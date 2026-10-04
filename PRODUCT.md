@@ -144,7 +144,37 @@
 
 ## 8. 주간 점검
 
-매주 월요일 아침 출근길(한국 시간 07:45)에 자동으로 새 세션이 돌아 이 파일과 리포 상태를 보고 점검한다.
+매주 월요일 아침 출근길(한국 시간 07:45)에 🧭 기획 파트너 세션이 깨어나 이 파일과 리포 상태를 보고 점검한다.
 결과는 아래에 날짜별로 쌓는다 (최신이 위).
 
 <!-- 주간 점검 기록 -->
+
+### 2026-10-05 (첫 주간 점검)
+
+**지난주 한 일** — 1주 만에 앱 9개 진행 (커밋 약 196개, `Release iOS` 25회 중 실패 1·취소 1, 나머지 성공)
+- 심사: Glance FX 재제출(빌드 9, 대기 중) · Kitty Queens 1.0 제출 → **2.1 정보 요청** 답장 초안 준비(`catdoku_app/store/review-reply.md`)
+- TestFlight 업로드: Glance dB(빌드 19) · Glance Tides(21) · Glance Mortgage 1.0(22) + 1.1(25, 주·카운티 세금)
+- 1차 완성·번들 등록, ASC 앱 등록 대기: Glance Speed · Kitty Path · Glance Solunar · Glance MPG
+- 운영: 기획/개발 세션 분리, `board/` 게시판, `PLAYBOOK.md`, 할 일 페이지 `docs/todo.html`, 주간 점검 루틴
+
+**막힌 것 / 사용자 차례** (할 일 페이지: https://soulfulfillable.github.io/test-mvp/todo.html)
+1. **Kitty Queens 심사 답장** — 아이폰 화면 녹화 첨부가 필요(사용자 폰). 이게 가장 급함.
+2. **Glance Mortgage 1.0 심사 제출 버튼** (등록 정보는 입력 완료).
+3. **ASC 신규 앱 4개**: Speed · Kitty Path · Solunar · MPG (앱당 1~2분).
+4. **TestFlight '느낌'**: dB(보정값 확인 필요) · Tides · Mortgage 1.1.
+- 공용 작업 요청 "TestFlight 초대 자동화"는 아직 맡은 세션 없음 → 다음에 `Release iOS` 돌리는 세션이 맡도록 유지.
+- 확인 못 함: 각 앱 심사 진행 상태(App Store Connect), AdMob 수익·노출, 실제 리뷰.
+
+**트렌드** ([apptoday 미국 무료 차트](https://apptoday.com/charts/top-100-free-apps-us), [appstorestatistics](https://appstorestatistics.com/charts/us/top-free))
+- Meowdoku! 가 여전히 상위 → Kitty Queens 출시 타이밍이 맞다. 승인이 빨리 나는 게 중요.
+- Block Out! – Color Sort Puzzle 상위 → 백로그의 "색깔 정렬 퍼즐"이 여전히 유효(경쟁 많음).
+- NYT Crossplay(단어 대전) 신규 → 단어 게임은 사전·검증 데이터가 필요해 우리 공식(코드가 콘텐츠)엔 덜 맞음.
+- 선교 관련: 이번에 만든 Speed·Solunar·MPG 는 전 세계 오프라인 동작 → 현지에서도 유지 쉬움.
+
+**이번 주 결정할 것 (A/B)**
+1. 새 앱: **A. 이번 주는 새 앱 없이 9개를 심사·출시까지 마무리 (추천 — 사용자 차례 일이 쌓여 있고, 첫 출시 반응이 다음 선택의 근거)** / B. 다음 후보(인터벌 타이머 또는 성경 통독 체크) 시작
+2. 심사 2.1 대비: **A. 앞으로 모든 앱 첫 제출 때 7항목 설명 + 아이폰 화면 녹화(30초)를 미리 첨부 (추천 — 환율·Kitty Queens 둘 다 2.1 요청을 받음)** / B. 요청 오면 그때 대응
+3. Kitty Queens 뉴스레터(모든 앱 공용 이메일 목록): **A. 출시 후 반응 보고 (추천)** / B. 지금 v1.1 에 넣기
+
+**추천 작업 순서**: ①Kitty Queens 녹화·답장 → ②Mortgage 1.0 제출 → ③ASC 앱 4개 몰아서 → ④TestFlight 느낌 3개 → ⑤승인 나는 앱부터 AdMob 스토어 링크 연결
+
