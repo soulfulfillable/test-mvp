@@ -14,6 +14,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   final prefs = await Prefs.load();
+  // 웹 미리보기 `?shots=1`: 스토어 스크린샷용 — 광고 자리 안내 상자를 빈칸으로.
+  if (kIsWeb && Uri.base.queryParameters['shots'] == '1') Ads.i = FakeAds();
   Ads.i.init();
   // 웹 미리보기: `?demo=1` 이면 가짜 주행(화면에 DEMO 표시). 앱 빌드에는 없다.
   final demo = kIsWeb && Uri.base.queryParameters['demo'] == '1';

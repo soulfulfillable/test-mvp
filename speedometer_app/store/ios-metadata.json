@@ -1,0 +1,20 @@
+{
+  "_comment": "App Store Connect 에 API 로 넣는 값 (.github/scripts/asc_metadata.py). 설명·조사는 ios-listing.md. 스크린샷: (docs 를 localhost:8765/test-mvp 로 띄운 뒤) node speedometer_app/store/screenshots/make.js",
+  "bundleId": "com.soulfulfill.speedometer",
+  "locale": "en-US",
+  "subtitle": "Car HUD, MPH Tracker, Odometer",
+  "privacyPolicyUrl": "https://soulfulfillable.github.io/test-mvp/speedometer-privacy.html",
+  "promotionalText": "Big, honest speed at a glance — HUD mode for night driving and your own speed alert. Free, no subscription, no full-screen ads.",
+  "description": "A big, clear GPS speedometer — free, no subscription, no trial.\n\n■ READ IT AT A GLANCE\nHuge numbers you can read from the corner of your eye, or a classic analog gauge with a smooth needle. MPH or km/h — tap the unit to switch.\n\n■ HUD MODE FOR NIGHT DRIVING\nMirrored numbers on a black screen. Lay your phone under the windshield and read your speed in the reflection. No ads in HUD mode.\n\n■ YOUR OWN SPEED ALERT\nPick a number. Go over it and the screen turns red with a short beep and a buzz — it mixes with your music and navigation instead of stopping them.\n\n■ TRIP STATS\nTop speed, average speed, distance and time, kept separately for Car, Bike, Run and Boat. Run mode shows your pace (min/mi or min/km); Boat mode uses knots and nautical miles.\n\n■ HONEST GPS\n• Shows \"Weak GPS\" or \"No GPS signal\" instead of guessing\n• Reads 0 when you're stopped — no jumping numbers at red lights\n• A single GPS glitch never becomes your top speed\n\n■ SIMPLE AND PRIVATE\n• Works offline — speed comes from your iPhone's GPS\n• Your location never leaves your iPhone. No account\n• The screen stays on while the app is open\n\nNo full-screen ads, ever. Just a small banner at the bottom.\n\nPlease don't interact with your phone while driving. The app does not show road speed limits — always follow posted limits.",
+  "keywords": "digital,bike,cycling,run,boat,knots,kph,kmh,trip,mileage,meter,gauge,dashboard,alert,driving,display",
+  "supportUrl": "https://github.com/soulfulfillable/test-mvp/issues",
+  "reviewNotes": "Speed is measured with the iPhone's GPS only while the app is open (When In Use permission; no background location). To see speed, please move (walk or drive) — when stationary it correctly shows 0.\nNo account or login. Location never leaves the device; the only network use is Google AdMob banner ads (no interstitial or video ads).\nDifferences from typical speedometer apps: no subscription or trial, honest GPS accuracy display (\"Weak GPS\" / \"No GPS signal\"), spike-filtered top speed, Car/Bike/Run (pace)/Boat (knots) modes, mirrored HUD mode and a user-set speed alert. A one-time safety notice asks users not to interact while driving. The app does not show road speed limits.",
+  "screenshots": [
+    "01-big-numbers.png",
+    "02-gauge.png",
+    "03-hud.png",
+    "04-speed-alert.png",
+    "05-run-pace.png"
+  ],
+  "screenshotDisplayType": "APP_IPHONE_67"
+}
