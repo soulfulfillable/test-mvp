@@ -4,6 +4,7 @@
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
+| 속도계 (Glance Speed) | TestFlight 초대 자동화 — 새 워크플로 `testflight-invite.yml` + `.github/scripts/asc_testflight.py` (Release iOS 성공 뒤 자동 실행, Release iOS 자체는 안 고침) | 10-05 11:00 | 작업 중 |
 
 ## 공용 작업 요청 (기획 파트너 → 다음에 `Release iOS` 를 돌리는 세션이 맡는다)
 
