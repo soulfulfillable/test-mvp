@@ -12,11 +12,11 @@ const CK = path.resolve(__dirname, '../flutter/build/web/canvaskit');
 const OUT = path.resolve(process.argv[2] || 'qa-shots');
 fs.mkdirSync(OUT, { recursive: true });
 
-async function open({ deny = false } = {}) {
+async function open({ deny = false, dark = false } = {}) {
   const args = ['--no-sandbox', '--use-fake-device-for-media-stream'];
   args.push(deny ? '--deny-permission-prompts' : '--use-fake-ui-for-media-stream');
   const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args });
-  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, hasTouch: true, isMobile: true });
+  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, hasTouch: true, isMobile: true, colorScheme: dark ? 'dark' : 'light' });
   if (!deny) await ctx.grantPermissions(['microphone'], { origin: 'http://localhost:8765' });
   const p = await ctx.newPage();
   await p.route(/^https:\/\//, async route => {
@@ -55,49 +55,52 @@ async function reading(p) {
 }
 
 (async () => {
-  // 1) 처음 실행 → 안내 → Continue → 가짜 마이크로 측정
-  let { b, p, errs } = await open();
-  await shot(p, '01-intro');
-  await tap(p, /Continue/);
-  await p.waitForTimeout(4000);
-  step('gauge after 4 s: ' + await reading(p));
-  await shot(p, '02-measuring');
-  await tap(p, /Sound level guide/);
-  await shot(p, '03-guide');
-  await back(p);
-  await p.waitForTimeout(3000);
-  await tap(p, /^Report$/);
-  await p.waitForTimeout(800);
-  await shot(p, '04-report');
-  await back(p);
-  await tap(p, /^Pause$/);
-  step('gauge after pause: ' + await reading(p));
-  await shot(p, '05-paused');
-  await tap(p, /History/);
-  await shot(p, '06-history');
-  await back(p);
-  await tap(p, /Settings/);
-  await shot(p, '07-settings');
-  await back(p);
-  await tap(p, /^Resume$/);
-  await p.waitForTimeout(2000);
-  step('gauge after resume: ' + await reading(p));
-  await tap(p, /^Reset$/);
-  step('gauge after reset: ' + await reading(p));
-  const e1 = [...errs];
-  await b.close();
+  const all = [];
+  for (const dark of [false, true]) {
+    const tag = dark ? 'dark' : 'light';
+    // 1) 처음 실행 → 바로 측정 화면(안내 화면 없음) → Start → 가짜 마이크로 측정
+    let { b, p, errs } = await open({ dark });
+    await shot(p, `${tag}-01-first`);
+    await tap(p, /^Start$/);
+    await p.waitForTimeout(4000);
+    step(`${tag} gauge after 4 s: ` + await reading(p));
+    await shot(p, `${tag}-02-measuring`);
+    await tap(p, /Sound level guide/);
+    await shot(p, `${tag}-03-guide`);
+    await tap(p, /^Back$/);
+    await p.waitForTimeout(3000);
+    await tap(p, /^Report$/);
+    await p.waitForTimeout(800);
+    await shot(p, `${tag}-04-report`);
+    await tap(p, /^Back$/);
+    await tap(p, /^Pause$/);
+    step(`${tag} gauge after pause: ` + await reading(p));
+    await shot(p, `${tag}-05-paused`);
+    await tap(p, /History/);
+    await shot(p, `${tag}-06-history`);
+    await tap(p, /^Back$/);
+    await tap(p, /Settings/);
+    await shot(p, `${tag}-07-settings`);
+    await tap(p, /^Back$/);
+    await tap(p, /^Resume$/);
+    await p.waitForTimeout(2000);
+    step(`${tag} gauge after resume: ` + await reading(p));
+    await tap(p, /^Reset$/);
+    step(`${tag} gauge after reset: ` + await reading(p));
+    all.push(...errs);
+    await b.close();
+  }
 
   // 2) 마이크 거부
-  ({ b, p, errs } = await open({ deny: true }));
-  await tap(p, /Continue/);
+  const { b, p, errs } = await open({ deny: true });
+  await tap(p, /^Start$/);
   await p.waitForTimeout(1500);
-  await shot(p, '08-mic-blocked');
-  await tap(p, /Try again/);
+  await shot(p, 'light-08-mic-blocked');
+  await tap(p, /Try Again/);
   await p.waitForTimeout(800);
-  const e2 = [...errs];
+  all.push(...errs);
   await b.close();
 
-  const all = [...e1, ...e2];
   step('console errors: ' + all.length);
   all.forEach(e => console.log('   ERR', e));
   fs.writeFileSync(path.join(OUT, 'log.txt'), log.join('\n') + '\n' + all.map(e => 'ERR ' + e).join('\n'));

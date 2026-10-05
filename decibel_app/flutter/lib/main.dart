@@ -1,12 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 
 import 'core/ads.dart';
 import 'core/store.dart';
 import 'core/theme.dart';
-import 'screens/intro_screen.dart';
 import 'screens/meter_screen.dart';
 
 Future<void> main() async {
@@ -19,14 +18,15 @@ Future<void> main() async {
   runApp(const DecibelApp());
 }
 
+/// DESIGN.md: Material 기본 테마 대신 iOS 부품(Cupertino)만. 라이트·다크는 시스템 설정을 따른다.
 class DecibelApp extends StatelessWidget {
   const DecibelApp({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) => CupertinoApp(
     title: kAppName,
     debugShowCheckedModeBanner: false,
     theme: buildTheme(),
-    home: AppStore.i.seenIntro ? const MeterScreen() : const IntroScreen(),
+    home: const MeterScreen(),
   );
 }

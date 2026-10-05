@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 import '../core/history.dart';
 import '../core/levels.dart';
@@ -58,7 +59,6 @@ class _ReportScreenState extends State<ReportScreen> {
     if (r == null || _busy) return;
     setState(() => _busy = true);
     FocusScope.of(context).unfocus();
-    final messenger = ScaffoldMessenger.of(context);
     final box = context.findRenderObject() as RenderBox?;
     final origin = box == null
         ? null
@@ -89,9 +89,19 @@ class _ReportScreenState extends State<ReportScreen> {
     if (!mounted) return;
     setState(() => _busy = false);
     if (!ok) {
-      messenger.showSnackBar(
-        const SnackBar(
-          content: Text('Could not share the image. Please try again.'),
+      await showCupertinoDialog<void>(
+        context: context,
+        builder: (c) => CupertinoAlertDialog(
+          title: const Text("Couldn't Share"),
+          content: const Text('Please try again.'),
+          actions: [
+            CupertinoDialogAction(
+              key: const Key('share-fail-ok'),
+              isDefaultAction: true,
+              onPressed: () => Navigator.pop(c),
+              child: const Text('OK'),
+            ),
+          ],
         ),
       );
     }
@@ -100,69 +110,86 @@ class _ReportScreenState extends State<ReportScreen> {
   @override
   Widget build(BuildContext context) {
     final r = record;
-    return Scaffold(
-      appBar: AppBar(title: const Text('Noise Report')),
-      body: r == null
-          ? const Center(
-              child: Text(
-                'This measurement was deleted.',
-                style: TextStyle(color: C.sub),
+    final secondary = dyn(context, CupertinoColors.secondaryLabel);
+    // 다른 화면(기록·설정·비유표)과 같은 큰 제목 막대
+    return CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.systemGroupedBackground,
+      child: CustomScrollView(
+        key: const Key('report-list'),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        slivers: [
+          const CupertinoSliverNavigationBar(
+            largeTitle: Text('Report'),
+            leading: BackLink(label: 'Back'),
+          ),
+          if (r == null)
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Center(
+                child: Text(
+                  'This measurement was deleted.',
+                  style: TextStyle(color: secondary),
+                ),
               ),
             )
-          : SingleChildScrollView(
-              key: const Key('report-list'),
-              padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // 메모 칸은 위에 — 키보드가 떠도 가려지지 않고, 적는 대로 아래 리포트에 들어간다.
-                  TextField(
-                    key: const Key('note'),
-                    controller: _note,
-                    onChanged: _onNote,
-                    maxLength: 120,
-                    textInputAction: TextInputAction.done,
-                    style: const TextStyle(color: C.ink),
-                    decoration: InputDecoration(
-                      labelText: 'Add a note (optional)',
-                      hintText: 'e.g. Upstairs neighbor, Apt 4B',
-                      filled: true,
-                      fillColor: C.card,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
+          else
+            SliverSafeArea(
+              top: false,
+              sliver: SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+                sliver: SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // 메모 칸은 위에 — 키보드가 떠도 가려지지 않고, 적는 대로 아래 리포트에 들어간다.
+                      CupertinoTextField(
+                        key: const Key('note'),
+                        controller: _note,
+                        onChanged: _onNote,
+                        placeholder:
+                            'Add a note — e.g. Upstairs neighbor, Apt 4B',
+                        clearButtonMode: OverlayVisibilityMode.editing,
+                        textInputAction: TextInputAction.done,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(120),
+                        ],
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
+                        decoration: BoxDecoration(
+                          color: dyn(
+                            context,
+                            CupertinoColors.secondarySystemGroupedBackground,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  RepaintBoundary(
-                    key: _shot,
-                    child: ReportCard(record: r, note: _note.text.trim()),
-                  ),
-                  const SizedBox(height: 14),
-                  FilledButton.icon(
-                    key: const Key('share'),
-                    onPressed: _busy ? null : _share,
-                    icon: const Icon(Icons.ios_share),
-                    label: Text(_busy ? 'Preparing…' : 'Save or Share Image'),
-                    style: FilledButton.styleFrom(
-                      minimumSize: const Size.fromHeight(52),
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                      const SizedBox(height: 16),
+                      RepaintBoundary(
+                        key: _shot,
+                        child: ReportCard(record: r, note: _note.text.trim()),
                       ),
-                    ),
+                      const SizedBox(height: 20),
+                      PrimaryButton(
+                        key: const Key('share'),
+                        label: _busy ? 'Preparing…' : 'Share Report',
+                        icon: CupertinoIcons.square_arrow_up,
+                        onPressed: _busy ? null : _share,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Choose “Save Image” in the share sheet to keep it in Photos.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: kSmall, color: secondary),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Tip: choose "Save Image" in the share sheet to keep it in Photos.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: C.muted, fontSize: 12),
-                  ),
-                ],
+                ),
               ),
             ),
+        ],
+      ),
     );
   }
 }
@@ -185,7 +212,7 @@ class ReportCard extends StatelessWidget {
     final trimText =
         '${trim >= 0 ? '+' : '−'}${trim.abs().toStringAsFixed(1)} dB';
     final mid = r.timeOfSecond(r.leq.length ~/ 2);
-    const ink = TextStyle(color: C.paperInk);
+    final ink = textOf(context).copyWith(color: Paper.ink);
 
     Widget big(String label, double v) => Expanded(
       child: Column(
@@ -193,10 +220,10 @@ class ReportCard extends StatelessWidget {
           Text(
             label,
             style: const TextStyle(
-              color: C.paperSub,
+              color: Paper.sub,
               fontSize: 11,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.5,
             ),
           ),
           const SizedBox(height: 2),
@@ -204,18 +231,15 @@ class ReportCard extends StatelessWidget {
             TextSpan(
               text: fmtDb(v),
               style: const TextStyle(
-                color: C.paperInk,
+                color: Paper.ink,
                 fontSize: 28,
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w600,
+                fontFeatures: tabular,
               ),
               children: [
                 TextSpan(
                   text: ' $unit',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: C.paperSub,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: const TextStyle(fontSize: 11, color: Paper.sub),
                 ),
               ],
             ),
@@ -228,8 +252,9 @@ class ReportCard extends StatelessWidget {
       key: const Key('report-card'),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: C.paper,
-        borderRadius: BorderRadius.circular(16),
+        color: Paper.bg,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Paper.line, width: 0.5),
       ),
       child: DefaultTextStyle(
         style: ink,
@@ -239,26 +264,26 @@ class ReportCard extends StatelessWidget {
             Row(
               children: [
                 const Icon(
-                  Icons.graphic_eq,
-                  color: Color(0xFF1A8FC4),
+                  CupertinoIcons.waveform,
+                  color: Paper.tint,
                   size: 22,
                 ),
                 const SizedBox(width: 6),
                 const Text(
                   'Noise Report',
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800,
-                    color: C.paperInk,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Paper.ink,
                   ),
                 ),
                 const Spacer(),
                 Text(
                   unit,
                   style: const TextStyle(
-                    fontSize: 12,
-                    color: C.paperSub,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 11,
+                    color: Paper.sub,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
@@ -268,15 +293,15 @@ class ReportCard extends StatelessWidget {
               fmtDate(r.startedAt),
               style: const TextStyle(
                 fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: C.paperInk,
+                fontWeight: FontWeight.w600,
+                color: Paper.ink,
               ),
             ),
             const SizedBox(height: 2),
             Text(
               '${fmtClock(r.startedAt)} – ${fmtClock(r.endedAt)}  ·  ${fmtDurationWords(r.duration)} measured',
               key: const Key('report-time'),
-              style: const TextStyle(fontSize: 13, color: C.paperSub),
+              style: const TextStyle(fontSize: 11, color: Paper.sub),
             ),
             if (note.isNotEmpty) ...[
               const SizedBox(height: 10),
@@ -294,8 +319,8 @@ class ReportCard extends StatelessWidget {
                   note,
                   key: const Key('report-note'),
                   style: const TextStyle(
-                    fontSize: 13,
-                    color: C.paperInk,
+                    fontSize: 11,
+                    color: Paper.ink,
                     height: 1.35,
                   ),
                 ),
@@ -314,14 +339,14 @@ class ReportCard extends StatelessWidget {
               Text.rich(
                 TextSpan(
                   text: 'Loudest moment: ',
-                  style: const TextStyle(color: C.paperSub, fontSize: 13),
+                  style: const TextStyle(color: Paper.sub, fontSize: 11),
                   children: [
                     TextSpan(
                       text:
                           '${fmtClock(r.timeOfSecond(loud), seconds: true)} (${fmtDb(r.peaks[loud])} $unit)',
                       style: const TextStyle(
-                        color: C.paperInk,
-                        fontWeight: FontWeight.w700,
+                        color: Paper.ink,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
@@ -344,15 +369,15 @@ class ReportCard extends StatelessWidget {
             const SizedBox(height: 6),
             const Text(
               'Bars: average each moment · Line: peak',
-              style: TextStyle(fontSize: 10, color: C.paperSub),
+              style: TextStyle(fontSize: 11, color: Paper.sub),
             ),
             const SizedBox(height: 12),
             const Text(
               'Time at each level',
               style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-                color: C.paperInk,
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: Paper.ink,
               ),
             ),
             const SizedBox(height: 6),
@@ -368,7 +393,7 @@ class ReportCard extends StatelessWidget {
                       if (per[b]! > 0)
                         Expanded(
                           flex: per[b]!,
-                          child: ColoredBox(color: b.color),
+                          child: ColoredBox(color: Color(b.color.toARGB32())),
                         ),
                   ],
                 ),
@@ -388,7 +413,7 @@ class ReportCard extends StatelessWidget {
                           width: 8,
                           height: 8,
                           decoration: BoxDecoration(
-                            color: b.color,
+                            color: Color(b.color.toARGB32()),
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -397,7 +422,7 @@ class ReportCard extends StatelessWidget {
                           '${b.name} ${(per[b]! * 100 / total).round()}%',
                           style: const TextStyle(
                             fontSize: 11,
-                            color: C.paperSub,
+                            color: Paper.sub,
                           ),
                         ),
                       ],
@@ -405,7 +430,7 @@ class ReportCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
-            const Divider(height: 1, color: C.paperLine),
+            Container(height: 0.5, color: Paper.line),
             const SizedBox(height: 8),
             Text(
               'Measured with $kAppName on iPhone · ${r.weighting.name.toUpperCase()}-weighting, Fast · '
@@ -413,8 +438,8 @@ class ReportCard extends StatelessWidget {
               'readings are estimates.',
               key: const Key('report-footer'),
               style: const TextStyle(
-                fontSize: 10,
-                color: C.paperSub,
+                fontSize: 11,
+                color: Paper.sub,
                 height: 1.4,
               ),
             ),
