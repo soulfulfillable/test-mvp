@@ -4,7 +4,6 @@
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
-| mortgage | **`Release iOS` 서명 고침** — 업로드 뒤 배포 인증서를 지우던(revoke) 단계 때문에 심사 제출 시 **ITMS-90035 Invalid Signature** 반려(Glance Mortgage 빌드 22). 인증서를 지우지 않고 암호화해 `ci-signing` 브랜치에 보관·재사용하도록 `release-ios.yml`·`asc_signing.py` 수정 중. **그동안 Release iOS 실행 자제 부탁** | 10-05 | 작업 중 |
 
 ## 공용 작업 요청 (기획 파트너 → 다음에 `Release iOS` 를 돌리는 세션이 맡는다)
 
@@ -24,6 +23,12 @@
 - 기존 앱 세션은 기능 수정·버그 수정만. 디자인 리터칭 요청(이전 "공용 작업 요청 2")은 취소.
 
 ## 이미 만들어진 공용 도구 (다시 만들지 말 것)
+- **⚠️ Release iOS 서명 수정 (mortgage 세션, 10-05) — 모든 앱 해당**: 예전 워크플로는 업로드 직후 배포 인증서를 **지웠다(revoke)**.
+  그 빌드를 나중에 심사 제출하면 **ITMS-90035 Invalid Signature** 로 "Invalid Binary/Rejected" (Glance Mortgage 빌드 22 실제 발생, 제출 1.5일 뒤).
+  → 이제 인증서 1개(`9BAX4TA7C3`)를 계속 쓴다: 개인 키를 `ASC_KEY_P8` 에서 만든 키로 암호화해 `ci-signing` 브랜치 `signing/state.json` 에 보관, 프로파일도 재사용.
+  **developer.apple.com 에서 이 인증서를 지우지 말 것.** run 30(빌드 30)부터 적용.
+  **run 29 이전 빌드로 심사 중인 앱(Glance FX 빌드 9·15, Kitty Queens 16, Glance dB 28 등)은 같은 메일이 올 수 있다** — 오면 새로 Release iOS 해서 그 빌드로 재제출.
+  `App Store 등록 정보 채우기` 는 json 에 `versionString` 을 넣으면 편집 중인 버전 번호도 바꾼다.
 - **Cupertino 부품 (소음 측정기 세션, 10-05)**: `decibel_app/flutter/lib/screens/widgets.dart` 의 `BackLink`(VoiceOver 되는 뒤로 — Flutter 기본 뒤로 버튼은 접근성 tap 없음), `SectionHeader`/`SectionFooter`(설정 앱 13pt 회색), `PrimaryButton`(다크 대비), `LevelNumber`. 공용 테마 패키지를 만들 세션은 여기서 가져가도 된다.
 
 - **TestFlight 초대 자동화** (속도계 세션, 2026-10-05, 빌드 26 으로 실제 확인): `Release iOS` 가 성공하면 워크플로
