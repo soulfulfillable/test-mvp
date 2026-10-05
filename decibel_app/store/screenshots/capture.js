@@ -13,13 +13,13 @@ const RAW = path.join(__dirname, 'raw');
 const PROFILE = fs.mkdtempSync(path.join(os.tmpdir(), 'glance-db-shots-'));
 fs.mkdirSync(RAW, { recursive: true });
 
-async function open(wav) {
+async function open(wav, scheme = 'light') {
   const ctx = await chromium.launchPersistentContext(PROFILE, {
     executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
     args: ['--no-sandbox', '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream',
       `--use-file-for-fake-audio-capture=${path.join(WAV, wav)}`],
     viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, hasTouch: true, isMobile: true,
-    timezoneId: 'America/New_York', locale: 'en-US',
+    timezoneId: 'America/New_York', locale: 'en-US', colorScheme: scheme,
   });
   await ctx.grantPermissions(['microphone'], { origin: 'http://localhost:8765' });
   const p = ctx.pages()[0] || await ctx.newPage();
@@ -45,7 +45,7 @@ async function open(wav) {
 }
 
 const tap = async (p, name) => { await p.getByRole('button', { name }).first().click(); await p.waitForTimeout(800); };
-const back = (p) => tap(p, 'Back');
+const back = (p) => tap(p, /^Back$/);
 const shot = async (p, name) => {
   // 마우스가 버튼 위에 머물면 툴팁("Back")이 찍힌다 → 빈 곳으로 치우고 툴팁이 사라질 때까지 기다린다
   await p.mouse.move(195, 820);
@@ -57,11 +57,19 @@ const wait = (p, s) => p.waitForTimeout(s * 1000);
 
 (async () => {
   const errs = [];
-  // 1) 일정한 청소기 소리: 측정 화면·비유표·설정, 짧은 기록 하나
-  let { ctx, p, errs: e1 } = await open('steady.wav');
-  await tap(p, /Continue/);
+  // 1) 일정한 청소기 소리 (다크 모드): 측정 화면 — 첫 장
+  let { ctx, p, errs: e1 } = await open('steady.wav', 'dark');
+  await tap(p, /^Start$/);
   await wait(p, 8);
   await shot(p, 'meter.png');
+  await tap(p, /^Reset$/);
+  errs.push(...e1);
+  await ctx.close();
+
+  // 2) 라이트 모드: 비유표·설정 + 짧은 기록 하나
+  ({ ctx, p, errs: e1 } = await open('steady.wav'));
+  await tap(p, /^Start$/);
+  await wait(p, 8);
   await tap(p, /Sound level guide/);
   await shot(p, 'guide.png');
   await back(p);
@@ -72,7 +80,7 @@ const wait = (p, s) => p.waitForTimeout(s * 1000);
   errs.push(...e1);
   await ctx.close();
 
-  // 2) 밤 소음(조용 → 쿵쿵·음악 → 조용) 90초: 리포트·기록
+  // 3) 밤 소음(조용 → 쿵쿵·음악 → 조용) 90초: 리포트·기록
   ({ ctx, p, errs: e1 } = await open('night.wav'));
   await tap(p, /^Start$/);
   await wait(p, 92);
@@ -80,7 +88,7 @@ const wait = (p, s) => p.waitForTimeout(s * 1000);
   await tap(p, /^Report$/);
   await p.getByRole('textbox').first().click();
   await p.keyboard.type('Upstairs neighbor, Apt 4B');
-  await p.mouse.click(195, 30); // 키보드 닫기 (제목 줄)
+  await p.mouse.click(300, 160); // 키보드 닫기 (큰 제목 자리)
   await wait(p, 1.5);
   await shot(p, 'report.png');
   await back(p);

@@ -1,5 +1,5 @@
 // raw/(1170×2532, capture.js 가 실제 측정으로 찍음) → App Store 6.7형(1290×2796) 홍보 이미지: 위에 큰 제목, 아래에 앱 화면.
-// 실행: node make.js  (대출 계산기 mortgage_app/store/screenshots/make.js 와 같은 틀, 색만 앱에 맞춤)
+// 실행: node make.js  (대출 계산기 make.js 와 같은 틀. DESIGN.md: 그라데이션·그림자 없이 iOS 회색 바탕 + 강조색 1개)
 const { chromium } = require('/opt/node-tools/node_modules/playwright');
 const fs = require('fs');
 const SHOTS = [
@@ -14,10 +14,10 @@ const SHOTS = [
   const p = await b.newPage({ viewport: { width: 1290, height: 2796 } });
   for (const [src, dst, title, sub] of SHOTS) {
     const img = fs.readFileSync(__dirname + '/raw/' + src).toString('base64');
-    await p.setContent(`<html><body style="margin:0;width:1290px;height:2796px;background:linear-gradient(#1B2638,#0B1019);font-family:Roboto,'Liberation Sans',Arial,sans-serif;overflow:hidden">
-      <div style="text-align:center;padding-top:120px;color:#F2F5F9;font-size:92px;font-weight:900;letter-spacing:-1px">${title}</div>
-      <div style="text-align:center;margin-top:24px;color:#4FC3F7;font-size:52px;font-weight:600">${sub}</div>
-      <div style="position:absolute;left:105px;top:520px;width:1080px;height:2337px;border-radius:72px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);border:14px solid #2E3848">
+    await p.setContent(`<html><body style="margin:0;width:1290px;height:2796px;background:#F2F2F7;font-family:Roboto,'Liberation Sans',Arial,sans-serif;overflow:hidden">
+      <div style="text-align:center;padding-top:120px;color:#1C1C1E;font-size:92px;font-weight:700;letter-spacing:-1px">${title}</div>
+      <div style="text-align:center;margin-top:24px;color:#00848A;font-size:52px;font-weight:600">${sub}</div>
+      <div style="position:absolute;left:105px;top:520px;width:1080px;height:2337px;border-radius:72px;overflow:hidden;border:10px solid #D1D1D6">
         <img src="data:image/png;base64,${img}" style="width:100%;display:block"></div></body></html>`);
     await p.waitForTimeout(300);
     await p.screenshot({ path: __dirname + '/' + dst });
