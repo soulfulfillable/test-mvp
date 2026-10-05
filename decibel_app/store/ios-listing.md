@@ -105,22 +105,24 @@ Phone microphones are not certified sound level meters. Readings are estimates f
 Free decibel meter with no subscription. See how loud it is, what it sounds like, and save a noise report for your neighbor or landlord.
 
 ## 심사 메모 (App Review Notes) — 첫 제출용
-환율 앱이 첫 제출에서 "새 계정 정보 요청(2.1)"으로 반려됐다 → **처음부터 같은 6항목을 Notes 에 넣고, 실기기 화면 녹화(앱 실행부터)를 첨부**한다.
+환율 앱이 첫 제출에서 "새 계정 정보 요청(2.1)"으로 반려됐다 → **처음부터 7항목을 Notes 에 넣는다** (`ios-metadata.json` reviewNotes 로 자동 입력). 실기기 화면 녹화(30초, 앱 실행부터)는 사용자가 App Review Information → Attachment 에 올리면 더 안전(API 로 못 올림).
 
 ```
 Glance dB is a sound level meter (decibel meter). No account, login, user-generated content, or in-app purchases.
 
-1. Screen recording: attached, captured on a physical iPhone from launch (welcome screen → microphone permission → measuring → report → history → settings).
+1. App flow: on launch a welcome screen explains the microphone use, then iOS asks for microphone permission, and the live level appears. Main screens: Meter, Report, History, "How loud is that?" guide, Settings.
 
-2. Purpose: helps people check how loud it is (noisy neighbors, restaurants, baby white-noise machines, concerts) and save a simple noise report with date, time, average and max levels to share with a landlord or neighbor. Every feature is free.
+2. Purpose and audience: helps people check how loud it is (noisy neighbors, restaurants, baby white-noise machines, concerts) and save a simple noise report with date, time, average and max levels to share with a landlord or neighbor. Every feature is free.
 
-3. How to use (no credentials needed): tap Continue, allow the microphone, and the live level appears. Pause/Resume/Reset control the measurement. Tap "Report" to see and share the report image (iOS share sheet). Tap the level chip for everyday comparisons. History lists past measurements. Settings: calibration offset, dBA/dBC/dBZ weighting, keep screen on.
+3. How to use (no credentials or setup): tap Continue and allow the microphone. Pause / Resume / Reset control the measurement. "Report" shows the report image and shares it with the iOS share sheet. Tap the level chip for everyday comparisons. History lists past measurements. Settings: calibration offset, dBA / dBC / dBZ weighting, keep screen on.
 
-4. Microphone: used only while the app is in the foreground to compute sound level on-device in real time (AVAudioSession measurement mode). Audio is never recorded, stored, or transmitted. No background audio mode. Only the numbers (per-second levels) are saved locally.
+4. Microphone and privacy: the microphone is used only while the app is in the foreground to compute the sound level on the device in real time (AVAudioSession measurement mode). Audio is never recorded, stored, or transmitted. There is no background audio mode. Only the numbers (per-second levels) are saved on the device.
 
-5. External services: Google AdMob banner ads only. No analytics, no backend server, no AI services. Measuring works offline.
+5. External services: Google AdMob banner ads only. No analytics, no backend server, no authentication, payment, or AI services. Measuring works offline.
 
-6. Accuracy / regulated use: the app states in the app and description that phone microphones are not certified sound level meters and readings are estimates; it makes no legal or medical claims. Hearing-safety tips cite the CDC/NIOSH 85 dBA guideline as general information.
+6. Regional differences: none. The app works the same in all regions. English only.
+
+7. Accuracy / regulated use: the app states in the app and in the description that phone microphones are not certified sound level meters and readings are estimates. It makes no legal or medical claims. Hearing-safety tips cite the CDC/NIOSH 85 dBA guideline as general information.
 ```
 
 ## 스크린샷 (6.7형 1290×2796) — 계획
