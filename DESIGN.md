@@ -66,3 +66,30 @@
 - Flutter iOS 적응: https://docs.flutter.dev/ui/adaptive-responsive/platform-adaptations · https://github.com/flutter/flutter/issues/147708 ·
   예시 https://github.com/InMatrix/veggieseasons_adaptive · Liquid Glass 미지원 https://github.com/flutter/flutter/issues/170310
 - 디자인 상 사례: https://www.apple.com/newsroom/2024/06/apple-announces-winners-of-the-2024-apple-design-awards/ · https://developer.apple.com/news/?id=9ab1g4r3
+
+## 5. 현재 앱 점검 결과 (2026-10-05, 웹 미리보기 첫 화면 8장 — `docs/design-audit/*.png`)
+
+### 코드에서 확인된 공통 원인
+- 8개 전부 `MaterialApp` + `useMaterial3: true` + `ColorScheme.fromSeed`. **글꼴 지정 없음** → 웹 미리보기는 아이폰 사파리에서도 **Roboto**(안드로이드 글꼴)로 보인다.
+  (네이티브 iOS 빌드는 Flutter 가 SF 로 그리지만, 사용자가 폰으로 보는 미리보기는 안드로이드 앱처럼 보인다 → 미리보기에도 iOS 글꼴 스택을 넣을 것.)
+- 아이콘은 전부 Material Icons. `cupertino_icons` 는 의존성만 있고 미사용.
+- 버튼은 M3 기본형 그대로: 높이 48~56 꽉 찬 알약 + 회색 테두리 알약, M3 칩, NavigationBar 알약 표시, 리플.
+
+### AI 티 상위 5개 (기여도 순)
+1. **글꼴이 기본 Roboto 하나** — 체감 1위.
+2. **M3 기본 부품** 그대로(알약 버튼·칩·탭 표시·리플·seed 색 조합).
+3. **앱끼리 레이아웃 복제**: Tides=Solunar(일러스트→큰 제목→설명→빈 공간→같은 버튼 2개), Decibel=Speedometer(아이콘+굵은 줄+회색 줄 목록), Kitty Path=Kitty Queens(이모지 글머리표 설명 시트). 여러 개 같이 보면 한 생성기에서 나온 티.
+4. **둥근 카드 + 일정 간격**: 같은 반경(~20) 흰 카드가 같은 간격으로, 카드 안에 회색 카드. 온보딩 화면은 아래 40~50% 가 빈 공간.
+5. **이모지·Material 아이콘**: 퍼즐 앱 설명에 ⬜🔢🏁👆↩️💡🎨↔️🙀💔, 실용 앱은 연한 원 안 Material 아이콘. 강조색도 Material 팔레트 그대로(Light Blue 300 등).
+
+### 이미 좋은 것 (지키기)
+큰 숫자 위계(Mortgage $2,628.97 센트 작게, Fuel Log 33.1), 고정폭 숫자, Solunar 숲·Tides 파도 일러스트, 퍼즐 앱의 따뜻한 단색, 솔직하고 짧은 문구, 다크 앱의 단일 강조색. 그라데이션 남용 없음.
+
+### 앱별 고칠 것 (각 세션이 맡는다)
+| 앱 | 고칠 것 |
+|---|---|
+| Glance Tides / Solunar | 온보딩 빈 공간 → 바로 **오늘 물때/오늘 점수**를 첫 화면 주인공으로(온보딩은 위치 권한 한 줄로). 두 앱 레이아웃이 같으니 각자 다른 구조로. 알약 버튼 → iOS 식 |
+| Glance dB / Speed | "아이콘+굵은 줄+회색 줄" 온보딩 목록 제거, 첫 화면에서 바로 측정 시작. 색: Light Blue 300 → 브랜드 색 1개. 큰 숫자가 주인공(이미 그렇다면 더 크게) |
+| Glance Mortgage / MPG | 카드 안의 카드 풀기 → 그룹 목록·가는 선. 알약 입력칸·칩 → iOS 입력. NavigationBar 알약 표시 제거. Tk 토큰 공유는 좋으나 두 앱이 똑같아 보이지 않게 강조색·숫자 글꼴로 구분 |
+| Kitty Queens / Kitty Path | **이모지 글머리표 전부 그림 아이콘으로**, 🐱 제목 이모지 → 로고 그림. 설명 시트 구조를 둘이 다르게. "Got it!" 버튼 iOS 식 |
+| 전체 | iOS 시스템 글꼴 스택(웹 포함) · `CupertinoIcons`/직접 그린 글리프 · 리플 끄기 · 버튼 높이 44·모서리 12~14·테두리 가늘게 · 시그니처 1개 정하기 |
