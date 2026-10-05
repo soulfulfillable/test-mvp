@@ -1,10 +1,10 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-06 04:11 (KST)
+마지막 갱신: 2026-10-06 05:30 (KST)
 
 ## 지금 상태 (3줄 이내)
-**DESIGN.md 리터칭 완료**: Cupertino 전면 전환(라이트/다크), 청록 강조색 1개, 안내 화면 없이 바로 측정, 시그니처 = 관성 바늘 + 구간 바뀔 때 햅틱.
-테스트 32개 통과(로봇: 라이트/다크 × 3기기 + 큰 글씨 135% 2대, VoiceOver 버튼 검사, 빗나간 누르기 = 실패). 웹 미리보기 갱신, 스크린샷 5장 실측으로 다시.
-새 빌드 `Release iOS` 중 → 등록 정보에 연결 → 사용자 제출(수동 항목 + 30초 녹화).
+**1.0 제출 직전** — 빌드 28(DESIGN.md 리터칭판) 업로드·TestFlight 배포 완료, 사용자가 30초 녹화 첨부(새 디자인 확인).
+GitHub 러너가 `App Store 등록 정보 채우기` 를 3번 못 잡아("not acquired by Runner") → 새 스크린샷 5장·고친 심사 메모·빌드 28 선택은 **사용자가 ASC 에서 직접**.
+보정 +94 는 그대로 제출(사용자 A: "조용한 곳이라 낮았던 것") — 1.0.1 때 NIOSH SLM 비교로 확인.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ 이름 A `Glance dB: Decibel Meter` / 번들 `com.soulfulfill.decibel` (사용자 확인) → ✅ Apple 번들 ID 등록 (Actions run 37065279691 로그 "새로 등록함").
@@ -27,6 +27,8 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-05 | 녹화 영상 보고 "실기기 숫자가 낮다(조용한 방 <20)" → A/B → "A. 지금 제출하고 1.0.1에서 고치기 … 아냐 조용한곳에 있었어서 그랫던거같은데" | 보정 +94 그대로 제출. 영상 속 측정은 실제로 조용했을 수 있음 — 숫자 비교는 여전히 **확인 못 함**, 출시 후 NIOSH SLM 과 나란히 재서 1.0.1 에 반영 |
+| 10-05 | "비디오는 여기넣었어 이제 add for review할까" (ASC 화면 — 심사 메모가 옛 안내 화면 기준) | 제출 보류 → 심사 메모를 새 첫 화면(Start 바로)에 맞게 고침. 영상은 프레임으로 확인: 빌드 28 새 디자인 ✓ |
 | 10-05 | (A/B) "DESIGN.md 에 걸리는데 제출 전에 고칠까요?" → "고치고 제출 (추천)" | 1.0 제출 보류 → Cupertino·iOS 스타일로 전면 리터칭(DESIGN.md 5장 dB 항목: 온보딩 목록 제거·브랜드 색·큰 숫자·시그니처) → 스크린샷 다시 → 새 빌드 → 제출 |
 | 10-05 | "아지금 괜찮아" (TestFlight 빌드 19 써 본 뒤로 해석 — 주간 점검의 'TestFlight 느낌: dB' 에 대한 답) | 출시 진행: 실측 스크린샷 5장·등록 정보 입력. 보정값(+94)은 숫자 비교 확인이 아니라서 '확인 못 함'으로 남김 |
 | 10-03 | "App Store Connect: 앱 이거해놨고 에드몸도 저기" (AdMob 배너 단위 생성 화면 스크린샷) | 앱 ID·배너 ID 를 코드·Info.plist 에 넣고 `Release iOS`(decibel) 실행 |
@@ -51,6 +53,8 @@
 10. 가짜 데이터 없음 (스크린샷도 합성 잡음을 실제로 측정) ✓
 
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
+- **GitHub 호스트 러너가 안 잡힐 때가 있다** (2026-10-05 20시 UTC, `ubuntu-latest` 3번 연속 "The job was not acquired by Runner of type hosted even after multiple attempts" → 15분 대기 뒤 취소). 우리 설정 문제 아님. 사용자가 기다리는 중이면 **수동 대안(붙여넣을 글·파일)을 바로** 주는 게 낫다.
+- **화면 흐름을 바꾸면 `ios-metadata.json` 의 심사 메모도 같이 고쳐라.** 리터칭으로 안내 화면을 없앴는데 메모는 "welcome screen … tap Continue" 그대로였다 — 사용자가 Add for Review 직전 화면을 보내 줘서 발견.
 - **Cupertino 전환 때 재사용할 부품** (`decibel_app/flutter/lib/screens/widgets.dart`): `BackLink`(VoiceOver tap 있는 뒤로), `SectionHeader`/`SectionFooter`(설정 앱 13pt 회색 — Flutter `insetGrouped` 기본 머리글은 20pt 굵게!), `PrimaryButton`(다크에서 밝은 강조색 위 검정 글씨), `LevelNumber`(노랑 글씨 대신 색 점).
 - **Flutter 기본 `CupertinoNavigationBarBackButton` 은 VoiceOver 누르기 동작이 없는 노드**를 만든다(버튼 안쪽 Semantics container) → 로봇 `expectButtonsTappable` 에 걸림. 위 `BackLink` 로 바꿔 해결.
 - `cupertino_icons` 는 **^1.0.x** (Flutter 3.47 템플릿 값). `pub add` 가 2.0.0 을 넣는데 SDK 의 CupertinoIcons 코드포인트는 1.x 기준.
