@@ -6,4 +6,7 @@ const appVersion = '1.0';
 const privacyUrl = 'https://soulfulfillable.github.io/test-mvp/fuellog-privacy.html';
 
 /// 기록이 사는 곳 — 웹 미리보기는 브라우저에 남는다.
-String get deviceWord => kIsWeb ? 'this browser' : 'this iPhone';
+String get deviceWord => kIsWeb && !storeShots ? 'this browser' : 'this iPhone';
+
+/// 웹 미리보기 `?shots=1` (스토어 스크린샷) — 아이폰 앱과 같은 문구·화면으로 찍는다.
+bool storeShots = false;

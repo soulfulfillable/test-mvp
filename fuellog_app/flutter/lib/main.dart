@@ -21,6 +21,11 @@ Future<void> main() async {
   if (demo) AppStore.i.persist = Persist.demo();
   await AppStore.i.load();
   if (demo && !AppStore.i.hasVehicle) AppStore.i.replaceAll(sampleData(AppStore.i.now()));
+  if (kIsWeb && Uri.base.queryParameters['shots'] == '1') {
+    storeShots = true;
+    Ads.i = HiddenAds();
+    Notifier.i = FakeNotifier(); // 알림 안내도 아이폰 앱 문구로
+  }
   Ads.i.init();
   Notifier.i.init();
   // 웹 미리보기: 접근성 트리를 켜 둬야 화면 읽기·자동 점검이 버튼을 이름으로 찾는다.
