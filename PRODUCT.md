@@ -46,7 +46,7 @@
 | **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | 2026-10-03 Flutter 1차 완성·테스트 31개·웹 미리보기 `docs/tides-app/`. 번들 `com.soulfulfill.tides` | TestFlight 빌드 21 업로드(10-03) → 사용자 느낌 → 스크린샷 → 심사 |
 | **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-05 **TestFlight 빌드 26 + 초대 메일(자동)**. AdMob 실제 ID, 스토어 스크린샷·설명·심사 메모 준비 | 사용자 TestFlight 느낌·화면 녹화 → App Privacy·연락처(사용자) → 제출 |
 | **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 2026-10-05 v1.0(빌드 22) 심사 제출(Waiting for Review). 1.1(빌드 25: 주·카운티 세율, 추가 상환 3종) TestFlight 대기 | 승인 → AdMob 스토어 연결 → 1.1 새 버전 제출(빌드 25) |
-| **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-05 DESIGN.md 리터칭판 빌드 28 → 1.0 제출 직전(사용자가 스크린샷·심사 메모·빌드 직접 입력 중, 30초 녹화 첨부) | 출시 후 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1. AdMob 스토어 링크 |
+| **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | **2026-10-05 1.0(빌드 28) 심사 제출** — Waiting for Review. DESIGN.md 리터칭판, 연령 4+, EU 제외 | 승인 후 AdMob 스토어 링크. 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1 |
 | **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) | 2026-10-02 Flutter 1차 완성·테스트 로봇 17개 통과·웹 미리보기 `docs/catdoku-app/` | 번들 ID 등록 → ASC 앱 레코드·AdMob 앱(사용자) → TestFlight |
 | **Kitty Path: Number Puzzle** (한붓 경로 퍼즐, `kittypath_app/`, `plans/path-puzzle-app.md`, `board/path-puzzle.md`) | 2026-10-03 Flutter 1차 완성·테스트 36개·웹 실제 터치 점검 24/24·웹 미리보기 `docs/path-puzzle-app/`. 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 아이콘·스토어 문구 → ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
 | **Glance Solunar: Fishing Times** (낚시·사냥 시간, `solunar_app/`, `plans/solunar-app.md`, `board/solunar.md`) | 2026-10-03 Flutter 1차 완성·테스트 34개(PyEphem 대조 1,800건+)·웹 미리보기 `docs/solunar-app/`(오프라인 계산, 마을 2만 곳). 번들 `com.soulfulfill.solunar` | ASC 앱 레코드·AdMob 배너+보상형(사용자) → `Release iOS`(solunar) → TestFlight |
@@ -95,6 +95,7 @@
 |---|---|---|
 | 2026-10-05 | **`DESIGN.md` 는 앞으로 새 앱에만 적용, 기존 앱 디자인은 손대지 않음** (디자인 리터칭 요청 취소, Glance dB 는 이미 한 것 유지) | 사용자 "지금까지 것은 만지지 말자, 나중에 만지면 이상해지는 것 같아서. 앞으로 것에 적용하자" |
 | 2026-10-05 | **앰비언트 엔진 ⓪ 웹 프로토타입(`docs/soaking.html`) 통과 → ① 3분 샘플 3종으로 진행** (비+피아노 / 모닥불+패드 / 카페+아르페지오). 코드 생성 음악 방향 유지 | 사용자 "너무 좋은데" — 중단 조건('AI 느낌·별로')에 안 걸림 |
+| 2026-10-05 | **Glance dB 1.0 심사 제출** (빌드 28, 연령 4+ — Advertising 만 Yes, EU 제외) | 사용자가 ASC 에서 직접 마무리("된건가?" 화면 = Waiting for Review) |
 | 2026-10-05 | Glance dB 1.0 은 보정 +94 그대로 제출, 숫자 확인은 1.0.1 | 실기기 녹화에서 조용한 방이 <20 dBA 로 나와 A/B 질문 → 사용자 "A … 조용한곳에 있었어서 그랫던거같은데". 실측 비교는 아직 안 함 |
 | 2026-10-05 | Glance dB 는 1.0 제출 전에 `DESIGN.md` 리터칭 먼저 (Cupertino·라이트/다크·브랜드 색 1개·시그니처 바늘), 그다음 제출 | 사용자: "고치고 제출 (추천)" — 첫인상이 중요하고 아직 제출 전 |
 | 2026-10-05 | 기도·묵상 생성 음악은 **단독 유료 앱 안 함** → 성경 통독 앱 등의 무료 부가 기능. **유튜브 채널이 본래 목적** → 수익 거절 대비책을 넣고 진행(짧은 영상 10편 먼저, 영상마다 다르게, 시드 공개) | 사용자 "앱 돈 내고 안 쓸 듯, 통독앱에 붙이는 게 낫지. 난 유튜브에 올릴 목적이었지" |
