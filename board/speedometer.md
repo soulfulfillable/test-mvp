@@ -10,7 +10,7 @@
 - [사용자] 메일 "View in TestFlight" → 설치 → 조수석/걷기로 '느낌' 한마디.
 - [사용자] 같은 김에 **화면 녹화 30초** (순서는 `speedometer_app/store/review-reply.md` 위쪽) → 심사 첨부용.
 - [사용자, 제출 때] App Privacy 설문(위치: 수집 안 함 / AdMob: 식별자·사용 데이터 — 다른 앱과 같게)·연락처·저작권 `2026 Soulfulfill`·EU 제외 → Submit.
-- [세션] 느낌 피드백 반영 → 녹화 첨부 → 제출 준비.
+- [세션] 느낌 피드백 반영 → 녹화 첨부 → 사용자가 연락처 넣은 뒤 `App Store 등록 정보 채우기`(speedometer, 26) 한 번 더 → 심사 메모가 7항목 버전으로 바뀜 → 제출 준비.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
@@ -25,6 +25,7 @@
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
 - **TestFlight 초대는 이제 자동** — `Release iOS` 성공하면 `TestFlight 초대` 워크플로가 이어서 돈다(`board/_shared.md`). 빌드 26 은 업로드 2분 뒤 처리 완료.
 - **스토어 스크린샷을 웹 미리보기로**: `?shots=1`(광고 자리 빈칸) + 가짜 GPS 주입으로 화면을 찍고 제목을 얹는다 — `speedometer_app/store/screenshots/make.js`. 진짜 글꼴(Roboto)로 나온다.
+- **심사 메모(App Review Notes)는 처음 한 번만 API 로 들어간다** — 그 뒤 고치려 하면 Apple 이 연락처 전화번호까지 검사해 409("phone number must be in a valid format"). 연락처는 사용자가 ASC 에서 넣는 값이라, **연락처 입력 후** 등록 정보 워크플로를 다시 돌린다. 처음부터 7항목 메모를 넣고 첫 실행을 하는 게 낫다.
 - GitHub API 는 이 환경에서 **인증 없이 curl 로 읽힌다**(공개 리포) → `until curl … runs/<id> … completed` 를 백그라운드로 걸면 Actions 끝날 때 알림을 받는다.
 - **위치(GPS) 앱 헤드리스 점검**: Playwright 의 `setGeolocation` 은 속도(`coords.speed`)를 못 준다 → `addInitScript` 로
   `navigator.geolocation`(watchPosition/getCurrentPosition/clearWatch)과 `navigator.permissions.query` 를 바꿔 끼워
