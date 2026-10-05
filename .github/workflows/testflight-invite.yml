@@ -1,0 +1,56 @@
+name: TestFlight 초대 (빌드 처리 대기 → 내부 그룹 → 초대 메일)
+
+# Release iOS 가 성공하면 자동으로 돈다 (Release iOS 자체의 대기 줄은 건드리지 않게 따로 둔 워크플로).
+# 빌드 처리가 끝나길 기다렸다가(보통 5~30분) 내부 테스트 그룹 `me`(없으면 생성) → 계정 소유자를 테스터로 →
+# 초대 메일. 사용자는 메일의 "View in TestFlight" / Redeem 코드만 누르면 된다.
+# 이메일은 로그에서 가리고 실행 요약에는 쓰지 않는다 (.github/scripts/asc_testflight.py).
+# 수동 실행: Actions → 이 워크플로 → Run workflow → 빌드 번호(Release iOS 실행 번호)와 앱 이름.
+
+on:
+  workflow_run:
+    workflows: ["Release iOS (앱 선택 → App Store Connect)"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      build:
+        description: "빌드 번호 (= Release iOS 실행 번호)"
+        required: true
+      app:
+        description: "앱 이름 (예: speedometer) — 번들 com.soulfulfill.<앱>"
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: testflight-invite-${{ github.event.workflow_run.run_number || inputs.build }}
+  cancel-in-progress: false
+
+jobs:
+  invite:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+      BUILD: ${{ github.event.workflow_run.run_number || inputs.build }}
+      BUNDLE: ${{ inputs.app && format('com.soulfulfill.{0}', inputs.app) || '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write API key
+        run: |
+          mkdir -p "$RUNNER_TEMP/keys"
+          printf '%s\n' "$KEY_P8" > "$RUNNER_TEMP/keys/AuthKey.p8"
+          echo "KEY_PATH=$RUNNER_TEMP/keys/AuthKey.p8" >> "$GITHUB_ENV"
+
+      - name: Wait for processing & invite
+        run: |
+          python3 -m pip install -q pyjwt cryptography
+          python3 .github/scripts/asc_testflight.py invite "$BUILD" $BUNDLE
+
+      - name: Remove API key
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/keys"
