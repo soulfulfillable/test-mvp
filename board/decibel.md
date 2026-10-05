@@ -1,10 +1,10 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-03 19:03 (KST)
+마지막 갱신: 2026-10-05 10:56 (KST)
 
 ## 지금 상태 (3줄 이내)
 Flutter 1차 완성(`decibel_app/flutter/`): 측정·비유표·리포트(이미지 공유)·기록·설정. 테스트 27개 통과(엔진 14 + 로봇 13, VoiceOver 버튼 검사 포함).
 웹 미리보기 `docs/decibel-app/` — 폰 브라우저에서 **진짜 마이크로** 측정된다. 광고는 배너만(iOS 실제 AdMob ID).
-**TestFlight 빌드 19 업로드 완료** (Release iOS run 37114360512, "Upload succeeded"). 사용자 설치·'느낌' 피드백 + 보정값 실기기 확인 대기.
+TestFlight 빌드 19 → 사용자 "아지금 괜찮아" → **심사 준비**: 스크린샷 5장(실측)·등록 정보 API 입력. 사용자가 ASC 수동 항목 채우고 제출하면 끝.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ 이름 A `Glance dB: Decibel Meter` / 번들 `com.soulfulfill.decibel` (사용자 확인) → ✅ Apple 번들 ID 등록 (Actions run 37065279691 로그 "새로 등록함").
@@ -12,7 +12,9 @@ Flutter 1차 완성(`decibel_app/flutter/`): 측정·비유표·리포트(이미
 - ✅ [세션] `Release iOS`(decibel) → 빌드 19 업로드 성공 (iOS 첫 컴파일 통과: record·audio_session SwiftPM 문제없음). 같은 실행이 2번째 시도로 성공 — 1번째 시도를 누가 왜 다시 돌렸는지는 확인 못 함.
 - [사용자] App Store Connect → Glance dB → TestFlight → 내부 테스트 그룹(＋) → 본인 추가 → 빌드 19 → 메일의 "View in TestFlight" 로 설치.
   써 볼 것: 조용한 방 / 대화 / TV 크게 — 숫자가 그럴듯한지, 리포트 저장·공유, 기록. (배너는 새 AdMob 앱이라 비어 있을 수 있음 — 정상)
-- [세션, 피드백 오면] 보정값(+94) 조정, 스크린샷 1290×2796 실측으로, `ios-metadata.json` → 심사(메모 6항목 + 실기기 녹화).
+- ✅ [세션] 스크린샷 5장 1290×2796 (`decibel_app/store/screenshots/`, 크롬 가짜 마이크에 합성 잡음 → **실제 측정값**), `ios-metadata.json`(심사 메모 7항목) → `App Store 등록 정보 채우기`(decibel, 빌드 19).
+- [사용자] ASC 첫 제출 때 API 로 못 넣는 것: 저작권 `2026 Soulfulfill` · Content Rights(제3자 콘텐츠 없음) · 카테고리 Utilities/Lifestyle · App Privacy(AdMob: 기기 ID·사용 데이터·진단, 추적 안 함 → Publish) · 가격 Free·판매국(EU 제외) · 심사 연락처 → (권장) 30초 실기기 녹화 첨부 → **Add for Review → Submit**.
+- [확인 못 함] 보정값 +94 가 실제 아이폰에서 맞는지 — 사용자 "괜찮아"는 전체 느낌, 숫자 비교는 아님. 리뷰·문의 오면 설정의 보정으로 대응.
 - (완료된 안내) App Store Connect → 앱 → ＋ → 신규 앱: 플랫폼 iOS / 이름 `Glance dB: Decibel Meter` / 기본 언어 English (U.S.) /
   번들 ID `com.soulfulfill.decibel` 선택 / SKU `decibel` / 사용자 액세스 Full Access → 생성.
 - [사용자] AdMob(**soulfulfillable 계정**, 게시자 ID pub-4724352880074547) → 앱 → 앱 추가 → iOS → "스토어에 등록되지 않음" → 이름 `Glance dB`
@@ -24,6 +26,7 @@ Flutter 1차 완성(`decibel_app/flutter/`): 측정·비유표·리포트(이미
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-05 | "아지금 괜찮아" (TestFlight 빌드 19 써 본 뒤로 해석 — 주간 점검의 'TestFlight 느낌: dB' 에 대한 답) | 출시 진행: 실측 스크린샷 5장·등록 정보 입력. 보정값(+94)은 숫자 비교 확인이 아니라서 '확인 못 함'으로 남김 |
 | 10-03 | "App Store Connect: 앱 이거해놨고 에드몸도 저기" (AdMob 배너 단위 생성 화면 스크린샷) | 앱 ID·배너 ID 를 코드·Info.plist 에 넣고 `Release iOS`(decibel) 실행 |
 | 10-03 | (A/B 질문) 이름 → "A. Glance dB: Decibel Meter (추천)", 번들 → "decibel 로 등록 (추천)" | 이름 확정, Actions 로 번들 ID 등록. 스토어 초안·PRODUCT 결정 로그 반영 |
 | 10-03 | "소음 측정기(데시벨) 앱 개발 시작해줘. plans/decibel-app.md 기획서대로 하고, 시작 전에 PLAYBOOK.md 와 board/ 전체를 읽어. 네 게시판은 board/decibel.md 야 — 내 피드백 받을 때마다, 단계 끝날 때마다 갱신해서 다른 세션들과 공유해줘." | 읽고 시작. 이 파일을 단계마다 갱신 |
@@ -50,6 +53,7 @@ Flutter 1차 완성(`decibel_app/flutter/`): 측정·비유표·리포트(이미
 - `flutter create` 템플릿은 `TARGETED_DEVICE_FAMILY = "1,2"`(아이패드 포함) → 아이폰 전용이면 3곳 `1` 로.
 
 ## 다른 세션·기획 파트너에게 묻고 싶은 것
+- 기획 파트너: `docs/todo.html` 에 **③ 첫 심사 제출 체크리스트**(저작권·Content Rights·카테고리·App Privacy·가격·연락처·녹화 첨부)를 앱마다 넣어 주면 사용자가 폰으로 한 번에 할 수 있을 듯 (대출 계산기 세션이 정리한 항목 그대로).
 - 기획 파트너: 보상형 광고 자리 — 기획서는 "긴 기록 리포트에만 검토". 지금은 리포트까지 전부 무료 + 배너만. 1차는 이대로 내고
   다운로드·리뷰 보고 정할지? (경쟁 앱이 유료로 막은 리포트를 무료로 푸는 게 차별점이라 막기 아깝다는 의견)
 - (해결) `Release iOS` 선택지 충돌 걱정 → 대출 계산기 세션이 번들 규칙을 한 줄로 바꿔 둬서 선택지에 이름만 더하면 된다. 충돌 나면 선택지 전부 살려서 합치기.

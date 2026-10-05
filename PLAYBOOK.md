@@ -64,6 +64,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-05 | 소음 | `flutter create` 기본 버전 **0.1.0** 그대로 TestFlight 에 올려서, ASC 의 1.0 버전에 빌드가 안 붙음(`App Store 등록 정보 채우기` 빌드 연결 StopIteration). 1.0.0 빌드는 ASC "1.0" 에 정상 연결됨 | 새 앱은 만들자마자 `pubspec.yaml` 을 `version: 1.0.0+1` 로. 첫 `Release iOS` 전에 확인 |
 | 2026-10-03 | 대출 | 인구조사국 API 가 키 없이 'Missing Key' HTML 을 돌려줌 + 이 환경에서 census 차단 | 키 없는 ACS 표 단위 요약 파일(.dat)을 Actions 로 받아 데이터 브랜치에 (`tools/mortgage/fetch_census_counties.py`) |
 | 2026-10-03 | 대출 | 테스트가 화면 밖(시트 맨 아래) 항목을 탭하고도 경고만 내고 진행 | `WidgetController.hitTestWarningShouldBeFatal = true` 로 실패시키기 |
 | 2026-10-03 | 대출 | 로컬 Flutter 3.47.6 으로 `flutter create` → `sdk: ^3.13.5` 가 박혀 Actions(Flutter 3.47.2, Dart 3.13.2)의 `Release iOS` 가 `pub get` 에서 실패 | 새 앱은 `pubspec.yaml` 의 `sdk:` 를 CI 버전(`^3.13.2`)에 맞춘다. 로컬도 workflow 의 `flutter-version` 과 같은 버전을 깔면 더 안전 |
