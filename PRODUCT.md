@@ -43,7 +43,7 @@
 |---|---|---|
 | **Glance FX: Currency Converter** (`currency_app/`) | 2026-10-02 v1.0(빌드 8) 심사 제출. v1.1 후보 = 빌드 9(TestFlight): 줄 꾹 눌러 끌기로 순서 변경, 긴 이름 줄 넘침 수정. 스크린샷 v2(금·BTC 첫 장) 준비됨 | 승인 대기 → AdMob 스토어 링크·결제 정보 → v1.1 제출(빌드 9 + 스크린샷 v2, `App Store 등록 정보 채우기`) → 리뷰·수익 확인 |
 | **Cozy Coloring 정식판** (원형 `docs/coloring-book.html`) | **보류** (2026-10-02). 기획서 OK, 선화 수집·변환기·테스트 로봇까지 만듦 | 재개 시 `plans/coloring-app.md` 의 첫 메시지로 새 세션 |
-| **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | 2026-10-03 Flutter 1차 완성·테스트 31개·웹 미리보기 `docs/tides-app/`. 번들 `com.soulfulfill.tides` | TestFlight 빌드 21 업로드(10-03) → 사용자 느낌 → 스크린샷 → 심사 |
+| **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | 2026-10-03 Flutter 1차 완성·테스트 31개·웹 미리보기 `docs/tides-app/`. 번들 `com.soulfulfill.tides` | 2026-10-05 v1.0(빌드 21) 심사 제출 → 승인 대기 → AdMob 스토어 링크 연결 → 리뷰·수익 확인 |
 | **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-05 **TestFlight 빌드 26 + 초대 메일(자동)**. AdMob 실제 ID, 스토어 스크린샷·설명·심사 메모 준비 | 사용자 TestFlight 느낌·화면 녹화 → App Privacy·연락처(사용자) → 제출 |
 | **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 1.0(빌드 22) ITMS-90035 반려 → 1.1(빌드 30) 등록 정보 입력 완료, 재제출 대기 | 사용자 Resubmit → 승인 → AdMob 스토어 연결 |
 | **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | **2026-10-05 1.0(빌드 28) 심사 제출** — Waiting for Review. DESIGN.md 리터칭판, 연령 4+, EU 제외 | 승인 후 AdMob 스토어 링크. 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1 |
@@ -93,6 +93,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-05 | Glance Tides v1.0(빌드 21) 심사 제출 | TestFlight 사용자 확인 "다 괜찮은 것 같다". 보상형 영상 무재고는 스토어 연결 전 정상 |
 | 2026-10-06 | Glance Mortgage 1.0(빌드 22) ITMS-90035 반려 → 같은 버전 칸을 **1.1 로 바꿔 빌드 30(주·카운티 세율·추가 상환 3종)으로 재제출** | 서명 문제는 공용 워크플로 수정으로 해결. 어차피 새 빌드가 필요해 기능이 더 많은 1.1 로 |
 | 2026-10-05 | 앰비언트 유튜브 영상 길이 **8시간 → 1시간 30분**. 모닥불은 밝은 장조로 다시, 카페는 반복감 줄여 다시, 샘플은 그림 있는 영상으로 | 사용자 "fireside pad는 음침하고 릴렉스가 아닌데 / cafe도 잘 모르겠네, 시각효과 같이 있으면 / 8시간 말고 1시간 30분정도로 하자" |
 | 2026-10-05 | **`DESIGN.md` 는 앞으로 새 앱에만 적용, 기존 앱 디자인은 손대지 않음** (디자인 리터칭 요청 취소, Glance dB 는 이미 한 것 유지) | 사용자 "지금까지 것은 만지지 말자, 나중에 만지면 이상해지는 것 같아서. 앞으로 것에 적용하자" |

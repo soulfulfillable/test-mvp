@@ -11,7 +11,8 @@ Flutter 1차 완성(`tides_app/flutter/`) + **보상형 30일 물때표**(영상
 - ✅ [세션] `Release iOS`(app=tides) run 37115299107 성공 — **빌드 21** 업로드(10-03 19:12 KST, 맥에서 첫 컴파일·서명 통과).
 - ✅ [사용자] TestFlight 빌드 21 '다 괜찮은 것 같다' (10-05). 보상형 영상은 아직 무재고(출시 후 AdMob 스토어 연결하면 채워짐).
 - ✅ [세션] `App Store 등록 정보 채우기`(tides, 빌드 21) 성공 10-05: 부제·설명·키워드·홍보 문구·URL·스크린샷 5장·빌드·심사 메모.
-- [사용자] ASC 에서 App Privacy 설문·연령 등급·카테고리(Weather)·가격(Free)·Copyright `2026 Soulfulfill`·EU 제외 → Submit for Review.
+- ✅ [사용자] ASC 수동 항목 + Submit for Review (10-05) → **Waiting for Review**.
+- [출시 후] AdMob 에 App Store 링크 연결(보상형 영상 재고), 리뷰·수익 확인. 새 디자인 규칙(DESIGN.md)은 새 앱만 적용 — 이 앱은 손대지 않음.
 - [세션] (지난 항목) TestFlight → 사용자 '느낌' → 스크린샷 6장(1290×2796) → `App Store 등록 정보 채우기`.
 - [사용자, 선택] 웹 미리보기 '느낌' 한마디.
 - 확인 못 한 것: iOS 실제 빌드(맥에서 첫 컴파일은 `Release iOS` 때), 실기기 위치 권한 창, 실제 AdMob 영상(지금은 테스트·가짜 광고).
@@ -19,6 +20,7 @@ Flutter 1차 완성(`tides_app/flutter/`) + **보상형 30일 물때표**(영상
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-05 | (ASC 캡처) "이건뭐해야하지" → Content Rights 빠짐 → (캡처) "1 Item Submitted" | 수동 항목 안내(Content Rights = 제3자 콘텐츠 있음·권리 있음, NOAA 공공 데이터). **v1.0(빌드 21) 심사 제출 완료** |
 | 10-05 | (TestFlight 빌드 21 캡처, 산타모니카) "다 괜찮은거같애 비디오보기하면 저렇게 나오는데 지금 정상이면 그럼 괜찮은거같애" | 위치→관측소·곡선·끌기·7일 표 정상 확인. "No video available" 는 새 AdMob 앱이 스토어에 연결되기 전 흔한 무재고 — 코드는 안내 문구대로 정상 동작. 스크린샷 5장 → 등록 정보 채우기 |
 | 10-03 | (AdMob 캡처 2장) "배너는됏고 리워드는 저렇게위에꺼는비우는거지 체크박스" → 보상형 완료 캡처, "App Store Connect 이거도 해놧어" | Partner bidding 은 비움이 맞다고 답함. 앱 ID `~3021266571`, 배너 `/9191837537`, 보상형 `/4912847027` 반영 → `Release iOS`(tides) 실행 |
 | 10-03 | (A/B) 이름 "Glance Tides (추천)" / 결제 "넣지 않음 (추천)" / 30일 표 보상형 "넣음 (추천)" | 이름 `Glance Tides: Tide Chart`, 번들 `com.soulfulfill.tides` 등록 실행, 결제 없음, 30일 표 영상 보고 24시간 열기 개발 |
