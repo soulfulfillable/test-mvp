@@ -50,3 +50,15 @@ calculator,economy,oil,change,reminder,service,expense,cost,vehicle,auto,truck,o
 3. 차트 — 연비 추이·월별 비용 ("See where your money goes")
 4. 정비 알림 — 진행 막대 ("Never miss an oil change")
 5. More — CSV 내보내기/가져오기 ("Your data is yours — free CSV export")
+
+## 첫 제출 — 사용자가 ASC 웹에서 직접 하는 것 (API 로 못 넣음)
+
+`App Store 등록 정보 채우기`(app=fuellog, build=33)가 부제·설명·키워드·홍보 문구·URL·스크린샷 5장·빌드 33·심사 메모를 넣는다. 나머지:
+1. **App Information**: 카테고리 Primary **Utilities**, Secondary **Productivity** · Content Rights → "does not contain third-party content" → Save
+2. **Age Rating**: 전부 None/No, 광고(Advertising)만 Yes → 4+ (소음 앱과 같음)
+3. **App Privacy** (AdMob SDK 분 — 사용자 기록은 기기 밖으로 안 나감, 위치 안 씀):
+   Location → Coarse Location · Identifiers → Device ID · Usage Data → Product Interaction, Advertising Data ·
+   Diagnostics → Crash Data, Performance Data / 용도 Third-Party Advertising, Analytics / 사용자와 연결 No / 추적 No → **Publish**
+4. **Pricing and Availability**: Free · 판매국 전체에서 EU 제외(trader 신고 전)
+5. **1.0 버전 화면**: Copyright `2026 Soulfulfill` · App Review Information 연락처(이름·성·이메일·전화) → Save
+6. **Add for Review → Submit**

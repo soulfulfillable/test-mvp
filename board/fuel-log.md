@@ -2,9 +2,9 @@
 마지막 갱신: 2026-10-03 (KST)
 
 ## 지금 상태 (3줄 이내)
-ASC 앱 `Glance MPG: Gas Mileage Log` 생성(사용자 10-05), AdMob 실제 ID 반영(배너만). 테스트 48개 통과.
-빌드 29 업로드·**TestFlight 초대 메일 발송**(10-05 20:42 UTC, 내부 그룹 `me` 생성) — 단 옛 서명 방식이라 시험용. **빌드 33**(실제 광고 ID + 고친 서명) 업로드 중 → 같은 그룹에 자동으로 붙음.
-DESIGN.md: "이미 만든 앱은 손대지 않는다"(10-05 사용자 결정) → 화면은 그대로.
+**빌드 33**(실제 AdMob ID·고친 서명) 업로드 성공. 스토어 스크린샷 5장·심사 메모 7항목 준비, `App Store 등록 정보 채우기`(build 33) 실행.
+남은 것 = 사용자 ASC 수동 항목(카테고리·Content Rights·연령·App Privacy·가격/EU 제외·저작권·연락처) → Add for Review → Submit.
+사용자 결정(10-06): TestFlight 느낌 확인·화면 녹화 없이 진행.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] 이름 A `Glance MPG: Gas Mileage Log`, 번들 `com.soulfulfill.fuellog`.
@@ -17,6 +17,7 @@ DESIGN.md: "이미 만든 앱은 손대지 않는다"(10-05 사용자 결정) �
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | "아냐확인하지말고 그냥 진행하자" (TestFlight 느낌 확인 건너뛰기) | 바로 제출 준비: 스토어 스크린샷 5장(웹 ?demo=1&shots=1 → 1290×2796), 심사 메모 7항목(녹화 대신 1분 체험 순서), `App Store 등록 정보 채우기`(build 33) 실행, 사용자 수동 항목 정리(`store/ios-listing.md` 끝) |
 | 10-05 | AdMob "Ad unit successfully created" 화면 캡처 (앱 ID `~6940701412`, 배너 `/8213509779`) | `lib/core/ads.dart`·`Info.plist` 에 반영, 같은 게시자 계정인지 검사하는 테스트 추가(48개 통과). 빌드 29 는 옛 서명 방식(인증서 지우던 때)이라 **고친 Release iOS 로 새 빌드** |
 | 10-05 | "신규 앱 했어 admod 어케해야되는지 안내" | ASC 앱 레코드 확인 Actions 재실행(러너 대기) → `Release iOS`(fuellog) 실행 #29 대기열 → 성공하면 TestFlight 초대 자동. AdMob 은 클릭 단위로 안내(배너 1개, soulfulfillable 계정), 완료 화면 캡처 받으면 ID 반영 |
 | 10-03 | (A/B) 이름 → "A. Glance MPG (추천)", 번들 → "fuellog 로 등록 (추천)" | 이름 `Glance MPG: Gas Mileage Log`, 번들 `com.soulfulfill.fuellog` Apple 등록 Actions 실행, `Release iOS`·`App Store 등록 정보 채우기` 선택지에 `fuellog` 추가, `docs/todo.html` 에 복사용 값 추가 |
