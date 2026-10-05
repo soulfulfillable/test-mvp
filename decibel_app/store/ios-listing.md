@@ -110,11 +110,11 @@ Free decibel meter with no subscription. See how loud it is, what it sounds like
 ```
 Glance dB is a sound level meter (decibel meter). No account, login, user-generated content, or in-app purchases.
 
-1. App flow: on launch a welcome screen explains the microphone use, then iOS asks for microphone permission, and the live level appears. Main screens: Meter, Report, History, "How loud is that?" guide, Settings.
+1. App flow: the app opens straight to the meter. Tapping Start shows the iOS microphone permission prompt, then the live level appears. A one-line note under Start says the microphone is only used to measure. Main screens: Meter, Report, History (clock icon, top left), Settings (top right), and the "How Loud Is That?" guide.
 
 2. Purpose and audience: helps people check how loud it is (noisy neighbors, restaurants, baby white-noise machines, concerts) and save a simple noise report with date, time, average and max levels to share with a landlord or neighbor. Every feature is free.
 
-3. How to use (no credentials or setup): tap Continue and allow the microphone. Pause / Resume / Reset control the measurement. "Report" shows the report image and shares it with the iOS share sheet. Tap the level chip for everyday comparisons. History lists past measurements. Settings: calibration offset, dBA / dBC / dBZ weighting, keep screen on.
+3. How to use (no credentials or setup): tap Start and allow the microphone. Pause / Resume / Reset control the measurement. "Report" shows the report image and shares it with the iOS share sheet. Tap the level name under the gauge (e.g. "Like normal conversation") for everyday comparisons. History lists past measurements (swipe left to delete). Settings: calibration offset, dBA / dBC / dBZ weighting, keep screen on.
 
 4. Microphone and privacy: the microphone is used only while the app is in the foreground to compute the sound level on the device in real time (AVAudioSession measurement mode). Audio is never recorded, stored, or transmitted. There is no background audio mode. Only the numbers (per-second levels) are saved on the device.
 
