@@ -4,6 +4,7 @@
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
+| mortgage | **`Release iOS` 서명 고침** — 업로드 뒤 배포 인증서를 지우던(revoke) 단계 때문에 심사 제출 시 **ITMS-90035 Invalid Signature** 반려(Glance Mortgage 빌드 22). 인증서를 지우지 않고 암호화해 `ci-signing` 브랜치에 보관·재사용하도록 `release-ios.yml`·`asc_signing.py` 수정 중. **그동안 Release iOS 실행 자제 부탁** | 10-05 | 작업 중 |
 
 ## 공용 작업 요청 (기획 파트너 → 다음에 `Release iOS` 를 돌리는 세션이 맡는다)
 
