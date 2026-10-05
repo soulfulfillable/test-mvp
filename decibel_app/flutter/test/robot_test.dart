@@ -2,18 +2,19 @@
 // 막힌 길(버튼이 안 먹음)·뒤로가기 불가·깨진 레이아웃(overflow 는 Flutter 가 예외로 던져 테스트 실패)을 잡는다.
 // 마이크는 가짜(정해 둔 크기의 1 kHz 사인파)라서 화면 숫자가 계산대로 나오는지까지 확인한다.
 // 실행: flutter test test/robot_test.dart  → 누른 버튼 목록이 로그로 찍힌다.
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:decibel/core/ads.dart';
 import 'package:decibel/core/mic.dart';
 import 'package:decibel/core/share.dart';
 import 'package:decibel/core/store.dart';
 import 'package:decibel/main.dart';
-import 'package:flutter/material.dart';
 
-import 'dart:ui' show Tristate;
+import 'dart:ui' show Brightness, Tristate;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,6 +36,8 @@ Future<void> boot(
   Size size = const Size(390, 844),
   double ratio = 3,
   Map<String, Object> prefs = const {'seenIntro': true},
+  Brightness brightness = Brightness.light,
+  double textScale = 1,
   bool granted = true,
   double level = -40,
 }) async {
@@ -42,6 +45,9 @@ Future<void> boot(
   t.view.devicePixelRatio = ratio;
   t.view.padding = FakeViewPadding(top: 47 * ratio, bottom: 34 * ratio);
   addTearDown(t.view.reset);
+  t.platformDispatcher.platformBrightnessTestValue = brightness;
+  t.platformDispatcher.textScaleFactorTestValue = textScale;
+  addTearDown(t.platformDispatcher.clearAllTestValues);
   SharedPreferences.setMockInitialValues(prefs);
   Ads.i = FakeAds();
   mic = FakeSource(granted: granted, level: level);
@@ -56,8 +62,14 @@ Future<void> boot(
 
 Future<void> press(WidgetTester t, Finder f, String label) async {
   expect(f, findsOneWidget, reason: 'button not found: $label');
-  await t.ensureVisible(f);
-  await t.pump();
+  // 화면 밖일 때만 끌어온다 (보이는데도 굴리면 큰 제목 막대가 접히며 화면이 움직이는 중에 누르게 된다)
+  final r = t.getRect(f);
+  final view = t.view.physicalSize / t.view.devicePixelRatio;
+  if (r.top < 100 || r.bottom > view.height - 40) {
+    await t.ensureVisible(f);
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 800));
+  }
   await t.tap(f);
   pressed.add(label);
   await t.pump();
@@ -66,7 +78,7 @@ Future<void> press(WidgetTester t, Finder f, String label) async {
 }
 
 Future<void> back(WidgetTester t, String from) async {
-  final nav = find.byType(BackButton);
+  final nav = find.byKey(const Key('back'));
   expect(nav, findsOneWidget, reason: 'no back button on $from');
   await press(t, nav, '$from: Back');
 }
@@ -79,7 +91,12 @@ Future<void> listen(WidgetTester t, double seconds) async {
 }
 
 String textOf(WidgetTester t, Key k) {
-  final w = t.widget<Text>(find.byKey(k));
+  final f = find.byKey(k);
+  final w = t.widget(f) is Text
+      ? t.widget<Text>(f)
+      : t.widget<Text>(
+          find.descendant(of: f, matching: find.byType(Text)).first,
+        );
   return w.data ?? w.textSpan?.toPlainText() ?? '';
 }
 
@@ -122,7 +139,27 @@ Future<void> finish(WidgetTester t) async {
   await t.pump(const Duration(seconds: 1));
 }
 
+/// 테스트 기본 글꼴(Ahem)은 글자마다 정사각형이라 큰 글씨에서 가짜 넘침이 난다(속도계 세션 교훈).
+/// SDK 의 Roboto(SF 와 폭이 비슷)를 iOS 시스템 글꼴 이름으로 넣어 진짜에 가깝게 잰다.
+Future<void> loadFonts() async {
+  const dir = 'bin/cache/artifacts/material_fonts';
+  final root = Platform.environment['FLUTTER_ROOT'] ?? '/root/flutter';
+  for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
+    final loader = FontLoader(family);
+    for (final w in ['Regular', 'Medium', 'Bold']) {
+      final f = File('$root/$dir/Roboto-$w.ttf');
+      if (f.existsSync()) {
+        loader.addFont(Future.value(ByteData.sublistView(f.readAsBytesSync())));
+      }
+    }
+    await loader.load();
+  }
+}
+
 void main() {
+  // 버튼을 눌렀는데 다른 것이 맞으면(가려짐·화면 밖) 경고가 아니라 실패로 — 막힌 버튼을 놓치지 않게
+  WidgetController.hitTestWarningShouldBeFatal = true;
+  setUpAll(loadFonts);
   tearDownAll(() {
     // ignore: avoid_print
     print(
@@ -133,27 +170,19 @@ void main() {
   });
 
   testWidgets(
-    'first launch: intro → Continue asks for the mic and starts measuring',
+    'first launch: no intro screen — Start asks for the mic, one honest line under it',
     (t) async {
       await boot(t, prefs: const {});
-      expect(find.text('How loud is it\naround you?'), findsOneWidget);
-      noKorean(t, 'Intro');
-      expect(mic.asked, isFalse, reason: 'must not ask before Continue');
-      await press(
-        t,
-        find.byKey(const Key('intro-continue')),
-        'Intro: Continue',
-      );
+      expect(find.byKey(const Key('main')), findsOneWidget);
+      expect(textOf(t, const Key('mic-hint')), contains('Nothing is recorded'));
+      noKorean(t, 'Meter (first launch)');
+      expect(mic.asked, isFalse, reason: 'must not ask before Start');
+      await press(t, find.byKey(const Key('main')), 'Meter: Start (first)');
       expect(mic.asked, isTrue);
       expect(mic.running, isTrue);
+      expect(find.byKey(const Key('mic-hint')), findsNothing);
       await listen(t, 2);
       expect(textOf(t, const Key('current')), '54'); // -40 dBFS + 94
-      // 두 번째 실행에는 안내가 안 뜬다
-      await finish(t);
-      await t.pumpWidget(const DecibelApp());
-      await t.pump(const Duration(milliseconds: 400));
-      expect(find.text('How loud is it\naround you?'), findsNothing);
-      expect(find.byKey(const Key('main')), findsOneWidget);
       await finish(t);
     },
   );
@@ -220,7 +249,7 @@ void main() {
 
     await press(t, find.byKey(const Key('reset')), 'Meter: Reset');
     expect(mic.running, isFalse);
-    expect(textOf(t, const Key('current')), '--');
+    expect(textOf(t, const Key('current')), '—');
     expect(textOf(t, const Key('like')), 'Tap Start to measure');
     expect(
       AppStore.i.records,
@@ -262,7 +291,7 @@ void main() {
     await t.ensureVisible(find.byKey(const Key('share')));
     await t.pump();
     await t.tap(find.byKey(const Key('share')));
-    pressed.add('Report: Save or Share Image');
+    pressed.add('Report: Share Report');
     for (var i = 0; i < 10 && outside.lastImage == null; i++) {
       await t.runAsync(
         () => Future<void>.delayed(const Duration(milliseconds: 200)),
@@ -281,7 +310,7 @@ void main() {
     expect(width, (390 - 32) * 3);
     await t.pump(const Duration(milliseconds: 500));
     expect(
-      find.text('Save or Share Image'),
+      find.text('Share Report'),
       findsOneWidget,
       reason: 'button returns after sharing',
     );
@@ -296,11 +325,10 @@ void main() {
       await t.pump();
     }
     await t.pump(const Duration(milliseconds: 300));
-    expect(
-      find.text('Could not share the image. Please try again.'),
-      findsOneWidget,
-    );
-    pressed.add('Report: share fails → message');
+    expect(find.text("Couldn't Share"), findsOneWidget);
+    pressed.add('Report: share fails → dialog');
+    await press(t, find.byKey(const Key('share-fail-ok')), 'Share failed: OK');
+    expect(find.text("Couldn't Share"), findsNothing);
 
     await back(t, 'Report');
     await t.pump(const Duration(milliseconds: 800));
@@ -315,11 +343,11 @@ void main() {
     await press(t, find.byKey(const Key('main')), 'Meter: Start');
     await listen(t, 2);
     await press(t, find.byKey(const Key('guide')), 'Meter: Level guide chip');
-    expect(find.text('How loud is that?'), findsOneWidget);
+    expect(find.text('How Loud Is That?'), findsWidgets);
     expect(find.byKey(const Key('guide-here')), findsOneWidget);
     expect(textOf(t, const Key('guide-now')), contains('like a lawnmower'));
     await t.scrollUntilVisible(
-      find.text('Hearing safety'),
+      find.text('HEARING SAFETY'),
       300,
       scrollable: find.byType(Scrollable).first,
     );
@@ -439,14 +467,27 @@ void main() {
       await press(t, find.byKey(Key('record-$id')), 'History: open record');
       expect(find.byKey(const Key('report-card')), findsOneWidget);
       await back(t, 'Report');
-      await press(t, find.byKey(Key('delete-$id')), 'History: Delete');
+      Future<void> swipe() async {
+        await t.drag(find.byKey(Key('record-$id')), const Offset(-500, 0));
+        pressed.add('History: swipe left to delete');
+        await t.pump();
+        await t.pump(const Duration(milliseconds: 500));
+      }
+
+      await swipe();
       await press(
         t,
         find.byKey(const Key('delete-cancel')),
         'Delete dialog: Cancel',
       );
+      await t.pump(const Duration(milliseconds: 500));
       expect(AppStore.i.records, hasLength(1));
-      await press(t, find.byKey(Key('delete-$id')), 'History: Delete');
+      expect(
+        find.byKey(Key('record-$id')),
+        findsOneWidget,
+        reason: 'row comes back',
+      );
+      await swipe();
       await press(
         t,
         find.byKey(const Key('delete-ok')),
@@ -538,17 +579,38 @@ void main() {
     },
   );
 
-  for (final d in devices.entries) {
-    testWidgets('every screen fits on ${d.key}', (t) async {
-      final (size, ratio) = d.value;
-      await boot(t, size: size, ratio: ratio, prefs: const {});
-      noKorean(t, 'Intro @${d.key}');
-      expectButtonsTappable(t, 'Intro');
-      await press(
+  final variants = <String, (Size, double, Brightness, double)>{
+    for (final d in devices.entries) ...{
+      '${d.key} light': (d.value.$1, d.value.$2, Brightness.light, 1.0),
+      '${d.key} dark': (d.value.$1, d.value.$2, Brightness.dark, 1.0),
+    },
+    'iPhone 13 large text 135%': (
+      const Size(390, 844),
+      3.0,
+      Brightness.light,
+      1.35,
+    ),
+    'iPhone SE large text 135%': (
+      const Size(375, 667),
+      2.0,
+      Brightness.dark,
+      1.35,
+    ),
+  };
+  for (final v in variants.entries) {
+    testWidgets('every screen fits: ${v.key}', (t) async {
+      final (size, ratio, brightness, scale) = v.value;
+      await boot(
         t,
-        find.byKey(const Key('intro-continue')),
-        'Intro: Continue',
+        size: size,
+        ratio: ratio,
+        prefs: const {},
+        brightness: brightness,
+        textScale: scale,
       );
+      noKorean(t, 'Meter @${v.key}');
+      expectButtonsTappable(t, 'Meter (first launch)');
+      await press(t, find.byKey(const Key('main')), 'Meter: Start');
       mic.level = -3; // 시끄러운 상태에서 안내 줄까지 다 뜬 화면
       await listen(t, 4);
       expect(find.byKey(const Key('notice')), findsOneWidget);

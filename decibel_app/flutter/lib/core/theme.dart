@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 /// 앱 이름 — 정해지면 여기 한 곳만 바꾼다 (스토어 이름은 store/ios-listing.md).
 const kAppName = 'Glance dB';
@@ -7,44 +7,39 @@ const kAppName = 'Glance dB';
 const kPrivacyUrl =
     'https://soulfulfillable.github.io/test-mvp/decibel-privacy.html';
 
-/// 측정기 느낌의 어두운 화면. 리포트 이미지만 흰 종이(인쇄·전달용).
-class C {
-  static const bg = Color(0xFF0E131C);
-  static const card = Color(0xFF19202C);
-  static const card2 = Color(0xFF232C3A);
-  static const line = Color(0xFF2E3848);
-  static const ink = Color(0xFFF2F5F9);
-  static const sub = Color(0xFFA7B1C2);
-  static const muted = Color(0xFF7D889B);
-  static const accent = Color(0xFF4FC3F7);
-  static const red = Color(0xFFFF6B5B);
+/// DESIGN.md: 강조색은 하나. 오실로스코프 파형 같은 청록 — Glance 다른 앱(민트·바다·초록)과 겹치지 않게.
+/// 나머지는 iOS 시스템 색(라이트/다크 자동)만 쓴다.
+const accent = CupertinoDynamicColor.withBrightness(
+  color: Color(0xFF00848A),
+  darkColor: Color(0xFF2FD0D6),
+);
 
-  // 리포트(흰 종이)
-  static const paper = Colors.white;
-  static const paperInk = Color(0xFF17202B);
-  static const paperSub = Color(0xFF5B6675);
-  static const paperLine = Color(0xFFE3E7EC);
+/// 리포트 이미지는 늘 흰 종이 (인쇄·전달용) — 화면 테마와 무관.
+class Paper {
+  static const bg = Color(0xFFFFFFFF);
+  static const ink = Color(0xFF1C1C1E);
+  static const sub = Color(0xFF6C6C70);
+  static const line = Color(0xFFE5E5EA);
+  static const tint = Color(0xFF00848A);
 }
 
-ThemeData buildTheme() => ThemeData(
-  useMaterial3: true,
-  brightness: Brightness.dark,
-  scaffoldBackgroundColor: C.bg,
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: C.accent,
-    brightness: Brightness.dark,
-    surface: C.bg,
-    primary: C.accent,
-  ),
-  appBarTheme: const AppBarTheme(
-    backgroundColor: C.bg,
-    foregroundColor: C.ink,
-    elevation: 0,
-    scrolledUnderElevation: 0,
-    centerTitle: true,
-  ),
-  snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating),
+/// 동적 색을 지금 밝기로.
+Color dyn(BuildContext context, Color c) =>
+    CupertinoDynamicColor.resolve(c, context);
+
+CupertinoThemeData buildTheme() => const CupertinoThemeData(
+  primaryColor: accent,
+  scaffoldBackgroundColor: CupertinoColors.systemBackground,
+  barBackgroundColor: CupertinoColors.systemBackground,
 );
+
+/// 글자 크기는 화면마다 3단계까지 (DESIGN.md): 본문 17, 보조 13, 그리고 화면의 주인공 하나.
+const double kBody = 17, kSmall = 13;
+
+TextStyle textOf(BuildContext context) =>
+    CupertinoTheme.of(context).textTheme.textStyle;
+
+const tabular = [FontFeature.tabularFigures()];
 
 const _months = [
   'Jan',

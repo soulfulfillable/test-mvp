@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 /// 숫자를 몰라도 읽히게 — 레벨 구간 이름과 색.
 class Band {
@@ -10,13 +10,14 @@ class Band {
   final Color color;
 }
 
+/// iOS 의미 색(라이트/다크 자동). 초록 = 괜찮음, 노랑·주황 = 시끄러움, 빨강·분홍 = 귀에 위험.
 const bands = [
-  Band('Quiet', -999, Color(0xFF3DDC97)),
-  Band('Moderate', 40, Color(0xFF9BE15D)),
-  Band('Loud', 65, Color(0xFFFFD43B)),
-  Band('Very loud', 80, Color(0xFFFF9F43)),
-  Band('Dangerous', 95, Color(0xFFFF6B5B)),
-  Band('Painful', 120, Color(0xFFE8457C)),
+  Band('Quiet', -999, CupertinoColors.systemGreen),
+  Band('Moderate', 40, CupertinoColors.systemGreen),
+  Band('Loud', 65, CupertinoColors.systemYellow),
+  Band('Very loud', 80, CupertinoColors.systemOrange),
+  Band('Dangerous', 95, CupertinoColors.systemRed),
+  Band('Painful', 120, CupertinoColors.systemPink),
 ];
 
 Band bandOf(double db) {
@@ -29,75 +30,29 @@ Band bandOf(double db) {
 
 /// "어느 정도 소리인가" 비유 표. 값은 CDC·NIDCD 가 쓰는 대표값 (dBA).
 class Ref {
-  const Ref(this.db, this.title, this.like, this.icon);
+  const Ref(this.db, this.title, this.like);
   final int db;
   final String title;
 
   /// 측정 화면에 뜨는 한 줄 비유.
   final String like;
-  final IconData icon;
 }
 
 const refs = [
-  Ref(10, 'Normal breathing', 'Like breathing', Icons.air),
-  Ref(
-    20,
-    'Rustling leaves, ticking watch',
-    'Like rustling leaves',
-    Icons.eco_outlined,
-  ),
-  Ref(30, 'Soft whisper', 'Like a soft whisper', Icons.hearing),
-  Ref(
-    40,
-    'Quiet library, fridge hum',
-    'Like a quiet library',
-    Icons.local_library_outlined,
-  ),
-  Ref(
-    50,
-    'Moderate rain, quiet office',
-    'Like moderate rain',
-    Icons.water_drop_outlined,
-  ),
-  Ref(
-    60,
-    'Normal conversation',
-    'Like normal conversation',
-    Icons.forum_outlined,
-  ),
-  Ref(
-    70,
-    'Washing machine, vacuum',
-    'Like a vacuum cleaner',
-    Icons.local_laundry_service_outlined,
-  ),
-  Ref(80, 'City traffic, lawnmower', 'Like a lawnmower', Icons.grass),
-  Ref(
-    90,
-    'Power tools, leaf blower up close',
-    'Like power tools',
-    Icons.handyman_outlined,
-  ),
-  Ref(95, 'Motorcycle', 'Like a motorcycle', Icons.two_wheeler),
-  Ref(
-    100,
-    'Subway train, car horn',
-    'Like a subway train',
-    Icons.train_outlined,
-  ),
-  Ref(
-    110,
-    'Rock concert, shouting in your ear',
-    'Like a rock concert',
-    Icons.speaker_outlined,
-  ),
-  Ref(
-    120,
-    'Siren up close, thunder',
-    'Like a siren up close',
-    Icons.campaign_outlined,
-  ),
-  Ref(140, 'Fireworks, gunshot', 'Like fireworks', Icons.celebration_outlined),
+  Ref(10, 'Normal breathing', 'Like breathing'),
+  Ref(20, 'Rustling leaves, ticking watch', 'Like rustling leaves'),
+  Ref(30, 'Soft whisper', 'Like a soft whisper'),
+  Ref(40, 'Quiet library, fridge hum', 'Like a quiet library'),
+  Ref(50, 'Moderate rain, quiet office', 'Like moderate rain'),
+  Ref(60, 'Normal conversation', 'Like normal conversation'),
+  Ref(70, 'Washing machine, vacuum', 'Like a vacuum cleaner'),
+  Ref(80, 'City traffic, lawnmower', 'Like a lawnmower'),
+  Ref(90, 'Power tools, leaf blower up close', 'Like power tools'),
+  Ref(95, 'Motorcycle', 'Like a motorcycle'),
+  Ref(100, 'Subway train, car horn', 'Like a subway train'),
+  Ref(110, 'Rock concert, yelling up close', 'Like a rock concert'),
+  Ref(120, 'Siren up close, thunder', 'Like a siren up close'),
+  Ref(140, 'Fireworks, gunshot', 'Like fireworks'),
 ];
 
 /// 지금 레벨에 가장 가까운 비유 (아래쪽 기준, 5 dB 여유).
