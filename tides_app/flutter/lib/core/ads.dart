@@ -134,7 +134,11 @@ class FakeAds extends Ads {
     this.result = RewardResult.rewarded,
     this.delay = Duration.zero,
     this.ready = true,
+    this.label = true,
   });
+
+  /// False for store screenshots (`?ads=shots`): the banner slot stays, without the "Ad" stand-in text.
+  final bool label;
 
   RewardResult result;
   Duration delay;
@@ -155,21 +159,21 @@ class FakeAds extends Ads {
   }
 
   @override
-  Widget banner() => const SizedBox(
-    key: Key('ad-banner'),
+  Widget banner() => SizedBox(
+    key: const Key('ad-banner'),
     height: 60,
-    child: Center(
-      child: Text(
-        'Ad',
-        style: TextStyle(fontSize: 11, color: Color(0xFF9AA8B8)),
-      ),
-    ),
+    child: label
+        ? const Center(
+            child: Text('Ad', style: TextStyle(fontSize: 11, color: Color(0xFF9AA8B8))),
+          )
+        : null,
   );
 }
 
 /// 웹 미리보기용 가짜 광고. 주소 뒤 `?ads=` 로 상황을 흉내 낸다 (점검용).
 ///   (없음) 1.5초 "영상" 뒤 보상 · slow 4초 로딩 뒤 보상 · none 8초 기다려도 영상 없음 · early 보상 전에 닫음
 FakeAds webPreviewAds(String? mode) => switch (mode) {
+  'shots' => FakeAds(label: false),
   'slow' => FakeAds(ready: false, delay: const Duration(seconds: 4)),
   'none' => FakeAds(
     ready: false,
