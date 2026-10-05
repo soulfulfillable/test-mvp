@@ -72,6 +72,15 @@ def main(meta_path, shots_dir, build_no):
     print(f'앱 {app["attributes"]["name"]} / 버전 {ver["attributes"]["versionString"]} ({ver["attributes"]["appStoreState"]})')
     ok = True
 
+    # 선택: json 에 versionString 이 있으면 편집 중인 버전 번호를 맞춘다 (반려된 1.0 을 1.1 빌드로 다시 낼 때 등)
+    if m.get('versionString') and m['versionString'] != ver['attributes']['versionString']:
+        def version_no():
+            call('PATCH', f'/appStoreVersions/{vid}', {'data': {
+                'type': 'appStoreVersions', 'id': vid, 'attributes': {'versionString': m['versionString']}}})
+            ver['attributes']['versionString'] = m['versionString']
+            print(f'  버전 번호 → {m["versionString"]}')
+        ok &= step('버전 번호', version_no)
+
     def app_info():
         infos = call('GET', f'/apps/{app_id}/appInfos')['data']
         info = next(i for i in infos if i['attributes'].get('appStoreState') in editable | {None}) if len(infos) > 1 else infos[0]
