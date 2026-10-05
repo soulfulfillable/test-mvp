@@ -2,7 +2,7 @@
 마지막 갱신: 2026-10-05 (기획 파트너가 만들어 둠)
 
 ## 지금 상태 (3줄 이내)
-시작 전. 기획서 `plans/soaking-music.md` (soaking 은 `plans/soaking-music-app.md`).
+시작 전. 기획서 `plans/ambient-youtube.md` (유튜브 채널, 주목적) + `plans/soaking-music-feature.md` (신앙 앱 부가 기능).
 
 ## 다음 할 일 / 사용자에게 받을 것
 ## 사용자 피드백 기록
