@@ -17,6 +17,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | (ASC 캡처) "submit 한거같은데 아직 invalid binary 있네 그냥 두면되나" | 그냥 두면 안 됨. 원인: 빌드 26 은 예전 Release iOS(업로드 뒤 배포 인증서 삭제)로 만든 빌드 → ITMS-90035 (대출·물때와 같음, `_shared.md`). 고쳐진 워크플로로 **빌드 32** 업로드(run 37389505875) → 1.0 에 빌드 32 연결 → 사용자 재제출 |
 | 10-06 | "다햇어" (App Privacy 끝) | 심사 메모 7항목으로 갱신 시도 → 409: 연락처 이름·성·이메일·전화가 아직 비어 있음 → 1.0 페이지 App Review Information 입력·Save 를 다시 안내 |
 | 10-05 | "Diagnostics 이거에서는뭐" (App Privacy 설문) | Crash Data·Performance Data 체크, 용도 Third-Party Advertising·Analytics, 연결 No·추적 No 라고 안내 (Google 광고 SDK 공개 안내 기준, `store/ios-listing.md` 에 기록) |
 | 10-05 | "화면 녹화 30초도 이건 나중에 할께 나머지 해야될거 알려줘" | 녹화는 뒤로(2.1 정보 요청 오면 그때 답장에 첨부해도 됨). 제출까지 사용자 할 일을 ASC 화면 순서대로 정리해 안내(아래 다음 할 일) |
