@@ -1,5 +1,5 @@
 {
-  "_comment": "App Store Connect 에 API 로 넣는 값 (.github/scripts/asc_metadata.py). 원문은 ios-listing.md. 스크린샷은 TestFlight 빌드로 찍은 뒤 채운다.",
+  "_comment": "App Store Connect 에 API 로 넣는 값 (.github/scripts/asc_metadata.py). 원문은 ios-listing.md. 스크린샷은 node tides_app/store/screenshots/make.js (NOAA 실제 예보).",
   "bundleId": "com.soulfulfill.tides",
   "locale": "en-US",
   "subtitle": "Tides Near Me & Tide Times",
@@ -9,6 +9,12 @@
   "keywords": "high,low,noaa,fishing,beach,surf,moon,sunrise,ocean,boating,kayak,clam,table,forecast,coast",
   "supportUrl": "https://github.com/soulfulfillable/test-mvp/issues",
   "reviewNotes": "Tide predictions come from NOAA CO-OPS public API (api.tidesandcurrents.noaa.gov, no key). Location (\"When In Use\") is used once on-device to pick the nearest station; it is not stored or sent — you can also search stations without location. Ads: AdMob banner, and one optional rewarded video that opens a 30-day tide table for 24 hours (7-day tides are always free). No login required.",
-  "screenshots": [],
+  "screenshots": [
+    "01-today.png",
+    "02-chart.png",
+    "03-week.png",
+    "04-stations.png",
+    "05-30-days.png"
+  ],
   "screenshotDisplayType": "APP_IPHONE_67"
 }
