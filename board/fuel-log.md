@@ -17,6 +17,7 @@ Flutter 1차 완성(`fuellog_app/flutter/`): 주유 한 화면(둘 넣으면 셋
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-05 | "신규 앱 했어 admod 어케해야되는지 안내" | ASC 앱 레코드 확인 Actions 재실행(러너 대기) → `Release iOS`(fuellog) 실행 #29 대기열 → 성공하면 TestFlight 초대 자동. AdMob 은 클릭 단위로 안내(배너 1개, soulfulfillable 계정), 완료 화면 캡처 받으면 ID 반영 |
 | 10-03 | (A/B) 이름 → "A. Glance MPG (추천)", 번들 → "fuellog 로 등록 (추천)" | 이름 `Glance MPG: Gas Mileage Log`, 번들 `com.soulfulfill.fuellog` Apple 등록 Actions 실행, `Release iOS`·`App Store 등록 정보 채우기` 선택지에 `fuellog` 추가, `docs/todo.html` 에 복사용 값 추가 |
 | 10-03 | "연비·정비 기록 앱 개발 시작해줘. plans/fuel-log-app.md 기획서대로 하고, 시작 전에 PLAYBOOK.md 와 board/ 전체를 읽어. 네 게시판은 board/fuel-log.md 야 — 내 피드백 받을 때마다, 단계 끝날 때마다 갱신해서 다른 세션들과 공유해줘." | 읽고 시작. 기획서 순서 ①조사 ②테스트 로봇 ③Flutter 까지 1차 완료, 이 파일을 단계마다 갱신 |
 
@@ -40,8 +41,7 @@ Flutter 1차 완성(`fuellog_app/flutter/`): 주유 한 화면(둘 넣으면 셋
 - **큰 글씨 대응**: 입력 칸 폭을 `MediaQuery.textScalerOf(context).scale(1)` 에 비례(화면 62% 까지), 요약 숫자 칸은 `FittedBox(scaleDown)`, 목록 줄은 자르지 말고 2줄.
 - **다른 앱 CSV 형식은 오픈소스 가져오기 코드에서**: Fuelly 웹 형식 `fuelup_date,odometer|miles,gallons|litres,price,partial_fuelup(1/0),missed_fuelup(1/0),notes`,
   Fuelly 앱 형식 `Type(Gas/Service),MPG,Date,Time,Vehicle,Odometer,Filled Up(Full/Partial),Price($),Gallons,Total Cost,…,Notes,Services`. 머리글 이름 별칭으로 맞춘다 (`lib/core/csv.dart`).
-- `share_plus` 는 안에서 `path_provider` → `path_provider_foundation` 2.6(FFI, `objective_c` 네이티브 에셋)을 끌고 온다 — 소음·속도계도 같음.
-  **처음 `Release iOS` 를 돌리는 세션이 이 부분 빌드 성공/실패를 여기 남겨 주자.**
+- `share_plus` 는 안에서 `path_provider` → `path_provider_foundation` 2.6(FFI, `objective_c` 네이티브 에셋)을 끌고 온다 — **소음 앱이 같은 조합으로 iOS 빌드 성공**(빌드 19~28) → 문제없음.
 - 웹 미리보기 `?demo=1` 예시 기록은 **저장 칸을 따로**(`PrefsPersist('fuellog.demo')`) — 예시를 본 뒤 진짜 링크를 열어도 예시가 안 섞인다.
 
 ## 다른 세션·기획 파트너에게 묻고 싶은 것
