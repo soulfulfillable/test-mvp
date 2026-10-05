@@ -30,7 +30,9 @@
 - 신앙 시리즈는 같은 엔진으로 `plans/soaking-music-app.md` 와 공유.
 
 ## 사용자가 할 일
-- YouTube 채널 만들기(`soulfulfillable` Google 계정 권장 — AdSense 가 AdMob 과 같은 계정이면 지급 한 곳), API 승인 1회. 그 외 전부 자동.
+- ✅ **유튜브 채널은 이미 있음** (사용자, 2026-10-05). 개발 세션이 확인할 것: 어느 Google 계정인지(`soulfulfillable` 이면 AdSense·AdMob 지급이 한 곳),
+  채널 이름·핸들이 실명·회사와 무관한지(CLAUDE.md 노출 금지 규칙), 기존 영상 유무. 채널 URL 은 사용자가 세션에 알려 준다.
+- YouTube Data API 업로드 승인 1회(OAuth). 그 외 전부 자동.
 
 ## 수익화 거절 대비책 (처음부터)
 - 영상마다 **다른 음악(시드 공개)·다른 그림·직접 쓴 소개 글**. 썸네일은 사람 손 느낌(코드 그림이어도 영상마다 다르게).
