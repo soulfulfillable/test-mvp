@@ -1,10 +1,10 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-05 10:56 (KST)
+마지막 갱신: 2026-10-05 11:17 (KST)
 
 ## 지금 상태 (3줄 이내)
 Flutter 1차 완성(`decibel_app/flutter/`): 측정·비유표·리포트(이미지 공유)·기록·설정. 테스트 27개 통과(엔진 14 + 로봇 13, VoiceOver 버튼 검사 포함).
 웹 미리보기 `docs/decibel-app/` — 폰 브라우저에서 **진짜 마이크로** 측정된다. 광고는 배너만(iOS 실제 AdMob ID).
-TestFlight 빌드 19 → 사용자 "아지금 괜찮아" → **심사 준비**: 스크린샷 5장(실측)·등록 정보 API 입력. 사용자가 ASC 수동 항목 채우고 제출하면 끝.
+**ASC 1.0 등록 정보 입력 완료** (설명·키워드·스크린샷 5장·빌드 27·심사 메모). 사용자가 ASC 수동 항목(저작권·App Privacy 등) 채우고 **Add for Review → Submit** 하면 끝.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ 이름 A `Glance dB: Decibel Meter` / 번들 `com.soulfulfill.decibel` (사용자 확인) → ✅ Apple 번들 ID 등록 (Actions run 37065279691 로그 "새로 등록함").
@@ -12,7 +12,7 @@ TestFlight 빌드 19 → 사용자 "아지금 괜찮아" → **심사 준비**: 
 - ✅ [세션] `Release iOS`(decibel) → 빌드 19 업로드 성공 (iOS 첫 컴파일 통과: record·audio_session SwiftPM 문제없음). 같은 실행이 2번째 시도로 성공 — 1번째 시도를 누가 왜 다시 돌렸는지는 확인 못 함.
 - [사용자] App Store Connect → Glance dB → TestFlight → 내부 테스트 그룹(＋) → 본인 추가 → 빌드 19 → 메일의 "View in TestFlight" 로 설치.
   써 볼 것: 조용한 방 / 대화 / TV 크게 — 숫자가 그럴듯한지, 리포트 저장·공유, 기록. (배너는 새 AdMob 앱이라 비어 있을 수 있음 — 정상)
-- ✅ [세션] 스크린샷 5장 1290×2796 (`decibel_app/store/screenshots/`, 크롬 가짜 마이크에 합성 잡음 → **실제 측정값**), `ios-metadata.json`(심사 메모 7항목) → `App Store 등록 정보 채우기`(decibel, 빌드 19).
+- ✅ [세션] 스크린샷 5장 1290×2796 (`decibel_app/store/screenshots/`, 크롬 가짜 마이크에 합성 잡음 → **실제 측정값**), `ios-metadata.json`(심사 메모 7항목) → `App Store 등록 정보 채우기`(decibel). 1차는 빌드 연결 실패(앱 버전이 flutter 기본 0.1.0) → 1.0.0 으로 고쳐 **빌드 27** 업로드 → 연결 성공(run 37254733271).
 - [사용자] ASC 첫 제출 때 API 로 못 넣는 것: 저작권 `2026 Soulfulfill` · Content Rights(제3자 콘텐츠 없음) · 카테고리 Utilities/Lifestyle · App Privacy(AdMob: 기기 ID·사용 데이터·진단, 추적 안 함 → Publish) · 가격 Free·판매국(EU 제외) · 심사 연락처 → (권장) 30초 실기기 녹화 첨부 → **Add for Review → Submit**.
 - [확인 못 함] 보정값 +94 가 실제 아이폰에서 맞는지 — 사용자 "괜찮아"는 전체 느낌, 숫자 비교는 아님. 리뷰·문의 오면 설정의 보정으로 대응.
 - (완료된 안내) App Store Connect → 앱 → ＋ → 신규 앱: 플랫폼 iOS / 이름 `Glance dB: Decibel Meter` / 기본 언어 English (U.S.) /

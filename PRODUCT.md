@@ -46,7 +46,7 @@
 | **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | 2026-10-03 Flutter 1차 완성·테스트 31개·웹 미리보기 `docs/tides-app/`. 번들 `com.soulfulfill.tides` | TestFlight 빌드 21 업로드(10-03) → 사용자 느낌 → 스크린샷 → 심사 |
 | **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-05 **TestFlight 빌드 26 + 초대 메일(자동)**. AdMob 실제 ID, 스토어 스크린샷·설명·심사 메모 준비 | 사용자 TestFlight 느낌·화면 녹화 → App Privacy·연락처(사용자) → 제출 |
 | **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 2026-10-05 v1.0(빌드 22) 심사 제출(Waiting for Review). 1.1(빌드 25: 주·카운티 세율, 추가 상환 3종) TestFlight 대기 | 승인 → AdMob 스토어 연결 → 1.1 새 버전 제출(빌드 25) |
-| **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-03 TestFlight 빌드 19 업로드. 테스트 27개 통과·웹 미리보기 `docs/decibel-app/`(진짜 마이크 측정). AdMob 배너 실제 ID | 사용자 TestFlight 느낌 → 보정값(+94) 실기기 확인 → 스크린샷·등록 정보 → 심사 |
+| **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-05 ASC 1.0 등록 정보·스크린샷 5장(실측)·빌드 27·심사 메모 입력 완료. TestFlight 사용자 "괜찮아" | 사용자: 저작권·Content Rights·카테고리·App Privacy·가격·연락처 → 제출. 보정값 +94 실측 비교는 아직 |
 | **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) | 2026-10-02 Flutter 1차 완성·테스트 로봇 17개 통과·웹 미리보기 `docs/catdoku-app/` | 번들 ID 등록 → ASC 앱 레코드·AdMob 앱(사용자) → TestFlight |
 | **Kitty Path: Number Puzzle** (한붓 경로 퍼즐, `kittypath_app/`, `plans/path-puzzle-app.md`, `board/path-puzzle.md`) | 2026-10-03 Flutter 1차 완성·테스트 36개·웹 실제 터치 점검 24/24·웹 미리보기 `docs/path-puzzle-app/`. 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 아이콘·스토어 문구 → ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
 | **Glance Solunar: Fishing Times** (낚시·사냥 시간, `solunar_app/`, `plans/solunar-app.md`, `board/solunar.md`) | 2026-10-03 Flutter 1차 완성·테스트 34개(PyEphem 대조 1,800건+)·웹 미리보기 `docs/solunar-app/`(오프라인 계산, 마을 2만 곳). 번들 `com.soulfulfill.solunar` | ASC 앱 레코드·AdMob 배너+보상형(사용자) → `Release iOS`(solunar) → TestFlight |
@@ -88,6 +88,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-05 | Glance dB 1.0 심사 준비 진행 (빌드 27, 등록 정보 API 입력 완료) | TestFlight 써 본 사용자 "아지금 괜찮아". 보정값은 숫자 비교 없이 추정치(+94) 그대로 — 설정에서 조정 가능 |
 | 2026-10-05 | 3차 시장조사(카드게임·보드게임 보조·파티·교사·시급 근무·재테크·해외여행·두뇌) → `plans/research-round3.md`. 상위: FreeCell → 빚 갚기 → 두뇌 테스트 | 사용자 "더 추가로 낼 것들, 아직 안 한 것들 조사" |
 | 2026-10-05 | 신앙 앱 수익: AdMob(민감 카테고리 차단, Religion 은 허용) + 신앙 상품 제휴 링크(Christianbook 등) 검토 (`plans/research-8-fields.md` 메모) | 사용자 "신앙 앱엔 신앙 관련 광고를 하면 되지 않을까" |
 | 2026-10-05 | 이번 주는 새 앱 없이 9개를 심사·출시까지 마무리 | 주간 점검 결정 1 = A |
