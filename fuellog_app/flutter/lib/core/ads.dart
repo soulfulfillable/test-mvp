@@ -4,14 +4,12 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'theme.dart';
 
-/// AdMob 광고 단위 ID.
-/// 아직 AdMob 에 이 앱을 만들지 않아 Google 공식 **테스트 ID** 를 쓴다.
-/// 콘솔에서 앱·광고 단위를 만들면 여기와 ios/Runner/Info.plist 의 GADApplicationIdentifier,
-/// android/app/src/main/AndroidManifest.xml 의 APPLICATION_ID 를 함께 바꾼다.
+/// AdMob 광고 단위 ID — `soulfulfillable` 계정의 "Glance MPG" iOS 앱 (2026-10-05 생성).
+/// 앱 ID 는 ios/Runner/Info.plist 의 GADApplicationIdentifier. 이 앱은 아이폰 전용이라 그 외는 Google 공식 테스트 ID.
 class AdIds {
   static bool get _ios => defaultTargetPlatform == TargetPlatform.iOS;
   static String get banner =>
-      _ios ? 'ca-app-pub-3940256099942544/2934735716' : 'ca-app-pub-3940256099942544/6300978111';
+      _ios ? 'ca-app-pub-4724352880074547/8213509779' : 'ca-app-pub-3940256099942544/6300978111';
 }
 
 /// 광고를 갈아끼울 수 있게 감싼다 — 테스트·웹 미리보기에서는 가짜를 쓴다.

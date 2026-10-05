@@ -1,7 +1,10 @@
 // 엔진 테스트 — 화면 없이 숫자만. 손으로 계산한 값과 맞는지 고정한다.
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fuellog/core/ads.dart';
 import 'package:fuellog/core/calc.dart';
 import 'package:fuellog/core/csv.dart';
 import 'package:fuellog/core/model.dart';
@@ -447,6 +450,18 @@ void main() {
         ['a', 'b'],
         ['x, y', 'say "hi"\nthere'],
       ]);
+    });
+  });
+
+  group('AdMob IDs', () {
+    test('iPhone uses the soulfulfillable account: app ID and banner unit match', () {
+      const pub = 'ca-app-pub-4724352880074547';
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      addTearDown(() => debugDefaultTargetPlatformOverride = null);
+      expect(AdIds.banner, '$pub/8213509779');
+      final plist = File('ios/Runner/Info.plist').readAsStringSync();
+      expect(plist, contains('<string>$pub~6940701412</string>'));
+      expect(plist, isNot(contains('3940256099942544')), reason: 'no Google test app ID in the iOS build');
     });
   });
 }

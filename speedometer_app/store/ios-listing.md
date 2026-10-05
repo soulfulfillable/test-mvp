@@ -45,7 +45,10 @@
 - 아이폰 전용·세로 고정. 위치는 "앱 사용 중"만, 백그라운드 위치 없음(UIBackgroundModes 없음)
 - 개인정보처리방침: https://soulfulfillable.github.io/test-mvp/speedometer-privacy.html
 - Copyright: `2026 Soulfulfill`
-- 앱 개인정보 라벨: 위치 = **수집 안 함**(기기 밖으로 안 나감). AdMob: 식별자·사용 데이터·진단(제3자 광고) — 환율 앱과 같은 방식.
+- 앱 개인정보 라벨 (App Privacy) — 정밀 위치(GPS)는 기기 밖으로 안 나가므로 **Precise Location 체크 안 함**. 수집은 Google AdMob SDK 분:
+  - Location → Coarse Location (IP 로 대략 위치) · Identifiers → Device ID · Usage Data → Product Interaction, Advertising Data
+  - **Diagnostics → Crash Data, Performance Data** (Google: 충돌 기록·성능 데이터를 SDK 개선·광고·분석에 씀. Other Diagnostic Data 는 체크 안 함 — 환율 앱과 같게)
+  - 각 항목 용도: Third-Party Advertising, Analytics / 사용자와 연결: No / 추적: No (ATT 안 띄움) → Publish
 
 ## 설명 초안 (English)
 

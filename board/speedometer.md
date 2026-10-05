@@ -1,20 +1,24 @@
 # GPS 속도계 (speedometer 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-05 11:15 (KST)
+마지막 갱신: 2026-10-06 08:50 (KST)
 
 ## 지금 상태 (3줄 이내)
-**TestFlight 빌드 26 업로드 + 초대 메일 발송 완료**(자동, 10-05). AdMob 실제 ID(iOS) 반영. 테스트 37개·웹 점검 31단계 통과.
-스토어: 스크린샷 5장·설명·키워드·심사 메모 7항목 준비, `App Store 등록 정보 채우기`(빌드 26) 실행. 제출은 사용자 TestFlight 느낌 + 화면 녹화 뒤.
-웹 미리보기 https://soulfulfillable.github.io/test-mvp/speedometer-app/index.html (`?demo=1` 가짜 주행).
+1.0 첫 제출이 **Invalid Binary**(빌드 26 = 예전 서명, ITMS-90035) → 고쳐진 Release iOS 로 **빌드 32** 업로드·TestFlight 자동 반영 → 1.0 에 빌드 32 연결, 심사 메모 7항목 갱신 완료(10-06).
+**사용자 재제출(Add for Review → Submit) 대기.** App Privacy·연락처는 사용자가 채움.
+웹 미리보기 https://soulfulfillable.github.io/test-mvp/speedometer-app/index.html
 
 ## 다음 할 일 / 사용자에게 받을 것
-- [사용자] 메일 "View in TestFlight" → 설치 → 조수석/걷기로 '느낌' 한마디.
-- [사용자] 같은 김에 **화면 녹화 30초** (순서는 `speedometer_app/store/review-reply.md` 위쪽) → 심사 첨부용.
-- [사용자, 제출 때] App Privacy 설문(위치: 수집 안 함 / AdMob: 식별자·사용 데이터 — 다른 앱과 같게)·연락처·저작권 `2026 Soulfulfill`·EU 제외 → Submit.
-- [세션] 느낌 피드백 반영 → 녹화 첨부 → 사용자가 연락처 넣은 뒤 `App Store 등록 정보 채우기`(speedometer, 26) 한 번 더 → 심사 메모가 7항목 버전으로 바뀜 → 제출 준비.
+- [사용자] ASC 1.0 페이지에서 빌드 32 확인 → **Add for Review → Submit to App Review**.
+- [사용자, 선택] TestFlight 앱에서 빌드 32 써 보고 '느낌'. [나중에] 화면 녹화 30초(2.1 요청 오면 답장에 첨부, 순서 `store/review-reply.md`).
+- [세션] 제출 뒤: 승인되면 AdMob 에 스토어 링크 연결 안내 / 2.1 요청 오면 `store/review-reply.md` 로 답장 준비.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | (빌드 32 재업로드 후) | 빌드 32 VALID·TestFlight 반영(이미 초대 수락 → 앱에 바로 뜸), `App Store 등록 정보 채우기`(32): 빌드 연결·심사 메모 7항목 ✓ (연락처가 채워져 이제 수정 통과) |
+| 10-06 | (ASC 캡처) "submit 한거같은데 아직 invalid binary 있네 그냥 두면되나" | 그냥 두면 안 됨. 원인: 빌드 26 은 예전 Release iOS(업로드 뒤 배포 인증서 삭제)로 만든 빌드 → ITMS-90035 (대출·물때와 같음, `_shared.md`). 고쳐진 워크플로로 **빌드 32** 업로드(run 37389505875) → 1.0 에 빌드 32 연결 → 사용자 재제출 |
+| 10-06 | "다햇어" (App Privacy 끝) | 심사 메모 7항목으로 갱신 시도 → 409: 연락처 이름·성·이메일·전화가 아직 비어 있음 → 1.0 페이지 App Review Information 입력·Save 를 다시 안내 |
+| 10-05 | "Diagnostics 이거에서는뭐" (App Privacy 설문) | Crash Data·Performance Data 체크, 용도 Third-Party Advertising·Analytics, 연결 No·추적 No 라고 안내 (Google 광고 SDK 공개 안내 기준, `store/ios-listing.md` 에 기록) |
+| 10-05 | "화면 녹화 30초도 이건 나중에 할께 나머지 해야될거 알려줘" | 녹화는 뒤로(2.1 정보 요청 오면 그때 답장에 첨부해도 됨). 제출까지 사용자 할 일을 ASC 화면 순서대로 정리해 안내(아래 다음 할 일) |
 | 10-05 | AdMob "Ad unit successfully created" 화면 캡처 + "여기 admob" (앱 ID `~2374916230`, 배너 `/8114503080`, 게시자 pub-4724352880074547 = soulfulfillable 계정 맞음) | iOS 실제 ID 로 교체(`lib/core/ads.dart`·Info.plist), 안드로이드는 테스트 ID 유지. 광고 초기화 실패해도 속도계는 동작하게 try/catch |
 | 10-03 | 이름 A/B → "Glance Speed (추천)", 번들 → "speedometer 로 등록 (추천)" | 이름 `Glance Speed: GPS Speedometer`(홈 화면 `Glance Speed`), 번들 `com.soulfulfill.speedometer` 등록 Actions 실행. 앱·방침·웹 제목 반영, `Release iOS` 선택지에 speedometer 추가 |
 | 10-03 | "GPS 속도계 앱 개발 시작해줘. plans/speedometer-app.md 기획서대로 하고, 시작 전에 PLAYBOOK.md 와 board/ 전체를 읽어. 네 게시판은 board/speedometer.md 야 — 내 피드백 받을 때마다, 단계 끝날 때마다 갱신해서 다른 세션들과 공유해줘." | 읽고 시작. 이 파일을 단계마다 갱신 |
