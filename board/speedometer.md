@@ -1,15 +1,16 @@
 # GPS 속도계 (speedometer 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-03 06:45 (KST)
+마지막 갱신: 2026-10-05 11:15 (KST)
 
 ## 지금 상태 (3줄 이내)
-Flutter 1차 완성(`speedometer_app/flutter/`): 큰 숫자/게이지·HUD·속도 경고·모드 4개·이동 기록. 테스트 37개 통과(엔진 18 + 로봇 19).
-웹 미리보기 https://soulfulfillable.github.io/test-mvp/speedometer-app/index.html — 폰 위치로 **진짜 속도**, `?demo=1` 은 가짜 주행. 광고는 배너만(테스트 ID).
-이름 **Glance Speed: GPS Speedometer** 확정, 번들 `com.soulfulfill.speedometer` **Apple 등록 완료**(Actions 로그 "새로 등록함"). 다음: ASC 앱 레코드·AdMob(사용자) → TestFlight.
+**TestFlight 빌드 26 업로드 + 초대 메일 발송 완료**(자동, 10-05). AdMob 실제 ID(iOS) 반영. 테스트 37개·웹 점검 31단계 통과.
+스토어: 스크린샷 5장·설명·키워드·심사 메모 7항목 준비, `App Store 등록 정보 채우기`(빌드 26) 실행. 제출은 사용자 TestFlight 느낌 + 화면 녹화 뒤.
+웹 미리보기 https://soulfulfillable.github.io/test-mvp/speedometer-app/index.html (`?demo=1` 가짜 주행).
 
 ## 다음 할 일 / 사용자에게 받을 것
-- [사용자] 웹 미리보기를 차에서(조수석) 켜 보고 '느낌' 한마디.
-- [사용자] App Store Connect → 앱 → ＋ 신규 앱: iOS / `Glance Speed: GPS Speedometer` / English (U.S.) / 번들 `com.soulfulfill.speedometer` / SKU `speedometer`.
-- [세션] ASC 앱 레코드 생기면 `Release iOS`(app=speedometer) → TestFlight → 스크린샷 1290×2796·`speedometer_app/store/ios-metadata.json`.
+- [사용자] 메일 "View in TestFlight" → 설치 → 조수석/걷기로 '느낌' 한마디.
+- [사용자] 같은 김에 **화면 녹화 30초** (순서는 `speedometer_app/store/review-reply.md` 위쪽) → 심사 첨부용.
+- [사용자, 제출 때] App Privacy 설문(위치: 수집 안 함 / AdMob: 식별자·사용 데이터 — 다른 앱과 같게)·연락처·저작권 `2026 Soulfulfill`·EU 제외 → Submit.
+- [세션] 느낌 피드백 반영 → 녹화 첨부 → 제출 준비.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
@@ -22,6 +23,9 @@ Flutter 1차 완성(`speedometer_app/flutter/`): 큰 숫자/게이지·HUD·속�
 - (Catdoku 게시판에서 배움) 폰으로 바로 해 보는 링크를 먼저 원함 → 웹 미리보기부터 준다. 속도계는 사파리 위치 API 로 웹에서도 진짜 속도가 나온다.
 
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
+- **TestFlight 초대는 이제 자동** — `Release iOS` 성공하면 `TestFlight 초대` 워크플로가 이어서 돈다(`board/_shared.md`). 빌드 26 은 업로드 2분 뒤 처리 완료.
+- **스토어 스크린샷을 웹 미리보기로**: `?shots=1`(광고 자리 빈칸) + 가짜 GPS 주입으로 화면을 찍고 제목을 얹는다 — `speedometer_app/store/screenshots/make.js`. 진짜 글꼴(Roboto)로 나온다.
+- GitHub API 는 이 환경에서 **인증 없이 curl 로 읽힌다**(공개 리포) → `until curl … runs/<id> … completed` 를 백그라운드로 걸면 Actions 끝날 때 알림을 받는다.
 - **위치(GPS) 앱 헤드리스 점검**: Playwright 의 `setGeolocation` 은 속도(`coords.speed`)를 못 준다 → `addInitScript` 로
   `navigator.geolocation`(watchPosition/getCurrentPosition/clearWatch)과 `navigator.permissions.query` 를 바꿔 끼워
   `window.__gps={mph,acc,on,speed}` 대로 1초마다 측정값을 보낸다. 거절·신호 끊김·속도 없음까지 흉내. `speedometer_app/qa/web-qa.js`.

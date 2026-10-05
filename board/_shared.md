@@ -4,15 +4,10 @@
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
-| 속도계 (Glance Speed) | TestFlight 초대 자동화 — 새 워크플로 `testflight-invite.yml` + `.github/scripts/asc_testflight.py` (Release iOS 성공 뒤 자동 실행, Release iOS 자체는 안 고침) | 10-05 11:00 | 작업 중 |
 
 ## 공용 작업 요청 (기획 파트너 → 다음에 `Release iOS` 를 돌리는 세션이 맡는다)
 
-- **TestFlight 초대 자동화** (사용자 요청 2026-10-03: "그냥 이메일로 테스트 코드 받아 넣어서 해보고 싶다").
-  `Release iOS` 업로드 후 App Store Connect API 로: 빌드 처리 완료 대기 → 내부 테스트 그룹(`me`) 없으면 생성 →
-  계정 소유자(`GET /v1/users` 에서 ACCOUNT_HOLDER 역할, **이메일을 리포에 쓰지 말 것**)를 테스터로 추가 → 빌드를 그룹에 연결 → 초대 메일 발송.
-  목표: 사용자는 **ASC 신규 앱 1회 등록 → 메일의 Redeem 코드 입력**만. 맡는 세션은 위 "공용 작업 중" 표에 먼저 적고, 끝나면 `PLAYBOOK.md` 2장에 기록.
-  API 로 안 되는 부분이 있으면 정확히 어디서 막혔는지 이 칸에 적는다.
+- ~~TestFlight 초대 자동화~~ → **완료** (속도계 세션 10-05, 아래 "이미 만들어진 공용 도구").
 
 ## 모든 앱 공통 규칙 (기획 파트너, 사용자 결정)
 
@@ -22,6 +17,11 @@
 
 ## 이미 만들어진 공용 도구 (다시 만들지 말 것)
 
+- **TestFlight 초대 자동화** (속도계 세션, 2026-10-05, 빌드 26 으로 실제 확인): `Release iOS` 가 성공하면 워크플로
+  `TestFlight 초대`(`testflight-invite.yml` + `.github/scripts/asc_testflight.py`)가 **자동으로** 돈다 → 빌드 처리 대기(보통 2~15분)
+  → 수출 규정 비어 있으면 "해당 없음" → 앱에 내부 그룹 없으면 `me` 생성(모든 빌드 자동 포함) → 계정 소유자를 테스터로 → 초대 메일.
+  사용자는 메일의 "View in TestFlight"/Redeem 코드만. 이미 수락한 앱은 새 빌드가 TestFlight 앱에 바로 뜬다.
+  안 됐으면: Actions → `TestFlight 초대` → Run workflow → 빌드 번호(= Release iOS 실행 번호)·앱 이름. 이메일은 로그에서 가리고 요약에 안 쓴다.
 - ⚠️ **`Release iOS` 는 대기 줄이 1칸뿐이다** (concurrency group `release-ios`). 다른 앱이 돌고 있을 때 새로 누르면 **이미 대기 중이던 다른 앱 실행이 취소된다.**
   누르기 전에 Actions 목록에서 `pending`/`queued` 인 Release iOS 가 있는지 보고, 있으면 그게 시작(in_progress)될 때까지 기다린다.
   (물때 세션이 10-03 에 소음 측정기 대기분을 이렇게 취소시켰다 → 바로 내 것 취소 + 그 실행 re-run 으로 되돌림.)

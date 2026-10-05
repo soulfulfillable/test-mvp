@@ -28,6 +28,8 @@
 - 업로드: GitHub Actions `Release iOS` (`.github/workflows/release-ios.yml`, 서명 스크립트 `.github/scripts/asc_signing.py`).
   **지금은 환율 앱 경로가 박혀 있다 → 새 앱이면 앱 폴더·번들 ID 를 입력값으로 받게 일반화부터.**
 - 등록 정보·스크린샷·빌드 연결: Actions `App Store 등록 정보 채우기` (`asc-metadata.yml`, 데이터는 `<앱>/store/`).
+- TestFlight 초대: `Release iOS` 성공 → `TestFlight 초대` 워크플로가 자동으로 내부 그룹 `me`·계정 소유자 초대 메일까지 (2026-10-05~).
+  API 메모: 내부 그룹은 `isInternalGroup: true, hasAccessToAllBuilds: true` 로 **API 로 만들 수 있다**. 그 그룹에 빌드를 직접 붙이면 422("Cannot add internal group to a build") — 자동 포함이라 괜찮다.
 - 비밀값(ASC API 키 등)은 GitHub 리포 Secrets 에 이미 있다 — 새 앱도 같은 키 재사용.
 - 실제로 겪은 실패 (다시 하지 말 것):
   - 자동 서명은 등록 기기가 없으면 개발용 프로파일을 못 만든다 → 실패.
@@ -64,6 +66,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-05 | 속도계 | TestFlight 초대를 사람이 ASC 웹에서 하던 걸 자동화 — 빌드 26 이 업로드 2분 뒤 VALID, 그룹 생성·테스터·초대 메일까지 API 로 됨 | `testflight-invite.yml`(Release iOS 와 따로 둔 워크플로라 Release iOS 대기 줄을 늘리지 않음). 공개 리포 로그엔 `::add-mask::`, Step Summary 는 가림이 안 먹으니 이메일 문장을 쓰지 않는다 |
 | 2026-10-05 | 소음 | `flutter create` 기본 버전 **0.1.0** 그대로 TestFlight 에 올려서, ASC 의 1.0 버전에 빌드가 안 붙음(`App Store 등록 정보 채우기` 빌드 연결 StopIteration). 1.0.0 빌드는 ASC "1.0" 에 정상 연결됨 | 새 앱은 만들자마자 `pubspec.yaml` 을 `version: 1.0.0+1` 로. 첫 `Release iOS` 전에 확인 |
 | 2026-10-03 | 대출 | 인구조사국 API 가 키 없이 'Missing Key' HTML 을 돌려줌 + 이 환경에서 census 차단 | 키 없는 ACS 표 단위 요약 파일(.dat)을 Actions 로 받아 데이터 브랜치에 (`tools/mortgage/fetch_census_counties.py`) |
 | 2026-10-03 | 대출 | 테스트가 화면 밖(시트 맨 아래) 항목을 탭하고도 경고만 내고 진행 | `WidgetController.hitTestWarningShouldBeFatal = true` 로 실패시키기 |

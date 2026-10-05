@@ -29,6 +29,13 @@
 
 ## 진행 기록 (개발 세션이 추가, 최신이 위)
 
+### 2026-10-05 개발 세션 1 (계속) — TestFlight
+- AdMob 실제 ID(사용자 생성): iOS 앱 `ca-app-pub-4724352880074547~2374916230`, 배너 `/8114503080`. 안드로이드는 테스트 ID.
+- ASC 앱 레코드 확인(id 6819121972) → `Release iOS`(speedometer) **빌드 26 업로드 성공**(7분).
+- 공용 요청이던 **TestFlight 초대 자동화** 구현·실제 확인: 빌드 26 VALID(2분) → 내부 그룹 `me` 생성 → 계정 소유자 테스터 → 초대 메일 발송.
+- 스토어: 스크린샷 5장(`store/screenshots/`, 45~66 mph — 1.4.4), `store/ios-metadata.json`, 심사 메모 7항목 `store/review-reply.md`(녹화 순서 포함). `App Store 등록 정보 채우기`(빌드 26) 실행.
+- 남은 것: 사용자 TestFlight 느낌·화면 녹화 → App Privacy·연락처·저작권(사용자) → 제출.
+
 ### 2026-10-03 개발 세션 1 (①~③ + 웹 미리보기)
 - **이름 `Glance Speed: GPS Speedometer`(홈 화면 `Glance Speed`)·번들 `com.soulfulfill.speedometer` 확정 (사용자, 둘 다 추천안)** → 번들 등록 Actions(로그: "새로 등록함", ASC 앱 레코드는 아직 없음), `Release iOS`·`App Store 등록 정보 채우기` 선택지에 speedometer 추가. 앱 아이콘(직접 그린 게이지 SVG).
 - CI 의 Flutter 3.47.2(Dart 3.13.2)에 맞춰 `pubspec.yaml` sdk 를 `^3.13.2` 로 (3.47.6 으로 만들면 `^3.13.5` 가 들어가 CI 에서 pub get 실패할 수 있음).
