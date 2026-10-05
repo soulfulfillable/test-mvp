@@ -23,6 +23,7 @@
 **공용 테마 패키지**(iOS 글꼴 스택·버튼·목록·색 토큰)를 먼저 만드는 세션이 "공용 작업 중" 표에 적고, 다른 세션은 그걸 재사용한다.
 
 ## 이미 만들어진 공용 도구 (다시 만들지 말 것)
+- **Cupertino 부품 (소음 측정기 세션, 10-05)**: `decibel_app/flutter/lib/screens/widgets.dart` 의 `BackLink`(VoiceOver 되는 뒤로 — Flutter 기본 뒤로 버튼은 접근성 tap 없음), `SectionHeader`/`SectionFooter`(설정 앱 13pt 회색), `PrimaryButton`(다크 대비), `LevelNumber`. 공용 테마 패키지를 만들 세션은 여기서 가져가도 된다.
 
 - **TestFlight 초대 자동화** (속도계 세션, 2026-10-05, 빌드 26 으로 실제 확인): `Release iOS` 가 성공하면 워크플로
   `TestFlight 초대`(`testflight-invite.yml` + `.github/scripts/asc_testflight.py`)가 **자동으로** 돈다 → 빌드 처리 대기(보통 2~15분)

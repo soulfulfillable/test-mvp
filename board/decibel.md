@@ -1,10 +1,10 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-06 03:33 (KST)
+마지막 갱신: 2026-10-06 04:11 (KST)
 
 ## 지금 상태 (3줄 이내)
-Flutter 1차 완성(`decibel_app/flutter/`): 측정·비유표·리포트(이미지 공유)·기록·설정. 테스트 27개 통과(엔진 14 + 로봇 13, VoiceOver 버튼 검사 포함).
-웹 미리보기 `docs/decibel-app/` — 폰 브라우저에서 **진짜 마이크로** 측정된다. 광고는 배너만(iOS 실제 AdMob ID).
-**ASC 1.0 등록 정보 입력 완료** (설명·키워드·스크린샷 5장·빌드 27·심사 메모). 사용자가 ASC 수동 항목(저작권·App Privacy 등) 채우고 **Add for Review → Submit** 하면 끝.
+**DESIGN.md 리터칭 완료**: Cupertino 전면 전환(라이트/다크), 청록 강조색 1개, 안내 화면 없이 바로 측정, 시그니처 = 관성 바늘 + 구간 바뀔 때 햅틱.
+테스트 32개 통과(로봇: 라이트/다크 × 3기기 + 큰 글씨 135% 2대, VoiceOver 버튼 검사, 빗나간 누르기 = 실패). 웹 미리보기 갱신, 스크린샷 5장 실측으로 다시.
+새 빌드 `Release iOS` 중 → 등록 정보에 연결 → 사용자 제출(수동 항목 + 30초 녹화).
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ 이름 A `Glance dB: Decibel Meter` / 번들 `com.soulfulfill.decibel` (사용자 확인) → ✅ Apple 번들 ID 등록 (Actions run 37065279691 로그 "새로 등록함").
@@ -13,6 +13,7 @@ Flutter 1차 완성(`decibel_app/flutter/`): 측정·비유표·리포트(이미
 - [사용자] App Store Connect → Glance dB → TestFlight → 내부 테스트 그룹(＋) → 본인 추가 → 빌드 19 → 메일의 "View in TestFlight" 로 설치.
   써 볼 것: 조용한 방 / 대화 / TV 크게 — 숫자가 그럴듯한지, 리포트 저장·공유, 기록. (배너는 새 AdMob 앱이라 비어 있을 수 있음 — 정상)
 - ✅ [세션] 스크린샷 5장 1290×2796 (`decibel_app/store/screenshots/`, 크롬 가짜 마이크에 합성 잡음 → **실제 측정값**), `ios-metadata.json`(심사 메모 7항목) → `App Store 등록 정보 채우기`(decibel). 1차는 빌드 연결 실패(앱 버전이 flutter 기본 0.1.0) → 1.0.0 으로 고쳐 **빌드 27** 업로드 → 연결 성공(run 37254733271).
+- ✅ [세션] DESIGN.md 리터칭 (아래 '디자인 점검 결과') → 새 빌드 → 등록 정보 다시.
 - [사용자] ASC 첫 제출 때 API 로 못 넣는 것: 저작권 `2026 Soulfulfill` · Content Rights(제3자 콘텐츠 없음) · 카테고리 Utilities/Lifestyle · App Privacy(AdMob: 기기 ID·사용 데이터·진단, 추적 안 함 → Publish) · 가격 Free·판매국(EU 제외) · 심사 연락처 → (권장) 30초 실기기 녹화 첨부 → **Add for Review → Submit**.
 - [확인 못 함] 보정값 +94 가 실제 아이폰에서 맞는지 — 사용자 "괜찮아"는 전체 느낌, 숫자 비교는 아님. 리뷰·문의 오면 설정의 보정으로 대응.
 - (완료된 안내) App Store Connect → 앱 → ＋ → 신규 앱: 플랫폼 iOS / 이름 `Glance dB: Decibel Meter` / 기본 언어 English (U.S.) /
@@ -37,7 +38,24 @@ Flutter 1차 완성(`decibel_app/flutter/`): 측정·비유표·리포트(이미
 - 이름·번들 둘 다 **추천안을 바로 고름** (Catdoku 때와 같음) — 추천 이유 한 줄이면 충분.
 - 웹 미리보기 '느낌' 피드백은 아직 없음.
 
+## 디자인 점검 결과 (DESIGN.md 4장, 2026-10-05 리터칭 후 웹 스크린샷 라이트·다크)
+1. 애플 기본 앱 옆에 어울림: 설정·기록·비유표·리포트 = 설정 앱식 묶음 목록·큰 제목, 측정 화면 = 큰 숫자 + 눈금 링 ✓
+2. Material 흔적: 없음 (CupertinoApp, 리플·FAB·카드 더미·보라 틴트 없음) ✓
+3. 글꼴: iOS 는 시스템 글꼴(SF) — 웹 미리보기는 기술적으로 SF 불가라 Roboto 로 보임(확인 못 함: 실기기 SF 렌더). 화면당 크기 3개(주인공·17·13)·굵기 2개(400/600) ✓
+4. 주인공: 측정 숫자(화면 폭 기준 약 105pt) ✓
+5. 강조색 1개(청록 #00848A / 다크 #2FD0D6) + iOS 의미 색(초록·노랑·주황·빨강), 그라데이션 없음 ✓
+6. 이모지 아이콘 없음, 채우기용 아이콘 제거(비유표의 Material 아이콘 삭제) ✓
+7. 간격: 게이지·그래프가 남는 높이를 상한까지 나눠 갖고 가운데 정렬 — 빈 띠 제거 ✓ / 그림자 없음 ✓
+8. 큰 글씨 135%·다크·키보드: 로봇 테스트로 통과 ✓ (노랑 글씨 대비 문제 → 숫자는 기본 글자색 + 색 점으로)
+9. 시그니처: VU 미터처럼 살짝 넘쳤다 돌아오는 바늘 + 구간 바뀔 때만 selectionClick 햅틱. 나머지는 조용 ✓ (햅틱 체감은 실기기에서만 — 확인 못 함)
+10. 가짜 데이터 없음 (스크린샷도 합성 잡음을 실제로 측정) ✓
+
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
+- **Cupertino 전환 때 재사용할 부품** (`decibel_app/flutter/lib/screens/widgets.dart`): `BackLink`(VoiceOver tap 있는 뒤로), `SectionHeader`/`SectionFooter`(설정 앱 13pt 회색 — Flutter `insetGrouped` 기본 머리글은 20pt 굵게!), `PrimaryButton`(다크에서 밝은 강조색 위 검정 글씨), `LevelNumber`(노랑 글씨 대신 색 점).
+- **Flutter 기본 `CupertinoNavigationBarBackButton` 은 VoiceOver 누르기 동작이 없는 노드**를 만든다(버튼 안쪽 Semantics container) → 로봇 `expectButtonsTappable` 에 걸림. 위 `BackLink` 로 바꿔 해결.
+- `cupertino_icons` 는 **^1.0.x** (Flutter 3.47 템플릿 값). `pub add` 가 2.0.0 을 넣는데 SDK 의 CupertinoIcons 코드포인트는 1.x 기준.
+- 로봇에 `WidgetController.hitTestWarningShouldBeFatal = true` — 버튼을 눌렀는데 다른 게 맞으면 실패. 단 화면 안에 이미 보이는 버튼까지 `ensureVisible` 하면 큰 제목 막대가 접히는 중에 눌러 오탐 → 화면 밖일 때만 굴린다.
+- 큰 글씨 테스트는 SDK Roboto 를 **`CupertinoSystemText`/`CupertinoSystemDisplay` 이름으로** `FontLoader` 에 넣어야 진짜에 가깝다(Ahem 오탐 6건이 0건으로).
 - (연비 세션 교훈 적용 확인) `Semantics(button, excludeSemantics: true)` 버튼 4개·칩 1개가 VoiceOver 로 안 눌리는 상태였다 — 로봇 검사 `expectButtonsTappable` 를 넣자 바로 실패, `Semantics(onTap:)` 로 고침. **다른 앱도 이 검사를 꼭 넣어 보자.**
 - **플랫폼 플러그인 호출을 `await` 하지 마라 (부가 기능일 때).** wakelock_plus 를 기다렸더니 위젯 테스트에서 응답이 안 와
   자동 저장이 통째로 멈췄다. `.catchError((_) {})` 로 흘려보내고 저장·상태 변경을 먼저.
