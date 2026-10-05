@@ -66,6 +66,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-05 | 앰비언트 | 헤드리스 크롬 OfflineAudioContext 로 3분 렌더 — 비 소리만 348초(빗방울 0.1초마다 노드 4개 생성) | 짧은 소리를 자주 내는 레이어는 노드를 매번 만들지 말고 미리 만든 버퍼를 재생. 긴 렌더는 조각으로 나눠 이어 붙인다 |
 | 2026-10-05 | 소음 | `App Store 등록 정보 채우기` 가 3번 연속 "job was not acquired by Runner of type hosted" 로 15분 대기 후 취소(GitHub 쪽). 또 UI 리터칭 후 심사 메모가 옛 화면(welcome·Continue) 그대로였다 | 러너가 한 번 안 잡히면 기다리지 말고 수동 대안(메모 붙여넣기 글·스크린샷 파일·빌드 직접 선택)을 바로 준다. 화면 흐름을 바꾸면 `ios-metadata.json` 심사 메모도 같은 커밋에서 고친다 |
 | 2026-10-05 | 소음 | Cupertino 전환 후 **Flutter 기본 뒤로 버튼이 VoiceOver 누르기 동작 없는 노드**를 만듦(로봇 접근성 검사로 발견), `insetGrouped` 머리글은 기본 20pt 굵게(설정 앱과 다름) | 직접 만든 `BackLink`·`SectionHeader`/`Footer` (`decibel_app/flutter/lib/screens/widgets.dart`) 재사용 |
 | 2026-10-05 | 소음 | 다크 모드 밝은 강조색 버튼에 흰 글씨 → 거의 안 읽힘. 노랑(systemYellow) 숫자 글씨도 흰 바탕에서 안 읽힘 | 강조색 위 글씨는 밝기 따라 흑/백. 의미 색은 글씨 대신 작은 점으로 |

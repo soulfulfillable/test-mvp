@@ -64,8 +64,10 @@
   <div class="center"><div class="elapsed" id="elapsed">0:00</div></div>
   <div class="bottom">
     <div class="seg" id="moods">
-      <button data-mood="rain" class="on">Rain &amp; Piano</button>
-      <button data-mood="night">Night Pad</button>
+      <button data-mood="rain" class="on">Rain</button>
+      <button data-mood="fire">Fire</button>
+      <button data-mood="cafe">Cafe</button>
+      <button data-mood="night">Night</button>
     </div>
     <div class="row">
       <button id="play">Play</button>
@@ -112,6 +114,43 @@
       pianoGain: 0.5,
       pianoRange: [60, 84],
       ambience: 'rain'
+    },
+    fire: {
+      name: 'Fireside Pad',
+      root: 53,                         // F
+      scale: [0, 2, 4, 5, 7, 9, 10],    // 믹솔리디안 — 따뜻하고 가라앉은 느낌
+      chords: [
+        [0, 4, 7, 14],    // Iadd9
+        [10, 14, 17, 21], // bVII
+        [5, 9, 12, 16],   // IVmaj7
+        [9, 12, 16, 19]   // vi
+      ],
+      chordLen: [16, 26],
+      padCut: [380, 900],
+      padGain: 0.2,
+      pianoGap: [2.2, 5.5],
+      pianoGain: 0.34,
+      pianoRange: [60, 81],
+      ambience: 'fire'
+    },
+    cafe: {
+      name: 'Cafe Arpeggio',
+      root: 60,                         // C
+      scale: [0, 2, 4, 5, 7, 9, 11],    // 장조
+      chords: [
+        [0, 4, 7, 11],    // Cmaj7
+        [9, 12, 16, 19],  // Am7
+        [2, 5, 9, 12],    // Dm7
+        [7, 11, 14, 17]   // G7
+      ],
+      chordLen: [8, 8],                 // 마디 단위로 규칙적
+      padCut: [600, 1200],
+      padGain: 0.09,
+      pianoGap: [0.36, 0.36],
+      pianoGain: 0.42,
+      pianoRange: [55, 84],
+      arp: true,
+      ambience: 'cafe'
     },
     night: {
       name: 'Night Pad',
@@ -186,7 +225,7 @@
 
     // 환경음
     this.noiseBuf = this.makeNoise(4);
-    if (m.ambience === 'rain') this.buildRain(); else this.buildNight();
+    if (m.ambience === 'rain') this.buildRain(); else if (m.ambience === 'fire') this.buildFire(); else if (m.ambience === 'cafe') this.buildCafe(); else this.buildNight();
   };
 
   Engine.prototype.makeImpulse = function (sec, decay) {
@@ -383,6 +422,89 @@
   };
 
   // 오디오 시계 t1 까지 예약
+  // 모닥불: 낮은 웅웅거림 + 불규칙한 탁탁(무리 지어 튐)
+  Engine.prototype.buildFire = function () {
+    var ctx = this.ctx;
+    this.ambBus = ctx.createGain(); this.ambBus.gain.value = 0.5; this.ambBus.connect(this.dry);
+    var src = this.noiseSource();
+    var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 260; lp.Q.value = 0.6;
+    var roar = ctx.createGain(); roar.gain.value = 0.16;
+    var lfo = ctx.createOscillator(); lfo.frequency.value = 0.13;
+    var lfoG = ctx.createGain(); lfoG.gain.value = 0.05;
+    lfo.connect(lfoG); lfoG.connect(roar.gain); lfo.start();
+    src.connect(lp); lp.connect(roar); roar.connect(this.ambBus); src.start();
+    var hiss = this.noiseSource();
+    var hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 4000;
+    var hg = ctx.createGain(); hg.gain.value = 0.006;
+    hiss.connect(hp); hp.connect(hg); hg.connect(this.ambBus); hiss.start();
+    this.crackBus = ctx.createGain(); this.crackBus.gain.value = 1; this.crackBus.connect(this.ambBus);
+    this.nextCrack = 0;
+  };
+
+  Engine.prototype.scheduleCrackles = function (t1) {
+    var ctx = this.ctx, r = this.ambRng;
+    while (this.nextCrack < t1) {
+      var t = this.nextCrack, n = r.next() < 0.25 ? Math.floor(r.range(3, 8)) : 1;
+      for (var k = 0; k < n; k++) {
+        var tk = t + k * r.range(0.015, 0.07);
+        var s = this.noiseSource();
+        var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = r.range(900, 5000); bp.Q.value = r.range(1, 5);
+        var g = ctx.createGain(), a = r.range(0.08, 0.5) * (k === 0 ? 1 : 0.6);
+        g.gain.setValueAtTime(0, tk); g.gain.linearRampToValueAtTime(a, tk + 0.001);
+        g.gain.exponentialRampToValueAtTime(0.0005, tk + r.range(0.006, 0.03));
+        var pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+        s.connect(bp); bp.connect(g);
+        if (pan) { pan.pan.value = r.range(-0.4, 0.4); g.connect(pan); pan.connect(this.crackBus); } else g.connect(this.crackBus);
+        s.start(tk); s.stop(tk + 0.05);
+      }
+      this.nextCrack = t + r.range(0.08, 0.9) * (r.next() < 0.15 ? 3 : 1);
+    }
+  };
+
+  // 카페: 멀리서 웅성거림(말소리 대역 노이즈를 음절 속도로 흔듦) + 가끔 잔·숟가락 소리
+  Engine.prototype.buildCafe = function () {
+    var ctx = this.ctx, r = this.ambRng;
+    this.ambBus = ctx.createGain(); this.ambBus.gain.value = 0.5; this.ambBus.connect(this.dry); this.ambBus.connect(this.reverb);
+    for (var i = 0; i < 4; i++) {
+      var src = this.noiseSource();
+      var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = r.range(350, 900); bp.Q.value = 1.2;
+      var bp2 = ctx.createBiquadFilter(); bp2.type = 'peaking'; bp2.frequency.value = r.range(1200, 2400); bp2.gain.value = 6; bp2.Q.value = 2;
+      var g = ctx.createGain(); g.gain.value = 0.02;
+      var syl = ctx.createOscillator(); syl.frequency.value = r.range(3, 5.5);
+      var sylG = ctx.createGain(); sylG.gain.value = 0.014;
+      var slow = ctx.createOscillator(); slow.frequency.value = r.range(0.04, 0.12);
+      var slowG = ctx.createGain(); slowG.gain.value = 0.012;
+      syl.connect(sylG); sylG.connect(g.gain); slow.connect(slowG); slowG.connect(g.gain);
+      var pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      src.connect(bp); bp.connect(bp2); bp2.connect(g);
+      if (pan) { pan.pan.value = -0.75 + i * 0.5; g.connect(pan); pan.connect(this.ambBus); } else g.connect(this.ambBus);
+      src.start(); syl.start(); slow.start();
+    }
+    this.nextClink = 0;
+  };
+
+  Engine.prototype.scheduleClinks = function (t1) {
+    var ctx = this.ctx, r = this.ambRng;
+    while (this.nextClink < t1) {
+      var t = this.nextClink, f = r.range(2200, 3800), hits = r.next() < 0.3 ? 2 : 1;
+      var pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      var out = ctx.createGain(); out.gain.value = r.range(0.015, 0.045);
+      if (pan) { pan.pan.value = r.range(-0.8, 0.8); out.connect(pan); pan.connect(this.ambBus); } else out.connect(this.ambBus);
+      for (var h = 0; h < hits; h++) {
+        var th = t + h * r.range(0.09, 0.2);
+        var ratios = [1, 2.32, 4.25];
+        for (var k = 0; k < ratios.length; k++) {
+          var o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f * ratios[k];
+          var g = ctx.createGain(); g.gain.setValueAtTime(0, th);
+          g.gain.linearRampToValueAtTime(1 / (k + 1), th + 0.002);
+          g.gain.exponentialRampToValueAtTime(0.0001, th + 0.5 / (k + 1));
+          o.connect(g); g.connect(out); o.start(th); o.stop(th + 0.6);
+        }
+      }
+      this.nextClink = t + r.range(3, 11);
+    }
+  };
+
   Engine.prototype.scheduleUntil = function (t1) {
     var m = this.mood, r = this.rng;
     while (this.nextChord < t1) {
@@ -400,7 +522,19 @@
     var nr = this.noteRng;
     while (this.nextNote < t1) {
       var tn = this.nextNote;
-      if (this.chord) {
+      if (this.chord && m.arp) {
+        // 아르페지오: 코드 톤을 올라갔다 내려오는 8음 패턴, 가끔 한 음씩 바꿔 변주
+        if (!this.arpStep) this.arpStep = 0;
+        var ch = this.chord, tones = [];
+        for (var o2 = 0; o2 < 2; o2++) for (var q = 0; q < ch.length; q++) tones.push(m.root + ch[q] + 12 * o2 - 5);
+        var pat = [0, 1, 2, 3, 4, 3, 2, 1], idx2 = pat[this.arpStep % 8] + (this.arpStep % 16 >= 8 && nr.next() < 0.3 ? 1 : 0);
+        var am = tones[Math.min(idx2, tones.length - 1)];
+        if (nr.next() < 0.08) am = this.pickNote();
+        var av = (this.arpStep % 4 === 0 ? 0.62 : 0.4) * nr.range(0.85, 1.1);
+        this.playPiano(tn + nr.range(-0.012, 0.012), am, av);
+        if (this.arpStep % 16 === 0) this.playPiano(tn, m.root + ch[0] - 12, 0.45);
+        this.arpStep++;
+      } else if (this.chord) {
         var midi = this.pickNote();
         var vel = nr.range(0.25, 0.8);
         this.playPiano(tn, midi, vel);
@@ -413,10 +547,10 @@
         }
       }
       var gap = nr.range(m.pianoGap[0], m.pianoGap[1]);
-      if (nr.next() < 0.12) gap *= 2.4;          // 가끔 쉼
+      if (!m.arp && nr.next() < 0.12) gap *= 2.4;          // 가끔 쉼
       this.nextNote = tn + gap;
     }
-    if (m.ambience === 'rain') this.scheduleDrops(t1); else this.scheduleCrickets(t1);
+    if (m.ambience === 'rain') this.scheduleDrops(t1); else if (m.ambience === 'fire') this.scheduleCrackles(t1); else if (m.ambience === 'cafe') this.scheduleClinks(t1); else this.scheduleCrickets(t1);
     this.until = t1;
   };
 
@@ -529,7 +663,22 @@
 
     g2.clearRect(0, 0, W, H);
     var cx = W / 2, cy = H * 0.42;
-    if (moodKey === 'rain') {
+    if (moodKey === 'fire') {
+      // 불티: 아래에서 천천히 떠오르는 점
+      for (i = 0; i < stars.length; i++) {
+        var e = stars[i], ey = H - ((e.y + t * 0.03 * e.f) % 1) * H * 0.9;
+        var ea = 0.15 + 0.5 * (0.5 + 0.5 * Math.sin(t * 2 * e.f + e.p));
+        g2.fillStyle = 'rgba(201,154,91,' + ea.toFixed(3) + ')';
+        g2.beginPath(); g2.arc(e.x * W + Math.sin(t * 0.7 + e.p) * 8, ey, e.s, 0, 6.283); g2.fill();
+      }
+    } else if (moodKey === 'cafe') {
+      // 창가 불빛: 흐릿한 둥근 빛 몇 개
+      for (i = 0; i < 9; i++) {
+        var b2 = stars[i], ba = 0.05 + 0.05 * Math.sin(t * 0.4 + b2.p);
+        g2.fillStyle = 'rgba(201,154,91,' + ba.toFixed(3) + ')';
+        g2.beginPath(); g2.arc(b2.x * W, (0.15 + b2.y * 0.9) * H, 18 + b2.s * 22, 0, 6.283); g2.fill();
+      }
+    } else if (moodKey === 'rain') {
       // 흐린 창: 느린 빗줄기
       g2.strokeStyle = 'rgba(201,154,91,0.22)'; g2.lineWidth = 1;
       for (i = 0; i < drops.length; i++) {
@@ -566,7 +715,23 @@
   pinScroll();
 
   // 헤드리스 검증용 훅: OfflineAudioContext 로 N초 렌더해 통계를 돌려준다
+  function renderRaw(mood, sd, sec) {
+    var sr = 44100, oc = new OfflineAudioContext(2, sr * sec, sr);
+    var e = new Engine(oc, mood, sd);
+    e.start(0.05); e.scheduleUntil(sec + 1);
+    return oc.startRendering();
+  }
   window.__soaking = {
+    renderChunk: function (mood, sd, sec) {
+      return renderRaw(mood, sd, sec).then(function (buf) { window.__buf = buf; return buf.length; });
+    },
+    getChunk: function (ch, from, n) {
+      var d = window.__buf.getChannelData(ch).subarray(from, from + n), o = new Int16Array(d.length);
+      for (var i = 0; i < d.length; i++) { var v = Math.max(-1, Math.min(1, d[i])); o[i] = v * 32767; }
+      var u = new Uint8Array(o.buffer), str = '';
+      for (i = 0; i < u.length; i += 8192) str += String.fromCharCode.apply(null, u.subarray(i, i + 8192));
+      return btoa(str);
+    },
     MOODS: MOODS, Engine: Engine,
     get playing() { return playing; }, get mood() { return moodKey; }, get seed() { return seed; },
     render: function (mood, sd, sec) {
