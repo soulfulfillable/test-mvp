@@ -29,3 +29,13 @@
 - 출처 URL 은 각 조사 보고에 있었다: Flow Free(apps.apple.com/us/app/flow-free/id526641427), LinkedIn 게임 통계(pinpointdaily.org/linkedin-games/),
   솔루나(apps.apple.com/us/app/fishing-hunting-solunar-time/id1056000899), Fuelly(apps.apple.com/us/app/fuelly-mpg-service-tracker/id295905460),
   NOAA 오로라 데이터(services.swpc.noaa.gov/json/ovation_aurora_latest.json), Kids 광고 규정(developer.apple.com/app-store/review/guidelines/).
+
+## 신앙 앱 수익 방식 메모 (2026-10-05, 사용자 아이디어 "신앙 앱엔 신앙 관련 광고")
+- **AdMob 으로 "기독교 광고만" 고를 수는 없다.** 할 수 있는 건 막기뿐: 앱별 Blocking controls → Sensitive categories 에서
+  데이트·도박·성적 내용·주류 등을 차단. **"Religion" 카테고리는 기본 허용이고 종교 광고를 포함하므로 막지 말 것**(막으면 신앙 광고도 사라짐).
+  앱 분류·내용에 맞춰 관련 광고가 더 자주 뜰 수는 있지만 보장 안 됨. (support.google.com/admob/answer/3150176, /3150953)
+- **신앙 상품을 직접 연결하는 길 = 제휴(affiliate) 링크**: Christianbook.com 제휴(CJ Affiliate 통해 신청, 약 5~8% 수수료, 쿠키 30일).
+  앱 안 "추천 자료"(성경·묵상집·통독 플래너 등)를 Safari 로 여는 방식. 광고가 아니라 추천이므로 "제휴 링크" 표시를 정직하게.
+  앱에 넣을 수 있는지(제휴사 약관·App Store 규정)는 개발 때 확인 필요.
+- 기독교 전용 광고 네트워크는 대부분 웹·팟캐스트용이고 모바일 앱 SDK 유무는 확인 못 함.
+- 정리: 신앙 앱 = AdMob(민감 카테고리 차단, Religion 허용, 읽는 화면 광고 없음) + 추천 자료 제휴 링크.
