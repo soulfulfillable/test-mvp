@@ -81,6 +81,10 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-05 | 이번 주는 새 앱 없이 9개를 심사·출시까지 마무리 | 주간 점검 결정 1 = A |
+| 2026-10-05 | **다음에 새 앱을 2개 더 만들 때 1개는 성경적으로 도움 되는 앱** (1순위 후보: 성경 통독 체크, `plans/research-8-fields.md`). 신앙 앱은 읽는 화면 광고 없음·민감 광고 차단 | 사용자 "성경적으로 도움될 수 있을 것도, 두 개 개발하면 하나는 넣자" |
+| 2026-10-05 | 모든 앱 첫 심사 제출 때 2.1 대비 7항목 설명 + 아이폰 화면 녹화를 미리 첨부 (`PLAYBOOK.md` 3장) | 주간 점검 결정 2 = A |
+| 2026-10-05 | Kitty Queens 뉴스레터(공용 이메일 목록)는 출시 후 반응 보고 결정 | 주간 점검 결정 3 = A |
 | 2026-10-05 | Glance: Mortgage Calculator **v1.0(빌드 22) 심사 제출** — Waiting for Review | 사용자가 ASC 에서 저작권·카테고리·App Privacy·가격(EU 제외)·연락처 채우고 제출 |
 | 2026-10-03 | Glance Mortgage 1.1 에 **카운티(3,135곳)도 넣음** — 인구조사국 ACS 2024 (재산세 중앙값 ÷ 집값 중앙값), 주 고른 뒤 검색해서 선택 | 사용자 "county 마다 텍스가 다른데 그건 왜 없어 넣는게". 공식 데이터를 Actions 로 받을 수 있어 정확도 문제 해결 |
 | 2026-10-03 | 경로 퍼즐 이름 **Kitty Path: Number Puzzle** (부제 Daily One Line Logic Game), 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 사용자: 둘 다 추천안. Kitty Queens 와 고양이 시리즈, 검색어 number puzzle·daily·one line·logic. "Zip" 은 LinkedIn 상표 출원이라 제외 |
