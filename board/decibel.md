@@ -6,6 +6,7 @@
 보정 +94 그대로 제출(사용자 A). 다음: 승인 → AdMob 에 스토어 링크 연결, NIOSH SLM 과 같은 소리 비교 → 1.0.1 기본 보정값.
 
 ## 다음 할 일 / 사용자에게 받을 것
+- ⚠️ **빌드 28 은 예전 `Release iOS`(업로드 뒤 배포 인증서 삭제)로 만든 빌드** — 대출 계산기 빌드 22 가 같은 이유로 제출 후 **ITMS-90035 Invalid Signature** 반려(`_shared.md`). 반려 메일이 오면: 대출 세션의 서명 수정(6eb31aa, run 30 검증 중)이 통과한 뒤 `Release iOS`(decibel) 새 빌드 → ASC 에서 빌드 교체 → 재제출. 그 전엔 Release iOS 돌리지 않음(대출 세션 요청).
 - ✅ 이름 A `Glance dB: Decibel Meter` / 번들 `com.soulfulfill.decibel` (사용자 확인) → ✅ Apple 번들 ID 등록 (Actions run 37065279691 로그 "새로 등록함").
 - ✅ [사용자] ASC 앱 레코드(id 6818761495, Actions 로 "있음" 확인), ✅ AdMob 앱(iOS)·배너 단위 → 앱 ID `~4858015861`·배너 `/4222667601` 반영 (안드로이드는 테스트 ID 유지).
 - ✅ [세션] `Release iOS`(decibel) → 빌드 19 업로드 성공 (iOS 첫 컴파일 통과: record·audio_session SwiftPM 문제없음). 같은 실행이 2번째 시도로 성공 — 1번째 시도를 누가 왜 다시 돌렸는지는 확인 못 함.
