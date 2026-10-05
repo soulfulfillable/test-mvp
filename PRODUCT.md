@@ -51,8 +51,8 @@
 | **Kitty Path: Number Puzzle** (한붓 경로 퍼즐, `kittypath_app/`, `plans/path-puzzle-app.md`, `board/path-puzzle.md`) | 2026-10-03 Flutter 1차 완성·테스트 36개·웹 실제 터치 점검 24/24·웹 미리보기 `docs/path-puzzle-app/`. 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 아이콘·스토어 문구 → ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
 | **Glance Solunar: Fishing Times** (낚시·사냥 시간, `solunar_app/`, `plans/solunar-app.md`, `board/solunar.md`) | 2026-10-03 Flutter 1차 완성·테스트 34개(PyEphem 대조 1,800건+)·웹 미리보기 `docs/solunar-app/`(오프라인 계산, 마을 2만 곳). 번들 `com.soulfulfill.solunar` | ASC 앱 레코드·AdMob 배너+보상형(사용자) → `Release iOS`(solunar) → TestFlight |
 | **Glance MPG: Gas Mileage Log** (연비·정비 기록, `fuellog_app/`, `plans/fuel-log-app.md`, `board/fuel-log.md`) | 2026-10-03 Flutter 1차 완성·테스트 47개 통과·웹 미리보기 `docs/fuel-log-app/`(`?demo=1` 예시). 번들 `com.soulfulfill.fuellog` | ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
-| **유튜브 앰비언스 채널** (`plans/ambient-youtube.md`, `board/ambient-youtube.md`) | 2026-10-05 결정, 세션 시작 대기 | 엔진 시제품 3분×3 → 사용자 느낌 → 8시간 렌더 → 채널 |
-| **기도·묵상 생성 음악 앱** (`plans/soaking-music-app.md`, `board/soaking-music.md`) | 2026-10-05 결정, 유튜브 엔진 공유 | 엔진 → Flutter 오디오 → TestFlight |
+| **유튜브 앰비언스 채널** (`plans/ambient-youtube.md`, `board/ambient-engine.md`) | 2026-10-05 결정(사용자 본래 의도), 세션 시작 대기 | 엔진 시제품 3분×3 → 사용자 느낌 → 8시간 렌더 → 채널 |
+| 기도·묵상 생성 음악 (`plans/soaking-music-feature.md`) | 단독 앱 폐기 → 신앙 앱 부가 기능 | 통독 앱 만들 때 탭으로 |
 | 웹 미니게임 9종 (`docs/*.html`) | 웹으로 공개 중 | 앱화 후보 고르기 (아래 백로그) |
 | 한의학(clinic) 앱 (`lib/`, `android/`) | 보류 | 재개 여부 미정 |
 
@@ -93,6 +93,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-05 | 기도·묵상 생성 음악은 **단독 유료 앱 안 함** → 성경 통독 앱 등의 무료 부가 기능. **유튜브 채널이 본래 목적** → 수익 거절 대비책을 넣고 진행(짧은 영상 10편 먼저, 영상마다 다르게, 시드 공개) | 사용자 "앱 돈 내고 안 쓸 듯, 통독앱에 붙이는 게 낫지. 난 유튜브에 올릴 목적이었지" |
 | 2026-10-05 | 앰비언트 조사 결과: 유튜브는 2025 반복 콘텐츠 정책 때문에 수익 기대 2/5 → **홍보·실험용으로만**. 기도·묵상 생성 음악은 1회 구매 소형 앱으로 가능. **공통 1단계 = 10분 웹 프로토타입 → 사용자 '듣기 좋음' 판정** 뒤 계속 여부 | 조사 보고 (`plans/soaking-music-app.md`, `plans/ambient-youtube.md`) |
 | 2026-10-05 | **두 번째 수익 줄기: 유튜브 앰비언스 채널**(코드 생성 음악 8시간 + 코드 그림, 중간 광고 없음) 시작. 같은 엔진으로 **기도·묵상 생성 음악 앱**도 (`plans/ambient-youtube.md`, `plans/soaking-music-app.md`). 둘 다 1단계는 3분 샘플 → 사용자 느낌 | 사용자 "이거 좋을 것 같은데, 기도묵상 생성음악도 하고" |
 | 2026-10-05 | 사용자 질문: 몇 시간짜리 은은한 음악(유튜브 "NO MID-ROLL ADS 봄 재즈 카페 앰비언스" 류)도 만들 수 있나 → 두 갈래(코드 생성 앰비언트 앱 / 유튜브 앰비언스 채널) 조사 중 | 사용자 링크 질문 |
