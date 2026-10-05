@@ -1,0 +1,43 @@
+name: Fetch ambient photos
+
+# 작업 환경에선 Commons 가 막혀 있어, 앰비언트 영상 배경 후보(PD/CC0)를 여기서 받아
+# `ambient-photos` 브랜치에 커밋한다 (main 이 아니라서 Pages 재배포 없음).
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-ambient-photos
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Switch to data branch
+        run: |
+          if git ls-remote --exit-code --heads origin ambient-photos >/dev/null; then
+            git fetch origin ambient-photos
+            git checkout -B ambient-photos origin/ambient-photos
+          else
+            git checkout --orphan ambient-photos && git rm -rqf . && git clean -fdq
+          fi
+          git checkout "$GITHUB_SHA" -- tools/ambient/fetch_photos.py
+      - name: Install ffmpeg
+        run: sudo apt-get update -q && sudo apt-get install -yq ffmpeg >/dev/null
+      - name: Fetch PD/CC0 photos
+        run: python3 -u tools/ambient/fetch_photos.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/ambient
+          git commit -qm "ambient: PD/CC0 photo candidates" || echo "nothing new"
+          git push origin ambient-photos
