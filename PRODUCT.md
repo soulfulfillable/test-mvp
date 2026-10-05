@@ -45,7 +45,7 @@
 | **Cozy Coloring 정식판** (원형 `docs/coloring-book.html`) | **보류** (2026-10-02). 기획서 OK, 선화 수집·변환기·테스트 로봇까지 만듦 | 재개 시 `plans/coloring-app.md` 의 첫 메시지로 새 세션 |
 | **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | 2026-10-03 Flutter 1차 완성·테스트 31개·웹 미리보기 `docs/tides-app/`. 번들 `com.soulfulfill.tides` | TestFlight 빌드 21 업로드(10-03) → 사용자 느낌 → 스크린샷 → 심사 |
 | **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-03 Flutter 1차 완성·테스트 37개·웹 미리보기 `docs/speedometer-app/`(폰 GPS 로 진짜 속도). 번들 `com.soulfulfill.speedometer` | 번들 등록 → ASC 앱 레코드·AdMob(사용자) → TestFlight |
-| **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 빌드 22·등록 정보·스크린샷 입력 완료 (사용자 "괜찮은 것 같다, 앱으로 내자") | 사용자: App Privacy·연령·가격 → 심사 제출 → 승인 후 AdMob 스토어 연결 |
+| **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 2026-10-05 v1.0(빌드 22) 심사 제출(Waiting for Review). 1.1(빌드 25: 주·카운티 세율, 추가 상환 3종) TestFlight 대기 | 승인 → AdMob 스토어 연결 → 1.1 새 버전 제출(빌드 25) |
 | **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-03 TestFlight 빌드 19 업로드. 테스트 27개 통과·웹 미리보기 `docs/decibel-app/`(진짜 마이크 측정). AdMob 배너 실제 ID | 사용자 TestFlight 느낌 → 보정값(+94) 실기기 확인 → 스크린샷·등록 정보 → 심사 |
 | **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) | 2026-10-02 Flutter 1차 완성·테스트 로봇 17개 통과·웹 미리보기 `docs/catdoku-app/` | 번들 ID 등록 → ASC 앱 레코드·AdMob 앱(사용자) → TestFlight |
 | **Kitty Path: Number Puzzle** (한붓 경로 퍼즐, `kittypath_app/`, `plans/path-puzzle-app.md`, `board/path-puzzle.md`) | 2026-10-03 Flutter 1차 완성·테스트 36개·웹 실제 터치 점검 24/24·웹 미리보기 `docs/path-puzzle-app/`. 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 아이콘·스토어 문구 → ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
@@ -81,6 +81,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-05 | Glance: Mortgage Calculator **v1.0(빌드 22) 심사 제출** — Waiting for Review | 사용자가 ASC 에서 저작권·카테고리·App Privacy·가격(EU 제외)·연락처 채우고 제출 |
 | 2026-10-03 | Glance Mortgage 1.1 에 **카운티(3,135곳)도 넣음** — 인구조사국 ACS 2024 (재산세 중앙값 ÷ 집값 중앙값), 주 고른 뒤 검색해서 선택 | 사용자 "county 마다 텍스가 다른데 그건 왜 없어 넣는게". 공식 데이터를 Actions 로 받을 수 있어 정확도 문제 해결 |
 | 2026-10-03 | 경로 퍼즐 이름 **Kitty Path: Number Puzzle** (부제 Daily One Line Logic Game), 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 사용자: 둘 다 추천안. Kitty Queens 와 고양이 시리즈, 검색어 number puzzle·daily·one line·logic. "Zip" 은 LinkedIn 상표 출원이라 제외 |
 | 2026-10-03 | 솔루나 앱 이름 **Glance Solunar: Fishing Times** (부제 Hunting Times & Moon Phases), 번들 ID `com.soulfulfill.solunar` 등록 실행 | 사용자: 둘 다 추천안. 1·2위 검색어 solunar + fishing times 를 이름에, hunting times 는 부제에. Glance 시리즈 통일 |
