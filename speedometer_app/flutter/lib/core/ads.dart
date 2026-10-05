@@ -4,13 +4,14 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// 광고는 하단 배너 하나뿐. 전면·영상 광고는 넣지 않는다 (운전 중 안전 + 1등 앱 불만의 정반대).
 ///
-/// AdMob 광고 단위 ID — 아직 AdMob 에 이 앱을 만들지 않아 Google 공식 **테스트 ID**.
-/// 콘솔에서 앱·배너 단위를 만들면 여기와 ios/Runner/Info.plist 의 GADApplicationIdentifier,
-/// android/app/src/main/AndroidManifest.xml 의 APPLICATION_ID 를 함께 바꾼다.
+/// AdMob 광고 단위 ID (soulfulfillable 계정, 게시자 pub-4724352880074547).
+/// iOS = 실제 ID (앱 Glance Speed `~2374916230`, 배너 단위 `banner`, 2026-10-05 사용자 생성).
+/// 안드로이드는 AdMob 앱을 아직 안 만들어 Google 공식 **테스트 ID** 그대로 (출시 대상 아님).
+/// 앱 ID 는 ios/Runner/Info.plist 의 GADApplicationIdentifier 와 짝이다.
 class AdIds {
   static bool get _ios => defaultTargetPlatform == TargetPlatform.iOS;
   static String get banner => _ios
-      ? 'ca-app-pub-3940256099942544/2934735716'
+      ? 'ca-app-pub-4724352880074547/8114503080'
       : 'ca-app-pub-3940256099942544/6300978111';
 }
 
@@ -23,7 +24,12 @@ abstract class Ads {
 class AdMobAds extends Ads {
   @override
   Future<void> init() async {
-    await MobileAds.instance.initialize();
+    // 광고가 안 떠도 속도계는 돌아야 한다 — 초기화 실패는 기록만.
+    try {
+      await MobileAds.instance.initialize();
+    } catch (e) {
+      debugPrint('AdMob init failed: $e');
+    }
   }
 
   @override

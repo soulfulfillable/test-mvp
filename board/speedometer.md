@@ -9,12 +9,12 @@ Flutter 1차 완성(`speedometer_app/flutter/`): 큰 숫자/게이지·HUD·속�
 ## 다음 할 일 / 사용자에게 받을 것
 - [사용자] 웹 미리보기를 차에서(조수석) 켜 보고 '느낌' 한마디.
 - [사용자] App Store Connect → 앱 → ＋ 신규 앱: iOS / `Glance Speed: GPS Speedometer` / English (U.S.) / 번들 `com.soulfulfill.speedometer` / SKU `speedometer`.
-- [사용자] AdMob(**`soulfulfillable` 계정**) → 앱 추가(iOS, 스토어 미등록, 이름 Glance Speed) → 광고 단위 1개: 배너 `banner`. 앱 ID(`~`)·단위 ID(`/`)를 알려 주면 교체.
 - [세션] ASC 앱 레코드 생기면 `Release iOS`(app=speedometer) → TestFlight → 스크린샷 1290×2796·`speedometer_app/store/ios-metadata.json`.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-05 | AdMob "Ad unit successfully created" 화면 캡처 + "여기 admob" (앱 ID `~2374916230`, 배너 `/8114503080`, 게시자 pub-4724352880074547 = soulfulfillable 계정 맞음) | iOS 실제 ID 로 교체(`lib/core/ads.dart`·Info.plist), 안드로이드는 테스트 ID 유지. 광고 초기화 실패해도 속도계는 동작하게 try/catch |
 | 10-03 | 이름 A/B → "Glance Speed (추천)", 번들 → "speedometer 로 등록 (추천)" | 이름 `Glance Speed: GPS Speedometer`(홈 화면 `Glance Speed`), 번들 `com.soulfulfill.speedometer` 등록 Actions 실행. 앱·방침·웹 제목 반영, `Release iOS` 선택지에 speedometer 추가 |
 | 10-03 | "GPS 속도계 앱 개발 시작해줘. plans/speedometer-app.md 기획서대로 하고, 시작 전에 PLAYBOOK.md 와 board/ 전체를 읽어. 네 게시판은 board/speedometer.md 야 — 내 피드백 받을 때마다, 단계 끝날 때마다 갱신해서 다른 세션들과 공유해줘." | 읽고 시작. 이 파일을 단계마다 갱신 |
 
