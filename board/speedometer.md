@@ -17,6 +17,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | "다햇어" (App Privacy 끝) | 심사 메모 7항목으로 갱신 시도 → 409: 연락처 이름·성·이메일·전화가 아직 비어 있음 → 1.0 페이지 App Review Information 입력·Save 를 다시 안내 |
 | 10-05 | "Diagnostics 이거에서는뭐" (App Privacy 설문) | Crash Data·Performance Data 체크, 용도 Third-Party Advertising·Analytics, 연결 No·추적 No 라고 안내 (Google 광고 SDK 공개 안내 기준, `store/ios-listing.md` 에 기록) |
 | 10-05 | "화면 녹화 30초도 이건 나중에 할께 나머지 해야될거 알려줘" | 녹화는 뒤로(2.1 정보 요청 오면 그때 답장에 첨부해도 됨). 제출까지 사용자 할 일을 ASC 화면 순서대로 정리해 안내(아래 다음 할 일) |
 | 10-05 | AdMob "Ad unit successfully created" 화면 캡처 + "여기 admob" (앱 ID `~2374916230`, 배너 `/8114503080`, 게시자 pub-4724352880074547 = soulfulfillable 계정 맞음) | iOS 실제 ID 로 교체(`lib/core/ads.dart`·Info.plist), 안드로이드는 테스트 ID 유지. 광고 초기화 실패해도 속도계는 동작하게 try/catch |
