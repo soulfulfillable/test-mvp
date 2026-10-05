@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ambient Scene</title>
+<style>
+  html, body { margin: 0; background: #0b0d10; height: 100%; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { width: 100vw; max-height: 100vh; aspect-ratio: 16 / 9; display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1280" height="720"></canvas>
+<script>
+// 유튜브 영상용 장면. draw(t) 는 t 에 대한 순수 함수이고 L 초마다 정확히 같은 그림으로 돌아온다(끊김 없는 반복).
+// ?mood=rain|fire|cafe&seed=1042 , 렌더러는 window.__scene.frame(t) 로 한 장씩 뽑는다.
+(function () {
+  'use strict';
+  var q = new URLSearchParams(location.search);
+  var MOOD = q.get('mood') || 'rain', SEED = parseInt(q.get('seed') || '1042', 10);
+  var cv = document.getElementById('c'), g = cv.getContext('2d'), W = cv.width, H = cv.height;
+  var L = 12, TAU = Math.PI * 2;
+  function RNG(s) { this.s = (s >>> 0) || 1; }
+  RNG.prototype.next = function () { var x = this.s; x ^= x << 13; x >>>= 0; x ^= x >>> 17; x ^= x << 5; x >>>= 0; this.s = x; return x / 4294967296; };
+  RNG.prototype.range = function (a, b) { return a + (b - a) * this.next(); };
+  RNG.prototype.int = function (a, b) { return Math.floor(this.range(a, b + 1)); };
+  var r = new RNG(SEED * 31 + MOOD.length);
+  function ph(t, k) { return TAU * k * t / L; }           // 반복 주기에 맞는 위상
+  function frac(x) { return x - Math.floor(x); }
+
+  // ─── 공통 자료 (시드로 고정) ───
+  var bokeh = [], streaks = [], drops = [], embers = [], steam = [];
+  for (var i = 0; i < 26; i++) bokeh.push({ x: r.next(), y: r.range(0.15, 0.75), s: r.range(14, 46), k: r.int(1, 2), p: r.next() * TAU, warm: r.next() < 0.75, a: r.range(0.08, 0.22) });
+  for (i = 0; i < 140; i++) streaks.push({ x: r.next(), y: r.next(), k: r.int(4, 8), l: r.range(16, 38), a: r.range(0.08, 0.22) });
+  for (i = 0; i < 46; i++) drops.push({ x: r.next(), y: r.next(), k: r.int(0, 1), s: r.range(1.5, 4.5), sway: r.range(2, 8), p: r.next() * TAU });
+  for (i = 0; i < 70; i++) embers.push({ x: r.range(-60, 60), y: r.next(), k: r.int(1, 3), s: r.range(1, 2.6), sway: r.range(6, 26), p: r.next() * TAU });
+  for (i = 0; i < 3; i++) steam.push({ off: i / 3, sway: r.range(8, 16), p: r.next() * TAU });
+
+  function vignette(strength) {
+    var vg = g.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 0.95);
+    vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,' + strength + ')');
+    g.fillStyle = vg; g.fillRect(0, 0, W, H);
+  }
+  function glow(x, y, rad, rgb, a) {
+    var gr = g.createRadialGradient(x, y, 0, x, y, rad);
+    gr.addColorStop(0, 'rgba(' + rgb + ',' + a + ')'); gr.addColorStop(1, 'rgba(' + rgb + ',0)');
+    g.fillStyle = gr; g.fillRect(x - rad, y - rad, rad * 2, rad * 2);
+  }
+
+  // ─── 비 오는 창 ───
+  function rain(t) {
+    var bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#141b24'); bg.addColorStop(1, '#0c1016');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    for (var i = 0; i < bokeh.length; i++) {
+      var b = bokeh[i], a = b.a * (0.75 + 0.25 * Math.sin(ph(t, b.k) + b.p));
+      glow(b.x * W, b.y * H, b.s * 2.2, b.warm ? '230,170,100' : '140,170,210', a);
+    }
+    g.lineWidth = 1;
+    for (i = 0; i < streaks.length; i++) {
+      var s = streaks[i], y = frac(s.y + s.k * t / L) * (H + 60) - 40, x = s.x * W + y * 0.06;
+      g.strokeStyle = 'rgba(190,205,225,' + s.a + ')';
+      g.beginPath(); g.moveTo(x, y); g.lineTo(x + s.l * 0.06, y + s.l); g.stroke();
+    }
+    // 유리에 맺힌 물방울: 천천히 흘러내린다 (k=0 은 멈춰 있음)
+    for (i = 0; i < drops.length; i++) {
+      var d = drops[i], dy = frac(d.y + d.k * t / L) * H, dx = d.x * W + Math.sin(ph(t, 1) + d.p) * (d.k ? d.sway * 0.3 : 0);
+      g.fillStyle = 'rgba(210,220,235,0.18)';
+      g.beginPath(); g.ellipse(dx, dy, d.s * 0.8, d.s, 0, 0, TAU); g.fill();
+      g.fillStyle = 'rgba(255,255,255,0.28)';
+      g.beginPath(); g.arc(dx - d.s * 0.25, dy - d.s * 0.3, d.s * 0.25, 0, TAU); g.fill();
+    }
+    // 창틀
+    g.fillStyle = '#07090c';
+    g.fillRect(W * 0.5 - 7, 0, 14, H); g.fillRect(0, H * 0.46 - 6, W, 12);
+    g.fillRect(0, 0, W, 26); g.fillRect(0, H - 34, W, 34); g.fillRect(0, 0, 26, H); g.fillRect(W - 26, 0, 26, H);
+    vignette(0.55);
+  }
+
+  // ─── 모닥불 ───
+  function flame(cx, base, w, h, t, k, p, rgb, a) {
+    var sway = Math.sin(ph(t, k) + p) * w * 0.18 + Math.sin(ph(t, k * 2 + 1) + p * 2) * w * 0.08;
+    var hh = h * (0.9 + 0.1 * Math.sin(ph(t, k + 2) + p));
+    g.fillStyle = 'rgba(' + rgb + ',' + a + ')';
+    g.beginPath();
+    g.moveTo(cx - w / 2, base);
+    g.bezierCurveTo(cx - w * 0.55, base - hh * 0.45, cx - w * 0.1 + sway * 0.5, base - hh * 0.7, cx + sway, base - hh);
+    g.bezierCurveTo(cx + w * 0.1 + sway * 0.5, base - hh * 0.7, cx + w * 0.55, base - hh * 0.45, cx + w / 2, base);
+    g.closePath(); g.fill();
+  }
+  function fire(t) {
+    var bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#0b0c12'); bg.addColorStop(1, '#1a120c');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    var cx = W / 2, base = H * 0.8;
+    glow(cx, base - 60, 420 + 14 * Math.sin(ph(t, 3)) + 8 * Math.sin(ph(t, 7)), '240,140,60', 0.22);
+    // 땅
+    g.fillStyle = '#120c08'; g.fillRect(0, base + 8, W, H - base);
+    glow(cx, base + 14, 260, '200,110,50', 0.2);
+    // 불꽃 겹겹이
+    flame(cx - 34, base, 90, 170, t, 2, 0.4, '225,95,40', 0.75);
+    flame(cx + 36, base, 84, 150, t, 3, 2.1, '225,95,40', 0.75);
+    flame(cx, base, 120, 230, t, 2, 1.2, '240,130,50', 0.85);
+    flame(cx - 10, base, 80, 170, t, 3, 3.3, '250,180,80', 0.9);
+    flame(cx + 6, base, 46, 110, t, 4, 0.8, '255,225,150', 0.95);
+    // 장작
+    g.fillStyle = '#2a1a10';
+    g.save(); g.translate(cx, base + 6); g.rotate(-0.22); g.fillRect(-120, -12, 240, 24); g.restore();
+    g.save(); g.translate(cx, base + 6); g.rotate(0.24); g.fillRect(-120, -12, 240, 24); g.restore();
+    g.fillStyle = 'rgba(240,120,50,0.5)';
+    g.fillRect(cx - 40, base - 4, 80, 6);
+    // 불티
+    for (var i = 0; i < embers.length; i++) {
+      var e = embers[i], f = frac(e.y + e.k * t / L), ey = base - 40 - f * 520, ex = cx + e.x + Math.sin(ph(t, e.k) + e.p) * e.sway * f;
+      var a = (1 - f) * 0.9;
+      g.fillStyle = 'rgba(255,190,110,' + a.toFixed(3) + ')';
+      g.beginPath(); g.arc(ex, ey, e.s * (1 - f * 0.5), 0, TAU); g.fill();
+    }
+    vignette(0.6);
+  }
+
+  // ─── 카페 창가 ───
+  function cafe(t) {
+    var bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#1c1712'); bg.addColorStop(1, '#100c09');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    for (var i = 0; i < bokeh.length; i++) {
+      var b = bokeh[i], a = b.a * 1.2 * (0.75 + 0.25 * Math.sin(ph(t, b.k) + b.p));
+      glow(b.x * W, b.y * H * 0.8, b.s * 2.4, b.warm ? '240,180,110' : '220,200,170', a);
+    }
+    // 창틀 + 탁자
+    g.fillStyle = '#0b0807'; g.fillRect(W * 0.62, 0, 12, H * 0.68); g.fillRect(0, H * 0.3, W, 8);
+    g.fillStyle = '#2b1d14'; g.fillRect(0, H * 0.68, W, H * 0.32);
+    g.fillStyle = 'rgba(255,200,140,0.06)'; g.fillRect(0, H * 0.68, W, 3);
+    // 잔
+    var cx = W * 0.32, cy = H * 0.68;
+    g.fillStyle = '#e8ded2';
+    g.beginPath(); g.ellipse(cx, cy + 4, 92, 14, 0, 0, TAU); g.fill();          // 받침
+    g.fillStyle = '#efe6db';
+    g.beginPath(); g.moveTo(cx - 52, cy - 82); g.lineTo(cx + 52, cy - 82); g.lineTo(cx + 42, cy - 4); g.lineTo(cx - 42, cy - 4); g.closePath(); g.fill();
+    g.strokeStyle = '#efe6db'; g.lineWidth = 12;
+    g.beginPath(); g.arc(cx + 58, cy - 48, 20, -1.2, 1.2); g.stroke();
+    g.fillStyle = '#4a2c1a';
+    g.beginPath(); g.ellipse(cx, cy - 82, 52, 8, 0, 0, TAU); g.fill();
+    // 김
+    g.lineWidth = 6; g.lineCap = 'round';
+    for (i = 0; i < steam.length; i++) {
+      var st = steam[i], f = frac(st.off + t / L * 2);
+      g.strokeStyle = 'rgba(240,230,220,' + (0.16 * Math.sin(Math.PI * f)).toFixed(3) + ')';
+      g.beginPath();
+      for (var k = 0; k <= 20; k++) {
+        var yy = cy - 92 - k * 7 - f * 60, xx = cx - 18 + i * 18 + Math.sin(k * 0.45 + ph(t, 2) + st.p) * st.sway * (k / 20);
+        if (k === 0) g.moveTo(xx, yy); else g.lineTo(xx, yy);
+      }
+      g.stroke();
+    }
+    vignette(0.55);
+  }
+
+  var DRAW = { rain: rain, fire: fire, cafe: cafe }[MOOD] || rain;
+  function frame(t) { DRAW(((t % L) + L) % L); }
+  window.__scene = { L: L, frame: function (t, q) { frame(t); return cv.toDataURL('image/jpeg', q || 0.9); } };
+  if (!q.get('static')) { var t0 = performance.now(); (function loop(now) { frame((now - t0) / 1000); requestAnimationFrame(loop); })(t0); }
+})();
+</script>
+</body>
+</html>

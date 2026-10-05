@@ -19,35 +19,35 @@
   .item { padding: 18px 0 20px; border-bottom: 1px solid #23272e; }
   .name { font-size: 17px; font-weight: 600; }
   .meta { margin-top: 3px; font-size: 13px; color: #8d919a; font-variant-numeric: tabular-nums; }
-  audio { width: 100%; margin-top: 12px; height: 40px; }
+  video { width: 100%; margin-top: 12px; border-radius: 10px; background: #000; aspect-ratio: 16 / 9; display: block; }
   .foot { margin-top: 22px; font-size: 13px; color: #8d919a; line-height: 1.5; }
   .foot a { color: #c99a5b; text-decoration: none; }
 </style>
 </head>
 <body>
   <h1>Ambient Samples</h1>
-  <p class="lead">Three minutes each. Every sound is synthesized by code, no recordings. Turn the silent switch off.</p>
+  <p class="lead">Three-minute previews of the video. Final videos run 1 h 30 min. Every sound is synthesized by code, no recordings. Turn the silent switch off.</p>
   <div class="list">
     <div class="item">
       <div class="name">Rain &amp; Piano</div>
-      <div class="meta">D lydian pad, wandering piano, soft rain · Seed #1042</div>
-      <audio controls preload="none" src="ambient/rain-piano-seed1042.mp3"></audio>
+      <div class="meta">Rain on the window, wandering piano · Seed #1042</div>
+      <video controls playsinline preload="metadata" poster="ambient/rain-piano-seed1042.jpg" src="ambient/rain-piano-seed1042.mp4"></video>
     </div>
     <div class="item">
-      <div class="name">Fireside Pad</div>
-      <div class="meta">F mixolydian pad, sparse piano, crackling fire · Seed #2187</div>
-      <audio controls preload="none" src="ambient/fireside-pad-seed2187.mp3"></audio>
+      <div class="name">Fireside</div>
+      <div class="meta">Brighter major-key piano, soft crackling fire · Seed #2187</div>
+      <video controls playsinline preload="metadata" poster="ambient/fireside-seed2187.jpg" src="ambient/fireside-seed2187.mp4"></video>
     </div>
     <div class="item">
-      <div class="name">Cafe Arpeggio</div>
-      <div class="meta">C major arpeggio, distant chatter, cups · Seed #3310</div>
-      <audio controls preload="none" src="ambient/cafe-arpeggio-seed3310.mp3"></audio>
+      <div class="name">Cafe Piano</div>
+      <div class="meta">Eight chords, the pattern changes every chord · Seed #3310</div>
+      <video controls playsinline preload="metadata" poster="ambient/cafe-piano-seed3310.jpg" src="ambient/cafe-piano-seed3310.mp4"></video>
     </div>
   </div>
   <p class="foot">Live version that never repeats: <a href="soaking.html">soaking.html</a></p>
 <script>
   // 하나를 틀면 나머지는 멈춘다
-  var as = document.querySelectorAll('audio');
+  var as = document.querySelectorAll('video');
   for (var i = 0; i < as.length; i++) as[i].addEventListener('play', function (e) {
     for (var j = 0; j < as.length; j++) if (as[j] !== e.target) as[j].pause();
   });
