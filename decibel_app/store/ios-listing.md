@@ -61,7 +61,7 @@ ASO 도구 공개 요약(ASOTools, Decibel X 키워드) 기준 — 국가·날�
 | Primary Category | Utilities |
 | Secondary Category | Lifestyle |
 | Content Rights | 제3자 콘텐츠 없음 |
-| Age Rating | 설문 전부 "None" → **4+** |
+| Age Rating | Advertising 만 **Yes**, 나머지 전부 None/No, Made for Kids 아님 → **4+** (Catdoku 와 같음) |
 | Price | Free |
 | Privacy Policy URL | https://soulfulfillable.github.io/test-mvp/decibel-privacy.html |
 | Copyright | `2026 Soulfulfill` |
