@@ -1,8 +1,8 @@
 name: Release iOS (앱 선택 → App Store Connect)
 
 # 맥 없이 App Store Connect 에 빌드를 올린다. 수동 실행 전용(Actions → Run workflow).
-# App Store Connect API 키로 배포 인증서·App Store 프로파일을 실행마다 새로 발급해 수동 서명하고,
-# 끝나면 지운다 (.github/scripts/asc_signing.py). 기기 등록이 필요 없다.
+# App Store Connect API 키로 배포 인증서·App Store 프로파일을 준비해 수동 서명한다 (.github/scripts/asc_signing.py).
+# 기기 등록이 필요 없다. 인증서는 한 번 만들어 계속 쓴다 — 예전처럼 끝나고 지우면 제출 때 ITMS-90035 로 반려된다.
 #   - 자동 서명 아카이브는 개발용 프로파일을 요구 → 등록 기기 없으면 실패
 #   - 서명 없이 아카이브 후 export 서명 → Google 광고 SDK 프레임워크가 재서명되지 않아 업로드 거부
 #
@@ -28,7 +28,7 @@ on:
         default: currency
 
 permissions:
-  contents: read
+  contents: write   # 배포 인증서 보관함(ci-signing 브랜치, 암호문만)에 저장하려고
 
 concurrency:
   group: release-ios
@@ -83,6 +83,18 @@ jobs:
       - name: Generate Flutter build config
         run: flutter build ios --release --config-only --no-codesign --build-number=${{ github.run_number }}
 
+      # 배포 인증서는 지우지 않고 계속 쓴다 (지우면 그걸로 서명해 제출한 빌드가 ITMS-90035 Invalid Signature).
+      # 개인 키는 KEY_P8 에서 만든 키로 암호화해 ci-signing 브랜치 signing/state.json 에 둔다.
+      - name: Load signing store
+        working-directory: .
+        run: |
+          if git fetch -q --depth 1 origin ci-signing 2>/dev/null; then
+            git show FETCH_HEAD:signing/state.json > "$RUNNER_TEMP/sign-store.json" 2>/dev/null || true
+          fi
+          [ -s "$RUNNER_TEMP/sign-store.json" ] && echo "보관된 배포 인증서 있음" || echo "보관된 인증서 없음 — 새로 발급"
+          echo "SIGN_STORE_IN=$RUNNER_TEMP/sign-store.json" >> "$GITHUB_ENV"
+          echo "SIGN_STORE_OUT=$RUNNER_TEMP/sign-store-new.json" >> "$GITHUB_ENV"
+
       - name: Issue distribution certificate & App Store profile
         run: |
           python3 -m venv "$RUNNER_TEMP/venv"
@@ -93,6 +105,30 @@ jobs:
           echo "$OUT"
           echo "PROFILE_NAME=$(echo "$OUT" | tail -1 | python3 -c 'import json,sys;print(json.load(sys.stdin)["profile_name"])')" >> "$GITHUB_ENV"
           echo "PROFILE_UUID=$(echo "$OUT" | tail -1 | python3 -c 'import json,sys;print(json.load(sys.stdin)["profile_uuid"])')" >> "$GITHUB_ENV"
+
+      - name: Save new certificate to signing store
+        working-directory: .
+        run: |
+          [ -s "$SIGN_STORE_OUT" ] || { echo "새 인증서 없음 — 저장할 것 없음"; exit 0; }
+          WT="$RUNNER_TEMP/ci-signing"
+          if git fetch -q origin ci-signing 2>/dev/null; then
+            git worktree add -q -B ci-signing "$WT" FETCH_HEAD
+          else
+            git worktree add -q --detach "$WT"
+            git -C "$WT" checkout -q --orphan ci-signing
+            git -C "$WT" rm -rqf .
+          fi
+          mkdir -p "$WT/signing"
+          cp "$SIGN_STORE_OUT" "$WT/signing/state.json"
+          cat > "$WT/signing/README.md" <<'EOF'
+          Release iOS 공용 배포 인증서 보관함. 개인 키는 GitHub Secret(ASC_KEY_P8)에서 만든 키로 암호화돼 있다.
+          **이 인증서를 developer.apple.com 에서 지우지(revoke) 말 것** — 그걸로 서명해 제출한 빌드가 ITMS-90035 로 반려된다.
+          EOF
+          git -C "$WT" add signing
+          git -C "$WT" -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -qm "ci-signing: 배포 인증서 보관 (run ${{ github.run_number }})"
+          git -C "$WT" push -q origin HEAD:ci-signing
+          echo "새 배포 인증서를 ci-signing 브랜치에 보관함"
 
       - name: Install certificate & profile
         run: |
@@ -172,11 +208,10 @@ jobs:
             -authenticationKeyIssuerID "$ISSUER_ID"
           echo "업로드 완료 — App Store Connect → 앱 → TestFlight 에 10~30분 뒤 빌드 ${{ github.run_number }} 가 나타납니다."
 
-      - name: Revoke temporary certificate & profile
+      # 인증서·프로파일은 지우지 않는다 (위 설명). 러너의 키체인만 정리.
+      - name: Remove local keychain
         if: always()
         run: |
-          [ -x "$RUNNER_TEMP/venv/bin/python" ] || exit 0
-          "$RUNNER_TEMP/venv/bin/python" "$GITHUB_WORKSPACE/.github/scripts/asc_signing.py" cleanup "$SIGN_DIR"
           security delete-keychain "$RUNNER_TEMP/ci.keychain-db" 2>/dev/null || true
 
       - name: Remove API key

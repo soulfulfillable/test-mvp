@@ -15,14 +15,20 @@
   녹화는 사용자 폰이 필요하니 **TestFlight 단계에서 미리 부탁**하고, 무엇을 찍을지(화면 순서)를 짧게 적어 준다. 예시 `catdoku_app/store/review-reply.md`, `PLAYBOOK.md` 3장.
 - 이번 주(10-05~)는 새 앱 없이 지금 9개를 출시까지 마무리한다.
 
-## 공용 작업 요청 2 — 디자인 리터칭 (모든 앱 세션, 2026-10-05)
+## 디자인 규칙 적용 범위 (2026-10-05 사용자 결정)
 
-사용자: "글씨체·UI 가 다 AI 로 돌린 느낌." → `DESIGN.md` 규칙 + 5장 앱별 고칠 것. 각 세션은
-①`DESIGN.md` 읽기 → ②자기 앱 고치기(글꼴·부품·레이아웃·아이콘·시그니처) → ③고친 뒤 첫 화면·주요 화면 스크린샷을
-`DESIGN.md` 4장 체크리스트로 점검해 게시판에 결과 기록 → ④웹 미리보기 재빌드(사용자가 폰으로 비교). 심사 중인 버전은 건드리지 말고 다음 버전에.
-**공용 테마 패키지**(iOS 글꼴 스택·버튼·목록·색 토큰)를 먼저 만드는 세션이 "공용 작업 중" 표에 적고, 다른 세션은 그걸 재사용한다.
+- **`DESIGN.md` 는 앞으로 새로 만드는 앱·새 화면에만 적용한다. 이미 만든 앱은 디자인을 다시 손대지 않는다.**
+  사용자: "지금까지 것은 만지지 말자, 나중에 만지면 이상해지는 것 같아서. 앞으로 것에 적용하자."
+- 예외: Glance dB 는 그 전에 사용자 결정으로 이미 리터칭함(그대로 둔다).
+- 기존 앱 세션은 기능 수정·버그 수정만. 디자인 리터칭 요청(이전 "공용 작업 요청 2")은 취소.
 
 ## 이미 만들어진 공용 도구 (다시 만들지 말 것)
+- **⚠️ Release iOS 서명 수정 (mortgage 세션, 10-05) — 모든 앱 해당**: 예전 워크플로는 업로드 직후 배포 인증서를 **지웠다(revoke)**.
+  그 빌드를 나중에 심사 제출하면 **ITMS-90035 Invalid Signature** 로 "Invalid Binary/Rejected" (Glance Mortgage 빌드 22 실제 발생, 제출 1.5일 뒤).
+  → 이제 인증서 1개(`9BAX4TA7C3`)를 계속 쓴다: 개인 키를 `ASC_KEY_P8` 에서 만든 키로 암호화해 `ci-signing` 브랜치 `signing/state.json` 에 보관, 프로파일도 재사용.
+  **developer.apple.com 에서 이 인증서를 지우지 말 것.** run 30(빌드 30)부터 적용.
+  **run 29 이전 빌드로 심사 중인 앱(Glance FX 빌드 9·15, Kitty Queens 16, Glance dB 28 등)은 같은 메일이 올 수 있다** — 오면 새로 Release iOS 해서 그 빌드로 재제출.
+  `App Store 등록 정보 채우기` 는 json 에 `versionString` 을 넣으면 편집 중인 버전 번호도 바꾼다.
 - **Cupertino 부품 (소음 측정기 세션, 10-05)**: `decibel_app/flutter/lib/screens/widgets.dart` 의 `BackLink`(VoiceOver 되는 뒤로 — Flutter 기본 뒤로 버튼은 접근성 tap 없음), `SectionHeader`/`SectionFooter`(설정 앱 13pt 회색), `PrimaryButton`(다크 대비), `LevelNumber`. 공용 테마 패키지를 만들 세션은 여기서 가져가도 된다.
 
 - **TestFlight 초대 자동화** (속도계 세션, 2026-10-05, 빌드 26 으로 실제 확인): `Release iOS` 가 성공하면 워크플로

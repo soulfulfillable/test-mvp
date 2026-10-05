@@ -34,7 +34,7 @@
 - 실제로 겪은 실패 (다시 하지 말 것):
   - 자동 서명은 등록 기기가 없으면 개발용 프로파일을 못 만든다 → 실패.
   - 서명 없이 아카이브하면 Google 광고 SDK 프레임워크가 재서명되지 않아 업로드 거부(ITMS 90035).
-  - → 해결: 실행마다 API 로 임시 배포 인증서·App Store 프로파일을 만들어 Runner 만 수동 서명, 끝나면 삭제.
+  - → 해결: API 로 배포 인증서·App Store 프로파일을 만들어 Runner 만 수동 서명. **인증서는 지우지 않고 재사용**(지우면 제출 때 ITMS-90035, 2026-10-05).
   - Podfile 은 `flutter pub get` 이후에 생긴다 → 있을 때만 수정.
   - iOS 는 SwiftPM 이라 CocoaPods 설치 불필요.
 - 첫 출시는 범위를 줄인다: 아이폰 전용·세로 고정, EU 제외(trader 신고는 사용자 확인 필요).
@@ -66,7 +66,9 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-05 | 공통(대출) | 제출 1.5일 뒤 **ITMS-90035 Invalid Signature** 로 반려 — Release iOS 가 업로드 직후 배포 인증서를 revoke 하고 있었다(빠르게 제출한 환율 빌드 8 은 통과해 늦게 드러남) | 배포 인증서는 지우지 않는다. 암호화해 `ci-signing` 브랜치에 보관·재사용 (`asc_signing.py`) |
 | 2026-10-05 | 앰비언트 | 헤드리스 크롬 OfflineAudioContext 로 3분 렌더 — 비 소리만 348초(빗방울 0.1초마다 노드 4개 생성) | 짧은 소리를 자주 내는 레이어는 노드를 매번 만들지 말고 미리 만든 버퍼를 재생. 긴 렌더는 조각으로 나눠 이어 붙인다 |
+| 2026-10-05 | 소음 | ASC 웹에서 스크린샷을 손으로 올리는데 버전 화면 칸이 **6.5" Display** 라 1290×2796(6.9"용)이 전부 거절 → 빨간 칸이 "screenshot uploads in progress" 로 제출을 막음. 여러 장 끌어 넣다 중복·순서 섞임 | 수동 업로드 안내 땐 6.5"용 1284×2778 도 같이 만든다(`ffmpeg scale=1284:2783,crop=1284:2778`, `decibel_app/store/screenshots/6.5in/`). 올릴 순서 목록을 같이 준다 |
 | 2026-10-05 | 소음 | `App Store 등록 정보 채우기` 가 3번 연속 "job was not acquired by Runner of type hosted" 로 15분 대기 후 취소(GitHub 쪽). 또 UI 리터칭 후 심사 메모가 옛 화면(welcome·Continue) 그대로였다 | 러너가 한 번 안 잡히면 기다리지 말고 수동 대안(메모 붙여넣기 글·스크린샷 파일·빌드 직접 선택)을 바로 준다. 화면 흐름을 바꾸면 `ios-metadata.json` 심사 메모도 같은 커밋에서 고친다 |
 | 2026-10-05 | 소음 | Cupertino 전환 후 **Flutter 기본 뒤로 버튼이 VoiceOver 누르기 동작 없는 노드**를 만듦(로봇 접근성 검사로 발견), `insetGrouped` 머리글은 기본 20pt 굵게(설정 앱과 다름) | 직접 만든 `BackLink`·`SectionHeader`/`Footer` (`decibel_app/flutter/lib/screens/widgets.dart`) 재사용 |
 | 2026-10-05 | 소음 | 다크 모드 밝은 강조색 버튼에 흰 글씨 → 거의 안 읽힘. 노랑(systemYellow) 숫자 글씨도 흰 바탕에서 안 읽힘 | 강조색 위 글씨는 밝기 따라 흑/백. 의미 색은 글씨 대신 작은 점으로 |

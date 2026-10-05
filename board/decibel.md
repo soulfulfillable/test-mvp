@@ -1,12 +1,12 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-06 05:30 (KST)
+마지막 갱신: 2026-10-06 07:45 (KST)
 
 ## 지금 상태 (3줄 이내)
-**1.0 제출 직전** — 빌드 28(DESIGN.md 리터칭판) 업로드·TestFlight 배포 완료, 사용자가 30초 녹화 첨부(새 디자인 확인).
-GitHub 러너가 `App Store 등록 정보 채우기` 를 3번 못 잡아("not acquired by Runner") → 새 스크린샷 5장·고친 심사 메모·빌드 28 선택은 **사용자가 ASC 에서 직접**.
-보정 +94 는 그대로 제출(사용자 A: "조용한 곳이라 낮았던 것") — 1.0.1 때 NIOSH SLM 비교로 확인.
+**1.0(빌드 28) 심사 제출 완료 — "Waiting for Review"** (2026-10-05 저녁 미 동부 / 10-06 아침 KST). 스크린샷 5장(6.5" 칸, 1284×2778)·고친 심사 메모·연령 4+·30초 녹화는 사용자가 ASC 에서 직접.
+보정 +94 그대로 제출(사용자 A). 다음: 승인 → AdMob 에 스토어 링크 연결, NIOSH SLM 과 같은 소리 비교 → 1.0.1 기본 보정값.
 
 ## 다음 할 일 / 사용자에게 받을 것
+- ⚠️ **빌드 28 은 예전 `Release iOS`(업로드 뒤 배포 인증서 삭제)로 만든 빌드** — 대출 계산기 빌드 22 가 같은 이유로 제출 후 **ITMS-90035 Invalid Signature** 반려(`_shared.md`). 반려 메일이 오면: 대출 세션의 서명 수정(6eb31aa, run 30 검증 중)이 통과한 뒤 `Release iOS`(decibel) 새 빌드 → ASC 에서 빌드 교체 → 재제출. 그 전엔 Release iOS 돌리지 않음(대출 세션 요청).
 - ✅ 이름 A `Glance dB: Decibel Meter` / 번들 `com.soulfulfill.decibel` (사용자 확인) → ✅ Apple 번들 ID 등록 (Actions run 37065279691 로그 "새로 등록함").
 - ✅ [사용자] ASC 앱 레코드(id 6818761495, Actions 로 "있음" 확인), ✅ AdMob 앱(iOS)·배너 단위 → 앱 ID `~4858015861`·배너 `/4222667601` 반영 (안드로이드는 테스트 ID 유지).
 - ✅ [세션] `Release iOS`(decibel) → 빌드 19 업로드 성공 (iOS 첫 컴파일 통과: record·audio_session SwiftPM 문제없음). 같은 실행이 2번째 시도로 성공 — 1번째 시도를 누가 왜 다시 돌렸는지는 확인 못 함.
@@ -27,6 +27,7 @@ GitHub 러너가 `App Store 등록 정보 채우기` 를 3번 못 잡아("not ac
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | "된건가?" (ASC 화면: 1.0 Waiting for Review, 스크린샷 5장 순서대로) | 제출 확인. 그 전에 겪은 것: 6.9"용 1290×2796 을 6.5" 칸에 넣어 거절 → 1284×2778 판(`store/screenshots/6.5in/`)을 만들어 줌, 중복 1장·순서 섞임 정리, 연령 등급 설문(Advertising 만 Yes → 4+) |
 | 10-05 | 녹화 영상 보고 "실기기 숫자가 낮다(조용한 방 <20)" → A/B → "A. 지금 제출하고 1.0.1에서 고치기 … 아냐 조용한곳에 있었어서 그랫던거같은데" | 보정 +94 그대로 제출. 영상 속 측정은 실제로 조용했을 수 있음 — 숫자 비교는 여전히 **확인 못 함**, 출시 후 NIOSH SLM 과 나란히 재서 1.0.1 에 반영 |
 | 10-05 | "비디오는 여기넣었어 이제 add for review할까" (ASC 화면 — 심사 메모가 옛 안내 화면 기준) | 제출 보류 → 심사 메모를 새 첫 화면(Start 바로)에 맞게 고침. 영상은 프레임으로 확인: 빌드 28 새 디자인 ✓ |
 | 10-05 | (A/B) "DESIGN.md 에 걸리는데 제출 전에 고칠까요?" → "고치고 제출 (추천)" | 1.0 제출 보류 → Cupertino·iOS 스타일로 전면 리터칭(DESIGN.md 5장 dB 항목: 온보딩 목록 제거·브랜드 색·큰 숫자·시그니처) → 스크린샷 다시 → 새 빌드 → 제출 |
@@ -53,6 +54,7 @@ GitHub 러너가 `App Store 등록 정보 채우기` 를 3번 못 잡아("not ac
 10. 가짜 데이터 없음 (스크린샷도 합성 잡음을 실제로 측정) ✓
 
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
+- **ASC 화면에서 스크린샷을 직접 올릴 때는 그 칸 크기를 먼저 본다.** 버전 화면에 6.9" 대신 **6.5" Display** 칸만 보이면 1284×2778(또는 1242×2688)만 받는다 — 1290×2796 은 빨간 ⓘ 로 남고 "screenshot uploads in progress" 로 제출을 막는다. Delete All 후 맞는 크기로. 여러 장을 끌어 넣으면 순서가 섞이고 중복이 생길 수 있음 → 사용자에게 순서 목록을 같이 준다.
 - **GitHub 호스트 러너가 안 잡힐 때가 있다** (2026-10-05 20시 UTC, `ubuntu-latest` 3번 연속 "The job was not acquired by Runner of type hosted even after multiple attempts" → 15분 대기 뒤 취소). 우리 설정 문제 아님. 사용자가 기다리는 중이면 **수동 대안(붙여넣을 글·파일)을 바로** 주는 게 낫다.
 - **화면 흐름을 바꾸면 `ios-metadata.json` 의 심사 메모도 같이 고쳐라.** 리터칭으로 안내 화면을 없앴는데 메모는 "welcome screen … tap Continue" 그대로였다 — 사용자가 Add for Review 직전 화면을 보내 줘서 발견.
 - **Cupertino 전환 때 재사용할 부품** (`decibel_app/flutter/lib/screens/widgets.dart`): `BackLink`(VoiceOver tap 있는 뒤로), `SectionHeader`/`SectionFooter`(설정 앱 13pt 회색 — Flutter `insetGrouped` 기본 머리글은 20pt 굵게!), `PrimaryButton`(다크에서 밝은 강조색 위 검정 글씨), `LevelNumber`(노랑 글씨 대신 색 점).
