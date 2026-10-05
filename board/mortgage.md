@@ -3,7 +3,7 @@
 
 ## 지금 상태 (3줄 이내)
 1.0(빌드 22) **반려 — ITMS-90035 Invalid Signature** (워크플로가 인증서를 revoke 한 탓) → 워크플로 고침(인증서 보관·재사용).
-새 빌드 30(1.1: 주·카운티 세율·추가 상환 3종) 업로드 → ASC 버전 번호 1.1·빌드 30·등록 정보 자동 입력 → 사용자 Resubmit.
+새 빌드 30(1.1) 업로드 + `App Store 등록 정보 채우기` 성공(버전 번호 1.0→1.1, 빌드 30, 설명·심사 메모) → **사용자 Resubmit 대기**.
 웹 미리보기 https://soulfulfillable.github.io/test-mvp/mortgage-app/index.html
 
 ## 다음 할 일 / 사용자에게 받을 것
