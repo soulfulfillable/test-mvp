@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f1216">
+<title>Soaking — generative ambience</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* 인앱 브라우저 시트 대응: 240px 완충지대 (CLAUDE.md) */
+  html { height: 100%; overflow: auto; overscroll-behavior: none; scrollbar-width: none; }
+  html::-webkit-scrollbar { display: none; }
+  body {
+    height: calc(100% + 240px);
+    overflow: hidden; overscroll-behavior: none;
+    background: #0f1216; color: #e8e6e1;
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #app { position: fixed; inset: 0; touch-action: pan-y; display: flex; flex-direction: column; }
+  canvas#sky { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .top { position: relative; padding: calc(env(safe-area-inset-top) + 22px) 20px 0; }
+  .title { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+  .sub { margin-top: 3px; font-size: 13px; color: #8d919a; font-variant-numeric: tabular-nums; }
+
+  .center { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; }
+  .elapsed { font-size: 34px; font-weight: 300; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; color: #e8e6e1; }
+
+  .bottom { position: relative; padding: 0 20px calc(env(safe-area-inset-bottom) + 26px); }
+  .seg {
+    display: flex; background: #1b1f26; border-radius: 9px; padding: 2px; margin-bottom: 14px;
+  }
+  .seg button {
+    flex: 1; height: 36px; border: 0; border-radius: 7px; background: transparent; color: #8d919a;
+    font: inherit; font-size: 14px; font-weight: 500;
+  }
+  .seg button.on { background: #2c313a; color: #e8e6e1; }
+  .row { display: flex; align-items: center; gap: 12px; }
+  #play {
+    flex: 1; height: 50px; border: 0; border-radius: 13px;
+    background: #c99a5b; color: #16120c; font: inherit; font-size: 17px; font-weight: 600;
+  }
+  #play.playing { background: #2c313a; color: #e8e6e1; }
+  #play:active { opacity: 0.8; }
+  .ghost {
+    height: 50px; padding: 0 16px; border: 1px solid #2c313a; border-radius: 13px; background: transparent;
+    color: #c99a5b; font: inherit; font-size: 15px; font-weight: 500;
+  }
+  .ghost:active { opacity: 0.6; }
+  .foot { margin-top: 14px; font-size: 12px; color: #8d919a; line-height: 1.45; }
+  .foot b { color: #b9bcc3; font-weight: 500; }
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="sky"></canvas>
+  <div class="top">
+    <div class="title" id="moodName">Rain &amp; Piano</div>
+    <div class="sub" id="seedLine">Seed #1042 · every seed is a different piece</div>
+  </div>
+  <div class="center"><div class="elapsed" id="elapsed">0:00</div></div>
+  <div class="bottom">
+    <div class="seg" id="moods">
+      <button data-mood="rain" class="on">Rain &amp; Piano</button>
+      <button data-mood="night">Night Pad</button>
+    </div>
+    <div class="row">
+      <button id="play">Play</button>
+      <button class="ghost" id="shuffle">New seed</button>
+    </div>
+    <div class="foot">Every sound is synthesized live, nothing is recorded or looped. <b>Turn the ring/silent switch off</b> and keep the screen on, this web version stops when the phone locks.</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ───────────── 난수 (xorshift32, 시드 재현 가능) ─────────────
+  function RNG(seed) { this.s = (seed >>> 0) || 1; }
+  RNG.prototype.next = function () {
+    var x = this.s; x ^= x << 13; x >>>= 0; x ^= x >>> 17; x ^= x << 5; x >>>= 0; this.s = x;
+    return x / 4294967296;
+  };
+  RNG.prototype.range = function (a, b) { return a + (b - a) * this.next(); };
+  RNG.prototype.pick = function (arr) { return arr[Math.floor(this.next() * arr.length)]; };
+
+  // ───────────── 음악 자료 ─────────────
+  var A4 = 440;
+  function mtof(m) { return A4 * Math.pow(2, (m - 69) / 12); }
+
+  // 분위기 정의: 조성·화성 진행·템포 등. 코드는 반음 오프셋 배열(루트 기준).
+  var MOODS = {
+    rain: {
+      name: 'Rain & Piano',
+      root: 62,                         // D
+      scale: [0, 2, 4, 6, 7, 9, 11],    // 리디안 — 밝고 떠 있는 느낌
+      chords: [
+        [0, 4, 7, 11],    // Imaj7
+        [9, 12, 16, 19],  // vi
+        [5, 9, 12, 16],   // IVmaj7
+        [2, 5, 9, 12],    // ii
+        [7, 11, 14, 18]   // Vsus/lyd
+      ],
+      chordLen: [14, 22],
+      padCut: [500, 1100],
+      padGain: 0.16,
+      pianoGap: [0.55, 1.6],
+      pianoGain: 0.5,
+      pianoRange: [60, 84],
+      ambience: 'rain'
+    },
+    night: {
+      name: 'Night Pad',
+      root: 57,                         // A
+      scale: [0, 2, 3, 5, 7, 8, 10],    // 자연 단조
+      chords: [
+        [0, 3, 7, 10],    // i7
+        [8, 12, 15, 19],  // VI
+        [5, 8, 12, 15],   // iv
+        [3, 7, 10, 14],   // III
+        [10, 14, 17, 21]  // VII
+      ],
+      chordLen: [18, 30],
+      padCut: [300, 700],
+      padGain: 0.2,
+      pianoGap: [3.5, 9],
+      pianoGain: 0.3,
+      pianoRange: [64, 86],
+      ambience: 'night'
+    }
+  };
+
+  // ───────────── 엔진 ─────────────
+  // 오디오 시계 기준으로 미리(lookahead) 예약하는 구조라 OfflineAudioContext 에서도 그대로 렌더된다.
+  function Engine(ctx, moodKey, seed) {
+    this.ctx = ctx;
+    this.mood = MOODS[moodKey];
+    this.moodKey = moodKey;
+    // 스트림마다 난수를 따로 둬서 예약 구간 길이와 상관없이 같은 시드 = 같은 곡
+    this.rng = new RNG(seed);               // 코드 진행
+    this.noteRng = new RNG(seed * 7 + 1);   // 피아노
+    this.ambRng = new RNG(seed * 13 + 2);   // 빗방울·귀뚜라미
+    this.until = 0;          // 여기까지 예약됨
+    this.nextChord = 0;
+    this.nextNote = 0;
+    this.chordIdx = 0;
+    this.chord = null;
+    this.lastMidi = null;
+    this.build();
+  }
+
+  Engine.prototype.build = function () {
+    var ctx = this.ctx, m = this.mood;
+    this.master = ctx.createGain(); this.master.gain.value = 0.0001;
+    this.comp = ctx.createDynamicsCompressor();
+    this.comp.threshold.value = -18; this.comp.knee.value = 12; this.comp.ratio.value = 3;
+    this.comp.attack.value = 0.02; this.comp.release.value = 0.4;
+    this.master.connect(this.comp); this.comp.connect(ctx.destination);
+    this.analyser = ctx.createAnalyser(); this.analyser.fftSize = 512; this.comp.connect(this.analyser);
+
+    // 리버브 (합성 임펄스, 5초)
+    this.reverb = ctx.createConvolver();
+    this.reverb.buffer = this.makeImpulse(5.0, 2.6);
+    this.revGain = ctx.createGain(); this.revGain.gain.value = 0.55;
+    this.reverb.connect(this.revGain); this.revGain.connect(this.master);
+    this.dry = ctx.createGain(); this.dry.gain.value = 1; this.dry.connect(this.master);
+
+    // 패드 버스: 저역 통과 + 느린 LFO
+    this.padBus = ctx.createGain(); this.padBus.gain.value = m.padGain;
+    this.padFilter = ctx.createBiquadFilter(); this.padFilter.type = 'lowpass';
+    this.padFilter.frequency.value = (m.padCut[0] + m.padCut[1]) / 2; this.padFilter.Q.value = 0.7;
+    this.padLfo = ctx.createOscillator(); this.padLfo.frequency.value = 0.045;
+    this.padLfoGain = ctx.createGain(); this.padLfoGain.gain.value = (m.padCut[1] - m.padCut[0]) / 2;
+    this.padLfo.connect(this.padLfoGain); this.padLfoGain.connect(this.padFilter.frequency);
+    this.padLfo.start();
+    this.padBus.connect(this.padFilter);
+    this.padFilter.connect(this.dry); this.padFilter.connect(this.reverb);
+
+    // 피아노 버스
+    this.pianoBus = ctx.createGain(); this.pianoBus.gain.value = m.pianoGain;
+    this.pianoBus.connect(this.dry); this.pianoBus.connect(this.reverb);
+
+    // 환경음
+    this.noiseBuf = this.makeNoise(4);
+    if (m.ambience === 'rain') this.buildRain(); else this.buildNight();
+  };
+
+  Engine.prototype.makeImpulse = function (sec, decay) {
+    var ctx = this.ctx, sr = ctx.sampleRate, n = Math.floor(sr * sec);
+    var buf = ctx.createBuffer(2, n, sr), r = new RNG(777);
+    for (var c = 0; c < 2; c++) {
+      var d = buf.getChannelData(c), lp = 0;
+      for (var i = 0; i < n; i++) {
+        var w = r.next() * 2 - 1;
+        lp += 0.25 * (w - lp);                       // 고역이 먼저 사라지는 자연스러운 꼬리
+        d[i] = lp * Math.pow(1 - i / n, decay) * 2.2;
+      }
+    }
+    return buf;
+  };
+
+  Engine.prototype.makeNoise = function (sec) {
+    var ctx = this.ctx, sr = ctx.sampleRate, n = Math.floor(sr * sec);
+    var buf = ctx.createBuffer(2, n, sr), r = new RNG(4242);
+    for (var c = 0; c < 2; c++) { var d = buf.getChannelData(c); for (var i = 0; i < n; i++) d[i] = r.next() * 2 - 1; }
+    return buf;
+  };
+
+  Engine.prototype.noiseSource = function () {
+    var s = this.ctx.createBufferSource(); s.buffer = this.noiseBuf; s.loop = true; return s;
+  };
+
+  // 비: 저역 노이즈 바닥 + 가는 빗방울 알갱이
+  Engine.prototype.buildRain = function () {
+    var ctx = this.ctx;
+    this.ambBus = ctx.createGain(); this.ambBus.gain.value = 0.5; this.ambBus.connect(this.dry);
+    var src = this.noiseSource();
+    var hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 180;
+    var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1400; lp.Q.value = 0.4;
+    var bed = ctx.createGain(); bed.gain.value = 0.11;
+    var lfo = ctx.createOscillator(); lfo.frequency.value = 0.07;
+    var lfoG = ctx.createGain(); lfoG.gain.value = 0.03;
+    lfo.connect(lfoG); lfoG.connect(bed.gain); lfo.start();
+    src.connect(hp); hp.connect(lp); lp.connect(bed); bed.connect(this.ambBus);
+    src.start();
+    this.rainHp = ctx.createBiquadFilter(); this.rainHp.type = 'highpass'; this.rainHp.frequency.value = 1500;
+    this.rainHp.connect(this.ambBus);
+    this.nextDrop = 0;
+  };
+
+  Engine.prototype.scheduleDrops = function (t1) {
+    var ctx = this.ctx;
+    while (this.nextDrop < t1) {
+      var t = this.nextDrop, r = this.ambRng;
+      var s = this.noiseSource();
+      var bp = ctx.createBiquadFilter(); bp.type = 'bandpass';
+      bp.frequency.value = r.range(1800, 6500); bp.Q.value = r.range(4, 12);
+      var g = ctx.createGain(); g.gain.setValueAtTime(0, t);
+      var a = r.range(0.04, 0.22);
+      g.gain.linearRampToValueAtTime(a, t + 0.003);
+      g.gain.exponentialRampToValueAtTime(0.0005, t + r.range(0.02, 0.07));
+      var pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      s.connect(bp); bp.connect(g);
+      if (pan) { pan.pan.value = r.range(-0.9, 0.9); g.connect(pan); pan.connect(this.rainHp); } else g.connect(this.rainHp);
+      s.start(t); s.stop(t + 0.1);
+      this.nextDrop += r.range(0.02, 0.16);
+    }
+  };
+
+  // 밤: 바람 + 귀뚜라미 + 낮은 드론
+  Engine.prototype.buildNight = function () {
+    var ctx = this.ctx, m = this.mood;
+    this.ambBus = ctx.createGain(); this.ambBus.gain.value = 0.5; this.ambBus.connect(this.dry);
+    var src = this.noiseSource();
+    var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 320; lp.Q.value = 0.8;
+    var wind = ctx.createGain(); wind.gain.value = 0.09;
+    var lfo = ctx.createOscillator(); lfo.frequency.value = 0.035;
+    var lfoG = ctx.createGain(); lfoG.gain.value = 0.06;
+    lfo.connect(lfoG); lfoG.connect(wind.gain);
+    var lfo2 = ctx.createOscillator(); lfo2.frequency.value = 0.021;
+    var lfo2G = ctx.createGain(); lfo2G.gain.value = 180;
+    lfo2.connect(lfo2G); lfo2G.connect(lp.frequency);
+    lfo.start(); lfo2.start();
+    src.connect(lp); lp.connect(wind); wind.connect(this.ambBus); wind.connect(this.reverb);
+    src.start();
+
+    // 드론: 루트 두 옥타브 아래 사인
+    var drone = ctx.createOscillator(); drone.type = 'sine'; drone.frequency.value = mtof(m.root - 24);
+    var dg = ctx.createGain(); dg.gain.value = 0.07;
+    drone.connect(dg); dg.connect(this.dry); drone.start();
+
+    // 귀뚜라미 2마리: 고음 사인에 빠른 진폭 변조 + 짧은 울음 패턴
+    this.crickets = [];
+    var r = this.ambRng;
+    for (var i = 0; i < 2; i++) {
+      var o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = r.range(3900, 4700);
+      var am = ctx.createOscillator(); am.type = 'sine'; am.frequency.value = r.range(28, 40);
+      var amG = ctx.createGain(); amG.gain.value = 0.5;
+      var amDc = ctx.createGain(); amDc.gain.value = 0.5;   // 0.5 + 0.5*sin → 0..1
+      var gate = ctx.createGain(); gate.gain.value = 0;
+      var vol = ctx.createGain(); vol.gain.value = 0.035;
+      var pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      am.connect(amG); amG.connect(gate.gain);
+      o.connect(gate); gate.connect(vol);
+      if (pan) { pan.pan.value = i === 0 ? -0.6 : 0.65; vol.connect(pan); pan.connect(this.ambBus); } else vol.connect(this.ambBus);
+      o.start(); am.start();
+      this.crickets.push({ gate: gate, next: r.range(0, 2), dc: amDc, rng: new RNG(this.ambRng.s + i * 31) });
+    }
+  };
+
+  Engine.prototype.scheduleCrickets = function (t1) {
+    for (var i = 0; i < this.crickets.length; i++) {
+      var c = this.crickets[i], r = c.rng;
+      while (c.next < t1) {
+        var t = c.next, chirps = Math.floor(r.range(2, 5)), len = r.range(0.12, 0.2), gap = r.range(0.08, 0.14);
+        for (var k = 0; k < chirps; k++) {
+          var s = t + k * (len + gap);
+          c.gate.gain.setValueAtTime(0, s);
+          c.gate.gain.linearRampToValueAtTime(1, s + 0.02);
+          c.gate.gain.setValueAtTime(1, s + len - 0.02);
+          c.gate.gain.linearRampToValueAtTime(0, s + len);
+        }
+        c.next = t + chirps * (len + gap) + r.range(0.5, 3.5);
+      }
+    }
+  };
+
+  // 패드 코드 한 개: 음마다 톱니파 2개(디튠) + 한 옥타브 아래 사인, 느린 어택/릴리스
+  Engine.prototype.playChord = function (t, chord, dur) {
+    var ctx = this.ctx, m = this.mood, r = this.rng;
+    for (var i = 0; i < chord.length; i++) {
+      var midi = m.root + chord[i] - (i === 0 ? 12 : 0);
+      var f = mtof(midi);
+      var g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t);
+      var atk = r.range(3.5, 6), rel = r.range(5, 8);
+      g.gain.exponentialRampToValueAtTime(0.25, t + atk);
+      g.gain.setValueAtTime(0.25, t + dur);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur + rel);
+      g.connect(this.padBus);
+      var oscs = [['sawtooth', -7, 0.35], ['sawtooth', 6, 0.35], ['sine', 0, 0.6]];
+      for (var k = 0; k < oscs.length; k++) {
+        var o = ctx.createOscillator(); o.type = oscs[k][0];
+        o.frequency.value = oscs[k][0] === 'sine' ? f / 2 : f;
+        o.detune.value = oscs[k][1] + r.range(-3, 3);
+        var og = ctx.createGain(); og.gain.value = oscs[k][2];
+        o.connect(og); og.connect(g);
+        o.start(t); o.stop(t + dur + rel + 0.1);
+      }
+    }
+  };
+
+  // 피아노 한 음: 배음 5개(약간 비조화) 지수 감쇠 + 저역 통과
+  Engine.prototype.playPiano = function (t, midi, vel) {
+    var ctx = this.ctx, f = mtof(midi);
+    var out = ctx.createGain(); out.gain.value = vel;
+    var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = Math.min(9000, f * 6 * (0.6 + vel)); lp.Q.value = 0.5;
+    var pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    out.connect(lp);
+    if (pan) { pan.pan.value = Math.max(-0.7, Math.min(0.7, (midi - 72) / 18)); lp.connect(pan); pan.connect(this.pianoBus); } else lp.connect(this.pianoBus);
+    var partials = [[1, 1, 3.2], [2.001, 0.5, 2.2], [3.004, 0.22, 1.4], [4.012, 0.1, 0.9], [5.03, 0.05, 0.6]];
+    for (var i = 0; i < partials.length; i++) {
+      var o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f * partials[i][0];
+      var g = ctx.createGain();
+      var a = partials[i][1] * 0.5, dec = partials[i][2] * (1 + (72 - midi) / 30);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.linearRampToValueAtTime(a, t + 0.004);
+      g.gain.exponentialRampToValueAtTime(a * 0.3, t + 0.25 * dec);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dec * 1.6);
+      o.connect(g); g.connect(out);
+      o.start(t); o.stop(t + dec * 1.6 + 0.05);
+    }
+    // 해머 타격 노이즈 한 톨
+    var s = this.noiseSource();
+    var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = f * 2; bp.Q.value = 2;
+    var ng = ctx.createGain(); ng.gain.setValueAtTime(0.06 * vel, t); ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.03);
+    s.connect(bp); bp.connect(ng); ng.connect(out); s.start(t); s.stop(t + 0.05);
+  };
+
+  // 코드 톤 + 음계 안에서 랜덤 워크로 다음 음을 고른다
+  Engine.prototype.pickNote = function () {
+    var m = this.mood, r = this.noteRng;
+    var chordTones = this.chord.map(function (c) { return (m.root + c) % 12; });
+    var lo = m.pianoRange[0], hi = m.pianoRange[1];
+    var cand = [];
+    for (var n = lo; n <= hi; n++) {
+      var pc = ((n - m.root) % 12 + 12) % 12;
+      if (m.scale.indexOf(pc) < 0) continue;
+      var w = chordTones.indexOf(n % 12) >= 0 ? 3 : 1;
+      if (this.lastMidi !== null) {
+        var d = Math.abs(n - this.lastMidi);
+        if (d === 0) w *= 0.3; else if (d <= 4) w *= 2.2; else if (d <= 7) w *= 1.2; else if (d > 12) w *= 0.2;
+      }
+      cand.push([n, w]);
+    }
+    var tot = 0; for (var i = 0; i < cand.length; i++) tot += cand[i][1];
+    var x = r.next() * tot;
+    for (i = 0; i < cand.length; i++) { x -= cand[i][1]; if (x <= 0) return cand[i][0]; }
+    return cand[cand.length - 1][0];
+  };
+
+  // 오디오 시계 t1 까지 예약
+  Engine.prototype.scheduleUntil = function (t1) {
+    var m = this.mood, r = this.rng;
+    while (this.nextChord < t1) {
+      var t = this.nextChord, dur = r.range(m.chordLen[0], m.chordLen[1]);
+      // 진행: 대체로 다음 코드로, 가끔 건너뜀. 같은 코드 연속은 피한다.
+      var idx = this.chordIdx;
+      if (this.chord !== null) {
+        idx = r.next() < 0.7 ? (idx + 1) % m.chords.length : Math.floor(r.next() * m.chords.length);
+        if (idx === this.chordIdx) idx = (idx + 1) % m.chords.length;
+      }
+      this.chordIdx = idx; this.chord = m.chords[idx];
+      this.playChord(t, this.chord, dur);
+      this.nextChord = t + dur;                  // 릴리스가 다음 코드와 겹치며 크로스페이드
+    }
+    var nr = this.noteRng;
+    while (this.nextNote < t1) {
+      var tn = this.nextNote;
+      if (this.chord) {
+        var midi = this.pickNote();
+        var vel = nr.range(0.25, 0.8);
+        this.playPiano(tn, midi, vel);
+        this.lastMidi = midi;
+        // 가끔 짧은 두 음 꾸밈 (피아노 분위기만)
+        if (m.ambience === 'rain' && nr.next() < 0.18) {
+          var m2 = this.pickNote();
+          this.playPiano(tn + nr.range(0.18, 0.32), m2, vel * 0.7);
+          this.lastMidi = m2;
+        }
+      }
+      var gap = nr.range(m.pianoGap[0], m.pianoGap[1]);
+      if (nr.next() < 0.12) gap *= 2.4;          // 가끔 쉼
+      this.nextNote = tn + gap;
+    }
+    if (m.ambience === 'rain') this.scheduleDrops(t1); else this.scheduleCrickets(t1);
+    this.until = t1;
+  };
+
+  Engine.prototype.start = function (t) {
+    this.nextChord = t + 0.05; this.nextNote = t + 1.5;
+    if (this.nextDrop !== undefined) this.nextDrop = t;
+    if (this.crickets) for (var i = 0; i < this.crickets.length; i++) this.crickets[i].next += t;
+    this.master.gain.setValueAtTime(0.0001, t);
+    this.master.gain.exponentialRampToValueAtTime(1, t + 2.5);
+  };
+
+  Engine.prototype.stop = function (t, fade) {
+    this.master.gain.cancelScheduledValues(t);
+    this.master.gain.setValueAtTime(Math.max(this.master.gain.value, 0.0001), t);
+    this.master.gain.exponentialRampToValueAtTime(0.0001, t + fade);
+    var self = this;
+    setTimeout(function () { try { self.master.disconnect(); self.comp.disconnect(); } catch (e) {} }, (fade + 0.2) * 1000);
+  };
+
+  // ───────────── UI ─────────────
+  var ctx = null, engine = null, playing = false, moodKey = 'rain';
+  var seed = (function () {
+    var m = /seed=(\d+)/.exec(location.hash || location.search);
+    if (m) return parseInt(m[1], 10) >>> 0 || 1;
+    return 1000 + Math.floor(Math.random() * 9000);
+  })();
+  var startedAt = 0, tickTimer = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var elPlay = $('play'), elElapsed = $('elapsed'), elSeed = $('seedLine'), elMood = $('moodName');
+
+  function fmt(s) { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  function renderInfo() {
+    elMood.textContent = MOODS[moodKey].name;
+    elSeed.textContent = 'Seed #' + seed + ' · every seed is a different piece';
+    location.replace('#seed=' + seed);
+  }
+
+  function ensureCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'playback' });
+    if (ctx.state !== 'running') ctx.resume();
+  }
+
+  function startEngine() {
+    ensureCtx();
+    var t = ctx.currentTime + 0.05;
+    engine = new Engine(ctx, moodKey, seed);
+    engine.start(t);
+    engine.scheduleUntil(t + 4);
+    clearInterval(tickTimer);
+    tickTimer = setInterval(function () {
+      if (!engine || !ctx) return;
+      if (ctx.currentTime + 3 > engine.until) engine.scheduleUntil(ctx.currentTime + 6);
+    }, 500);
+  }
+
+  function stopEngine(fade) {
+    clearInterval(tickTimer); tickTimer = null;
+    if (engine && ctx) engine.stop(ctx.currentTime, fade);
+    engine = null;
+  }
+
+  function setPlaying(on) {
+    playing = on;
+    elPlay.textContent = on ? 'Pause' : 'Play';
+    elPlay.className = on ? 'playing' : '';
+    if (on) { startedAt = performance.now(); startEngine(); }
+    else { stopEngine(1.2); }
+  }
+
+  elPlay.addEventListener('click', function () { setPlaying(!playing); });
+
+  $('moods').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var k = b.getAttribute('data-mood'); if (k === moodKey) return;
+    moodKey = k;
+    var bs = this.querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].className = bs[i] === b ? 'on' : '';
+    renderInfo();
+    if (playing) { stopEngine(2.5); startedAt = performance.now(); startEngine(); }
+  });
+
+  $('shuffle').addEventListener('click', function () {
+    seed = 1000 + Math.floor(Math.random() * 9000);
+    renderInfo();
+    if (playing) { stopEngine(2.5); startedAt = performance.now(); startEngine(); }
+  });
+
+  // ───────────── 그림: 분위기마다 코드로 그린 느린 장면 ─────────────
+  var cv = $('sky'), g2 = cv.getContext('2d'), W = 0, H = 0, DPR = 1;
+  function resize() {
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR;
+    g2.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener('resize', resize); resize();
+  var vr = new RNG(99), drops = [], stars = [];
+  for (var i = 0; i < 70; i++) drops.push({ x: vr.next(), y: vr.next(), v: vr.range(0.35, 0.9), l: vr.range(10, 26) });
+  for (i = 0; i < 90; i++) stars.push({ x: vr.next(), y: vr.next() * 0.7, s: vr.range(0.4, 1.4), p: vr.next() * 6.28, f: vr.range(0.2, 0.9) });
+  var level = 0, fdata = null;
+
+  function draw(now) {
+    var t = now / 1000;
+    if (engine && engine.analyser) {
+      if (!fdata) fdata = new Uint8Array(engine.analyser.frequencyBinCount);
+      engine.analyser.getByteTimeDomainData(fdata);
+      var sum = 0; for (var i = 0; i < fdata.length; i++) { var d = (fdata[i] - 128) / 128; sum += d * d; }
+      level += (Math.sqrt(sum / fdata.length) - level) * 0.08;
+    } else level *= 0.95;
+
+    g2.clearRect(0, 0, W, H);
+    var cx = W / 2, cy = H * 0.42;
+    if (moodKey === 'rain') {
+      // 흐린 창: 느린 빗줄기
+      g2.strokeStyle = 'rgba(201,154,91,0.22)'; g2.lineWidth = 1;
+      for (i = 0; i < drops.length; i++) {
+        var p = drops[i];
+        var y = ((p.y + t * 0.05 * p.v) % 1) * (H + 40) - 20, x = p.x * W;
+        g2.beginPath(); g2.moveTo(x, y); g2.lineTo(x - 1.5, y + p.l); g2.stroke();
+      }
+    } else {
+      // 밤하늘: 깜빡이는 별
+      for (i = 0; i < stars.length; i++) {
+        var s = stars[i], a = 0.25 + 0.45 * (0.5 + 0.5 * Math.sin(t * s.f + s.p));
+        g2.fillStyle = 'rgba(232,230,225,' + a.toFixed(3) + ')';
+        g2.beginPath(); g2.arc(s.x * W, s.y * H, s.s, 0, 6.283); g2.fill();
+      }
+    }
+    // 시그니처: 소리 세기에 따라 숨 쉬는 고리 하나
+    var r = Math.min(W, H) * 0.22 * (1 + level * 1.6) + Math.sin(t * 0.5) * 4;
+    g2.strokeStyle = 'rgba(201,154,91,' + (playing ? 0.55 : 0.25) + ')'; g2.lineWidth = 1.5;
+    g2.beginPath(); g2.arc(cx, cy, r, 0, 6.283); g2.stroke();
+    g2.strokeStyle = 'rgba(201,154,91,0.12)';
+    g2.beginPath(); g2.arc(cx, cy, r * 1.35 + Math.sin(t * 0.3) * 6, 0, 6.283); g2.stroke();
+
+    if (playing) elElapsed.textContent = fmt((now - startedAt) / 1000);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+  renderInfo();
+
+  // 인앱 브라우저 시트 닫힘 방지 (CLAUDE.md)
+  var SE = document.scrollingElement || document.documentElement, PIN = 120, pinT = null;
+  function pinScroll() { var max = SE.scrollHeight - SE.clientHeight; if (max <= 0) return; SE.scrollTop = Math.min(PIN, Math.max(1, max - 1)); }
+  document.addEventListener('touchstart', pinScroll, { passive: true });
+  window.addEventListener('scroll', function () { clearTimeout(pinT); pinT = setTimeout(pinScroll, 250); }, { passive: true });
+  pinScroll();
+
+  // 헤드리스 검증용 훅: OfflineAudioContext 로 N초 렌더해 통계를 돌려준다
+  window.__soaking = {
+    MOODS: MOODS, Engine: Engine,
+    get playing() { return playing; }, get mood() { return moodKey; }, get seed() { return seed; },
+    render: function (mood, sd, sec) {
+      var sr = 44100, oc = new OfflineAudioContext(2, sr * sec, sr);
+      var e = new Engine(oc, mood, sd);
+      e.start(0.05); e.scheduleUntil(sec + 1);
+      return oc.startRendering().then(function (buf) {
+        var L = buf.getChannelData(0), Rr = buf.getChannelData(1), peak = 0, blocks = [], bs = sr;
+        for (var b = 0; b < sec; b++) {
+          var sum = 0; for (var i = b * bs; i < (b + 1) * bs; i++) { sum += L[i] * L[i]; var a = Math.abs(L[i]); if (a > peak) peak = a; }
+          blocks.push(Math.sqrt(sum / bs));
+        }
+        var diff = 0; for (i = 0; i < sr * 2; i++) diff += Math.abs(L[i + sr * 5] - Rr[i + sr * 5]);
+        return { peak: peak, rmsPerSec: blocks, stereoDiff: diff / (sr * 2), samples: Array.prototype.slice.call(L, sr * 5, sr * 5 + 8) };
+      });
+    }
+  };
+})();
+</script>
+</body>
+</html>
