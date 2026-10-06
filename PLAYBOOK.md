@@ -66,6 +66,8 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-06 | 성경 통독 | 하루 분량을 장 수로 나누면 시편 117편(2절)·119편(176절)이 같은 무게라 들쭉날쭉 — 경쟁 앱 리뷰 불만 1순위 중 하나 | 분량은 **절 수 누적**으로 나누고(장은 안 쪼갬) 매일 1장 이상 보장, 15가지 계획 전부 테스트. 장·절 수는 PyPI `pythonbible`(MIT) 휠에서 (`tools/bible/make_books.py`) |
+| 2026-10-06 | 성경 통독 | DESIGN.md 첫 적용 — `CupertinoListTile` 오른쪽 값(`additionalInfo`)이 큰 글씨에서 제목을 잘라 먹음, 두 책 걸친 큰 제목이 "2 / Samuel" 로 끊김(스크린샷에서만 보임) | 긴 값은 `subtitle` 로, 큰 제목은 조각마다 줄바꿈. 테스트 스크린샷의 아이콘 네모는 CupertinoIcons 글꼴을 `FontLoader` 로 |
 | 2026-10-06 | 앰비언트 | 코드(캔버스 도형)로 그린 영상 그림이 "최악" — 다듬어도 클립아트 수준 | 영상·배경은 **실사 사진 + GPU 셰이더 효과**. 헤드리스 크롬 WebGL2 는 `--use-angle=swiftshader --enable-unsafe-swiftshader --allow-file-access-from-files` 로 된다. 사진은 Actions 로 Commons PD/CC0 받기(작업 환경은 사진 사이트 차단) |
 | 2026-10-06 | 연비 | 앱 레코드를 만들자마자 돌린 빌드 29 가 **서명 수정(6eb31aa) 이전 커밋**이라, 그대로 냈다면 다른 앱처럼 ITMS-90035 반려될 뻔 | 제출할 빌드는 `git merge-base --is-ancestor 6eb31aa <빌드의 head_sha>` 로 확인. 아니면 새로 Release iOS |
 | 2026-10-06 | 연비 | 스토어 스크린샷을 웹 미리보기로 찍으니 가짜 광고 칸·"web preview"·"this browser" 문구·탭 말풍선(마우스 hover)이 찍힘 | 웹 전용 `?shots=1`(광고 숨김·아이폰 문구) + 예시 기록 `?demo=1`, 탭은 Playwright `.tap()`(click 은 tooltip). `fuellog_app/store/screenshots/capture.js` |
