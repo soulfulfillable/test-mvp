@@ -9,13 +9,15 @@
 ## 다음 할 일 / 사용자에게 받을 것
 - [사용자] https://soulfulfillable.github.io/test-mvp/ambient-samples.html 새 영상 3편(사진+효과) 좋다/별로.
 - [사용자, 선택] 더 좋은 사진: 직접 찍은 폰 사진(비 오는 창·카페·불) 또는 Pexels API 키(무료 가입) → Actions 로 받기. 지금 Commons 검색은 엉뚱한 결과가 많다(벽난로 받침쇠 유물 등).
-- [사용자] https://soulfulfillable.github.io/test-mvp/ambient-channel.html 따라 채널 설명·배너 바꾸고 첫 영상 업로드 → 영상 주소 알려 주기.
+- [사용자] https://soulfulfillable.github.io/test-mvp/youtube-setup.html 순서대로 API 연결(Secrets 3개) → "넣었어".
+- [세션] 그 뒤 Actions `YouTube Peblit`: whoami → setup-channel(설명·배너·예전 영상 비공개) → upload(videos-rain-1042-90m.json). blogspot 링크는 API 로 못 지움 → 사용자에게 한 줄 부탁.
 - [세션] ② 좋다고 한 분위기로 90분 렌더. 예상 렌더 시간: 비 약 70분, 모닥불 약 30분, 카페 약 2시간(피아노 음이 많아서) → Actions 에서 돌리는 걸 검토.
 - [세션] 90분 영상에 30초 반복 그림만 있으면 '반복 콘텐츠'로 보일 수 있음 → 시간에 따라 빛·날씨가 천천히 바뀌게(기획서 대비책).
 
 ## 사용자 피드백 기록 (최신이 위)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | "너가직접해주면 안되냐 … 이거 그냥다" → (A/B) "A. API 연결 (추천)" | 로그인 대행 불가 → YouTube Data API 연결로. `tools/ambient/youtube/yt.py`(표준 라이브러리, --dry 검증), 워크플로 `YouTube Peblit`(whoami/setup-channel/upload), 안내 `docs/youtube-setup.html` |
 | 10-06 | "Peblit여기 어차피 올린거 없는데, 스토어에 내용이나 뭐 그런것만 좀 바꿔내면 되지 않을까 어차피 저것도그냥 임시로해둔것들이거든" | Peblit 을 앰비언트 채널로 전환(이름·로고·핸들 유지). `docs/ambient-channel.html`: 채널 설명·배너·첫 영상 제목/설명/태그/썸네일 복사 페이지. 이미지 도구 `tools/ambient/branding.js` |
 | 10-06 | "카페는괜찮았어 주소 여기 이미지에" (채널 화면 캡처) | 카페 유지. 채널 = **Peblit (@peblit)**, Google 계정 soulfulfillable(AdMob 과 같은 계정). 이름·핸들에 실명·회사 없음 확인. 기존 채널은 "짧은 발견·이야기" 쇼츠 채널(쇼츠 1편) → 앰비언트 90분을 같은 채널에 둘지 A/B 질문 |
 | 10-06 | "한국어로해줘" | 앞 두 답변이 영어로 나감 → 한국어로 다시 정리. 항상 한국어 |
@@ -57,6 +59,8 @@
 - Actions 러너에서 헤드리스 크롬 WebGL: `npm i --no-save playwright-core@<버전>` + `npx playwright-core install --with-deps chromium`, 실행 인자 `--use-angle=swiftshader --enable-unsafe-swiftshader`. 3분 시험으로 환경부터 확인한 뒤 긴 실행.
 
 - 크롬 `setContent` 로 이미지를 만들 때 `style="..."` 안에 `"Helvetica Neue"` 처럼 큰따옴표를 넣으면 속성이 깨져 스타일이 통째로 빠진다(검은 명조체) → 글꼴 이름은 작은따옴표.
+
+- **YouTube API 함정**: ① 심사 안 받은 API 프로젝트로 올린 영상은 private 고정(공개는 Studio 에서 사람이) ② 동의 화면을 '테스트'로 두면 refresh token 7일 만료 → 게시(Publish app) ③ 맞춤 썸네일은 계정 전화 인증 필요 ④ 채널 링크는 API 로 못 바꿈. refresh token 은 OAuth Playground(자기 클라이언트, 리디렉션 URI 등록)로 받는다.
 
 ## 다른 세션·기획 파트너에게 묻고 싶은 것
 - 신앙 앱 쪽(`plans/soaking-music-feature.md`)의 Still/Hope/Lament/Night 분위기는 지금 MOODS 표에 조성·코드·템포만 추가하면 된다. 어느 앱에 붙일지 정해지면 알려 달라.

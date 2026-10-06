@@ -1,0 +1,57 @@
+name: YouTube Peblit
+
+# Peblit 채널 자동 관리 (tools/ambient/youtube/yt.py). 필요한 Secrets: YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN
+# 설정 안내: https://soulfulfillable.github.io/test-mvp/youtube-setup.html
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "할 일"
+        type: choice
+        options: [whoami, setup-channel, upload]
+        default: whoami
+      video:
+        description: "upload 일 때 영상 정보 파일 (tools/ambient/youtube/ 아래)"
+        default: "videos-rain-1042-90m.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-peblit
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+      YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+      YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+      GH_TOKEN: ${{ github.token }}
+    defaults:
+      run:
+        working-directory: tools/ambient/youtube
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check secrets
+        run: |
+          for k in YT_CLIENT_ID YT_CLIENT_SECRET YT_REFRESH_TOKEN; do
+            [ -n "${!k}" ] || { echo "::error::Secret $k 이 비어 있음 → youtube-setup.html 순서대로 넣기"; exit 1; }
+          done
+      - name: Who am I
+        run: python3 -u yt.py whoami
+      - name: Set up channel (description, banner, hide old videos)
+        if: inputs.action == 'setup-channel'
+        run: |
+          python3 -u yt.py channel channel.json
+          python3 -u yt.py hide-others
+      - name: Upload video
+        if: inputs.action == 'upload'
+        run: |
+          REL=$(python3 -c "import json;print(json.load(open('${{ inputs.video }}'))['release'])")
+          gh release download "$REL" --repo "$GITHUB_REPOSITORY" --pattern "*.mp4" --dir /tmp/v
+          python3 -u yt.py upload "${{ inputs.video }}" /tmp/v/*.mp4
+          echo "영상: https://youtu.be/$(cat video-id.txt)" >> "$GITHUB_STEP_SUMMARY"
