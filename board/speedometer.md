@@ -14,6 +14,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | (decibel 세션에 보냄) ASC 캡처 4장: Glance Speed 1.0(32) **"Guideline 2.1 - Information Needed - New App Submission"**(Apple 10-05 11:15 PM), Unresolved Issues | decibel 세션이 안내: `store/review-reply.md` 순서대로 30초 녹화(걸으면서) → 메시지 **Reply** 에 영어 답장+녹화 → 1.0 App Review Information Attachment 에도 녹화 → **Resubmit to App Review**. 결과는 이 세션이 이어서 확인 |
 | 10-06 | (빌드 32 재업로드 후) | 빌드 32 VALID·TestFlight 반영(이미 초대 수락 → 앱에 바로 뜸), `App Store 등록 정보 채우기`(32): 빌드 연결·심사 메모 7항목 ✓ (연락처가 채워져 이제 수정 통과) |
 | 10-06 | (ASC 캡처) "submit 한거같은데 아직 invalid binary 있네 그냥 두면되나" | 그냥 두면 안 됨. 원인: 빌드 26 은 예전 Release iOS(업로드 뒤 배포 인증서 삭제)로 만든 빌드 → ITMS-90035 (대출·물때와 같음, `_shared.md`). 고쳐진 워크플로로 **빌드 32** 업로드(run 37389505875) → 1.0 에 빌드 32 연결 → 사용자 재제출 |
 | 10-06 | "다햇어" (App Privacy 끝) | 심사 메모 7항목으로 갱신 시도 → 409: 연락처 이름·성·이메일·전화가 아직 비어 있음 → 1.0 페이지 App Review Information 입력·Save 를 다시 안내 |
