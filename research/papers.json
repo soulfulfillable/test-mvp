@@ -4016,5 +4016,29 @@
       "TCM clinical decision support syndrome differentiation"
     ],
     "first_seen": "2026-10-02"
+  },
+  {
+    "id": "doi:10.1016/j.onehlt.2026.101573",
+    "title": "Combating antimicrobial resistance through multimodal data via artificial intelligence.",
+    "authors": [
+      "Xia Q",
+      "Li J",
+      "Wu W",
+      "Wang J",
+      "Zhou Z",
+      "Wu M",
+      "Qiu M",
+      "Xu L",
+      "Ren J",
+      "Wu X."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.onehlt.2026.101573",
+    "abstract": "Antimicrobial resistance (AMR) poses a critical global health challenge, leading to substantial mortality and economic losses without science-based interventions. Conventional approaches to combating AMR have important limitations in addressing this escalating threat. Recent advances in AI, including deep learning, large language models, and protein language models, provide new opportunities to integrate multimodal data for AMR research. However, evidence remains uneven, with many approaches limited to computational benchmarking rather than real-world validation. Here, we critically review AI applications in AMR, focusing on rapid diagnosis, therapeutic discovery, and clinical decision support. AI-based diagnostic models can identify resistant pathogens and predict resistance profiles, but most lack prospective clinical evaluation. AI-assisted drug discovery and alternative therapies have generated promising candidates, although most remain at computational, in vitro, or early preclinical stages. Large language models may support decision-making, but their clinical use remains preliminary. Successful translation of AI into clinical and One Health practice will require representative datasets, independent validation, prospective evaluation, and robust governance.",
+    "matched_queries": [
+      "active medical inquiry reinforcement learning diagnosis"
+    ],
+    "first_seen": "2026-10-06"
   }
 ]
