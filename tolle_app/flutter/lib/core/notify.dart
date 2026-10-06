@@ -63,7 +63,10 @@ class LocalNotifier extends Notifier {
   Future<bool> requestPermission() async {
     if (!_ready) return false;
     try {
-      final ios = _p.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>();
+      final ios = _p
+          .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin
+          >();
       return await ios?.requestPermissions(alert: true, sound: true) ?? false;
     } catch (e) {
       debugPrint('notification permission failed: $e');
@@ -83,7 +86,9 @@ class LocalNotifier extends Notifier {
           body: n.body,
           // 그 순간(절대 시각)에 울린다 — 시간대 데이터 없이 UTC 로 넘긴다
           scheduledDate: tz.TZDateTime.from(n.when, tz.UTC),
-          notificationDetails: const NotificationDetails(iOS: DarwinNotificationDetails()),
+          notificationDetails: const NotificationDetails(
+            iOS: DarwinNotificationDetails(),
+          ),
           androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
         );
       }

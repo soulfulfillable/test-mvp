@@ -69,7 +69,13 @@ class _FakeBanner extends StatelessWidget {
         height: 50,
         alignment: Alignment.center,
         color: dyn(context, CupertinoColors.secondarySystemFill),
-        child: Text('Ad', style: TextStyle(fontSize: kSmall, color: dyn(context, CupertinoColors.secondaryLabel))),
+        child: Text(
+          'Ad',
+          style: TextStyle(
+            fontSize: kSmall,
+            color: dyn(context, CupertinoColors.secondaryLabel),
+          ),
+        ),
       ),
     ),
   );
@@ -111,7 +117,9 @@ class _AdBannerState extends State<_AdBanner> {
     key: const Key('banner'),
     height: bannerHeight,
     child: _loaded && _ad != null
-        ? Center(child: SizedBox(width: 320, height: 50, child: AdWidget(ad: _ad!)))
+        ? Center(
+            child: SizedBox(width: 320, height: 50, child: AdWidget(ad: _ad!)),
+          )
         : null,
   );
 }

@@ -14,7 +14,12 @@ class PlanScreen extends StatelessWidget {
   const PlanScreen({super.key});
 
   /// 진행이 있으면 새 계획 전에 묻는다 (지도가 새로 시작되므로).
-  static Future<void> _startPlan(BuildContext context, Scope s, Order o, int len) async {
+  static Future<void> _startPlan(
+    BuildContext context,
+    Scope s,
+    Order o,
+    int len,
+  ) async {
     final st = AppStore.i;
     if (st.done > 0) {
       final ok = await showCupertinoDialog<bool>(
@@ -25,7 +30,11 @@ class PlanScreen extends StatelessWidget {
             'Your map starts fresh. The ${st.done} ${st.done == 1 ? 'day' : 'days'} you checked off in this plan will be cleared.',
           ),
           actions: [
-            CupertinoDialogAction(isDefaultAction: true, onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancel')),
+            CupertinoDialogAction(
+              isDefaultAction: true,
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Cancel'),
+            ),
             CupertinoDialogAction(
               key: const Key('confirm-new-plan'),
               isDestructiveAction: true,
@@ -40,7 +49,12 @@ class PlanScreen extends StatelessWidget {
     st.startPlan(s, o, len);
   }
 
-  static Future<DateTime?> _pick(BuildContext context, CupertinoDatePickerMode mode, DateTime initial, String title) {
+  static Future<DateTime?> _pick(
+    BuildContext context,
+    CupertinoDatePickerMode mode,
+    DateTime initial,
+    String title,
+  ) {
     var value = initial;
     return showCupertinoModalPopup<DateTime>(
       context: context,
@@ -53,12 +67,24 @@ class PlanScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CupertinoButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-                  Expanded(child: Text(title, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.w600))),
+                  CupertinoButton(
+                    onPressed: () => Navigator.pop(ctx),
+                    child: const Text('Cancel'),
+                  ),
+                  Expanded(
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
                   CupertinoButton(
                     key: const Key('picker-done'),
                     onPressed: () => Navigator.pop(ctx, value),
-                    child: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
+                    child: const Text(
+                      'Done',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ],
               ),
@@ -82,12 +108,24 @@ class PlanScreen extends StatelessWidget {
     builder: (context, _) {
       final s = AppStore.i;
       final secondary = dyn(context, CupertinoColors.secondaryLabel);
-      Widget check(bool on) =>
-          on ? Icon(CupertinoIcons.checkmark_alt, color: dyn(context, accent), size: 22) : const SizedBox(width: 22);
-      Widget value(String t, {Key? key}) => Text(t, key: key, style: TextStyle(color: secondary));
+      Widget check(bool on) => on
+          ? Icon(
+              CupertinoIcons.checkmark_alt,
+              color: dyn(context, accent),
+              size: 22,
+            )
+          : const SizedBox(width: 22);
+      Widget value(String t, {Key? key}) => Text(
+        t,
+        key: key,
+        style: TextStyle(color: secondary),
+      );
 
       final seqLen = s.schedule.seq.length;
-      final totalVerses = s.schedule.seq.fold<int>(0, (a, id) => a + versesOf(id));
+      final totalVerses = s.schedule.seq.fold<int>(
+        0,
+        (a, id) => a + versesOf(id),
+      );
 
       return CupertinoPageScaffold(
         backgroundColor: CupertinoColors.systemGroupedBackground,
@@ -117,7 +155,14 @@ class PlanScreen extends StatelessWidget {
                                 Scope.psalmsProverbs => '181 chapters',
                               }),
                               trailing: check(s.scope == sc),
-                              onTap: s.scope == sc ? null : () => _startPlan(context, sc, s.order, sc.lengths.first),
+                              onTap: s.scope == sc
+                                  ? null
+                                  : () => _startPlan(
+                                      context,
+                                      sc,
+                                      s.order,
+                                      sc.lengths.first,
+                                    ),
                             ),
                         ],
                       ),
@@ -132,7 +177,14 @@ class PlanScreen extends StatelessWidget {
                                 'About ${(seqLen / len).toStringAsFixed(seqLen / len < 10 ? 1 : 0).replaceAll('.0', '')} chapters, ${(totalVerses * 7.5 / 60 / len).round()} min a day',
                               ),
                               trailing: check(s.length == len),
-                              onTap: s.length == len ? null : () => _startPlan(context, s.scope, s.order, len),
+                              onTap: s.length == len
+                                  ? null
+                                  : () => _startPlan(
+                                      context,
+                                      s.scope,
+                                      s.order,
+                                      len,
+                                    ),
                             ),
                         ],
                       ),
@@ -154,12 +206,19 @@ class PlanScreen extends StatelessWidget {
                                   children: {
                                     for (final o in Order.values)
                                       o: Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 6),
-                                        child: Text(o.title, key: Key('order-${o.name}')),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 6,
+                                        ),
+                                        child: Text(
+                                          o.title,
+                                          key: Key('order-${o.name}'),
+                                        ),
                                       ),
                                   },
                                   onValueChanged: (o) {
-                                    if (o != null && o != s.order) _startPlan(context, s.scope, o, s.length);
+                                    if (o != null && o != s.order) {
+                                      _startPlan(context, s.scope, o, s.length);
+                                    }
                                   },
                                 ),
                               ),
@@ -169,13 +228,18 @@ class PlanScreen extends StatelessWidget {
                       CupertinoListSection.insetGrouped(
                         header: const SectionHeader('Schedule'),
                         footer: s.behind >= 2 && !s.finished
-                            ? const SectionFooter('Behind the calendar? Spread what’s left or continue from today.')
+                            ? const SectionFooter(
+                                'Behind the calendar? Spread what’s left or continue from today.',
+                              )
                             : null,
                         children: [
                           CupertinoListTile(
                             key: const Key('start-date'),
                             title: const Text('Start Date'),
-                            additionalInfo: value(fmtDate(dateOf(s.schedule.dates.first)), key: const Key('start-value')),
+                            additionalInfo: value(
+                              fmtDate(dateOf(s.schedule.dates.first)),
+                              key: const Key('start-value'),
+                            ),
                             trailing: const CupertinoListTileChevron(),
                             onTap: () async {
                               final d = await _pick(
@@ -189,11 +253,17 @@ class PlanScreen extends StatelessWidget {
                           ),
                           CupertinoListTile(
                             title: const Text('Finish'),
-                            additionalInfo: value(fmtDate(dateOf(s.schedule.endDay)), key: const Key('end-value')),
+                            additionalInfo: value(
+                              fmtDate(dateOf(s.schedule.endDay)),
+                              key: const Key('end-value'),
+                            ),
                           ),
                           CupertinoListTile(
                             title: const Text('Days Read'),
-                            additionalInfo: value('${s.done} of ${s.schedule.length}', key: const Key('days-read')),
+                            additionalInfo: value(
+                              '${s.done} of ${s.schedule.length}',
+                              key: const Key('days-read'),
+                            ),
                           ),
                           if (s.behind >= 2 && !s.finished) ...[
                             CupertinoListTile(
@@ -201,13 +271,19 @@ class PlanScreen extends StatelessWidget {
                               title: const Text('Spread the Rest'),
                               subtitle: s.previewSpread() == null
                                   ? null
-                                  : _Sub('Still finish ${fmtDate(dateOf(s.previewSpread()!.endDay))}'),
-                              onTap: s.previewSpread() == null ? null : s.spread,
+                                  : _Sub(
+                                      'Still finish ${fmtDate(dateOf(s.previewSpread()!.endDay))}',
+                                    ),
+                              onTap: s.previewSpread() == null
+                                  ? null
+                                  : s.spread,
                             ),
                             CupertinoListTile(
                               key: const Key('plan-shift'),
                               title: const Text('Continue From Today'),
-                              subtitle: _Sub('Finish ${fmtDate(dateOf(s.previewShift().endDay))}'),
+                              subtitle: _Sub(
+                                'Finish ${fmtDate(dateOf(s.previewShift().endDay))}',
+                              ),
                               onTap: s.shift,
                             ),
                           ],
@@ -228,7 +304,10 @@ class PlanScreen extends StatelessWidget {
                               value: s.reminderOn,
                               activeTrackColor: dyn(context, accent),
                               onChanged: (on) async {
-                                if (on && !await Notifier.i.requestPermission()) return;
+                                if (on &&
+                                    !await Notifier.i.requestPermission()) {
+                                  return;
+                                }
                                 s.setReminder(on: on);
                               },
                             ),
@@ -237,30 +316,45 @@ class PlanScreen extends StatelessWidget {
                             CupertinoListTile(
                               key: const Key('reminder-time'),
                               title: const Text('Time'),
-                              additionalInfo: value(fmtMinute(s.reminderMinute)),
+                              additionalInfo: value(
+                                fmtMinute(s.reminderMinute),
+                              ),
                               trailing: const CupertinoListTileChevron(),
                               onTap: () async {
                                 final now = DateTime.now();
                                 final t = await _pick(
                                   context,
                                   CupertinoDatePickerMode.time,
-                                  DateTime(now.year, now.month, now.day, s.reminderMinute ~/ 60, s.reminderMinute % 60),
+                                  DateTime(
+                                    now.year,
+                                    now.month,
+                                    now.day,
+                                    s.reminderMinute ~/ 60,
+                                    s.reminderMinute % 60,
+                                  ),
                                   'Reminder Time',
                                 );
-                                if (t != null) s.setReminder(minute: t.hour * 60 + t.minute);
+                                if (t != null) {
+                                  s.setReminder(minute: t.hour * 60 + t.minute);
+                                }
                               },
                             ),
                         ],
                       ),
                       CupertinoListSection.insetGrouped(
                         header: const SectionHeader('Your Data'),
-                        footer: const SectionFooter('No account. Your progress stays on this iPhone.'),
+                        footer: const SectionFooter(
+                          'No account. Your progress stays on this iPhone.',
+                        ),
                         children: [
                           CupertinoListTile(
                             key: const Key('export'),
                             title: const Text('Export Progress (CSV)'),
                             trailing: const CupertinoListTileChevron(),
-                            onTap: () => Outside.shareCsv('bible-reading-${isoDate(DateTime.now())}.csv', s.exportCsv()),
+                            onTap: () => Outside.shareCsv(
+                              'bible-reading-${isoDate(DateTime.now())}.csv',
+                              s.exportCsv(),
+                            ),
                           ),
                           CupertinoListTile(
                             key: const Key('privacy'),
@@ -290,6 +384,11 @@ class _Sub extends StatelessWidget {
   final String text;
 
   @override
-  Widget build(BuildContext context) =>
-      Text(text, style: TextStyle(fontSize: kSmall, color: dyn(context, CupertinoColors.secondaryLabel)));
+  Widget build(BuildContext context) => Text(
+    text,
+    style: TextStyle(
+      fontSize: kSmall,
+      color: dyn(context, CupertinoColors.secondaryLabel),
+    ),
+  );
 }

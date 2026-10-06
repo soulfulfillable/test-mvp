@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 const kAppName = 'Tolle';
 
 /// 개인정보처리방침 (GitHub Pages).
-const kPrivacyUrl = 'https://soulfulfillable.github.io/test-mvp/bible-privacy.html';
+const kPrivacyUrl =
+    'https://soulfulfillable.github.io/test-mvp/bible-privacy.html';
 
 /// DESIGN.md: 강조색은 하나. 따뜻한 포도주색(성찬) — Glance 앱들(청록·민트·바다·초록)과 겹치지 않고,
 /// 보라·남색 그라데이션이나 크림+테라코타 같은 'AI 기본값' 과도 다르다. 나머지는 iOS 시스템 색만.
@@ -19,7 +20,8 @@ const cellOff = CupertinoDynamicColor.withBrightness(
   darkColor: Color(0xFF2C2C2E),
 );
 
-Color dyn(BuildContext context, Color c) => CupertinoDynamicColor.resolve(c, context);
+Color dyn(BuildContext context, Color c) =>
+    CupertinoDynamicColor.resolve(c, context);
 
 CupertinoThemeData buildTheme() => const CupertinoThemeData(
   primaryColor: accent,
@@ -30,18 +32,42 @@ CupertinoThemeData buildTheme() => const CupertinoThemeData(
 /// 글자 크기는 화면마다 3단계까지 (DESIGN.md): 본문 17, 보조 13, 그리고 화면의 주인공 하나(34).
 const double kBody = 17, kSmall = 13, kHero = 34;
 
-TextStyle textOf(BuildContext context) => CupertinoTheme.of(context).textTheme.textStyle;
+TextStyle textOf(BuildContext context) =>
+    CupertinoTheme.of(context).textTheme.textStyle;
 
 const tabular = [FontFeature.tabularFigures()];
 
-const _months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const _days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const _months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+const _days = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
 
 /// "Tuesday, October 6"
-String fmtLongDate(DateTime t) => '${_days[t.weekday - 1]}, ${_months[t.month - 1]} ${t.day}';
+String fmtLongDate(DateTime t) =>
+    '${_days[t.weekday - 1]}, ${_months[t.month - 1]} ${t.day}';
 
 /// "Oct 6, 2027"
-String fmtDate(DateTime t) => '${_months[t.month - 1].substring(0, 3)} ${t.day}, ${t.year}';
+String fmtDate(DateTime t) =>
+    '${_months[t.month - 1].substring(0, 3)} ${t.day}, ${t.year}';
 
 /// "7:00 AM"
 String fmtMinute(int m) {
@@ -50,4 +76,5 @@ String fmtMinute(int m) {
 }
 
 /// 1189 → "1,189"
-String fmtInt(int n) => n.toString().replaceAllMapped(RegExp(r'\B(?=(\d{3})+(?!\d))'), (_) => ',');
+String fmtInt(int n) =>
+    n.toString().replaceAllMapped(RegExp(r'\B(?=(\d{3})+(?!\d))'), (_) => ',');

@@ -55,7 +55,8 @@ class _TodayScreenState extends State<TodayScreen> {
         title: const Text('Adjust Your Schedule'),
         message: Text(
           [
-            if (spread != null && s.behind > 0) 'Spread the rest: still finish ${fmtDate(dateOf(spread.endDay))}.',
+            if (spread != null && s.behind > 0)
+              'Spread the rest: still finish ${fmtDate(dateOf(spread.endDay))}.',
             'Continue from today: finish ${fmtDate(dateOf(shift.endDay))}.',
           ].join('\n'),
         ),
@@ -96,14 +97,23 @@ class _TodayScreenState extends State<TodayScreen> {
       final secondary = dyn(context, CupertinoColors.secondaryLabel);
       final small = base.copyWith(fontSize: kSmall, color: secondary);
       final body2 = base.copyWith(color: secondary);
-      final hero = base.copyWith(fontSize: kHero, fontWeight: FontWeight.w600, height: 1.12, letterSpacing: -0.4);
+      final hero = base.copyWith(
+        fontSize: kHero,
+        fontWeight: FontWeight.w600,
+        height: 1.12,
+        letterSpacing: -0.4,
+      );
 
       // 오늘 하루치를 읽었으면 '마친 날' 을, 아니면 다음에 읽을 날을 주인공으로
       final showDone = s.readToday || s.finished;
       final heroDay = showDone ? s.done - 1 : s.done;
-      final heroIds = heroDay >= 0 ? s.schedule.chaptersOn(heroDay) : const <int>[];
+      final heroIds = heroDay >= 0
+          ? s.schedule.chaptersOn(heroDay)
+          : const <int>[];
       final next = s.nextDay;
-      final nextIds = next == null ? const <int>[] : s.schedule.chaptersOn(next);
+      final nextIds = next == null
+          ? const <int>[]
+          : s.schedule.chaptersOn(next);
       final behind = s.behind;
 
       final String kicker;
@@ -126,7 +136,11 @@ class _TodayScreenState extends State<TodayScreen> {
             key: const Key('today-list'),
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
             children: [
-              Text(fmtLongDate(clock.now()).toUpperCase(), style: small, key: const Key('date')),
+              Text(
+                fmtLongDate(clock.now()).toUpperCase(),
+                style: small,
+                key: const Key('date'),
+              ),
               const SizedBox(height: 2),
               Text(
                 '${s.scope.title} · ${s.order == Order.chronological && s.scope.hasOrder ? 'Chronological · ' : ''}Day ${(showDone ? heroDay : s.done) + 1} of ${s.schedule.length}',
@@ -137,14 +151,21 @@ class _TodayScreenState extends State<TodayScreen> {
               Row(
                 children: [
                   if (showDone) ...[
-                    Icon(CupertinoIcons.checkmark_alt, size: 16, color: dyn(context, accent)),
+                    Icon(
+                      CupertinoIcons.checkmark_alt,
+                      size: 16,
+                      color: dyn(context, accent),
+                    ),
                     const SizedBox(width: 4),
                   ],
                   Expanded(
                     child: Text(
                       kicker,
                       key: const Key('kicker'),
-                      style: small.copyWith(color: showDone ? dyn(context, accent) : secondary, fontWeight: FontWeight.w600),
+                      style: small.copyWith(
+                        color: showDone ? dyn(context, accent) : secondary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ],
@@ -157,7 +178,11 @@ class _TodayScreenState extends State<TodayScreen> {
                   label: readingLabel(heroIds),
                   excludeSemantics: true,
                   // 책이 둘이면 줄을 나눠 '2 / Samuel' 처럼 이름 중간에서 끊기지 않게
-                  child: Text(readingParts(heroIds).join('\n'), key: const Key('reading'), style: hero),
+                  child: Text(
+                    readingParts(heroIds).join('\n'),
+                    key: const Key('reading'),
+                    style: hero,
+                  ),
                 ),
               const SizedBox(height: 8),
               if (heroIds.isNotEmpty)
@@ -172,7 +197,11 @@ class _TodayScreenState extends State<TodayScreen> {
                   style: body2,
                 ),
                 const SizedBox(height: 16),
-                PrimaryButton(key: const Key('new-plan'), label: 'Start a New Plan', onPressed: widget.onOpenPlan),
+                PrimaryButton(
+                  key: const Key('new-plan'),
+                  label: 'Start a New Plan',
+                  onPressed: widget.onOpenPlan,
+                ),
               ] else if (!showDone) ...[
                 Semantics(
                   button: true,
@@ -188,17 +217,35 @@ class _TodayScreenState extends State<TodayScreen> {
                 ),
                 if (s.done > 0) ...[
                   const SizedBox(height: 4),
-                  Center(child: TextAction(key: const Key('undo'), label: 'Undo Last', onTap: _undo)),
+                  Center(
+                    child: TextAction(
+                      key: const Key('undo'),
+                      label: 'Undo Last',
+                      onTap: _undo,
+                    ),
+                  ),
                 ],
               ] else ...[
                 // 오늘 분은 끝 — 다음 분량은 조용히, 미리 읽기는 원할 때만
-                Text('Next: ${readingLabel(nextIds)}', key: const Key('next'), style: base),
+                Text(
+                  'Next: ${readingLabel(nextIds)}',
+                  key: const Key('next'),
+                  style: base,
+                ),
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    TextAction(key: const Key('read-ahead'), label: 'Read Ahead', onTap: _markReadAhead),
+                    TextAction(
+                      key: const Key('read-ahead'),
+                      label: 'Read Ahead',
+                      onTap: _markReadAhead,
+                    ),
                     const Spacer(),
-                    TextAction(key: const Key('undo'), label: 'Undo', onTap: _undo),
+                    TextAction(
+                      key: const Key('undo'),
+                      label: 'Undo',
+                      onTap: _undo,
+                    ),
                   ],
                 ),
               ],
@@ -211,7 +258,11 @@ class _TodayScreenState extends State<TodayScreen> {
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: TextAction(key: const Key('adjust'), label: 'Adjust Schedule', onTap: _adjust),
+                  child: TextAction(
+                    key: const Key('adjust'),
+                    label: 'Adjust Schedule',
+                    onTap: _adjust,
+                  ),
                 ),
               ],
               const SizedBox(height: 40),
@@ -230,15 +281,25 @@ class _TodayScreenState extends State<TodayScreen> {
                       key: const Key('count'),
                     ),
                   ),
-                  Text('${(s.chaptersRead * 100 / s.chaptersTotal).floor()}%', style: small.copyWith(fontFeatures: tabular)),
+                  Text(
+                    '${(s.chaptersRead * 100 / s.chaptersTotal).floor()}%',
+                    style: small.copyWith(fontFeatures: tabular),
+                  ),
                 ],
               ),
               if (s.fresh) ...[
                 const SizedBox(height: 28),
-                Text('Starting with the Whole Bible in a year, from today.', style: small),
+                Text(
+                  'Starting with the Whole Bible in a year, from today.',
+                  style: small,
+                ),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: TextAction(key: const Key('change-plan'), label: 'Change Plan', onTap: widget.onOpenPlan),
+                  child: TextAction(
+                    key: const Key('change-plan'),
+                    label: 'Change Plan',
+                    onTap: widget.onOpenPlan,
+                  ),
                 ),
               ],
             ],

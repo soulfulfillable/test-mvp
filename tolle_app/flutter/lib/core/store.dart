@@ -43,6 +43,31 @@ class AppStore extends ChangeNotifier {
   /// 읽은 장 번호들.
   Iterable<int> get readIds => schedule.seq.take(chaptersRead);
 
+  /// 계획과 상관없이 직접 체크한 장 (Map → 책 → 장). 새 계획을 시작해도 지워지지 않는다.
+  Set<int> checked = {};
+
+  /// 지도에 채워지는 장 = 계획에서 읽은 장 ∪ 직접 체크한 장.
+  Set<int> get allRead => {...readIds, ...checked};
+
+  /// 계획에서 읽음으로 들어간 장인가 (책 화면에서 직접 해제할 수 없다 — 오늘 화면의 Undo 로).
+  bool readInPlan(int id) => readIds.contains(id);
+
+  void toggleChapter(int id) {
+    if (id < 0 || id >= totalChapters || readInPlan(id)) return;
+    checked.contains(id) ? checked.remove(id) : checked.add(id);
+    _changed();
+  }
+
+  void checkAll(Iterable<int> ids) {
+    checked.addAll(ids.where((id) => id >= 0 && id < totalChapters));
+    _changed();
+  }
+
+  void uncheckAll(Iterable<int> ids) {
+    checked.removeAll(ids);
+    _changed();
+  }
+
   /// 다음에 읽을 날(0부터). 다 읽었으면 null.
   int? get nextDay => finished ? null : done;
 
@@ -80,6 +105,14 @@ class AppStore extends ChangeNotifier {
 
   void _restore(Object? j) {
     if (j is! Map) throw const FormatException('state');
+    // 직접 체크한 장은 계획 부분이 깨져도 살린다
+    final c = j['checked'];
+    if (c is List) {
+      checked = {
+        for (final v in c)
+          if (v is int && v >= 0 && v < totalChapters) v,
+      };
+    }
     final s = Scope.values.byName(j['scope'] as String);
     final o = Order.values.byName(j['order'] as String);
     final len = j['length'] as int;
@@ -88,7 +121,9 @@ class AppStore extends ChangeNotifier {
     final doneOn0 = (j['doneOn'] as List).cast<int>();
     final seq = sequenceFor(s, o);
     // 형식 검사: 경계가 늘어나는 순서이고 장 수와 맞아야 한다
-    if (cuts.length != dates.length + 1 || cuts.first != 0 || cuts.last != seq.length) {
+    if (cuts.length != dates.length + 1 ||
+        cuts.first != 0 ||
+        cuts.last != seq.length) {
       throw const FormatException('cuts');
     }
     for (var k = 1; k < cuts.length; k++) {
@@ -115,6 +150,7 @@ class AppStore extends ChangeNotifier {
     'reminderOn': reminderOn,
     'reminderMinute': reminderMinute,
     'fresh': fresh,
+    'checked': (checked.toList()..sort()),
   };
 
   void _changed() {
@@ -212,17 +248,32 @@ class AppStore extends ChangeNotifier {
     // 오늘 이미 읽었으면 오늘 알림은 없다
     for (var k = readToday ? 1 : 0; k < 30 && day < schedule.length; k++) {
       final d = dateOf(today() + k);
-      final at = DateTime(d.year, d.month, d.day, reminderMinute ~/ 60, reminderMinute % 60);
+      final at = DateTime(
+        d.year,
+        d.month,
+        d.day,
+        reminderMinute ~/ 60,
+        reminderMinute % 60,
+      );
       if (!at.isAfter(now)) continue;
       final ids = schedule.chaptersOn(day);
-      out.add(PlannedNotice(k + 1, at, "Today's reading", '${readingLabel(ids)} · about ${minutesFor(ids)} min'));
+      out.add(
+        PlannedNotice(
+          k + 1,
+          at,
+          "Today's reading",
+          '${readingLabel(ids)} · about ${minutesFor(ids)} min',
+        ),
+      );
       day++;
     }
     return out;
   }
 
   void syncReminders() {
-    Notifier.i.sync(plannedReminders()).catchError((Object e) => debugPrint('$e'));
+    Notifier.i
+        .sync(plannedReminders())
+        .catchError((Object e) => debugPrint('$e'));
   }
 
   /// 백업용 CSV: 날마다 한 줄 (예정일, 분량, 읽은 날).
@@ -231,7 +282,9 @@ class AppStore extends ChangeNotifier {
     for (var i = 0; i < schedule.length; i++) {
       final ids = schedule.chaptersOn(i);
       final read = i < doneOn.length ? isoDate(dateOf(doneOn[i])) : '';
-      b.writeln('${i + 1},${isoDate(dateOf(schedule.dates[i]))},"${readingLabel(ids)}",${ids.length},$read');
+      b.writeln(
+        '${i + 1},${isoDate(dateOf(schedule.dates[i]))},"${readingLabel(ids)}",${ids.length},$read',
+      );
     }
     return b.toString();
   }

@@ -64,6 +64,16 @@ async function tapText(p, re) {
     ok('Map shows Genesis 3 of 50', /Genesis, 3 of 50 chapters read/.test(t));
     await p.screenshot({ path: path.join(out, 'w3-map.png') });
 
+    // 책을 눌러 장 직접 체크 (사용자 요청 10-06)
+    await tapBtn(p, /^Exodus, 0 of 40/);
+    await tapBtn(p, /^Exodus 3, not read/);
+    t = await text(p);
+    ok('book screen: tap a chapter checks it', /1 of 40 chapters read/.test(t) && /Exodus 3, read/.test(t));
+    await p.screenshot({ path: path.join(out, 'w3b-book.png') });
+    await tapBtn(p, /^Back$/);
+    t = await text(p);
+    ok('map counts the checked chapter', /4 of 1,189 chapters read/.test(t));
+
     await tapText(p, /^\s*Plan/);
     await p.screenshot({ path: path.join(out, 'w4-plan.png') });
     await tapText(p, /New Testament\s+260 chapters/);

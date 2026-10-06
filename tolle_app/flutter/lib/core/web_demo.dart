@@ -15,7 +15,11 @@ void applyWebDemo([Uri? uri]) {
   final n = int.tryParse(q['demo'] ?? '');
   if (n == null) return;
   final behind = int.tryParse(q['behind'] ?? '') ?? 0;
-  final scope = Scope.values.where((s) => s.name == q['scope']).firstOrNull ?? Scope.whole;
-  final order = q['order'] == 'chronological' ? Order.chronological : Order.canonical;
+  final scope =
+      Scope.values.where((s) => s.name == q['scope']).firstOrNull ??
+      Scope.whole;
+  final order = q['order'] == 'chronological'
+      ? Order.chronological
+      : Order.canonical;
   AppStore.i.showDemo(scope, order, n, behind);
 }

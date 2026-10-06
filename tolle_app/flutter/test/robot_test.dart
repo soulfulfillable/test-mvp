@@ -287,7 +287,8 @@ void main() {
         await press(t, find.byKey(const Key('mark-read')), 'Today: Mark as Read (day ${d + 1})');
       }
       await tab(t, 'Map');
-      expect(textOf(t, const Key('map-summary')), '10 of 1,189 chapters · 0%');
+      expect(textOf(t, const Key('map-summary')), '10 of 1,189 chapters read · 0%');
+      expect(textOf(t, const Key('map-hint')), 'Tap a book to check off chapters you’ve read.');
       expect(textOf(t, const Key('streak')), '3 days in a row');
       expect(find.text('OLD TESTAMENT'), findsOneWidget);
       expect(find.bySemanticsLabel('Genesis, 10 of 50 chapters read'), findsOneWidget);
@@ -409,6 +410,69 @@ void main() {
     });
   });
 
+  testWidgets('Map → book: check off chapters read outside the plan (user request 10-06)', (t) async {
+    await at(() async {
+      await boot(t);
+      await press(t, find.byKey(const Key('mark-read')), 'Today: Mark as Read'); // Genesis 1–3 in plan
+      await tab(t, 'Map');
+      await press(t, find.byKey(const Key('book-Gen')), 'Map: Genesis');
+      expect(textOf(t, const Key('book-count')), '3 of 50 chapters read');
+      await check(t, 'Book (Genesis)', shot: '12-book-genesis');
+
+      // 계획에서 읽은 장은 여기서 못 지운다 — 이유가 보인다
+      await press(t, find.byKey(const Key('ch-2')), 'Book: chapter 2 (read in plan)');
+      expect(textOf(t, const Key('book-note')), 'Genesis 2 is checked off in your plan. Undo it from Today.');
+      expect(textOf(t, const Key('book-count')), '3 of 50 chapters read');
+
+      // 직접 체크·해제 (두 상태만)
+      await press(t, find.byKey(const Key('ch-12')), 'Book: chapter 12');
+      await press(t, find.byKey(const Key('ch-13')), 'Book: chapter 13');
+      expect(textOf(t, const Key('book-count')), '5 of 50 chapters read');
+      await press(t, find.byKey(const Key('ch-13')), 'Book: chapter 13 again (uncheck)');
+      expect(textOf(t, const Key('book-count')), '4 of 50 chapters read');
+      expect(AppStore.i.checked, {12 - 1});
+      expect(AppStore.i.done, 1, reason: 'checking a chapter never changes the plan');
+
+      await press(t, find.byKey(const Key('back')), 'Book: Back');
+      expect(textOf(t, const Key('map-summary')), '4 of 1,189 chapters read · 0%');
+
+      // 시편 전체 체크 → 지우기(확인)
+      await press(t, find.byKey(const Key('book-Ps')), 'Map: Psalms');
+      await check(t, 'Book (Psalms, 150 chapters)', shot: '13-book-psalms');
+      await press(t, find.byKey(const Key('mark-all')), 'Book: Mark All Read');
+      expect(textOf(t, const Key('book-count')), '150 of 150 chapters read');
+      await press(t, find.byKey(const Key('clear')), 'Book: Clear');
+      await check(t, 'Clear dialog', shot: '14-book-clear');
+      await press(t, find.text('Cancel'), 'Clear dialog: Cancel');
+      expect(textOf(t, const Key('book-count')), '150 of 150 chapters read');
+      await press(t, find.byKey(const Key('clear')), 'Book: Clear (again)');
+      await press(t, find.byKey(const Key('confirm-clear')), 'Clear dialog: Clear');
+      expect(textOf(t, const Key('book-count')), '0 of 150 chapters read');
+      await press(t, find.byKey(const Key('back')), 'Book: Back (Psalms)');
+
+      // 다시 켜도, 새 계획을 시작해도 직접 체크는 남는다
+      await finish(t);
+      await boot(t, resetPrefs: false);
+      expect(AppStore.i.checked, {11});
+      AppStore.i.startPlan(Scope.newTestament, Order.canonical, 90);
+      await settle(t);
+      expect(AppStore.i.checked, {11});
+      await tab(t, 'Map');
+      expect(textOf(t, const Key('map-summary')), '1 of 1,189 chapters read · 0%');
+      expect(find.text('OLD TESTAMENT'), findsOneWidget, reason: 'all 66 books even on a New Testament plan');
+      await finish(t);
+    });
+  });
+
+  testWidgets('checked chapters survive a broken plan record; junk entries are dropped', (t) async {
+    await at(() async {
+      await boot(t, prefs: {'bible.state.v1': '{"scope":"nope","checked":[0,5,"x",-1,99999,5]}'});
+      expect(reading(t), 'Genesis 1–3');
+      expect(AppStore.i.checked, {0, 5});
+      await finish(t);
+    });
+  });
+
   testWidgets('broken saved data opens a fresh plan instead of a gray screen', (t) async {
     await at(() async {
       for (final junk in ['{', '[]', '{"scope":"whole"}', '{"scope":"nope","order":"canonical","length":3,"cuts":[0,5],"dates":[1],"doneOn":[]}',
@@ -448,6 +512,9 @@ void main() {
             await check(t, 'Today scrolled $tag');
             await tab(t, 'Map');
             await check(t, 'Map $tag', shot: 'L-$tag-map');
+            await press(t, find.byKey(const Key('book-Ps')), 'Map: Psalms ($tag)');
+            await check(t, 'Book Psalms $tag', shot: 'L-$tag-book');
+            await press(t, find.byKey(const Key('back')), 'Book: Back ($tag)');
             await tab(t, 'Plan');
             await check(t, 'Plan $tag', shot: 'L-$tag-plan');
             await t.drag(find.byKey(const Key('plan-list')), const Offset(0, -3000));

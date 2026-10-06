@@ -57,7 +57,9 @@ List<String> readingParts(List<int> ids) {
   while (i < ids.length) {
     final (b, c0) = chapterOf(ids[i]);
     var j = i;
-    while (j + 1 < ids.length && ids[j + 1] == ids[j] + 1 && chapterOf(ids[j + 1]).$1 == b) {
+    while (j + 1 < ids.length &&
+        ids[j + 1] == ids[j] + 1 &&
+        chapterOf(ids[j + 1]).$1 == b) {
       j++;
     }
     final c1 = chapterOf(ids[j]).$2;

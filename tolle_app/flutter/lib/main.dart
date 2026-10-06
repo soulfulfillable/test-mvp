@@ -77,9 +77,18 @@ class _HomeTabsState extends State<HomeTabs> with WidgetsBindingObserver {
     tabBar: CupertinoTabBar(
       activeColor: dyn(context, accent),
       items: const [
-        BottomNavigationBarItem(icon: Icon(CupertinoIcons.book), label: 'Today'),
-        BottomNavigationBarItem(icon: Icon(CupertinoIcons.square_grid_3x2), label: 'Map'),
-        BottomNavigationBarItem(icon: Icon(CupertinoIcons.calendar), label: 'Plan'),
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.book),
+          label: 'Today',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.square_grid_3x2),
+          label: 'Map',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.calendar),
+          label: 'Plan',
+        ),
       ],
     ),
     tabBuilder: (context, i) => CupertinoTabView(

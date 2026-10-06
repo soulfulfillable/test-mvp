@@ -12,7 +12,11 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     text.toUpperCase(),
-    style: TextStyle(fontSize: kSmall, fontWeight: FontWeight.w400, color: dyn(context, CupertinoColors.secondaryLabel)),
+    style: TextStyle(
+      fontSize: kSmall,
+      fontWeight: FontWeight.w400,
+      color: dyn(context, CupertinoColors.secondaryLabel),
+    ),
   );
 }
 
@@ -23,20 +27,31 @@ class SectionFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     text,
-    style: TextStyle(fontSize: kSmall, height: 1.35, color: dyn(context, CupertinoColors.secondaryLabel)),
+    style: TextStyle(
+      fontSize: kSmall,
+      height: 1.35,
+      color: dyn(context, CupertinoColors.secondaryLabel),
+    ),
   );
 }
 
 /// 강조색 버튼 하나 (높이 50, 모서리 14). 다크 모드의 밝은 강조색 위에는 검정 글씨.
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({super.key, required this.label, required this.onPressed, this.icon});
+  const PrimaryButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+  });
   final String label;
   final IconData? icon;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final fg = CupertinoTheme.brightnessOf(context) == Brightness.dark ? CupertinoColors.black : CupertinoColors.white;
+    final fg = CupertinoTheme.brightnessOf(context) == Brightness.dark
+        ? CupertinoColors.black
+        : CupertinoColors.white;
     return CupertinoButton(
       color: dyn(context, accent),
       borderRadius: BorderRadius.circular(14),
@@ -46,11 +61,21 @@ class PrimaryButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (icon != null) ...[Icon(icon, size: 20, color: fg), const SizedBox(width: 8)],
+          if (icon != null) ...[
+            Icon(icon, size: 20, color: fg),
+            const SizedBox(width: 8),
+          ],
           Flexible(
             child: FittedBox(
               fit: BoxFit.scaleDown,
-              child: Text(label, style: TextStyle(fontSize: kBody, fontWeight: FontWeight.w600, color: fg)),
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: kBody,
+                  fontWeight: FontWeight.w600,
+                  color: fg,
+                ),
+              ),
             ),
           ),
         ],
@@ -77,7 +102,12 @@ class TextAction extends StatelessWidget {
 /// 시그니처: 계획의 모든 장을 작은 칸으로. 읽음을 누르면 오늘 읽은 칸들이 차례로 '톡' 채워진다.
 /// 다음에 읽을 칸은 강조색 테두리로 표시해 '어디쯤인지' 가 보인다.
 class MiniMap extends StatefulWidget {
-  const MiniMap({super.key, required this.total, required this.read, required this.next});
+  const MiniMap({
+    super.key,
+    required this.total,
+    required this.read,
+    required this.next,
+  });
 
   /// 칸 수(계획의 장 수), 읽은 장 수, 다음에 읽을 장 수.
   final int total, read, next;
@@ -87,7 +117,10 @@ class MiniMap extends StatefulWidget {
 }
 
 class _MiniMapState extends State<MiniMap> with SingleTickerProviderStateMixin {
-  late final AnimationController _c = AnimationController(vsync: this, duration: Duration.zero);
+  late final AnimationController _c = AnimationController(
+    vsync: this,
+    duration: Duration.zero,
+  );
   int _from = 0;
 
   @override
@@ -198,7 +231,11 @@ class _MiniMapPainter extends CustomPainter {
         final local = ((t * ms - (i - from) * 90) / 320).clamp(0.0, 1.0);
         if (local > 0) {
           final s = Curves.easeOutBack.transform(local);
-          final rr = Rect.fromCenter(center: r.center, width: r.width * s, height: r.height * s);
+          final rr = Rect.fromCenter(
+            center: r.center,
+            width: r.width * s,
+            height: r.height * s,
+          );
           canvas.drawRRect(RRect.fromRectAndRadius(rr, radius), pOn);
         }
       } else if (i < read + next) {
@@ -215,7 +252,11 @@ class _MiniMapPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_MiniMapPainter o) =>
-      o.read != read || o.t != t || o.next != next || o.on != on || o.total != total;
+      o.read != read ||
+      o.t != t ||
+      o.next != next ||
+      o.on != on ||
+      o.total != total;
 
   int get total => g.total;
 }
@@ -237,7 +278,13 @@ class BookCells extends StatelessWidget {
         width: box.maxWidth,
         height: rows * (cell + gap) - gap,
         child: CustomPaint(
-          painter: _BookPainter(chapters, cols, isRead, dyn(context, accent), dyn(context, cellOff)),
+          painter: _BookPainter(
+            chapters,
+            cols,
+            isRead,
+            dyn(context, accent),
+            dyn(context, cellOff),
+          ),
         ),
       );
     },
@@ -254,11 +301,50 @@ class _BookPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     const c = BookCells.cell, g = BookCells.gap;
     for (var i = 0; i < n; i++) {
-      final r = Rect.fromLTWH((i % cols) * (c + g), (i ~/ cols) * (c + g), c, c);
-      canvas.drawRRect(RRect.fromRectAndRadius(r, const Radius.circular(2)), Paint()..color = isRead(i + 1) ? on : off);
+      final r = Rect.fromLTWH(
+        (i % cols) * (c + g),
+        (i ~/ cols) * (c + g),
+        c,
+        c,
+      );
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(r, const Radius.circular(2)),
+        Paint()..color = isRead(i + 1) ? on : off,
+      );
     }
   }
 
   @override
   bool shouldRepaint(_BookPainter o) => true;
+}
+
+/// 상단 "‹ Map". Flutter 기본 뒤로 버튼은 VoiceOver 누르기 동작이 빠진 노드를 만든다(소음 앱 세션 교훈)
+/// → 같은 모양을 직접 그리고 접근성 tap 을 단다.
+class BackLink extends StatelessWidget {
+  const BackLink({super.key, this.label = 'Back'});
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    void pop() => Navigator.maybePop(context);
+    return Semantics(
+      button: true,
+      label: 'Back',
+      onTap: pop,
+      excludeSemantics: true,
+      child: CupertinoButton(
+        key: const Key('back'),
+        padding: EdgeInsets.zero,
+        minimumSize: const Size(44, 44),
+        onPressed: pop,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(CupertinoIcons.back, size: 26),
+            Text(label, style: const TextStyle(fontSize: kBody)),
+          ],
+        ),
+      ),
+    );
+  }
 }
