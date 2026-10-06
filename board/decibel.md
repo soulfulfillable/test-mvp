@@ -1,9 +1,10 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-06 21:11 (KST)
+마지막 갱신: 2026-10-06 22:00 (KST)
 
 ## 지금 상태 (3줄 이내)
-**1.0(빌드 28) 심사 제출 완료 — "Waiting for Review"** (2026-10-05 저녁 미 동부 / 10-06 아침 KST). 스크린샷 5장(6.5" 칸, 1284×2778)·고친 심사 메모·연령 4+·30초 녹화는 사용자가 ASC 에서 직접.
-보정 +94 그대로 제출(사용자 A). 다음: 승인 → AdMob 에 스토어 링크 연결, NIOSH SLM 과 같은 소리 비교 → 1.0.1 기본 보정값.
+1.0(빌드 28) 심사 결과 **"2.1 Information Needed - New App Submission"**(새 계정 이력 부족 — 환율·대출·속도계·물때와 같은 정형 요청). 앱 문제 지적 아님.
+답장 페이지 `docs/decibel-review.html`(복사 버튼) → 사용자: Reply 에 글 + 어제 녹화(36초) 첨부 → **Resubmit to App Review**.
+빌드 28 은 예전 서명(인증서 삭제)이지만 제출 때 Invalid Binary 로 안 걸렸다(속도계 26 은 걸림) — 재제출 때 걸리면 새 빌드로 교체.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ⚠️ **빌드 28 은 예전 `Release iOS`(업로드 뒤 배포 인증서 삭제)로 만든 빌드** — 대출 계산기 빌드 22 가 같은 이유로 제출 후 **ITMS-90035 Invalid Signature** 반려(`_shared.md`). 반려 메일이 오면: 대출 세션의 서명 수정(6eb31aa, run 30 검증 중)이 통과한 뒤 `Release iOS`(decibel) 새 빌드 → ASC 에서 빌드 교체 → 재제출. 그 전엔 Release iOS 돌리지 않음(대출 세션 요청).
@@ -27,6 +28,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | (ASC 캡처 + Apple 메시지 원문) Glance dB 1.0 (28) Rejected — "Guideline 2.1 - Information Needed - New App Submission" | 답장 페이지 `docs/decibel-review.html` 만들어 안내(글은 Notes 와 같은 내용을 Apple 6항목 번호에 맞춤, 영상은 어제 녹화 재사용). 빌드 28 은 그대로 재제출 |
 | 10-06 | (Glance Speed 의 2.1 정보 요청 캡처를 이 세션에 보냄) | 속도계 세션이 만들어 둔 답장(`speedometer_app/store/review-reply.md`)으로 안내, `board/speedometer.md` 에 기록. Glance dB 도 같은 요청이 올 수 있어 `decibel_app/store/review-reply.md` 준비(메모·녹화는 이미 첨부) |
 | 10-06 | "된건가?" (ASC 화면: 1.0 Waiting for Review, 스크린샷 5장 순서대로) | 제출 확인. 그 전에 겪은 것: 6.9"용 1290×2796 을 6.5" 칸에 넣어 거절 → 1284×2778 판(`store/screenshots/6.5in/`)을 만들어 줌, 중복 1장·순서 섞임 정리, 연령 등급 설문(Advertising 만 Yes → 4+) |
 | 10-05 | 녹화 영상 보고 "실기기 숫자가 낮다(조용한 방 <20)" → A/B → "A. 지금 제출하고 1.0.1에서 고치기 … 아냐 조용한곳에 있었어서 그랫던거같은데" | 보정 +94 그대로 제출. 영상 속 측정은 실제로 조용했을 수 있음 — 숫자 비교는 여전히 **확인 못 함**, 출시 후 NIOSH SLM 과 나란히 재서 1.0.1 에 반영 |

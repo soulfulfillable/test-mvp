@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glance dB 심사 답장</title>
+<style>
+  :root{--bg:#F2F2F7;--fg:#1C1C1E;--muted:#6C6C70;--card:#FFFFFF;--line:#E5E5EA;--accent:#00848A}
+  @media (prefers-color-scheme:dark){:root{--bg:#000000;--fg:#F2F2F7;--muted:#98989F;--card:#1C1C1E;--line:#2C2C2E;--accent:#2FD0D6}}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  main{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:28px 0 8px}
+  .sub{color:var(--muted);font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  ol{padding-left:20px;margin:0} li{margin:6px 0}
+  pre{white-space:pre-wrap;word-break:break-word;font:14px/1.5 -apple-system,sans-serif;margin:0}
+  button{display:block;width:100%;margin:12px 0 0;padding:14px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:600}
+  @media (prefers-color-scheme:dark){button{color:#000}}
+  .ok{color:var(--accent);font-weight:600;text-align:center;min-height:22px;margin-top:8px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Glance dB — 심사 답장 (2.1 정보 요청)</h1>
+  <div class="sub">App Store Connect → Glance dB → App Review → 메시지 아래 <b>Reply</b></div>
+
+  <h2>① 영상</h2>
+  <div class="card"><p style="margin:0">어제 찍은 녹화(<b>video_2026-10-05_16-07-06.mp4</b>, 36초, 빌드 28)를 그대로 씁니다. 앱 실행 → Start → 측정 → Report → Settings → 일시정지·이어하기가 다 들어 있어요. 새로 찍을 필요 없어요.</p></div>
+
+  <h2>② 답장 글 (영어 그대로 붙여넣기)</h2>
+  <div class="card"><pre id="reply">Hello App Review team, thank you for reviewing Glance dB: Decibel Meter. A screen recording from a physical iPhone (build 1.0.0 (28)) is attached (also in the App Review Information attachment).
+
+1. Screen recording: attached. It starts at app launch and shows the meter, tapping Start, live measuring, the noise Report, Settings, and pausing/resuming. The app has no account registration, login, user-generated content, or paid content.
+
+2. Purpose and audience: a free sound level (decibel) meter for anyone who wants to know how loud it is — noisy neighbors, restaurants, baby white-noise machines, concerts. It explains each level in plain English (&quot;Like normal conversation&quot;) and saves a simple noise report (date, time, average, max, a chart) to share with a landlord or neighbor. Every feature is free.
+
+3. How to use: no setup or login. Tap Start and allow the microphone. Pause / Resume / Reset control the measurement. &quot;Report&quot; shows the report image and shares it with the iOS share sheet. Tap the level name under the gauge for everyday comparisons. History (clock icon, top left) lists past measurements. Settings (top right): calibration offset, dBA / dBC / dBZ weighting, keep screen on.
+
+4. External services: Google AdMob banner ads only. No backend server, analytics, authentication, payment, or AI services. Measuring works offline. The microphone is used only while the app is open to compute the level on the device; audio is never recorded, stored, or sent anywhere.
+
+5. Regional differences: none. The app works the same in all regions where it is available. English only.
+
+6. Regulated industry / third-party content: not applicable. The app says in the app and in the description that phone microphones are not certified sound level meters and readings are estimates; it makes no legal or medical claims. Hearing-safety tips cite the public CDC/NIOSH 85 dBA guideline as general information. All art and the app icon are our own.
+
+Thank you!</pre></div>
+  <button id="copy">답장 글 복사</button>
+  <div class="ok" id="ok"></div>
+
+  <h2>③ 보내기</h2>
+  <div class="card"><ol>
+    <li>Reply 칸에 붙여넣기 + 영상 첨부 → <b>Send</b></li>
+    <li>위쪽 <b>Resubmit to App Review</b> 가 눌리면 누르기</li>
+  </ol><p class="sub" style="margin:10px 0 0">같은 내용은 App Review Information → Notes 와 Attachment 에 이미 들어가 있어요.</p></div>
+</main>
+<script>
+document.getElementById('copy').onclick = async () => {
+  const t = document.getElementById('reply').innerText;
+  try { await navigator.clipboard.writeText(t); }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('reply'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
+  }
+  document.getElementById('ok').textContent = '복사됐어요 ✓';
+};
+</script>
+</body>
+</html>
