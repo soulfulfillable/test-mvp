@@ -37,7 +37,7 @@ Verse Weave 는 이 앱의 2차 기능 후보로, 은사 키트는 다음 신앙
 ## 결정 필요 (개발 세션 → 사용자 A/B)
 - 이름: 미국 검색어 조사 후 2~3개 (예: "Bible in a Year: Reading Plan" 류. Glance 시리즈와 분리할지).
 - 번들 ID `com.soulfulfill.<이름>` — 등록 전 확인.
-- 첫 버전에 위젯 넣을지 (A. 2차로 미룸 — 추천, 빨리 출시 / B. 처음부터).
+- ✅ 위젯은 **2차로 미룸** (사용자 2026-10-06, 추천대로)
 
 ## 진행 순서
 ①경쟁 앱(One Year Bible Plan, Bible Reading Tracker 등) 화면·리뷰 확인 → ②1,189장 데이터·계획 생성기(+검증: 합계 1,189, 날짜 계산) → ③테스트 로봇 → ④Flutter(DESIGN.md) → ⑤광고·차단 설정 → ⑥Release iOS → ⑦TestFlight(2.1 대비 녹화 미리 부탁) → ⑧음악 탭은 엔진 판정 후
