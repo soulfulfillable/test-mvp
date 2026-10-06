@@ -17,6 +17,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | (ASC App Privacy → Device ID 용도 창 캡처) "여기는" | Third-Party Advertising + Analytics 체크 → Next → 사용자와 연결 No → 추적 No. 나머지 항목(대략 위치·제품 사용·광고 데이터·충돌·성능)도 같은 답 |
 | 10-06 | "아냐확인하지말고 그냥 진행하자" (TestFlight 느낌 확인 건너뛰기) | 바로 제출 준비: 스토어 스크린샷 5장(웹 ?demo=1&shots=1 → 1290×2796), 심사 메모 7항목(녹화 대신 1분 체험 순서), `App Store 등록 정보 채우기`(build 33) 실행, 사용자 수동 항목 정리(`store/ios-listing.md` 끝) |
 | 10-05 | AdMob "Ad unit successfully created" 화면 캡처 (앱 ID `~6940701412`, 배너 `/8213509779`) | `lib/core/ads.dart`·`Info.plist` 에 반영, 같은 게시자 계정인지 검사하는 테스트 추가(48개 통과). 빌드 29 는 옛 서명 방식(인증서 지우던 때)이라 **고친 Release iOS 로 새 빌드** |
 | 10-05 | "신규 앱 했어 admod 어케해야되는지 안내" | ASC 앱 레코드 확인 Actions 재실행(러너 대기) → `Release iOS`(fuellog) 실행 #29 대기열 → 성공하면 TestFlight 초대 자동. AdMob 은 클릭 단위로 안내(배너 1개, soulfulfillable 계정), 완료 화면 캡처 받으면 ID 반영 |
