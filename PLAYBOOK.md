@@ -66,6 +66,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-06 | 앰비언트 | 90분 영상은 작업 환경에서 몇 시간·리포 100MB 제한 초과 | Actions 에서 렌더 → `gh release create` 로 Releases 에 올림(자산 2GB 까지). 긴 실행 전에 같은 워크플로를 3분짜리로 먼저 돌려 환경 확인 |
 | 2026-10-06 | 앰비언트 | 코드(캔버스 도형)로 그린 영상 그림이 "최악" — 다듬어도 클립아트 수준 | 영상·배경은 **실사 사진 + GPU 셰이더 효과**. 헤드리스 크롬 WebGL2 는 `--use-angle=swiftshader --enable-unsafe-swiftshader --allow-file-access-from-files` 로 된다. 사진은 Actions 로 Commons PD/CC0 받기(작업 환경은 사진 사이트 차단) |
 | 2026-10-06 | 연비 | 앱 레코드를 만들자마자 돌린 빌드 29 가 **서명 수정(6eb31aa) 이전 커밋**이라, 그대로 냈다면 다른 앱처럼 ITMS-90035 반려될 뻔 | 제출할 빌드는 `git merge-base --is-ancestor 6eb31aa <빌드의 head_sha>` 로 확인. 아니면 새로 Release iOS |
 | 2026-10-06 | 연비 | 스토어 스크린샷을 웹 미리보기로 찍으니 가짜 광고 칸·"web preview"·"this browser" 문구·탭 말풍선(마우스 hover)이 찍힘 | 웹 전용 `?shots=1`(광고 숨김·아이폰 문구) + 예시 기록 `?demo=1`, 탭은 Playwright `.tap()`(click 은 tooltip). `fuellog_app/store/screenshots/capture.js` |

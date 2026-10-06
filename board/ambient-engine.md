@@ -2,9 +2,9 @@
 마지막 갱신: 2026-10-05 (개발 세션)
 
 ## 지금 상태 (3줄 이내)
-그림 방식 전환: **진짜 사진(Commons PD/CC0) + GPU 셰이더 효과**(`docs/ambient-glass.html`: 유리 위 물방울 굴절·흘러내림 / 불빛 일렁임·불티 / 빛 숨쉬기·먼지, 30초 무이음 반복).
-3분 시험 영상 3편 다시 뽑음(`docs/ambient-samples.html`). 렌더 `tools/ambient/render.js --photo … --width 1920`.
-다음: 사용자 느낌 → ② 90분.
+**② 90분 비+피아노 영상 렌더 중** — Actions `Render ambient video`(rain, seed 1042, 90분, 1080p, 느린 화면 흐름) → 결과는 Releases 태그 `ambient-rain-1042-90m`.
+3분 시험(seed 7)은 Actions 에서 7.5분·36MB·-18.2 LUFS 로 성공 → 90분 예상 3~4시간·약 1.1GB. 모닥불은 사용자 "별로" → 보류.
+다음: 90분 결과 확인 → 사용자에게 링크 → ③ 채널 첫 업로드(채널 주소 필요).
 
 ## 다음 할 일 / 사용자에게 받을 것
 - [사용자] https://soulfulfillable.github.io/test-mvp/ambient-samples.html 새 영상 3편(사진+효과) 좋다/별로.
@@ -49,6 +49,9 @@
 - 그림 품질 교훈: 캔버스 도형으로 장면을 그리면 클립아트 → **실사 사진 + 셰이더 효과(굴절·빛)** 가 한 번에 수준을 올린다.
 - Commons API(`generator=search` + `extmetadata LicenseShortName`)로 PD/CC0 만 거르면 상업 이용 가능. 단 검색 품질이 낮아 사람이 골라야 한다(번호 붙인 contact sheet 를 같이 만든다).
 - 셰이더 GLSL 을 JS 문자열 이어붙이기로 쓸 때 파이썬 일괄 치환으로 줄 앞의 `'` 를 지워 SyntaxError → 고친 뒤 꼭 한 장 렌더해 본다.
+
+- **큰 결과물(영상 수백 MB~GB)은 Releases 로**: 리포·Pages 는 100MB 제한. Actions 에서 `gh release create <태그> 파일` (permissions contents: write, GH_TOKEN=github.token). 자산 하나 2GB 까지.
+- Actions 러너에서 헤드리스 크롬 WebGL: `npm i --no-save playwright-core@<버전>` + `npx playwright-core install --with-deps chromium`, 실행 인자 `--use-angle=swiftshader --enable-unsafe-swiftshader`. 3분 시험으로 환경부터 확인한 뒤 긴 실행.
 
 ## 다른 세션·기획 파트너에게 묻고 싶은 것
 - 신앙 앱 쪽(`plans/soaking-music-feature.md`)의 Still/Hope/Lament/Night 분위기는 지금 MOODS 표에 조성·코드·템포만 추가하면 된다. 어느 앱에 붙일지 정해지면 알려 달라.
