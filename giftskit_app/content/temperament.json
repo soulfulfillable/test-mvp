@@ -1,0 +1,87 @@
+{
+  "version": "draft-1",
+  "source": "IPIP 50-item Big-Five Factor Markers (Goldberg, 1992), public domain — https://ipip.ori.org/",
+  "note": "key +1 = agreeing moves toward the 'high' pole, -1 = toward the 'low' pole. 'ipip' is the original IPIP wording; 'en' is our lightly adapted wording.",
+  "traits": [
+    {
+      "id": "outgoing", "factor": "Extraversion",
+      "en": "Outgoing", "ko": "외향",
+      "low_en": "Reserved", "low_ko": "차분히 물러서는",
+      "high_en": "Outgoing", "high_ko": "다가가는",
+      "items": [
+        {"id": "outgoing.1", "key": 1, "ipip": "Feel comfortable around people.", "en": "I feel comfortable around people.", "ko": "사람들 사이에 있으면 편하다."},
+        {"id": "outgoing.2", "key": 1, "ipip": "Start conversations.", "en": "I start conversations.", "ko": "내가 먼저 말을 건다."},
+        {"id": "outgoing.3", "key": 1, "ipip": "Talk to a lot of different people at parties.", "en": "I talk to a lot of different people at gatherings.", "ko": "모임에서 여러 사람과 두루 이야기한다."},
+        {"id": "outgoing.4", "key": 1, "ipip": "Don't mind being the center of attention.", "en": "I don't mind being the center of attention.", "ko": "주목받는 자리도 괜찮다."},
+        {"id": "outgoing.5", "key": -1, "ipip": "Don't talk a lot.", "en": "I don't talk a lot.", "ko": "말을 많이 하지 않는다."},
+        {"id": "outgoing.6", "key": -1, "ipip": "Keep in the background.", "en": "I keep in the background.", "ko": "뒤쪽에 있는 편이다."},
+        {"id": "outgoing.7", "key": -1, "ipip": "Am quiet around strangers.", "en": "I'm quiet around people I don't know.", "ko": "모르는 사람들 앞에서는 조용하다."},
+        {"id": "outgoing.8", "key": -1, "ipip": "Don't like to draw attention to myself.", "en": "I don't like to draw attention to myself.", "ko": "나에게 시선이 쏠리는 게 싫다."}
+      ]
+    },
+    {
+      "id": "warmth", "factor": "Agreeableness",
+      "en": "Warmth", "ko": "따뜻함",
+      "low_en": "Direct", "low_ko": "직설적인",
+      "high_en": "Warm", "high_ko": "다정한",
+      "items": [
+        {"id": "warmth.1", "key": 1, "ipip": "Sympathize with others' feelings.", "en": "I sympathize with others' feelings.", "ko": "다른 사람의 감정에 공감한다."},
+        {"id": "warmth.2", "key": 1, "ipip": "Have a soft heart.", "en": "I have a soft heart.", "ko": "마음이 여리다."},
+        {"id": "warmth.3", "key": 1, "ipip": "Take time out for others.", "en": "I take time out for others.", "ko": "다른 사람을 위해 시간을 낸다."},
+        {"id": "warmth.4", "key": 1, "ipip": "Make people feel at ease.", "en": "I make people feel at ease.", "ko": "사람들을 편안하게 해 준다."},
+        {"id": "warmth.5", "key": -1, "ipip": "Feel little concern for others.", "en": "I feel little concern for others.", "ko": "다른 사람에게 별로 마음을 쓰지 않는다."},
+        {"id": "warmth.6", "key": -1, "ipip": "Am not interested in other people's problems.", "en": "I'm not very interested in other people's problems.", "ko": "남의 문제에는 별 관심이 없다."},
+        {"id": "warmth.7", "key": -1, "ipip": "Am not really interested in others.", "en": "I'm not really interested in others.", "ko": "다른 사람에게 그다지 관심이 없다."},
+        {"id": "warmth.8", "key": -1, "ipip": "Insult people.", "en": "I can be harsh with people.", "ko": "사람들에게 모질게 말할 때가 있다."}
+      ]
+    },
+    {
+      "id": "structure", "factor": "Conscientiousness",
+      "en": "Structure", "ko": "꼼꼼함",
+      "low_en": "Flexible", "low_ko": "유연한",
+      "high_en": "Structured", "high_ko": "계획적인",
+      "items": [
+        {"id": "structure.1", "key": 1, "ipip": "Am always prepared.", "en": "I'm always prepared.", "ko": "늘 준비되어 있다."},
+        {"id": "structure.2", "key": 1, "ipip": "Pay attention to details.", "en": "I pay attention to details.", "ko": "세부 사항에 신경 쓴다."},
+        {"id": "structure.3", "key": 1, "ipip": "Get chores done right away.", "en": "I get chores done right away.", "ko": "할 일은 바로 끝낸다."},
+        {"id": "structure.4", "key": 1, "ipip": "Follow a schedule.", "en": "I follow a schedule.", "ko": "일정표대로 움직인다."},
+        {"id": "structure.5", "key": -1, "ipip": "Leave my belongings around.", "en": "I leave my things lying around.", "ko": "물건을 여기저기 늘어놓는다."},
+        {"id": "structure.6", "key": -1, "ipip": "Make a mess of things.", "en": "I make a mess of things.", "ko": "일을 엉망으로 만들곤 한다."},
+        {"id": "structure.7", "key": -1, "ipip": "Often forget to put things back in their proper place.", "en": "I often forget to put things back where they belong.", "ko": "물건을 제자리에 두는 걸 자주 잊는다."},
+        {"id": "structure.8", "key": -1, "ipip": "Shirk my duties.", "en": "I put off my duties.", "ko": "해야 할 일을 미룬다."}
+      ]
+    },
+    {
+      "id": "calm", "factor": "Emotional Stability (reverse of Neuroticism)",
+      "en": "Calm", "ko": "평온함",
+      "low_en": "Sensitive", "low_ko": "예민하게 느끼는",
+      "high_en": "Calm", "high_ko": "잔잔한",
+      "items": [
+        {"id": "calm.1", "key": 1, "ipip": "Am relaxed most of the time.", "en": "I'm relaxed most of the time.", "ko": "대부분의 시간에 마음이 느긋하다."},
+        {"id": "calm.2", "key": 1, "ipip": "Seldom feel blue.", "en": "I seldom feel down.", "ko": "울적할 때가 드물다."},
+        {"id": "calm.3", "key": -1, "ipip": "Get stressed out easily.", "en": "I get stressed out easily.", "ko": "쉽게 스트레스를 받는다."},
+        {"id": "calm.4", "key": -1, "ipip": "Worry about things.", "en": "I worry about things.", "ko": "이것저것 걱정한다."},
+        {"id": "calm.5", "key": -1, "ipip": "Get upset easily.", "en": "I get upset easily.", "ko": "쉽게 속상해한다."},
+        {"id": "calm.6", "key": -1, "ipip": "Have frequent mood swings.", "en": "My mood changes often.", "ko": "기분이 자주 바뀐다."},
+        {"id": "calm.7", "key": -1, "ipip": "Get irritated easily.", "en": "I get irritated easily.", "ko": "쉽게 짜증이 난다."},
+        {"id": "calm.8", "key": -1, "ipip": "Often feel blue.", "en": "I often feel down.", "ko": "자주 울적하다."}
+      ]
+    },
+    {
+      "id": "imagination", "factor": "Intellect / Imagination (Openness)",
+      "en": "Imagination", "ko": "상상력",
+      "low_en": "Practical", "low_ko": "현실적인",
+      "high_en": "Imaginative", "high_ko": "상상하는",
+      "items": [
+        {"id": "imagination.1", "key": 1, "ipip": "Have a vivid imagination.", "en": "I have a vivid imagination.", "ko": "상상력이 풍부하다."},
+        {"id": "imagination.2", "key": 1, "ipip": "Am full of ideas.", "en": "I'm full of ideas.", "ko": "아이디어가 넘친다."},
+        {"id": "imagination.3", "key": 1, "ipip": "Have excellent ideas.", "en": "I come up with excellent ideas.", "ko": "좋은 아이디어를 잘 낸다."},
+        {"id": "imagination.4", "key": 1, "ipip": "Am quick to understand things.", "en": "I'm quick to understand things.", "ko": "이해가 빠르다."},
+        {"id": "imagination.5", "key": 1, "ipip": "Spend time reflecting on things.", "en": "I spend time reflecting on things.", "ko": "곰곰이 생각하는 데 시간을 쓴다."},
+        {"id": "imagination.6", "key": -1, "ipip": "Am not interested in abstract ideas.", "en": "I'm not interested in abstract ideas.", "ko": "추상적인 생각에는 관심이 없다."},
+        {"id": "imagination.7", "key": -1, "ipip": "Do not have a good imagination.", "en": "I don't have a good imagination.", "ko": "상상력이 좋은 편이 아니다."},
+        {"id": "imagination.8", "key": -1, "ipip": "Have difficulty understanding abstract ideas.", "en": "I have a hard time with abstract ideas.", "ko": "추상적인 개념은 어렵게 느껴진다."}
+      ]
+    }
+  ]
+}

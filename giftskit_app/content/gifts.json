@@ -1,0 +1,191 @@
+{
+  "version": "draft-1",
+  "scale": {
+    "en": ["Not like me", "A little like me", "Somewhat like me", "Mostly like me", "Very much like me"],
+    "ko": ["전혀 아니다", "조금 그렇다", "어느 정도 그렇다", "대체로 그렇다", "매우 그렇다"]
+  },
+  "gifts": [
+    {
+      "id": "teaching", "en": "Teaching", "ko": "가르침",
+      "summary_en": "Helping people understand God's Word clearly so they can live it.",
+      "summary_ko": "하나님의 말씀을 분명히 이해하고 살아 내도록 돕는 은사.",
+      "refs": ["Romans 12:7", "1 Corinthians 12:28", "Ephesians 4:11", "Acts 18:24-28"],
+      "items": [
+        {"id": "teaching.1", "en": "When I read a Bible passage, I start working out how I'd explain it to someone else.", "ko": "성경 본문을 읽으면 다른 사람에게 어떻게 설명할지 궁리하게 된다."},
+        {"id": "teaching.2", "en": "People tell me a topic finally made sense after I walked them through it.", "ko": "내가 차근차근 설명해 주면 \"이제야 이해된다\"는 말을 듣는다."},
+        {"id": "teaching.3", "en": "I enjoy preparing a Bible study, even when it takes hours.", "ko": "몇 시간이 걸려도 성경공부를 준비하는 게 즐겁다."},
+        {"id": "teaching.4", "en": "When a group discussion drifts, I point back to what the passage actually says.", "ko": "모임 대화가 엇나가면 본문이 실제로 뭐라고 하는지 다시 짚어 준다."},
+        {"id": "teaching.5", "en": "I break big ideas into steps, examples, or simple pictures so others can follow.", "ko": "큰 개념을 단계·예시·쉬운 그림으로 쪼개서 다른 사람이 따라오게 한다."}
+      ]
+    },
+    {
+      "id": "serving", "en": "Serving", "ko": "섬김",
+      "summary_en": "Seeing practical needs and meeting them gladly, often behind the scenes.",
+      "summary_ko": "실제적인 필요를 보고, 대개 드러나지 않게 기쁘게 채우는 은사.",
+      "refs": ["Romans 12:7", "1 Corinthians 12:28", "1 Peter 4:10-11", "Acts 6:1-3"],
+      "items": [
+        {"id": "serving.1", "en": "I'd rather set up chairs or wash dishes than stand up front.", "ko": "앞에 서는 것보다 의자 놓기·설거지 같은 일이 더 좋다."},
+        {"id": "serving.2", "en": "I notice practical jobs that need doing before anyone asks.", "ko": "누가 말하기 전에 해야 할 실제적인 일이 눈에 들어온다."},
+        {"id": "serving.3", "en": "I'm glad when my work frees someone else to focus on what they do best.", "ko": "내가 일을 맡아서 다른 사람이 자기가 잘하는 일에 집중할 수 있으면 기쁘다."},
+        {"id": "serving.4", "en": "I don't need my name mentioned to enjoy having helped.", "ko": "내 이름이 언급되지 않아도 도운 것 자체로 만족스럽다."},
+        {"id": "serving.5", "en": "When someone says \"we need a hand,\" I'm usually one of the first to say yes.", "ko": "\"손이 필요해요\" 하면 보통 먼저 \"제가 할게요\" 하는 편이다."}
+      ]
+    },
+    {
+      "id": "mercy", "en": "Mercy", "ko": "긍휼",
+      "summary_en": "Feeling deeply for people who suffer and caring for them with patience and cheer.",
+      "summary_ko": "고통받는 사람을 깊이 느끼고, 오래 참음과 즐거움으로 돌보는 은사.",
+      "refs": ["Romans 12:8", "Luke 10:33-35", "Matthew 25:35-36", "Colossians 3:12"],
+      "items": [
+        {"id": "mercy.1", "en": "My heart goes out to people who are sick, grieving, or left out.", "ko": "아프거나 슬퍼하거나 소외된 사람에게 마음이 간다."},
+        {"id": "mercy.2", "en": "I can sit with someone in pain without rushing to fix it.", "ko": "아파하는 사람 곁에서 서둘러 해결하려 하지 않고 함께 있어 줄 수 있다."},
+        {"id": "mercy.3", "en": "I notice when someone in the room is hurting, even if they hide it.", "ko": "숨기고 있어도 그 자리에 힘들어하는 사람이 있으면 알아챈다."},
+        {"id": "mercy.4", "en": "Visiting a hospital, a care home, or a lonely neighbor feels meaningful, not draining.", "ko": "병원·요양원·외로운 이웃을 찾아가는 일이 지치기보다 의미 있게 느껴진다."},
+        {"id": "mercy.5", "en": "I keep caring for people even when they can't give anything back.", "ko": "아무것도 돌려받지 못해도 계속 돌본다."}
+      ]
+    },
+    {
+      "id": "encouragement", "en": "Encouragement", "ko": "권면·격려",
+      "summary_en": "Coming alongside people with words that strengthen, comfort, and spur them on.",
+      "summary_ko": "곁에 다가가 힘을 주고 위로하고 다시 일어서게 하는 말을 건네는 은사.",
+      "refs": ["Romans 12:8", "Acts 4:36", "1 Thessalonians 5:11", "Hebrews 10:24-25"],
+      "items": [
+        {"id": "encouragement.1", "en": "I often send someone a message just to cheer them on.", "ko": "응원하려고 누군가에게 그냥 메시지를 보낼 때가 많다."},
+        {"id": "encouragement.2", "en": "People come to me when they're down and leave with a next step.", "ko": "낙심한 사람이 나를 찾아왔다가 다음 걸음을 들고 돌아간다."},
+        {"id": "encouragement.3", "en": "I see what someone could grow into, and I tell them.", "ko": "그 사람이 자라 갈 수 있는 모습이 보이고, 그걸 말해 준다."},
+        {"id": "encouragement.4", "en": "I can urge a friend to keep going without making them feel judged.", "ko": "친구가 판단받는 느낌 없이 \"계속 가 보자\"고 다독일 수 있다."},
+        {"id": "encouragement.5", "en": "I connect Scripture to everyday struggles in a way that gives people hope.", "ko": "성경을 일상의 어려움과 연결해 사람들에게 소망을 준다."}
+      ]
+    },
+    {
+      "id": "giving", "en": "Giving", "ko": "구제·드림",
+      "summary_en": "Sharing money, time, and things generously and wisely to meet real needs.",
+      "summary_ko": "돈·시간·물건을 넉넉하고 지혜롭게 나눠 실제 필요를 채우는 은사.",
+      "refs": ["Romans 12:8", "2 Corinthians 9:6-7", "Acts 4:34-37", "Luke 21:1-4"],
+      "items": [
+        {"id": "giving.1", "en": "I look for ways to use my money or belongings to meet someone's need.", "ko": "내 돈이나 물건으로 누군가의 필요를 채울 길을 찾는다."},
+        {"id": "giving.2", "en": "I've given quietly and felt real joy, not loss.", "ko": "조용히 드리고 나서 아까움보다 진짜 기쁨을 느낀 적이 있다."},
+        {"id": "giving.3", "en": "I'm willing to live more simply so I can give more.", "ko": "더 드리기 위해 더 소박하게 살 마음이 있다."},
+        {"id": "giving.4", "en": "When I hear about a specific need, I start thinking about what I could give.", "ko": "구체적인 필요를 들으면 내가 뭘 드릴 수 있을지 생각하기 시작한다."},
+        {"id": "giving.5", "en": "Before I give, I check that it will really help.", "ko": "드리기 전에 그게 정말 도움이 되는지 살핀다."}
+      ]
+    },
+    {
+      "id": "leadership", "en": "Leadership", "ko": "다스림·이끎",
+      "summary_en": "Setting direction and helping a group move toward it together, with care.",
+      "summary_ko": "방향을 세우고 모임이 함께 그쪽으로 가도록 성실하게 이끄는 은사.",
+      "refs": ["Romans 12:8", "Nehemiah 2:17-18", "Hebrews 13:17", "1 Peter 5:2-3"],
+      "items": [
+        {"id": "leadership.1", "en": "When a group doesn't know where to go next, people tend to look to me.", "ko": "모임이 어디로 갈지 모를 때 사람들이 나를 쳐다보는 편이다."},
+        {"id": "leadership.2", "en": "I can picture where a group could be a year from now and explain why it matters.", "ko": "1년 뒤 모임의 모습을 그려 보고 왜 중요한지 설명할 수 있다."},
+        {"id": "leadership.3", "en": "I'm comfortable making a call when the group is stuck.", "ko": "모임이 막혔을 때 결정을 내리는 게 불편하지 않다."},
+        {"id": "leadership.4", "en": "When I suggest a direction, others are willing to follow.", "ko": "내가 방향을 제안하면 다른 사람들이 따라와 준다."},
+        {"id": "leadership.5", "en": "I feel responsible for how the whole group is doing, not just my part.", "ko": "내 몫만이 아니라 모임 전체가 어떤지에 책임감을 느낀다."}
+      ]
+    },
+    {
+      "id": "administration", "en": "Administration", "ko": "행정·조직",
+      "summary_en": "Organizing people, plans, and details so the work of the group gets done well.",
+      "summary_ko": "사람·계획·세부를 정리해 모임의 일이 잘 되게 하는 은사.",
+      "refs": ["1 Corinthians 12:28", "Exodus 18:17-23", "Luke 14:28-30", "Acts 6:1-4"],
+      "items": [
+        {"id": "administration.1", "en": "I enjoy turning a messy plan into a clear list of who does what by when.", "ko": "엉킨 계획을 \"누가·무엇을·언제까지\" 목록으로 정리하는 게 즐겁다."},
+        {"id": "administration.2", "en": "I keep track of details others forget: dates, sign-ups, supplies.", "ko": "날짜·신청 명단·준비물처럼 남들이 잊는 세부를 챙긴다."},
+        {"id": "administration.3", "en": "Before an event, I think through each step and what could go wrong.", "ko": "행사 전에 순서마다 잘못될 수 있는 점을 미리 짚어 본다."},
+        {"id": "administration.4", "en": "I like setting up simple systems, like a schedule or sign-up sheet, that help a group run smoothly.", "ko": "일정표·신청표처럼 모임이 매끄럽게 돌아가게 하는 장치를 만드는 게 좋다."},
+        {"id": "administration.5", "en": "When tasks pile up, I know how to split them so everyone has a fitting part.", "ko": "일이 쌓이면 각자에게 맞는 몫으로 나누는 법을 안다."}
+      ]
+    },
+    {
+      "id": "wisdom", "en": "Wisdom", "ko": "지혜",
+      "summary_en": "Applying God's truth to real situations and seeing the way forward.",
+      "summary_ko": "하나님의 진리를 실제 상황에 적용하고 나아갈 길을 보는 은사.",
+      "refs": ["1 Corinthians 12:8", "James 1:5", "James 3:17", "Proverbs 2:6"],
+      "items": [
+        {"id": "wisdom.1", "en": "Friends ask me what to do when they face a hard choice.", "ko": "어려운 선택 앞에서 친구들이 나에게 어떻게 할지 묻는다."},
+        {"id": "wisdom.2", "en": "I can see how a decision is likely to play out down the road.", "ko": "어떤 결정이 나중에 어떻게 흘러갈지 내다보인다."},
+        {"id": "wisdom.3", "en": "In a tense moment, the right words to calm things down often come to me.", "ko": "긴장된 순간에 상황을 가라앉힐 알맞은 말이 떠오르곤 한다."},
+        {"id": "wisdom.4", "en": "I can take a biblical principle and apply it to a messy real-life situation.", "ko": "성경의 원리를 복잡한 실제 상황에 적용할 수 있다."},
+        {"id": "wisdom.5", "en": "People later tell me my advice turned out to be right.", "ko": "나중에 \"그때 그 조언이 맞았다\"는 말을 듣는다."}
+      ]
+    },
+    {
+      "id": "knowledge", "en": "Knowledge", "ko": "지식",
+      "summary_en": "Digging deep into Scripture and gathering understanding to share with others.",
+      "summary_ko": "성경을 깊이 파고들어 이해를 쌓고 다른 사람과 나누는 은사.",
+      "refs": ["1 Corinthians 12:8", "Proverbs 18:15", "Acts 17:11", "2 Timothy 2:15"],
+      "items": [
+        {"id": "knowledge.1", "en": "I love digging into the background of a passage: history, words, places.", "ko": "본문의 배경(역사·단어·지명)을 파고드는 게 정말 좋다."},
+        {"id": "knowledge.2", "en": "I read and study beyond what's required, just to understand more.", "ko": "요구된 것 이상으로, 더 알고 싶어서 읽고 공부한다."},
+        {"id": "knowledge.3", "en": "People come to me when they have a question about what the Bible says.", "ko": "성경이 뭐라고 하는지 궁금하면 사람들이 나에게 묻는다."},
+        {"id": "knowledge.4", "en": "I like comparing passages to see how the whole Bible fits together.", "ko": "여러 본문을 비교해 성경 전체가 어떻게 맞물리는지 보는 게 좋다."},
+        {"id": "knowledge.5", "en": "I keep notes on what I learn so I can share it later.", "ko": "배운 것을 나중에 나누려고 기록해 둔다."}
+      ]
+    },
+    {
+      "id": "faith", "en": "Faith", "ko": "믿음",
+      "summary_en": "Trusting God boldly for what can't yet be seen, and steadying others to trust too.",
+      "summary_ko": "아직 보이지 않는 것을 하나님께 담대히 맡기고, 다른 사람도 믿도록 붙잡아 주는 은사.",
+      "refs": ["1 Corinthians 12:9", "Hebrews 11:1", "Hebrews 11:6", "Matthew 17:20"],
+      "items": [
+        {"id": "faith.1", "en": "I trust God will provide even when a plan looks impossible on paper.", "ko": "계획이 서류상 불가능해 보여도 하나님이 채우실 거라고 믿는다."},
+        {"id": "faith.2", "en": "When others want to give up, I'm the one who says \"let's keep praying.\"", "ko": "다른 사람들이 포기하려 할 때 \"계속 기도하자\"고 말하는 쪽이다."},
+        {"id": "faith.3", "en": "I've stepped into something new with no guarantee because I believed God was in it.", "ko": "하나님이 함께하신다고 믿고 아무 보장 없이 새 일에 발을 디딘 적이 있다."},
+        {"id": "faith.4", "en": "In hard times, my confidence in God tends to steady the people around me.", "ko": "어려울 때 하나님을 향한 내 확신이 주변 사람들을 붙잡아 준다."},
+        {"id": "faith.5", "en": "I pray for big things and expect God to answer.", "ko": "큰 것을 구하며 기도하고, 하나님의 응답을 기대한다."}
+      ]
+    },
+    {
+      "id": "discernment", "en": "Discernment", "ko": "분별",
+      "summary_en": "Telling truth from error and seeing what lies beneath the surface.",
+      "summary_ko": "참과 거짓을 가려내고 겉모습 아래 있는 것을 보는 은사.",
+      "refs": ["1 Corinthians 12:10", "1 John 4:1", "Philippians 1:9-10", "Hebrews 5:14"],
+      "items": [
+        {"id": "discernment.1", "en": "I can usually tell when a message sounds good but doesn't match Scripture.", "ko": "그럴듯하지만 성경과 맞지 않는 메시지를 대개 알아챈다."},
+        {"id": "discernment.2", "en": "I sense when something is off in a situation before I can explain why.", "ko": "이유를 설명하기 전에 상황에서 뭔가 어긋났다는 걸 느낀다."},
+        {"id": "discernment.3", "en": "I notice when someone's words and actions don't line up.", "ko": "누군가의 말과 행동이 맞지 않으면 눈에 띈다."},
+        {"id": "discernment.4", "en": "I can separate what is true from what is just popular or emotional.", "ko": "참된 것과 그저 유행하거나 감정적인 것을 구분할 수 있다."},
+        {"id": "discernment.5", "en": "Friends check with me before getting involved with a new group or a popular new idea.", "ko": "친구들이 새 모임이나 유행하는 새 주장에 빠지기 전에 나에게 물어본다."}
+      ]
+    },
+    {
+      "id": "evangelism", "en": "Evangelism", "ko": "전도",
+      "summary_en": "Sharing the good news of Jesus naturally and clearly with people who don't yet know him.",
+      "summary_ko": "아직 예수님을 모르는 사람에게 복음을 자연스럽고 분명하게 전하는 은사.",
+      "refs": ["Ephesians 4:11", "Acts 8:26-35", "Romans 10:14-15", "1 Peter 3:15"],
+      "items": [
+        {"id": "evangelism.1", "en": "I find natural ways to talk about Jesus with people who don't know him.", "ko": "예수님을 모르는 사람과 자연스럽게 예수님 이야기를 꺼낼 길을 찾는다."},
+        {"id": "evangelism.2", "en": "I have friends outside church and enjoy spending time with them.", "ko": "교회 밖 친구들이 있고, 함께 시간 보내는 게 즐겁다."},
+        {"id": "evangelism.3", "en": "I can explain the gospel simply, in everyday words.", "ko": "복음을 일상의 말로 쉽게 설명할 수 있다."},
+        {"id": "evangelism.4", "en": "I pray by name for people I know who don't follow Jesus, and look for chances to talk.", "ko": "예수님을 따르지 않는 지인들의 이름을 부르며 기도하고 대화할 기회를 찾는다."},
+        {"id": "evangelism.5", "en": "A skeptic's hard questions about God excite me more than they scare me.", "ko": "회의적인 사람이 하나님에 대해 던지는 어려운 질문이 두렵기보다 반갑다."}
+      ]
+    },
+    {
+      "id": "shepherding", "en": "Shepherding", "ko": "목양·돌봄",
+      "summary_en": "Caring for a group of people over time, guiding and protecting them as they grow.",
+      "summary_ko": "한 무리의 사람을 오래 돌보며, 자라 가도록 이끌고 지켜 주는 은사.",
+      "refs": ["Ephesians 4:11", "John 10:11-14", "Acts 20:28", "1 Peter 5:2-3"],
+      "items": [
+        {"id": "shepherding.1", "en": "I keep track of how each person in my group is doing over months, not just on meeting night.", "ko": "모임 날만이 아니라 몇 달에 걸쳐 모임 사람 하나하나가 어떤지 챙긴다."},
+        {"id": "shepherding.2", "en": "When someone stops showing up, I reach out.", "ko": "누가 안 나오기 시작하면 연락한다."},
+        {"id": "shepherding.3", "en": "I'm willing to walk alongside someone for a long time as they grow.", "ko": "한 사람이 자라 가는 동안 오랫동안 곁에서 함께 걸을 마음이 있다."},
+        {"id": "shepherding.4", "en": "I feel responsible for helping the people around me grow closer to God.", "ko": "주변 사람들이 하나님께 더 가까워지도록 돕는 데 책임감을 느낀다."},
+        {"id": "shepherding.5", "en": "I gently protect my group from things that would harm or divide it.", "ko": "모임을 해치거나 갈라놓을 것들로부터 모임을 부드럽게 지킨다."}
+      ]
+    },
+    {
+      "id": "hospitality", "en": "Hospitality", "ko": "대접",
+      "summary_en": "Welcoming people, including strangers, so they feel at home and cared for.",
+      "summary_ko": "낯선 사람까지 맞아들여 집처럼 편안하고 돌봄받는다고 느끼게 하는 은사.",
+      "refs": ["1 Peter 4:9", "Romans 12:13", "Hebrews 13:2", "Acts 16:15"],
+      "items": [
+        {"id": "hospitality.1", "en": "I love having people over, even when the house isn't perfect.", "ko": "집이 완벽하지 않아도 사람들을 초대하는 게 좋다."},
+        {"id": "hospitality.2", "en": "I spot new people at church and make sure they're not standing alone.", "ko": "교회에 새로 온 사람을 알아보고 혼자 서 있지 않게 챙긴다."},
+        {"id": "hospitality.3", "en": "Sharing a meal feels like one of the best ways to care for someone.", "ko": "함께 밥을 먹는 것이 사람을 돌보는 가장 좋은 방법 중 하나라고 느낀다."},
+        {"id": "hospitality.4", "en": "Within a few minutes, I can help a stranger feel like they belong.", "ko": "처음 보는 사람도 몇 분 안에 소속감을 느끼게 해 줄 수 있다."},
+        {"id": "hospitality.5", "en": "I enjoy opening my home or table to people who are different from me.", "ko": "나와 다른 사람들에게도 집과 식탁을 여는 게 즐겁다."}
+      ]
+    }
+  ]
+}
