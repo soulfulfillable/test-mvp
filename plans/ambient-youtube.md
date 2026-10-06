@@ -55,3 +55,4 @@
 - **2026-10-05~06 그림 방식 전환** — 코드 도형 그림 "최악" → 사진 + 셰이더(`docs/ambient-glass.html`). 사진은 Actions `Fetch ambient photos`(Commons PD/CC0, `ambient-photos` 브랜치)에서 3장 선택. 3분 시험 영상 3편(1280, 미리보기는 crf 29 로 압축). 업로드용은 `--width 1920`. 다음: 느낌 → 90분.
 - **2026-10-06 ② 시작** — 사용자 "불은 별로, 1번(비)이 제일 나음". 렌더 워크플로 `render-ambient.yml`(Actions → Releases) + `render.js --drift`(수십 분 주기 화면 이동·밝기 변화). 3분 시험 성공(7.5분, 36MB). 90분 rain seed 1042 렌더 실행.
 - **2026-10-06 ② 완료** — 90분 rain seed 1042: Actions 렌더 3시간 43분, 5400초·989MB·-18.1 LUFS, https://github.com/soulfulfillable/test-mvp/releases/tag/ambient-rain-1042-90m . 채널 Peblit(@peblit) 확인, 카페 유지.
+- **2026-10-06 ③ 준비** — 채널 Peblit 을 앰비언트로 전환 결정. 업로드 안내·복사 페이지 `docs/ambient-channel.html`(채널 설명, 배너 2560×1440, 첫 영상 제목 94자·설명·태그·썸네일 1280×720). 사용자 업로드 대기.

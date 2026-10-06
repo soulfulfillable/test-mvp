@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Peblit 채널 바꾸기</title>
+<style>
+:root{--bg:#f6f5f2;--card:#fff;--ink:#1d1d1f;--sub:#6b6b70;--line:#e3e1dc;--acc:#2f6fed;--ok:#1f9d55}
+@media (prefers-color-scheme:dark){:root{--bg:#121214;--card:#1c1c1f;--ink:#f2f2f4;--sub:#a0a0a8;--line:#2c2c31;--acc:#6b9bff;--ok:#3ccf7c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;padding:16px 16px 48px;max-width:720px;margin:0 auto}
+h1{font-size:22px;margin:4px 0}
+p.lead{color:var(--sub);margin:0 0 16px;font-size:14px}
+h2{font-size:17px;margin:26px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.k{font-size:14px;font-weight:600}
+.n{font-size:12px;color:var(--sub)}
+pre{margin:0;white-space:pre-wrap;word-break:break-word;font:14px/1.45 ui-monospace,Menlo,monospace}
+button{border:1px solid var(--line);background:transparent;color:var(--acc);border-radius:8px;padding:6px 12px;font-size:13px;flex:0 0 auto}
+button.done{color:var(--ok);border-color:var(--ok)}
+ol{padding-left:20px;margin:6px 0}li{margin:5px 0}
+img{width:100%;border-radius:10px;display:block;margin-top:8px}
+a{color:var(--acc)}
+.note{font-size:13px;color:var(--sub)}
+</style>
+</head>
+<body>
+<h1>Peblit 채널 바꾸기 + 첫 영상</h1>
+<p class="lead">PC 에서 하는 걸 추천합니다(영상이 1GB). 회색 칸은 오른쪽 버튼으로 복사해서 그대로 붙여 넣으면 됩니다.</p>
+
+<h2>1. 채널 정리 (5분)</h2>
+<div class="card"><ol>
+<li>YouTube Studio → <b>Content</b> → 기존 쇼츠(주유소) → 점 3개 → <b>Delete forever</b> (또는 Visibility 를 Private).</li>
+<li>Studio → <b>Customization</b> → <b>Profile</b> → Description 을 아래 글로 바꾸기.</li>
+<li>같은 화면 <b>Links</b> 의 blogspot 링크 삭제.</li>
+<li><b>Banner image</b> → 아래 배너 이미지 업로드. 이름(Peblit)·로고·핸들은 그대로 둡니다. 물에 떨어지는 조약돌 로고가 잔잔한 채널과 잘 맞습니다.</li>
+<li>오른쪽 위 <b>Publish</b>.</li>
+</ol></div>
+
+<div class="card"><div class="top"><span class="k">채널 설명 (Description)</span><button data-c="desc">복사</button></div>
+<pre id="desc">Peblit is a quiet place to rest your mind: long, calm videos for sleep, study, reading and work. Rain on the window, soft piano, cozy cafes.
+
+Every sound you hear is played live by a generative music system we designed. Nothing is looped and there is no stock music, so every video is a brand-new piece. Each video shows its seed number, so you can always come back to the exact same piece.
+
+No mid-roll ads, ever. Close your eyes and stay as long as you like.</pre></div>
+
+<div class="card"><div class="top"><span class="k">배너 (2560×1440)</span><a href="ambient/channel/banner.jpg" download>다운로드</a></div>
+<img src="ambient/channel/banner.jpg" alt="channel banner"></div>
+
+<h2>2. 첫 영상 올리기</h2>
+<div class="card"><ol>
+<li>영상 받기: <a href="https://github.com/soulfulfillable/test-mvp/releases/tag/ambient-rain-1042-90m">ambient-rain-1042-90m.mp4</a> (989MB, 90분).</li>
+<li>Studio → <b>Create</b> → Upload videos → 받은 mp4.</li>
+<li>Title·Description 붙여 넣기, Thumbnail 업로드, Tags 는 <b>Show more</b> 안에.</li>
+<li><b>Audience</b>: No, it's not made for kids.</li>
+<li><b>Altered content</b>: No (실제 사람·장소·사건을 꾸민 게 아니라서 표시 대상이 아닙니다).</li>
+<li>Category: <b>Music</b>. Visibility: <b>Public</b>.</li>
+</ol></div>
+
+<div class="card"><div class="top"><span class="k">제목 (Title)</span><button data-c="title">복사</button></div>
+<pre id="title">Rain on the Window &amp; Soft Piano | 1.5 Hours Relaxing Music for Sleep &amp; Study | No Mid-Roll Ads</pre></div>
+
+<div class="card"><div class="top"><span class="k">설명 (Description)</span><button data-c="vdesc">복사</button></div>
+<pre id="vdesc">Soft rain on the window and a gentle piano that never repeats. 1.5 hours of calm for sleep, study, reading, work or just slowing down. No mid-roll ads.
+
+Every note and every raindrop sound is played live by our own generative music system. Nothing is looped and nothing is stock music. The piano follows slow, drifting chords in D Lydian over a warm pad, and the music moves to a new section every few minutes.
+
+Seed #1042. Every seed is a different piece. This one is yours to come back to.
+
+How to listen
+• Sleep: lower the volume and let it run.
+• Study and work: put it on in the background, it stays out of the way.
+• Reading: the rain keeps the room quiet around you.
+
+Photo: Kaique Rocha (CC0) via Wikimedia Commons. Raindrops on the glass are rendered live by code.
+
+#rainsounds #relaxingmusic #pianomusic #sleepmusic #studymusic</pre></div>
+
+<div class="card"><div class="top"><span class="k">태그 (Tags)</span><button data-c="tags">복사</button></div>
+<pre id="tags">rain sounds, rain and piano, relaxing piano music, sleep music, study music, rain on window, rainy day music, calm piano, ambient music, reading music, no mid roll ads, peaceful music, soft piano, rain ambience, focus music</pre></div>
+
+<div class="card"><div class="top"><span class="k">썸네일 (1280×720)</span><a href="ambient/channel/thumb-rain-1042.jpg" download>다운로드</a></div>
+<img src="ambient/channel/thumb-rain-1042.jpg" alt="thumbnail"></div>
+
+<p class="note">올린 뒤 영상 주소를 세션에 알려 주면, 조회·시청 시간 기록을 시작합니다. 수익 조건(구독 1,000 + 시청 4,000시간)까지는 몇 달 걸리는 게 보통입니다.</p>
+
+<script>
+document.querySelectorAll('button[data-c]').forEach(function(b){b.addEventListener('click',function(){
+  var t=document.getElementById(b.getAttribute('data-c')).innerText;
+  function ok(){b.textContent='복사됨';b.className='done';setTimeout(function(){b.textContent='복사';b.className='';},1500);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){fallback(t);ok();});}else{fallback(t);ok();}
+});});
+function fallback(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');}catch(e){}a.remove();}
+</script>
+</body>
+</html>
