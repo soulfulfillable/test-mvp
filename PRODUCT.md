@@ -54,6 +54,9 @@
 | **유튜브 앰비언스 채널** (`plans/ambient-youtube.md`, `board/ambient-engine.md`) | 2026-10-05 결정(사용자 본래 의도), 세션 시작 대기 | 엔진 시제품 3분×3 → 사용자 느낌 → 8시간 렌더 → 채널 |
 | 기도·묵상 생성 음악 (`plans/soaking-music-feature.md`) | 단독 앱 폐기 → 신앙 앱 부가 기능 | 통독 앱 만들 때 탭으로 |
 | **성경 통독 앱** (`plans/bible-reading-app.md`, `board/bible-reading.md`) | 2026-10-06 신앙 앱 첫 번째로 결정, 세션 시작 대기 | 이름·번들 → 개발(DESIGN.md 첫 적용) → TestFlight |
+| **Verse Weave 암송 퍼즐** (`plans/verse-weave-app.md`, `board/verse-weave.md`) | 2026-10-06 결정, 세션 시작 대기 | 이름·번들 → 개발 → TestFlight |
+| **소그룹 은사·기질 키트** (`plans/gifts-kit-app.md`, `board/gifts-kit.md`) | 2026-10-06 결정, 세션 시작 대기 | 문항 초안 → **사용자 검토** → 개발 |
+| **Blessing Jar 가족 축복 항아리** (`plans/blessing-jar-app.md`, `board/blessing-jar.md`) | 2026-10-06 결정, 세션 시작 대기 | 흔들기 시제품 → 사용자 느낌 → 개발 |
 | 웹 미니게임 9종 (`docs/*.html`) | 웹으로 공개 중 | 앱화 후보 고르기 (아래 백로그) |
 | 한의학(clinic) 앱 (`lib/`, `android/`) | 보류 | 재개 여부 미정 |
 
@@ -94,6 +97,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-06 | 신앙 앱 3개 추가 진행: **Verse Weave 암송 퍼즐 → 소그룹 은사·기질 키트 → Blessing Jar** (추천 순서). Table Oracle(식탁 대화 카드)은 제외 | 사용자 "Table Oracle 은 빼도 될 듯, 추천대로 해보자" |
 | 2026-10-06 | **Glance Solunar 는 출시 전에 `DESIGN.md` 리터칭** (기존 앱 손대지 않기 규칙의 예외 — Glance dB 와 같은 경우): Cupertino·강조색 1개(해 뜰 녘 주황)·시그니처 24시간 원형 다이얼·낚시/사냥 전환·안내 화면 없이 바로 메인 | 사용자 "앱이 1차원적인데 디자인들이, 어제 head 쪽에 말한 디자인 방향 보고 다시 해보자". 아직 TestFlight 전이라 첫인상부터 새 디자인으로 |
 | 2026-10-06 | **신앙 앱 첫 번째 = 성경 통독 앱** (오늘 분량 하나·1년 지도·읽는 화면 광고 없음·기도 음악 탭·제휴 링크). Verse Weave 는 2차 기능 후보, 은사 키트는 다음 신앙 앱 후보 | 사용자 "가자 성경 쪽으로!" |
 | 2026-10-05 | 앰비언트 영상 그림은 **진짜 사진(PD/CC0 또는 직접 찍은 사진) + 코드 GPU 효과**로. 코드로 그린 장면은 폐기 | 사용자 "그림 최악이다… 아예 다른 접근방식" → A/B 에서 "A. 진짜 사진 + 코드 효과 (추천)" |
