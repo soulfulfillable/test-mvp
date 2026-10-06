@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glance Tides 심사 답장</title>
+<link rel="icon" href="favicon.png">
+<style>
+  :root{--bg:#F5F6F8;--fg:#14181D;--muted:#5C6672;--card:#FFFFFF;--line:#E1E4E8;--accent:#1677C9}
+  @media (prefers-color-scheme:dark){:root{--bg:#0B0E13;--fg:#EEF1F4;--muted:#9AA4B2;--card:#151A21;--line:#262E39;--accent:#6CB4F0}}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  main{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:28px 0 8px}
+  .sub{color:var(--muted);font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  ol{padding-left:20px;margin:0} li{margin:6px 0}
+  pre{white-space:pre-wrap;word-break:break-word;font:14px/1.5 -apple-system,sans-serif;margin:0}
+  button{display:block;width:100%;margin:12px 0 0;padding:14px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:700}
+  @media (prefers-color-scheme:dark){button{color:#0B0E13}}
+  .ok{color:var(--accent);font-weight:700;text-align:center;min-height:22px;margin-top:8px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Glance Tides — 심사 답장 (2.1 정보 요청)</h1>
+  <div class="sub">App Store Connect → Glance Tides → App Review → 메시지 아래 <b>Reply</b></div>
+
+  <h2>① 화면 녹화 (30초 안팎)</h2>
+  <div class="card"><ol>
+    <li>제어 센터 → 화면 기록 ● 시작</li>
+    <li><b>앱 아이콘을 눌러 켜는 것부터</b> 찍기 (Apple 조건)</li>
+    <li>이미 관측소가 골라져 있으면: 맨 위 <b>관측소 이름</b> 누르기 → <b>Nearest station to me</b> (위치 권한·가까운 관측소가 찍힘)</li>
+    <li>물때 화면에서 <b>그래프를 손가락으로 좌우로 끌기</b> 2~3초</li>
+    <li>아래 7일 표에서 <b>내일(요일)</b> 한 줄 누르기 → 그래프 바뀜</li>
+    <li>⭐ 별 누르기 → 관측소 이름 누르기 → 검색칸에 <b>santa</b> 입력 → 하나 골라 돌아오기</li>
+    <li>오른쪽 위 <b>설정(슬라이더) 아이콘</b> → <b>Meters</b> → <b>Feet</b> → <b>Done</b></li>
+    <li>아래로 내려 <b>Next 30 days → Watch</b> 한 번 누르기 (영상이 없다고 떠도 괜찮음) → 기록 멈춤</li>
+  </ol><p class="sub" style="margin:10px 0 0">30~60초면 충분해요. 바닷가가 아니어도 됩니다.</p></div>
+
+  <h2>② 답장 글 (영어 그대로 붙여넣기)</h2>
+  <div class="card"><pre id="reply">Hello App Review team, thank you for reviewing Glance Tides: Tide Chart. A screen recording from a physical iPhone (latest iOS, build 1.0.0 (31)) is attached.
+
+1. Screen recording: attached. It starts at app launch and shows the welcome screen, &quot;Use My Location&quot; with the iOS location permission, the nearest NOAA tide station, the rising/falling indicator with the current height and next high/low tide, dragging across the tide chart to read any time, the 7-day table (tapping a day changes the chart), station search and favorites, Settings (feet/meters, About the data, &quot;Not for navigation&quot;), and the optional &quot;Next 30 days&quot; card.
+   - The app has no account registration, login, or user-generated content.
+
+2. Purpose and audience: A free tide app for people going to the beach, fishing, kayaking, surfing or boating on US coasts. It shows when the tide is high or low today and this week at the nearest NOAA station, with sunrise/sunset and moon phase, without full-screen ads.
+
+3. How to use: No setup or login. Tap &quot;Use My Location&quot; (or &quot;Search Stations&quot; to type a beach, city, state or NOAA station ID). The main screen shows the tide now, a 24-hour chart (drag to read any time) and a 7-day table. Tap the station name to change station, the star to save a favorite, and the sliders icon for settings. Predictions are saved on the device so they still show with no signal (an &quot;Offline&quot; note shows the saved time).
+
+4. External services: NOAA CO-OPS public tide prediction API (api.tidesandcurrents.noaa.gov, US government, free, no key). Requests contain only the station ID and dates, never the user&#x27;s location. Google AdMob: a banner ad, and one optional rewarded video that opens a 30-day tide table for 24 hours (the 7-day view is always free). No backend server, analytics, authentication, or AI services. Sunrise, sunset and moon phase are calculated on the device.
+
+5. Regional differences: None. The app works the same in all regions where it is available; it covers NOAA stations on US coasts and territories (plus a few nearby stations NOAA publishes). English only.
+
+6. Regulated industry / third-party content: Not a regulated industry. Tide data is public-domain NOAA (US government) data. The app states &quot;Not for navigation&quot;. The app icon and all art are our own.
+
+7. In-App Purchase: None. No subscription or paid content.
+
+Thank you!</pre></div>
+  <button id="copy">답장 글 복사</button>
+  <div class="ok" id="ok"></div>
+
+  <h2>③ 보내기</h2>
+  <div class="card"><ol>
+    <li>Reply 칸에 붙여넣기 + 녹화 영상 첨부 → <b>Send</b></li>
+    <li>위쪽 <b>Resubmit to App Review</b> 가 눌리면 누르기</li>
+  </ol><p class="sub" style="margin:10px 0 0">같은 글은 App Review Information → Notes 에 이미 넣어 뒀어요.</p></div>
+</main>
+<script>
+document.getElementById('copy').onclick = async () => {
+  const t = document.getElementById('reply').innerText;
+  try { await navigator.clipboard.writeText(t); }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('reply'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
+  }
+  document.getElementById('ok').textContent = '복사됐어요 ✓';
+};
+</script>
+</body>
+</html>
