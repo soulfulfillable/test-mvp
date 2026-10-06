@@ -1,4 +1,4 @@
-"""성경 66권 장·절 수 → bible_app/flutter/lib/core/books_data.dart
+"""성경 66권 장·절 수 → tolle_app/flutter/lib/core/books_data.dart
 
 출처: PyPI `pythonbible` 0.15.5 (MIT) 의 MAX_VERSE_NUMBER_BY_BOOK_AND_CHAPTER (개신교 66권, 영어 성경 장·절 구분).
 본문은 넣지 않는다 — 장 수·절 수(계획을 고르게 나누는 무게)만.
@@ -45,7 +45,7 @@ out = [
 for (name, short), (_, verses) in zip(NAMES, books):
     out.append(f"  ('{name}', '{short}', {list(verses)}),")
 out.append("];")
-dst = Path(__file__).resolve().parents[2] / "bible_app/flutter/lib/core/books_data.dart"
+dst = Path(__file__).resolve().parents[2] / "tolle_app/flutter/lib/core/books_data.dart"
 dst.parent.mkdir(parents=True, exist_ok=True)
 dst.write_text("\n".join(out) + "\n")
 print("wrote", dst)

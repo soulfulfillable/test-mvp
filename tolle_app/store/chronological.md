@@ -1,6 +1,6 @@
 # 연대순(Chronological) 읽기 순서 — 근거
 
-앱의 연대순 계획(`bible_app/flutter/lib/core/plan.dart` 의 `_chrono`)은 **장 묶음 단위 근사**다.
+앱의 연대순 계획(`tolle_app/flutter/lib/core/plan.dart` 의 `_chrono`)은 **장 묶음 단위 근사**다.
 장을 쪼개지 않는다(체크 칸이 장 단위라서). 1,189장이 정확히 한 번씩 들어가는지는 `test/plan_test.dart` 가 확인한다.
 
 ## 따른 큰 흐름 (공개 자료)

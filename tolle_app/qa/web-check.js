@@ -1,5 +1,5 @@
 // 웹 미리보기 실제 터치 점검 — docs/bible-reading-app 을 폰 크기 헤드리스 크롬으로 띄워 버튼을 손가락(tap)으로 누른다.
-// 실행: (docs 를 /test-mvp 로 띄운 뒤) NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt node bible_app/qa/web-check.js http://localhost:8765/test-mvp/bible-reading-app/index.html <스크린샷폴더>
+// 실행: (docs 를 /test-mvp 로 띄운 뒤) NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt node tolle_app/qa/web-check.js http://localhost:8765/test-mvp/bible-reading-app/index.html <스크린샷폴더>
 const { open } = require('../../catdoku_app/qa/flutter-web-harness.js');
 const fs = require('fs'), path = require('path');
 const [url, out] = process.argv.slice(2);

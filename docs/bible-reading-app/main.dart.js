@@ -33600,7 +33600,7 @@ A.a82.prototype={
 $1(a){return A.Aq().$1("ads: "+A.j(a))},
 $S:46}
 A.AV.prototype={
-H(a){return new A.t6(B.As,B.zB,"Bible Reading Plan",!1,null)}}
+H(a){return new A.t6(B.As,B.zB,"Tolle",!1,null)}}
 A.u0.prototype={
 af(){return new A.Id(new A.tj(0,$.aJ()))}}
 A.Id.prototype={

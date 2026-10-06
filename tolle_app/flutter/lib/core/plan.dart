@@ -85,7 +85,7 @@ List<int> splitByVerses(List<int> seq, int days) {
 }
 
 /// 연대순(근사) — 장 묶음 단위. 공개된 연대순 계획(Blue Letter Bible 1년 연대순 등)의 큰 흐름을 따라
-/// 장을 쪼개지 않는 선에서 직접 구성했다. 근거·출처는 bible_app/store/chronological.md.
+/// 장을 쪼개지 않는 선에서 직접 구성했다. 근거·출처는 tolle_app/store/chronological.md.
 /// 1,189장이 정확히 한 번씩 들어가는지는 테스트가 확인한다.
 const _chrono = <(String, int, int)>[
   ('Gen', 1, 11), ('Job', 1, 42), ('Gen', 12, 50),

@@ -53,7 +53,7 @@
 | **Glance MPG: Gas Mileage Log** (연비·정비 기록, `fuellog_app/`, `plans/fuel-log-app.md`, `board/fuel-log.md`) | **2026-10-06 1.0(빌드 33) 심사 제출 — Waiting for Review.** 번들 `com.soulfulfill.fuellog`, AdMob 배너(실제 ID), 테스트 48개 | 심사 결과 → (2.1 요청 시 녹화) → 승인 후 AdMob 스토어 링크 연결 → 리뷰·수익 확인 |
 | **유튜브 앰비언스 채널** (`plans/ambient-youtube.md`, `board/ambient-engine.md`) | 2026-10-05 결정(사용자 본래 의도), 세션 시작 대기 | 엔진 시제품 3분×3 → 사용자 느낌 → 8시간 렌더 → 채널 |
 | 기도·묵상 생성 음악 (`plans/soaking-music-feature.md`) | 단독 앱 폐기 → 신앙 앱 부가 기능 | 통독 앱 만들 때 탭으로 |
-| **성경 통독 앱** (`plans/bible-reading-app.md`, `board/bible-reading.md`) | 2026-10-06 Flutter 1차 완성(테스트 45·웹 터치 15/15), 웹 미리보기 `docs/bible-reading-app/` | 이름·번들(사용자) → TestFlight |
+| **Tolle: Bible Reading Plan** 성경 통독 (`plans/bible-reading-app.md`, `board/bible-reading.md`, `tolle_app/`) | 2026-10-06 Flutter 1차 완성, 번들 `com.soulfulfill.tolle` 등록 | ASC 앱 레코드(사용자) → TestFlight |
 | **Verse Weave 암송 퍼즐** (`plans/verse-weave-app.md`, `board/verse-weave.md`) | 2026-10-06 결정, 세션 시작 대기 | 이름·번들 → 개발 → TestFlight |
 | **소그룹 은사·기질 키트** (`plans/gifts-kit-app.md`, `board/gifts-kit.md`) | 2026-10-06 결정, 세션 시작 대기 | 문항 초안 → **사용자 검토** → 개발 |
 | **Blessing Jar 가족 축복 항아리** (`plans/blessing-jar-app.md`, `board/blessing-jar.md`) | 2026-10-06 결정, 세션 시작 대기 | 흔들기 시제품 → 사용자 느낌 → 개발 |
@@ -97,6 +97,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-06 | 성경 통독 앱 이름 **Tolle: Bible Reading Plan**(tolle lege), 번들 `com.soulfulfill.tolle`, 잠금화면 위젯은 2차 | 사용자 "1 A, 2 A 추천대로" |
 | 2026-10-06 | 성경 통독 앱 1차 설계: 오늘 '다음 분량' 하나가 주인공(밀려도 날짜가 아니라 이어서), 밀림 조정은 '남은 장 다시 나누기(끝날 유지)'·'오늘부터 계속(끝날 미룸)' 둘 다, 하루 분량은 절 수로 균형, 연대순은 장 단위 근사, 지도·계획은 계획 범위만 표시, 새 계획 시 지도 초기화(확인 창) | 경쟁 앱 리뷰 불만(죄책감·못 따라감·분량 들쭉날쭉) — 개발 세션 |
 | 2026-10-06 | 신앙 앱 3개 추가 진행: **Verse Weave 암송 퍼즐 → 소그룹 은사·기질 키트 → Blessing Jar** (추천 순서). Table Oracle(식탁 대화 카드)은 제외 | 사용자 "Table Oracle 은 빼도 될 듯, 추천대로 해보자" |
 | 2026-10-06 | **Glance Solunar 는 출시 전에 `DESIGN.md` 리터칭** (기존 앱 손대지 않기 규칙의 예외 — Glance dB 와 같은 경우): Cupertino·강조색 1개(해 뜰 녘 주황)·시그니처 24시간 원형 다이얼·낚시/사냥 전환·안내 화면 없이 바로 메인 | 사용자 "앱이 1차원적인데 디자인들이, 어제 head 쪽에 말한 디자인 방향 보고 다시 해보자". 아직 TestFlight 전이라 첫인상부터 새 디자인으로 |

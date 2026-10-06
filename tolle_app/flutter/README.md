@@ -1,6 +1,6 @@
 # bible
 
-Bible Reading Plan — quiet Bible reading plan tracker (iPhone).
+Tolle: Bible Reading Plan — quiet Bible reading plan tracker (iPhone).
 
 ## Getting Started
 

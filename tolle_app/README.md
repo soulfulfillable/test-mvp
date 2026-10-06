@@ -1,4 +1,4 @@
-# 성경 통독 앱 (`bible_app/`)
+# 성경 통독 앱 (`tolle_app/`)
 
 기획서 `plans/bible-reading-app.md`, 게시판 `board/bible-reading.md`.
 

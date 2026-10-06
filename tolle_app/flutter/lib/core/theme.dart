@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 /// 앱 이름 — 정해지면 여기 한 곳만 바꾼다 (스토어 이름은 store/ios-listing.md).
-const kAppName = 'Bible Reading Plan';
+const kAppName = 'Tolle';
 
 /// 개인정보처리방침 (GitHub Pages).
 const kPrivacyUrl = 'https://soulfulfillable.github.io/test-mvp/bible-privacy.html';

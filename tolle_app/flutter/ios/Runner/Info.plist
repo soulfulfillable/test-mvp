@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Bible Plan</string>
+	<string>Tolle</string>
 	<key>GADApplicationIdentifier</key>
 	<!-- Google 공식 테스트 앱 ID — AdMob 에 앱을 만들면 진짜 ID 로 바꾼다 (lib/core/ads.dart 도) -->
 	<string>ca-app-pub-3940256099942544~1458002511</string>
