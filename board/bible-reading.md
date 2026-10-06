@@ -8,7 +8,7 @@
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] 이름 A `Tolle: Bible Reading Plan`, 위젯 A(2차로). 번들 `com.soulfulfill.tolle` 등록 완료.
-- [사용자] App Store Connect → 앱 → ＋ 신규 앱: iOS / `Tolle: Bible Reading Plan` / English (U.S.) / `com.soulfulfill.tolle` / SKU `tolle` / Full Access (복사: https://soulfulfillable.github.io/test-mvp/todo.html)
+- ✅ [사용자] ASC 앱 레코드 생성 (id 6819705454, Actions 확인 run 15) → `Release iOS`(tolle) 실행
 - [사용자, 스토어 제출 전] AdMob(soulfulfillable 계정) → 앱 추가(iOS, 미출시, 이름 Tolle) → Banner `banner` → 완료 화면 캡처. 앱 설정 → Blocking controls → 민감 카테고리 차단(Religion 허용).
 - [세션] 레코드 생기면 `Release iOS`(tolle) → TestFlight 자동 초대 → 2.1 대비 30초 녹화 부탁(오늘 → Mark as Read → Map → Plan).
 - 준비 완료: 스토어 문구·심사 메모 7항목 `tolle_app/store/ios-metadata.json`, 스크린샷 5장 `tolle_app/store/screenshots/`.
@@ -17,6 +17,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | "햇어" (ASC 신규 앱) | 앱 레코드 확인 Actions → 있음(id 6819705454) → Release iOS(tolle) 실행 |
 | 10-06 | "1 A, 2 A 추천대로" | 이름 Tolle: Bible Reading Plan, 위젯은 2차. 폴더 `bible_app`→`tolle_app`(워크플로 규칙: 폴더=번들 이름), 번들 등록, Release iOS·등록 정보 선택지에 tolle, todo 페이지, 스토어 문구·스크린샷 |
 | 10-06 | "성경 통독 앱 개발 시작해줘. … DESIGN.md 새 앱 규칙을 처음 적용하는 앱이니까 첫 화면 만들기 전에 꼭 읽고, 스크린샷을 4장 체크리스트로 점검해서 보고해줘" | DESIGN.md 를 먼저 읽고 Cupertino 로만 만듦. 아래 "디자인 점검 결과" 10항목 |
 
