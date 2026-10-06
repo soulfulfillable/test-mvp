@@ -1,0 +1,65 @@
+name: Render ambient video
+
+# 앰비언트 유튜브 영상(소리+사진+GPU 효과)을 렌더해 Releases 에 올린다.
+# 90분짜리는 작업 환경에서 몇 시간 걸리고 리포에 못 올리는 크기라 여기서 돌린다.
+# 다운로드: https://github.com/soulfulfillable/test-mvp/releases (태그 ambient-<mood>-<seed>-<minutes>m)
+
+on:
+  workflow_dispatch:
+    inputs:
+      mood:
+        description: "분위기"
+        type: choice
+        options: [rain, cafe, night, fire]
+        default: rain
+      seed:
+        description: "시드 (같은 시드 = 같은 영상)"
+        default: "1042"
+      minutes:
+        description: "길이(분)"
+        default: "90"
+      photo:
+        description: "배경 사진 (docs/ 아래 경로)"
+        default: "docs/ambient/photo-rain.jpg"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-ambient-${{ inputs.mood }}-${{ inputs.seed }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install ffmpeg + headless Chromium
+        run: |
+          sudo apt-get update -q && sudo apt-get install -yq ffmpeg >/dev/null
+          npm i --no-save playwright-core@1.56
+          npx playwright-core install --with-deps chromium
+      - name: Render
+        env:
+          X264_CRF: "25"
+        run: |
+          TAG="ambient-${{ inputs.mood }}-${{ inputs.seed }}-${{ inputs.minutes }}m"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          node tools/ambient/render.js "${{ inputs.mood }}" "${{ inputs.seed }}" "${{ inputs.minutes }}" "out/$TAG.mp4" \
+            --photo "${{ inputs.photo }}" --width 1920 --loop 30 --drift
+          ffmpeg -hide_banner -ss 60 -i "out/$TAG.mp4" -frames:v 1 -q:v 3 "out/$TAG-thumb.jpg"
+          ls -la out
+          ffprobe -v error -show_entries format=duration,size -of default=nw=1 "out/$TAG.mp4"
+          ffmpeg -hide_banner -i "out/$TAG.mp4" -af ebur128=framelog=quiet -f null - 2>&1 | grep -E " I:| LRA:" | tail -2
+      - name: Publish to Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete "$TAG" -y --cleanup-tag 2>/dev/null || true
+          gh release create "$TAG" "out/$TAG.mp4" "out/$TAG-thumb.jpg" --target "$GITHUB_SHA" \
+            --title "Ambient: ${{ inputs.mood }} · Seed #${{ inputs.seed }} · ${{ inputs.minutes }} min" \
+            --notes "Rendered by tools/ambient/render.js (mood ${{ inputs.mood }}, seed ${{ inputs.seed }}, photo ${{ inputs.photo }}). Every sound is synthesized by code. Photo credits: docs/ambient/photos.json"
