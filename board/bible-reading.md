@@ -4,7 +4,7 @@
 ## 지금 상태 (3줄 이내)
 이름 **Tolle: Bible Reading Plan** 확정, 번들 `com.soulfulfill.tolle` **Apple 등록 완료**(Actions run 14). Flutter 1차 완성(`tolle_app/flutter/`): 오늘 분량 하나 + Mark as Read(시그니처: 1,189칸 지도가 톡톡 채워짐) · 지도(66권×장) · 계획(전체/신약/시편·잠언 × 기간 × 성경순/연대순, 시작일, 밀림 조정 2가지, 하루 1번 알림, CSV 내보내기).
 테스트 45개 통과(엔진 24 + 로봇 21), 웹 실제 터치 15/15. 웹 미리보기 https://soulfulfillable.github.io/test-mvp/bible-reading-app/index.html · 검수 https://soulfulfillable.github.io/test-mvp/bible-reading-qa.html
-**빌드 35 TestFlight 준비 끝 + 초대 메일 보냄**(10-06). 다음: 사용자 TestFlight 느낌 + 30초 녹화 → AdMob → 스토어 제출.
+**빌드 36(장 직접 체크 포함) TestFlight 반영**(10-06, 초대는 빌드 35 때 수락됨). 다음: 사용자 TestFlight 느낌 + 30초 녹화 → AdMob → 스토어 제출.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] 이름 A `Tolle: Bible Reading Plan`, 위젯 A(2차로). 번들 `com.soulfulfill.tolle` 등록 완료.
