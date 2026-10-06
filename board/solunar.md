@@ -4,11 +4,13 @@
 ## 지금 상태 (3줄 이내)
 **10-06 사용자 요청으로 `DESIGN.md` 리터칭 완료**(기존 앱이지만 사용자가 직접 요청 — Glance dB 와 같은 예외): Cupertino·라이트/다크·강조색 1개(해 뜰 녘 주황)·시그니처 **24시간 원형 다이얼**(해·달 하루, Major 굵게·Minor 가늘게, 지금 점), 낚시/사냥 전환(사냥은 다이얼 가운데 허용 시간 카운트다운), 안내 화면 없이 첫 화면부터 메인.
 테스트 37개(엔진 22 + 로봇 15: 3기종×라이트/다크·135% 글씨·VoiceOver 버튼·줄 합쳐짐 검사) + 웹 클릭 점검 43/43. AdMob 실제 ID 반영(배너·보상형). 웹 https://soulfulfillable.github.io/test-mvp/solunar-app/index.html
-다음: ASC 앱 레코드(사용자) 확인 → `Release iOS`(solunar) → TestFlight(초대 자동).
+ASC 앱 레코드 있음(id 6819474340) → `Release iOS` run 34(빌드 34) 실행 → TestFlight 초대 자동.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ 이름·번들(10-03) → ✅ Apple 번들 등록 → ✅ AdMob 앱·광고 단위 2개(10-06, 사용자 캡처: 앱 `~5104875562`, 배너 `/2111135851`, 보상형 `/6669238673`) → 코드 반영.
-- [사용자] App Store Connect 신규 앱: iOS / `Glance Solunar: Fishing Times` / English (U.S.) / `com.soulfulfill.solunar` / SKU `solunar` / Full Access (https://soulfulfillable.github.io/test-mvp/todo.html). 됐는지 Actions 로 확인 후 바로 Release iOS.
+- ✅ [사용자] App Store Connect 앱 레코드 (Actions 확인 10-06: "있음 — id 6819474340").
+- [세션] `Release iOS` run 34 → TestFlight 초대 메일 자동(속도계 세션 도구). 심사 메모 7항목 `solunar_app/store/review-notes.md` 준비.
+- [사용자, TestFlight 때] 새 디자인 '느낌' 한마디 + 30초 화면 녹화(순서는 `review-notes.md`) — 2.1 대비.
 - [사용자] 새 디자인 웹 미리보기 '느낌' 한마디.
 - [세션] 앱 레코드 생기면 → `Release iOS`(solunar) → TestFlight 초대 자동 → 스크린샷 1290×2796 → `App Store 등록 정보 채우기` → 2.1 대비 심사 메모 7항목·녹화 부탁(공통 규칙).
 
