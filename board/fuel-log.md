@@ -2,9 +2,8 @@
 마지막 갱신: 2026-10-03 (KST)
 
 ## 지금 상태 (3줄 이내)
-**빌드 33**(실제 AdMob ID·고친 서명) 업로드 성공. 스토어 스크린샷 5장·심사 메모 7항목 준비, `App Store 등록 정보 채우기`(build 33) **완료** — 부제·설명·키워드·스크린샷 5장(APP_IPHONE_67)·빌드 33 연결·심사 메모 전부 ✓ (run 37391125810).
-남은 것 = 사용자 ASC 수동 항목(카테고리·Content Rights·연령·App Privacy·가격/EU 제외·저작권·연락처) → Add for Review → Submit.
-사용자 결정(10-06): TestFlight 느낌 확인·화면 녹화 없이 진행.
+**1.0(빌드 33) 심사 제출 완료 — "Waiting for Review"** (사용자 캡처 2026-10-06). 스크린샷 5장·심사 메모 7항목·빌드 연결은 Actions, App Privacy·연령·가격 등은 사용자.
+다음: 심사 결과(보통 24~48시간). 2.1 정보 요청이 오면 30초 녹화(`store/review-notes.md` 순서). 승인되면 AdMob 에 스토어 링크 연결.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] 이름 A `Glance MPG: Gas Mileage Log`, 번들 `com.soulfulfill.fuellog`.
@@ -17,6 +16,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | (ASC 캡처) "1 Item Submitted", 1.0 Waiting for Review | **심사 제출 완료** 기록(게시판·기획서·PRODUCT·PLAYBOOK) |
 | 10-06 | (ASC App Privacy → Device ID 용도 창 캡처) "여기는" | Third-Party Advertising + Analytics 체크 → Next → 사용자와 연결 No → 추적 No. 나머지 항목(대략 위치·제품 사용·광고 데이터·충돌·성능)도 같은 답 |
 | 10-06 | "아냐확인하지말고 그냥 진행하자" (TestFlight 느낌 확인 건너뛰기) | 바로 제출 준비: 스토어 스크린샷 5장(웹 ?demo=1&shots=1 → 1290×2796), 심사 메모 7항목(녹화 대신 1분 체험 순서), `App Store 등록 정보 채우기`(build 33) 실행, 사용자 수동 항목 정리(`store/ios-listing.md` 끝) |
 | 10-05 | AdMob "Ad unit successfully created" 화면 캡처 (앱 ID `~6940701412`, 배너 `/8213509779`) | `lib/core/ads.dart`·`Info.plist` 에 반영, 같은 게시자 계정인지 검사하는 테스트 추가(48개 통과). 빌드 29 는 옛 서명 방식(인증서 지우던 때)이라 **고친 Release iOS 로 새 빌드** |
