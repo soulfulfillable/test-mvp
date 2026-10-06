@@ -2,9 +2,9 @@
 마지막 갱신: 2026-10-05 (개발 세션)
 
 ## 지금 상태 (3줄 이내)
-**② 90분 비+피아노 영상 렌더 중** — Actions `Render ambient video`(rain, seed 1042, 90분, 1080p, 느린 화면 흐름) → 결과는 Releases 태그 `ambient-rain-1042-90m`.
-3분 시험(seed 7)은 Actions 에서 7.5분·36MB·-18.2 LUFS 로 성공 → 90분 예상 3~4시간·약 1.1GB. 모닥불은 사용자 "별로" → 보류.
-다음: 90분 결과 확인 → 사용자에게 링크 → ③ 채널 첫 업로드(채널 주소 필요).
+**② 완료: 90분 비+피아노 영상** — Releases `ambient-rain-1042-90m` (5400초, 989MB, 1080p, -18.1 LUFS, Actions 렌더 3시간 43분).
+채널 Peblit(@peblit, soulfulfillable 계정) 확인. 카페 유지, 모닥불 보류.
+다음: 채널 A/B(새 앰비언트 채널 vs Peblit) → ③ 첫 업로드(제목·설명·썸네일 준비).
 
 ## 다음 할 일 / 사용자에게 받을 것
 - [사용자] https://soulfulfillable.github.io/test-mvp/ambient-samples.html 새 영상 3편(사진+효과) 좋다/별로.

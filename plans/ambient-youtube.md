@@ -54,3 +54,4 @@
 - **2026-10-05 ① 2차** — 사용자: 모닥불 음침, 카페 반복적·판단 어려움, **영상은 90분**. → 모닥불 밝게(Eb 장조 5음), 카페 화음 8개·패턴 변주, 그림 장면 `docs/ambient-scene.html`(비 오는 창/모닥불/카페 창가, 12초 무이음 반복), 렌더 도구 `tools/ambient/render.js`(5분 조각+크로스페이드, 소리+그림 → MP4). 샘플 3분 영상 3편. 다음: 느낌 → ② 90분.
 - **2026-10-05~06 그림 방식 전환** — 코드 도형 그림 "최악" → 사진 + 셰이더(`docs/ambient-glass.html`). 사진은 Actions `Fetch ambient photos`(Commons PD/CC0, `ambient-photos` 브랜치)에서 3장 선택. 3분 시험 영상 3편(1280, 미리보기는 crf 29 로 압축). 업로드용은 `--width 1920`. 다음: 느낌 → 90분.
 - **2026-10-06 ② 시작** — 사용자 "불은 별로, 1번(비)이 제일 나음". 렌더 워크플로 `render-ambient.yml`(Actions → Releases) + `render.js --drift`(수십 분 주기 화면 이동·밝기 변화). 3분 시험 성공(7.5분, 36MB). 90분 rain seed 1042 렌더 실행.
+- **2026-10-06 ② 완료** — 90분 rain seed 1042: Actions 렌더 3시간 43분, 5400초·989MB·-18.1 LUFS, https://github.com/soulfulfillable/test-mvp/releases/tag/ambient-rain-1042-90m . 채널 Peblit(@peblit) 확인, 카페 유지.
