@@ -51,3 +51,4 @@ Verse Weave 는 이 앱의 2차 기능 후보로, 은사 키트는 다음 신앙
 - 지금 앱 이름 자리표시 `Bible Reading Plan`, 광고는 Google 테스트 ID, 번들 미정(`com.soulfulfill.bible` 은 flutter create 기본값일 뿐 — 등록 전 사용자 확인).
 - 남은 것: 이름·번들(사용자) → ⑤광고 진짜 ID → ⑥Release iOS → ⑦TestFlight. 위젯·음악 탭·추천 자료·오늘의 한 절은 2차.
 - 10-06 사용자 결정: 이름 **Tolle: Bible Reading Plan**(부제 `Bible in a Year Checklist`), 번들 `com.soulfulfill.tolle`(등록 완료), 위젯 2차. 앱 폴더 `tolle_app/`. 스토어 문구·스크린샷 준비. 남은 것: ASC 앱 레코드(사용자) → Release iOS → TestFlight.
+- 10-06 ASC 앱 레코드(사용자) → Release iOS run 35 성공 → 빌드 35 TestFlight 내부 테스트, 초대 메일 보냄. 다음: 사용자 느낌·녹화 → AdMob → 스토어 제출.

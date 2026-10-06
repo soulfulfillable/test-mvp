@@ -4,13 +4,14 @@
 ## 지금 상태 (3줄 이내)
 이름 **Tolle: Bible Reading Plan** 확정, 번들 `com.soulfulfill.tolle` **Apple 등록 완료**(Actions run 14). Flutter 1차 완성(`tolle_app/flutter/`): 오늘 분량 하나 + Mark as Read(시그니처: 1,189칸 지도가 톡톡 채워짐) · 지도(66권×장) · 계획(전체/신약/시편·잠언 × 기간 × 성경순/연대순, 시작일, 밀림 조정 2가지, 하루 1번 알림, CSV 내보내기).
 테스트 45개 통과(엔진 24 + 로봇 21), 웹 실제 터치 15/15. 웹 미리보기 https://soulfulfillable.github.io/test-mvp/bible-reading-app/index.html · 검수 https://soulfulfillable.github.io/test-mvp/bible-reading-qa.html
-다음: ASC 앱 레코드(사용자) → `Release iOS`(tolle) → TestFlight. AdMob 은 스토어 제출 전까지.
+**빌드 35 TestFlight 준비 끝 + 초대 메일 보냄**(10-06). 다음: 사용자 TestFlight 느낌 + 30초 녹화 → AdMob → 스토어 제출.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] 이름 A `Tolle: Bible Reading Plan`, 위젯 A(2차로). 번들 `com.soulfulfill.tolle` 등록 완료.
 - ✅ [사용자] ASC 앱 레코드 생성 (id 6819705454, Actions 확인 run 15) → `Release iOS`(tolle) 실행
 - [사용자, 스토어 제출 전] AdMob(soulfulfillable 계정) → 앱 추가(iOS, 미출시, 이름 Tolle) → Banner `banner` → 완료 화면 캡처. 앱 설정 → Blocking controls → 민감 카테고리 차단(Religion 허용).
-- [세션] 레코드 생기면 `Release iOS`(tolle) → TestFlight 자동 초대 → 2.1 대비 30초 녹화 부탁(오늘 → Mark as Read → Map → Plan).
+- ✅ [세션] `Release iOS` run 35 성공 → 빌드 35 VALID → 그룹 `me` 생성 → 초대 메일(두 번째 실행에서)
+- [사용자] 메일의 View in TestFlight → 설치 → '느낌' 한마디 + 30초 화면 녹화(오늘 → Mark as Read → Map → Plan, 2.1 대비)
 - 준비 완료: 스토어 문구·심사 메모 7항목 `tolle_app/store/ios-metadata.json`, 스크린샷 5장 `tolle_app/store/screenshots/`.
 - [나중] 위젯(2차, 사용자 결정), 음악 탭, 추천 자료(제휴), 오늘의 한 절(WEB).
 
@@ -37,6 +38,7 @@
 - (다른 게시판에서 배움) 폰 링크 먼저, 결정은 2지선다+추천 이유 한 줄, 보고는 짧게 번호로. 신앙 앱은 혼내지 않는 정서.
 
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
+- **새 앱 첫 `TestFlight 초대` 는 메일이 안 갈 수 있다**: 그룹 `me` 를 막 만든 직후라 "409 Tester has no installable build" 로 메일을 건너뜀(빌드가 그룹에 자동으로 붙기 전). 몇 분 뒤 `TestFlight 초대`를 수동 실행(build·app)하면 "초대 메일 보냄". 로그의 409 줄을 꼭 확인.
 - **성경 장·절 수는 PyPI `pythonbible`(MIT) 휠에 들어 있다** (`MAX_VERSE_NUMBER_BY_BOOK_AND_CHAPTER`, 앞 66권 = 1,189장·31,102절). pip download 가 이 환경에서 된다 → `tools/bible/make_books.py` 가 Dart 상수로 뽑음. Verse Weave 등 다른 신앙 앱도 재사용.
 - **하루 분량은 장 수 말고 절 수로 나눈다** — 시편 117편(2절)과 119편(176절)이 같은 '1장'이라 장 수로 나누면 들쭉날쭉(경쟁 앱 Read Scripture 리뷰 불만이 이것). 누적 절 수 목표에 가장 가까운 장 경계 + 남은 날마다 1장 보장 → 1년 계획 하루 4~22분, 중앙 11분.
 - **경쟁 앱 리뷰 불만 = 기능 목록**: 연속 기록 죄책감, 밀리면 못 따라감, 시작일 못 바꿈 → '오늘' 대신 '다음 분량'을 주인공으로, 밀리면 "Spread the Rest(끝날 유지)" / "Continue From Today(끝날 미룸)" 두 가지, 시작일 변경은 진행 유지.
