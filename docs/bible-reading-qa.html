@@ -1,0 +1,27 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>성경 통독 앱 검수</title>
+<style>
+:root{--bg:#F2F4F7;--fg:#0F1A24;--muted:#4F5D6B;--card:#fff;--ok:#178A52}
+@media (prefers-color-scheme:dark){:root{--bg:#0D1217;--fg:#E9EEF3;--muted:#A3AFBB;--card:#161D24;--ok:#3CC580}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:22px;margin:0 0 6px} .sub{color:var(--muted);font-size:13px}
+.ok{color:var(--ok);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:16px}
+figure{margin:0;background:var(--card);border-radius:12px;padding:8px} img{width:100%;border-radius:8px;display:block}
+figcaption{font-size:12px;color:var(--muted);margin-top:6px}
+details{margin-top:20px;background:var(--card);border-radius:12px;padding:12px} code{font-size:12px}
+a{color:#8E2C48}
+</style></head><body><main>
+<h1>성경 통독 앱 — 검수 결과</h1>
+<div class="sub">2026-10-06 · Flutter 1차 · 자동 테스트가 실제로 누른 기록 · <a href="bible-reading-app/index.html">폰으로 해 보기</a></div>
+<ul>
+<li><span class="ok">테스트 45개 전부 통과</span> — 엔진 24(1,189장·31,102절 합계, 연대순 1,189장 정확히 한 번, 15가지 계획 전부 매일 1장 이상·분량 균형, 밀림 조정, 서머타임 날짜) + 로봇 21</li>
+<li>로봇: 서로 다른 버튼 35종 · 64번 누름 · 화면 71개 점검 · 스크린샷 47장 (잘린 글자·VoiceOver 로 못 누르는 버튼·한글 섞임 자동 검사)</li>
+<li>기기 3종(iPhone 13 1170×2532 / SE / 15 Pro Max) × 라이트·다크 × 글씨 100%·135%</li>
+<li><span class="ok">웹 실제 터치 점검 15/15</span> (헤드리스 크롬 폰 크기, 손가락 tap·세로 끌기, 콘솔 에러 0)</li>
+<li>로봇이 잡아서 고친 것: 큰 글씨에서 "Psalms &amp; Proverbs"·"Spread the Rest" 가 잘림 → 설명을 아랫줄로. 책이 둘인 날 큰 제목이 "2 / Samuel" 로 끊김(스크린샷에서 발견) → 책마다 한 줄.</li>
+<li>확인 못 한 것: 실기기 햅틱 느낌, 아이폰 시스템 글꼴(SF) 렌더(웹·테스트는 Roboto), 실제 알림 도착, 진짜 광고(지금은 테스트 ID).</li>
+</ul>
+<div class="grid"><figure><img src="bible-reading-qa/01-today-first.jpg" loading="lazy" alt=""><figcaption>오늘 — 처음 켰을 때</figcaption></figure><figure><img src="bible-reading-qa/02-today-read.jpg" loading="lazy" alt=""><figcaption>읽음 누른 뒤 (지도 3칸 채워짐)</figcaption></figure><figure><img src="bible-reading-qa/03-today-behind.jpg" loading="lazy" alt=""><figcaption>6일 밀렸을 때 — 혼내지 않음</figcaption></figure><figure><img src="bible-reading-qa/04-adjust-sheet.jpg" loading="lazy" alt=""><figcaption>일정 조정: 나머지 다시 나누기 / 오늘부터</figcaption></figure><figure><img src="bible-reading-qa/05-map.jpg" loading="lazy" alt=""><figcaption>지도 (66권 × 장)</figcaption></figure><figure><img src="bible-reading-qa/07-plan.jpg" loading="lazy" alt=""><figcaption>계획</figcaption></figure><figure><img src="bible-reading-qa/08-plan-confirm.jpg" loading="lazy" alt=""><figcaption>새 계획 전 확인</figcaption></figure><figure><img src="bible-reading-qa/11-today-complete.jpg" loading="lazy" alt=""><figcaption>계획 완료</figcaption></figure><figure><img src="bible-reading-qa/L-iPhone13-dark-100-today.jpg" loading="lazy" alt=""><figcaption>다크 모드 · 연대순 121일째</figcaption></figure><figure><img src="bible-reading-qa/L-iPhone13-dark-100-map.jpg" loading="lazy" alt=""><figcaption>다크 모드 지도</figcaption></figure><figure><img src="bible-reading-qa/L-iPhoneSE-light-135-today.jpg" loading="lazy" alt=""><figcaption>iPhone SE · 큰 글씨 135%</figcaption></figure><figure><img src="bible-reading-qa/L-iPhone15ProMax-dark-135-plan.jpg" loading="lazy" alt=""><figcaption>Pro Max · 다크 · 큰 글씨</figcaption></figure><figure><img src="bible-reading-qa/w2-read.jpg" loading="lazy" alt=""><figcaption>웹 실제 터치 — 읽음</figcaption></figure><figure><img src="bible-reading-qa/w3-map.jpg" loading="lazy" alt=""><figcaption>웹 — 지도</figcaption></figure><figure><img src="bible-reading-qa/w6-adjust.jpg" loading="lazy" alt=""><figcaption>웹 — 일정 조정 시트</figcaption></figure></div>
+</main></body></html>

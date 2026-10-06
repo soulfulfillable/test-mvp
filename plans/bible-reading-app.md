@@ -43,3 +43,11 @@ Verse Weave 는 이 앱의 2차 기능 후보로, 은사 키트는 다음 신앙
 ①경쟁 앱(One Year Bible Plan, Bible Reading Tracker 등) 화면·리뷰 확인 → ②1,189장 데이터·계획 생성기(+검증: 합계 1,189, 날짜 계산) → ③테스트 로봇 → ④Flutter(DESIGN.md) → ⑤광고·차단 설정 → ⑥Release iOS → ⑦TestFlight(2.1 대비 녹화 미리 부탁) → ⑧음악 탭은 엔진 판정 후
 
 ## 진행 기록 (개발 세션이 추가, 최신이 위)
+
+### 2026-10-06 개발 세션 1 — Flutter 1차 완성
+- ①경쟁 앱: One Year Bible Plan(4.9/3천), ReadingPlan(4.7, "밀려도 죄책감 없음" 칭찬), Bible Box(밀리면 다시 나눔·히트맵), Read Scripture(하루 분량 들쭉날쭉 불만), YouVersion(streak 죄책감·Catch Me Up 불만). → 밀림 조정 2가지·시작일 변경·절 수 균형을 1차에 넣음.
+- ②데이터: `pythonbible`(MIT) 장·절 수 → `lib/core/books_data.dart`. 계획 15종(범위 3 × 기간 3 × 순서 2, 시편·잠언은 순서 없음) 전부 테스트(합계·한 번씩·매일 1장 이상·균형). 연대순 근거 `bible_app/store/chronological.md`.
+- ③④ 로봇 21개(3기기×라이트/다크×글씨 135%, 잘림·VoiceOver·한글 검사) + 엔진 24개 통과, 웹 터치 15/15. 디자인 점검 10항목 `board/bible-reading.md`.
+- 지금 앱 이름 자리표시 `Bible Reading Plan`, 광고는 Google 테스트 ID, 번들 미정(`com.soulfulfill.bible` 은 flutter create 기본값일 뿐 — 등록 전 사용자 확인).
+- 남은 것: 이름·번들(사용자) → ⑤광고 진짜 ID → ⑥Release iOS → ⑦TestFlight. 위젯·음악 탭·추천 자료·오늘의 한 절은 2차.
+
