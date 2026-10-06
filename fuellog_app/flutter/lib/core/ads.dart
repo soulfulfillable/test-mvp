@@ -43,6 +43,15 @@ class FakeAds extends Ads {
   }
 }
 
+/// 웹 미리보기 `?shots=1` — 스토어 스크린샷을 찍을 때 가짜 광고 자리를 숨긴다 (아이폰 앱에는 없는 길).
+class HiddenAds extends Ads {
+  @override
+  Future<void> init() async {}
+
+  @override
+  Widget banner() => const SizedBox.shrink();
+}
+
 /// 배너 높이 (320×50 + 위아래 여백). 광고가 안 와도 자리를 비워 둬 화면이 출렁이지 않는다.
 const bannerHeight = 60.0;
 
