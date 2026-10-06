@@ -66,6 +66,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-06 | Blessing Jar | 기획서의 "흔들면 하나 떨어짐" 이 경쟁 앱 4곳에 이미 있었다(검색 1번에 나옴). 또 로봇의 "카드 연타 방지" 검사가 0.8초 기다린 뒤 연타해 잠금(0.7초)이 이미 풀려 오탐 | 시제품 전에 핵심 동작 이름으로 스토어 검색 → 차별점을 동작이 아니라 쓰는 방식(돌려쓰기·봉인 의식)에 둔다. 연타 검사는 결과가 뜬 **직후** 바로 누른다. 흔들기 웹 점검은 `new DeviceMotionEvent('devicemotion', {acceleration})` dispatch + 마우스 끌기 둘 다 (`blessingjar_app/qa/robot.js`) |
 | 2026-10-06 | 성경 통독 | 하루 분량을 장 수로 나누면 시편 117편(2절)·119편(176절)이 같은 무게라 들쭉날쭉 — 경쟁 앱 리뷰 불만 1순위 중 하나 | 분량은 **절 수 누적**으로 나누고(장은 안 쪼갬) 매일 1장 이상 보장, 15가지 계획 전부 테스트. 장·절 수는 PyPI `pythonbible`(MIT) 휠에서 (`tools/bible/make_books.py`) |
 | 2026-10-06 | 성경 통독 | DESIGN.md 첫 적용 — `CupertinoListTile` 오른쪽 값(`additionalInfo`)이 큰 글씨에서 제목을 잘라 먹음, 두 책 걸친 큰 제목이 "2 / Samuel" 로 끊김(스크린샷에서만 보임) | 긴 값은 `subtitle` 로, 큰 제목은 조각마다 줄바꿈. 테스트 스크린샷의 아이콘 네모는 CupertinoIcons 글꼴을 `FontLoader` 로 |
 | 2026-10-06 | 솔루나 | (웹) `CupertinoSearchTextField` 의 기본 × 버튼이 첫 글자 입력 때 나타나며 입력칸 포커스를 날림 — `enterText` 로봇은 통과, 웹에서 한 글자씩 칠 때만 보임 | `suffixMode: never` + × 를 칸 밖에 항상. 웹 점검에 "한 글자씩 치며 `activeElement` 유지" 검사 |
