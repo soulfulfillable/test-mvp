@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// 보상형 광고를 보여 주는 자리. 지금은 30일 달력 하나 (영상 보면 24시간 열림).
@@ -19,19 +19,17 @@ enum RewardResult {
   unavailable,
 }
 
-/// AdMob 광고 단위 ID.
-/// 아직 AdMob 에 이 앱을 만들지 않아 Google 공식 **테스트 ID** 를 쓴다.
-/// 콘솔(soulfulfillable 계정)에서 앱·광고 단위를 만들면 여기와 ios/Runner/Info.plist 의
-/// GADApplicationIdentifier 를 함께 바꾼다.
+/// AdMob 광고 단위 ID — `soulfulfillable` 계정의 "Glance Solunar" iOS 앱 (앱 ID 는 ios/Runner/Info.plist).
+/// 안드로이드는 AdMob 앱을 만들지 않아 Google 공식 테스트 ID.
 ///
 /// 방침: 배너 + 보상형(30일 달력)만. 전면 광고 없음, 구독 없음 — 경쟁 앱 불만의 정반대.
 class AdIds {
   static bool get _ios => defaultTargetPlatform == TargetPlatform.iOS;
   static String get banner =>
-      _ios ? 'ca-app-pub-3940256099942544/2934735716' : 'ca-app-pub-3940256099942544/6300978111';
+      _ios ? 'ca-app-pub-4724352880074547/2111135851' : 'ca-app-pub-3940256099942544/6300978111';
   static String rewarded(RewardPlacement p) => switch (p) {
     RewardPlacement.calendar =>
-      _ios ? 'ca-app-pub-3940256099942544/1712485313' : 'ca-app-pub-3940256099942544/5224354917',
+      _ios ? 'ca-app-pub-4724352880074547/6669238673' : 'ca-app-pub-3940256099942544/5224354917',
   };
 }
 

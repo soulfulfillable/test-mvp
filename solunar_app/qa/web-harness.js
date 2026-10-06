@@ -21,6 +21,7 @@ exports.open = async (opts = {}) => {
   const ctx = await b.newContext({
     viewport: opts.viewport || { width: 390, height: 844 }, deviceScaleFactor: opts.scale || 3, hasTouch: true, isMobile: true,
     timezoneId: opts.timezoneId || 'America/Chicago',
+    colorScheme: opts.colorScheme || 'light',
     ...(opts.geolocation ? { geolocation: opts.geolocation, permissions: ['geolocation'] } : {}),
   });
   if (opts.clock) await ctx.addInitScript(`(() => { const T = ${+opts.clock}; const D = Date; const off = T - D.now();

@@ -18,8 +18,7 @@ class LocationResult {
   String get message => switch (problem) {
     LocationProblem.serviceOff => 'Location Services are off. Turn them on in Settings, or search for a town.',
     LocationProblem.denied => 'Location permission was not given. You can search for a town instead.',
-    LocationProblem.deniedForever =>
-      'Location is turned off for this app. Allow it in Settings, or search for a town.',
+    LocationProblem.deniedForever => 'Location is turned off for this app. Allow it in Settings, or search for a town.',
     LocationProblem.unavailable => "Couldn't get your location. Try again or search for a town.",
     null => '',
   };

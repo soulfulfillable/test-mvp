@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 
@@ -8,7 +8,6 @@ import 'core/location.dart';
 import 'core/store.dart';
 import 'core/theme.dart';
 import 'screens/home_screen.dart';
-import 'screens/welcome_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,22 +29,12 @@ Future<void> main() async {
   runApp(const SolunarApp());
 }
 
+/// DESIGN.md: Material 기본 테마 대신 iOS 부품(Cupertino)만. 라이트·다크는 시스템 설정을 따른다.
+/// 첫 화면부터 메인 — 장소를 아직 안 골랐으면 폰 시간대의 가장 큰 마을로 보여 주고 "Use My Location" 을 권한다.
 class SolunarApp extends StatelessWidget {
   const SolunarApp({super.key});
 
   @override
   Widget build(BuildContext context) =>
-      MaterialApp(title: 'Glance Solunar', debugShowCheckedModeBanner: false, theme: buildTheme(), home: const _Root());
-}
-
-/// Welcome until a place is chosen, then the main screen. Follows the store,
-/// so picking a place anywhere (search, my location) switches this.
-class _Root extends StatelessWidget {
-  const _Root();
-
-  @override
-  Widget build(BuildContext context) => ListenableBuilder(
-    listenable: AppStore.i,
-    builder: (context, _) => AppStore.i.place == null ? const WelcomeScreen() : const HomeScreen(),
-  );
+      CupertinoApp(title: kAppName, debugShowCheckedModeBanner: false, theme: buildTheme(), home: const HomeScreen());
 }

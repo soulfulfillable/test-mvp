@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../core/ads.dart';
 import '../core/format.dart';
@@ -10,26 +10,24 @@ import 'widgets.dart';
 /// Asks to watch a rewarded video, then opens the 30-day calendar for 24 hours.
 /// Returns true when the calendar is open.
 Future<bool> unlockCalendarFlow(BuildContext context) async {
-  final go = await showDialog<bool>(
+  final go = await showCupertinoDialog<bool>(
     context: context,
-    builder: (ctx) => AlertDialog(
-      icon: const Icon(Icons.calendar_month, color: Palette.pine, size: 36),
+    builder: (ctx) => CupertinoAlertDialog(
       title: const Text('30-Day Calendar'),
       content: const Text(
-        'Watch a short video to open the 30-day calendar for 24 hours. '
-        'Today and the next 7 days are always free.',
+        'Watch a short video to open the 30-day calendar for 24 hours. Today and the next 7 days are always free.',
       ),
       actions: [
-        TextButton(
+        CupertinoDialogAction(
           key: const Key('unlock-cancel'),
           onPressed: () => Navigator.of(ctx).pop(false),
-          child: const Text('Not now'),
+          child: const Text('Not Now'),
         ),
-        FilledButton.icon(
+        CupertinoDialogAction(
           key: const Key('unlock-watch'),
+          isDefaultAction: true,
           onPressed: () => Navigator.of(ctx).pop(true),
-          icon: const Icon(Icons.play_arrow),
-          label: const Text('Watch Video'),
+          child: const Text('Watch Video'),
         ),
       ],
     ),
@@ -41,19 +39,15 @@ Future<bool> unlockCalendarFlow(BuildContext context) async {
   var loadingShown = false;
   if (!Ads.i.isReady(RewardPlacement.calendar)) {
     loadingShown = true;
-    showDialog<void>(
+    showCupertinoDialog<void>(
       context: context,
-      barrierDismissible: false,
       builder: (_) => const PopScope(
         canPop: false,
-        child: AlertDialog(
+        child: CupertinoAlertDialog(
           key: Key('video-loading'),
           content: Row(
-            children: [
-              SizedBox(width: 22, height: 22, child: CircularProgressIndicator(strokeWidth: 2.5)),
-              SizedBox(width: 16),
-              Text('Loading video…'),
-            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [CupertinoActivityIndicator(), SizedBox(width: 12), Text('Loading video…')],
           ),
         ),
       ),
@@ -62,28 +56,36 @@ Future<bool> unlockCalendarFlow(BuildContext context) async {
   final result = await Ads.i.showRewarded(RewardPlacement.calendar);
   if (loadingShown) nav.pop();
   if (!context.mounted) return false;
-  final messenger = ScaffoldMessenger.of(context);
   switch (result) {
     case RewardResult.rewarded:
       await AppStore.i.unlockCalendar();
-      messenger.showSnackBar(const SnackBar(content: Text('30-day calendar open for 24 hours')));
       return true;
     case RewardResult.closedEarly:
-      messenger.showSnackBar(
-        const SnackBar(content: Text('The video was closed early, so the calendar stays locked.')),
+      await showCupertinoDialog<void>(
+        context: context,
+        builder: (ctx) => CupertinoAlertDialog(
+          key: const Key('closed-early'),
+          title: const Text('Video Closed Early'),
+          content: const Text('The calendar stays locked. Watch to the end to open it for 24 hours.'),
+          actions: [
+            CupertinoDialogAction(
+              key: const Key('closed-early-ok'),
+              isDefaultAction: true,
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
       );
       return false;
     case RewardResult.unavailable:
       // No video to show (no signal, no ad to fill): don't make people pay for our ad gap.
       await AppStore.i.unlockCalendar();
-      messenger.showSnackBar(
-        const SnackBar(content: Text('No video right now — the calendar is open for you anyway.')),
-      );
       return true;
   }
 }
 
-/// 30 days from today, laid out by week. Tap a day to see it on the main screen.
+/// 30 days from today, laid out by week like the Calendar app. Tap a day to see it on the main screen.
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
 
@@ -103,105 +105,116 @@ class _CalendarScreenState extends State<CalendarScreen> {
       for (final (i, d) in _days.indexed) _cell(d, i),
     ];
     final best = [..._days]..sort((a, b) => b.score.total.compareTo(a.score.total));
-    return Scaffold(
-      appBar: AppBar(title: const Text('30-Day Calendar')),
-      body: SafeArea(
-        child: ListView(
-          key: const Key('calendar-list'),
-          padding: const EdgeInsets.fromLTRB(12, 4, 12, 20),
-          children: [
-            Text(
-              AppStore.i.place!.name,
-              style: const TextStyle(fontSize: 15, color: Palette.sub, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 10),
-            Row(
+    final secondary = dyn(context, CupertinoColors.secondaryLabel);
+    return CupertinoPageScaffold(
+      child: CustomScrollView(
+        key: const Key('calendar-list'),
+        slivers: [
+          const CupertinoSliverNavigationBar(largeTitle: Text('30 Days'), leading: BackLink(), border: null),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+            sliver: SliverList.list(
               children: [
-                for (final w in const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
-                  Expanded(
-                    child: Text(
-                      w,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Palette.sub),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4, bottom: 10),
+                  child: Text(
+                    '${AppStore.i.place!.name} · longer bar, better day',
+                    style: TextStyle(fontSize: kSmall, color: secondary),
                   ),
+                ),
+                Row(
+                  children: [
+                    for (final w in const ['S', 'M', 'T', 'W', 'T', 'F', 'S'])
+                      Expanded(
+                        child: Text(
+                          w,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: kSmall, color: secondary),
+                        ),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                GridView.count(
+                  crossAxisCount: 7,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  childAspectRatio: 0.8,
+                  children: cells,
+                ),
               ],
             ),
-            const SizedBox(height: 6),
-            GridView.count(
-              crossAxisCount: 7,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 4,
-              crossAxisSpacing: 4,
-              childAspectRatio: 0.72,
-              children: cells,
-            ),
-            const SizedBox(height: 18),
-            const SectionTitle('Best days ahead'),
-            for (final d in best.take(5))
-              ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 4),
-                leading: MoonIcon(illumination: d.phase.illumination, waxing: d.phase.waxing, size: 26),
-                title: Text(dayLabel(d.wallDay), style: const TextStyle(fontWeight: FontWeight.w700)),
-                subtitle: Text(d.phase.phase.label),
-                trailing: ScoreChip(score: d.score),
-                onTap: () => Navigator.of(context).pop(d.wallDay),
+          ),
+          SliverList.list(
+            children: [
+              CupertinoListSection.insetGrouped(
+                header: const SectionHeader('Best days ahead'),
+                children: [
+                  for (final (i, d) in best.take(5).indexed)
+                    ListRow(
+                      button: true,
+                      child: CupertinoListTile(
+                        key: Key('best-$i'),
+                        leading: MoonIcon(illumination: d.phase.illumination, waxing: d.phase.waxing, size: 22),
+                        title: Text(dayLabel(d.wallDay)),
+                        subtitle: Text(d.phase.phase.label),
+                        additionalInfo: Text('${d.score.total}', style: const TextStyle(fontFeatures: tabular)),
+                        trailing: const CupertinoListTileChevron(),
+                        onTap: () => Navigator.of(context).pop(d.wallDay),
+                      ),
+                    ),
+                ],
               ),
-          ],
-        ),
+              const SizedBox(height: 24),
+            ],
+          ),
+        ],
       ),
     );
   }
 
   Widget _cell(SolunarDay d, int i) {
-    final c = Palette.rating(d.score.rating);
-    final strong = d.score.rating == Rating.best || d.score.rating == Rating.good;
-    return Semantics(
-      button: true,
+    final base = textOf(context);
+    final a = dyn(context, accent);
+    final first = d.wallDay.day == 1 || i == 0;
+    return Tap(
+      key: Key('cal-$i'),
       label: '${dayLabel(d.wallDay)}, score ${d.score.total} ${d.score.rating.label}',
-      child: InkWell(
-        key: Key('cal-$i'),
-        borderRadius: BorderRadius.circular(10),
-        onTap: () => Navigator.of(context).pop(d.wallDay),
-        child: Container(
-          decoration: BoxDecoration(
-            color: c.withValues(alpha: strong ? 1 : 0.55),
-            borderRadius: BorderRadius.circular(10),
-            border: i == 0 ? Border.all(color: Palette.ink, width: 2) : null,
-          ),
-          padding: const EdgeInsets.all(3),
-          child: ExcludeSemantics(
-            // Big text settings shrink to fit the cell instead of spilling out.
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    d.wallDay.day == 1 || i == 0 ? '${monthName(d.wallDay)} ${d.wallDay.day}' : '${d.wallDay.day}',
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 11.5,
-                      fontWeight: FontWeight.w700,
-                      color: strong ? Colors.white : Palette.ink,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  MoonIcon(illumination: d.phase.illumination, waxing: d.phase.waxing, size: 14),
-                  const SizedBox(height: 2),
-                  Text(
-                    '${d.score.total}',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                      color: strong ? Colors.white : Palette.ink,
-                    ),
-                  ),
-                ],
+      onTap: () => Navigator.of(context).pop(d.wallDay),
+      // Big text settings shrink to fit the cell instead of spilling out.
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              first ? monthName(d.wallDay).toUpperCase() : ' ',
+              style: base.copyWith(fontSize: kSmall, color: a, fontWeight: FontWeight.w600),
+            ),
+            Container(
+              width: 34,
+              height: 34,
+              alignment: Alignment.center,
+              decoration: i == 0
+                  ? BoxDecoration(
+                      border: Border.all(color: a, width: 1.5),
+                      shape: BoxShape.circle,
+                    )
+                  : null,
+              child: Text(
+                '${d.wallDay.day}',
+                style: base.copyWith(
+                  fontSize: kBody,
+                  fontFeatures: tabular,
+                  fontWeight: i == 0 ? FontWeight.w600 : null,
+                ),
               ),
             ),
-          ),
+            const SizedBox(height: 4),
+            ScoreBar(score: d.score, width: 28),
+            const SizedBox(height: 2),
+            MoonIcon(illumination: d.phase.illumination, waxing: d.phase.waxing, size: 10),
+          ],
         ),
       ),
     );

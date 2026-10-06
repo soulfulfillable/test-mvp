@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../core/format.dart';
 import '../core/places.dart';
@@ -50,127 +50,161 @@ class _PlacesScreenState extends State<PlacesScreen> {
     final q = _query.text.trim();
     final results = q.isEmpty ? const <Town>[] : store.db.search(q);
     final here = store.place;
-    return Scaffold(
-      appBar: AppBar(title: const Text('Places')),
-      body: SafeArea(
+    final secondary = dyn(context, CupertinoColors.secondaryLabel);
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(middle: Text('Places'), leading: BackLink(), border: null),
+      child: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-              child: TextField(
-                key: const Key('place-search'),
-                controller: _query,
-                textInputAction: TextInputAction.search,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  hintText: 'Search a town, e.g. Austin, TX',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: q.isEmpty
-                      ? null
-                      : IconButton(
-                          key: const Key('search-clear'),
-                          tooltip: 'Clear',
-                          icon: const Icon(Icons.close),
-                          onPressed: () => setState(_query.clear),
-                        ),
-                  filled: true,
-                  fillColor: Palette.card,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: const BorderSide(color: Palette.line),
+              padding: const EdgeInsets.fromLTRB(16, 8, 8, 4),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: CupertinoSearchTextField(
+                      key: const Key('place-search'),
+                      controller: _query,
+                      placeholder: 'Search a town, e.g. Austin, TX',
+                      autocorrect: false,
+                      // The built-in clear button appears inside the field on the first letter, and on the web
+                      // preview that rebuilds the input and drops focus after one letter (web check caught it).
+                      // So the clear button sits outside the field instead.
+                      suffixMode: OverlayVisibilityMode.never,
+                      onChanged: (_) => setState(() {}),
+                    ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: const BorderSide(color: Palette.line),
+                  Semantics(
+                    button: true,
+                    label: 'Clear search',
+                    enabled: q.isNotEmpty,
+                    onTap: q.isEmpty ? null : () => setState(_query.clear),
+                    excludeSemantics: true,
+                    child: CupertinoButton(
+                      key: const Key('search-clear'),
+                      padding: EdgeInsets.zero,
+                      minimumSize: const Size(40, 40),
+                      onPressed: q.isEmpty ? null : () => setState(_query.clear),
+                      child: Icon(
+                        CupertinoIcons.xmark_circle_fill,
+                        color: q.isEmpty
+                            ? dyn(context, CupertinoColors.quaternaryLabel)
+                            : dyn(context, CupertinoColors.secondaryLabel),
+                      ),
+                    ),
                   ),
-                ),
-                onChanged: (_) => setState(() {}),
+                ],
               ),
             ),
             Expanded(
               child: ListView(
                 key: const Key('places-list'),
                 keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                 children: [
                   if (q.isEmpty) ...[
-                    if (_error != null) ...[
-                      Notice(key: const Key('places-error'), text: _error!, icon: Icons.location_off_outlined),
-                      const SizedBox(height: 8),
-                    ],
-                    Material(
-                      color: Palette.card,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                        side: const BorderSide(color: Palette.line),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ListTile(
-                        key: const Key('places-gps'),
-                        leading: store.locating
-                            ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2.4))
-                            : const Icon(Icons.my_location, color: Palette.pine),
-                        title: Text(
-                          store.locating ? 'Finding your location…' : 'Use My Location',
-                          style: const TextStyle(fontWeight: FontWeight.w700),
+                    CupertinoListSection.insetGrouped(
+                      footer: _error == null
+                          ? null
+                          : Text(
+                              _error!,
+                              key: const Key('places-error'),
+                              style: TextStyle(fontSize: kSmall, color: dyn(context, CupertinoColors.systemRed)),
+                            ),
+                      children: [
+                        ListRow(
+                          button: true,
+                          child: CupertinoListTile(
+                            key: const Key('places-gps'),
+                            leading: store.locating
+                                ? const CupertinoActivityIndicator()
+                                : Icon(CupertinoIcons.location_fill, color: dyn(context, accent)),
+                            title: Text(store.locating ? 'Finding Your Location…' : 'Use My Location'),
+                            subtitle: const Text('Times for exactly where you are'),
+                            trailing: here?.isGps == true
+                                ? Icon(CupertinoIcons.checkmark, color: dyn(context, accent))
+                                : null,
+                            onTap: store.locating ? null : _useLocation,
+                          ),
                         ),
-                        subtitle: const Text('Times for exactly where you are'),
-                        trailing: here?.isGps == true ? const Icon(Icons.check, color: Palette.pine) : null,
-                        onTap: store.locating ? null : _useLocation,
-                      ),
+                      ],
                     ),
-                    const SizedBox(height: 18),
-                    const SectionTitle('Saved places'),
-                    if (store.favorites.isEmpty)
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          'Tap ☆ on the main screen to save a spot — your lake, lease or deer stand.',
-                          key: Key('no-favorites'),
-                          style: TextStyle(color: Palette.sub, height: 1.35),
-                        ),
+                    CupertinoListSection.insetGrouped(
+                      header: const SectionHeader('Saved places'),
+                      footer: SectionFooter(
+                        store.favorites.isEmpty
+                            ? 'Tap the star on the main screen to save a spot — your lake, lease or deer stand.'
+                            : 'Search ${thousands(store.db.towns.length)} US and Canadian towns — works offline.',
+                        textKey: Key(store.favorites.isEmpty ? 'no-favorites' : 'town-count'),
                       ),
-                    for (final (i, f) in store.favorites.indexed)
-                      _PlaceRow(
-                        key: Key('fav-$i'),
-                        icon: Icons.star,
-                        iconColor: Palette.major,
-                        title: f.name,
-                        subtitle: [?f.detail, PlaceZone(f.tz).abbreviation(store.clock())].join(' · '),
-                        selected: here != null && !here.isGps && here.sameSpot(f),
-                        onTap: () => _choose(f),
-                        trailing: IconButton(
-                          key: Key('fav-del-$i'),
-                          tooltip: 'Remove ${f.name}',
-                          icon: const Icon(Icons.delete_outline, color: Palette.sub),
-                          onPressed: () => store.removeFavorite(f),
-                        ),
-                      ),
-                    const SizedBox(height: 14),
-                    Text(
-                      'Search ${thousands(store.db.towns.length)} US and Canadian towns — works offline.',
-                      style: const TextStyle(fontSize: 12.5, color: Palette.faint),
+                      children: [
+                        if (store.favorites.isEmpty)
+                          ListRow(
+                            child: CupertinoListTile(
+                              title: Text('No saved places yet', style: TextStyle(color: secondary)),
+                            ),
+                          ),
+                        for (final (i, f) in store.favorites.indexed)
+                          ListRow(
+                            button: true,
+                            hasButtons: true,
+                            child: CupertinoListTile(
+                              key: Key('fav-$i'),
+                              leading: Icon(CupertinoIcons.star_fill, color: dyn(context, accent), size: 20),
+                              title: Text(f.name),
+                              subtitle: Text([?f.detail, PlaceZone(f.tz).abbreviation(store.clock())].join(' · ')),
+                              additionalInfo: here != null && !here.isGps && here.sameSpot(f)
+                                  ? Icon(CupertinoIcons.checkmark, color: dyn(context, accent))
+                                  : null,
+                              trailing: Semantics(
+                                button: true,
+                                label: 'Remove ${f.name}',
+                                onTap: () => store.removeFavorite(f),
+                                excludeSemantics: true,
+                                child: CupertinoButton(
+                                  key: Key('fav-del-$i'),
+                                  padding: EdgeInsets.zero,
+                                  minimumSize: const Size(44, 44),
+                                  onPressed: () => store.removeFavorite(f),
+                                  child: Icon(
+                                    CupertinoIcons.minus_circle_fill,
+                                    color: dyn(context, CupertinoColors.systemRed),
+                                  ),
+                                ),
+                              ),
+                              onTap: () => _choose(f),
+                            ),
+                          ),
+                      ],
                     ),
                   ] else ...[
                     if (results.isEmpty)
                       Padding(
-                        padding: const EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.fromLTRB(32, 24, 32, 0),
                         child: Text(
                           'No town named “$q”. Try the nearest bigger town, or use your location.',
                           key: const Key('no-results'),
-                          style: const TextStyle(color: Palette.sub),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: secondary),
                         ),
-                      ),
-                    for (final (i, t) in results.indexed)
-                      _PlaceRow(
-                        key: Key('town-$i'),
-                        icon: Icons.place_outlined,
-                        iconColor: Palette.pine,
-                        title: t.label,
-                        subtitle: here == null ? null : '${miles(milesBetween(here.lat, here.lng, t.lat, t.lng))} away',
-                        onTap: () => _choose(t.toPlace()),
+                      )
+                    else
+                      CupertinoListSection.insetGrouped(
+                        children: [
+                          for (final (i, t) in results.indexed)
+                            ListRow(
+                              button: true,
+                              child: CupertinoListTile(
+                                key: Key('town-$i'),
+                                title: Text(t.label),
+                                additionalInfo: here == null
+                                    ? null
+                                    : Text(miles(milesBetween(here.lat, here.lng, t.lat, t.lng))),
+                                onTap: () => _choose(t.toPlace()),
+                              ),
+                            ),
+                        ],
                       ),
                   ],
+                  const SizedBox(height: 24),
                 ],
               ),
             ),
@@ -179,49 +213,4 @@ class _PlacesScreenState extends State<PlacesScreen> {
       ),
     );
   }
-}
-
-class _PlaceRow extends StatelessWidget {
-  const _PlaceRow({
-    super.key,
-    required this.icon,
-    required this.iconColor,
-    required this.title,
-    this.subtitle,
-    this.trailing,
-    this.selected = false,
-    required this.onTap,
-  });
-  final IconData icon;
-  final Color iconColor;
-  final String title;
-  final String? subtitle;
-  final Widget? trailing;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: 6),
-    child: Material(
-      color: Palette.card,
-      borderRadius: BorderRadius.circular(14),
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-          side: BorderSide(color: selected ? Palette.pine : Palette.line),
-        ),
-        leading: Icon(icon, color: iconColor),
-        title: Text(
-          title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontWeight: FontWeight.w600),
-        ),
-        subtitle: subtitle == null ? null : Text(subtitle!, maxLines: 1, overflow: TextOverflow.ellipsis),
-        trailing: trailing ?? (selected ? const Icon(Icons.check, color: Palette.pine) : null),
-        onTap: onTap,
-      ),
-    ),
-  );
 }

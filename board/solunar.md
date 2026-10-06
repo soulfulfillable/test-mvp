@@ -1,27 +1,30 @@
 # Glance Solunar: Fishing Times (낚시·사냥 시간, solunar 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-03 21:15 (KST)
+마지막 갱신: 2026-10-06 (KST)
 
 ## 지금 상태 (3줄 이내)
-Flutter 1차 완성(`solunar_app/flutter/`): 오늘 점수(0~100)·Major/Minor 구간·24시간 막대·지금/다음 구간·사냥 허용 시간 카운트다운·해/달·7일 띠·30일 달력(영상 보고 24시간)·장소 검색(미국·캐나다 2만 곳, 오프라인)·저장한 곳.
-테스트 34개 통과(엔진 22: PyEphem 대조 1,800건+·공개 솔루나 표 3곳 2분 이내 / 로봇 12), 웹 클릭 점검 39/39. 웹 미리보기 https://soulfulfillable.github.io/test-mvp/solunar-app/index.html
-이름 `Glance Solunar: Fishing Times` 확정, **번들 `com.soulfulfill.solunar` Apple 등록 완료**(Actions run 37121872573). ASC 앱 레코드·AdMob(사용자) 대기 → `Release iOS`(solunar) → TestFlight.
+**10-06 사용자 요청으로 `DESIGN.md` 리터칭 완료**(기존 앱이지만 사용자가 직접 요청 — Glance dB 와 같은 예외): Cupertino·라이트/다크·강조색 1개(해 뜰 녘 주황)·시그니처 **24시간 원형 다이얼**(해·달 하루, Major 굵게·Minor 가늘게, 지금 점), 낚시/사냥 전환(사냥은 다이얼 가운데 허용 시간 카운트다운), 안내 화면 없이 첫 화면부터 메인.
+테스트 37개(엔진 22 + 로봇 15: 3기종×라이트/다크·135% 글씨·VoiceOver 버튼·줄 합쳐짐 검사) + 웹 클릭 점검 43/43. AdMob 실제 ID 반영(배너·보상형). 웹 https://soulfulfillable.github.io/test-mvp/solunar-app/index.html
+다음: ASC 앱 레코드(사용자) 확인 → `Release iOS`(solunar) → TestFlight(초대 자동).
 
 ## 다음 할 일 / 사용자에게 받을 것
-- ✅ [사용자] 이름 A `Glance Solunar: Fishing Times`, 번들 `com.soulfulfill.solunar` (10-03) → ✅ [세션] Apple 번들 등록 ("새로 등록함").
-- [사용자] App Store Connect 신규 앱: iOS / `Glance Solunar: Fishing Times` / English (U.S.) / `com.soulfulfill.solunar` / SKU `solunar` / Full Access. 복사 버튼: https://soulfulfillable.github.io/test-mvp/todo.html
-- [사용자] AdMob(**soulfulfillable 계정**) → 앱 추가(iOS, 스토어 미등록, 이름 `Glance Solunar`) → 광고 단위 2개: **Banner 카드** 이름 `banner`, **Rewarded 카드(4번째)** 이름 `rewarded_calendar`. 완료 화면 캡처 주면 ID 반영.
-- [사용자] 웹 미리보기 '느낌' 한마디.
-- [세션] 앱 레코드 생기면 → `Release iOS`(solunar, 선택지 추가해 둠) → TestFlight → 스크린샷 1290×2796 → `App Store 등록 정보 채우기`(`solunar_app/store/ios-metadata.json` 준비됨).
+- ✅ 이름·번들(10-03) → ✅ Apple 번들 등록 → ✅ AdMob 앱·광고 단위 2개(10-06, 사용자 캡처: 앱 `~5104875562`, 배너 `/2111135851`, 보상형 `/6669238673`) → 코드 반영.
+- [사용자] App Store Connect 신규 앱: iOS / `Glance Solunar: Fishing Times` / English (U.S.) / `com.soulfulfill.solunar` / SKU `solunar` / Full Access (https://soulfulfillable.github.io/test-mvp/todo.html). 됐는지 Actions 로 확인 후 바로 Release iOS.
+- [사용자] 새 디자인 웹 미리보기 '느낌' 한마디.
+- [세션] 앱 레코드 생기면 → `Release iOS`(solunar) → TestFlight 초대 자동 → 스크린샷 1290×2796 → `App Store 등록 정보 채우기` → 2.1 대비 심사 메모 7항목·녹화 부탁(공통 규칙).
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | "너무 뭔가 앱이 1차원적인데 디자인들이, 어제 내가 head쪽에 디자인업데이트방향 말해봤는데 그거보고 다시좀해보자" | `DESIGN.md` 방향으로 다시 만듦: Material → Cupertino(큰 제목·묶음 목록·라이트/다크), 강조색 1개, 평평한 24시간 막대 → **원형 다이얼(시그니처)**, 낚시/사냥 전환, 온보딩 삭제(폰 시간대 큰 마을로 바로 시작 + Use My Location). `DESIGN.md` 는 "기존 앱 손대지 않음" 이지만 사용자가 이 앱에 직접 요청 → PRODUCT 결정 로그에 예외로 기록 |
+| 10-06 | AdMob 광고 단위 생성 완료 화면 2장 (배너·보상형) | 앱 ID `ca-app-pub-4724352880074547~5104875562`(Info.plist), 배너 `…/2111135851`, 보상형 `…/6669238673`(ads.dart) |
 | 10-03 | (A/B) 이름 → "Glance Solunar: Fishing Times (추천)", 번들 → "solunar 로 등록 (추천)" | 이름·부제 확정, Actions 로 번들 등록(새로 등록함), 홈 화면 이름 `Solunar`, 스토어 문구 `ios-metadata.json`, `Release iOS`·`App Store 등록 정보 채우기` 선택지에 solunar 추가, todo 페이지에 추가 |
 | 10-03 | "낚시·사냥 시간(솔루나) 앱 개발 시작해줘. plans/solunar-app.md 기획서대로 하고, 시작 전에 PLAYBOOK.md 와 board/ 전체를 읽어 (특히 board/tides.md — 일출일몰·달 계산 재사용). 네 게시판은 board/solunar.md 야 — 내 피드백 받을 때마다, 단계 끝날 때마다 갱신해서 다른 세션들과 공유해줘." | 읽고 시작. 물때 앱 일출일몰·위상 코드 재사용 + 달 위치·월출월몰·남중 새로 만듦. 이 파일을 단계마다 갱신 |
 
 ## 사용자 성향 — 원하는 것 / 불편해하는 것 (이 앱에서 알게 된 것)
 - (다른 게시판에서 배움) 폰으로 바로 해 보는 링크를 먼저 원함 → 웹 미리보기부터. 결정은 추천안 + 이유 한 줄. 이름은 Glance 시리즈로 통일되는 중.
 - (이 앱) 이름·번들 둘 다 추천안을 바로 골랐다 (다른 앱들과 같음).
+- (이 앱) **평평한(1차원) 화면을 싫어한다** — 막대 그래프+카드 목록은 "1차원적". 한눈에 들어오는 주인공 그림(다이얼) 하나가 있는 쪽을 원함.
+- (이 앱) 기획 쪽(head)에 말해 둔 방향을 개발 세션이 알아서 찾아 반영하길 기대한다 → 시작할 때 `DESIGN.md`·PRODUCT 결정 로그를 다시 읽을 것.
 
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
 - **물때 세션에: 월출·월몰·달 남중/북중이 생겼다** → `solunar_app/flutter/lib/core/astro.dart` 의 `moonEvents(start, end, lat, lng)` (Meeus 47장 달 위치 + USNO 정의).
@@ -41,6 +44,16 @@ Flutter 1차 완성(`solunar_app/flutter/`): 오늘 점수(0~100)·Major/Minor �
 
 - **todo 페이지 광고 단위가 2개 이상인 앱**: `docs/todo.html` 의 `apps` 항목에 `units:[['광고 단위 1 · Banner 카드','banner'],['광고 단위 2 · Rewarded 카드','rewarded_calendar']]` 처럼 넣으면 줄마다 복사 버튼이 생긴다 (없으면 기존대로 banner 한 줄).
 - 홈 화면 아이콘 아래 이름은 12자 안팎에서 잘린다 → "Glance Solunar"(14자) 대신 `Solunar`. 스토어 이름은 따로라 검색에는 영향 없음.
+
+- **(웹 미리보기) `CupertinoSearchTextField` 기본 지우기(×) 버튼은 첫 글자를 치는 순간 입력칸 포커스를 날린다** — 웹 점검에서 한 글자씩 쳤더니 "b" 만 들어감
+  (`document.activeElement` 가 BODY 로). 자리표시 글자는 무관, `suffixMode: OverlayVisibilityMode.never` 로 끄면 해결 → ×는 칸 **밖에 항상** 두고 비었을 때 흐리게.
+  `enterText` 를 쓰는 로봇 테스트로는 안 잡힌다 — 웹 점검에서 **한 글자씩 치며 포커스 유지**를 검사할 것 (`solunar_app/qa/web-check.js`).
+- **`CupertinoListTile(onTap:)` 은 자기 접근성 노드를 안 만든다** → 묶음 하나가 통째로 버튼 하나로 읽혔다("Starts 6:18 AM Ends … Adjust"). 줄마다 `MergeSemantics`
+  (안에 버튼이 있는 줄은 `Semantics(container: true)`) — `solunar_app/flutter/lib/screens/widgets.dart` 의 `ListRow`. 로봇 `expectButtonsTappable` 에 "버튼 라벨이 4줄 넘으면 합쳐진 것" 검사 추가(고치기 전 실패 확인).
+- **`CupertinoSliverNavigationBar` 는 `middle` 이 없으면 큰 제목 위젯(키 포함)을 접힌 제목에도 쓴다** → `find.byKey` 가 2개 → `middle:` 따로 + `alwaysShowMiddle: false`.
+- **`CupertinoListTile` 의 `additionalInfo` 는 큰 글씨(135%)·SE 에서 제목을 자른다**("Adjust for Your State 30 / 30 min") → 값은 `subtitle` 로. 로봇 잘림 검사가 잡음.
+- 한 가지 강조색으로 등급·구간을 나눌 때 **연한 색(투명도)은 다른 연한 면(낮 구간)과 섞여 안 보인다** → 굵기·길이로 구분(Major 굵게·Minor 가늘게, 점수는 막대 길이).
+- 첫 실행 안내 화면 대신 **폰 시간대의 가장 큰 마을**로 바로 진짜 숫자를 보여 주고 "Use My Location" 버튼 하나 (`AppStore.guessPlace`). 시간대에 마을이 없으면(해외 폰) 뉴욕.
 
 ## 다른 세션·기획 파트너에게 묻고 싶은 것
 - 기획 파트너: 30일 달력 보상형에서 **영상이 없을 때(오프라인·광고 재고 없음)는 그냥 열어 준다**(8초 기다린 뒤). 사용자 탓이 아닌데 막는 건 1등 앱 불만과 같은 결이라 판단. 괜찮은지?

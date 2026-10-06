@@ -21,8 +21,15 @@ class AppStore extends ChangeNotifier {
   late SharedPreferences _prefs;
   late PlaceDb db;
 
-  /// The place on screen. Null until the user picks one (welcome screen).
+  /// The place on screen. On first launch it is a guess (the biggest town in the
+  /// phone's time zone) so the main screen shows real times straight away.
   Place? place;
+
+  /// [place] is that first-launch guess, not something the user chose.
+  bool placeGuessed = false;
+
+  /// Main screen shows the Hunting view (shooting-light countdown in the dial).
+  bool huntMode = false;
 
   /// Follow the device location on every launch.
   bool followLocation = false;
@@ -47,6 +54,12 @@ class AppStore extends ChangeNotifier {
     _prefs = await SharedPreferences.getInstance();
     db = await PlaceDb.load();
     place = _readPlace('place');
+    placeGuessed = false;
+    if (place == null) {
+      place = guessPlace(await DeviceZone.i.name());
+      placeGuessed = true;
+    }
+    huntMode = _prefs.getBool('huntMode') ?? false;
     followLocation = _prefs.getBool('followLocation') ?? false;
     favorites = [for (final j in _readList('favorites')) ?Place.fromJson(j)];
     beforeSunrise = _prefs.getInt('beforeSunrise') ?? 30;
@@ -80,8 +93,23 @@ class AppStore extends ChangeNotifier {
 
   // ───────────── place ─────────────
 
+  /// Biggest town in the phone's time zone; New York when there is none (phone set elsewhere).
+  Place guessPlace(String zone) {
+    for (final t in db.towns) {
+      if (t.tz == zone) return t.toPlace();
+    }
+    return db.towns.first.toPlace();
+  }
+
+  Future<void> setHuntMode(bool on) async {
+    huntMode = on;
+    await _prefs.setBool('huntMode', on);
+    notifyListeners();
+  }
+
   Future<void> selectPlace(Place p, {bool viaLocation = false}) async {
     place = p;
+    placeGuessed = false;
     followLocation = viaLocation;
     _weekCache = null;
     await _prefs.setString('place', jsonEncode(p.toJson()));
