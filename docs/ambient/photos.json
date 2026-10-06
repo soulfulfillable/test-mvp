@@ -1,0 +1,35 @@
+[
+ {
+  "file": "photo-rain.jpg",
+  "title": "File:Blur-cars-dew-125510.jpg",
+  "license": "CC0",
+  "size": [
+   6000,
+   4000
+  ],
+  "page": "https://commons.wikimedia.org/wiki/File:Blur-cars-dew-125510.jpg",
+  "artist": "Kaique Rocha"
+ },
+ {
+  "file": "photo-cafe.jpg",
+  "title": "File:Project 365 -202 210723 The Rainy City (53061937253).jpg",
+  "license": "CC0",
+  "size": [
+   4000,
+   2669
+  ],
+  "page": "https://commons.wikimedia.org/wiki/File:Project_365_-202_210723_The_Rainy_City_(53061937253).jpg",
+  "artist": "Pete from Liverpool, UK"
+ },
+ {
+  "file": "photo-fire.jpg",
+  "title": "File:Meadow Creek Campfire (9194201298).jpg",
+  "license": "Public domain",
+  "size": [
+   1600,
+   1067
+  ],
+  "page": "https://commons.wikimedia.org/wiki/File:Meadow_Creek_Campfire_(9194201298).jpg",
+  "artist": "Forest Service Northern Region from Missoula, MT, USA"
+ }
+]

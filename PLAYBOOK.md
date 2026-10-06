@@ -66,6 +66,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-06 | 앰비언트 | 코드(캔버스 도형)로 그린 영상 그림이 "최악" — 다듬어도 클립아트 수준 | 영상·배경은 **실사 사진 + GPU 셰이더 효과**. 헤드리스 크롬 WebGL2 는 `--use-angle=swiftshader --enable-unsafe-swiftshader --allow-file-access-from-files` 로 된다. 사진은 Actions 로 Commons PD/CC0 받기(작업 환경은 사진 사이트 차단) |
 | 2026-10-05 | 물때 | 심사 제출 때 "Content Rights Information" 이 빠져 Add for Review 막힘 | 외부 데이터(NOAA 등)를 보여 주는 앱은 App Information → Content Rights 를 "제3자 콘텐츠 있음 + 권리 있음" 으로 미리 안내 |
 | 2026-10-05 | 공통(대출) | 제출 1.5일 뒤 **ITMS-90035 Invalid Signature** 로 반려 — Release iOS 가 업로드 직후 배포 인증서를 revoke 하고 있었다(빠르게 제출한 환율 빌드 8 은 통과해 늦게 드러남) | 배포 인증서는 지우지 않는다. 암호화해 `ci-signing` 브랜치에 보관·재사용 (`asc_signing.py`) |
 | 2026-10-05 | 앰비언트 | 헤드리스 크롬 OfflineAudioContext 로 3분 렌더 — 비 소리만 348초(빗방울 0.1초마다 노드 4개 생성) | 짧은 소리를 자주 내는 레이어는 노드를 매번 만들지 말고 미리 만든 버퍼를 재생. 긴 렌더는 조각으로 나눠 이어 붙인다 |
