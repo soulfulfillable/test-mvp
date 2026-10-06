@@ -17,6 +17,7 @@
 ## 사용자 피드백 기록 (최신이 위)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | "publish app안되는거같은데" (Audience 화면 캡처: Publish app 회색, 'complete your configuration on the Branding page') | Branding 에 앱 이름·지원 이메일·개발자 연락처 이메일 저장 후 게시하도록 안내 + 안내 페이지에 단계 추가 |
 | 10-06 | "너가직접해주면 안되냐 … 이거 그냥다" → (A/B) "A. API 연결 (추천)" | 로그인 대행 불가 → YouTube Data API 연결로. `tools/ambient/youtube/yt.py`(표준 라이브러리, --dry 검증), 워크플로 `YouTube Peblit`(whoami/setup-channel/upload), 안내 `docs/youtube-setup.html` |
 | 10-06 | "Peblit여기 어차피 올린거 없는데, 스토어에 내용이나 뭐 그런것만 좀 바꿔내면 되지 않을까 어차피 저것도그냥 임시로해둔것들이거든" | Peblit 을 앰비언트 채널로 전환(이름·로고·핸들 유지). `docs/ambient-channel.html`: 채널 설명·배너·첫 영상 제목/설명/태그/썸네일 복사 페이지. 이미지 도구 `tools/ambient/branding.js` |
 | 10-06 | "카페는괜찮았어 주소 여기 이미지에" (채널 화면 캡처) | 카페 유지. 채널 = **Peblit (@peblit)**, Google 계정 soulfulfillable(AdMob 과 같은 계정). 이름·핸들에 실명·회사 없음 확인. 기존 채널은 "짧은 발견·이야기" 쇼츠 채널(쇼츠 1편) → 앰비언트 90분을 같은 채널에 둘지 A/B 질문 |

@@ -44,12 +44,13 @@ a{color:var(--acc)}
 <li><a href="https://console.cloud.google.com/auth/overview" target="_blank">Google Auth Platform</a> → <b>시작하기(Get started)</b>.</li>
 <li>앱 이름 아래 값, 지원 이메일 soulfulfillable@gmail.com → 다음.</li>
 <li>대상(Audience): <b>외부(External)</b> → 다음 → 연락처 이메일 soulfulfillable@gmail.com → 동의 체크 → <b>만들기</b>.</li>
+<li>왼쪽 <b>브랜딩(Branding)</b> → 앱 이름 <b>Peblit Uploader</b>, 사용자 지원 이메일, 맨 아래 <b>개발자 연락처 이메일</b>(soulfulfillable@gmail.com)을 채우고 <b>저장</b>. 로고·홈페이지 칸은 비워 둡니다. <span class="note">이걸 안 하면 Publish 버튼이 회색입니다.</span></li>
 <li>왼쪽 <b>대상(Audience)</b> → <b>앱 게시(Publish app)</b> → 확인. <span class="note">'테스트' 상태로 두면 연결이 7일마다 끊깁니다. 게시해도 심사 없이 본인 계정은 쓸 수 있습니다.</span></li>
 </ol></div>
 <div class="card"><div class="top"><span class="k">앱 이름</span><button data-c="a">복사</button></div><pre id="a">Peblit Uploader</pre></div>
 
 <h2>3. 열쇠(클라이언트) 만들기</h2>
-<div class="card"><ol start="7">
+<div class="card"><ol start="8">
 <li>왼쪽 <b>클라이언트(Clients)</b> → <b>클라이언트 만들기</b> → 유형 <b>웹 애플리케이션</b>.</li>
 <li><b>승인된 리디렉션 URI</b> → URI 추가 → 아래 값 → <b>만들기</b>.</li>
 <li>뜨는 창의 <b>클라이언트 ID</b> 와 <b>클라이언트 보안 비밀번호</b> 를 메모장에 잠깐 복사해 둡니다(다시 보기 어려움).</li>
@@ -57,8 +58,8 @@ a{color:var(--acc)}
 <div class="card"><div class="top"><span class="k">리디렉션 URI</span><button data-c="r">복사</button></div><pre id="r">https://developers.google.com/oauthplayground</pre></div>
 
 <h2>4. 유튜브 권한 받기 (refresh token)</h2>
-<div class="card"><ol start="10">
-<li><a href="https://developers.google.com/oauthplayground" target="_blank">OAuth Playground</a> 열기 → 오른쪽 위 <b>톱니바퀴</b> → <b>Use your own OAuth credentials</b> 체크 → 9번의 ID·비밀번호 붙여 넣기 → Close.</li>
+<div class="card"><ol start="11">
+<li><a href="https://developers.google.com/oauthplayground" target="_blank">OAuth Playground</a> 열기 → 오른쪽 위 <b>톱니바퀴</b> → <b>Use your own OAuth credentials</b> 체크 → 10번의 ID·비밀번호 붙여 넣기 → Close.</li>
 <li>왼쪽 아래 <b>Input your own scopes</b> 칸에 아래 값 → <b>Authorize APIs</b>.</li>
 <li>soulfulfillable 계정 선택 → "Google에서 확인하지 않은 앱" 이 나오면 <b>고급 → peblit-uploader(으)로 이동</b> → <b>Peblit</b> 채널 선택 → 허용.</li>
 <li><b>Exchange authorization code for tokens</b> 클릭 → 나온 <b>Refresh token</b> 복사.</li>
@@ -66,7 +67,7 @@ a{color:var(--acc)}
 <div class="card"><div class="top"><span class="k">scope</span><button data-c="s">복사</button></div><pre id="s">https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.upload</pre></div>
 
 <h2>5. GitHub 에 넣기 (3개)</h2>
-<div class="card"><ol start="14">
+<div class="card"><ol start="15">
 <li><a href="https://github.com/soulfulfillable/test-mvp/settings/secrets/actions/new" target="_blank">새 Secret 만들기</a> 열기 → Name 에 아래 이름, Secret 에 값 → <b>Add secret</b>. 3번 반복.</li>
 </ol>
 <p class="note">이 값들은 채팅에 붙여 넣지 마세요. GitHub Secret 에만 넣습니다.</p></div>
