@@ -66,6 +66,8 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-06 | 연비 | 앱 레코드를 만들자마자 돌린 빌드 29 가 **서명 수정(6eb31aa) 이전 커밋**이라, 그대로 냈다면 다른 앱처럼 ITMS-90035 반려될 뻔 | 제출할 빌드는 `git merge-base --is-ancestor 6eb31aa <빌드의 head_sha>` 로 확인. 아니면 새로 Release iOS |
+| 2026-10-06 | 연비 | 스토어 스크린샷을 웹 미리보기로 찍으니 가짜 광고 칸·"web preview"·"this browser" 문구·탭 말풍선(마우스 hover)이 찍힘 | 웹 전용 `?shots=1`(광고 숨김·아이폰 문구) + 예시 기록 `?demo=1`, 탭은 Playwright `.tap()`(click 은 tooltip). `fuellog_app/store/screenshots/capture.js` |
 | 2026-10-05 | 물때 | 심사 제출 때 "Content Rights Information" 이 빠져 Add for Review 막힘 | 외부 데이터(NOAA 등)를 보여 주는 앱은 App Information → Content Rights 를 "제3자 콘텐츠 있음 + 권리 있음" 으로 미리 안내 |
 | 2026-10-05 | 공통(대출) | 제출 1.5일 뒤 **ITMS-90035 Invalid Signature** 로 반려 — Release iOS 가 업로드 직후 배포 인증서를 revoke 하고 있었다(빠르게 제출한 환율 빌드 8 은 통과해 늦게 드러남) | 배포 인증서는 지우지 않는다. 암호화해 `ci-signing` 브랜치에 보관·재사용 (`asc_signing.py`) |
 | 2026-10-05 | 앰비언트 | 헤드리스 크롬 OfflineAudioContext 로 3분 렌더 — 비 소리만 348초(빗방울 0.1초마다 노드 4개 생성) | 짧은 소리를 자주 내는 레이어는 노드를 매번 만들지 말고 미리 만든 버퍼를 재생. 긴 렌더는 조각으로 나눠 이어 붙인다 |
