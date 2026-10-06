@@ -2,19 +2,22 @@
 마지막 갱신: 2026-10-05 (개발 세션)
 
 ## 지금 상태 (3줄 이내)
-① 샘플 2차: 3분 **영상** 3편(`docs/ambient-samples.html`, 1280×720, 코드 그림 12초 끊김 없는 반복 + 소리). 모닥불은 밝게 다시, 카페는 반복감 줄여 다시.
-영상 길이는 **1시간 30분**으로 확정(사용자). 렌더 도구 `tools/ambient/render.js` 가 5분 조각+8초 크로스페이드로 90분도 뽑는다(2조각 이음새 확인).
-다음: 사용자 느낌 → ② 90분 렌더.
+**② 90분 비+피아노 영상 렌더 중** — Actions `Render ambient video`(rain, seed 1042, 90분, 1080p, 느린 화면 흐름) → 결과는 Releases 태그 `ambient-rain-1042-90m`.
+3분 시험(seed 7)은 Actions 에서 7.5분·36MB·-18.2 LUFS 로 성공 → 90분 예상 3~4시간·약 1.1GB. 모닥불은 사용자 "별로" → 보류.
+다음: 90분 결과 확인 → 사용자에게 링크 → ③ 채널 첫 업로드(채널 주소 필요).
 
 ## 다음 할 일 / 사용자에게 받을 것
-- [사용자] https://soulfulfillable.github.io/test-mvp/ambient-samples.html 영상 3편 곡마다 좋다/별로.
+- [사용자] https://soulfulfillable.github.io/test-mvp/ambient-samples.html 새 영상 3편(사진+효과) 좋다/별로.
+- [사용자, 선택] 더 좋은 사진: 직접 찍은 폰 사진(비 오는 창·카페·불) 또는 Pexels API 키(무료 가입) → Actions 로 받기. 지금 Commons 검색은 엉뚱한 결과가 많다(벽난로 받침쇠 유물 등).
 - [사용자] 유튜브 채널 주소 (로그인은 ④ 자동 업로드 때 한 번).
 - [세션] ② 좋다고 한 분위기로 90분 렌더. 예상 렌더 시간: 비 약 70분, 모닥불 약 30분, 카페 약 2시간(피아노 음이 많아서) → Actions 에서 돌리는 걸 검토.
-- [세션] 90분 영상에 12초 반복 그림만 있으면 '반복 콘텐츠'로 보일 수 있음 → 시간에 따라 빛·날씨가 천천히 바뀌게(기획서 대비책).
+- [세션] 90분 영상에 30초 반복 그림만 있으면 '반복 콘텐츠'로 보일 수 있음 → 시간에 따라 빛·날씨가 천천히 바뀌게(기획서 대비책).
 
 ## 사용자 피드백 기록 (최신이 위)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | "불은 아 좀 별로인거같애, 1번이 제일 나은거같애" (사진+효과 영상 3편 본 뒤) | 모닥불 보류(지목된 것만, 엔진·코드는 남김). 비+피아노로 ② 90분 영상 진행. 카페는 언급 없음 → 다음에 따로 묻기 |
+| 10-05 | (A/B) "A. 진짜 사진 + 코드 효과 (추천)" 선택 | Actions `Fetch ambient photos` 로 Commons PD/CC0 후보 받음(ambient-photos 브랜치) → 3장 골라 `docs/ambient/photo-*.jpg`(+photos.json 출처). 셰이더 효과 페이지 + 시험 영상 3편 |
 | 10-05 | "아 그림 최악이다 저게 좋다고 할거면 발전가능이 없어보이는데 해결방법이 없나. 비약적으로 아예 다른접근방식 가능하게." | 캔버스 도형 그림은 한계 → 진짜 사진 + GPU 셰이더 효과(유리 위 빗방울 굴절 등) 방식 제안, A/B 질문. 확인: 헤드리스 WebGL2(SwiftShader) 됨, 사진 사이트는 이 환경에서 막힘(Actions 로 우회 가능) |
 | 10-05 | "cafe arpeggio는 너무 똑같은게 반복되는거같기도하고 이게 좋은건지 나는 몰라서" | 원인: 8음 패턴 1개×화음 4개. 화음 8개(Dm9-G13-Cmaj9…), 화음마다 패턴 5종 중 하나, 음 빼기·쉼·옥타브 이동. 이름 Cafe Piano |
 | 10-05 | "fireside pad는 이상해 음침하고 뭐 릴렉스가 아닌데 / cafe도 잘 모르곘네 뭐 시각효과같이있으면 좋을지, 그리고 8시간짜리 영상말고 1시간 30분정도로 하자" | 모닥불: 한 옥타브 위 Eb 장조 5음, bVII 제거, 피아노 자주, 저음 불 소리 1/3. 샘플을 그림 있는 영상으로. 길이 90분 확정 → PRODUCT.md 결정 로그 |
@@ -41,6 +44,14 @@
 - 렌더 속도 개선: 빗방울·장작을 미리 만든 소리 조각(BufferSource 1개+Gain)과 고정 팬 버스 5개로 → 비 3분 348초 → 140초. 남은 병목은 피아노(음마다 노드 7개).
 - **헤드리스 테스트 크롬(chromium-1194)은 H.264 를 못 튼다** (`canPlayType` 빈 값) → 영상 페이지 재생 확인은 ffmpeg 전체 디코딩 오류 0 + 프레임 추출로. 아이폰 사파리는 H.264/AAC 기본 재생.
 - `pkill -f <스크립트이름>` 이 내 bash 명령까지 죽인다(PLAYBOOK 에 이미 있는 교훈, 또 밟음) → `timeout 60 node …` 로 감싼다.
+
+- **헤드리스 크롬 WebGL2 가 된다**: `--use-angle=swiftshader --enable-unsafe-swiftshader`. 사진을 file:// 로 텍스처에 올리려면 `--allow-file-access-from-files`(없으면 캔버스 오염). 1280×720 한 장 약 0.3초.
+- 그림 품질 교훈: 캔버스 도형으로 장면을 그리면 클립아트 → **실사 사진 + 셰이더 효과(굴절·빛)** 가 한 번에 수준을 올린다.
+- Commons API(`generator=search` + `extmetadata LicenseShortName`)로 PD/CC0 만 거르면 상업 이용 가능. 단 검색 품질이 낮아 사람이 골라야 한다(번호 붙인 contact sheet 를 같이 만든다).
+- 셰이더 GLSL 을 JS 문자열 이어붙이기로 쓸 때 파이썬 일괄 치환으로 줄 앞의 `'` 를 지워 SyntaxError → 고친 뒤 꼭 한 장 렌더해 본다.
+
+- **큰 결과물(영상 수백 MB~GB)은 Releases 로**: 리포·Pages 는 100MB 제한. Actions 에서 `gh release create <태그> 파일` (permissions contents: write, GH_TOKEN=github.token). 자산 하나 2GB 까지.
+- Actions 러너에서 헤드리스 크롬 WebGL: `npm i --no-save playwright-core@<버전>` + `npx playwright-core install --with-deps chromium`, 실행 인자 `--use-angle=swiftshader --enable-unsafe-swiftshader`. 3분 시험으로 환경부터 확인한 뒤 긴 실행.
 
 ## 다른 세션·기획 파트너에게 묻고 싶은 것
 - 신앙 앱 쪽(`plans/soaking-music-feature.md`)의 Still/Hope/Lament/Night 분위기는 지금 MOODS 표에 조성·코드·템포만 추가하면 된다. 어느 앱에 붙일지 정해지면 알려 달라.

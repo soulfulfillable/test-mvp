@@ -49,10 +49,11 @@
 | **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | **2026-10-05 1.0(빌드 28) 심사 제출** — Waiting for Review. DESIGN.md 리터칭판, 연령 4+, EU 제외 | 승인 후 AdMob 스토어 링크. 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1 |
 | **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) | 2026-10-02 Flutter 1차 완성·테스트 로봇 17개 통과·웹 미리보기 `docs/catdoku-app/` | 번들 ID 등록 → ASC 앱 레코드·AdMob 앱(사용자) → TestFlight |
 | **Kitty Path: Number Puzzle** (한붓 경로 퍼즐, `kittypath_app/`, `plans/path-puzzle-app.md`, `board/path-puzzle.md`) | 2026-10-03 Flutter 1차 완성·테스트 36개·웹 실제 터치 점검 24/24·웹 미리보기 `docs/path-puzzle-app/`. 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 아이콘·스토어 문구 → ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
-| **Glance Solunar: Fishing Times** (낚시·사냥 시간, `solunar_app/`, `plans/solunar-app.md`, `board/solunar.md`) | 2026-10-03 Flutter 1차 완성·테스트 34개(PyEphem 대조 1,800건+)·웹 미리보기 `docs/solunar-app/`(오프라인 계산, 마을 2만 곳). 번들 `com.soulfulfill.solunar` | ASC 앱 레코드·AdMob 배너+보상형(사용자) → `Release iOS`(solunar) → TestFlight |
-| **Glance MPG: Gas Mileage Log** (연비·정비 기록, `fuellog_app/`, `plans/fuel-log-app.md`, `board/fuel-log.md`) | 2026-10-03 Flutter 1차 완성·테스트 47개 통과·웹 미리보기 `docs/fuel-log-app/`(`?demo=1` 예시). 번들 `com.soulfulfill.fuellog` | ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
+| **Glance Solunar: Fishing Times** (낚시·사냥 시간, `solunar_app/`, `plans/solunar-app.md`, `board/solunar.md`) | 2026-10-06 `DESIGN.md` 리터칭(Cupertino·24시간 다이얼·낚시/사냥) 완료·테스트 37개·웹 점검 43/43·웹 미리보기 `docs/solunar-app/`. 번들 `com.soulfulfill.solunar`, AdMob 실제 ID(배너·보상형) | ASC 앱 레코드(사용자) → `Release iOS`(solunar) → TestFlight(초대 자동) → 스크린샷·심사 메모 |
+| **Glance MPG: Gas Mileage Log** (연비·정비 기록, `fuellog_app/`, `plans/fuel-log-app.md`, `board/fuel-log.md`) | **2026-10-06 1.0(빌드 33) 심사 제출 — Waiting for Review.** 번들 `com.soulfulfill.fuellog`, AdMob 배너(실제 ID), 테스트 48개 | 심사 결과 → (2.1 요청 시 녹화) → 승인 후 AdMob 스토어 링크 연결 → 리뷰·수익 확인 |
 | **유튜브 앰비언스 채널** (`plans/ambient-youtube.md`, `board/ambient-engine.md`) | 2026-10-05 결정(사용자 본래 의도), 세션 시작 대기 | 엔진 시제품 3분×3 → 사용자 느낌 → 8시간 렌더 → 채널 |
 | 기도·묵상 생성 음악 (`plans/soaking-music-feature.md`) | 단독 앱 폐기 → 신앙 앱 부가 기능 | 통독 앱 만들 때 탭으로 |
+| **성경 통독 앱** (`plans/bible-reading-app.md`, `board/bible-reading.md`) | 2026-10-06 신앙 앱 첫 번째로 결정, 세션 시작 대기 | 이름·번들 → 개발(DESIGN.md 첫 적용) → TestFlight |
 | 웹 미니게임 9종 (`docs/*.html`) | 웹으로 공개 중 | 앱화 후보 고르기 (아래 백로그) |
 | 한의학(clinic) 앱 (`lib/`, `android/`) | 보류 | 재개 여부 미정 |
 
@@ -93,6 +94,10 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-06 | **Glance Solunar 는 출시 전에 `DESIGN.md` 리터칭** (기존 앱 손대지 않기 규칙의 예외 — Glance dB 와 같은 경우): Cupertino·강조색 1개(해 뜰 녘 주황)·시그니처 24시간 원형 다이얼·낚시/사냥 전환·안내 화면 없이 바로 메인 | 사용자 "앱이 1차원적인데 디자인들이, 어제 head 쪽에 말한 디자인 방향 보고 다시 해보자". 아직 TestFlight 전이라 첫인상부터 새 디자인으로 |
+| 2026-10-06 | **신앙 앱 첫 번째 = 성경 통독 앱** (오늘 분량 하나·1년 지도·읽는 화면 광고 없음·기도 음악 탭·제휴 링크). Verse Weave 는 2차 기능 후보, 은사 키트는 다음 신앙 앱 후보 | 사용자 "가자 성경 쪽으로!" |
+| 2026-10-05 | 앰비언트 영상 그림은 **진짜 사진(PD/CC0 또는 직접 찍은 사진) + 코드 GPU 효과**로. 코드로 그린 장면은 폐기 | 사용자 "그림 최악이다… 아예 다른 접근방식" → A/B 에서 "A. 진짜 사진 + 코드 효과 (추천)" |
+| 2026-10-06 | **Glance MPG 1.0(빌드 33) 심사 제출** | 사용자가 ASC 수동 항목(App Privacy·연령·가격·저작권·연락처) 마치고 Submit. 개발 시작(10-03)부터 사흘 |
 | 2026-10-06 | Glance MPG: TestFlight 느낌 확인·화면 녹화 없이 바로 심사 제출 준비(빌드 33) | 사용자 "확인하지말고 그냥 진행하자". 심사 메모엔 녹화 대신 1분 체험 순서, 2.1 요청이 오면 그때 녹화 |
 | 2026-10-06 | Glance Speed 1.0: 빌드 26(Invalid Binary, ITMS-90035) → 빌드 32 로 교체해 재제출. 화면 녹화는 사용자 "나중에" — 2.1 요청 오면 답장에 첨부 | 서명 문제는 공용 워크플로 수정으로 해결된 상태. 사용자가 App Privacy·연락처 입력 완료 |
 | 2026-10-05 | Glance Tides v1.0(빌드 21) 심사 제출 | TestFlight 사용자 확인 "다 괜찮은 것 같다". 보상형 영상 무재고는 스토어 연결 전 정상 |

@@ -7,6 +7,9 @@ const fs = require('fs'), path = require('path'), { execFileSync } = require('ch
 let pw; try { pw = require('playwright-core'); } catch (e) { pw = require('/opt/node-tools/node_modules/playwright-core'); }
 const [mood, seedS, minS, out] = process.argv.slice(2);
 const audioOnly = process.argv.includes('--audio-only');
+const opt = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
+const DRIFT = process.argv.includes('--drift');
+const PHOTO = opt('--photo', null), VW = parseInt(opt('--width', '1920'), 10), LOOP = parseInt(opt('--loop', '30'), 10);
 if (!mood || !out) { console.error('usage: render.js <mood> <seed> <minutes> <out.mp4>'); process.exit(1); }
 const SEED = parseInt(seedS, 10), TOTAL = Math.round(parseFloat(minS) * 60), SR = 44100;
 const CHUNK = 300, XF = 8, FPS = 24;
@@ -17,7 +20,7 @@ const ff = (args) => execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error
 
 (async () => {
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
-  const browser = await pw.chromium.launch({ executablePath: fs.existsSync(CHROME) ? CHROME : undefined, args: ['--no-sandbox'] });
+  const browser = await pw.chromium.launch({ executablePath: fs.existsSync(CHROME) ? CHROME : undefined, args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--allow-file-access-from-files'] });
   const page = await browser.newPage();
   const errs = []; page.on('pageerror', e => errs.push(String(e)));
   await page.goto('file://' + path.join(ROOT, 'docs/soaking.html'));
@@ -51,16 +54,30 @@ const ff = (args) => execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error
   if (audioOnly) { ff(['-i', audio, '-c:a', 'libmp3lame', '-b:a', '192k', out]); }
   else {
     // 2) 그림 12초 반복
-    await page.goto('file://' + path.join(ROOT, `docs/ambient-scene.html?mood=${mood}&seed=${SEED}&static=1`));
-    const L = await page.evaluate(() => window.__scene.L);
+    // 사진이 있으면 사진 + GPU 효과(ambient-glass.html), 없으면 예전 코드 그림(ambient-scene.html)
+    let L, grab;
+    if (PHOTO) {
+      await page.setViewportSize({ width: VW, height: Math.round(VW * 9 / 16) });
+      await page.goto('file://' + path.join(ROOT, `docs/ambient-glass.html?static=1&mood=${mood}&seed=${SEED}&w=${VW}&loop=${LOOP}&photo=${encodeURIComponent(path.relative(path.join(ROOT, 'docs'), path.resolve(PHOTO)))}`));
+      await page.evaluate(() => window.__glass.ready);
+      L = LOOP; grab = t => window.__glass.frame(t, 0.93);
+    } else {
+      await page.goto('file://' + path.join(ROOT, `docs/ambient-scene.html?mood=${mood}&seed=${SEED}&static=1`));
+      L = await page.evaluate(() => window.__scene.L); grab = t => window.__scene.frame(t, 0.92);
+    }
     for (let i = 0; i < L * FPS; i++) {
-      const d = await page.evaluate(t => window.__scene.frame(t, 0.92), i / FPS);
+      const d = await page.evaluate(grab, i / FPS);
       fs.writeFileSync(path.join(tmp, `f${String(i).padStart(4, '0')}.jpg`), Buffer.from(d.split(',')[1], 'base64'));
     }
     const loop = path.join(tmp, 'loop.mp4');
-    ff(['-framerate', String(FPS), '-i', path.join(tmp, 'f%04d.jpg'), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '24', '-g', String(L * FPS), loop]);
+    ff(['-framerate', String(FPS), '-i', path.join(tmp, 'f%04d.jpg'), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '21', '-preset', 'slow', '-g', String(L * FPS), loop]);
     // 3) 합치기 (반복 영상은 다시 인코딩하지 않고 복사)
-    ff(['-stream_loop', '-1', '-i', loop, '-i', audio, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', String(TOTAL), '-movflags', '+faststart', out]);
+    // --drift: 긴 영상이 30초 반복으로 보이지 않게, 수십 분 주기로 아주 느린 화면 이동(줌 8%)과 밝기 변화를 얹어 다시 인코딩
+    const vArgs = DRIFT
+      ? ['-vf', `scale=${Math.round(VW * 1.08 / 2) * 2}:${Math.round(VW * 9 / 16 * 1.08 / 2) * 2},crop=${VW}:${Math.round(VW * 9 / 16)}:x='(in_w-out_w)/2*(1+0.85*sin(2*PI*t/1530))':y='(in_h-out_h)/2*(1+0.8*sin(2*PI*t/2170+1))',eq=brightness='0.025*sin(2*PI*t/1810)':saturation='1+0.06*sin(2*PI*t/2630)':eval=frame,format=yuv420p`,
+         '-c:v', 'libx264', '-preset', process.env.X264_PRESET || 'medium', '-crf', process.env.X264_CRF || '25']
+      : ['-c:v', 'copy'];
+    ff(['-stream_loop', '-1', '-i', loop, '-i', audio, '-map', '0:v', '-map', '1:a', ...vArgs, '-c:a', 'aac', '-b:a', '192k', '-t', String(TOTAL), '-movflags', '+faststart', out]);
   }
   fs.rmSync(tmp, { recursive: true, force: true });
   if (errs.length) { console.error('page errors', errs); process.exitCode = 1; }

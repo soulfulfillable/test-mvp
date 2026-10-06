@@ -25,6 +25,14 @@
 
 ## 진행 기록 (개발 세션이 추가, 최신이 위)
 
+### 2026-10-06 1.0(빌드 33) 심사 제출
+- 사용자 "확인하지말고 그냥 진행하자" → TestFlight 느낌·화면 녹화 없이 제출 준비.
+- 스크린샷 5장: 웹 미리보기 `?demo=1&shots=1`(예시 기록·광고 자리 숨김·아이폰 문구)을 아이폰 13 크기 3배율로 찍어(`store/screenshots/capture.js`)
+  1290×2796 틀에 넣음(`make.js`, 소음 앱 틀: 회색 바탕 + 강조색 1개). 미리보기 `docs/fuel-log-store.html`.
+- 심사 메모 7항목(`store/review-notes.md`, 녹화 대신 1분 체험 순서) → `App Store 등록 정보 채우기`(build 33): 부제·설명·키워드·스크린샷·빌드·메모 전부 ✓.
+- 사용자: App Privacy(AdMob 분 5항목, 용도 Third-Party Advertising·Analytics, 연결 No·추적 No)·연령·가격·저작권·연락처 → **Submit → Waiting for Review**.
+- 다음: 심사 결과 → (2.1 요청 시) 30초 녹화 → 승인 후 AdMob 앱에 App Store 링크 연결.
+
 ### 2026-10-05 ASC 앱·AdMob·TestFlight
 - 사용자: ASC 신규 앱 생성, AdMob 앱 "Glance MPG" + 배너 `banner` 생성 → 앱 ID `ca-app-pub-4724352880074547~6940701412`(Info.plist),
   배너 `…/8213509779`(`lib/core/ads.dart`). 두 ID 가 같은 게시자(soulfulfillable) 계정인지 검사하는 테스트 추가 → 48개 통과.
