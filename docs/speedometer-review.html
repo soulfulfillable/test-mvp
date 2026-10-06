@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glance Speed 심사 답장</title>
+<link rel="icon" href="favicon.png">
+<style>
+  :root{--bg:#F5F6F8;--fg:#14181D;--muted:#5C6672;--card:#FFFFFF;--line:#E1E4E8;--accent:#0F8F64}
+  @media (prefers-color-scheme:dark){:root{--bg:#0B0E13;--fg:#EEF1F4;--muted:#9AA4B2;--card:#151A21;--line:#262E39;--accent:#34E0A1}}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  main{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:28px 0 8px}
+  .sub{color:var(--muted);font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  ol{padding-left:20px;margin:0} li{margin:6px 0}
+  pre{white-space:pre-wrap;word-break:break-word;font:14px/1.5 -apple-system,sans-serif;margin:0}
+  button{display:block;width:100%;margin:12px 0 0;padding:14px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:700}
+  @media (prefers-color-scheme:dark){button{color:#0B0E13}}
+  .ok{color:var(--accent);font-weight:700;text-align:center;min-height:22px;margin-top:8px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Glance Speed — 심사 답장 (2.1 정보 요청)</h1>
+  <div class="sub">App Store Connect → Glance Speed → App Review → 메시지 아래 <b>Reply</b></div>
+
+  <h2>① 화면 녹화 (30초 안팎)</h2>
+  <div class="card"><ol>
+    <li>제어 센터 → 화면 기록 ● 시작</li>
+    <li><b>앱 아이콘을 눌러 켜는 것부터</b> 찍기 (Apple 조건)</li>
+    <li>서 있을 때 <b>0</b> 2초 → 걸으면서(또는 조수석에서) 숫자가 올라가는 것 5초</li>
+    <li><b>Gauge</b> → <b>Digits</b></li>
+    <li><b>HUD</b> → 화면 탭 → <b>Exit HUD</b></li>
+    <li><b>Alert off</b> 눌러 켜기 → −5 몇 번 → <b>Done</b> → 넘으면 빨간 화면</li>
+    <li>위쪽 <b>Run</b> → <b>Car</b> → ⚙ 설정 열고 <b>Done</b> → 기록 멈춤</li>
+  </ol><p class="sub" style="margin:10px 0 0">운전 중엔 찍지 마세요. 걸으면서 찍어도 충분해요.</p></div>
+
+  <h2>② 답장 글 (영어 그대로 붙여넣기)</h2>
+  <div class="card"><pre id="reply">Hello App Review team, thank you for reviewing Glance Speed: GPS Speedometer. A screen recording from a physical iPhone (latest iOS, build 1.0.0 (32)) is attached.
+
+1. Screen recording: attached. It starts at app launch and shows the one-time safety notice and location permission, the speedometer reading 0 while stopped and then the live GPS speed while moving, the analog gauge, the mirrored HUD mode, the user-set speed alert (screen turns red), Run mode (pace) and Settings.
+   - The app has no account registration, login, or user-generated content.
+
+2. Purpose and audience: A simple GPS speedometer for drivers, cyclists, runners and boaters who want to see their real speed at a glance, set their own speed alert, and see trip totals (top speed, average, distance, time). Speed comes from the iPhone&#x27;s GPS only while the app is open (When In Use permission; no background location).
+
+3. How to use: No setup or login. On first launch a short safety notice appears, then iOS asks for location permission. The big number is the current speed; tap the unit to switch MPH/km/h. Buttons: Alert (set your own speed limit), Gauge/Digits, HUD (mirrored for the windshield), and the mode bar at the top (Car / Bike / Run / Boat). To see speed, please move (walk or drive) — when stationary it correctly shows 0. If GPS is weak or lost, the app says so (&quot;Weak GPS&quot; / &quot;No GPS signal&quot;) instead of showing a guessed number.
+
+4. External services: Google AdMob banner ads only (no interstitial or video ads; no ads in HUD mode). No backend server, analytics, authentication, or AI services. The user&#x27;s location never leaves the device and is not passed to the ad SDK.
+
+5. Regional differences: None. The app works the same in all regions where it is available. English only.
+
+6. Regulated industry / third-party content: Not applicable. The app does not show road speed limits or speed-camera data; the speed alert is a number the user chooses. A one-time safety notice asks users not to interact with the phone while driving. All art and the app icon are our own.
+
+7. In-App Purchase: None. All features are free, with no subscription or trial.
+
+Thank you!</pre></div>
+  <button id="copy">답장 글 복사</button>
+  <div class="ok" id="ok"></div>
+
+  <h2>③ 보내기</h2>
+  <div class="card"><ol>
+    <li>Reply 칸에 붙여넣기 + 녹화 영상 첨부 → <b>Send</b></li>
+    <li>위쪽 <b>Resubmit to App Review</b> 가 눌리면 누르기</li>
+  </ol><p class="sub" style="margin:10px 0 0">같은 글은 App Review Information → Notes 에 이미 넣어 뒀어요.</p></div>
+</main>
+<script>
+document.getElementById('copy').onclick = async () => {
+  const t = document.getElementById('reply').innerText;
+  try { await navigator.clipboard.writeText(t); }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('reply'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
+  }
+  document.getElementById('ok').textContent = '복사됐어요 ✓';
+};
+</script>
+</body>
+</html>

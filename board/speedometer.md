@@ -7,13 +7,14 @@
 웹 미리보기 https://soulfulfillable.github.io/test-mvp/speedometer-app/index.html
 
 ## 다음 할 일 / 사용자에게 받을 것
-- [사용자] ASC 1.0 페이지에서 빌드 32 확인 → **Add for Review → Submit to App Review**.
+- [사용자] **2.1 정보 요청 답장**: 화면 녹화 30초 → App Review 메시지에 Reply(답장 글 + 영상) → Resubmit. 안내 https://soulfulfillable.github.io/test-mvp/speedometer-review.html
 - [사용자, 선택] TestFlight 앱에서 빌드 32 써 보고 '느낌'. [나중에] 화면 녹화 30초(2.1 요청 오면 답장에 첨부, 순서 `store/review-reply.md`).
 - [세션] 제출 뒤: 승인되면 AdMob 에 스토어 링크 연결 안내 / 2.1 요청 오면 `store/review-reply.md` 로 답장 준비.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-06 | (ASC 캡처 4장: "Unresolved Issues", Guideline 2.1 Information Needed, 1.0 (32)) "이게 여기앱말하는거같은데 맞나 캡쳐를 잘한게" | 맞음 — 신규 개인 계정 첫 제출에 오는 2.1 정보 요청(환율·Kitty Queens 와 같음). 녹화가 1번 필수 항목이라 이제 필요. 폰에서 복사하는 답장 페이지 `docs/speedometer-review.html`(녹화 순서·답장 영어·보내는 법) 안내 |
 | 10-06 | (decibel 세션에 보냄) ASC 캡처 4장: Glance Speed 1.0(32) **"Guideline 2.1 - Information Needed - New App Submission"**(Apple 10-05 11:15 PM), Unresolved Issues | decibel 세션이 안내: `store/review-reply.md` 순서대로 30초 녹화(걸으면서) → 메시지 **Reply** 에 영어 답장+녹화 → 1.0 App Review Information Attachment 에도 녹화 → **Resubmit to App Review**. 결과는 이 세션이 이어서 확인 |
 | 10-06 | (빌드 32 재업로드 후) | 빌드 32 VALID·TestFlight 반영(이미 초대 수락 → 앱에 바로 뜸), `App Store 등록 정보 채우기`(32): 빌드 연결·심사 메모 7항목 ✓ (연락처가 채워져 이제 수정 통과) |
 | 10-06 | (ASC 캡처) "submit 한거같은데 아직 invalid binary 있네 그냥 두면되나" | 그냥 두면 안 됨. 원인: 빌드 26 은 예전 Release iOS(업로드 뒤 배포 인증서 삭제)로 만든 빌드 → ITMS-90035 (대출·물때와 같음, `_shared.md`). 고쳐진 워크플로로 **빌드 32** 업로드(run 37389505875) → 1.0 에 빌드 32 연결 → 사용자 재제출 |
