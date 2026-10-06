@@ -56,7 +56,7 @@
 | **Tolle: Bible Reading Plan** 성경 통독 (`plans/bible-reading-app.md`, `board/bible-reading.md`, `tolle_app/`) | 2026-10-06 Flutter 1차 완성, 번들 `com.soulfulfill.tolle` 등록 | ASC 앱 레코드(사용자) → TestFlight |
 | **Verse Weave 암송 퍼즐** (`plans/verse-weave-app.md`, `board/verse-weave.md`) | 2026-10-06 결정, 세션 시작 대기 | 이름·번들 → 개발 → TestFlight |
 | **소그룹 은사·기질 키트** (`plans/gifts-kit-app.md`, `board/gifts-kit.md`) | 10-06 문항 초안 완료(은사 70·기질 40), 사용자 검토 대기 | 검토 반영 → 채점·코드 엔진 |
-| **Blessing Jar 가족 축복 항아리** (`plans/blessing-jar-app.md`, `board/blessing-jar.md`) | 2026-10-06 결정, 세션 시작 대기 | 흔들기 시제품 → 사용자 느낌 → 개발 |
+| **Blessing Jar 가족 축복 항아리** (`plans/blessing-jar-app.md`, `board/blessing-jar.md`) | 2026-10-06 개발 세션 시작 — 1단계 웹 시제품 `docs/blessing-jar.html` | 흔들기 시제품 → 사용자 느낌 → 개발 |
 | 웹 미니게임 9종 (`docs/*.html`) | 웹으로 공개 중 | 앱화 후보 고르기 (아래 백로그) |
 | 한의학(clinic) 앱 (`lib/`, `android/`) | 보류 | 재개 여부 미정 |
 
