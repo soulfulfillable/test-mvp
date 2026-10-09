@@ -4040,5 +4040,23 @@
       "active medical inquiry reinforcement learning diagnosis"
     ],
     "first_seen": "2026-10-06"
+  },
+  {
+    "id": "doi:10.2196/103584",
+    "title": "Generative AI-Assisted Progressive-Disclosure Case-Based Learning for Clinical Reasoning in Occupational Medicine: Quasi-Experimental Study.",
+    "authors": [
+      "Su P",
+      "Hu M",
+      "Chen C",
+      "Xu S."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.2196/103584",
+    "abstract": "<h4>Background</h4>Case-based learning (CBL) promotes transfer of knowledge to practice, yet occupational health CBL must also develop exposure assessment and epidemiologic thinking. Static, single-session cases that disclose all information upfront can truncate iterative reasoning and encourage premature diagnostic closure. Generative AI (GenAI) can support the efficient development of high-fidelity, progressively disclosed cases, but hallucination risks require strict quality control.<h4>Objective</h4>This study aimed to develop and evaluate a multicomponent GenAI-assisted, 4-act progressive-disclosure CBL package for an occupational lead poisoning module, using a human-in-the-loop workflow to mitigate hallucination risk.<h4>Methods</h4>In a nonrandomized posttest controlled quasi-experimental study, 224 undergraduates were assigned by administrative class to an intervention group (n=114) or a control group (n=110). The control group received conventional static CBL; the intervention group received a GenAI-assisted progressive-disclosure CBL package. The primary outcome was the standardized individual case-analysis assignment score. Secondary outcomes were the delayed final examination score, 5 self-reported learning experience domains, and 3 video-derived behavioral engagement indicators. Subgroup analyses by academic major and group-by-major interaction tests were exploratory.<h4>Results</h4>Baseline characteristics were comparable between groups. The intervention group scored higher on case analysis (mean 88.41, SD 3.85 vs mean 82.51, SD 3.94; P<.001; Cohen d=1.51) and on the delayed final exam (mean 80.96, SD 8.47 vs mean 78.62, SD 6.63; P=.02; Cohen d=0.31). Significant improvements were observed in information gathering, hypothesis generation, and differential diagnosis (all P<.001 after Holm correction), while treatment/management planning did not differ (P=.19). The intervention group reported higher perceived difficulty, perceived improvement in clinical reasoning, engagement, transfer of self-efficacy, and evaluation of the course materials (all P<.001). Voluntary responses (mean 2.30, SD 1.11 vs mean 1.68, SD 0.92; P=.008), evidence-referencing statements (mean 1.90, SD 0.88 vs mean 1.45, SD 0.71; P=.01), and net group discussion time (mean 36.50, SD 6.88 vs mean 28.42, SD 7.02 minutes; P<.001) were all higher in the intervention group. The group-by-major interaction for the final examination was not statistically significant (P=.41). Audit logs showed that all AI-generated case drafts required expert correction.<h4>Conclusions</h4>A multicomponent GenAI-assisted, 4-act progressive-disclosure CBL package implemented with rigorous human-in-the-loop verification was associated with higher case-analysis performance, modestly higher delayed examination performance, and greater behavioral engagement in one nonrandomized cohort. Randomized and class-level multilevel designs with longer follow-up are needed to determine the durability and generalizability of these findings.",
+    "matched_queries": [
+      "traditional chinese medicine dynamic questioning diagnosis"
+    ],
+    "first_seen": "2026-10-09"
   }
 ]
