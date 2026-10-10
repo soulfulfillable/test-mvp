@@ -4058,5 +4058,28 @@
       "traditional chinese medicine dynamic questioning diagnosis"
     ],
     "first_seen": "2026-10-09"
+  },
+  {
+    "id": "epmc:PMC/PMC13647801",
+    "title": "Large language models linking traditional Chinese medicine knowledge and clinical practice",
+    "authors": [
+      "Li C",
+      "Zhang X",
+      "Zhu L",
+      "Zhu B",
+      "Chu C",
+      "Li X",
+      "Yao Y",
+      "Zeng Y",
+      "Zheng J."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://europepmc.org/article/PMC/PMC13647801",
+    "abstract": "",
+    "matched_queries": [
+      "TCM body constitution classification machine learning"
+    ],
+    "first_seen": "2026-10-10"
   }
 ]
