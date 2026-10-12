@@ -66,6 +66,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-12 | Tolle | 2.1 답장 후 Update Review 를 눌렀는데 버전 상태가 "Waiting for Review" 가 아니라 **"Ready for Review"**(아직 제출 안 됨)로 바뀜 — 사용자가 기다리는 줄 앎 | 재제출 안내는 "상태가 **Waiting for Review** 인지 확인"까지. Ready for Review 면 Add for Review → Submit to App Review (폰 웹은 버튼이 안 보일 수 있어 PC 권장) |
 | 2026-10-06 | Blessing Jar | 기획서의 "흔들면 하나 떨어짐" 이 경쟁 앱 4곳에 이미 있었다(검색 1번에 나옴). 또 로봇의 "카드 연타 방지" 검사가 0.8초 기다린 뒤 연타해 잠금(0.7초)이 이미 풀려 오탐 | 시제품 전에 핵심 동작 이름으로 스토어 검색 → 차별점을 동작이 아니라 쓰는 방식(돌려쓰기·봉인 의식)에 둔다. 연타 검사는 결과가 뜬 **직후** 바로 누른다. 흔들기 웹 점검은 `new DeviceMotionEvent('devicemotion', {acceleration})` dispatch + 마우스 끌기 둘 다 (`blessingjar_app/qa/robot.js`) |
 | 2026-10-06 | Tolle(성경 통독) | 새 앱 첫 `TestFlight 초대` 자동 실행이 그룹을 만든 직후 "409 Tester has no installable build" 로 초대 메일을 건너뛰고도 ✅ 성공으로 끝남 | 새 앱은 자동 실행 로그에서 "초대 메일 보냄" 줄을 확인. 없으면 몇 분 뒤 `TestFlight 초대` 를 build·app 넣어 수동 실행 |
 | 2026-10-06 | 은사 키트 | 문항 70개를 손으로 쓰다 보니 분별 문항에 "teaching", 전도·목양 문항에 "faith" 가 섞여 다른 은사 점수를 유도할 뻔 | 문구가 많은 앱은 **검사 스크립트부터**: 금지어(상표·타사·의료 언어) + 항목 이름 노출 + 중복·길이 (`tools/giftskit/check_content.py`). 사용자 검토는 폰 페이지에 "표시 → id 복사" 버튼 |

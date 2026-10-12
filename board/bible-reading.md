@@ -4,7 +4,7 @@
 ## 지금 상태 (3줄 이내)
 이름 **Tolle: Bible Reading Plan** 확정, 번들 `com.soulfulfill.tolle` **Apple 등록 완료**(Actions run 14). Flutter 1차 완성(`tolle_app/flutter/`): 오늘 분량 하나 + Mark as Read(시그니처: 1,189칸 지도가 톡톡 채워짐) · 지도(66권×장) · 계획(전체/신약/시편·잠언 × 기간 × 성경순/연대순, 시작일, 밀림 조정 2가지, 하루 1번 알림, CSV 내보내기).
 테스트 45개 통과(엔진 24 + 로봇 21), 웹 실제 터치 15/15. 웹 미리보기 https://soulfulfillable.github.io/test-mvp/bible-reading-app/index.html · 검수 https://soulfulfillable.github.io/test-mvp/bible-reading-qa.html
-1.0(빌드 36) 제출 10-07 → 10-08 **2.1 정보 요청** → 10-12 답장+녹화 보냄 → **Update Review 재제출 완료**(심사 대기). 광고는 아직 테스트 ID.
+1.0(빌드 36) 제출 10-07 → 10-08 **2.1 정보 요청** → 10-12 답장+녹화 보냄 → Update Review 눌렀으나 상태가 **Ready for Review**(미제출) → Add for Review·Submit 필요. 광고는 아직 테스트 ID.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] 이름 A `Tolle: Bible Reading Plan`, 위젯 A(2차로). 번들 `com.soulfulfill.tolle` 등록 완료.
@@ -18,6 +18,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-12 | (폰 캡처) iOS App Version 1.0 "Ready for Review" — "이거는 이제 기다리는건가" | 아직 아님: Ready for Review = 제출 전 상태. **Add for Review → Submit to App Review** 해야 Waiting for Review. PC 에서 하라고 안내 |
 | 10-12 | "review는 눌렀어" / "AdMob … 어케하는지몰라 너가 해줘야되는데" | 재제출 완료 기록. AdMob 은 API 로 앱·광고 단위를 만들 수 없음(관리형 계정 전용) → 클릭 단위 4단계 안내, 완료 화면 캡처 받으면 ID 반영·새 빌드 |
 | 10-12 | (캡처) 답장 보냄 — 6항목 + video_2026-10-12_13-01-47.mp4, 빌드 1.0.0 (36). Resubmit to App Review 는 회색 | 버전 화면(Distribution → iOS App 1.0) 맨 위 **Update Review** 로 재제출하라고 안내 (환율 앱 때와 같음) |
 | 10-12 | (메시지 캡처) "Guideline 2.1 - Information Needed - New App Submission" (10-08, 제출 10-07) | 신규 계정 표준 정보 요청(환율·캣도쿠·소음과 같음). 답장 페이지 `docs/tolle-review.html`(녹화 순서·6항목 영어 답장 복사 버튼·Update Review 안내). 광고는 아직 테스트 ID — 정식 출시 전 AdMob 진짜 ID 로 바꿀 것 |
