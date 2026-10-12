@@ -12,7 +12,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system
 h1{font-size:28px;font-weight:700;margin:8px 0 2px}
 .lead{color:var(--sub);font-size:14px;margin:0 0 16px}
 .card{background:var(--card);border-radius:12px;padding:14px 16px;margin:10px 0}
-.top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.top .name{min-width:0;flex:1}
 .name{font-size:17px;font-weight:600}
 .when{font-size:13px;color:var(--sub);white-space:nowrap}
 .next{margin:8px 0 0;font-size:15px}
@@ -35,12 +36,13 @@ const BOARDS=['_planning','catdoku','currency','decibel','mortgage','speedometer
 function pick(sec,label){const m=sec.match(new RegExp('^- \\**'+label+'\\**[^:：]*[:：]\\s*(.+)$','m'));return m?m[1].replace(/\*\*/g,'').trim():''}
 async function load(b){
   try{
-    const r=await fetch(RAW+b+'.md?t='+Date.now()); if(!r.ok) throw 0;
-    const md=await r.text();
-    const title=(md.match(/^#\s+(.+)$/m)||[,b])[1].replace(/ — .*$/,'');
+    let md=null;
+    for(let k=0;k<3&&md===null;k++){try{const r=await fetch(RAW+b+'.md?t='+Date.now());if(r.ok)md=await r.text();}catch(e){} if(md===null)await new Promise(z=>setTimeout(z,600*(k+1)));}
+    if(md===null) throw 0;
+    const title=(md.match(/^#\s+(.+)$/m)||[,b])[1].replace(/ — .*$/,'').replace(/\s*\(.*?\)\s*$/,'');
     const i=md.indexOf('## 🔁 이어받기'); if(i<0) return null;
     const j=md.indexOf('\n## ',i+5); const sec=md.slice(i,j<0?undefined:j);
-    const when=(pick(sec,'마지막 저장').split('·')[0]||'').trim();
+    const wm=pick(sec,'마지막 저장').match(/\d{4}-\d{2}-\d{2}(?:\s+\d{1,2}:\d{2})?/); const when=wm?wm[0]:'';
     const next=pick(sec,'다음 할 일');
     const wait=pick(sec,'사용자 대기 중인 것');
     const pm=sec.match(/`([^`]*이어서[^`]*)`/); const prompt=pm?pm[1]:`soulfulfillable/test-mvp 의 board/${b}.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘.`;
