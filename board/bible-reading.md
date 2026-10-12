@@ -18,6 +18,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-12 | (폰 캡처) App Review → 수요일 8:48 PM 제출 "Unresolved Issues" — "저거때문아님가?" | 맞음: 답장한 그 제출이 아직 열려 있음. 그 제출을 눌러 **Resubmit to App Review**(이제 파란색이어야 함) → Waiting for Review 확인. 회색이면 캡처 받기(Cancel Submission 은 답장 맥락을 잃을 수 있어 마지막 수단) |
 | 10-12 | "아예 싹 초기화하기 이런게잇어도 좋겟지? 전체는 위험하니 각 책마다 해노ㅗ을까 그래서 진짜할거냐면 확인한번 받고" | 이미 책마다 확인 창 있는 지우기가 있었음 → 눈에 띄게 **Reset Book** 으로 이름 바꾸고 확인 창 문구를 "Reset Psalms? … This can’t be undone. Chapters finished in your reading plan stay." 로. 전체 초기화는 만들지 않음(사용자 판단과 같음). 계획 진행은 Plan 에서 새 계획 시작(확인 창)으로만 초기화. 테스트 47·웹 17/17. 앱 반영은 다음 빌드 |
 | 10-12 | (폰 캡처) iOS App Version 1.0 "Ready for Review" — "이거는 이제 기다리는건가" | 아직 아님: Ready for Review = 제출 전 상태. **Add for Review → Submit to App Review** 해야 Waiting for Review. PC 에서 하라고 안내 |
 | 10-12 | "review는 눌렀어" / "AdMob … 어케하는지몰라 너가 해줘야되는데" | 재제출 완료 기록. AdMob 은 API 로 앱·광고 단위를 만들 수 없음(관리형 계정 전용) → 클릭 단위 4단계 안내, 완료 화면 캡처 받으면 ID 반영·새 빌드 |
