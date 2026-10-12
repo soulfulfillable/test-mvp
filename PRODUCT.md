@@ -44,7 +44,7 @@
 | **Glance FX: Currency Converter** (`currency_app/`) | 2026-10-02 v1.0(빌드 8) 심사 제출. v1.1 후보 = 빌드 9(TestFlight): 줄 꾹 눌러 끌기로 순서 변경, 긴 이름 줄 넘침 수정. 스크린샷 v2(금·BTC 첫 장) 준비됨 | 승인 대기 → AdMob 스토어 링크·결제 정보 → v1.1 제출(빌드 9 + 스크린샷 v2, `App Store 등록 정보 채우기`) → 리뷰·수익 확인 |
 | **Cozy Coloring 정식판** (원형 `docs/coloring-book.html`) | **보류** (2026-10-02). 기획서 OK, 선화 수집·변환기·테스트 로봇까지 만듦 | 재개 시 `plans/coloring-app.md` 의 첫 메시지로 새 세션 |
 | **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | 2026-10-03 Flutter 1차 완성·테스트 31개·웹 미리보기 `docs/tides-app/`. 번들 `com.soulfulfill.tides` | 2026-10-05 v1.0(빌드 21) 심사 제출 → 승인 대기 → AdMob 스토어 링크 연결 → 리뷰·수익 확인 |
-| **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-06 첫 제출 Invalid Binary(빌드 26 예전 서명) → **빌드 32 로 교체·등록 정보 완료** | 사용자 재제출 → 승인 → AdMob 스토어 연결 |
+| **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-08 **Guideline 5.6 거절**("심사 중 숨긴 기능") — 빌드 32 에 숨긴 기능 없음 | 사실 설명 답장 + Resubmit(사용자) → 다시 거절되면 안내 문구·Always 문구 제거 새 빌드 + App Review Board |
 | **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 1.0(빌드 22) ITMS-90035 반려 → 1.1(빌드 30) 등록 정보 입력 완료, 재제출 대기 | 사용자 Resubmit → 승인 → AdMob 스토어 연결 |
 | **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-05 1.0(빌드 28) 제출 → 10-06 **2.1 정보 요청**(새 계정 정형) → 답장·재제출 중 (`docs/decibel-review.html`) | 승인 후 AdMob 스토어 링크. 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1 |
 | **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) | 2026-10-02 Flutter 1차 완성·테스트 로봇 17개 통과·웹 미리보기 `docs/catdoku-app/` | 번들 ID 등록 → ASC 앱 레코드·AdMob 앱(사용자) → TestFlight |
@@ -97,6 +97,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-12 | Glance Speed 5.6 거절(10-08)에 **앱 수정 없이 사실 설명 답장 + 구체적 지적 요청**으로 대응. 다시 거절되면 정지 중 안내 문구·안 쓰는 Always 위치 문구 제거 새 빌드 + App Review Board | 코드 점검상 숨긴 기능 없음. 5.6 은 반복 시 계정 위험 → 성급히 빌드를 바꿔 재제출하지 않는다. 계정 단위 위험이라 `board/_shared.md` 에 알림 |
 | 2026-10-06 | 유튜브 채널 관리·업로드는 **YouTube Data API + Actions 자동화**(사용자는 처음 연결 15분 + 영상마다 Public 버튼). 미심사 API 는 업로드가 private 고정이라, 채널이 자리 잡으면 API 심사(audit) 신청 검토 | 사용자 "너가 직접 해주면 안 되냐 … 이거 그냥 다" → A/B "A. API 연결 (추천)" |
 | 2026-10-06 | Tolle: 계획은 창세기부터 그대로 두고, **Map 에서 책 → 장을 직접 체크**하는 기록 기능 추가(계획과 따로 저장, 지도는 66권 전부) | 사용자 "내가 읽은것에 체크해둘수있게… 이건있어야할듯" |
 | 2026-10-06 | 앰비언트 영상은 기존 채널 **Peblit(@peblit, soulfulfillable 계정)** 을 앰비언트 채널로 바꿔 올린다(이름·로고 유지, 설명·배너 교체, 기존 쇼츠 삭제). 카페 분위기 유지, 모닥불 보류 | 사용자 "Peblit 여기 어차피 올린 거 없는데, 내용만 바꾸면 되지 않을까, 임시로 해 둔 것" / "카페는 괜찮았어" / "불은 별로" |

@@ -22,7 +22,34 @@
 </head>
 <body>
 <main>
-  <h1>Glance Speed — 심사 답장 (2.1 정보 요청)</h1>
+  <h1>Glance Speed — 심사 답장 (5.6, 10-08)</h1>
+  <div class="sub">App Store Connect → Glance Speed → App Review → 5.6 메시지 아래 <b>Reply to App Review</b></div>
+
+  <h2>① 답장 글 (영어 그대로 붙여넣기)</h2>
+  <div class="card"><pre id="reply56">Hello App Review team,
+
+Thank you for your message. We take the Developer Code of Conduct seriously, and we want to clearly confirm that Glance Speed: GPS Speedometer has no hidden, dormant, or undocumented features. The build under review, 1.0.0 (32), is exactly what customers will receive.
+
+- No remote configuration, feature flags, server, or downloaded code. The only network traffic is the Google Mobile Ads SDK banner.
+- Nothing depends on region, locale, date, IP address, device, or whether the app is being reviewed.
+- Location is requested only &quot;While Using the App&quot;. The app never asks for &quot;Always&quot; or background location, and location data never leaves the device.
+- Every feature is on the main screen at all times: the speed number (tap the unit to switch MPH / km/h), the mode bar (Car / Bike / Run / Boat), Alert (a speed limit the user sets), Gauge / Digits, HUD (mirrored display for the windshield), Reset trip, and Settings (units, display, HUD mirror, driving safety notice, privacy policy).
+
+The only thing that changes is the GPS reading itself. When the iPhone is stationary or indoors, the app correctly shows 0 or &quot;No GPS signal&quot;, so the red speed alert and the trip totals change only while the device is actually moving. That is why our screen recording was made while walking outdoors. To see it on your device: walk outside (or ride as a passenger), tap Alert, turn it on and lower the limit to 3 MPH with the −5 / −1 buttons — the screen turns red as soon as walking speed goes above it.
+
+If a specific screen or behavior looked hidden to you, could you please tell us which one? We will gladly explain it or change it in the next build.
+
+Thank you for your time.</pre></div>
+  <button id="copy56">답장 글 복사</button>
+  <div class="ok" id="ok56"></div>
+
+  <h2>② 보내기</h2>
+  <div class="card"><ol>
+    <li>Reply to App Review → 붙여넣기 → (10-06 에 보낸 녹화 영상을 다시 첨부하면 더 좋아요) → <b>Send</b></li>
+    <li>위쪽 <b>Resubmit to App Review</b> 가 눌리면 누르기</li>
+  </ol><p class="sub" style="margin:10px 0 0">빌드는 그대로(32). 앱을 고치지 않고 설명으로 답하는 단계예요. 또 거절되면 그때 화면에 "움직이면 속도가 나와요" 안내를 넣은 새 빌드 + 심사위원회(App Review Board) 이의 제기를 준비합니다.</p></div>
+
+  <h2 style="margin-top:40px">(지난 10-06) 2.1 정보 요청 답장 — 이미 보냄</h2>
   <div class="sub">App Store Connect → Glance Speed → App Review → 메시지 아래 <b>Reply</b></div>
 
   <h2>① 화면 녹화 (30초 안팎)</h2>
@@ -37,7 +64,7 @@
   </ol><p class="sub" style="margin:10px 0 0">운전 중엔 찍지 마세요. 걸으면서 찍어도 충분해요.</p></div>
 
   <h2>② 답장 글 (영어 그대로 붙여넣기)</h2>
-  <div class="card"><pre id="reply">Hello App Review team, thank you for reviewing Glance Speed: GPS Speedometer. A screen recording from a physical iPhone (latest iOS, build 1.0.0 (32)) is attached.
+  <div class="card"><pre id="reply21">Hello App Review team, thank you for reviewing Glance Speed: GPS Speedometer. A screen recording from a physical iPhone (latest iOS, build 1.0.0 (32)) is attached.
 
 1. Screen recording: attached. It starts at app launch and shows the one-time safety notice and location permission, the speedometer reading 0 while stopped and then the live GPS speed while moving, the analog gauge, the mirrored HUD mode, the user-set speed alert (screen turns red), Run mode (pace) and Settings.
    - The app has no account registration, login, or user-generated content.
@@ -55,8 +82,8 @@
 7. In-App Purchase: None. All features are free, with no subscription or trial.
 
 Thank you!</pre></div>
-  <button id="copy">답장 글 복사</button>
-  <div class="ok" id="ok"></div>
+  <button id="copy21">답장 글 복사</button>
+  <div class="ok" id="ok21"></div>
 
   <h2>③ 보내기</h2>
   <div class="card"><ol>
@@ -65,15 +92,16 @@ Thank you!</pre></div>
   </ol><p class="sub" style="margin:10px 0 0">같은 글은 App Review Information → Notes 에 이미 넣어 뒀어요.</p></div>
 </main>
 <script>
-document.getElementById('copy').onclick = async () => {
-  const t = document.getElementById('reply').innerText;
-  try { await navigator.clipboard.writeText(t); }
-  catch (e) {
-    const r = document.createRange(); r.selectNodeContents(document.getElementById('reply'));
-    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
-  }
-  document.getElementById('ok').textContent = '복사됐어요 ✓';
-};
+function wire(btn, pre, ok) {
+  document.getElementById(btn).onclick = async () => {
+    const el = document.getElementById(pre), t = el.innerText;
+    try { await navigator.clipboard.writeText(t); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); }
+    document.getElementById(ok).textContent = '복사됐어요 ✓';
+  };
+}
+wire('copy56', 'reply56', 'ok56');
+wire('copy21', 'reply21', 'ok21');
 </script>
 </body>
 </html>

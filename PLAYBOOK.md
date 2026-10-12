@@ -66,6 +66,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-12 | 속도계 | 2.1 답장(녹화 첨부) 이틀 뒤 **5.6 Developer Code of Conduct**("심사 중 숨긴 기능") 거절. 숨긴 기능은 없음 — 정지·실내에선 속도·경고·기록이 안 변해 심사자가 못 본 것, 또는 새 계정 다수 제출 패턴으로 추정 | 움직여야 보이는 기능은 **정지 상태에서도 화면에 이유를 보이게**("움직이면 속도가 나와요"). 안 쓰는 권한 문구(Always 위치 등)는 넣지 않는다. 5.6 은 빌드를 바꾸기 전에 사실 설명 답장부터 |
 | 2026-10-12 | Tolle | 2.1 답장 후 Update Review 를 눌렀는데 버전 상태가 "Waiting for Review" 가 아니라 **"Ready for Review"**(아직 제출 안 됨)로 바뀜 — 사용자가 기다리는 줄 앎 | 재제출 안내는 "상태가 **Waiting for Review** 인지 확인"까지. Ready for Review 면 Add for Review → Submit to App Review (폰 웹은 버튼이 안 보일 수 있어 PC 권장) |
 | 2026-10-06 | Blessing Jar | 기획서의 "흔들면 하나 떨어짐" 이 경쟁 앱 4곳에 이미 있었다(검색 1번에 나옴). 또 로봇의 "카드 연타 방지" 검사가 0.8초 기다린 뒤 연타해 잠금(0.7초)이 이미 풀려 오탐 | 시제품 전에 핵심 동작 이름으로 스토어 검색 → 차별점을 동작이 아니라 쓰는 방식(돌려쓰기·봉인 의식)에 둔다. 연타 검사는 결과가 뜬 **직후** 바로 누른다. 흔들기 웹 점검은 `new DeviceMotionEvent('devicemotion', {acceleration})` dispatch + 마우스 끌기 둘 다 (`blessingjar_app/qa/robot.js`) |
 | 2026-10-06 | Tolle(성경 통독) | 새 앱 첫 `TestFlight 초대` 자동 실행이 그룹을 만든 직후 "409 Tester has no installable build" 로 초대 메일을 건너뛰고도 ✅ 성공으로 끝남 | 새 앱은 자동 실행 로그에서 "초대 메일 보냄" 줄을 확인. 없으면 몇 분 뒤 `TestFlight 초대` 를 build·app 넣어 수동 실행 |

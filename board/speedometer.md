@@ -1,19 +1,20 @@
 # GPS 속도계 (speedometer 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-06 08:50 (KST)
+마지막 갱신: 2026-10-12 (KST)
 
 ## 지금 상태 (3줄 이내)
-1.0 첫 제출이 **Invalid Binary**(빌드 26 = 예전 서명, ITMS-90035) → 고쳐진 Release iOS 로 **빌드 32** 업로드·TestFlight 자동 반영 → 1.0 에 빌드 32 연결, 심사 메모 7항목 갱신 완료(10-06).
-**사용자 재제출(Add for Review → Submit) 대기.** App Privacy·연락처는 사용자가 채움.
-웹 미리보기 https://soulfulfillable.github.io/test-mvp/speedometer-app/index.html
+**10-08 Guideline 5.6 (Developer Code of Conduct) 거절** — "심사 중 의도적으로 숨긴 기능이 있는 것 같다". 빌드 32 에 숨긴 기능 없음(코드 점검).
+앱은 고치지 않고 사실대로 답장 + "어떤 기능인지" 묻기로 → 답장 페이지 https://soulfulfillable.github.io/test-mvp/speedometer-review.html
+사용자 답장·Resubmit 대기. 다시 거절되면 계획 B(아래).
 
 ## 다음 할 일 / 사용자에게 받을 것
-- [사용자] **2.1 정보 요청 답장**: 화면 녹화 30초 → App Review 메시지에 Reply(답장 글 + 영상) → Resubmit. 안내 https://soulfulfillable.github.io/test-mvp/speedometer-review.html
-- [사용자, 선택] TestFlight 앱에서 빌드 32 써 보고 '느낌'. [나중에] 화면 녹화 30초(2.1 요청 오면 답장에 첨부, 순서 `store/review-reply.md`).
-- [세션] 제출 뒤: 승인되면 AdMob 에 스토어 링크 연결 안내 / 2.1 요청 오면 `store/review-reply.md` 로 답장 준비.
+- [사용자] 5.6 메시지에 Reply(페이지의 답장 글 + 10-06 녹화 재첨부) → Resubmit to App Review.
+- [세션, 다시 거절되면 계획 B] ① 정지 중 "Start moving to see your speed" 안내 ② Info.plist 의 안 쓰는 Always 위치 문구 제거(ITMS-90683 확인)
+  ③ 웹 전용 데모·스크린샷 코드를 별도 진입점으로 → 새 빌드 + App Review Board 이의 제기. 근거·원문 `speedometer_app/store/review-reply-5.6.md`.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-12 | (ASC 캡처) Apple 10-08: "Guideline 5.6 - Developer Code of Conduct … features that appear to have been intentionally hidden during the review process" (사용자 글 없음) | 빌드 32 코드 점검: 원격 설정·서버·지역/날짜 분기 없음, 웹 전용 데모는 kIsWeb 상수로 막힘. 앱 수정 없이 사실 설명 + 구체적 지적 요청 답장 작성(`docs/speedometer-review.html` 맨 위). 공용 게시판·결정 로그에 계정 위험 알림 |
 | 10-06 | (ASC 캡처 4장: "Unresolved Issues", Guideline 2.1 Information Needed, 1.0 (32)) "이게 여기앱말하는거같은데 맞나 캡쳐를 잘한게" | 맞음 — 신규 개인 계정 첫 제출에 오는 2.1 정보 요청(환율·Kitty Queens 와 같음). 녹화가 1번 필수 항목이라 이제 필요. 폰에서 복사하는 답장 페이지 `docs/speedometer-review.html`(녹화 순서·답장 영어·보내는 법) 안내 |
 | 10-06 | (decibel 세션에 보냄) ASC 캡처 4장: Glance Speed 1.0(32) **"Guideline 2.1 - Information Needed - New App Submission"**(Apple 10-05 11:15 PM), Unresolved Issues | decibel 세션이 안내: `store/review-reply.md` 순서대로 30초 녹화(걸으면서) → 메시지 **Reply** 에 영어 답장+녹화 → 1.0 App Review Information Attachment 에도 녹화 → **Resubmit to App Review**. 결과는 이 세션이 이어서 확인 |
 | 10-06 | (빌드 32 재업로드 후) | 빌드 32 VALID·TestFlight 반영(이미 초대 수락 → 앱에 바로 뜸), `App Store 등록 정보 채우기`(32): 빌드 연결·심사 메모 7항목 ✓ (연락처가 채워져 이제 수정 통과) |
