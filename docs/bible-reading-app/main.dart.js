@@ -33876,9 +33876,9 @@ A.a16.prototype={
 $0(){return this.a.d=null},
 $S:0}
 A.a15.prototype={
-$1(a){var s=null,r=A.aW("Clear "+this.a.a.c.b+"?",s,s,s,s,s,s,s),q=this.b.length,p=q===1?"chapter":"chapters"
-p=A.aW("Unchecks the "+q+" "+p+" you checked here. Your reading plan isn\u2019t changed.",s,s,s,s,s,s,s)
-return A.acX(A.c([A.OS(B.fx,!0,!1,s,new A.a13(a)),A.OS(B.ZY,!1,!0,B.a_R,new A.a14(a))],t.p),p,r)},
+$1(a){var s=null,r=this.a.a.c.b,q=A.aW("Reset "+r+"?",s,s,s,s,s,s,s),p=this.b.length,o=p===1?"chapter":"chapters"
+r=A.aW("Unchecks the "+p+" "+o+" you checked in "+r+". This can\u2019t be undone. Chapters finished in your reading plan stay.",s,s,s,s,s,s,s)
+return A.acX(A.c([A.OS(B.fx,!0,!1,s,new A.a13(a)),A.OS(B.ZR,!1,!0,B.a_R,new A.a14(a))],t.p),r,q)},
 $S:131}
 A.a13.prototype={
 $0(){A.dp(this.a,!1).hN(!1)
@@ -33905,7 +33905,7 @@ j=A.aW("Tap a chapter you\u2019ve read.",f,f,f,f,f,A.du(f,f,m,f,f,f,f,f,f,f,f,13
 a=p===s?f:new A.a1d(e,a,b)
 s=n.length===0?f:new A.a1e(d,n)
 i=t.p
-s=A.hB(A.c([new A.hL("Mark All Read",a,B.a06),B.wA,new A.hL("Clear",s,B.a_Y)],i),B.K,B.H,0)
+s=A.hB(A.c([new A.hL("Mark All Read",a,B.a06),B.wA,new A.hL("Reset Book",s,B.a_Y)],i),B.K,B.H,0)
 a=A.DF(new A.a1f(d,c,b,l,k))
 d=d.d
 h=d==null
@@ -34003,7 +34003,7 @@ $0(){A.dp(this.a,!1).hN(!0)
 return null},
 $S:0}
 A.UW.prototype={
-$1(a){var s=this,r=null,q=B.ew.a6(a),p=s.a,o=t.p,n=A.hB(A.c([A.th(r,B.fx,r,r,r,r,new A.UT(a),r),A.jz(A.aW(s.b,r,r,r,r,r,B.wU,B.aV),1),A.th(r,B.ZT,r,B.a_H,r,r,new A.UU(p,a),r)],o),B.K,B.H,0)
+$1(a){var s=this,r=null,q=B.ew.a6(a),p=s.a,o=t.p,n=A.hB(A.c([A.th(r,B.fx,r,r,r,r,new A.UT(a),r),A.jz(A.aW(s.b,r,r,r,r,r,B.wU,B.aV),1),A.th(r,B.ZU,r,B.a_H,r,r,new A.UU(p,a),r)],o),B.K,B.H,0)
 return A.jt(r,A.mF(!0,A.dM(A.c([n,A.jz(new A.lo(s.c,s.d,new A.UV(p),r),1)],o),B.K,B.P,B.H),B.ae,!1),B.w,q,r,r,300,r,r,r)},
 $S:194}
 A.UT.prototype={
@@ -34049,7 +34049,7 @@ A.cV()
 s=s.oK(A.d4(A.c5()))
 p=c.e.length
 s=s-p>=2&&p<c.gaV().c.length?B.Xj:d
-p=A.c([A.ju(a0.$2$key(A.AA(A.rf(B.b.gS(c.gaV().c))),B.a_S),B.a_I,new A.V3(a5,c),d,B.ZU,B.ey),A.ju(a0.$2$key(A.AA(A.rf(B.b.ga8(c.gaV().c))),B.a_Q),d,d,d,B.ZV,d),A.ju(a0.$2$key(""+c.e.length+" of "+c.gaV().c.length,B.a_J),d,d,d,B.ZX,d)],a3)
+p=A.c([A.ju(a0.$2$key(A.AA(A.rf(B.b.gS(c.gaV().c))),B.a_S),B.a_I,new A.V3(a5,c),d,B.ZV,B.ey),A.ju(a0.$2$key(A.AA(A.rf(B.b.ga8(c.gaV().c))),B.a_Q),d,d,d,B.ZW,d),A.ju(a0.$2$key(""+c.e.length+" of "+c.gaV().c.length,B.a_J),d,d,d,B.ZY,d)],a3)
 o=c.gaV()
 A.cV()
 o=o.oK(A.d4(A.c5()))
@@ -34081,7 +34081,7 @@ p=B.e.bq(f,12)
 if(p===0)p=12
 o=f<12?"AM":"PM"
 s.push(A.ju(a0.$1(""+p+":"+e+" "+o),B.a0c,new A.V5(a5,c),d,B.ZQ,B.ey))}a4.push(A.tm(s,new A.mN("Reminders work in the iPhone app, not in this web preview.",d),B.Xq))
-a4.push(A.tm(A.c([A.ju(d,B.a02,new A.V6(c),d,B.ZS,B.ey),A.ju(d,B.a0d,new A.V7(),d,B.ZM,B.ey)],a3),B.Xk,B.Xm))
+a4.push(A.tm(A.c([A.ju(d,B.a02,new A.V6(c),d,B.ZT,B.ey),A.ju(d,B.a0d,new A.V7(),d,B.ZM,B.ey)],a3),B.Xk,B.Xm))
 a4.push(B.ww)
 return A.OZ(B.hl,A.dM(A.c([A.jz(A.ad3(B.a03,A.c([B.zN,new A.wv(A.afs(a4,!0,!0,!0),d)],a3)),1),A.mF(!0,$.a8Z().zI(),B.ae,!1)],a3),B.K,B.P,B.H),d)},
 $S:45}
@@ -34221,7 +34221,7 @@ A.cV()
 m=s.oK(A.d4(A.c5()))-m.e.length>0}else m=!1
 if(m)n.push(A.a9u(B.x1,!1,B.a0j,new A.a6I(a,q.b)))
 n.push(A.a9u(B.x2,!1,B.a0i,new A.a6J(a,q.b)))
-return new A.lm(B.ZW,o,n,A.a9u(B.fx,!0,p,new A.a6K(a)),p)},
+return new A.lm(B.ZX,o,n,A.a9u(B.fx,!0,p,new A.a6K(a)),p)},
 $S:181}
 A.a6I.prototype={
 $0(){A.dp(this.a,!1).hN(null)
@@ -66927,8 +66927,8 @@ B.a1L=new A.lr(!0,!0,null)
 B.ZO=new A.cu("Plan",null,null,null,null,null,null,null,null)
 B.dV=new A.qo(null)
 B.zN=new A.oc(B.ZO,B.hl,null)
-B.ZR=new A.cu("Map",null,null,null,null,null,null,null,null)
-B.zO=new A.oc(B.ZR,null,null)
+B.ZS=new A.cu("Map",null,null,null,null,null,null,null,null)
+B.zO=new A.oc(B.ZS,null,null)
 B.d1=new A.M(0.9411764705882353,0.9764705882352941,0.9764705882352941,0.9764705882352941,B.f)
 B.ee=new A.M(0.9411764705882353,0.11372549019607843,0.11372549019607843,0.11372549019607843,B.f)
 B.zw=new A.aA(B.d1,null,null,B.d1,B.ee,B.d1,B.ee,B.d1,B.ee,B.d1,B.ee)
@@ -69603,15 +69603,15 @@ B.ZN=new A.cu("Start a New Plan?",null,null,null,null,null,null,null,null)
 B.ZP=new A.cu("Start New Plan",null,null,null,null,null,null,null,null)
 B.x1=new A.cu("Spread the Rest",null,null,null,null,null,null,null,null)
 B.ZQ=new A.cu("Time",null,null,null,null,null,null,null,null)
-B.ZS=new A.cu("Export Progress (CSV)",null,null,null,null,null,null,null,null)
-B.ZT=new A.cu("Done",null,B.wU,null,null,null,null,null,null)
+B.ZR=new A.cu("Reset",null,null,null,null,null,null,null,null)
+B.ZT=new A.cu("Export Progress (CSV)",null,null,null,null,null,null,null,null)
+B.ZU=new A.cu("Done",null,B.wU,null,null,null,null,null,null)
 B.fx=new A.cu("Cancel",null,null,null,null,null,null,null,null)
 B.x2=new A.cu("Continue From Today",null,null,null,null,null,null,null,null)
-B.ZU=new A.cu("Start Date",null,null,null,null,null,null,null,null)
-B.ZV=new A.cu("Finish",null,null,null,null,null,null,null,null)
-B.ZW=new A.cu("Adjust Your Schedule",null,null,null,null,null,null,null,null)
-B.ZX=new A.cu("Days Read",null,null,null,null,null,null,null,null)
-B.ZY=new A.cu("Clear",null,null,null,null,null,null,null,null)
+B.ZV=new A.cu("Start Date",null,null,null,null,null,null,null,null)
+B.ZW=new A.cu("Finish",null,null,null,null,null,null,null,null)
+B.ZX=new A.cu("Adjust Your Schedule",null,null,null,null,null,null,null,null)
+B.ZY=new A.cu("Days Read",null,null,null,null,null,null,null,null)
 B.ZZ=new A.cu("Daily Reminder",null,null,null,null,null,null,null,null)
 B.a__=new A.cu("",null,null,null,null,null,null,null,null)
 B.T_=new A.i(0.056,0.024)

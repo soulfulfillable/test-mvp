@@ -441,7 +441,8 @@ void main() {
       await check(t, 'Book (Psalms, 150 chapters)', shot: '13-book-psalms');
       await press(t, find.byKey(const Key('mark-all')), 'Book: Mark All Read');
       expect(textOf(t, const Key('book-count')), '150 of 150 chapters read');
-      await press(t, find.byKey(const Key('clear')), 'Book: Clear');
+      await press(t, find.byKey(const Key('clear')), 'Book: Reset Book');
+      expect(find.text('Reset Psalms?'), findsOneWidget);
       await check(t, 'Clear dialog', shot: '14-book-clear');
       await press(t, find.text('Cancel'), 'Clear dialog: Cancel');
       expect(textOf(t, const Key('book-count')), '150 of 150 chapters read');

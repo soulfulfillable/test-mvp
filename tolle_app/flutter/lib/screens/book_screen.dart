@@ -57,9 +57,9 @@ class _BookScreenState extends State<BookScreen> {
     final ok = await showCupertinoDialog<bool>(
       context: context,
       builder: (ctx) => CupertinoAlertDialog(
-        title: Text('Clear ${widget.book.name}?'),
+        title: Text('Reset ${widget.book.name}?'),
         content: Text(
-          'Unchecks the ${mine.length} ${mine.length == 1 ? 'chapter' : 'chapters'} you checked here. Your reading plan isn’t changed.',
+          'Unchecks the ${mine.length} ${mine.length == 1 ? 'chapter' : 'chapters'} you checked in ${widget.book.name}. This can’t be undone. Chapters finished in your reading plan stay.',
         ),
         actions: [
           CupertinoDialogAction(
@@ -71,7 +71,7 @@ class _BookScreenState extends State<BookScreen> {
             key: const Key('confirm-clear'),
             isDestructiveAction: true,
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Clear'),
+            child: const Text('Reset'),
           ),
         ],
       ),
@@ -128,7 +128,7 @@ class _BookScreenState extends State<BookScreen> {
                   const Spacer(),
                   TextAction(
                     key: const Key('clear'),
-                    label: 'Clear',
+                    label: 'Reset Book',
                     onTap: mine.isEmpty ? null : () => _clear(mine),
                   ),
                 ],
