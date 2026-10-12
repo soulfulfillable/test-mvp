@@ -1,6 +1,15 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
 마지막 갱신: 2026-10-06 22:00 (KST)
 
+## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
+- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 1.0(빌드 28) 2.1 정보 요청, 답장 페이지 docs/decibel-review.html
+- 진행 중이던 것: 없음
+- **다음 할 일**: 사용자: Reply 에 글 + 36초 녹화 → Resubmit. Invalid Binary 나면 새 빌드로 교체
+- 이어받는 세션에 붙여 넣을 말:
+  `soulfulfillable/test-mvp 의 board/decibel.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+
+
 ## 지금 상태 (3줄 이내)
 1.0(빌드 28) 심사 결과 **"2.1 Information Needed - New App Submission"**(새 계정 이력 부족 — 환율·대출·속도계·물때와 같은 정형 요청). 앱 문제 지적 아님.
 답장 페이지 `docs/decibel-review.html`(복사 버튼) → 사용자: Reply 에 글 + 어제 녹화(36초) 첨부 → **Resubmit to App Review**.

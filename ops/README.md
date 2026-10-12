@@ -22,3 +22,6 @@ GitHub(`soulfulfillable`)만 살아 있으면 새 Claude 계정에서 그대로 
    **"ops/README.md 보고 복구해줘"**
 3. 그 세션이 할 일: `ops/routines/` 의 루틴을 파일에 적힌 일정·프롬프트 그대로 다시 만들고,
    `PRODUCT.md` 를 읽어 기획 파트너로 이어서 일한다.
+
+## 크레딧이 막혔을 때 (계정은 살아 있음)
+- https://soulfulfillable.github.io/test-mvp/handoff.html 에서 앱을 골라 '문장 복사' → 다른 계정(개인 Claude)의 새 세션에 붙여 넣기. 기획 파트너는 `board/_planning.md`.

@@ -1,6 +1,15 @@
 # Blessing Jar (가족 축복 항아리) — 개발 세션 게시판
 마지막 갱신: 2026-10-06 (KST)
 
+## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
+- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 웹 시제품 완료 docs/blessing-jar.html, 로봇 99/99
+- 진행 중이던 것: 없음
+- **다음 할 일**: 사용자 '느낌' → Flutter 개발
+- 이어받는 세션에 붙여 넣을 말:
+  `soulfulfillable/test-mvp 의 board/blessing-jar.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+
+
 ## 지금 상태 (3줄 이내)
 1단계 웹 시제품 완료: https://soulfulfillable.github.io/test-mvp/blessing-jar.html (흔들기·쪽지 물리). 로봇 99/99.
 경쟁 확인: "흔들면 쪽지" 는 Gratitude Jar·GratJar·Gratitudes Jar·Orca 에 이미 있음 → 차별점은 돌려쓰기(계정 0)·봉인 후 함께 여는 의식.

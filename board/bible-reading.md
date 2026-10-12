@@ -1,6 +1,15 @@
 # 성경 통독 앱 — 개발 세션 게시판
 마지막 갱신: 2026-10-12 (KST)
 
+## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
+- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: Tolle 빌드 36 TestFlight 반영
+- 진행 중이던 것: 없음
+- **다음 할 일**: 사용자: TestFlight 느낌 + 30초 녹화 → AdMob → 스토어 제출
+- 이어받는 세션에 붙여 넣을 말:
+  `soulfulfillable/test-mvp 의 board/bible-reading.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+
+
 ## 지금 상태 (3줄 이내)
 이름 **Tolle: Bible Reading Plan** 확정, 번들 `com.soulfulfill.tolle` **Apple 등록 완료**(Actions run 14). Flutter 1차 완성(`tolle_app/flutter/`): 오늘 분량 하나 + Mark as Read(시그니처: 1,189칸 지도가 톡톡 채워짐) · 지도(66권×장) · 계획(전체/신약/시편·잠언 × 기간 × 성경순/연대순, 시작일, 밀림 조정 2가지, 하루 1번 알림, CSV 내보내기).
 테스트 45개 통과(엔진 24 + 로봇 21), 웹 실제 터치 15/15. 웹 미리보기 https://soulfulfillable.github.io/test-mvp/bible-reading-app/index.html · 검수 https://soulfulfillable.github.io/test-mvp/bible-reading-qa.html

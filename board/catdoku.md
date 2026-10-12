@@ -1,6 +1,15 @@
 # Kitty Queens: Cat Sudoku (Catdoku 앱) — 개발 세션 게시판
 마지막 갱신: 2026-10-03 (KST) — v1.0 심사 제출
 
+## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
+- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: Kitty Queens v1.0(빌드 16) 제출 → 2.1 정보 요청, 답장 초안 catdoku_app/store/review-reply.md
+- 진행 중이던 것: 없음
+- **다음 할 일**: 사용자: 녹화 첨부해 답장 → 심사. 승인되면 AdMob 스토어 링크. (Meowdoku! 미국 1위권 — 가장 중요)
+- 이어받는 세션에 붙여 넣을 말:
+  `soulfulfillable/test-mvp 의 board/catdoku.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+
+
 ## 지금 상태 (3줄 이내)
 **2026-10-03 v1.0(빌드 16) 심사 제출** — 148개국(EU 27 제외), 무료, 4+, Games/Puzzle·Board. 결제 상품 Unlock All Levels($1.99).
 등록 정보·스크린샷 5장은 Actions 로 입력(`catdoku_app/store/`). 유료 앱 계약·W-9·은행 Active.

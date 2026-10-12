@@ -1,6 +1,15 @@
 # GPS 속도계 (speedometer 앱) — 개발 세션 게시판
 마지막 갱신: 2026-10-12 (KST)
 
+## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
+- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 빌드 32 로 교체·심사 메모 완료, 2.1 답장 페이지 있음
+- 진행 중이던 것: 없음
+- **다음 할 일**: 사용자: Add for Review → Submit, 2.1 오면 녹화+답장
+- 이어받는 세션에 붙여 넣을 말:
+  `soulfulfillable/test-mvp 의 board/speedometer.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+
+
 ## 지금 상태 (3줄 이내)
 **10-08 Guideline 5.6 (Developer Code of Conduct) 거절** — "심사 중 의도적으로 숨긴 기능이 있는 것 같다". 빌드 32 에 숨긴 기능 없음(코드 점검).
 앱은 고치지 않고 사실대로 답장 + "어떤 기능인지" 묻기로 → 답장 페이지 https://soulfulfillable.github.io/test-mvp/speedometer-review.html

@@ -1,6 +1,15 @@
 # Kitty Path: Number Puzzle (한붓 경로 퍼즐, kittypath 앱) — 개발 세션 게시판
 마지막 갱신: 2026-10-03 (KST)
 
+## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
+- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: Kitty Path 1차 완성·번들 등록
+- 진행 중이던 것: 없음
+- **다음 할 일**: 사용자: ASC 신규 앱 등록(todo.html) → Release iOS(kittypath) → TestFlight
+- 이어받는 세션에 붙여 넣을 말:
+  `soulfulfillable/test-mvp 의 board/path-puzzle.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+
+
 ## 지금 상태 (3줄 이내)
 Flutter 1차 완성(`kittypath_app/flutter/`): 오늘의 퍼즐 6×6 + 무한 단계 5×5→8×8, 고양이를 끌어 줄 긋기·되돌리기, 보상형 힌트(길을 그어 줌, 영상 없으면 무료). 테스트 36개 + 웹 실제 터치 24/24.
 이름 **Kitty Path: Number Puzzle**, 번들 `com.soulfulfill.kittypath` **Apple 등록 완료**. 아이콘·개인정보 페이지·스토어 문구 준비됨. 웹 미리보기 https://soulfulfillable.github.io/test-mvp/path-puzzle-app/index.html
