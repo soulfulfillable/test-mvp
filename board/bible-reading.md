@@ -1,5 +1,5 @@
 # 성경 통독 앱 — 개발 세션 게시판
-마지막 갱신: 2026-10-06 (KST)
+마지막 갱신: 2026-10-12 (KST)
 
 ## 지금 상태 (3줄 이내)
 이름 **Tolle: Bible Reading Plan** 확정, 번들 `com.soulfulfill.tolle` **Apple 등록 완료**(Actions run 14). Flutter 1차 완성(`tolle_app/flutter/`): 오늘 분량 하나 + Mark as Read(시그니처: 1,189칸 지도가 톡톡 채워짐) · 지도(66권×장) · 계획(전체/신약/시편·잠언 × 기간 × 성경순/연대순, 시작일, 밀림 조정 2가지, 하루 1번 알림, CSV 내보내기).
@@ -18,6 +18,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-12 | (ASC 캡처) iOS 1.0 **Rejected — 2.1.0 Performance: App Completeness**, Update Review 버튼 | 상세 사유(View Submission → App Review 메시지) 요청. 리포 기록상 제출은 사용자가 ASC 에서 직접(등록 정보 Actions 미실행), 빌드는 35/36 = **광고가 Google 테스트 ID**(Map·Plan 에 'Test Ad' 배너) — 가장 유력한 원인으로 보고 확인 중 |
 | 10-06 | "무조건 genesis 여기부터 시작되야하는거같은데 이거는 이거대로 있고 그리고 다른탭이나 뭔가 고민해서, 내가 읽은것에 체크해둘수있게하는거는 없나? 이건있어야할듯" | 계획(창세기부터)은 그대로. **Map 에서 책을 누르면 장 번호 칸 → 탭해서 읽음/해제**(두 상태만), Mark All Read·Clear(확인 창). 계획과 따로 저장, 새 계획에도 남음, 지도는 이제 66권 전부(계획 읽음 ∪ 직접 체크). 계획에서 읽은 장은 책 화면에서 못 지우고 이유 표시. 테스트 47·웹 터치 17/17 |
 | 10-06 | "햇어" (ASC 신규 앱) | 앱 레코드 확인 Actions → 있음(id 6819705454) → Release iOS(tolle) 실행 |
 | 10-06 | "1 A, 2 A 추천대로" | 이름 Tolle: Bible Reading Plan, 위젯은 2차. 폴더 `bible_app`→`tolle_app`(워크플로 규칙: 폴더=번들 이름), 번들 등록, Release iOS·등록 정보 선택지에 tolle, todo 페이지, 스토어 문구·스크린샷 |
