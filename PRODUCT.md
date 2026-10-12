@@ -201,6 +201,35 @@
 
 <!-- 주간 점검 기록 -->
 
+### 2026-10-12
+
+**지난주 한 일** (커밋 약 91개, 10-06 이후로는 작업이 멈춰 있었음 — 세션 접속 문제로 보임)
+- 심사 제출: Glance dB · MPG · Tides(10-05~06) + 앞서 FX · Kitty Queens. **승인 소식은 리포에 기록 없음.**
+- 신규: **Tolle: Bible Reading Plan**(성경 통독, 번들 등록·TestFlight 빌드 36) · Glance Solunar(TestFlight 34, 사용자 요청으로 디자인 리터칭) ·
+  은사 키트 **문항 초안 110개** · Blessing Jar 웹 시제품 · 앰비언트 **90분 비+피아노 영상 완성**(채널 Peblit 확인).
+- 공용 도구: TestFlight 초대 자동화 완성, Release iOS 서명 문제(ITMS-90035) 해결.
+
+**막힌 것 — 사실상 전부 사용자 차례**
+- **Apple 2.1 "정보 요청"이 거의 모든 앱에 옴**(새 계정 이력 부족 — 앱 문제 아님): dB · Speed · Tides · Mortgage · FX. 각 세션이 답장 페이지(복사 버튼)를 만들어 둠 → **녹화 첨부 + Reply + Resubmit** 이 남음.
+- 재제출 버튼: Mortgage(빌드 30) · Speed(빌드 32).
+- 검토·느낌: 은사 키트 문항 · Blessing Jar 시제품 · Tolle TestFlight · Solunar TestFlight · 앰비언트 채널 A/B.
+- Apple 앱 등록: Kitty Path.
+- Verse Weave 세션은 아직 시작 안 함.
+- 확인 못 함: 각 앱의 실제 심사 상태(이후 바뀌었을 수 있음), AdMob 수익, 리뷰.
+
+**트렌드** ([AppBrain 미국 무료 게임](https://www.appbrain.com/stats/appstore-rankings), [Similarweb 10-06](https://www.similarweb.com/top-apps/apple/games/top-free/), [Apple Games](https://apps.apple.com/us/iphone/games))
+- **Meowdoku! 여전히 1위권** → Kitty Queens 승인이 가장 중요한 한 건.
+- Block Out!·Magic Sort·Color Block Jam(색깔 정렬) 계속 상위 → 백로그 "정렬 퍼즐" 유효. Rotate Rings·CubeAway(3D 퍼즐) 신규.
+- 선교 관련: 이번 주 새 후보 없음.
+
+**이번 주 결정할 것 (A/B)**
+1. 2.1 답장: **A. 이번 주에 몰아서 처리 — 앱마다 30초 녹화 + 복사 붙여넣기 (추천, 이게 막히면 아무 앱도 출시 안 됨)** / B. 1~2개씩 천천히
+2. 새 앱: **A. 이번 주도 새 세션 없이 심사 통과에 집중 (추천)** / B. Verse Weave 시작
+3. 앰비언트 채널: **A. 기존 Peblit 채널에 올리기 (추천 — 바로 시작 가능, 구독자 0부터라도 같음)** / B. 새 채널
+
+**추천 작업 순서**: ①Kitty Queens 2.1 답장(트렌드 1위 장르) → ②dB·Tides·Speed·Mortgage·FX 답장·재제출 → ③은사 키트 문항 검토 → ④앰비언트 첫 업로드 → ⑤TestFlight 느낌(Tolle·Solunar) → ⑥Blessing Jar 느낌
+
+
 ### 2026-10-05 (첫 주간 점검)
 
 **지난주 한 일** — 1주 만에 앱 9개 진행 (커밋 약 196개, `Release iOS` 25회 중 실패 1·취소 1, 나머지 성공)
