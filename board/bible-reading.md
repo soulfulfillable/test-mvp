@@ -4,7 +4,7 @@
 ## 지금 상태 (3줄 이내)
 이름 **Tolle: Bible Reading Plan** 확정, 번들 `com.soulfulfill.tolle` **Apple 등록 완료**(Actions run 14). Flutter 1차 완성(`tolle_app/flutter/`): 오늘 분량 하나 + Mark as Read(시그니처: 1,189칸 지도가 톡톡 채워짐) · 지도(66권×장) · 계획(전체/신약/시편·잠언 × 기간 × 성경순/연대순, 시작일, 밀림 조정 2가지, 하루 1번 알림, CSV 내보내기).
 테스트 45개 통과(엔진 24 + 로봇 21), 웹 실제 터치 15/15. 웹 미리보기 https://soulfulfillable.github.io/test-mvp/bible-reading-app/index.html · 검수 https://soulfulfillable.github.io/test-mvp/bible-reading-qa.html
-**빌드 36(장 직접 체크 포함) TestFlight 반영**(10-06, 초대는 빌드 35 때 수락됨). 다음: 사용자 TestFlight 느낌 + 30초 녹화 → AdMob → 스토어 제출.
+1.0(빌드 36) 제출 10-07 → 10-08 **2.1 정보 요청** → 10-12 답장+녹화 보냄 → 사용자 Update Review 대기. 광고는 아직 테스트 ID.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] 이름 A `Tolle: Bible Reading Plan`, 위젯 A(2차로). 번들 `com.soulfulfill.tolle` 등록 완료.
@@ -18,6 +18,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-12 | (캡처) 답장 보냄 — 6항목 + video_2026-10-12_13-01-47.mp4, 빌드 1.0.0 (36). Resubmit to App Review 는 회색 | 버전 화면(Distribution → iOS App 1.0) 맨 위 **Update Review** 로 재제출하라고 안내 (환율 앱 때와 같음) |
 | 10-12 | (메시지 캡처) "Guideline 2.1 - Information Needed - New App Submission" (10-08, 제출 10-07) | 신규 계정 표준 정보 요청(환율·캣도쿠·소음과 같음). 답장 페이지 `docs/tolle-review.html`(녹화 순서·6항목 영어 답장 복사 버튼·Update Review 안내). 광고는 아직 테스트 ID — 정식 출시 전 AdMob 진짜 ID 로 바꿀 것 |
 | 10-12 | (ASC 캡처) iOS 1.0 **Rejected — 2.1.0 Performance: App Completeness**, Update Review 버튼 | 상세 사유 요청 → 아래 줄 |
 | 10-06 | "무조건 genesis 여기부터 시작되야하는거같은데 이거는 이거대로 있고 그리고 다른탭이나 뭔가 고민해서, 내가 읽은것에 체크해둘수있게하는거는 없나? 이건있어야할듯" | 계획(창세기부터)은 그대로. **Map 에서 책을 누르면 장 번호 칸 → 탭해서 읽음/해제**(두 상태만), Mark All Read·Clear(확인 창). 계획과 따로 저장, 새 계획에도 남음, 지도는 이제 66권 전부(계획 읽음 ∪ 직접 체크). 계획에서 읽은 장은 책 화면에서 못 지우고 이유 표시. 테스트 47·웹 터치 17/17 |
