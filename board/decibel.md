@@ -4,8 +4,8 @@
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
 - 마지막 저장: 2026-10-13 (decibel 개발 세션)
 - 작업 브랜치: `claude/dreamy-mayer-uw3eax` · 방금 끝낸 것: 1.0(빌드 28) 2.1 정보 요청, 답장 페이지 docs/decibel-review.html
-- 진행 중이던 것: 빌드 28 이 **ITMS-90035 Invalid Signature** 메일(10-13) → 고쳐진 `Release iOS`(decibel) **run #40 (id 38328318879)** 로 새 빌드 업로드 중
-- **다음 할 일**: run #40 성공·TestFlight 처리 확인 → `App Store 등록 정보 채우기`(decibel, build 40)로 빌드 연결 → 사용자: Apple 2.1 메시지에 **Reply**(`docs/decibel-review.html` 글 + 36초 녹화, 글 속 빌드 번호 40) → 버전 화면 **Update Review** 로 재제출. 승인 후 AdMob 스토어 링크, 보정값 NIOSH 비교 → 1.0.1
+- 진행 중이던 것: 없음 — 빌드 40(run #40, 고쳐진 서명) 업로드·처리 완료, `App Store 등록 정보 채우기`(run 38328992428)로 1.0 에 **빌드 40 연결**·스크린샷(6.9")·메모 ✓
+- **다음 할 일**: 사용자: Apple 2.1 메시지 **Reply to App Review**(`docs/decibel-review.html` 글 + 10-05 36초 녹화 재사용) → **Send** → 버전 화면 **Update Review → Submit**. 그 뒤 심사 결과 대기 → 승인되면 AdMob 스토어 링크, 보정값 NIOSH 비교 → 1.0.1
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/decibel.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
