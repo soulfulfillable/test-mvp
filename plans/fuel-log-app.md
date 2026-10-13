@@ -28,7 +28,8 @@
 ### 2026-10-13 2.1 정보 요청 (1.0 (33) Rejected)
 - 신규 개인 계정 첫 제출 정형 요청(실기기 녹화 + 목적·사용법·외부 서비스·지역·규제). 다른 앱 5개와 같음.
 - 답장 페이지 `docs/fuel-log-review.html`(앱 지우고 TestFlight 33 설치 → 녹화 8단계 → 글 복사 → Send → Resubmit → Waiting for Review 확인).
-- 같은 글을 `ios-metadata.json` reviewNotes 로 → `App Store 등록 정보 채우기`(build 33) 재실행해 Notes 갱신.
+- 같은 글을 `ios-metadata.json` reviewNotes 로 → `App Store 등록 정보 채우기`(build 33) 재실행 → 버전 상태 REJECTED 에서도 부제·설명·스크린샷·빌드·**심사 메모 전부 ✓**.
+- 다음: [사용자] 실기기 녹화 + Reply + Resubmit → Waiting for Review 확인 → 승인 후 AdMob 스토어 링크 연결.
 
 ### 2026-10-06 1.0(빌드 33) 심사 제출
 - 사용자 "확인하지말고 그냥 진행하자" → TestFlight 느낌·화면 녹화 없이 제출 준비.

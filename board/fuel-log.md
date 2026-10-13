@@ -1,25 +1,26 @@
 # 연비·정비 기록 (fuel-log 앱, `fuellog_app/`) — 개발 세션 게시판
-마지막 갱신: 2026-10-03 (KST)
+마지막 갱신: 2026-10-13 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 1.0(빌드 33) Waiting for Review (10-06)
-- 진행 중이던 것: 없음
-- **다음 할 일**: 심사 결과 확인. 2.1 오면 store/review-notes.md 순서로 30초 녹화
+- 마지막 저장: 2026-10-13 (개발 세션)
+- 작업 브랜치: `claude/fuel-log-app-dev-jj1vzk` · 방금 끝낸 것: 2.1 답장 페이지 `docs/fuel-log-review.html` + App Review Notes 갱신(`App Store 등록 정보 채우기` build 33, 전 항목 ✓ — 10-13)
+- 진행 중이던 것: 없음 (사용자 차례 — 실기기 녹화 + Reply + Resubmit)
+- **다음 할 일**: 사용자가 답장·재제출 → 상태 **Waiting for Review** 확인. 승인되면 AdMob 앱(Glance MPG)에 App Store 링크 연결 안내 → PRODUCT 결정 로그·이 게시판 기록.
+  다시 거절되면 사유 캡처 받아 `store/review-notes.md`·`ios-metadata.json` reviewNotes 고치고 `App Store 등록 정보 채우기`(app=fuellog, build=33).
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/fuel-log.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 
 ## 지금 상태 (3줄 이내)
 1.0(빌드 33) **Rejected — Guideline 2.1 Information Needed**(Apple 10-05 11:15 PM, 신규 계정 정형 요청 — 앱 문제 아님). 답장 페이지 `docs/fuel-log-review.html`(녹화 순서·복사 버튼),
-같은 글로 App Review Notes 갱신. 사용자: 실기기 녹화(40~60초) + 답장 → Send → Resubmit → 상태 **Waiting for Review** 확인.
+같은 글로 App Review Notes 갱신(✓ 10-13). 사용자: 실기기 녹화(40~60초) + 답장 → Send → Resubmit → 상태 **Waiting for Review** 확인.
 
 ## 다음 할 일 / 사용자에게 받을 것
-- ✅ [사용자] 이름 A `Glance MPG: Gas Mileage Log`, 번들 `com.soulfulfill.fuellog`.
-- [사용자] App Store Connect → 앱 → ＋ 신규 앱: iOS / `Glance MPG: Gas Mileage Log` / English (U.S.) / `com.soulfulfill.fuellog` / SKU `fuellog` / Full Access (값 복사: https://soulfulfillable.github.io/test-mvp/todo.html).
-- [사용자, 스토어 제출 전] AdMob(**soulfulfillable 계정**) → 앱 추가(iOS, 스토어 미등록, 이름 Glance MPG) → 광고 단위 **Banner** `banner` → 완료 화면 캡처.
-- [사용자] 웹 미리보기 '느낌' 한마디 (주유 두 번 넣어 보면 MPG 가 나온다).
-- [세션] ASC 레코드 생기면 → `Release iOS`(app=fuellog) → TestFlight → 스크린샷 1290×2796 → `App Store 등록 정보 채우기`.
+- ✅ 이름·번들 · ASC 신규 앱 · AdMob(앱 `~6940701412`, 배너 `/8213509779`) · Release iOS #33 · 등록 정보·스크린샷 · App Privacy · 제출(10-06).
+- [사용자] 2.1 답장: https://soulfulfillable.github.io/test-mvp/fuel-log-review.html — 앱 지우고 TestFlight 33 설치 → 녹화 8단계(40~60초) →
+  답장 글 복사 → Reply 에 붙여넣기 + 영상 → **Send** → **Resubmit to App Review**(또는 Update Review) → 상태가 **Waiting for Review** 인지 확인
+  (Ready for Review 로 남으면 Add for Review → Submit. PC 가 편함 — 다른 앱 세션 경험).
+- [세션] 승인되면 AdMob 앱에 App Store 링크 연결 안내, 결정 로그 기록.
 - 검수 증거 페이지: https://soulfulfillable.github.io/test-mvp/fuel-log-qa.html
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
