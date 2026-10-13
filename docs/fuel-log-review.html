@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glance MPG 심사 답장</title>
+<link rel="icon" href="fuel-log-app/favicon.png">
+<style>
+  :root{--bg:#F5F6F8;--fg:#14181D;--muted:#5C6672;--card:#FFFFFF;--line:#E1E4E8;--accent:#1665D8}
+  @media (prefers-color-scheme:dark){:root{--bg:#0B0E13;--fg:#EEF1F4;--muted:#9AA4B2;--card:#151A21;--line:#262E39;--accent:#5C9DFF}}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  main{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:28px 0 8px}
+  .sub{color:var(--muted);font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  ol{padding-left:20px;margin:0} li{margin:6px 0}
+  pre{white-space:pre-wrap;word-break:break-word;font:14px/1.5 -apple-system,sans-serif;margin:0}
+  button{display:block;width:100%;margin:12px 0 0;padding:14px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:700}
+  @media (prefers-color-scheme:dark){button{color:#0B0E13}}
+  .ok{color:var(--accent);font-weight:700;text-align:center;min-height:22px;margin-top:8px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Glance MPG — 심사 답장 (2.1 정보 요청)</h1>
+  <div class="sub">신규 계정 첫 제출에 오는 정형 요청이에요 (다른 앱들도 똑같이 받음). 앱 문제 지적 아님.</div>
+
+  <h2>① 화면 녹화 (40~60초)</h2>
+  <div class="card"><ol><li>녹화 전에: 아이폰에서 Glance MPG 를 한 번 길게 눌러 <b>앱 삭제</b> → TestFlight 앱 → Glance MPG → <b>설치</b>(빌드 1.0.0 (33)) — 첫 화면부터 찍히게</li><li>제어 센터 → <b>화면 기록 ●</b> 시작</li><li><b>앱 아이콘을 눌러 켜는 것부터</b> 찍기 (Apple 조건)</li><li>차 이름에 My Car → <b>Start logging</b></li><li><b>Fill-up</b> → Odometer 10000, Gallons 12, Price 3.25 → <b>Save</b></li><li><b>Fill-up</b> → Odometer 10300, Gallons 10, Total 35 → 아래에 &quot;This tank: 30.0 MPG&quot; 가 보이면 <b>Save</b> → 위에 30.0 MPG</li><li>아래 <b>Reminders</b> 탭 → <b>Add reminder</b> → <b>Oil change</b> → <b>Save reminder</b> → 알림 <b>허용</b></li><li><b>Charts</b> 탭 잠깐 → <b>More</b> 탭 → <b>Export CSV</b> → 공유 창이 뜨면 닫기 → 녹화 멈춤</li></ol></div>
+
+  <h2>② 답장 글 (영어 그대로 붙여넣기)</h2>
+  <div class="card"><pre id="reply">Hello App Review team, thank you for reviewing Glance MPG: Gas Mileage Log. A screen recording from a physical iPhone (latest iOS, build 1.0.0 (33)) is attached.
+
+1. Screen recording: attached. It starts at app launch and shows the first-run screen (name your car, choose units), logging a fill-up (odometer, gallons and price; the total fills in automatically), logging a second fill-up where the app shows &quot;This tank: 30.0 MPG&quot; before saving and then the 30.0 MPG average on the Log tab, adding an oil change reminder with the iOS notification permission, the Charts tab, and More &gt; Export CSV with the iOS share sheet.
+   - The app has no account registration, login, or user-generated content shared with others.
+
+2. Purpose and audience: A free fuel and car maintenance log for drivers who want to know their real gas mileage (MPG), what they spend on gas and service each month, and when the next oil change or other service is due. It replaces paper logs and spreadsheets, and the user&#x27;s data can be exported as CSV at any time.
+
+3. How to use: No setup or login. On first launch, type a car name and tap Start logging. Log tab: Fill-up (odometer, gallons, price, full or partial tank) and Service (oil change, tires, insurance, etc.). MPG appears after two full fill-ups. Charts tab: MPG trend and spending by month. Reminders tab: maintenance reminders by distance and/or months, with local notifications. More tab: vehicles, units (miles/km, gallons/liters), road trip cost split, CSV export and import. No sample files or credentials are needed.
+
+4. External services: Google AdMob banner ads only (no interstitial or video ads, and no ads on the fill-up or service entry screens). No backend server, analytics, authentication, payment processor, data provider, or AI services. All calculations run on the device and the log is stored only on the device; CSV export uses the iOS share sheet and import uses the iOS file picker. Reminders are local notifications scheduled on the device.
+
+5. Regional differences: None. The app works the same in all regions where it is available. English only; US units by default, metric units available in More.
+
+6. Regulated industry / third-party content: Not applicable. The app does not connect to vehicles, does not give financial or mechanical advice, and shows no third-party content. Suggested service intervals are labeled as common intervals with a note to check the owner&#x27;s manual. The app icon and all artwork are our own.
+
+7. In-App Purchase: None. All features are free, with no subscription or trial.
+
+Thank you!</pre></div>
+  <button id="copy">답장 글 복사</button>
+  <div class="ok" id="ok"></div>
+
+  <h2>③ 보내기</h2>
+  <div class="card"><ol>
+    <li>App Store Connect → Glance MPG → App Review → Apple 메시지 <b>맨 아래 Reply to App Review</b></li>
+    <li>글 붙여넣기 + 녹화 영상 첨부 → <b>Send</b></li>
+    <li>위쪽 <b>Resubmit to App Review</b>(또는 버전 화면 <b>Update Review</b>) 누르기</li>
+    <li>상태가 <b>Waiting for Review</b> 인지 확인 — "Ready for Review" 로 남아 있으면 <b>Add for Review → Submit</b></li>
+  </ol><p class="sub" style="margin:10px 0 0">같은 글은 App Review Information → Notes 에도 넣어 둬요.</p></div>
+</main>
+<script>
+document.getElementById('copy').onclick = async () => {
+  const t = document.getElementById('reply').innerText;
+  try { await navigator.clipboard.writeText(t); }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('reply'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
+  }
+  document.getElementById('ok').textContent = '복사됐어요 ✓';
+};
+</script>
+</body>
+</html>
