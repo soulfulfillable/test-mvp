@@ -1,11 +1,11 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-06 22:00 (KST)
+마지막 갱신: 2026-10-13 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 1.0(빌드 28) 2.1 정보 요청, 답장 페이지 docs/decibel-review.html
+- 마지막 저장: 2026-10-13 (decibel 개발 세션)
+- 작업 브랜치: `claude/dreamy-mayer-uw3eax` · 방금 끝낸 것: 1.0(빌드 28) 2.1 정보 요청, 답장 페이지 docs/decibel-review.html
 - 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: Reply 에 글 + 36초 녹화 → Resubmit. Invalid Binary 나면 새 빌드로 교체
+- **다음 할 일**: 사용자: 메시지 맨 아래 **Reply to App Review** 에 글 + 36초 녹화 → **Send** → 버전 화면(Action → Edit) 맨 위 **Update Review** 로 재제출(Resubmit 버튼은 답장 후에도 회색 — 환율·성경 앱에서 확인). Invalid Binary 나면 새 빌드로 교체
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/decibel.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
@@ -37,6 +37,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-13 | (폰 캡처 5장, 글 없음) 2.1 메시지·Rejected·회색 Resubmit, 아직 답장 전(Messages 1) | 메시지 맨 아래 **Reply to App Review** 위치 안내 + 답장 후 재제출은 버전 화면 **Update Review** 로(다른 앱 게시판 교훈). 답장 페이지 ③ 단계도 같은 내용으로 고침 |
 | 10-06 | (ASC 캡처 + Apple 메시지 원문) Glance dB 1.0 (28) Rejected — "Guideline 2.1 - Information Needed - New App Submission" | 답장 페이지 `docs/decibel-review.html` 만들어 안내(글은 Notes 와 같은 내용을 Apple 6항목 번호에 맞춤, 영상은 어제 녹화 재사용). 빌드 28 은 그대로 재제출 |
 | 10-06 | (Glance Speed 의 2.1 정보 요청 캡처를 이 세션에 보냄) | 속도계 세션이 만들어 둔 답장(`speedometer_app/store/review-reply.md`)으로 안내, `board/speedometer.md` 에 기록. Glance dB 도 같은 요청이 올 수 있어 `decibel_app/store/review-reply.md` 준비(메모·녹화는 이미 첨부) |
 | 10-06 | "된건가?" (ASC 화면: 1.0 Waiting for Review, 스크린샷 5장 순서대로) | 제출 확인. 그 전에 겪은 것: 6.9"용 1290×2796 을 6.5" 칸에 넣어 거절 → 1284×2778 판(`store/screenshots/6.5in/`)을 만들어 줌, 중복 1장·순서 섞임 정리, 연령 등급 설문(Advertising 만 Yes → 4+) |
