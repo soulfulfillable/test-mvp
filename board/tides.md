@@ -2,13 +2,12 @@
 마지막 갱신: 2026-10-03 06:50 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: v1.0 빌드 31 연결, 2.1 답장 페이지 있음
+- 마지막 저장: 2026-10-13 (tides 개발 세션)
+- 작업 브랜치: `claude/wonderful-mccarthy-g6wrjj` · 방금 끝낸 것: 2.1 답장(10-06 사용자 보냄), 10-12 재제출 → 자동 분석 "광고 있는데 Age Rating Advertising=No" → 사용자가 제출을 **Removed**(정상 — 버전은 Prepare for Submission 으로 돌아감, 빌드 31·등록 정보 그대로)
 - 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: 2.1 답장(녹화+글) → Resubmit
+- **다음 할 일**: 사용자: App Information → Age Rating → Advertising **Yes** → Save → iOS App 1.0 → **Add for Review → Submit**. 그 뒤 심사 대기 → 승인되면 AdMob 에 스토어 링크 연결(보상형 영상 재고) → 리뷰·수익 확인. 2.1 이 또 오면 `docs/tides-review.html` 재사용
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/tides.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
-
 
 ## 지금 상태 (3줄 이내)
 Flutter 1차 완성(`tides_app/flutter/`) + **보상형 30일 물때표**(영상 1편 → 24시간). 테스트 34개 통과(엔진 21 + 로봇 13), 웹 클릭 점검 34/34 + 스크린샷 11장.
@@ -29,6 +28,7 @@ Flutter 1차 완성(`tides_app/flutter/`) + **보상형 30일 물때표**(영상
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-13 | (캡처: iOS Submission Removed, 2.3.6) "내가 뭐 잘못누른듯 리무브됏어" | 제출 취소일 뿐 — 빌드·등록 정보 그대로. 연령 등급 Advertising=Yes 고친 뒤 Add for Review 다시 안내 |
 | 10-13 | (Apple 메일·ASC 캡처) 10-12 재제출 → 자동 분석 "광고가 있는데 연령 등급의 Advertising 을 Yes 로 안 함" | App Information → Age Rating → Advertising **Yes** 로 바꾸고 Update Review 안내 (2.1 답장은 10-06 에 보냄) |
 | 10-06 | (ASC 캡처) 빌드 31 Rejected — Guideline 2.1 Information Needed (신규 계정, 녹화·목적·사용법·외부 서비스·지역·규제 요청) | 속도계 세션 방식 그대로: 폰용 답장 페이지 `docs/tides-review.html`(녹화 순서·영어 답장 복사), `store/review-reply.md`, 심사 메모(Notes)도 같은 글로 갱신 |
 | 10-06 | (ASC 캡처) "1.0 Invalid Binary" | 원인: 공용 Release iOS 가 업로드 직후 배포 인증서를 revoke 하던 문제(ITMS-90035, 대출 세션이 찾아 고침). 고쳐진 워크플로로 **빌드 31** 업로드(run 37387141670) → 등록 정보로 1.0 에 빌드 31 연결 완료 → 사용자 재제출 대기 |
