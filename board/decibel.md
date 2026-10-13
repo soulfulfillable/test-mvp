@@ -4,8 +4,8 @@
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
 - 마지막 저장: 2026-10-13 (decibel 개발 세션)
 - 작업 브랜치: `claude/dreamy-mayer-uw3eax` · 방금 끝낸 것: 1.0(빌드 28) 2.1 정보 요청, 답장 페이지 docs/decibel-review.html
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: 메시지 맨 아래 **Reply to App Review** 에 글 + 36초 녹화 → **Send** → 버전 화면(Action → Edit) 맨 위 **Update Review** 로 재제출(Resubmit 버튼은 답장 후에도 회색 — 환율·성경 앱에서 확인). Invalid Binary 나면 새 빌드로 교체
+- 진행 중이던 것: 빌드 28 이 **ITMS-90035 Invalid Signature** 메일(10-13) → 고쳐진 `Release iOS`(decibel) **run #40 (id 38328318879)** 로 새 빌드 업로드 중
+- **다음 할 일**: run #40 성공·TestFlight 처리 확인 → `App Store 등록 정보 채우기`(decibel, build 40)로 빌드 연결 → 사용자: Apple 2.1 메시지에 **Reply**(`docs/decibel-review.html` 글 + 36초 녹화, 글 속 빌드 번호 40) → 버전 화면 **Update Review** 로 재제출. 승인 후 AdMob 스토어 링크, 보정값 NIOSH 비교 → 1.0.1
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/decibel.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
@@ -37,6 +37,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-13 | (Gmail 캡처) App Store Connect "ITMS-90035: Invalid Signature … Build 28" | 예상했던 반려(예전 서명). 고쳐진 Release iOS 로 새 빌드(run #40) → 빌드 교체 후 답장·재제출 |
 | 10-13 | (폰 캡처 5장, 글 없음) 2.1 메시지·Rejected·회색 Resubmit, 아직 답장 전(Messages 1) | 메시지 맨 아래 **Reply to App Review** 위치 안내 + 답장 후 재제출은 버전 화면 **Update Review** 로(다른 앱 게시판 교훈). 답장 페이지 ③ 단계도 같은 내용으로 고침 |
 | 10-06 | (ASC 캡처 + Apple 메시지 원문) Glance dB 1.0 (28) Rejected — "Guideline 2.1 - Information Needed - New App Submission" | 답장 페이지 `docs/decibel-review.html` 만들어 안내(글은 Notes 와 같은 내용을 Apple 6항목 번호에 맞춤, 영상은 어제 녹화 재사용). 빌드 28 은 그대로 재제출 |
 | 10-06 | (Glance Speed 의 2.1 정보 요청 캡처를 이 세션에 보냄) | 속도계 세션이 만들어 둔 답장(`speedometer_app/store/review-reply.md`)으로 안내, `board/speedometer.md` 에 기록. Glance dB 도 같은 요청이 올 수 있어 `decibel_app/store/review-reply.md` 준비(메모·녹화는 이미 첨부) |
