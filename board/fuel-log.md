@@ -11,8 +11,8 @@
 
 
 ## 지금 상태 (3줄 이내)
-**1.0(빌드 33) 심사 제출 완료 — "Waiting for Review"** (사용자 캡처 2026-10-06). 스크린샷 5장·심사 메모 7항목·빌드 연결은 Actions, App Privacy·연령·가격 등은 사용자.
-다음: 심사 결과(보통 24~48시간). 2.1 정보 요청이 오면 30초 녹화(`store/review-notes.md` 순서). 승인되면 AdMob 에 스토어 링크 연결.
+1.0(빌드 33) **Rejected — Guideline 2.1 Information Needed**(Apple 10-05 11:15 PM, 신규 계정 정형 요청 — 앱 문제 아님). 답장 페이지 `docs/fuel-log-review.html`(녹화 순서·복사 버튼),
+같은 글로 App Review Notes 갱신. 사용자: 실기기 녹화(40~60초) + 답장 → Send → Resubmit → 상태 **Waiting for Review** 확인.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] 이름 A `Glance MPG: Gas Mileage Log`, 번들 `com.soulfulfill.fuellog`.
@@ -25,6 +25,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-13 | (ASC 캡처 2장) 1.0 (33) Rejected — "Guideline 2.1 - Information Needed - New App Submission" | 답장 페이지 `docs/fuel-log-review.html`(녹화 8단계·답장 글 복사·보내기/재제출 확인), `store/review-notes.md`, reviewNotes 갱신 |
 | 10-06 | (ASC 캡처) "1 Item Submitted", 1.0 Waiting for Review | **심사 제출 완료** 기록(게시판·기획서·PRODUCT·PLAYBOOK) |
 | 10-06 | (ASC App Privacy → Device ID 용도 창 캡처) "여기는" | Third-Party Advertising + Analytics 체크 → Next → 사용자와 연결 No → 추적 No. 나머지 항목(대략 위치·제품 사용·광고 데이터·충돌·성능)도 같은 답 |
 | 10-06 | "아냐확인하지말고 그냥 진행하자" (TestFlight 느낌 확인 건너뛰기) | 바로 제출 준비: 스토어 스크린샷 5장(웹 ?demo=1&shots=1 → 1290×2796), 심사 메모 7항목(녹화 대신 1분 체험 순서), `App Store 등록 정보 채우기`(build 33) 실행, 사용자 수동 항목 정리(`store/ios-listing.md` 끝) |

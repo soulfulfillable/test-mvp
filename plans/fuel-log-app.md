@@ -25,6 +25,11 @@
 
 ## 진행 기록 (개발 세션이 추가, 최신이 위)
 
+### 2026-10-13 2.1 정보 요청 (1.0 (33) Rejected)
+- 신규 개인 계정 첫 제출 정형 요청(실기기 녹화 + 목적·사용법·외부 서비스·지역·규제). 다른 앱 5개와 같음.
+- 답장 페이지 `docs/fuel-log-review.html`(앱 지우고 TestFlight 33 설치 → 녹화 8단계 → 글 복사 → Send → Resubmit → Waiting for Review 확인).
+- 같은 글을 `ios-metadata.json` reviewNotes 로 → `App Store 등록 정보 채우기`(build 33) 재실행해 Notes 갱신.
+
 ### 2026-10-06 1.0(빌드 33) 심사 제출
 - 사용자 "확인하지말고 그냥 진행하자" → TestFlight 느낌·화면 녹화 없이 제출 준비.
 - 스크린샷 5장: 웹 미리보기 `?demo=1&shots=1`(예시 기록·광고 자리 숨김·아이폰 문구)을 아이폰 13 크기 3배율로 찍어(`store/screenshots/capture.js`)
