@@ -11,8 +11,8 @@
 
 
 ## 지금 상태 (3줄 이내)
-1.0(빌드 22) **반려 — ITMS-90035 Invalid Signature** (워크플로가 인증서를 revoke 한 탓) → 워크플로 고침(인증서 보관·재사용).
-새 빌드 30(1.1) 업로드 + `App Store 등록 정보 채우기` 성공(버전 번호 1.0→1.1, 빌드 30, 설명·심사 메모) → **사용자 Resubmit 대기**.
+1.1(빌드 30) 서명 문제는 해결 → 이번엔 **2.1 Information Needed**(새 계정 정보 요청, 환율·Kitty Queens 와 같음).
+답장 `mortgage_app/store/review/2026-10-05-reply.md` 준비 → 사용자: 실기기 화면 녹화 + 답장 붙여넣기 → Resubmit.
 웹 미리보기 https://soulfulfillable.github.io/test-mvp/mortgage-app/index.html
 
 ## 다음 할 일 / 사용자에게 받을 것
@@ -26,6 +26,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-13 | 반려 화면 캡처 2장 (1.1 빌드 30 — Guideline 2.1 Information Needed, 녹화+6항목 요청) | 서명 문제 해결 확인. 미리 쓴 답장을 1.1(주·카운티 데이터 출처) 기준으로 고쳐 붙여넣을 글 제공, 녹화 순서 안내 |
 | 10-05 | 반려 화면 캡처 → "못찾겟어ㅠ" → Apple 메일 캡처 "이건가?" (ITMS-90035 Invalid Signature) | 원인: Release iOS 가 업로드 후 배포 인증서를 지움. 공용 워크플로 수정(인증서 암호화 보관·재사용), 빌드 30(1.1)으로 재제출 준비. 반려 메일은 '메일함 검색'으로 찾게 안내하는 게 빠르다 |
 | 10-05 | ASC 캡처 "1.0 Waiting for Review" + "이거된건가이대로?" | 제출 완료 확인. 1.0 승인 → AdMob 앱에 스토어 링크 연결, 1.1(빌드 25) 새 버전으로 제출 예정 |
 | 10-04 | ASC "Unable to Add for Review" 캡처(저작권·Content Rights·카테고리·App Privacy·가격·심사 연락처) | 항목별 클릭 안내 → 사용자가 채우고 제출 |
