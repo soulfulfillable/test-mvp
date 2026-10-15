@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>How It Works — prototype</title>
+<style>
+:root{
+  --bg:#F2F2F7; --card:#FFFFFF; --label:#000; --label2:rgba(60,60,67,.62); --sep:rgba(60,60,67,.22);
+  --accent:#D63A2A; --tint:rgba(214,58,42,.10); --ok:#248A3D; --bar:rgba(249,249,251,.98);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#000;--card:#1C1C1E;--label:#fff;--label2:rgba(235,235,245,.6);--sep:rgba(84,84,88,.6);
+  --accent:#FF5B47;--tint:rgba(255,91,71,.16);--ok:#30D158;--bar:rgba(22,22,24,.98)}
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--label);font-family:var(--font);font-size:17px;line-height:1.4;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px calc(96px + env(safe-area-inset-bottom))}
+.navtop{display:flex;align-items:flex-end;justify-content:space-between;padding:calc(14px + env(safe-area-inset-top)) 0 4px}
+.date{font-size:13px;color:var(--label2);text-transform:uppercase;letter-spacing:.02em;font-weight:600}
+h1.large{font-size:34px;line-height:1.15;font-weight:700;margin:2px 0 0;letter-spacing:-.01em}
+.streak{font-size:13px;color:var(--label2);display:flex;align-items:center;gap:4px;padding-bottom:6px}
+.back{display:flex;align-items:center;gap:2px;color:var(--accent);padding:calc(12px + env(safe-area-inset-top)) 0 0;min-height:44px}
+/* lesson */
+.meta{font-size:13px;color:var(--label2);margin-top:18px}
+.titlerow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+h2.title{font-size:28px;line-height:1.15;font-weight:700;margin:2px 0 6px}
+.save{width:44px;height:44px;display:grid;place-items:center;margin-right:-10px;color:var(--accent)}
+.summary{margin:0 0 14px;color:var(--label)}
+.sheet{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 0 0 .5px rgba(0,0,0,.12);margin:0 -4px}
+.sheet svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.callout{background:var(--card);border-radius:12px;margin-top:10px;display:flex;align-items:center;gap:10px;padding:10px 6px 10px 14px;min-height:76px}
+.callout .badge{flex:0 0 26px;height:26px;border-radius:13px;border:1.5px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:13px;font-weight:600}
+.callout .txt{flex:1;font-size:17px;color:var(--label)}
+.callout .txt b{display:block;font-weight:600;margin-bottom:1px}
+.callout .hint{color:var(--label2)}
+.step-btns{display:flex;flex-direction:column}
+.arrow{width:40px;height:34px;display:grid;place-items:center;color:var(--accent)}
+.arrow:disabled{color:var(--sep)}
+.sec{font-size:13px;color:var(--label2);text-transform:uppercase;letter-spacing:.02em;margin:28px 0 6px 2px;font-weight:400}
+.play{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:44px;border-radius:12px;background:var(--tint);color:var(--accent);font-weight:600;margin-top:12px}
+.steps{list-style:none;margin:0;padding:0;background:var(--card);border-radius:12px}
+.steps li{display:flex;gap:12px;padding:11px 14px;border-top:.5px solid var(--sep);transition:background .2s}
+.steps li:first-child{border-top:0}
+.steps li .n{flex:0 0 18px;color:var(--accent);font-weight:600}
+.steps li.now{background:var(--tint)}
+.fact{background:var(--card);border-radius:12px;padding:12px 14px}
+.quiz{background:var(--card);border-radius:12px;overflow:hidden}
+.quiz .q{padding:12px 14px;font-weight:600}
+.opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:12px 14px;border-top:.5px solid var(--sep);min-height:48px}
+.opt .mk{flex:0 0 22px;height:22px;border-radius:11px;border:1.5px solid var(--sep);display:grid;place-items:center}
+.opt.right .mk{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.wrong .mk{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt:disabled{cursor:default}
+.result{padding:12px 14px;border-top:.5px solid var(--sep)}
+.result b{display:block;font-weight:600}
+.result.good b{color:var(--ok)}
+.src{font-size:13px;color:var(--label2);margin:6px 2px 0;padding-left:18px}
+.src li{margin:3px 0}
+.src a{color:var(--label2)}
+.ad{margin:24px auto 0;width:320px;max-width:100%;height:50px;border:1px dashed var(--sep);border-radius:6px;display:grid;place-items:center;font-size:13px;color:var(--label2)}
+.next{display:flex;align-items:center;justify-content:space-between;width:100%;background:var(--card);border-radius:12px;padding:12px 14px;margin-top:14px;min-height:52px;text-align:left}
+.next span small{display:block;font-size:13px;color:var(--label2)}
+/* library */
+.group{background:var(--card);border-radius:12px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:8px 10px 8px 12px;min-height:60px;border-top:.5px solid var(--sep)}
+.group .row:first-child{border-top:0}
+.thumb{flex:0 0 56px;height:40px;border-radius:6px;overflow:hidden;background:#fff;box-shadow:0 0 0 .5px rgba(0,0,0,.12)}
+.thumb svg{width:100%;height:100%;display:block}
+.row .t{flex:1}
+.row .t small{display:block;font-size:13px;color:var(--label2)}
+.row .chev{color:var(--sep)}
+.done{color:var(--ok)}
+.note{font-size:13px;color:var(--label2);margin:8px 2px 0}
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--bar);border-top:.5px solid var(--sep);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+.tab{flex:0 1 180px;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0 4px;font-size:10px;color:var(--label2);font-weight:500;min-height:49px}
+.tab.on{color:var(--accent)}
+/* drawing */
+.ink{stroke:#24272c;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ink:not([fill]):not(.fm):not(.fw):not(.water){fill:none}
+.thin{stroke-width:.8}
+.fm{fill:#eceef1}
+.fw{fill:#fff}
+.water{fill:#cfe3f4}
+.wline{fill:none;stroke:#3a7fc0;stroke-width:1.2}
+.energy{fill:none;stroke:#D63A2A;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.flow{fill:none;stroke:#3a7fc0;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hand{font-family:"Noteworthy","Bradley Hand","Chalkboard SE","Segoe Print","Comic Neue",cursive;font-size:10px;fill:#5a5f66}
+.art>*{transition:opacity .25s}
+svg.focus .art>:not(.on){opacity:.25}
+.on .ink{stroke:#D63A2A}
+.num .lead{stroke:#D63A2A;stroke-width:.9}
+.num .dot{fill:#D63A2A}
+.num .badge{fill:#fff;stroke:#D63A2A;stroke-width:1.5}
+.num text{font:600 11px var(--font);fill:#D63A2A;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.num.on .badge{fill:#D63A2A}
+.num.on text{fill:#fff}
+.num{cursor:pointer;outline:none}
+.num:focus-visible .badge{stroke-width:3}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<nav class="tabbar" id="tabbar">
+  <button class="tab" data-tab="today" aria-label="Today">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="5.5" width="18" height="16" rx="3"/><path d="M4 10.5h18M9 3.5v4M17 3.5v4"/><path d="M9.5 15.5l2.3 2.3 4.7-4.7"/></svg>
+    Today</button>
+  <button class="tab" data-tab="library" aria-label="Library">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="4" y="4" width="5" height="18" rx="1"/><rect x="10.5" y="4" width="5" height="18" rx="1"/><path d="M17.3 5.2l4.4-1.2 4 16.6-4.4 1.2z" transform="translate(-2 0)"/></svg>
+    Library</button>
+</nav>
+
+<script>
+'use strict';
+/* ---------- drawing helpers ---------- */
+const TAU = Math.PI * 2;
+const f1 = v => Math.round(v * 10) / 10;
+// sine wave along a polyline, with an arrowhead at the end
+function wave(pts, amp, wl, phase) {
+  let d = '', s = 0, last, dir;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
+    const L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L;
+    for (let u = 0; u <= L; u += 2) {
+      const k = Math.min(1, (s + u) / 14) * Math.min(1, (L - u + (i < pts.length - 2 ? 99 : 0)) / 10);
+      const o = amp * k * Math.sin(TAU * (s + u) / wl - phase);
+      const x = x1 + ux * u - uy * o, y = y1 + uy * u + ux * o;
+      d += (d ? 'L' : 'M') + f1(x) + ',' + f1(y);
+      last = [x, y]; dir = [ux, uy];
+    }
+    s += L;
+  }
+  const [x, y] = last, [ux, uy] = dir, a = 5;
+  d += `M${f1(x - ux * a - uy * a * .7)},${f1(y - uy * a + ux * a * .7)}L${f1(x)},${f1(y)}L${f1(x - ux * a + uy * a * .7)},${f1(y - uy * a - ux * a * .7)}`;
+  return d;
+}
+function rot(px, py, cx, cy, deg) {
+  const r = deg * Math.PI / 180, c = Math.cos(r), s = Math.sin(r);
+  return [cx + (px - cx) * c - (py - cy) * s, cy + (px - cx) * s + (py - cy) * c];
+}
+const ease = x => x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
+const seg = (t, a, b) => ease((t - a) / (b - a));
+function defs(p) {
+  return `<defs>
+  <pattern id="${p}grid" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><path d="M10,0V10H0" fill="none" stroke="#dce6f0" stroke-width=".6"/></pattern>
+  <pattern id="${p}hatch" width="4.5" height="4.5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4.5" height="4.5" fill="#fff"/><line x1="2.25" y1="0" x2="2.25" y2="4.5" stroke="#3a3e44" stroke-width=".55"/></pattern>
+  <pattern id="${p}fabric" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><rect width="3" height="3" fill="#f3f1ec"/><line x1="0" y1="0" x2="3" y2="0" stroke="#c9c4b8" stroke-width=".5"/></pattern>
+  <filter id="${p}rough" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>`;
+}
+
+/* ---------- lessons ---------- */
+const LESSONS = [];
+
+/* 1. Microwave oven */
+LESSONS.push({
+  key: 'microwave', title: 'Microwave Oven', cat: 'Kitchen', mins: 3, vb: [360, 240],
+  summary: 'A tube called a magnetron makes microwaves that flip the water molecules in your food back and forth billions of times a second. That jostling is heat.',
+  parts: [
+    { n: 1, name: 'Magnetron', at: [262, 112], num: [302, 128], desc: 'A vacuum tube with magnets that turns electricity into microwaves — radio waves that cycle 2.45 billion times a second.' },
+    { n: 2, name: 'Waveguide', at: [222, 63], num: [222, 18], desc: 'A hollow metal channel that steers the microwaves from the magnetron into the cooking box.' },
+    { n: 3, name: 'High-voltage transformer', at: [270, 172], num: [302, 180], desc: 'Steps the 120 volts from your outlet up to thousands of volts — what the magnetron needs to run.' },
+    { n: 4, name: 'Metal cavity', at: [22, 50], num: [36, 18], desc: 'The metal walls reflect microwaves, so they bounce around inside the box instead of escaping.' },
+    { n: 5, name: 'Turntable', at: [52, 174], num: [30, 226], desc: 'Microwaves form a fixed pattern of hot and cold spots. Turning the food moves it through them so it heats more evenly.' },
+    { n: 6, name: 'Door screen', at: [338, 48], num: [348, 18], desc: 'The metal mesh in the door has holes far smaller than the 12 cm (5 in) microwaves, so they can’t get out — but light can, so you can watch.' },
+  ],
+  steps: [
+    { text: 'The transformer boosts wall power to thousands of volts.', parts: [3], t: [0, 1.6] },
+    { text: 'The magnetron turns that power into microwaves.', parts: [1], t: [1.6, 3.2] },
+    { text: 'The waveguide carries them into the box, where they bounce off the metal walls.', parts: [2, 4], t: [3.2, 4.8] },
+    { text: 'The waves flip water molecules in the food back and forth. That motion is heat — mostly in the outer inch; the middle warms by conduction. The turntable keeps hot spots moving.', parts: [5], t: [4.8, 8] },
+  ],
+  dur: 8,
+  fact: 'It was discovered by accident. Around 1945, Raytheon engineer Percy Spencer was working near a radar magnetron when the candy bar in his pocket melted. He soon tried popcorn — it popped.',
+  quiz: {
+    q: 'Why does the door have a metal screen full of tiny holes?',
+    opts: ['To let steam escape while cooking', 'The holes are too small for microwaves to pass, but light gets through', 'To keep the glass from cracking when it heats up'],
+    a: 1,
+    why: 'Microwaves are about 12 cm long. Holes a few millimeters wide block them like a solid wall, while visible light — with waves about 200,000 times shorter — passes right through.'
+  },
+  sources: [
+    ['Microwave oven — Wikipedia', 'https://en.wikipedia.org/wiki/Microwave_oven'],
+    ['Percy Spencer — Wikipedia', 'https://en.wikipedia.org/wiki/Percy_Spencer'],
+    ['Microwave Oven Radiation — U.S. FDA', 'https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-oven-radiation'],
+    ['How do microwave ovens work? — Explain that Stuff', 'https://www.explainthatstuff.com/microwaveovens.html'],
+  ],
+  art(p) {
+    let fins = '';
+    for (let y = 98; y <= 128; y += 5) fins += `M220,${y}H268`;
+    let coil = '';
+    for (let x = 220; x <= 236; x += 3) coil += `M${x},157V187`;
+    for (let x = 244; x <= 260; x += 3) coil += `M${x},157V187`;
+    let holes = '';
+    for (let y = 40; y <= 96; y += 8) for (let x = 290; x <= 350; x += 8) holes += `<circle cx="${x + ((y / 8) % 2) * 4}" cy="${y}" r="2.3"/>`;
+    return `
+    <g class="shell"><rect x="10" y="32" width="272" height="174" rx="9" class="ink"/>
+      <path d="M30,206v6h18v-6M244,206v6h18v-6" class="ink"/>
+      </g>
+    <g data-part="4"><path d="M18,44H190V196H18Z M26,52V188H182V52Z" fill-rule="evenodd" fill="url(#${p}hatch)" class="ink"/>
+      <rect x="181" y="58.8" width="10" height="12.4" fill="url(#${p}grid)"/></g>
+    <g data-part="2"><path d="M182,58H254V92H238V72H182" class="ink fm"/></g>
+    <g data-part="3"><rect x="210" y="150" width="60" height="44" rx="2" class="ink fw"/>
+      <rect x="217" y="156" width="22" height="32" class="ink thin"/><rect x="241" y="156" width="22" height="32" class="ink thin"/>
+      <path d="${coil}" class="ink thin"/>
+      <path d="M232,150C232,142 238,144 238,134" class="ink thin"/></g>
+    <g data-part="1"><rect x="226" y="92" width="36" height="42" rx="3" class="ink fm"/>
+      <path d="${fins}" class="ink thin"/>
+      <rect x="242" y="80" width="4" height="12" class="ink fw"/></g>
+    <g class="food">
+      <path id="${p}soup" d="M69,148Q86,145 104,148T139,148Q137,168 104,168Q71,168 69,148Z" class="water"/>
+      <path d="M62,140H146 M66,140Q68,170 104,170Q140,170 142,140 M90,170V172H118V170" class="ink"/>
+      <g id="${p}mol"></g>
+      <path id="${p}steam" d="M92,134q-4,-6 0,-12q4,-6 0,-12 M104,132q-4,-6 0,-12q4,-6 0,-12 M116,134q-4,-6 0,-12q4,-6 0,-12" class="ink thin" opacity=".55"/></g>
+    <g data-part="5"><rect x="40" y="172" width="128" height="5" rx="2.5" class="ink fm"/>
+      <circle cx="60" cy="181" r="3.5" class="ink fw"/><circle cx="148" cy="181" r="3.5" class="ink fw"/>
+      <path d="M52,185.5H156 M104,177V196" class="ink thin"/>
+      <rect x="94" y="196" width="20" height="8" rx="1.5" class="ink fw"/>
+      <circle id="${p}mark" cx="104" cy="174.5" r="1.4" fill="#24272c"/></g>
+    <g class="waves"><path id="${p}w0" class="energy"/><path id="${p}w1" class="energy"/>
+      <text x="138" y="126" class="hand" style="fill:#D63A2A">2.45 GHz</text></g>
+    <g data-part="6"><circle cx="318" cy="66" r="30" fill="#e3e6ea"/>
+      <g clip-path="url(#${p}ic)" fill="#fff" stroke="#24272c" stroke-width=".5">${holes}</g>
+      <circle cx="318" cy="66" r="30" class="ink"/>
+      <text x="318" y="108" class="hand" text-anchor="middle">door screen</text></g>
+    <clipPath id="${p}ic"><circle cx="318" cy="66" r="29"/></clipPath>`;
+  },
+  anim(svg, p, t) {
+    const q = id => svg.querySelector('#' + p + id);
+    const ph = t == null ? 0 : t * 9;
+    q('w0').setAttribute('d', wave([[184, 65], [132, 104]], 4, 14, ph));
+    q('w1').setAttribute('d', wave([[184, 65], [40, 64], [32, 66], [82, 132]], 4, 14, ph));
+    let m = '';
+    [[86, 158, 20], [104, 156, -35], [122, 160, 60]].forEach(([x, y, a], i) => {
+      const ang = t == null ? a : a + 40 * Math.sin(t * 26 + i * 2);
+      const [hx1, hy1] = rot(x + 4.6, y, x, y, ang + 52), [hx2, hy2] = rot(x + 4.6, y, x, y, ang - 52);
+      m += `<circle cx="${f1(hx1)}" cy="${f1(hy1)}" r="1.9" class="ink thin fw"/><circle cx="${f1(hx2)}" cy="${f1(hy2)}" r="1.9" class="ink thin fw"/><circle cx="${x}" cy="${y}" r="3.1" class="ink thin" fill="#D63A2A"/>`;
+    });
+    q('mol').innerHTML = m;
+    q('steam').setAttribute('opacity', t == null ? .55 : Math.min(.8, seg(t, 4.8, 7.5) * .8));
+    q('mark').setAttribute('cx', t == null ? 104 : f1(104 + 58 * Math.sin(t * .9)));
+  }
+});
+
+/* 2. Flush toilet */
+const CAV = 'M46,122C50,168 80,200 112,208L130,210C146,204 160,188 168,178C172,172 178,170 180,178L180,240L196,240L196,166C196,148 176,146 168,158L148,188C145,193 138,192 140,184C150,164 172,146 182,122Z';
+const TRAP = 'M124,209L130,210C146,204 160,188 168,178C172,172 178,170 180,178L180,240L196,240L196,166C196,148 176,146 168,158L148,188C145,192 136,198 124,209Z';
+LESSONS.push({
+  key: 'toilet', title: 'Flush Toilet', cat: 'Bathroom', mins: 3, vb: [360, 252],
+  summary: 'The handle dumps a tank of water into the bowl so fast that the curved pipe below fills and becomes a siphon — it sucks the bowl empty. Then a float valve refills the tank.',
+  parts: [
+    { n: 1, name: 'Handle & chain', at: [204, 29], num: [184, 16], desc: 'Pushing the handle tips a lever inside the tank, and the chain pulls the flapper up.' },
+    { n: 2, name: 'Flapper', at: [246, 106], num: [228, 76], desc: 'A rubber seal over the hole in the bottom of the tank. Lift it, and the tank empties into the bowl in a few seconds.' },
+    { n: 3, name: 'Fill valve & float', at: [310, 50], num: [340, 62], desc: 'When the water drops, the float drops and opens the valve. As the tank refills, the float rises and shuts the water off.' },
+    { n: 4, name: 'Overflow tube', at: [270, 80], num: [284, 90], desc: 'If the fill valve sticks open, extra water spills down this tube into the bowl instead of onto your floor. A thin refill tube also tops up the bowl through it.' },
+    { n: 5, name: 'Rim holes', at: [35, 130], num: [14, 100], desc: 'Tank water flows through a hollow channel inside the rim and pours out of holes all around it, rinsing the bowl.' },
+    { n: 6, name: 'Trapway', at: [190, 162], num: [232, 210], desc: 'A curved pipe molded into the porcelain. Its bend holds the water that blocks sewer gas — and when it fills completely, it becomes a siphon.' },
+  ],
+  steps: [
+    { text: 'Push the handle: the chain lifts the flapper and the tank water drops into the bowl.', parts: [1, 2], t: [0, 1.2] },
+    { text: 'Water floods in through the rim. The bowl level rises over the trapway’s bend and fills it.', parts: [5, 6], t: [1.2, 2.2] },
+    { text: 'The full trapway is now a siphon: water falling down the drain pulls the whole bowl after it — until air gets in. That’s the gurgle.', parts: [6], t: [2.2, 4.4] },
+    { text: 'The float drops, so the fill valve opens and refills the tank. The refill tube tops up the bowl so the trap holds water again.', parts: [3, 4], t: [4.4, 9] },
+  ],
+  dur: 9,
+  fact: 'Since 1994, U.S. law has capped new toilets at 1.6 gallons per flush. Older toilets could use as much as 6 gallons. Today’s WaterSense models use 1.28 or less.',
+  quiz: {
+    q: 'What actually pulls everything down the drain?',
+    opts: ['A pump hidden under the bowl', 'Air pushed in from the tank', 'A siphon in the curved trapway'],
+    a: 2,
+    why: 'Once the trapway is completely full, the water falling down the drain side pulls the rest along — a siphon. When the bowl is empty, air breaks the siphon with a gurgle.'
+  },
+  sources: [
+    ['Flush toilet — Wikipedia', 'https://en.wikipedia.org/wiki/Flush_toilet'],
+    ['Energy Policy Act of 1992 — Wikipedia', 'https://en.wikipedia.org/wiki/Energy_Policy_Act_of_1992'],
+    ['Residential Toilets — EPA WaterSense', 'https://www.epa.gov/watersense/residential-toilets'],
+    ['How do toilets work? — Explain that Stuff', 'https://www.explainthatstuff.com/toilets.html'],
+  ],
+  art(p) {
+    return `
+    <g class="shell">
+      <path d="M0,240H352" class="ink"/><rect x="0" y="240.7" width="352" height="11" fill="url(#${p}hatch)"/>
+      <rect x="352.7" y="0" width="8" height="252" fill="url(#${p}hatch)"/><path d="M352,0V252" class="ink"/>
+      <path d="M70,240C70,214 38,196 32,160L26,132Q24,122 36,122L276,122L276,140Q276,148 268,148L206,148C200,178 198,210 206,240Z" fill="url(#${p}hatch)" class="ink"/>
+      <rect x="20" y="115" width="32" height="7" rx="3" class="ink fw"/><rect x="170" y="115" width="32" height="7" rx="3" class="ink fw"/>
+      <path d="M210,16H322V118H210Z M216,22V112H316V22Z" fill-rule="evenodd" fill="url(#${p}hatch)" class="ink"/>
+      <rect x="206" y="10" width="120" height="6" rx="2" class="ink fw"/>
+      <rect x="297" y="118" width="6" height="10" class="ink fw"/>
+      <path d="M300,128V196H336" class="ink" stroke-width="2.4"/><circle cx="341" cy="196" r="5" class="ink fw"/><path d="M341,191V184M337,184H345M346,196H352" class="ink"/>
+      <text x="70" y="250" class="hand" fill="#5a5f66"></text></g>
+    <g data-part="6"><path d="${CAV}" fill="url(#${p}grid)" class="ink"/>
+      <g clip-path="url(#${p}cav)"><rect id="${p}bw" x="30" y="174" width="144" height="60" class="water"/></g>
+      <path id="${p}dw" d="${TRAP}" class="water" opacity="0"/>
+      <path id="${p}bwl" d="" class="wline"/></g>
+    <g data-part="5"><rect x="30" y="126" width="10" height="8" rx="2" fill="url(#${p}grid)" class="ink thin"/>
+      <path d="M186,127H240V111.5H256V135H186Z" fill="url(#${p}grid)" class="ink thin"/>
+      <path d="M236,112H240M256,112H260" class="ink"/></g>
+    <g class="tankwater"><rect id="${p}tw" x="216.5" y="46" width="99" height="66" class="water"/><path id="${p}twl" d="M216.5,46H315.5" class="wline"/></g>
+    <g data-part="4"><rect x="262" y="40" width="8" height="72" class="ink fw"/><path d="M300,30C300,18 266,20 266,40" class="ink thin"/></g>
+    <g data-part="3"><rect x="296" y="34" width="8" height="78" class="ink fw"/><rect x="292" y="28" width="16" height="7" rx="1.5" class="ink fw"/>
+      <rect id="${p}float" x="290" y="40" width="20" height="14" rx="2" class="ink fw"/></g>
+    <g data-part="2"><g id="${p}flap"><path d="M238,112L262,112L262,108Q250,100 238,108Z" class="ink" fill="#6b7078"/></g></g>
+    <g data-part="1"><rect x="196" y="26" width="14" height="6" rx="2" class="ink fw"/><path id="${p}arm" d="M216,29H250" class="ink" stroke-width="2"/>
+      <path id="${p}chain" d="M249,30L245,105" class="ink thin" stroke-dasharray="2.5 1.6"/></g>
+    <g id="${p}flow" opacity="0">
+      <path d="M232,130H198M50,124H46M36,136l4,7M190,136l-4,7M168,176l8,-8" class="flow"/>
+      <path d="M200,127l-3,3l3,3M38,143l4,1l1,-4M186,143l-4,1l-1,-4" class="flow"/></g>
+    <g id="${p}rflow" opacity="0"><path d="M266,52V100" class="flow" stroke-dasharray="3 3"/></g>
+    <clipPath id="${p}cav"><path d="${CAV}"/></clipPath>`;
+  },
+  anim(svg, p, t) {
+    const q = id => svg.querySelector('#' + p + id);
+    let arm = 0, flap = 0, L = 46, B = 174, siph = 0, flow = 0, rflow = 0;
+    if (t != null) {
+      arm = -14 * (seg(t, 0, .35) - seg(t, 1.3, 1.7));
+      flap = -55 * (seg(t, 0, .35) - seg(t, 3.0, 3.4));
+      L = 46 + 58 * (seg(t, .35, 3.0) - seg(t, 3.4, 8.6));
+      B = 174 - 16 * seg(t, .5, 1.6) + 48 * seg(t, 2.0, 3.8) - 32 * seg(t, 4.6, 8.6);
+      siph = seg(t, 1.4, 1.9) - seg(t, 3.7, 4.2);
+      flow = seg(t, .4, .7) - seg(t, 2.8, 3.2);
+      rflow = seg(t, 3.4, 3.7) - seg(t, 8.2, 8.6);
+    }
+    q('arm').setAttribute('transform', `rotate(${f1(arm)} 216 29)`);
+    q('flap').setAttribute('transform', `rotate(${f1(flap)} 262 110)`);
+    const [ax, ay] = rot(249, 29, 216, 29, arm), [fx, fy] = rot(245, 106, 262, 110, flap);
+    q('chain').setAttribute('d', `M${f1(ax)},${f1(ay)}L${f1(fx)},${f1(fy)}`);
+    q('tw').setAttribute('y', f1(L)); q('tw').setAttribute('height', f1(112 - L));
+    q('twl').setAttribute('d', `M216.5,${f1(L)}H${L > 104 ? 216.5 : 315.5}`);
+    q('float').setAttribute('y', f1(Math.min(L - 6, 94)));
+    const bw = q('bw');
+    bw.setAttribute('y', f1(B)); bw.setAttribute('width', B < 172 ? 170 : 144);
+    q('dw').setAttribute('opacity', f1(siph));
+    q('flow').setAttribute('opacity', f1(flow));
+    q('rflow').setAttribute('opacity', f1(rflow));
+  }
+});
+
+/* 3. Zipper */
+LESSONS.push({
+  key: 'zipper', title: 'Zipper', cat: 'Around the House', mins: 3, vb: [360, 280],
+  summary: 'The slider is a wedge with a Y-shaped channel. Going up, it presses two rows of hooked teeth together so each bump locks into the hollow across; going down, it pries them apart.',
+  parts: [
+    { n: 1, name: 'Teeth', at: [100, 238], num: [24, 244], desc: 'Each tooth has a bump on top and a hollow underneath. The two rows are offset by half a tooth, so each tooth fits between two across from it.' },
+    { n: 2, name: 'Tape', at: [72, 190], num: [24, 190], desc: 'The fabric strips the teeth are clamped onto — the part that gets sewn into your jacket or bag.' },
+    { n: 3, name: 'Slider', at: [128, 128], num: [184, 106], desc: 'Inside is a Y-shaped channel. Pull up, and its two arms squeeze the rows together. Pull down, and the wedge in the middle splits them.' },
+    { n: 4, name: 'Pull tab', at: [118, 180], num: [184, 184], desc: 'The handle you grab. Some sliders have a small pin that locks them in place when the tab is folded down.' },
+    { n: 5, name: 'Stops', at: [120, 270], num: [184, 266], desc: 'Small metal stops at the ends keep the slider from running off the teeth.' },
+    { n: 6, name: 'Bump & hollow', at: [272, 136], num: [340, 226], desc: 'Seen from the side (zoomed): each bump nests in the hollow of the tooth above it from the other side. Pulled straight apart they hold — only bending them at an angle, which the slider does, lets them go.' },
+  ],
+  steps: [
+    { text: 'The teeth on the two sides are offset by half a tooth.', parts: [1], t: [0, 1.5] },
+    { text: 'Pull the tab up: the slider’s Y-shaped channel steers the two rows together at an angle.', parts: [3, 4], t: [1.5, 3] },
+    { text: 'Each tooth’s bump drops into the hollow under the tooth across. Now they’re hooked and won’t pull apart sideways.', parts: [6], t: [3, 4.5] },
+    { text: 'Pull down, and the wedge inside the slider bends them apart one by one.', parts: [3], t: [4.5, 7] },
+  ],
+  dur: 7,
+  fact: 'It wasn’t called a “zipper” until 1923, when B.F. Goodrich put Gideon Sundback’s fastener on rubber boots and named them for the zip sound. Sundback’s patent dates to 1917.',
+  quiz: {
+    q: 'Why don’t the teeth come apart when you pull the two sides straight apart?',
+    opts: ['Each tooth’s bump is hooked into the hollow of the tooth across', 'The teeth are slightly magnetic', 'The slider keeps squeezing every tooth'],
+    a: 0,
+    why: 'Pulled straight sideways, every bump is trapped in a hollow. The rows only release when they’re bent to an angle — exactly what the wedge in the slider does.'
+  },
+  sources: [
+    ['Zipper — Wikipedia', 'https://en.wikipedia.org/wiki/Zipper'],
+    ['Gideon Sundback — Wikipedia', 'https://en.wikipedia.org/wiki/Gideon_Sundback'],
+    ['How do zippers work? — Explain that Stuff', 'https://www.explainthatstuff.com/zippers.html'],
+  ],
+  art(p) {
+    // side view of interlocking teeth (zoomed)
+    let side = '';
+    for (let i = 0; i < 6; i++) {
+      const top = 104 + i * 16, bot = top + 16, L = i % 2 === 0;
+      const x0 = L ? 214 : 258, x1 = L ? 286 : 330;
+      side += `<path d="M${x0},${top}H267A5,5 0 0 1 277,${top}H${x1}V${bot}H277A5,5 0 0 0 267,${bot}H${x0}Z" class="ink" fill="${L ? '#fff' : '#e6e8eb'}"/>`;
+    }
+    return `
+    <g class="shell"><path id="${p}tapeL" fill="url(#${p}fabric)" class="ink"/><path id="${p}tapeR" fill="url(#${p}fabric)" class="ink"/></g>
+    <g data-part="2"><path id="${p}tapeL2" class="ink"/><path id="${p}tapeR2" class="ink"/></g>
+    <g data-part="1"><path id="${p}teeth" class="ink fm"/></g>
+    <g data-part="5"><path id="${p}stops" class="ink" fill="#c9ccd1"/><rect x="99" y="265" width="22" height="8" rx="1.5" class="ink" fill="#c9ccd1"/></g>
+    <g data-part="3"><path id="${p}slider" class="ink fm"/><path id="${p}chan" class="ink thin" stroke-dasharray="2.5 2"/></g>
+    <g data-part="4"><path id="${p}tab" class="ink fw"/></g>
+    <g class="zoom"><circle cx="110" cy="226" r="11" class="ink thin" stroke-dasharray="2 2"/>
+      <path d="M119,219L205,170M121,230L210,192" class="ink thin" stroke-dasharray="2 2"/>
+      <text x="272" y="236" class="hand" text-anchor="middle">side view, zoomed</text></g>
+    <g data-part="6"><circle cx="272" cy="150" r="66" class="fw"/>
+      <g clip-path="url(#${p}zc)">${side}</g>
+      <circle cx="272" cy="150" r="66" class="ink"/>
+      </g>
+    <clipPath id="${p}zc"><circle cx="272" cy="150" r="65"/></clipPath>`;
+  },
+  anim(svg, p, t) {
+    const q = id => svg.querySelector('#' + p + id);
+    const sT = t == null ? 118 : 150 - 100 * Math.sin(Math.PI * Math.min(1, t / 7));
+    const k = .26, base = 5;
+    const off = y => (y < sT ? base + (sT - y) * k : 0);
+    let teeth = '', ptsL = [], ptsR = [];
+    for (let y = 16; y <= 262; y += 6) {
+      const left = ((y - 16) / 6) % 2 === 0, o = off(y);
+      if (y > sT - 2 && y < sT + 46) { ptsL.push([110 - o, y]); ptsR.push([110 + o, y]); continue; }
+      if (left) { const x0 = 97 - o; teeth += `M${f1(x0)},${y - 2.6}H${f1(x0 + 12)}Q${f1(x0 + 16.5)},${y} ${f1(x0 + 12)},${y + 2.6}H${f1(x0)}Z`; }
+      else { const x0 = 123 + o; teeth += `M${f1(x0)},${y - 2.6}H${f1(x0 - 12)}Q${f1(x0 - 16.5)},${y} ${f1(x0 - 12)},${y + 2.6}H${f1(x0)}Z`; }
+      ptsL.push([110 - o, y]); ptsR.push([110 + o, y]);
+    }
+    q('teeth').setAttribute('d', teeth);
+    const tape = (pts, s) => {
+      const top = pts[0][1] - 8;
+      let d = `M${f1(pts[0][0] - s * 9)},${top}`;
+      pts.forEach(([x, y]) => d += `L${f1(x - s * 9)},${y}`);
+      d += `L${f1(pts[pts.length - 1][0] - s * 9)},280H${f1(pts[pts.length - 1][0] - s * 58)}`;
+      for (let i = pts.length - 1; i >= 0; i--) d += `L${f1(pts[i][0] - s * 58)},${pts[i][1]}`;
+      return d + `L${f1(pts[0][0] - s * 58)},${top}Z`;
+    };
+    q('tapeL').setAttribute('d', tape(ptsL, 1)); q('tapeR').setAttribute('d', tape(ptsR, -1));
+    q('tapeL2').setAttribute('d', ''); q('tapeR2').setAttribute('d', '');
+    const oT = off(16);
+    q('stops').setAttribute('d', `M${f1(98 - oT)},5h12v6h-12z M${f1(110 + oT)},5h12v6h-12z`);
+    const y = sT;
+    q('slider').setAttribute('d', `M88,${f1(y)}H132L126,${f1(y + 44)}H94Z`);
+    q('chan').setAttribute('d', `M98,${f1(y + 1)}L105,${f1(y + 22)}V${f1(y + 43)} M122,${f1(y + 1)}L115,${f1(y + 22)}V${f1(y + 43)} M104,${f1(y + 1)}L110,${f1(y + 17)}L116,${f1(y + 1)}`);
+    q('tab').setAttribute('d', `M106,${f1(y + 30)}h8v6h-8z M101,${f1(y + 36)}H119L117,${f1(y + 82)}Q110,${f1(y + 86)} 103,${f1(y + 82)}Z M107,${f1(y + 66)}h6v10h-6z`);
+    return { 3: [128, f1(y + 10)], 4: [117, f1(y + 60)], 2: [f1(72 - off(190) * .9), 190] };
+  }
+});
+
+/* ---------- state ---------- */
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('hiw.' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('hiw.' + k, JSON.stringify(v)); } catch (e) {} }
+};
+const dayNo = (() => { const n = new Date(); return Math.floor((Date.UTC(n.getFullYear(), n.getMonth(), n.getDate())) / 864e5); })();
+function streak() {
+  let s = store.get('streak', { last: 0, n: 0 });
+  if (s.last !== dayNo) { s = { last: dayNo, n: s.last === dayNo - 1 ? s.n + 1 : 1 }; store.set('streak', s); }
+  return s.n;
+}
+const START = Date.UTC(2026, 9, 15) / 864e5; // prototype: day 1 = microwave
+const state = { tab: 'today', open: null };
+let player = null;
+const app = document.getElementById('app');
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const fmtDate = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+function svgFor(L, p, withNums) {
+  const [w, h] = L.vb;
+  let nums = '';
+  if (withNums) L.parts.forEach(pt => {
+    nums += `<g class="num" data-n="${pt.n}" role="button" tabindex="0" aria-label="${pt.n}. ${esc(pt.name)}">
+      <line class="lead" x1="${pt.num[0]}" y1="${pt.num[1]}" x2="${pt.at[0]}" y2="${pt.at[1]}"/><circle class="dot" cx="${pt.at[0]}" cy="${pt.at[1]}" r="1.8"/>
+      <circle cx="${pt.num[0]}" cy="${pt.num[1]}" r="19" fill="transparent"/><circle class="badge" cx="${pt.num[0]}" cy="${pt.num[1]}" r="9"/>
+      <text x="${pt.num[0]}" y="${pt.num[1] + .5}">${pt.n}</text></g>`;
+  });
+  return `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cutaway drawing of a ${esc(L.title.toLowerCase())}">
+    ${defs(p)}<rect width="${w}" height="${h}" fill="url(#${p}grid)"/>
+    <g class="art" filter="url(#${p}rough)">${L.art(p)}</g>${nums}</svg>`;
+}
+
+function render() {
+  stopPlay();
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('on', b.dataset.tab === state.tab));
+  if (state.open) return renderLesson(LESSONS.find(l => l.key === state.open), true);
+  if (state.tab === 'today') return renderLesson(LESSONS[((dayNo - START) % LESSONS.length + LESSONS.length) % LESSONS.length], false);
+  renderLibrary();
+}
+
+function renderLibrary() {
+  const done = store.get('done', {}), saved = store.get('saved', {});
+  const row = L => `<button class="row" data-open="${L.key}"><span class="thumb">${svgFor(L, 't' + L.key, false)}</span>
+    <span class="t">${esc(L.title)}<small>${esc(L.cat)} · ${L.mins} min</small></span>
+    ${done[L.key] ? '<svg class="done" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-label="Learned"><path d="M5 10.5l3.2 3.2L15 7"/></svg>' : ''}
+    <svg class="chev" width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l6 6-6 6"/></svg></button>`;
+  const cats = [...new Set(LESSONS.map(l => l.cat))];
+  const sv = LESSONS.filter(l => saved[l.key]);
+  app.innerHTML = `<div class="navtop"><div><div class="date">${LESSONS.length} lessons in this preview</div><h1 class="large">Library</h1></div></div>
+    ${sv.length ? `<div class="sec">Saved</div><div class="group">${sv.map(row).join('')}</div>` : ''}
+    ${cats.map(c => `<div class="sec">${esc(c)}</div><div class="group">${LESSONS.filter(l => l.cat === c).map(row).join('')}</div>`).join('')}
+    <p class="note">Prototype: the full app adds one new lesson every day.</p>`;
+  app.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { state.open = b.dataset.open; render(); scrollTo(0, 0); });
+}
+
+function renderLesson(L, pushed) {
+  const p = 'm' + L.key;
+  const done = store.get('done', {}), saved = store.get('saved', {});
+  const idx = LESSONS.indexOf(L), nxt = LESSONS[(idx + 1) % LESSONS.length];
+  const head = pushed
+    ? `<button class="back" id="back"><svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 2L2 10l8 8"/></svg>Library</button>`
+    : `<div class="navtop"><div><div class="date">${fmtDate}</div><h1 class="large">Today</h1></div>
+       <div class="streak">${streak()}-day streak</div></div>`;
+  app.innerHTML = `${head}
+    <div class="meta">${esc(L.cat)} · ${L.mins} min</div>
+    <div class="titlerow"><h2 class="title">${esc(L.title)}</h2>
+      <button class="save" id="save" aria-label="${saved[L.key] ? 'Saved' : 'Save'}" aria-pressed="${!!saved[L.key]}">
+        <svg width="20" height="22" viewBox="0 0 20 22" fill="${saved[L.key] ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 2h12v18l-6-4.5L4 20z"/></svg></button></div>
+    <p class="summary">${esc(L.summary)}</p>
+    <div class="sheet" id="sheet">${svgFor(L, p, true)}</div>
+    <div class="callout" id="callout" aria-live="polite"></div>
+    <button class="play" id="play"><svg width="14" height="16" viewBox="0 0 14 16"><path d="M2 1.5v13l11-6.5z" fill="currentColor"/></svg><span>See it work</span></button>
+    <div class="sec">How it works</div>
+    <ol class="steps" id="steps">${L.steps.map((s, i) => `<li><span class="n">${i + 1}</span><span>${esc(s.text)}</span></li>`).join('')}</ol>
+    <div class="sec">Did you know?</div>
+    <div class="fact">${esc(L.fact)}</div>
+    <div class="sec">Quick check</div>
+    <div class="quiz" id="quiz"></div>
+    <div class="sec">Sources</div>
+    <ol class="src">${L.sources.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(t)}</a></li>`).join('')}</ol>
+    <div class="ad">Ad banner (placeholder)</div>
+    <button class="next" id="next"><span><small>Next lesson</small>${esc(nxt.title)}</span>
+      <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--sep)"><path d="M1 1l6 6-6 6"/></svg></button>`;
+
+  const svg = app.querySelector('#sheet svg');
+  L.anim(svg, p, null);
+  let sel = 0;
+  const callout = app.querySelector('#callout');
+  function select(n) {
+    sel = n;
+    svg.classList.toggle('focus', !!n);
+    svg.querySelectorAll('[data-part]').forEach(g => g.classList.toggle('on', +g.dataset.part === n));
+    svg.querySelectorAll('.num').forEach(g => g.classList.toggle('on', +g.dataset.n === n));
+    const pt = L.parts.find(x => x.n === n);
+    callout.innerHTML = pt
+      ? `<span class="badge">${pt.n}</span><span class="txt"><b>${esc(pt.name)}</b>${esc(pt.desc)}</span>
+         <span class="step-btns"><button class="arrow" data-d="-1" aria-label="Previous part" ${n <= 1 ? 'disabled' : ''}><svg width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 8l6-6 6 6"/></svg></button>
+         <button class="arrow" data-d="1" aria-label="Next part" ${n >= L.parts.length ? 'disabled' : ''}><svg width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l6 6 6-6"/></svg></button></span>`
+      : `<span class="hint">Tap a number on the drawing to see what that part does.</span>`;
+    callout.querySelectorAll('.arrow').forEach(b => b.onclick = () => select(sel + +b.dataset.d));
+  }
+  select(0);
+  svg.querySelectorAll('.num').forEach(g => {
+    const go = () => { stopPlay(); select(sel === +g.dataset.n ? 0 : +g.dataset.n); };
+    g.addEventListener('click', go);
+    g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  });
+  function moveLeaders(map) {
+    if (!map) return;
+    for (const n in map) {
+      const g = svg.querySelector(`.num[data-n="${n}"]`); if (!g) continue;
+      const [x, y] = map[n];
+      g.querySelector('.lead').setAttribute('x2', x); g.querySelector('.lead').setAttribute('y2', y);
+      g.querySelector('.dot').setAttribute('cx', x); g.querySelector('.dot').setAttribute('cy', y);
+    }
+  }
+  moveLeaders(L.anim(svg, p, null));
+
+  const playBtn = app.querySelector('#play'), stepsEl = app.querySelectorAll('#steps li');
+  playBtn.onclick = () => {
+    if (player) { stopPlay(); return; }
+    select(0);
+    const t0 = performance.now();
+    playBtn.querySelector('span').textContent = 'Stop';
+    let lastStep = -1;
+    player = {
+      raf: 0, stop() {
+        cancelAnimationFrame(this.raf);
+        stepsEl.forEach(li => li.classList.remove('now'));
+        svg.classList.remove('focus'); svg.querySelectorAll('.on').forEach(e => e.classList.remove('on'));
+        moveLeaders(L.anim(svg, p, null));
+        playBtn.querySelector('span').textContent = 'See it work';
+      }
+    };
+    const tick = now => {
+      const t = (now - t0) / 1000;
+      if (t >= L.dur) { stopPlay(); return; }
+      moveLeaders(L.anim(svg, p, t));
+      const si = L.steps.findIndex(s => t >= s.t[0] && t < s.t[1]);
+      if (si !== lastStep) {
+        lastStep = si;
+        stepsEl.forEach((li, i) => li.classList.toggle('now', i === si));
+        const ps = si >= 0 ? L.steps[si].parts : [];
+        svg.classList.toggle('focus', ps.length > 0);
+        svg.querySelectorAll('[data-part]').forEach(g => g.classList.toggle('on', ps.includes(+g.dataset.part)));
+        svg.querySelectorAll('.num').forEach(g => g.classList.toggle('on', ps.includes(+g.dataset.n)));
+      }
+      player.raf = requestAnimationFrame(tick);
+    };
+    player.raf = requestAnimationFrame(tick);
+  };
+
+  const quiz = app.querySelector('#quiz');
+  function drawQuiz(pick) {
+    const Q = L.quiz, answered = pick != null;
+    quiz.innerHTML = `<div class="q">${esc(Q.q)}</div>` + Q.opts.map((o, i) => {
+      const cls = !answered ? '' : i === Q.a ? 'right' : i === pick ? 'wrong' : '';
+      const mk = cls === 'right' ? '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2.5 6.3l2.3 2.3L9.5 3.8"/></svg>'
+        : cls === 'wrong' ? '<svg width="10" height="10" viewBox="0 0 10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l6 6M8 2l-6 6"/></svg>' : '';
+      return `<button class="opt ${cls}" data-i="${i}" ${answered ? 'disabled' : ''}><span class="mk">${mk}</span><span>${esc(o)}</span></button>`;
+    }).join('') + (answered ? `<div class="result ${pick === Q.a ? 'good' : ''}"><b>${pick === Q.a ? '1 more thing you know.' : 'Not quite — now you know.'}</b>${esc(Q.why)}</div>` : '');
+    quiz.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      const d = store.get('done', {}); d[L.key] = { pick: +b.dataset.i, day: dayNo }; store.set('done', d);
+      drawQuiz(+b.dataset.i);
+    });
+  }
+  drawQuiz(done[L.key] ? done[L.key].pick : null);
+
+  app.querySelector('#save').onclick = () => { const s = store.get('saved', {}); s[L.key] = !s[L.key]; store.set('saved', s); renderLesson(L, pushed); };
+  app.querySelector('#next').onclick = () => { state.open = nxt.key; render(); scrollTo(0, 0); };
+  const back = app.querySelector('#back');
+  if (back) back.onclick = () => { state.open = null; state.tab = 'library'; render(); scrollTo(0, 0); };
+}
+function stopPlay() { if (player) { const pl = player; player = null; pl.stop(); } }
+
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => { state.tab = b.dataset.tab; state.open = null; render(); scrollTo(0, 0); });
+render();
+</script>
+</body>
+</html>

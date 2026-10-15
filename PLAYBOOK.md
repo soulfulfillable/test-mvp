@@ -66,6 +66,7 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-15 | How It Works | 코드로 그린 SVG 단면도에서 해칭·색 채움이 전부 사라짐 — CSS `.ink{fill:none}` 이 요소의 `fill=` 속성을 이김(속성 우선순위가 가장 낮다). 또 App Store·trustpilot 은 이 환경에서 WebFetch/curl 모두 막힘 | 스타일 클래스엔 `:not([fill])` 조건. 도해는 스크린샷을 꼭 직접 본다. 경쟁 조사는 WebSearch 요약 + 제3자 집계(apppricinglab 등)로, 정확한 값은 Actions |
 | 2026-10-13 | 물때 | 재제출이 자동 분석으로 막힘: AdMob 광고가 있는데 연령 등급 설문의 **Advertising** 을 No 로 둠 | 광고 넣은 앱은 Age Rating 설문에서 Advertising = **Yes** (연령 등급은 그대로 4+) — 첫 제출 체크리스트에 넣을 것 |
 | 2026-10-12 | 속도계 | 2.1 답장(녹화 첨부) 이틀 뒤 **5.6 Developer Code of Conduct**("심사 중 숨긴 기능") 거절. 숨긴 기능은 없음 — 정지·실내에선 속도·경고·기록이 안 변해 심사자가 못 본 것, 또는 새 계정 다수 제출 패턴으로 추정 | 움직여야 보이는 기능은 **정지 상태에서도 화면에 이유를 보이게**("움직이면 속도가 나와요"). 안 쓰는 권한 문구(Always 위치 등)는 넣지 않는다. 5.6 은 빌드를 바꾸기 전에 사실 설명 답장부터 |
 | 2026-10-12 | Tolle | 2.1 답장 후 Update Review 를 눌렀는데 버전 상태가 "Waiting for Review" 가 아니라 **"Ready for Review"**(아직 제출 안 됨)로 바뀜 — 사용자가 기다리는 줄 앎 | 재제출 안내는 "상태가 **Waiting for Review** 인지 확인"까지. Ready for Review 면 Add for Review → Submit to App Review (폰 웹은 버튼이 안 보일 수 있어 PC 권장) |
