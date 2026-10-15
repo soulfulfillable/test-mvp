@@ -32,7 +32,7 @@ button.done{opacity:.6}
 <div id="list"><p class="lead">불러오는 중…</p></div>
 <script>
 const RAW='https://raw.githubusercontent.com/soulfulfillable/test-mvp/main/board/';
-const BOARDS=['_planning','catdoku','currency','decibel','mortgage','speedometer','tides','fuel-log','solunar','path-puzzle','bible-reading','verse-weave','gifts-kit','blessing-jar','ambient-engine'];
+const BOARDS=['_planning','catdoku','currency','decibel','mortgage','speedometer','tides','fuel-log','solunar','path-puzzle','bible-reading','verse-weave','gifts-kit','blessing-jar','ambient-engine','how-it-works'];
 function pick(sec,label){const m=sec.match(new RegExp('^- \\**'+label+'\\**[^:：]*[:：]\\s*(.+)$','m'));return m?m[1].replace(/\*\*/g,'').trim():''}
 async function load(b){
   try{

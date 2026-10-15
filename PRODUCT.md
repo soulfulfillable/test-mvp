@@ -57,6 +57,7 @@
 | **Verse Weave 암송 퍼즐** (`plans/verse-weave-app.md`, `board/verse-weave.md`) | 2026-10-06 결정, 세션 시작 대기 | 이름·번들 → 개발 → TestFlight |
 | **소그룹 은사·기질 키트** (`plans/gifts-kit-app.md`, `board/gifts-kit.md`) | 10-06 문항 초안 완료(은사 70·기질 40), 사용자 검토 대기 | 검토 반영 → 채점·코드 엔진 |
 | **Blessing Jar 가족 축복 항아리** (`plans/blessing-jar-app.md`, `board/blessing-jar.md`) | 2026-10-06 개발 세션 시작 — 1단계 웹 시제품 `docs/blessing-jar.html` | 흔들기 시제품 → 사용자 느낌 → 개발 |
+| **How It Works 사물의 원리** (`plans/how-it-works-app.md`, `board/how-it-works.md`) | 2026-10-15 결정, 세션 시작 대기 | 경쟁 조사 → 레슨 3개 시제품 → 사용자 느낌 |
 | 웹 미니게임 9종 (`docs/*.html`) | 웹으로 공개 중 | 앱화 후보 고르기 (아래 백로그) |
 | 한의학(clinic) 앱 (`lib/`, `android/`) | 보류 | 재개 여부 미정 |
 
@@ -97,6 +98,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-15 | 새 앱: **하루 한 장 사물의 원리**(공책 스케치 SVG 단면도 + 번호 탭 + 퀴즈, 구독 없이 광고). 그림 공급 위험 → 1단계는 레슨 3개 시제품으로 사용자 느낌 먼저 | 사용자가 SmartyMe 광고("Become the smartest person in the room") 보고 "이런 거 하나 해 보자" |
 | 2026-10-13 | Glance Tides 1.0(빌드 31) 재제출 — 2.1 답장(녹화) + 연령 등급 Advertising=Yes | 신규 계정 2.1 정보 요청, 광고 표시 누락 자동 반려를 해결 |
 | 2026-10-12 | **모든 세션 '자주 저장' 규칙**: 단계마다 WIP 커밋·푸시 + `board/<앱>.md` 맨 위 "🔁 이어받기"(다음 할 일 미리) 갱신. 이어받기 모아 보기 `docs/handoff.html`. 크레딧 막히면 사용자가 개인 Claude 계정에서 이어감 | 사용자 "크레딧이 계속 막혀, 막히면 아무 말도 안 하잖아. 다른 계정으로 제일 최신 것부터 하게. 코덱스는 이어받기를 못 해" |
 | 2026-10-12 | Glance Speed 5.6 거절(10-08)에 **앱 수정 없이 사실 설명 답장 + 구체적 지적 요청**으로 대응. 다시 거절되면 정지 중 안내 문구·안 쓰는 Always 위치 문구 제거 새 빌드 + App Review Board | 코드 점검상 숨긴 기능 없음. 5.6 은 반복 시 계정 위험 → 성급히 빌드를 바꿔 재제출하지 않는다. 계정 단위 위험이라 `board/_shared.md` 에 알림 |
