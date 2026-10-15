@@ -34,3 +34,4 @@
 → ③레슨 30개 + 출처 검증 → ④테스트 로봇 → ⑤Flutter → ⑥광고 → ⑦Release iOS → ⑧TestFlight
 
 ## 진행 기록 (개발 세션이 추가, 최신이 위)
+- 2026-10-15 ① 경쟁 조사 완료(`howitworks_app/research/competitors.md`): SmartyMe(4.6★ 3.2만, 주 $6.99~연 $99.99)·Imprint(4.8★ 4.4만, 연 $99.99)·Brilliant(4.7★ 2.8만, 연 $150~240) 전부 구독 벽, 불만 1순위 몰래 갱신·환불. 가장 비슷한 Innerspect(도해 자르기+하루 해금+광고)는 안드로이드 전용. iOS 'How Things Work' 이름은 Sweet Escape Labs(3D/AR, 2026-06) 가 사용 → 이름 피하기.
