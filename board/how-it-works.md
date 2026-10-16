@@ -2,16 +2,15 @@
 마지막 갱신: 2026-10-15 (KST) — 시제품 공개
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-16 · 작업 브랜치: `claude/how-it-works`
-- 방금 끝낸 것: 레슨을 파일 1개씩으로 분리(`howitworks_app/lessons/NN-key.js`, 빌드 `tools/howitworks/build.py`), 작성 가이드 `howitworks_app/lessons/README.md`,
-  "Why it's built this way"(설계 이유) 섹션 추가, 로봇을 모든 레슨 자동 검사형으로(`howitworks_app/qa/robot.js` — 내용 규칙+터치 125/125), ASO 수집 워크플로 `howitworks-aso.yml` 실행
-- 진행 중이던 것: ① 레슨 27개를 작업자 5명이 병렬로 작성 중(파일 단위). ② ASO 결과(브랜치 `how-it-works-aso` 의 `tools/howitworks/aso/aso.md`)로 이름 A/B 정리
-- **다음 할 일**: 없는 레슨 파일부터 이어서 작성(가이드대로, 번호·key 는 아래 표) → `build.py` → 로봇 전체 통과 → 스크린샷 직접 확인 → main 푸시
-  → 이름 A/B 사용자에게 → 번들 ID 확정 → ④ Flutter 이식 방식 결정(도해·애니메이션을 Dart 로 어떻게 옮길지)
-- 레슨 번호·key: 03 refrigerator · 04 air-conditioner · 05 lock · 07 ballpoint-pen · 08 elevator · 09 electric-toothbrush · 10 coffee-maker · 11 toaster ·
-  12 washing-machine · 13 wifi-router · 14 touchscreen · 15 gps · 16 e-bike · 17 car-brakes · 18 airplane-wing · 19 helicopter · 20 four-stroke-engine ·
-  21 hybrid-car · 22 solar-panel · 23 battery · 24 led-bulb · 25 water-filter · 26 fire-extinguisher · 27 septic-tank · 28 dishwasher · 29 vacuum-cleaner · 30 barcode-scanner
-- 사용자 대기 중인 것: 없음 (이름 A/B 를 곧 물어봄)
+- 마지막 저장: 2026-10-16 · 작업 브랜치: `claude/how-it-works` (main 반영)
+- 방금 끝낸 것: **레슨 30개 완성**(`howitworks_app/lessons/01~30`, 웹 `docs/how-it-works.html`), 로봇 1124/1124(내용 규칙 + 30개 레슨 번호 180개 탭·재생·퀴즈, 라이트/다크, 콘솔 에러 0),
+  이름 조사(`howitworks_app/research/names.md`) → A/B 를 사용자에게 물음
+- 진행 중이던 것: 없음
+- **다음 할 일**: ① 사용자 이름 답 → 번들 ID `com.soulfulfill.<이름>` (Actions `iOS 번들 ID 등록`), `docs/todo.html` 에 앱 값 추가(앱 레코드·AdMob 은 사용자)
+  ② 30개 내용 2차 사실 검토(작업자들은 WebSearch 요약만 봤다 — 페이지 원문 미확인. 특히 연도·숫자)
+  ③ ⑤ Flutter 이식 방식 결정: 도해 SVG 문자열 + 애니메이션을 Dart 로? (후보: flutter_svg 정지 그림 + 애니메이션은 레슨별 Dart, 또는 WebView 로 이 엔진 그대로) → 사용자 A/B
+  ④ 테스트 로봇(Flutter) → 광고 → Release iOS → TestFlight
+- 사용자 대기 중인 것: **이름 A/B** (A `How Things Work: Engineering` 추천 / B `Inside Things: Engineering`)
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/how-it-works.md "🔁 이어받기" 와 plans/how-it-works-app.md 를 읽고, "다음 할 일"부터 이어서 해줘.`
 
@@ -32,6 +31,9 @@
 - 폰 링크 먼저, A/B + 추천 이유 한 줄, 보고는 짧게 번호로, 증거(스크린샷) 같이.
 
 ## 다른 세션에 알리는 노하우
+- **콘텐츠 대량 제작은 '파일 1개 = 단위 1개' + 작성 가이드 + 자동 검사 로봇 + 병렬 작업자**로: 레슨 27개를 작업자 5명이 각자 파일만 쓰고, 각자 미리보기(`build.py --only … --out 스크래치`)·로봇·스크린샷 확인까지 하고 넘김 → 약 25분. 공용 파일(엔진)은 작업자가 못 고치게 하고 버그는 보고만 받아 한 곳에서 고침.
+- SVG 에서 CSS 가 `stroke`·`stroke-width`·`opacity` 속성도 덮는다(fill 과 같은 문제). 클래스 규칙은 `:not([stroke])` 등 속성이 없을 때만.
+- 레슨 파일 하나의 문법 오류가 페이지 전체를 죽인다 → 빌드 때 `node --check` 먼저.
 - **SVG 에서 CSS 클래스의 `fill:none` 은 요소의 `fill="…"` 속성을 이긴다**(속성은 우선순위가 가장 낮음) → 해칭·색 채움이 통째로 사라졌다. `.ink:not([fill]){fill:none}` 처럼 속성이 없을 때만 적용.
 - 코드 도해를 '손그림'처럼: `feTurbulence`+`feDisplacementMap`(scale 2 정도)으로 선을 살짝 흔들고, 단면은 45° 해칭 패턴, 배경 모눈 패턴. 빈 칸(구멍)은 모눈 패턴으로 채우면 이음새가 안 보인다.
 - 헤드리스 리눅스엔 손글씨 글꼴이 없어 스크린샷은 세리프로 나온다(아이폰은 Noteworthy). 손글씨 라벨은 짧게만.

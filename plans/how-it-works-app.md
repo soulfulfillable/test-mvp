@@ -45,5 +45,6 @@ SmartyMe: 7일 체험 후 월 $9.99·연 $79.99 구독. Trustpilot 1점 리뷰�
 → ③레슨 30개 + 출처 검증 → ④테스트 로봇 → ⑤Flutter → ⑥광고 → ⑦Release iOS → ⑧TestFlight
 
 ## 진행 기록 (개발 세션이 추가, 최신이 위)
+- 2026-10-16 ③ 레슨 30개 완성. 구조: 레슨 1개 = `howitworks_app/lessons/NN-key.js`(가이드 `lessons/README.md`), 빌드 `tools/howitworks/build.py`(문법 검사 포함), 로봇 `howitworks_app/qa/robot.js` 1124/1124. 새 섹션 'Why it's built this way'(차별화 3). 카테고리 Kitchen 6·Bathroom 3·Home 9·Getting Around 7·Digital 5. 사실은 WebSearch 요약 기준(원문 페이지는 이 환경에서 못 엶) → 2차 검토 필요. 이름 조사 `howitworks_app/research/names.md`(검색량 숫자는 못 얻음, 경쟁 밀도·충돌 기준) → A/B 질문.
 - 2026-10-15 ② 웹 시제품 `docs/how-it-works.html`(Today·Library 탭, 레슨 3개). 레슨 구조: 한 줄 요약 → 단면도(번호 6개, 탭하면 아래 설명·나머지 흐리게) → **See it work**(7~9초 움직이는 원리, 단계와 부품 강조가 같이 감) → How it works 4단계 → Did you know → 퀴즈 3지선다(정답 위치 섞음) → 출처 3~4개 → 광고 자리. 도해 SVG 는 레슨마다 손으로 좌표를 짠 코드(레슨당 약 60~90줄). 로봇 186/186(라이트·다크, 번호 18개·화살표·재생/정지·퀴즈·저장·다음·뒤로·새로고침 유지). 사용자 느낌 대기.
 - 2026-10-15 ① 경쟁 조사 완료(`howitworks_app/research/competitors.md`): SmartyMe(4.6★ 3.2만, 주 $6.99~연 $99.99)·Imprint(4.8★ 4.4만, 연 $99.99)·Brilliant(4.7★ 2.8만, 연 $150~240) 전부 구독 벽, 불만 1순위 몰래 갱신·환불. 가장 비슷한 Innerspect(도해 자르기+하루 해금+광고)는 안드로이드 전용. iOS 'How Things Work' 이름은 Sweet Escape Labs(3D/AR, 2026-06) 가 사용 → 이름 피하기.
