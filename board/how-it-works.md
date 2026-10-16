@@ -10,7 +10,7 @@
   `soulfulfillable/test-mvp 의 board/how-it-works.md "🔁 이어받기" 와 plans/how-it-works-app.md 를 읽고, "다음 할 일"부터 이어서 해줘.`
 
 ## 지금 상태 (3줄 이내)
-시작 전. 기획서 `plans/how-it-works-app.md`. DESIGN.md 새 앱 규칙 적용 대상.
+시작 전. 기획서 `plans/how-it-works-app.md`(차별화 4개 포함). DESIGN.md 새 앱 규칙 적용 대상. **대상 = 미국 일반 성인(사용자 결정 10-16)** — 남은 결정은 이름·번들 ID.
 
 ## 다음 할 일 / 사용자에게 받을 것
 ## 사용자 피드백 기록
