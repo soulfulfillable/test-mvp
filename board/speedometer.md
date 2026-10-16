@@ -23,6 +23,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-16 | A/B "다른 앱 새 제출 잠깐 멈출까요?" → "잠깐 멈추기 (추천)" | `board/_shared.md`·`PRODUCT.md` 결정 로그에 기록: 속도계 5.6 답이 올 때까지 다른 앱 새 Submit 보류(심사 중인 건 유지, 개발·TestFlight 는 계속) |
 | 10-12 | (ASC 캡처) Apple 10-08: "Guideline 5.6 - Developer Code of Conduct … features that appear to have been intentionally hidden during the review process" (사용자 글 없음) | 빌드 32 코드 점검: 원격 설정·서버·지역/날짜 분기 없음, 웹 전용 데모는 kIsWeb 상수로 막힘. 앱 수정 없이 사실 설명 + 구체적 지적 요청 답장 작성(`docs/speedometer-review.html` 맨 위). 공용 게시판·결정 로그에 계정 위험 알림 |
 | 10-06 | (ASC 캡처 4장: "Unresolved Issues", Guideline 2.1 Information Needed, 1.0 (32)) "이게 여기앱말하는거같은데 맞나 캡쳐를 잘한게" | 맞음 — 신규 개인 계정 첫 제출에 오는 2.1 정보 요청(환율·Kitty Queens 와 같음). 녹화가 1번 필수 항목이라 이제 필요. 폰에서 복사하는 답장 페이지 `docs/speedometer-review.html`(녹화 순서·답장 영어·보내는 법) 안내 |
 | 10-06 | (decibel 세션에 보냄) ASC 캡처 4장: Glance Speed 1.0(32) **"Guideline 2.1 - Information Needed - New App Submission"**(Apple 10-05 11:15 PM), Unresolved Issues | decibel 세션이 안내: `store/review-reply.md` 순서대로 30초 녹화(걸으면서) → 메시지 **Reply** 에 영어 답장+녹화 → 1.0 App Review Information Attachment 에도 녹화 → **Resubmit to App Review**. 결과는 이 세션이 이어서 확인 |
