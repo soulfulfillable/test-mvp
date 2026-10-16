@@ -98,6 +98,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-16 | How It Works 이름 = **A `How Things Work: Engineering`** · 부제 `Everyday Objects, Explained` · 번들 `com.soulfulfill.howthingswork` (등록 Actions 실행) | 사용자 "A 추천대로 가자". 미국 스토어에서 'how things work' 를 잡은 전용 앱이 없음(`howitworks_app/research/names.md`) |
 | 2026-10-16 | **품질 목표: "와, 이 정도까지 한다고?"** — 모든 앱·세션 공통. 기능 수가 아니라 핵심 화면의 깊이·다듬기로. 앱마다 '와 포인트' 1개를 기획서에 적고 보고 때 보여 줌. CLAUDE.md·PLAYBOOK·board/_shared 에 반영 | 사용자 "모두가 기억하게 해 놔줘" |
 | 2026-10-16 | How It Works 대상 = **미국 일반 성인**. 차별화 4개 확정: 구독·결제 벽 없음 / 움직이는 SVG 도해(시그니처) / 하루 하나만 깊게+출처 / 오프라인·배너 1곳 | 사용자 "추천대로". SmartyMe = 월 $9.99·연 $79.99 구독, 1점 리뷰 불만 1위 결제·해지, 2위 얕은 내용 |
 | 2026-10-15 | 새 앱: **하루 한 장 사물의 원리**(공책 스케치 SVG 단면도 + 번호 탭 + 퀴즈, 구독 없이 광고). 그림 공급 위험 → 1단계는 레슨 3개 시제품으로 사용자 느낌 먼저 | 사용자가 SmartyMe 광고("Become the smartest person in the room") 보고 "이런 거 하나 해 보자" |
