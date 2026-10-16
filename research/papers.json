@@ -4113,5 +4113,47 @@
       "large language model traditional chinese medicine diagnosis dialogue"
     ],
     "first_seen": "2026-10-14"
+  },
+  {
+    "id": "doi:10.1002/ptr.70429",
+    "title": "Therapeutic Properties and Underlying Mechanisms of Traditional Chinese Medicine in Managing Rheumatoid Arthritis: An Integrative Review of Clinical and Molecular Findings.",
+    "authors": [
+      "Wen J",
+      "Liu J",
+      "Wan L",
+      "Wang F",
+      "Li Y."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1002/ptr.70429",
+    "abstract": "Traditional Chinese medicine (TCM) has a long-standing history in the treatment of rheumatoid arthritis (RA), known as \"Bi Zheng,\" and offers a comprehensive therapeutic approach characterized by multi-target and multi-pathway mechanisms. Modern pharmacological research has demonstrated that bioactive compounds and herbal formulas derived from TCM (e.g., triptolide [TPL] from Tripterygium wilfordii and the Xinfeng Capsule [XFC]) effectively interfere with the complex pathogenesis of RA. These interventions modulate diverse pathological processes, including the suppression of pro-inflammatory cytokines (e.g., TNF-α, IL-6, and IL-1β), induction of apoptosis in hyperplastic synovial cells, and regulation of novel cell death pathways (such as ferroptosis and pyroptosis). Furthermore, TCM components exhibit potent antioxidant properties, inhibit pathological angiogenesis, ameliorate hypercoagulable states, and restore gut microbiota dysbiosis, which is increasingly recognized as a key environmental factor in RA development. Notably, emerging evidence highlights the critical role of non-coding RNAs (ncRNAs) as mediators of these therapeutic effects. Concurrently, a growing body of clinical evidence from randomized controlled trials (RCTs), cohort studies, and real-world data mining consistently confirms the significant efficacy and safety of TCM interventions in relieving RA symptoms, improving joint function, and reducing disease activity. By integrating preclinical and clinical findings, a robust evidence chain emerges, validating traditional TCM concepts through modern scientific rigor. Therefore, TCM represents a valuable resource for RA drug discovery and integrative treatment strategies. Further in-depth investigation is needed into its specific molecular targets, optimal formulations, and long-term clinical outcomes to facilitate its global translation and application.",
+    "matched_queries": [
+      "adaptive symptom questionnaire traditional chinese medicine"
+    ],
+    "first_seen": "2026-10-16"
+  },
+  {
+    "id": "doi:10.1002/ptr.70421",
+    "title": "Systematic Review and Meta-Analysis: Plant-Based Therapy for Irritable Bowel Syndrome.",
+    "authors": [
+      "Meyer A",
+      "Auer J",
+      "Cascant-Ortolano L",
+      "Schreiber N",
+      "Zimmermann-Klemd A",
+      "Gründemann C",
+      "Busche P",
+      "Schirra J",
+      "Fox MR."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1002/ptr.70421",
+    "abstract": "Irritable bowel syndrome (IBS) is a common disorder of brain-gut interaction that presents with abdominal pain, bloating associated with variable stool consistency. Many IBS patients prefer plant-based preparations to pharmacological therapy; however, the utility of this approach is not well established. To address this issue, a systematic review with meta-analysis to assess the efficacy and safety of plant-based therapy in IBS patients was performed. Literature search with 3 electronic databases (Medline via PubMed, Embase via Ovid, and Web of Science Core Collection) from inception to May 2024. Efficacy was assessed using dichotomous ratings of change in IBS symptoms. A random effects model with 95% confidence intervals was used. Through the screening process, 60 eligible studies were identified (6329 patients). Meta-analysis was performed for fiber (8 studies, RR = 1.22; 95% CI: 1.00-1.49), peppermint oil (7 studies, RR = 1.63; 95% CI: 1.33-2.00), Aloe vera (3 studies, RR = 1.25; 95% CI: 0.76-2.06), and Chinese herbal medicine (7 studies, RR = 1.56; 95% CI: 1.27-1.92). For other plant-based substances investigated in at least one randomized controlled trial (RCT) (e.g., St. John's wort, Anise oil), there were insufficient data for a meta-analysis. The quality of many studies was limited. The findings demonstrate that the treatment of IBS patients with peppermint oil and Chinese herbal medicine were more effective than placebo and had a good safety profile. Dietary fiber showed effects that approached significance. Further, well-powered RCTs are needed to establish the place of plant-based preparations in IBS treatment.",
+    "matched_queries": [
+      "multi-label symptom syndrome classification traditional chinese medicine"
+    ],
+    "first_seen": "2026-10-16"
   }
 ]
