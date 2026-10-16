@@ -156,6 +156,9 @@ function defs(p) {
 /* ---------- lessons ---------- */
 const LESSONS = [];
 
+/* LESSONS:BEGIN */
+/* 01-microwave.js */
+{
 /* 1. Microwave oven */
 LESSONS.push({
   key: 'microwave', title: 'Microwave Oven', cat: 'Kitchen', mins: 3, vb: [360, 240],
@@ -175,6 +178,7 @@ LESSONS.push({
     { text: 'The waves flip water molecules in the food back and forth. That motion is heat — mostly in the outer inch; the middle warms by conduction. The turntable keeps hot spots moving.', parts: [5], t: [4.8, 8] },
   ],
   dur: 8,
+  why: 'Why a metal box? Metal reflects microwaves, so the box keeps them in and sends them through the food again and again instead of leaking out. And 2.45 GHz sits in a radio band reserved for industrial, scientific and medical use, so ovens don’t jam radio services.',
   fact: 'It was discovered by accident. Around 1945, Raytheon engineer Percy Spencer was working near a radar magnetron when the candy bar in his pocket melted. He soon tried popcorn — it popped.',
   quiz: {
     q: 'Why does the door have a metal screen full of tiny holes?',
@@ -244,7 +248,9 @@ LESSONS.push({
     q('mark').setAttribute('cx', t == null ? 104 : f1(104 + 58 * Math.sin(t * .9)));
   }
 });
-
+}
+/* 02-toilet.js */
+{
 /* 2. Flush toilet */
 const CAV = 'M46,122C50,168 80,200 112,208L130,210C146,204 160,188 168,178C172,172 178,170 180,178L180,240L196,240L196,166C196,148 176,146 168,158L148,188C145,193 138,192 140,184C150,164 172,146 182,122Z';
 const TRAP = 'M124,209L130,210C146,204 160,188 168,178C172,172 178,170 180,178L180,240L196,240L196,166C196,148 176,146 168,158L148,188C145,192 136,198 124,209Z';
@@ -266,6 +272,7 @@ LESSONS.push({
     { text: 'The float drops, so the fill valve opens and refills the tank. The refill tube tops up the bowl so the trap holds water again.', parts: [3, 4], t: [4.4, 9] },
   ],
   dur: 9,
+  why: 'Why the curved trapway? Its bend always keeps a plug of water in the pipe, which stops sewer gas from rising into your bathroom — with no moving parts. The same bend becomes the siphon that empties the bowl, so no pump is needed.',
   fact: 'Since 1994, U.S. law has capped new toilets at 1.6 gallons per flush. Older toilets could use as much as 6 gallons. Today’s WaterSense models use 1.28 or less.',
   quiz: {
     q: 'What actually pulls everything down the drain?',
@@ -337,10 +344,12 @@ LESSONS.push({
     q('rflow').setAttribute('opacity', f1(rflow));
   }
 });
-
+}
+/* 06-zipper.js */
+{
 /* 3. Zipper */
 LESSONS.push({
-  key: 'zipper', title: 'Zipper', cat: 'Around the House', mins: 3, vb: [360, 280],
+  key: 'zipper', title: 'Zipper', cat: 'Home', mins: 3, vb: [360, 280],
   summary: 'The slider is a wedge with a Y-shaped channel. Going up, it presses two rows of hooked teeth together so each bump locks into the hollow across; going down, it pries them apart.',
   parts: [
     { n: 1, name: 'Teeth', at: [100, 238], num: [24, 244], desc: 'Each tooth has a bump on top and a hollow underneath. The two rows are offset by half a tooth, so each tooth fits between two across from it.' },
@@ -357,6 +366,7 @@ LESSONS.push({
     { text: 'Pull down, and the wedge inside the slider bends them apart one by one.', parts: [3], t: [4.5, 7] },
   ],
   dur: 7,
+  why: 'Why offset the teeth? With the rows shifted half a tooth, every tooth sits between two teeth across, so the pull is shared along the zipper — and one slider can lock hundreds of teeth in a single smooth pull.',
   fact: 'It wasn’t called a “zipper” until 1923, when B.F. Goodrich put Gideon Sundback’s fastener on rubber boots and named them for the zip sound. Sundback’s patent dates to 1917.',
   quiz: {
     q: 'Why don’t the teeth come apart when you pull the two sides straight apart?',
@@ -378,8 +388,7 @@ LESSONS.push({
       side += `<path d="M${x0},${top}H267A5,5 0 0 1 277,${top}H${x1}V${bot}H277A5,5 0 0 0 267,${bot}H${x0}Z" class="ink" fill="${L ? '#fff' : '#e6e8eb'}"/>`;
     }
     return `
-    <g class="shell"><path id="${p}tapeL" fill="url(#${p}fabric)" class="ink"/><path id="${p}tapeR" fill="url(#${p}fabric)" class="ink"/></g>
-    <g data-part="2"><path id="${p}tapeL2" class="ink"/><path id="${p}tapeR2" class="ink"/></g>
+    <g data-part="2"><path id="${p}tapeL" fill="url(#${p}fabric)" class="ink"/><path id="${p}tapeR" fill="url(#${p}fabric)" class="ink"/></g>
     <g data-part="1"><path id="${p}teeth" class="ink fm"/></g>
     <g data-part="5"><path id="${p}stops" class="ink" fill="#c9ccd1"/><rect x="99" y="265" width="22" height="8" rx="1.5" class="ink" fill="#c9ccd1"/></g>
     <g data-part="3"><path id="${p}slider" class="ink fm"/><path id="${p}chan" class="ink thin" stroke-dasharray="2.5 2"/></g>
@@ -416,7 +425,6 @@ LESSONS.push({
       return d + `L${f1(pts[0][0] - s * 58)},${top}Z`;
     };
     q('tapeL').setAttribute('d', tape(ptsL, 1)); q('tapeR').setAttribute('d', tape(ptsR, -1));
-    q('tapeL2').setAttribute('d', ''); q('tapeR2').setAttribute('d', '');
     const oT = off(16);
     q('stops').setAttribute('d', `M${f1(98 - oT)},5h12v6h-12z M${f1(110 + oT)},5h12v6h-12z`);
     const y = sT;
@@ -426,6 +434,8 @@ LESSONS.push({
     return { 3: [128, f1(y + 10)], 4: [117, f1(y + 60)], 2: [f1(72 - off(190) * .9), 190] };
   }
 });
+}
+/* LESSONS:END */
 
 /* ---------- state ---------- */
 const store = {
@@ -438,6 +448,8 @@ function streak() {
   if (s.last !== dayNo) { s = { last: dayNo, n: s.last === dayNo - 1 ? s.n + 1 : 1 }; store.set('streak', s); }
   return s.n;
 }
+const SPEED = +(new URLSearchParams(location.search).get('speed') || 1); // QA robot only
+const CATS = ['Kitchen', 'Bathroom', 'Home', 'Getting Around', 'Digital'];
 const START = Date.UTC(2026, 9, 15) / 864e5; // prototype: day 1 = microwave
 const state = { tab: 'today', open: null };
 let player = null;
@@ -456,7 +468,7 @@ function svgFor(L, p, withNums) {
   });
   return `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cutaway drawing of a ${esc(L.title.toLowerCase())}">
     ${defs(p)}<rect width="${w}" height="${h}" fill="url(#${p}grid)"/>
-    <g class="art" filter="url(#${p}rough)">${L.art(p)}</g>${nums}</svg>`;
+    <g class="art"${withNums ? ` filter="url(#${p}rough)"` : ''}>${L.art(p)}</g>${nums}</svg>`;
 }
 
 function render() {
@@ -470,15 +482,15 @@ function render() {
 function renderLibrary() {
   const done = store.get('done', {}), saved = store.get('saved', {});
   const row = L => `<button class="row" data-open="${L.key}"><span class="thumb">${svgFor(L, 't' + L.key, false)}</span>
-    <span class="t">${esc(L.title)}<small>${esc(L.cat)} · ${L.mins} min</small></span>
+    <span class="t">${esc(L.title)}<small>Day ${LESSONS.indexOf(L) + 1} · ${L.mins} min</small></span>
     ${done[L.key] ? '<svg class="done" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-label="Learned"><path d="M5 10.5l3.2 3.2L15 7"/></svg>' : ''}
     <svg class="chev" width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l6 6-6 6"/></svg></button>`;
-  const cats = [...new Set(LESSONS.map(l => l.cat))];
+  const cats = CATS.filter(c => LESSONS.some(l => l.cat === c)).concat([...new Set(LESSONS.map(l => l.cat))].filter(c => !CATS.includes(c)));
   const sv = LESSONS.filter(l => saved[l.key]);
-  app.innerHTML = `<div class="navtop"><div><div class="date">${LESSONS.length} lessons in this preview</div><h1 class="large">Library</h1></div></div>
+  app.innerHTML = `<div class="navtop"><div><div class="date">${LESSONS.length} lessons · one a day</div><h1 class="large">Library</h1></div></div>
     ${sv.length ? `<div class="sec">Saved</div><div class="group">${sv.map(row).join('')}</div>` : ''}
     ${cats.map(c => `<div class="sec">${esc(c)}</div><div class="group">${LESSONS.filter(l => l.cat === c).map(row).join('')}</div>`).join('')}
-    <p class="note">Prototype: the full app adds one new lesson every day.</p>`;
+    <p class="note">Web preview: every lesson is open. In the app, a new one unlocks each day.</p>`;
   app.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { state.open = b.dataset.open; render(); scrollTo(0, 0); });
 }
 
@@ -501,6 +513,7 @@ function renderLesson(L, pushed) {
     <button class="play" id="play"><svg width="14" height="16" viewBox="0 0 14 16"><path d="M2 1.5v13l11-6.5z" fill="currentColor"/></svg><span>See it work</span></button>
     <div class="sec">How it works</div>
     <ol class="steps" id="steps">${L.steps.map((s, i) => `<li><span class="n">${i + 1}</span><span>${esc(s.text)}</span></li>`).join('')}</ol>
+    ${L.why ? `<div class="sec">Why it’s built this way</div><div class="fact">${esc(L.why)}</div>` : ''}
     <div class="sec">Did you know?</div>
     <div class="fact">${esc(L.fact)}</div>
     <div class="sec">Quick check</div>
@@ -562,7 +575,7 @@ function renderLesson(L, pushed) {
       }
     };
     const tick = now => {
-      const t = (now - t0) / 1000;
+      const t = (now - t0) / 1000 * SPEED;
       if (t >= L.dur) { stopPlay(); return; }
       moveLeaders(L.anim(svg, p, t));
       const si = L.steps.findIndex(s => t >= s.t[0] && t < s.t[1]);
