@@ -39,6 +39,7 @@ jobs:
           APP_NAME: ${{ inputs.name }}
         run: |
           python3 -m pip install -q pyjwt cryptography
+          set -o pipefail  # tee 가 실패를 가리지 않게 (10-16 How It Works: 시간 초과인데 성공으로 표시됨)
           python3 .github/scripts/asc_signing.py register "$BUNDLE_ID" "$APP_NAME" | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Remove API key

@@ -37,7 +37,7 @@ SmartyMe: 7일 체험 후 월 $9.99·연 $79.99 구독. Trustpilot 1점 리뷰�
 - DESIGN.md 새 앱 규칙(시스템 글꼴, Cupertino, 강조색 1개). 단, 도해만은 **공책 스케치 느낌**이 시그니처(종이 배경 줄·손글씨 느낌 라벨 — 글꼴은 무료 라이선스 확인).
 
 ## 결정 필요 (개발 세션 → 사용자 A/B)
-- 이름(검색어 조사: "how things work", "engineering explained", "daily learning"), 번들 ID.
+- ~~이름·번들~~ → **결정(2026-10-16): `How Things Work: Engineering` / 부제 `Everyday Objects, Explained` / `com.soulfulfill.howthingswork`.**
 - ~~대상~~ → **결정(2026-10-16): A. 미국 일반 성인.** UI·스토어 전부 영어.
 
 ## 진행 순서
