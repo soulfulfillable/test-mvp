@@ -3,14 +3,14 @@
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
 - 마지막 저장: 2026-10-16 · 작업 브랜치: `claude/how-it-works` (main 반영)
-- 방금 끝낸 것: **레슨 30개 완성**(`howitworks_app/lessons/01~30`, 웹 `docs/how-it-works.html`), 로봇 1124/1124(내용 규칙 + 30개 레슨 번호 180개 탭·재생·퀴즈, 라이트/다크, 콘솔 에러 0),
-  이름 조사(`howitworks_app/research/names.md`) → A/B 를 사용자에게 물음
+- 방금 끝낸 것: 이름 확정 **How Things Work: Engineering** / 부제 Everyday Objects, Explained (`howitworks_app/store/ios-listing.md`),
+  번들 **`com.soulfulfill.howthingswork` 등록 완료**(Actions iOS 번들 ID 등록 run 38916038511), `docs/todo.html` 에 앱 값 추가
 - 진행 중이던 것: 없음
-- **다음 할 일**: ① 사용자 이름 답 → 번들 ID `com.soulfulfill.<이름>` (Actions `iOS 번들 ID 등록`), `docs/todo.html` 에 앱 값 추가(앱 레코드·AdMob 은 사용자)
-  ② 30개 내용 2차 사실 검토(작업자들은 WebSearch 요약만 봤다 — 페이지 원문 미확인. 특히 연도·숫자)
-  ③ ⑤ Flutter 이식 방식 결정: 도해 SVG 문자열 + 애니메이션을 Dart 로? (후보: flutter_svg 정지 그림 + 애니메이션은 레슨별 Dart, 또는 WebView 로 이 엔진 그대로) → 사용자 A/B
-  ④ 테스트 로봇(Flutter) → 광고 → Release iOS → TestFlight
-- 사용자 대기 중인 것: **이름 A/B** (A `How Things Work: Engineering` 추천 / B `Inside Things: Engineering`)
+- **다음 할 일**: ① 사용자에게 Flutter 이식 방식 A/B(A 추천: Flutter 셸 + 지금 JS/SVG 엔진을 앱 안 WebView 로 그대로 / B: 30개 도해를 Dart 로 다시 그리기)
+  ② 답 받으면 `howitworks_app/flutter/` 생성(pubspec `version: 1.0.0+1`, `sdk: ^3.13.2`) → 테스트 로봇 먼저 → Today/Library/레슨 화면(Cupertino)
+  ③ 30개 사실 2차 검토(작업자는 WebSearch 요약만 봤음) ④ AdMob(배너+보상형 "내일 레슨 미리 보기") → Release iOS 옵션에 앱 추가 → TestFlight
+- 사용자 대기 중인 것: Flutter 이식 방식 A/B. (사용자 할 일: App Store Connect 앱 레코드·AdMob 앱 — todo.html, 급하지 않음: 첫 업로드 전까지)
+- ⚠️ 2026-10-16 결정: 속도계 5.6 답이 올 때까지 **새 심사 제출 보류**(개발·TestFlight 는 계속) — 이 앱도 해당
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/how-it-works.md "🔁 이어받기" 와 plans/how-it-works-app.md 를 읽고, "다음 할 일"부터 이어서 해줘.`
 
@@ -24,6 +24,7 @@
 - ✅ 대상 = **A 미국 일반 성인** (사용자 결정 2026-10-16, 기획 파트너가 기록). 차별화 4개는 기획서 '차별화 4개' 참고 — 특히 2번 **움직이는 도해**가 시그니처
 
 ## 사용자 피드백 기록 (최신이 위)
+- 2026-10-16 "A 추천대로 가자" → 이름 How Things Work: Engineering, 번들 com.soulfulfill.howthingswork 등록
 - 2026-10-16 "시제품 괜찮아. 그림 결 이대로 가자. 대상은 미국 일반 성인으로 결정됐어. 이름 검색어 조사해서 A/B 추천해주고, 레슨 27개 추가 진행해줘." → 그림 결 고정(가이드에 명시), 이름 조사·27개 착수
 - 2026-10-16 (기획 파트너 세션에서, 시제품 첫 느낌): "오 괜찮아" → 그림 결·방향 OK. 다음 단계(이름 A/B → 레슨 27개) 진행 가능
 ## 사용자 성향 — 원하는 것 / 불편해하는 것
@@ -31,6 +32,7 @@
 - 폰 링크 먼저, A/B + 추천 이유 한 줄, 보고는 짧게 번호로, 증거(스크린샷) 같이.
 
 ## 다른 세션에 알리는 노하우
+- **`iOS 번들 ID 등록` 워크플로가 실패해도 ✅ 로 보였다**: Apple API 시간 초과인데 `| tee` 가 종료 코드를 가림 → `set -o pipefail` 추가(10-16). 다른 워크플로도 `| tee` 앞엔 pipefail. 결과는 로그의 "새로 등록함/이미 등록됨" 줄로 확인.
 - **콘텐츠 대량 제작은 '파일 1개 = 단위 1개' + 작성 가이드 + 자동 검사 로봇 + 병렬 작업자**로: 레슨 27개를 작업자 5명이 각자 파일만 쓰고, 각자 미리보기(`build.py --only … --out 스크래치`)·로봇·스크린샷 확인까지 하고 넘김 → 약 25분. 공용 파일(엔진)은 작업자가 못 고치게 하고 버그는 보고만 받아 한 곳에서 고침.
 - SVG 에서 CSS 가 `stroke`·`stroke-width`·`opacity` 속성도 덮는다(fill 과 같은 문제). 클래스 규칙은 `:not([stroke])` 등 속성이 없을 때만.
 - 레슨 파일 하나의 문법 오류가 페이지 전체를 죽인다 → 빌드 때 `node --check` 먼저.
