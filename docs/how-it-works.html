@@ -491,7 +491,11 @@ function renderLibrary() {
     ${sv.length ? `<div class="sec">Saved</div><div class="group">${sv.map(row).join('')}</div>` : ''}
     ${cats.map(c => `<div class="sec">${esc(c)}</div><div class="group">${LESSONS.filter(l => l.cat === c).map(row).join('')}</div>`).join('')}
     <p class="note">Web preview: every lesson is open. In the app, a new one unlocks each day.</p>`;
-  app.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { state.open = b.dataset.open; render(); scrollTo(0, 0); });
+  app.querySelectorAll('[data-open]').forEach(b => {
+    b.onclick = () => { state.open = b.dataset.open; render(); scrollTo(0, 0); };
+    const L = LESSONS.find(l => l.key === b.dataset.open);
+    try { L.anim(b.querySelector('svg'), 't' + L.key, null); } catch (e) { console.error(e); }
+  });
 }
 
 function renderLesson(L, pushed) {
