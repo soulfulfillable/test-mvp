@@ -34,4 +34,4 @@
   다 읽으면 "Opened" 보관함, 가족 이름 편집, 쓸 말 없을 때 질문 15개. 저장은 localStorage. 다음 사람 차례로 '보낸 사람' 자동 넘김.
 - 테스트 로봇 `blessingjar_app/qa/robot.js` 99/99 통과 (스크린샷 `blessingjar_app/qa/shots/`).
 - 확인 못 한 것: 실제 아이폰 흔들기 감도(헤드리스는 가짜 DeviceMotion 이벤트), iOS 진동(사파리는 vibrate 미지원 → 네이티브에서 햅틱), 실제 소리 크기.
-- 다음: 사용자 느낌 → (수익 A/B, 이름·번들) → ③ Flutter 테스트 로봇 → ④ Flutter.
+- 다음: 사용자 느낌 → 이름·번들 → ③ Flutter 테스트 로봇 → ④ Flutter. (수익은 이미 확정: 무료 + 보관함 배너 1곳)
