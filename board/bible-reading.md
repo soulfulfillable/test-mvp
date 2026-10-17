@@ -1,28 +1,29 @@
 # 성경 통독 앱 — 개발 세션 게시판
-마지막 갱신: 2026-10-12 (KST)
+마지막 갱신: 2026-10-17 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: Tolle 빌드 36 TestFlight 반영
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: TestFlight 느낌 + 30초 녹화 → AdMob → 스토어 제출
+- 마지막 저장: 2026-10-17 (개발 세션) · 작업 브랜치: `claude/tender-brahmagupta-n0qp95` (main 과 같음)
+- 방금 끝낸 것: 2.1 정보 요청 답장+녹화 보냄(10-12) · 책 화면 "Clear" → **Reset Book**(확인 창) — 웹 미리보기에만, 앱 빌드엔 아직 없음
+- 진행 중이던 것: 심사 재제출 확인. 10-12 마지막 안내 = App Review → "Wednesday at 8:48 PM" 제출 → **Resubmit to App Review** → 상태 **Waiting for Review** 확인. 사용자가 실제로 눌렀는지·결과는 **아직 못 들음**
+- **다음 할 일** (순서대로):
+  1. 사용자에게 ASC 상태 확인(Waiting for Review / In Review / 승인 / 반려). 반려면 메시지 캡처 받아 대응. 여전히 Resubmit 회색이면 그 화면 캡처 (Cancel Submission 은 답장·영상이 묶여 있어 마지막 수단)
+  2. AdMob(사용자, 클릭 안내는 대화에 줬음): soulfulfillable 계정 → Apps → Add app(iOS, 스토어 No, `Tolle`) → Add ad unit → **Banner** 카드 → 이름 `banner` → 완료 화면 캡처
+  3. 캡처 받으면: `tolle_app/flutter/lib/core/ads.dart` `AdIds.banner` + `ios/Runner/Info.plist` `GADApplicationIdentifier` 교체(지금 Google 테스트 ID) → `flutter test` → `Release iOS`(tolle, 대기 줄 먼저 확인) → 빌드 37 (Reset Book 포함). 같은 게시자 `pub-4724352880074547` 인지 테스트로 확인(연비 앱 방식)
+  4. AdMob 앱 설정 → Blocking controls → 민감 카테고리 차단(Religion 은 허용) 안내
+  5. 1.0 승인 뒤: AdMob 에 스토어 링크 연결, 빌드 37 로 1.0.1 제출(심사 메모·녹화는 `docs/tolle-review.html` 재사용)
+- 사용자 대기: ASC 재제출 결과 · AdMob 완료 화면 캡처
 - 이어받는 세션에 붙여 넣을 말:
-  `soulfulfillable/test-mvp 의 board/bible-reading.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
-
+  `soulfulfillable/test-mvp 의 board/bible-reading.md "🔁 이어받기" 와 plans/bible-reading-app.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 ## 지금 상태 (3줄 이내)
-이름 **Tolle: Bible Reading Plan** 확정, 번들 `com.soulfulfill.tolle` **Apple 등록 완료**(Actions run 14). Flutter 1차 완성(`tolle_app/flutter/`): 오늘 분량 하나 + Mark as Read(시그니처: 1,189칸 지도가 톡톡 채워짐) · 지도(66권×장) · 계획(전체/신약/시편·잠언 × 기간 × 성경순/연대순, 시작일, 밀림 조정 2가지, 하루 1번 알림, CSV 내보내기).
-테스트 45개 통과(엔진 24 + 로봇 21), 웹 실제 터치 15/15. 웹 미리보기 https://soulfulfillable.github.io/test-mvp/bible-reading-app/index.html · 검수 https://soulfulfillable.github.io/test-mvp/bible-reading-qa.html
-1.0(빌드 36) 제출 10-07 → 10-08 **2.1 정보 요청** → 10-12 답장+녹화 보냄 → Update Review 눌렀으나 상태가 **Ready for Review**(미제출) → Add for Review·Submit 필요. 광고는 아직 테스트 ID.
+**Tolle: Bible Reading Plan** (`tolle_app/`, 번들 `com.soulfulfill.tolle`, ASC id 6819705454). 1.0(빌드 36) 10-07 제출 → 10-08 2.1 정보 요청 → 10-12 답장+영상 → 재제출 안내(결과 미확인). 광고는 아직 Google 테스트 ID.
+기능: 오늘 분량(절 수 균형)·Mark as Read·1,189칸 지도·책별 장 직접 체크·Reset Book·계획 15종(성경순/연대순)·밀림 조정·알림·CSV. 테스트 47 · 웹 터치 17/17.
+웹 미리보기 https://soulfulfillable.github.io/test-mvp/bible-reading-app/index.html · 검수 https://soulfulfillable.github.io/test-mvp/bible-reading-qa.html · 심사 답장 https://soulfulfillable.github.io/test-mvp/tolle-review.html
 
 ## 다음 할 일 / 사용자에게 받을 것
-- ✅ [사용자] 이름 A `Tolle: Bible Reading Plan`, 위젯 A(2차로). 번들 `com.soulfulfill.tolle` 등록 완료.
-- ✅ [사용자] ASC 앱 레코드 생성 (id 6819705454, Actions 확인 run 15) → `Release iOS`(tolle) 실행
-- [사용자, 스토어 제출 전] AdMob(soulfulfillable 계정) → 앱 추가(iOS, 미출시, 이름 Tolle) → Banner `banner` → 완료 화면 캡처. 앱 설정 → Blocking controls → 민감 카테고리 차단(Religion 허용).
-- ✅ [세션] `Release iOS` run 35 성공 → 빌드 35 VALID → 그룹 `me` 생성 → 초대 메일(두 번째 실행에서)
-- [사용자] 메일의 View in TestFlight → 설치 → '느낌' 한마디 + 30초 화면 녹화(오늘 → Mark as Read → Map → Plan, 2.1 대비)
-- 준비 완료: 스토어 문구·심사 메모 7항목 `tolle_app/store/ios-metadata.json`, 스크린샷 5장 `tolle_app/store/screenshots/`.
-- [나중] 위젯(2차, 사용자 결정), 음악 탭, 추천 자료(제휴), 오늘의 한 절(WEB).
+- 위 "🔁 이어받기 → 다음 할 일" 1~5 가 최신.
+- 준비 완료: 스토어 문구·심사 메모 `tolle_app/store/ios-metadata.json`, 스크린샷 5장 `tolle_app/store/screenshots/`, 개인정보 `docs/bible-privacy.html`.
+- [나중] 위젯(2차, 사용자 결정), 음악 탭(앰비언트 판정 뒤), 추천 자료(제휴), 오늘의 한 절(WEB).
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
