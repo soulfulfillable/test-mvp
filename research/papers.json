@@ -4155,5 +4155,51 @@
       "multi-label symptom syndrome classification traditional chinese medicine"
     ],
     "first_seen": "2026-10-16"
+  },
+  {
+    "id": "doi:10.3389/fendo.2026.1929926",
+    "title": "An interpretable prediction model for non-invasive identification of the phlegm-dampness constitution based on machine learning.",
+    "authors": [
+      "Zhang X",
+      "Li T",
+      "Liu Y",
+      "Zhu L",
+      "Yao Y",
+      "Zhang Y",
+      "Fei C",
+      "Huang S",
+      "Xu Z",
+      "Ye F",
+      "Xia Y",
+      "Li L."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.3389/fendo.2026.1929926",
+    "abstract": "<h4>Introduction</h4>In traditional Chinese medicine (TCM), constitutional types influence disease susceptibility. Phlegm-Dampness Constitution (PDC), a common subtype, has been linked to elevated risk of metabolic diseases. Therefore, early identification of PDC is essential for implementing early interventions and disease prevention strategies. This study aimed to develop and evaluate interpretable machine learning models for the identification of PDC based on routinely available clinical variables and dietary preferences.<h4>Methods</h4>We analyzed 139 participants (96 PDC and 43 Balanced Constitution [BC]). Seventeen clinical and biochemical variables were screened using least absolute shrinkage and selection operator regression, and logistic regression, random forest, support vector machine, and Extreme Gradient Boosting classifiers were developed. The dataset was divided into training and test sets, and three-fold cross-validation was applied. Model performance was assessed using the area under the receiver operating characteristic curve (AUC), cut-off value, sensitivity, specificity, positive likelihood ratio (PLR), negative likelihood ratio (NLR), positive predictive value (PPV), and negative predictive value (NPV), while model outputs were interpreted using SHapley Additive exPlanations (SHAP).<h4>Results</h4>The logistic regression model using waist circumference and triglycerides (TG), with age and body mass index (BMI) as covariates, achieved an AUC of 0.983, with a sensitivity of 0.945 and a specificity of 0.970. A second fully non-invasive model using systolic blood pressure, diastolic blood pressure, and waist circumference, with the same covariates, also showed good discrimination and was retained as a candidate model. SHAP analysis provided individual-level explanations of model predictions and identified BMI and TG as key clinical contributors. In addition, we constructed a PDC identification model based on dietary preferences. The logistic regression model showed good discriminative performance in the training data (AUC = 0.891, specificity = 0.964) and the testing data (AUC = 0.838, specificity = 0.894). SHAP indicated that scorching and salty preferences shifted predictions toward PDC, whereas a light preference shifted predictions toward BC.<h4>Discussion</h4>In summary, this study developed interpretable models to improve PDC identification, including a fully non-invasive model, thereby potentially supporting early risk identification and preventive strategies for metabolic diseases in clinical settings.",
+    "matched_queries": [
+      "TCM body constitution classification machine learning"
+    ],
+    "first_seen": "2026-10-17"
+  },
+  {
+    "id": "doi:10.1007/s12028-026-02543-x",
+    "title": "Promoting Consciousness Recovery in Patients with Acquired Brain Injury Through Multimodal Sensory Stimulation: A Randomized Controlled Trial of Median Nerve and Auricular Stimulation.",
+    "authors": [
+      "Li H",
+      "Song W",
+      "Zeng S",
+      "Liu L",
+      "Liu C",
+      "Lu H."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1007/s12028-026-02543-x",
+    "abstract": "<h4>Background</h4>Addressing disorders of consciousness (DOC) secondary to acquired brain injury (ABI) remains challenging in neurorehabilitation. Median nerve electrical stimulation (MNES) is a noninvasive therapeutic option, but its benefits as monotherapy are restricted. The auricular intradermal needle, a prolonged-stimulation traditional Chinese medicine technique, has not been assessed for consciousness restoration. This study examined the safety and effectiveness of combining MNES with auricular needling for patients with DOC post-ABI.<h4>Methods</h4>This randomized controlled trial enrolled 116 patients with DOC (GCS 4-8), randomly assigned to a treatment group (n = 58, standard care + MNES + auricular intradermal needling) or a comparison group (n = 58, standard care + MNES). MNES was administered twice daily for 60 min per session; auricular needles were embedded for 3 days (three pressings/day), with the total protocol spanning 11 days. Primary outcome was Coma Recovery Scale-Revised (CRS-R) score, evaluated at 4 weeks postintervention and 3 months post-ABI. Secondary outcomes included GCS score, awakening rate, Glasgow Outcome Scale (GOS) score, and family satisfaction.<h4>Results</h4>Intent-to-treat (ITT) analysis showed that the experimental group had a significantly greater CRS-R score increase than controls at 4 weeks (mean difference: 1.62, P = 0.022) and 3 months (mean difference: 2.05, P = 0.006). All secondary outcomes differed significantly: higher GCS scores, higher awakening rates (48.28% vs. 27.59% at 4 weeks; 62.07% vs. 41.38% at 3 months), more favorable GOS outcomes (4-5: 55.17% vs. 31.03%), and improved family satisfaction. No serious treatment-related adverse events occurred.<h4>Conclusions</h4>Integrating MNES with auricular intradermal needle enhances therapeutic outcomes for DOC following ABI, proving more effective than MNES alone in promoting consciousness recovery and neurological improvement without compromising safety. This complementary method represents a viable and promising advancement in noninvasive DOC management. Trial registration ClinicalTrials.gov Identifier: NCT07273864.",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-10-17"
   }
 ]
