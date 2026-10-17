@@ -1,5 +1,14 @@
 # Glance FX (환율 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-12 (KST)
+마지막 갱신: 2026-10-17 (KST)
+
+## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- 마지막 저장: 2026-10-17 (currency 개발 세션)
+- 작업 브랜치: `claude/app-store-justification-presentation-9ktgmm` · 방금 끝낸 것: v1.0 에 **빌드 39** 연결(사용자 Add Build → 39 → Update Review, 10-12). 빌드 38·39 는 고쳐진 Release iOS(인증서 보관)로 서명 — 9·15 는 ITMS-90035 로 못 씀
+- 진행 중이던 것: 없음 (심사 결과 대기. Waiting for Review 화면은 사용자에게서 아직 못 받음 — 확인 못 함)
+- **다음 할 일**: ① 사용자에게 상태 확인(Waiting for Review / In Review / Ready for Distribution / Rejected) ② 반려면 메시지 원문 받아 대응(2.1 답장 원문 `currency_app/store/review/2026-10-03-reply.md`) ③ 승인되면 AdMob 앱에 스토어 링크 연결 + 지급 정보 안내(AdMob 계정 = soulfulfillable, `board/_shared.md`) ④ 다음 버전: 금·코인 보이는 스크린샷 교체
+- 주의: Actions 는 MCP 로 owner `hugoseong0721` 호출. Release iOS 대기 줄 1칸 — 누르기 전 queued 확인. 빌드 번호 = 실행 번호
+- 이어받는 세션에 붙여 넣을 말:
+  `soulfulfillable/test-mvp 의 board/currency.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
 - 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
@@ -11,18 +20,19 @@
 
 
 ## 지금 상태 (3줄 이내)
-v1.0 빌드 8 반려(2.1) → 빌드 9 재제출 → 10-12 **Invalid Binary** 로 대기열 이탈 → 빌드 15 도 **ITMS-90035 Invalid Signature**(예전 워크플로가 업로드 후 배포 인증서를 지워서) → 고쳐진 워크플로로 **빌드 39** 업로드 중.
+v1.0 빌드 8 반려(2.1) → 빌드 9 재제출 → 10-12 **Invalid Binary** 로 대기열 이탈 → 빌드 15 도 **ITMS-90035 Invalid Signature**(예전 워크플로가 업로드 후 배포 인증서를 지워서) → 고쳐진 워크플로로 올린 **빌드 39 연결 후 재제출(10-12)**, 심사 대기.
 빌드 15(Release iOS run 15, 번호 = run_number 라 다른 앱 실행 수만큼 건너뜀): 맨 위 기준 통화 줄도 끌기 — 테스트 7/7, 업로드 성공.
 빌드 15 실기기 확인 완료(사용자 "된답") — 이번 1.0 심사에 바로 사용.
 
 ## 다음 할 일 / 사용자에게 받을 것
-- [세션] 빌드 39 처리되면 asc-metadata(build 39)로 연결 → [사용자] Update Review.
+- ✅ 빌드 39 연결 + 사용자 Update Review (10-12).
 - [대기] 심사 결과 메일.
 - [세션] 승인되면: AdMob 에 스토어 링크 연결·결제 정보 안내, (1.0.1 은 다음 변경 생길 때)
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-12 | "저거로 하라는거지 39?" (Add Build 화면) | 39 선택 → Done → Update Review 안내 |
 | 10-12 | ITMS-90035 메일(빌드 15) | 원인: 옛 release-ios 가 인증서 revoke. 다른 세션이 인증서 보관으로 수정함 → 빌드 39 재업로드 |
 | 10-12 | 왼쪽 메뉴 "1.0 Invalid Binary" 스크린샷 | asc-metadata 로 빌드 15 연결 → 사용자 Update Review → Waiting for Review |
 | 10-03 | (빌드 15 맨 위 줄 끌기) "된답" | 실기기 확인 완료 — 1.0.1 후보 확정 |
