@@ -1,8 +1,8 @@
 # How It Works (사물의 원리) — 개발 세션 게시판
-마지막 갱신: 2026-10-15 (KST) — 시제품 공개
+마지막 갱신: 2026-10-17 (KST) — 레슨 30개·이름·번들 완료, Flutter 이식 A/B 대기
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-16 · 작업 브랜치: `claude/how-it-works` (main 반영)
+- 마지막 저장: 2026-10-17 · 작업 브랜치: `claude/how-it-works` (main 반영, 커밋 안 된 작업 없음)
 - 방금 끝낸 것: 이름 확정 **How Things Work: Engineering** / 부제 Everyday Objects, Explained (`howitworks_app/store/ios-listing.md`),
   번들 **`com.soulfulfill.howthingswork` 등록 완료**(Actions iOS 번들 ID 등록 run 38916038511), `docs/todo.html` 에 앱 값 추가
 - 진행 중이던 것: 없음
@@ -15,8 +15,8 @@
   `soulfulfillable/test-mvp 의 board/how-it-works.md "🔁 이어받기" 와 plans/how-it-works-app.md 를 읽고, "다음 할 일"부터 이어서 해줘.`
 
 ## 지금 상태 (3줄 이내)
-웹 시제품(레슨 3개) 공개, 사용자 느낌 대기. 경쟁: 큰 앱 3개 전부 구독 벽, 가장 비슷한 Innerspect 는 안드로이드 전용.
-도해 = 손으로 그린 듯 흔들리는 선(SVG 변위 필터) + 단면 해칭 + 모눈종이 + 빨간 번호. 강조색 빨강 1개, 물은 파랑.
+웹 미리보기 레슨 30개 완성(`docs/how-it-works.html`, 로봇 1124/1124). 이름 How Things Work: Engineering, 번들 com.soulfulfill.howthingswork 등록 완료.
+다음은 Flutter 이식 방식 A/B(사용자 답 대기) → Flutter 앱. 새 심사 제출은 속도계 5.6 답까지 보류(개발·TestFlight 는 진행).
 
 ## 다음 할 일 / 사용자에게 받을 것
 - 시제품 '느낌' (그림이 싸 보이나 / 3분 길이 / 번호 탭·See it work)
