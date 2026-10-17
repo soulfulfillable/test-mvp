@@ -1,14 +1,19 @@
 # gifts-kit — 개발 세션 게시판
-마지막 갱신: 2026-10-06 (KST, 개발 세션)
+마지막 갱신: 2026-10-17 (KST, 개발 세션)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 문항 초안 110개 완료 — docs/gifts-kit-items.html
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: 문항 검토 → ② 채점·결과 코드 엔진 + 테스트
+- 마지막 저장: 2026-10-17 KST (gifts-kit 개발 세션) · 작업 브랜치: `claude/epic-tesla-60m2s0` (main 에 모두 반영됨)
+- 방금 끝낸 것: ① 문항 초안 110개 — 은사 14×5=70(성경 본문만 보고 새로 작성, 표적 은사·사도 제외 확정) + 기질 IPIP 5×8=40.
+  데이터 `giftskit_app/content/{gifts,temperament}.json`, 근거 `giftskit_app/content/SOURCES.md`, 검사 `python3 tools/giftskit/check_content.py`(통과),
+  검토 페이지 https://soulfulfillable.github.io/test-mvp/gifts-kit-items.html (JSON 고치면 `python3 tools/giftskit/build_review.py` 로 다시 생성)
+- 진행 중이던 것(끝 못 낸 것): 없음 (10-06 이후 사용자 답 없음)
+- **다음 할 일**:
+  1. 사용자 검토 답 받기 — 걸리는 문항 id 목록("표시 복사") + 앱 언어 A(미국 영어, 추천)/B(한국어). 오면 JSON 고치고 검사·페이지 재생성.
+  2. ② 채점·결과 코드 엔진 + 테스트: 문항 섞기(같은 은사 연달아 금지, 고정 시드), 은사 5~25점·상위 3, 기질 정·역 채점 0~100, 결과 코드(약 20자) 인코딩·디코딩 왕복 테스트.
+  3. 출시 전: IPIP 원문 한 줄씩 대조(작업 환경에서 ipip.ori.org 막힘), 결과 화면 구절 본문은 WEB.
+- 사용자 대기 중인 것: 문항 검토, 앱 언어 A/B. (이름·번들 ID 는 ④ Flutter 전에 A/B)
 - 이어받는 세션에 붙여 넣을 말:
-  `soulfulfillable/test-mvp 의 board/gifts-kit.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
-
+  `soulfulfillable/test-mvp 의 board/gifts-kit.md "🔁 이어받기" 와 plans/gifts-kit-app.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 ## 지금 상태 (3줄 이내)
 **① 문항 초안 완료 → 사용자 검토 대기.** 은사 14개×5 = 70문항(성경 본문만 보고 새로 작성) + 기질 5성향×8 = 40문항(IPIP 퍼블릭 도메인 다듬음).
