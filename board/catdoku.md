@@ -1,17 +1,18 @@
 # Kitty Queens: Cat Sudoku (Catdoku 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-03 (KST) — v1.0 심사 제출
+마지막 갱신: 2026-10-17 (KST) — 1.1.0(빌드 37) 재제출
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: Kitty Queens v1.0(빌드 16) 제출 → 2.1 정보 요청, 답장 초안 catdoku_app/store/review-reply.md
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: 녹화 첨부해 답장 → 심사. 승인되면 AdMob 스토어 링크. (Meowdoku! 미국 1위권 — 가장 중요)
+- 마지막 저장: 2026-10-17 (개발 세션)
+- 작업 브랜치: `claude/determined-feynman-sjoyxp` · 방금 끝낸 것: 빌드 16·23 이 ITMS-90035(Invalid Signature, 옛 Release iOS 가 인증서 revoke)로 Invalid Binary → 버전 번호를 1.1.0 으로 바꾸고 Release iOS 재실행 → **빌드 37(1.1.0, 조용한 막힘 안내 포함)** 을 연결해 재제출 안내(앱 + Unlock All Levels 함께).
+- 진행 중이던 것: 심사 대기 (사용자가 37 선택·Submit 했는지 ASC 에서 확인 필요)
+- **다음 할 일**: ① ASC 에서 1.1.0(37) 이 Waiting for Review 인지 확인, 반려면 스크린샷 받기 ② 승인되면 AdMob 앱에 스토어 링크 연결 ③ v1.1 뉴스레터 아이디어는 출시 뒤.
+- 참고: Glance FX 도 같은 ITMS-90035 — 이 세션이 Release iOS(currency) 를 한 번 돌려 둠(1.0.0, 빌드 38 이상). 제출은 Glance FX 세션 몫.
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/catdoku.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 
 ## 지금 상태 (3줄 이내)
-**2026-10-03 v1.0(빌드 16) 심사 제출** — 148개국(EU 27 제외), 무료, 4+, Games/Puzzle·Board. 결제 상품 Unlock All Levels($1.99).
+**2026-10-12 1.1.0(빌드 37) 재제출** (빌드 16·23 은 ITMS-90035 로 무효) · 처음 제출 10-03 — 148개국(EU 27 제외), 무료, 4+, Games/Puzzle·Board. 결제 상품 Unlock All Levels($1.99).
 등록 정보·스크린샷 5장은 Actions 로 입력(`catdoku_app/store/`). 유료 앱 계약·W-9·은행 Active.
 다음: 심사 결과 → 출시 후 AdMob 앱에 스토어 링크 연결.
 
