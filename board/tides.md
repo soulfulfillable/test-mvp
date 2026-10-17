@@ -1,18 +1,24 @@
 # 물때 시간 (tides 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-03 06:50 (KST)
+마지막 갱신: 2026-10-17 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-13 저녁 (tides 개발 세션)
-- 작업 브랜치: `claude/wonderful-mccarthy-g6wrjj` · 방금 끝낸 것: 2.1 답장(10-06 사용자 보냄), 10-12 재제출 → 자동 분석 "광고 있는데 Age Rating Advertising=No" → 사용자가 제출을 **Removed**(정상 — 버전은 Prepare for Submission 으로 돌아감, 빌드 31·등록 정보 그대로)
-- 진행 중이던 것: 없음
-- **다음 할 일**: ✅ 사용자가 Age Rating Advertising=Yes + 재제출 완료(10-13). 심사 대기(보통 24~48시간) → 승인되면 AdMob 에 스토어 링크 연결(보상형 영상 재고) → 리뷰·수익 확인. 2.1 이 또 오면 `docs/tides-review.html` 재사용
+- 마지막 저장: 2026-10-17 (tides 개발 세션)
+- 작업 브랜치: `claude/wonderful-mccarthy-g6wrjj` (main 과 같음, 미커밋 작업 없음)
+- 방금 끝낸 것: **1.0(빌드 31) 재제출 완료 10-13** — 2.1 정보 요청 답장(녹화+글, 10-06) + 연령 등급 Advertising=Yes. 빌드 31 은 고쳐진 서명(ITMS-90035 수정 후)
+- 진행 중이던 것: 없음. **심사 결과는 이 세션이 아직 모름** (사용자가 메일·ASC 캡처를 보내면 앎)
+- **다음 할 일**:
+  1. 사용자에게 심사 결과 확인 (ASC → Glance Tides → App Review 상태)
+  2. **반려면**: 메시지 원문 받아 고치기 — 2.1 이면 `docs/tides-review.html` 답장 재사용, 메타데이터면 `tides_app/store/ios-metadata.json` 고쳐 `App Store 등록 정보 채우기`(tides, build 31). 코드 수정이 필요하면 `Release iOS`(tides) 새 빌드 → 연결 → 재제출 (`Release iOS` 는 대기 줄 1칸 — 누르기 전 pending 확인)
+  3. **승인되면**: 출시(Manual 이면 Release 버튼) → AdMob(soulfulfillable 계정) → Glance Tides 앱 → **App Store 연결**(보상형 영상 재고가 생김) → 결제 정보 확인
+  4. 출시 1~2주 뒤: 리뷰·평점·AdMob 수익(배너 vs 30일 표 보상형) 확인 → 1.0.1 후보(관측소 지도, 위젯, 서핑·낚시 표시 등)는 사용자 A/B. 디자인은 손대지 않음(DESIGN.md 는 새 앱만)
+- 사용자 대기: 심사 결과 메일
 - 이어받는 세션에 붙여 넣을 말:
-  `soulfulfillable/test-mvp 의 board/tides.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+  `soulfulfillable/test-mvp 의 board/tides.md "🔁 이어받기" 와 plans/tides-app.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 ## 지금 상태 (3줄 이내)
-Flutter 1차 완성(`tides_app/flutter/`) + **보상형 30일 물때표**(영상 1편 → 24시간). 테스트 34개 통과(엔진 21 + 로봇 13), 웹 클릭 점검 34/34 + 스크린샷 11장.
-웹 미리보기 https://soulfulfillable.github.io/test-mvp/tides-app/index.html — 폰에서 NOAA 실제 예보. 광고는 테스트 ID(웹은 가짜 광고, `?ads=slow|none|early`).
-이름 `Glance Tides: Tide Chart`·번들 `com.soulfulfill.tides` **Apple 등록 완료**, 아이콘·스토어 문구 초안 완료. ASC 앱 레코드·AdMob(사용자) 대기 → TestFlight.
+**Glance Tides: Tide Chart 1.0(빌드 31) 심사 중** (10-13 재제출). 번들 `com.soulfulfill.tides`, 실제 AdMob ID(배너·보상형 30일 표).
+앱: 내 위치→가장 가까운 NOAA 관측소, 오늘 곡선·Rising/Falling, 7일 표, 일출일몰·달, 오프라인 캐시, 30일 표(영상 보고 24시간). 테스트 34개 + 웹 점검 34/34.
+웹 미리보기 https://soulfulfillable.github.io/test-mvp/tides-app/index.html · 심사 답장 페이지 https://soulfulfillable.github.io/test-mvp/tides-review.html
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ [사용자] ASC 앱 레코드 생성 (10-03), AdMob 앱 + 배너·보상형 단위 → ✅ [세션] 실제 ID 반영 (iOS. 안드로이드는 테스트 ID 유지).

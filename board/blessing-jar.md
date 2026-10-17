@@ -1,14 +1,18 @@
 # Blessing Jar (가족 축복 항아리) — 개발 세션 게시판
-마지막 갱신: 2026-10-06 (KST)
+마지막 갱신: 2026-10-17 14:10 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 웹 시제품 완료 docs/blessing-jar.html, 로봇 99/99
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자 '느낌' → Flutter 개발
+- 마지막 저장: 2026-10-17 14:10 KST · 작업 브랜치: `claude/vibrant-franklin-hlhe9t` (main 까지 반영됨)
+- 방금 끝낸 것: ①경쟁 확인 + ②웹 시제품 `docs/blessing-jar.html`(넣기·흔들기·꺼내기·보관함·가족), 테스트 로봇 `blessingjar_app/qa/robot.js` 99/99, 스크린샷 `blessingjar_app/qa/shots/`
+- 진행 중이던 것(끝 못 낸 것): 없음 — 코드는 다 커밋됨
+- **다음 할 일**:
+  1. 사용자 '느낌' 받기 (흔들기 감도·쪽지 떨어지는 맛·항아리 그림) → 지목된 것만 고친다
+  2. 이름·번들 ID A/B 질문 (스토어 검색 먼저 — "Blessing Jar"·"Gratitude Jar" 동명 확인)
+  3. `blessingjar_app/flutter/` 생성(CupertinoApp, `version: 1.0.0+1`, `sdk: ^3.13.2`) → 테스트 로봇 먼저 → 웹 시제품 그대로 옮기기 + 봉인(정한 요일에만 열림)·질문 100개·보관함 이미지 저장·보관함 하단 배너 1곳
+- 이미 확정된 것: **수익 = 결제 없음·완전 무료, 배너는 보관함 화면 하단 1곳만** (사용자 10-06, `plans/blessing-jar-app.md`). 쓰기·흔들기·읽기 화면엔 광고 없음, 전면·보상형 없음
+- 사용자 대기 중인 것: 시제품 느낌 (https://soulfulfillable.github.io/test-mvp/blessing-jar.html)
 - 이어받는 세션에 붙여 넣을 말:
-  `soulfulfillable/test-mvp 의 board/blessing-jar.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
-
+  `soulfulfillable/test-mvp 의 board/blessing-jar.md "🔁 이어받기" 와 plans/blessing-jar-app.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md·DESIGN.md 규칙대로.`
 
 ## 지금 상태 (3줄 이내)
 1단계 웹 시제품 완료: https://soulfulfillable.github.io/test-mvp/blessing-jar.html (흔들기·쪽지 물리). 로봇 99/99.
@@ -17,7 +21,7 @@
 
 ## 다음 할 일 / 사용자에게 받을 것
 - [사용자] 시제품 폰으로 해 보고 느낌 (흔들기 감도, 쪽지 떨어지는 맛, 항아리 그림).
-- [사용자, 나중] 수익 A(1회 구매 $2.99, 광고 없음 — 추천) / B(무료 + 보관함 배너). 이름·번들 ID.
+- [사용자, 나중] 이름·번들 ID. (수익은 확정: 완전 무료 + 보관함 배너 1곳)
 - [세션] 느낌 반영 → Flutter 테스트 로봇 → Flutter(CupertinoApp) → TestFlight.
 - [세션] 정한 요일에만 열리는 '봉인' (지금 시제품은 언제든 열림), 오늘의 질문 100개, 보관함 이미지 저장.
 
