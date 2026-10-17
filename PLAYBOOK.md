@@ -68,6 +68,8 @@
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|
+| 2026-10-17 | 앰비언트 | 한 세션을 며칠 이어 쓰며 렌더 대기·워크플로 확인을 반복 → 대화가 길어져 $27.57, 개인 한도에 걸려 6일 사용 불가 | 단계가 끝나면 게시판 "🔁 이어받기"를 갱신하고 **새 세션으로**. 긴 작업은 send_later 로 끝난 뒤 한 번만 확인 |
+| 2026-10-06 | 앰비언트 | OAuth 앱 Publish 버튼이 회색 — 홈페이지·개인정보처리방침 URL 필수 | Pages 에 `docs/<이름>.html`·`<이름>-privacy.html` 만들고 Branding 에 넣기 + 승인된 도메인 `soulfulfillable.github.io` |
 | 2026-10-16 | How It Works | `iOS 번들 ID 등록` 이 Apple API 시간 초과로 실패했는데 ✅ 성공 표시(`… | tee` 가 파이썬 종료 코드를 가림) | 워크플로의 `| tee` 앞에 `set -o pipefail`(ios-register 수정함). Actions 결과는 초록 체크가 아니라 **로그의 결과 줄**로 확인 |
 | 2026-10-16 | How It Works | 콘텐츠 27개(SVG 도해+애니메이션+사실)를 한 세션이 순서대로 쓰면 몇 시간·크레딧 위험. 또 App Store 자동완성(검색 인기) 엔드포인트는 이제 빈 값 | 단위별 파일 + 작성 가이드 + 내용 규칙 로봇을 먼저 만들고 작업자 5명 병렬(`howitworks_app/lessons/README.md`). 작업자는 자기 파일만, 엔진 버그는 보고만. 검색량은 못 얻으니 iTunes Search API 로 '경쟁 밀도·이름 충돌'을 본다(`tools/howitworks/aso_fetch.py`) |
 | 2026-10-15 | How It Works | 코드로 그린 SVG 단면도에서 해칭·색 채움이 전부 사라짐 — CSS `.ink{fill:none}` 이 요소의 `fill=` 속성을 이김(속성 우선순위가 가장 낮다). 또 App Store·trustpilot 은 이 환경에서 WebFetch/curl 모두 막힘 | 스타일 클래스엔 `:not([fill])` 조건. 도해는 스크린샷을 꼭 직접 본다. 경쟁 조사는 WebSearch 요약 + 제3자 집계(apppricinglab 등)로, 정확한 값은 Actions |

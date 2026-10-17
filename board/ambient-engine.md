@@ -1,19 +1,26 @@
 # 앰비언트 엔진 (유튜브 채널 + 신앙 앱 음악 기능) — 세션 게시판
-마지막 갱신: 2026-10-05 (개발 세션)
+마지막 갱신: 2026-10-17 (개발 세션)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 90분 비+피아노 영상 완성(Releases ambient-rain-1042-90m), 채널 Peblit 확인
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: 채널 A/B(Peblit 추천) → 첫 업로드(제목·설명·썸네일)
+- 마지막 저장: 2026-10-17 (개발 세션)
+- 작업 브랜치: `claude/determined-galileo-0p6126` (main 과 같음) · 방금 끝낸 것: YouTube API 자동화 도구·워크플로·안내 페이지, 구글 OAuth 앱 게시(사용자가 Publish 완료), Playground 에서 refresh token 받음
+- 진행 중이던 것: **사용자가 GitHub Secrets 3개 넣는 중** (`YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`). 아직 "넣었어" 못 받음
+- ⚠️ 사용자 캡처에 **예전 Client secret(GOCSPX-mPe… 로 시작)과 refresh token 이 찍혀 대화에 남음** → 새 secret 을 만들어 `YT_CLIENT_SECRET` 에 넣고 예전 것은 Disable·Delete 하도록 부탁해 둠. 이어받는 세션은 이 교체가 됐는지 먼저 확인할 것(값을 대화에 다시 적지 않는다)
+- **다음 할 일**:
+  1. 사용자 "넣었어" → Actions `YouTube Peblit` action=whoami (ref main) 로 연결 확인
+  2. action=setup-channel → 채널 설명·키워드·배너 교체 + 예전 쇼츠 비공개 (삭제 아님)
+  3. action=upload, video=`videos-rain-1042-90m.json` → Releases `ambient-rain-1042-90m` 영상 업로드·썸네일. 미심사 API 라 private 고정 → 사용자가 Studio 에서 Public
+  4. 사용자에게 한 줄 부탁: 채널 Links 의 blogspot 링크 삭제(API 로 못 함)
+  5. 그 뒤: 카페 90분 렌더(`render-ambient.yml` mood=cafe, photo=`docs/ambient/photo-cafe.jpg`), 12주 데이터 보기
+- 실패 시 볼 곳: 토큰 오류면 동의 화면이 Testing 으로 돌아갔는지(7일 만료)·secret 교체 후 값이 맞는지. 썸네일 실패는 계정 전화 인증(youtube.com/verify)
+- 비용 메모: 이 세션은 대화가 너무 길어져 $27.57 쓰고 개인 한도에 걸림(2026-10-06~12 사용 불가). **단계마다 새 세션으로 이어받고, 긴 렌더는 기다리지 말고 끝난 뒤 확인만**
 - 이어받는 세션에 붙여 넣을 말:
-  `soulfulfillable/test-mvp 의 board/ambient-engine.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
-
+  `soulfulfillable/test-mvp 의 board/ambient-engine.md "🔁 이어받기" 와 plans/ambient-youtube.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. 시크릿 3개 넣었어.`
 
 ## 지금 상태 (3줄 이내)
-**② 완료: 90분 비+피아노 영상** — Releases `ambient-rain-1042-90m` (5400초, 989MB, 1080p, -18.1 LUFS, Actions 렌더 3시간 43분).
-채널 Peblit(@peblit, soulfulfillable 계정) 확인. 카페 유지, 모닥불 보류.
-다음: 채널 A/B(새 앰비언트 채널 vs Peblit) → ③ 첫 업로드(제목·설명·썸네일 준비).
+90분 비+피아노 영상 완성(Releases `ambient-rain-1042-90m`). 채널은 Peblit(@peblit) 을 앰비언트로 전환하기로 결정.
+YouTube API 자동화(`tools/ambient/youtube/yt.py`, Actions `YouTube Peblit`) 준비 완료, 구글 OAuth 앱 게시 완료.
+남은 것: 사용자 GitHub Secrets 3개 입력 → 채널 정리 → 첫 업로드.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - [사용자] https://soulfulfillable.github.io/test-mvp/ambient-samples.html 새 영상 3편(사진+효과) 좋다/별로.
@@ -26,6 +33,8 @@
 ## 사용자 피드백 기록 (최신이 위)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-17 | "이거하니 잘못해놧다가 힌 이주 못썼는데 뭐한거니" (/usage $27.57) | 설정 변경은 없고, 긴 대화가 매번 다시 읽혀 비용이 쌓인 것이라 설명. 단계마다 새 세션 권장 → 이어받기 갱신 |
+| 10-06 | "이거 이렇게 주면되니" / "Access token 여기 옆에 있는걸 주면되는거야?" (Playground 캡처, 값 노출) | Access token 아님, Refresh token·Client ID·새 Client secret 을 GitHub Secrets 에 직접. 노출된 secret 교체 부탁 |
 | 10-06 | (캡처) Publish 툴팁: 'app name, support email, homepage url, privacy policy url are required' | `docs/peblit.html`(홈)·`docs/peblit-privacy.html`(개인정보) 만들고 Branding 에 넣도록 안내 |
 | 10-06 | "publish app안되는거같은데" (Audience 화면 캡처: Publish app 회색, 'complete your configuration on the Branding page') | Branding 에 앱 이름·지원 이메일·개발자 연락처 이메일 저장 후 게시하도록 안내 + 안내 페이지에 단계 추가 |
 | 10-06 | "너가직접해주면 안되냐 … 이거 그냥다" → (A/B) "A. API 연결 (추천)" | 로그인 대행 불가 → YouTube Data API 연결로. `tools/ambient/youtube/yt.py`(표준 라이브러리, --dry 검증), 워크플로 `YouTube Peblit`(whoami/setup-channel/upload), 안내 `docs/youtube-setup.html` |
@@ -46,6 +55,7 @@
 - **음악이 좋은지 스스로 판단하기 어려워한다** ("이게 좋은건지 나는 몰라서") → 그림과 함께 보여 주고, 비교할 기준(참고 채널)을 같이 준다.
 - **코드로 그린 도형 그림(클립아트 느낌)은 "최악"** → 영상 그림은 사진·실사 수준이 기본.
 - 어둡고 무거운 소리는 싫어한다 → 장조·높은 음역 기본.
+- **열쇠·토큰을 캡처째 보내기 쉽다** → 값 입력이 필요한 안내엔 처음부터 "채팅·캡처로 보내지 말고 어디에 넣는지"를 표로 적는다.
 - **보고가 길면 뭘 하라는 건지 못 알아듣는다** ("뭐 어떻게 확인하라고"). 폰에서 읽는다 → 지시는 번호 3~4줄, 답은 한 단어로 받게.
 - 유튜브 채널이 본래 목적(앱 아님). 기대치는 낮게, 정책 거절 대비(시드 공개·영상마다 다르게)를 처음부터.
 
