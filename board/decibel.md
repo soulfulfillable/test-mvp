@@ -1,11 +1,15 @@
 # Glance dB: Decibel Meter (소음 측정기, decibel 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-13 (KST)
+마지막 갱신: 2026-10-17 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-13 (decibel 개발 세션)
-- 작업 브랜치: `claude/dreamy-mayer-uw3eax` · 방금 끝낸 것: 1.0(빌드 28) 2.1 정보 요청, 답장 페이지 docs/decibel-review.html
-- 진행 중이던 것: 없음 — 빌드 40(run #40, 고쳐진 서명) 업로드·처리 완료, `App Store 등록 정보 채우기`(run 38328992428)로 1.0 에 **빌드 40 연결**·스크린샷(6.9")·메모 ✓
-- **다음 할 일**: 사용자: Apple 2.1 메시지 **Reply to App Review**(`docs/decibel-review.html` 글 + 10-05 36초 녹화 재사용) → **Send** → 버전 화면 **Update Review → Submit**. 그 뒤 심사 결과 대기 → 승인되면 AdMob 스토어 링크, 보정값 NIOSH 비교 → 1.0.1
+- 마지막 저장: 2026-10-17 (decibel 개발 세션)
+- 작업 브랜치: `claude/dreamy-mayer-uw3eax` · 방금 끝낸 것: 빌드 28 ITMS-90035(서명) → 고쳐진 Release iOS 로 **빌드 40** 업로드(run #40)·TestFlight 반영(10-13 "1.0.0 (40) is ready to test" 메일)·1.0 에 빌드 40 연결(`App Store 등록 정보 채우기` run 38328992428: 빌드·스크린샷·메모 ✓), 답장 페이지 글 빌드 번호 40 으로 갱신
+- 진행 중이던 것: 없음. **사용자 대기**: 2.1 답장·재제출을 했는지 아직 확인 못 함(10-13 이후 캡처 없음)
+- **다음 할 일**:
+  1. 사용자에게 ASC 상태 캡처 받기 → 아직이면: Apple 2.1 메시지 **Reply to App Review**(`docs/decibel-review.html` 복사 + 10-05 36초 녹화 재사용) → **Send** → 버전 화면(Action → Edit)에서 Build **40** 확인 → 맨 위 **Update Review → Submit** (Resubmit 버튼은 답장 후에도 회색).
+  2. 심사 대기(보통 1~2일). 또 2.1/다른 반려면 사유 보고 대응, 메모·영상은 그대로 재사용.
+  3. 승인되면: AdMob 앱에 App Store 링크 연결 안내, `PRODUCT.md`·`plans/decibel-app.md`·이 게시판에 출시 기록.
+  4. 1.0.1 준비: 시끄러운 곳에서 NIOSH SLM 과 같은 소리 비교 → 기본 보정값(+94) 조정, 같은 때 리뷰·문의 확인.
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/decibel.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
