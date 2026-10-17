@@ -1,11 +1,21 @@
 # GPS 속도계 (speedometer 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-12 (KST)
+마지막 갱신: 2026-10-17 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 빌드 32 로 교체·심사 메모 완료, 2.1 답장 페이지 있음
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: Add for Review → Submit, 2.1 오면 녹화+답장
+- 마지막 저장: 2026-10-17 (speedometer 개발 세션)
+- 작업 브랜치: `claude/cool-thompson-jlo1p0` (main 과 같음) · 방금 끝낸 것: 10-08 **Guideline 5.6** 거절에 사실 설명 답장 작성(`docs/speedometer-review.html` 맨 위, 원문·판단 `speedometer_app/store/review-reply-5.6.md`),
+  공용 게시판 계정 위험 알림, **사용자 결정(10-16): 속도계 답이 올 때까지 다른 앱 새 심사 제출 보류**(`board/_shared.md`·`PRODUCT.md`)
+- 진행 중이던 것: 없음. **사용자 대기**: 5.6 답장(Reply)·Resubmit 을 했는지 아직 확인 못 함 (10-12 이후 캡처 없음)
+- **다음 할 일**:
+  1. 사용자에게 ASC 상태 캡처 받기 → 아직이면: 5.6 메시지 **Reply to App Review**(페이지 맨 위 "답장 글 복사" + 10-06 녹화 재첨부) → **Send** →
+     Resubmit 이 회색이면 1.0 버전 화면에서 Build **32** 확인 → 맨 위 **Update Review → Submit** (decibel 세션 노하우: 답장 후에도 Resubmit 은 회색일 수 있음).
+  2. Apple 답 기다림(보통 1~3일). 결과별로:
+     - **승인** → `board/_shared.md` 에 "제출 재개" 적어 다른 앱 보류 해제 → AdMob 앱(Glance Speed)에 App Store 링크 연결 안내 → `PRODUCT.md`·`plans/speedometer-app.md`·이 게시판에 출시 기록.
+     - **다시 5.6 이나 구체적 지적** → 계획 B: ① 정지 중 "Start moving to see your speed" 안내(정지·실내에서도 기능이 왜 안 변하는지 화면에 보이게)
+       ② Info.plist 의 안 쓰는 `NSLocationAlwaysAndWhenInUseUsageDescription` 제거(업로드 메일 ITMS-90683 확인) ③ 웹 전용 데모·`?shots=1` 코드를 `lib/main_web.dart` 별도 진입점으로
+       → 테스트 37개 + 웹 점검 31단계 → `Release iOS`(speedometer) → `App Store 등록 정보 채우기`(새 빌드) → 답장 + App Review Board 이의 제기 문안. 계정 위험이 커지면 사용자와 A/B.
+     - **2.1 등 정보 요청** → `store/review-reply.md`·녹화 재사용.
+  3. 출시 뒤: 리뷰·평점·AdMob 수익 확인 → 1.1 후보(잠금화면 Live Activity·백그라운드 기록, 기획 파트너 확인 필요), `CLAUDE.md` ✨ 품질 목표 기준으로 '와 포인트'(HUD·정직한 GPS) 다듬기.
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/speedometer.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
