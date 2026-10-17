@@ -23,16 +23,20 @@ details{margin-top:8px;font-size:14px;color:var(--sub)}
 details pre{white-space:pre-wrap;font:13px/1.4 ui-monospace,Menlo,monospace;color:var(--ink);margin:8px 0 0}
 button{margin-top:10px;width:100%;height:44px;border:0;border-radius:10px;background:var(--acc);color:#fff;font:600 16px -apple-system,sans-serif}
 button.done{opacity:.6}
+.btns{display:flex;gap:8px}.btns button{flex:1}button.ghost{background:transparent;color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc);flex:0 0 34%}
+.sub{margin:2px 0 0;font-size:13px;color:var(--sub)}
 .err{color:var(--warn);font-size:14px}
 </style>
 </head>
 <body>
 <h1>이어받기</h1>
-<p class="lead">크레딧이 막힌 세션을 다른 계정에서 이어 갈 때. 앱을 골라 <b>문장 복사</b> → 새 세션(저장소 soulfulfillable/test-mvp)에 붙여 넣기. 각 세션이 단계마다 갱신해요.</p>
+<p class="lead">다른 계정에서 이어 갈 때. 위에서부터 순서대로: 새 세션(저장소 test-mvp) 열기 → <b>문장 복사</b> 붙여 넣기 → 세션 이름을 <b>이름 복사</b>로 바꾸고 핀. 그러면 왼쪽 목록이 지금과 똑같이 돼요. 각 세션이 단계마다 갱신해요.</p>
 <div id="list"><p class="lead">불러오는 중…</p></div>
 <script>
 const RAW='https://raw.githubusercontent.com/soulfulfillable/test-mvp/main/board/';
-const BOARDS=['_planning','catdoku','currency','decibel','mortgage','speedometer','tides','fuel-log','solunar','path-puzzle','bible-reading','verse-weave','gifts-kit','blessing-jar','ambient-engine','how-it-works'];
+// 세션 목록 = 사용자의 핀 순서·이름 그대로 (ops/sessions.md 와 같게 유지). 새 계정에서 이 순서대로 세션을 만들고 '이름 복사'로 제목을 붙인다.
+const SESSIONS=[['_planning','0. Head'],['currency','1. Currency'],['catdoku','2. Dok'],['mortgage','3. Calculate'],['decibel','4. Decibel'],['tides','5. Tid'],['speedometer','6. Speed'],['fuel-log','7. MPG Log'],['solunar','8. Solunar'],['ambient-engine','9. Music'],['bible-reading','10. Tolle'],['how-it-works','How It Works 앱 개발'],['path-puzzle','Kitty Path'],['blessing-jar','Blessing Jar'],['gifts-kit','Gifts Kit'],['verse-weave','Verse Weave']];
+const BOARDS=SESSIONS.map(x=>x[0]); const NAME=Object.fromEntries(SESSIONS);
 function pick(sec,label){const m=sec.match(new RegExp('^- \\**'+label+'\\**[^:：]*[:：]\\s*(.+)$','m'));return m?m[1].replace(/\*\*/g,'').trim():''}
 async function load(b){
   try{
@@ -51,22 +55,22 @@ async function load(b){
 }
 (async()=>{
   const items=(await Promise.all(BOARDS.map(load))).filter(Boolean);
-  items.sort((a,c)=>(c.when||'').localeCompare(a.when||''));
   const L=document.getElementById('list'); L.innerHTML='';
   for(const it of items){
     const d=document.createElement('div'); d.className='card';
-    if(it.err){d.innerHTML=`<div class="name">${it.title}</div><p class="err">불러오지 못했어요</p>`;L.append(d);continue}
-    d.innerHTML=`<div class="top"><span class="name"></span><span class="when"></span></div>
+    if(it.err){d.innerHTML=`<div class="name">${NAME[it.b]||it.title}</div><p class="err">불러오지 못했어요</p>`;L.append(d);continue}
+    d.innerHTML=`<div class="top"><span class="name"></span><span class="when"></span></div><p class="sub"></p>
       <p class="next"><b>다음</b> <span class="n"></span></p>${it.wait?'<p class="wait"></p>':''}
-      <details><summary>자세히</summary><pre></pre></details><button>문장 복사</button>`;
-    d.querySelector('.name').textContent=it.title;
+      <details><summary>자세히</summary><pre></pre></details><div class="btns"><button class="ghost">이름 복사</button><button class="main">문장 복사</button></div>`;
+    d.querySelector('.name').textContent=NAME[it.b]||it.title; d.querySelector('.sub').textContent=it.title;
     d.querySelector('.when').textContent=it.when;
     d.querySelector('.n').textContent=it.next||'—';
     if(it.wait) d.querySelector('.wait').textContent='사용자 대기: '+it.wait;
     d.querySelector('pre').textContent=it.sec.replace(/^## .*\n/,'');
-    const btn=d.querySelector('button');
-    btn.onclick=()=>{const done=()=>{btn.textContent='복사됨';btn.classList.add('done');setTimeout(()=>{btn.textContent='문장 복사';btn.classList.remove('done')},1400)};
-      (navigator.clipboard?navigator.clipboard.writeText(it.prompt):Promise.reject()).then(done,done)};
+    const copy=(btn,text)=>{const o=btn.textContent;const done=()=>{btn.textContent='복사됨';btn.classList.add('done');setTimeout(()=>{btn.textContent=o;btn.classList.remove('done')},1400)};
+      (navigator.clipboard?navigator.clipboard.writeText(text):Promise.reject()).then(done,done)};
+    d.querySelector('.main').onclick=e=>copy(e.target,it.prompt);
+    d.querySelector('.ghost').onclick=e=>copy(e.target,NAME[it.b]||it.title);
     L.append(d);
   }
 })();

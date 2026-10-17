@@ -20,6 +20,7 @@ GitHub(`soulfulfillable`)만 살아 있으면 새 Claude 계정에서 그대로 
 1. 개인 이메일로 Claude 가입 → claude.ai/code 에서 GitHub `soulfulfillable` 연결.
 2. `soulfulfillable/test-mvp` 로 새 세션을 열고 이렇게 말한다:
    **"ops/README.md 보고 복구해줘"**
+   나머지 앱 세션은 **`ops/sessions.md`**(핀 순서·이름 목록) 순서대로 — 또는 handoff.html 에서 '문장 복사'·'이름 복사'.
 3. 그 세션이 할 일: `ops/routines/` 의 루틴을 파일에 적힌 일정·프롬프트 그대로 다시 만들고,
    `PRODUCT.md` 를 읽어 기획 파트너로 이어서 일한다.
 
