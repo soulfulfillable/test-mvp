@@ -1,14 +1,20 @@
 # Glance: Mortgage Calculator (대출 계산기, mortgage 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-03 06:20 (KST)
+마지막 갱신: 2026-10-17 14:10 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: 1.0 서명 반려 → 빌드 30(1.1) 업로드·등록 정보 완료
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: Resubmit 버튼. 2.1 오면 답장 초안 사용
+- 마지막 저장: 2026-10-17 14:10 (KST) · 작업 브랜치: `claude/mortgage-calculator-app-o2iaqd` (main 과 같음, 앱 코드는 전부 main 에 있음)
+- 방금 끝낸 것: 1.1(빌드 30) 심사 결과 = **Guideline 2.1 Information Needed**(새 계정 정보 요청). 답장 글을 1.1(주·카운티 데이터 출처) 기준으로 고쳐 사용자에게 줌 → `mortgage_app/store/review/2026-10-05-reply.md`
+- 진행 중이던 것: 없음 (코드 작업 없음 — 사용자 행동 대기)
+- **사용자 대기**: ① 아이폰 화면 녹화(앱 실행부터: 집값 → Taxes 펼쳐 State·County → +$200 → Amortization schedule → Auto·Personal) ② ASC → App Review → **Reply to App Review** 에 답장 글 붙여넣기 + 녹화 첨부 → Send ③ 버전 1.1 화면 **App Review Information → Notes** 에 같은 글 → Save → **Resubmit to App Review**
+- **다음 할 일 (순서대로, 미리 예상 포함)**:
+  1. 사용자가 막히면 ASC 화면 캡처 보고 클릭 위치 안내 (반려 메시지는 Distribution → App Review → 해당 제출 → 아래 Messages)
+  2. 심사 결과 대기 (보통 1~2일). 또 반려되면 사유 캡처 받아 대응 — 4.3(포화 분야)·5.1.1(ix)(금융) 가능성 대비: "대출 안 함·계산기만·리드폼 없음" 근거는 답장 6항에 있음
+  3. **승인되면**: ① AdMob → 앱 Glance Mortgage → App settings → **App Store 링크 연결**(앱 ID 6818760811) ② `board/mortgage.md`·`PRODUCT.md` 포트폴리오에 '출시' 기록 ③ 스토어 스크린샷 v2(주·카운티 화면 포함, `test/store_shots_test.dart` + `store/screenshots/make.js`)로 교체 → 다음 버전 때 `App Store 등록 정보 채우기`
+  4. 출시 1~2주 뒤: App Analytics 검색어 확인 → 키워드 칸 조정, 리뷰·광고 수익 확인 (`mortgage_app/store/ios-listing.md`)
+  5. 후보(사용자 결정 필요): 상환표 PDF 내보내기(보상형 광고 자리), 안드로이드 출시(AdMob 안드로이드 앱 필요)
+- 주의: `Release iOS` 는 이제 배포 인증서를 지우지 않고 `ci-signing` 브랜치에 암호화 보관(인증서 `9BAX4TA7C3`) — developer.apple.com 에서 지우지 말 것. 빌드 번호 = run 번호.
 - 이어받는 세션에 붙여 넣을 말:
-  `soulfulfillable/test-mvp 의 board/mortgage.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
-
+  `soulfulfillable/test-mvp 의 board/mortgage.md "🔁 이어받기" 와 plans/mortgage-app.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 ## 지금 상태 (3줄 이내)
 1.1(빌드 30) 서명 문제는 해결 → 이번엔 **2.1 Information Needed**(새 계정 정보 요청, 환율·Kitty Queens 와 같음).
@@ -16,12 +22,9 @@
 웹 미리보기 https://soulfulfillable.github.io/test-mvp/mortgage-app/index.html
 
 ## 다음 할 일 / 사용자에게 받을 것
-- ✅ [사용자] 이름 A `Glance: Mortgage Calculator`, 번들 `com.soulfulfill.mortgage` → ✅ [세션] 번들 Apple 등록.
-- ✅ [사용자] ASC 앱 레코드 → ✅ [세션] `Release iOS` 빌드 18 업로드 (첫 시도는 Dart SDK 제약 때문에 pub get 실패 → 수정).
-- [사용자] TestFlight → 내부 테스팅 그룹에 빌드 18 추가·초대 → 폰 TestFlight 앱에서 설치 → '느낌' 피드백.
-- ✅ [사용자] AdMob 앱(Glance Mortgage, `~9582805496`)·배너 `…/4605810985` → ✅ [세션] 코드 반영.
-- [사용자] 웹 미리보기 써 보고 '느낌' 한마디.
-- [세션] ASC 레코드 생기면 → `Release iOS`(app=mortgage) → TestFlight → 스크린샷 1290×2796 → `App Store 등록 정보 채우기`(`mortgage_app/store/ios-metadata.json` 준비됨).
+- [사용자] 화면 녹화 + Reply to App Review(답장 붙여넣기·녹화 첨부) + Notes 에 같은 글 → Resubmit (자세한 순서는 위 🔁 이어받기)
+- [세션, 승인 후] AdMob 스토어 링크 연결 안내, 출시 기록, 스크린샷 v2(주·카운티)
+- 완료: 이름·번들 등록, ASC 레코드, AdMob 실제 ID, TestFlight(빌드 18→22→25→30), 서명 문제(ITMS-90035) 해결, 1.1 기능(주·카운티 세율·추가 상환 3종)
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
