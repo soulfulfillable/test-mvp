@@ -41,23 +41,23 @@
 
 | 앱 | 상태 | 다음 할 일 |
 |---|---|---|
-| **Glance FX: Currency Converter** (`currency_app/`) | 2026-10-02 v1.0(빌드 8) 심사 제출. v1.1 후보 = 빌드 9(TestFlight): 줄 꾹 눌러 끌기로 순서 변경, 긴 이름 줄 넘침 수정. 스크린샷 v2(금·BTC 첫 장) 준비됨 | 승인 대기 → AdMob 스토어 링크·결제 정보 → v1.1 제출(빌드 9 + 스크린샷 v2, `App Store 등록 정보 채우기`) → 리뷰·수익 확인 |
+| **Glance FX: Currency Converter** (`currency_app/`) | ITMS-90035 로 빌드 9·15 무효 → **빌드 39 연결해 재제출(10-12)**. 심사 결과 리포에 없음 | 사용자 ASC 상태 확인 → 승인 시 AdMob 스토어 링크 → v1.1(금·코인 스크린샷) |
 | **Cozy Coloring 정식판** (원형 `docs/coloring-book.html`) | **보류** (2026-10-02). 기획서 OK, 선화 수집·변환기·테스트 로봇까지 만듦 | 재개 시 `plans/coloring-app.md` 의 첫 메시지로 새 세션 |
-| **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | 2026-10-03 Flutter 1차 완성·테스트 31개·웹 미리보기 `docs/tides-app/`. 번들 `com.soulfulfill.tides` | 2026-10-05 v1.0(빌드 21) 심사 제출 → 승인 대기 → AdMob 스토어 링크 연결 → 리뷰·수익 확인 |
+| **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | **1.0(빌드 31) 재제출 10-13**(2.1 답장 + 연령 등급 Advertising=Yes). 결과 미확인 | 결과 확인 → 승인 시 AdMob 스토어 연결 |
 | **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-08 **Guideline 5.6 거절**("심사 중 숨긴 기능") — 빌드 32 에 숨긴 기능 없음 | 사실 설명 답장 + Resubmit(사용자) → 다시 거절되면 안내 문구·Always 문구 제거 새 빌드 + App Review Board |
 | **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 1.0(빌드 22) ITMS-90035 반려 → 1.1(빌드 30) 등록 정보 입력 완료, 재제출 대기 | 사용자 Resubmit → 승인 → AdMob 스토어 연결 |
 | **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-05 1.0(빌드 28) 제출 → 10-06 **2.1 정보 요청**(새 계정 정형) → 답장·재제출 중 (`docs/decibel-review.html`) | 승인 후 AdMob 스토어 링크. 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1 |
-| **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) | 2026-10-02 Flutter 1차 완성·테스트 로봇 17개 통과·웹 미리보기 `docs/catdoku-app/` | 번들 ID 등록 → ASC 앱 레코드·AdMob 앱(사용자) → TestFlight |
+| **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) | ITMS-90035 로 빌드 16·23 무효 → **1.1.0(빌드 37) 재제출 안내(10-17)**, 앱 + Unlock All Levels | 사용자가 Submit 했는지 ASC 확인 → 승인 시 AdMob |
 | **Kitty Path: Number Puzzle** (한붓 경로 퍼즐, `kittypath_app/`, `plans/path-puzzle-app.md`, `board/path-puzzle.md`) | 2026-10-03 Flutter 1차 완성·테스트 36개·웹 실제 터치 점검 24/24·웹 미리보기 `docs/path-puzzle-app/`. 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 아이콘·스토어 문구 → ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
 | **Glance Solunar: Fishing Times** (낚시·사냥 시간, `solunar_app/`, `plans/solunar-app.md`, `board/solunar.md`) | 2026-10-06 `DESIGN.md` 리터칭(Cupertino·24시간 다이얼·낚시/사냥) 완료·테스트 37개·웹 점검 43/43·웹 미리보기 `docs/solunar-app/`. 번들 `com.soulfulfill.solunar`, AdMob 실제 ID(배너·보상형) | ASC 앱 레코드(사용자) → `Release iOS`(solunar) → TestFlight(초대 자동) → 스크린샷·심사 메모 |
 | **Glance MPG: Gas Mileage Log** (연비·정비 기록, `fuellog_app/`, `plans/fuel-log-app.md`, `board/fuel-log.md`) | **2026-10-06 1.0(빌드 33) 심사 제출 — Waiting for Review.** 번들 `com.soulfulfill.fuellog`, AdMob 배너(실제 ID), 테스트 48개 | 심사 결과 → (2.1 요청 시 녹화) → 승인 후 AdMob 스토어 링크 연결 → 리뷰·수익 확인 |
 | **유튜브 앰비언스 채널** (`plans/ambient-youtube.md`, `board/ambient-engine.md`) | 2026-10-05 결정(사용자 본래 의도), 세션 시작 대기 | 엔진 시제품 3분×3 → 사용자 느낌 → 8시간 렌더 → 채널 |
 | 기도·묵상 생성 음악 (`plans/soaking-music-feature.md`) | 단독 앱 폐기 → 신앙 앱 부가 기능 | 통독 앱 만들 때 탭으로 |
-| **Tolle: Bible Reading Plan** 성경 통독 (`plans/bible-reading-app.md`, `board/bible-reading.md`, `tolle_app/`) | 2026-10-06 Flutter 1차 완성, 번들 `com.soulfulfill.tolle` 등록 | ASC 앱 레코드(사용자) → TestFlight |
+| **Tolle: Bible Reading Plan** 성경 통독 (`plans/bible-reading-app.md`, `board/bible-reading.md`, `tolle_app/`) | 2.1 답장+녹화 보냄(10-12) → Resubmit 결과 미확인. AdMob 은 아직 테스트 ID | ASC 상태 확인 → AdMob 앱·배너 만들기(사용자) → 빌드 37 |
 | **Verse Weave 암송 퍼즐** (`plans/verse-weave-app.md`, `board/verse-weave.md`) | 2026-10-06 결정, 세션 시작 대기 | 이름·번들 → 개발 → TestFlight |
 | **소그룹 은사·기질 키트** (`plans/gifts-kit-app.md`, `board/gifts-kit.md`) | 10-06 문항 초안 완료(은사 70·기질 40), 사용자 검토 대기 | 검토 반영 → 채점·코드 엔진 |
-| **Blessing Jar 가족 축복 항아리** (`plans/blessing-jar-app.md`, `board/blessing-jar.md`) | 2026-10-06 개발 세션 시작 — 1단계 웹 시제품 `docs/blessing-jar.html` | 흔들기 시제품 → 사용자 느낌 → 개발 |
-| **How It Works 사물의 원리** (`plans/how-it-works-app.md`, `board/how-it-works.md`) | 2026-10-15 결정, 세션 시작 대기 | 경쟁 조사 → 레슨 3개 시제품 → 사용자 느낌 |
+| **Blessing Jar 가족 축복 항아리** (`plans/blessing-jar-app.md`, `board/blessing-jar.md`) | 웹 시제품 완성(로봇 99/99, 10-17). 완전 무료·보관함 배너 1곳 확정 | **사용자 느낌** → 이름 A/B → Flutter |
+| **How Things Work: Engineering** (사물의 원리, `plans/how-it-works-app.md`, `board/how-it-works.md`) | 레슨 30개 웹 완성·로봇 통과, 이름 확정, 번들 `com.soulfulfill.howthingswork` 등록(10-16) | Flutter 이식 방식 A/B(사용자) → Flutter → TestFlight (제출은 속도계 5.6 해결 후) |
 | 웹 미니게임 9종 (`docs/*.html`) | 웹으로 공개 중 | 앱화 후보 고르기 (아래 백로그) |
 | 한의학(clinic) 앱 (`lib/`, `android/`) | 보류 | 재개 여부 미정 |
 
@@ -93,6 +93,8 @@
 | Glance 유틸: 소음 측정기 | 1등(15.3만 평가)이 연 $45 구독으로 막음 | 4 | 3 | 2 | 유틸 2순위 |
 | Glance 유틸: 물때 시간 | 1등(16.2만 평가) 30초 광고 불만, NOAA 무료 API | 4 | 3 | 3 | 미국 해안 한정 |
 | Glance 유틸: GPS 속도계 | 1등(12.9만 평가) 구독 함정 불만, 하루 제작 | 4 | 3 | 1 | 전 세계 동작 |
+| 🎉 추수감사절·연말 파티 게임(패스앤플레이 몸짓·단어 맞히기) | Heads Up 류 유료 팩 불만, 11-26 추수감사절·연말 모임 검색 급증. 단어 목록=코드 콘텐츠 | 4 | 3 | 1 | 2026-10-19 주간 점검. 11월 초 출시해야 의미(심사 보류 풀린 뒤) |
+| 색깔 정렬 퍼즐(날짜 시드) | Block Out!·Magic Sort 3주째 상위, 캣도쿠 엔진·랭킹 재사용 | 4 | 2 | 2 | 10-12·10-19 연속 확인 |
 
 ## 5. 결정 로그
 
@@ -210,6 +212,35 @@
 결과는 아래에 날짜별로 쌓는다 (최신이 위).
 
 <!-- 주간 점검 기록 -->
+
+### 2026-10-19
+
+**지난주 한 일** (커밋 약 60개, Actions 실패 0 — Pages 취소는 연속 푸시로 덮인 것)
+- **How Things Work: Engineering** 새 앱: 기획(10-15) → 경쟁 조사·시제품·레슨 30개·검사 로봇 → 이름·번들 등록(10-16)까지 이틀. 사용자 느낌 "오 괜찮아".
+- 재제출: Kitty Queens 1.1.0(빌드 37) · FX(빌드 39) · Tides(빌드 31) · dB(빌드 40 연결) — ITMS-90035(옛 서명) 빌드를 새 빌드로 교체.
+- 속도계 **5.6 거절**에 사실 설명 답장 작성 → **사용자 결정: 답이 올 때까지 다른 앱 새 제출 보류**(10-16).
+- Blessing Jar 시제품(99/99) · 은사 키트 문항 110개(10-06) 대기 · 품질 목표 "와, 이 정도까지?" 규칙(10-16).
+- **Claude 조직 플랜 취소 예정 → 개인 계정 이전 준비**: 결정 로그, 이어받기 페이지를 핀 순서·이름 그대로(`ops/sessions.md`).
+
+**막힌 것 — 전부 사용자 차례 (앱 쪽 코드 막힘 없음)**
+- **ASC 상태를 아무 세션도 모름**(10-13 이후 캡처 없음): FX · Kitty Queens · Tides · dB · Mortgage · MPG · Tolle · Speed.
+- 남은 클릭: Speed 5.6 답장·Resubmit, Mortgage·MPG 2.1 답장+녹화, Tolle AdMob 앱.
+- 느낌·검토 대기: Blessing Jar 시제품, 은사 키트 문항·언어, How It Works Flutter 방식, 앰비언트 첫 업로드, Solunar TestFlight.
+- 확인 못 함 — 사용자 확인 필요: 모든 앱 심사 결과, AdMob 수익, 리뷰.
+- 정리할 것: `board/currency.md` 에 옛 "🔁 이어받기" 블록이 하나 더 남아 있음(currency 세션이 다음 저장 때 지우기).
+
+**트렌드** ([AppToday 미국 무료 10-14](https://apptoday.com/charts/top-100-free-apps-us), [Appfigures](https://app.appfigures.com/top-apps/ios-app-store/united-states/iphone/top-overall), [WhistleOut 10월 새 앱](https://www.whistleout.com/CellPhones/Apps/best-new-apps))
+- 1위권은 AI(Muse·ChatGPT·Gemini)와 이벤트성 앱 — 작게 따라갈 영역 아님.
+- **Block Out!·Magic Sort(색깔 정렬) 3주째 상위** → 백로그 "색깔 정렬 퍼즐(날짜 시드)" 유효.
+- 계절: 추수감사절(11-26)·연말 모임 → **패스앤플레이 파티 게임** 후보(Heads Up 류 유료 팩 불만의 반대). 단, 5.6 보류가 풀려야 11월 안에 낼 수 있음.
+- 선교 관련: 새 후보 없음(여행 전 체크 카드 유지).
+
+**이번 주 결정할 것 (A/B)**
+1. 계정 이전: **A. 회사 플랜 끝나기 전에 이번 주 개인 메일로 옮기기 — 0. Head 먼저, 나머지는 필요할 때 (추천)** / B. 끝나는 날 한 번에
+2. 심사 상태: **A. ASC 앱 목록 화면 캡처 1장을 Head 에 주면 한 번에 정리 (추천)** / B. 앱 세션마다 따로
+3. How It Works 이식: **A. Flutter 셸 + 지금 SVG 엔진 WebView (추천 — 30개 도해 그대로, 빠름)** / B. Dart 로 다시 그리기
+
+**추천 작업 순서**: ①ASC 캡처 1장(전체 상태) → ②Speed 5.6 답장·Resubmit(이게 풀려야 다른 제출 재개) → ③계정 이전(0. Head) → ④How It Works A/B → ⑤Blessing Jar 느낌 → ⑥Mortgage·MPG 녹화 답장
 
 ### 2026-10-12
 
