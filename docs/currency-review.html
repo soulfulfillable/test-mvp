@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glance FX 심사 답장</title>
+<link rel="icon" href="favicon.png">
+<style>
+  :root{--bg:#F5F6F8;--fg:#14181D;--muted:#5C6672;--card:#FFFFFF;--line:#E1E4E8;--accent:#1677C9}
+  @media (prefers-color-scheme:dark){:root{--bg:#0B0E13;--fg:#EEF1F4;--muted:#9AA4B2;--card:#151A21;--line:#262E39;--accent:#6CB4F0}}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  main{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:28px 0 8px}
+  .sub{color:var(--muted);font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  ol{padding-left:20px;margin:0} li{margin:6px 0}
+  pre{white-space:pre-wrap;word-break:break-word;font:14px/1.5 -apple-system,sans-serif;margin:0}
+  button{display:block;width:100%;margin:12px 0 0;padding:14px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:700}
+  @media (prefers-color-scheme:dark){button{color:#0B0E13}}
+  .ok{color:var(--accent);font-weight:700;text-align:center;min-height:22px;margin-top:8px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Glance FX — 심사 답장 (4.3 스팸 질문)</h1>
+  <div class="sub">재제출(Resubmit/Update Review)은 누르지 말고, 답장만 보냅니다.</div>
+  <h2>① 보내는 곳</h2>
+  <div class="card"><ol>
+    <li>App Store Connect → Glance FX → <b>App Review</b> → iOS Submission</li>
+    <li>맨 아래 Apple 메시지(4.3) 밑 <b>Reply to App Review</b></li>
+    <li>아래 버튼으로 복사 → 붙여넣기 → <b>Send</b> (Draft 로 남지 않게 꼭 Send)</li>
+  </ol></div>
+  <h2>② 답장 글 (영어 그대로)</h2>
+  <div class="card"><pre id="reply">Hello App Review team, thank you for the detailed questions. Answers below.
+
+1. What the app does / problem it solves
+Glance FX converts one amount into many currencies at the same time. The user keeps a personal list (for example USD, EUR, GBP, MXN, plus gold or Bitcoin) and can type into any row; every other row updates instantly. Rows can be reordered by dragging, and whichever row is dragged to the top becomes the base. Each row also shows the local time in that currency&#x27;s country and the day&#x27;s change. A Chart tab shows real historical rates (1W/1M/3M/1Y) for any pair the user picks. The last rates are saved, so it keeps working offline, with a clear &quot;Saved / Offline&quot; label and the date of the rates. The problem it solves: when you travel, shop from overseas stores, or get paid in another currency, you usually need several currencies at once, and most converters show only one pair at a time, need a connection, or hide history behind a subscription.
+
+2. Intended user
+Travelers (including people visiting several countries on one trip), people buying from overseas online stores, people sending money to family abroad, and freelancers or remote workers paid in a foreign currency. They are mostly in the United States and check rates on the go, often with poor connectivity (airports, flights, abroad without roaming).
+
+3. Need or gap
+- Many currencies on one screen, typed from any row, instead of one pair at a time.
+- Traditional currencies, crypto (e.g. BTC, ETH) and precious metals (gold, silver per troy ounce) in the same list, searchable by plain words like &quot;gold&quot; or &quot;bitcoin&quot;.
+- Real historical charts for any pair at no cost, with no fake or placeholder data.
+- Local time of each country next to its currency, which travelers use to plan calls and check-ins.
+- Works offline with the last saved rates and says honestly when the data is not live.
+- No account, no sign-in, no subscription; one small banner ad.
+For tiny rates the app flips the unit line (for example &quot;1 USD = 1,356 KRW&quot; instead of &quot;1 KRW = 0.0007 USD&quot;) so it stays readable.
+
+4. Beta testing
+I tested on a physical iPhone 13 through TestFlight over several builds, plus an automated test suite that drives the real screens at iPhone 13 size (including with the keyboard open and with every supported currency on screen). Feedback that changed the production build:
+- &quot;Searching for gold doesn&#x27;t work / the search box disappears&quot;: the currency picker was hidden behind the keyboard. It now sits above the keyboard, and search matches everyday words (gold, ounce, bitcoin).
+- &quot;Is the chart even needed? I can&#x27;t pick the countries&quot;: the first chart only covered a fixed pair. It now uses real history and lets the user choose and swap any pair.
+- &quot;I want to drag the countries up and down&quot;: rows can now be reordered by long-press and drag.
+- &quot;The top USD row can&#x27;t be moved down&quot;: the top row is now draggable too, and the row moved to the top becomes the base.
+- Long currency names overlapped the local clock on smaller screens: fixed and covered by a layout test.
+
+5. Standalone or suite
+Standalone. My account also has a few other small single-purpose apps (for example a tide chart, a mortgage payment calculator, a sound level meter, a speedometer and a logic puzzle game), some of which use the same &quot;Glance&quot; naming. Each solves a different everyday task with its own data source and screens; none of them converts currencies or shows exchange rates.
+
+6. Could it be an in-app purchase or feature of another app?
+No. None of my other apps deals with money conversion or exchange rates, so this would not fit as a feature or add-on of any of them.
+
+7. Shared code/assets with other apps on the account
+No shared feature code or content. The converter, rate service, history charts, currency list and screens were written for this app. It uses standard third-party frameworks only (Flutter, Google Mobile Ads, shared_preferences, intl, timezone). A small build/upload script is reused across my apps, but it is not part of the app binary.
+
+8. Shared codebase/SDK/content with third-party apps
+No, beyond the standard frameworks above. Rate data comes from the free, public-domain (CC0) Currency API by fawazahmed0, loaded read-only. The app is not built from a template or an app generation service.
+
+9. Created for a client or third party?
+No. I am an individual developer; the concept, code, icon and branding are my own, and I submit it under my own account.
+
+Thank you for your time.</pre></div>
+  <button id="copy">답장 글 복사</button>
+  <div class="ok" id="ok"></div>
+</main>
+<script>
+document.getElementById('copy').onclick = async () => {
+  const t = document.getElementById('reply').innerText;
+  try { await navigator.clipboard.writeText(t); }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('reply'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
+  }
+  document.getElementById('ok').textContent = '복사됐어요 ✓';
+};
+</script>
+</body>
+</html>
