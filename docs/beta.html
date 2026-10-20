@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>베타 테스터 모집</title>
+<style>
+:root{--bg:#f2f2f7;--card:#fff;--ink:#1c1c1e;--sub:#6c6c70;--acc:#0a7d6b}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--ink:#f2f2f7;--sub:#98989f;--acc:#3fc7ad}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;padding:16px 16px 48px;max-width:720px;margin:0 auto}
+h1{font-size:28px;margin:8px 0 2px}
+.lead{color:var(--sub);font-size:14px;margin:0 0 16px}
+.card{background:var(--card);border-radius:12px;padding:14px 16px;margin:10px 0}
+h2{font-size:17px;margin:0 0 6px}
+.note{font-size:14px;color:var(--sub);margin:6px 0 0}
+pre{white-space:pre-wrap;word-break:break-word;font:15px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);border-radius:8px;padding:10px 12px;margin:8px 0 0}
+button{margin-top:8px;width:100%;height:44px;border:0;border-radius:10px;background:var(--acc);color:#fff;font:600 16px -apple-system,sans-serif}
+button.done{opacity:.6}
+ol{padding-left:20px;margin:6px 0}li{margin:4px 0}
+</style>
+</head>
+<body>
+<h1>베타 테스터 모집</h1>
+<p class="lead">대표 앱 <b>How Things Work</b>을 Apple 에 내기 전에, 아는 분들 <b>10명 이상</b>이 써 보고 한마디씩 남겨 주는 게 목표예요. 그 피드백이 Apple 4.3 질문 4번("베타 테스트에서 무엇을 고쳤나")의 근거가 돼요.</p>
+
+<div class="card"><h2>1. 언제 보내나</h2>
+<p class="note">개발 세션이 TestFlight <b>공개 링크</b>를 만들면(외부 베타 심사 통과 후) 아래 문구의 <b>[링크]</b>를 그 주소로 바꿔서 보내요. 그 전엔 "곧 보낼게, 해줄 수 있어?"만 미리 물어 두면 좋아요.</p></div>
+
+<div class="card"><h2>2. 카톡용 (한국어)</h2>
+<pre>안녕하세요! 제가 만든 아이폰 앱을 출시 전에 써 봐 주실 분을 찾고 있어요 🙏
+'How Things Work' — 전자레인지·변기·지퍼 같은 생활 물건이 어떻게 작동하는지 그림으로 3분 만에 보는 앱이에요 (화면은 영어).
+
+1) 아이폰에서 아래 링크를 열면 TestFlight 앱 설치 → 앱 설치로 이어져요
+[링크]
+2) 레슨 2~3개만 봐 주세요 (5~10분)
+3) 아래 3가지만 답장 주시면 끝이에요!
+ - 제일 좋았던 것 하나
+ - 헷갈리거나 불편했던 것 하나
+ - 친구에게 추천할 것 같은지 (0~10점)
+
+무료고, 개인정보는 따로 받지 않아요. 감사합니다!</pre><button>복사</button></div>
+
+<div class="card"><h2>3. 영어 (해외 지인·교회 영어권)</h2>
+<pre>Hi! I'm about to release a small iPhone app and would love a few friends to try it first.
+"How Things Work" shows how everyday objects (microwave, toilet, zipper…) actually work, with hand-drawn diagrams you can tap — about 3 minutes a day.
+
+1) Open this link on your iPhone (it installs TestFlight, then the app):
+[LINK]
+2) Try 2–3 lessons (5–10 minutes).
+3) Reply with three quick things:
+ - One thing you liked
+ - One thing that was confusing or annoying
+ - How likely you'd recommend it to a friend (0–10)
+
+It's free and I don't collect any personal info. Thank you so much!</pre><button>복사</button></div>
+
+<div class="card"><h2>4. 답장이 오면</h2>
+<ol>
+<li>답장 <b>원문 그대로</b>(이름 빼고) 캡처하거나 복사해서 How It Works 개발 세션에 붙여 넣기</li>
+<li>세션이 <code>howitworks_app/store/beta-feedback.md</code> 에 모으고, 고친 것을 빌드별로 기록</li>
+<li>10명 이상 모이고 반영 빌드가 나오면 → 기획 파트너가 제출 여부 판단</li>
+</ol>
+<p class="note">이름·연락처는 저장소에 적지 않아요 ("테스터 A, 40대, 교회" 정도만).</p></div>
+
+<script>
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const t=b.previousElementSibling.textContent;
+  const done=()=>{const o=b.textContent;b.textContent='복사됨';b.classList.add('done');setTimeout(()=>{b.textContent=o;b.classList.remove('done')},1300)};
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(done,done);
+});
+</script>
+</body>
+</html>

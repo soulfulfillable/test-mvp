@@ -2,15 +2,19 @@
 마지막 갱신: 2026-10-17 (KST) — 레슨 30개·이름·번들 완료, Flutter 이식 A/B 대기
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-17 · 작업 브랜치: `claude/how-it-works` (main 반영, 커밋 안 된 작업 없음)
+- 마지막 저장: 2026-10-20 (기획 파트너가 대표 앱 지정·다음 할 일 갱신) · 작업 브랜치: `claude/how-it-works` (main 반영, 커밋 안 된 작업 없음)
 - 방금 끝낸 것: 이름 확정 **How Things Work: Engineering** / 부제 Everyday Objects, Explained (`howitworks_app/store/ios-listing.md`),
   번들 **`com.soulfulfill.howthingswork` 등록 완료**(Actions iOS 번들 ID 등록 run 38916038511), `docs/todo.html` 에 앱 값 추가
 - 진행 중이던 것: 없음
-- **다음 할 일**: ① 사용자에게 Flutter 이식 방식 A/B(A 추천: Flutter 셸 + 지금 JS/SVG 엔진을 앱 안 WebView 로 그대로 / B: 30개 도해를 Dart 로 다시 그리기)
-  ② 답 받으면 `howitworks_app/flutter/` 생성(pubspec `version: 1.0.0+1`, `sdk: ^3.13.2`) → 테스트 로봇 먼저 → Today/Library/레슨 화면(Cupertino)
-  ③ 30개 사실 2차 검토(작업자는 WebSearch 요약만 봤음) ④ AdMob(배너+보상형 "내일 레슨 미리 보기") → Release iOS 옵션에 앱 추가 → TestFlight
-- 사용자 대기 중인 것: Flutter 이식 방식 A/B. (사용자 할 일: App Store Connect 앱 레코드·AdMob 앱 — todo.html, 급하지 않음: 첫 업로드 전까지)
-- ⚠️ 2026-10-16 결정: 속도계 5.6 답이 올 때까지 **새 심사 제출 보류**(개발·TestFlight 는 계속) — 이 앱도 해당
+- 🚩 **2026-10-20 (기획 파트너): 이 앱이 계정의 대표 앱이 됐다.** 다른 8개 앱이 전부 4.3 스팸으로 거절됨(`board/_shared.md` 🛑). 이 앱을 통과시키는 게 계정 전체를 살리는 일 — 서두르지 말고 '와 포인트'까지 완성도 우선.
+- **다음 할 일**:
+  ① **이식 방식 = 네이티브 추천으로 변경**(기획 파트너): WebView 로 웹 엔진을 감싸면 4.2(웹사이트를 감싼 앱) 위험이 지금 계정 상태에선 크다. 화면·조작·애니메이션은 Flutter 네이티브, 도해는 지금 SVG 를 `flutter_svg` 로 그리고 움직이는 부분만 Dart 애니메이션(혹은 30개 Dart 로 다시). 방식 확정안을 사용자에게 한 줄로 확인받고 진행
+  ② `howitworks_app/flutter/` 생성(pubspec `version: 1.0.0+1`, `sdk: ^3.13.2`) → 테스트 로봇 먼저 → Today/Library/레슨(Cupertino) → 30개 사실 2차 검토
+  ③ 이름 접두·화면 틀이 기존 'Glance' 앱과 겹치지 않게(아이콘·색·구조 모두 다르게) — 4.3 대비
+  ④ Release iOS → **TestFlight 외부 테스트 그룹 + 공개 링크**(ASC API `betaGroups` publicLinkEnabled) → 외부 베타 심사 → 사용자에게 링크 전달(모집 문구 `docs/beta.html`)
+  ⑤ 테스터 10명+ 피드백 원문을 `howitworks_app/store/beta-feedback.md` 에 모으고, 반영한 것을 빌드별로 기록(4.3 질문 4번의 근거)
+  ⑥ 심사 메모에 4.3 9문항 답을 미리 작성(`howitworks_app/store/review-notes.md`) → 기획 파트너·사용자 확인 뒤에만 제출. AdMob 은 제출 직전
+- 사용자 대기 중인 것: 이식 방식 확인(네이티브 추천). (App Store Connect 앱 레코드는 TestFlight 업로드 전까지)
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/how-it-works.md "🔁 이어받기" 와 plans/how-it-works-app.md 를 읽고, "다음 할 일"부터 이어서 해줘.`
 
