@@ -4201,5 +4201,51 @@
       "TCM clinical decision support syndrome differentiation"
     ],
     "first_seen": "2026-10-17"
+  },
+  {
+    "id": "epmc:PMC/PMC13666647",
+    "title": "The Role of Herbal Medicines in Cognitive Impairment: A Narrative Review of Neuroprotective Mechanisms and Therapeutic Perspectives",
+    "authors": [
+      "Intharuksa A",
+      "Prasansuklab A",
+      "Techarang T",
+      "Chaikhong K",
+      "Arunotayanun W",
+      "Jenraumjit R."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://europepmc.org/article/PMC/PMC13666647",
+    "abstract": "",
+    "matched_queries": [
+      "traditional chinese medicine syndrome differentiation decision tree"
+    ],
+    "first_seen": "2026-10-20"
+  },
+  {
+    "id": "doi:10.3967/bes2026.094",
+    "title": "Dual-track Parallel and Integrated Innovation: Recent Advancements of Clinical Decision Support Systems in Cardiovascular Diseases from the Perspective of Integrative Chinese and Western Medicine.",
+    "authors": [
+      "Jia ZH",
+      "Zhang L",
+      "Tong L",
+      "Zhang HF",
+      "Li HT",
+      "Zhang FX",
+      "Tian SW",
+      "Guo Z",
+      "Zhang SQ",
+      "Ma Y",
+      "Li B",
+      "Zhang HM."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.3967/bes2026.094",
+    "abstract": "Cardiovascular diseases (CVDs) are the leading causes of death worldwide, have a growing disease burden, and present multiple challenges for precision management. Clinical Decision Support Systems (CDSS) are tools that leverage information technology to assist clinicians in diagnosis and treatment decisions and provide references for clinical decision-making by offering personalized suggestions, prompts, or reminders. By integrating multisource data, evidence-based guidelines, and artificial intelligence algorithms, CDSS can support diagnosis, prescribing, and comorbidity management. Studies in hypertension have reported improvements in prescribing and blood pressure, while effects on major cardiovascular events and mortality require further evaluation. Notably, with the continuous development of informatization and digitalization of Traditional Chinese Medicine (TCM), traditional Chinese medicine clinical decision support systems (TCM-CDSS), as an innovative achievement integrating traditional medicine with modern information technology, have shown promise in supporting the prevention and treatment of CVDs. TCM-CDSS achieves an intelligent diagnosis and treatment closed loop from \"syndrome differentiation\" to \"formula recommendation\" by integrating TCM theory of \"principles, methods, formulas, and medicinals,\" renowned TCM experts' clinical experience, TCM knowledge graphs, and intelligent syndrome differentiation algorithms, providing a new paradigm for individualized diagnosis and treatment of CVDs such as hypertension and coronary heart disease (CHD). However, reviews addressing the integration of Chinese and Western medicine in cardiovascular CDSS remain limited. To address this knowledge gap, this review adopts a conceptual framework of \"dual-track parallel and integrated innovation\" to systematically elaborate on the current application status of CDSS across major CVDs. We critically stratified current clinical evidence tiers, highlighting the widespread reliance on retrospective studies and the urgent need for large-scale randomized controlled trials (RCTs). Furthermore, we propose that the future paradigm lies in mechanism-data, dual-driven hybrid architectures that quantitatively anchor Western physiological indicators to TCM macrosyndromes. Finally, we provide targeted solutions for the core technical bottlenecks, including Electronic Health Record workflow integration, cross-system comorbidity management, and grassroots application feasibility. These results provide an important reference for the precise treatment of CVDs and a basis for developing new paradigms for CVD prevention and treatment.",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-10-20"
   }
 ]
