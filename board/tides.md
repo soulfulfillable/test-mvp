@@ -5,14 +5,14 @@
 - 마지막 저장: 2026-10-20 (tides 개발 세션)
 - 작업 브랜치: `claude/wonderful-mccarthy-g6wrjj`
 - 방금 끝낸 것: Glance Tides 1.0(31) **4.3 Spam + 4.2.6 반려**(10-19) → 사용자 결정 **"솔루나에 합치기"**(10-20). 계획 `plans/solunar-tides-merge.md`, `_shared` 공용 작업 중에 등록, PRODUCT 결정 로그
-- 진행 중이던 것: 솔루나에 물때 섹션 이식 시작 전
+- 진행 중이던 것: **코드 이식은 보류** — 같은 날 8개 앱 일괄 4.3 반려 공지(`_shared`): 기획 파트너·사용자가 포트폴리오 축소·통합안을 정할 때까지 대기. 물때→솔루나 합치기는 그 통합안의 한 조각으로 제안됨
 - **다음 할 일**:
   1. `solunar_app/flutter` 에 물때 엔진 이식: `assets/stations.json`, `tides.dart`(NoaaApi·TideData·캐시), 가까운 관측소(30마일), 엔진 테스트 이식
   2. 솔루나 다이얼에 물 높이 링 + 만조▲·간조▼, Major×들물 겹침 강조 (와 포인트) / 묶음 목록에 Tide 섹션 / 물때 상세 시트(곡선·7일) / 30일 달력에 고/저조
   3. 로봇·웹 점검 갱신 → 스크린샷(DESIGN.md 체크리스트) → 사용자에게 보여 주기 + 부제 A/B(Tides 넣을지)
   4. `Release iOS`(solunar) → TestFlight → 사용자 느낌. 제출은 속도계 5.6 해결 후(공용 규칙)
   - Glance Tides 는 ASC 에 Rejected 로 둔다(답장·재제출 안 함)
-- 사용자 대기: 없음 (개발 진행)
+- 사용자 대기: 기획 파트너와 포트폴리오 통합 결정 (물때→솔루나 합치기 포함 여부 확정되면 1번부터 시작)
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/tides.md "🔁 이어받기" 와 plans/solunar-tides-merge.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md·DESIGN.md 규칙대로.`
 
