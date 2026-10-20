@@ -2,18 +2,19 @@
 마지막 갱신: 2026-10-17 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-17 (tides 개발 세션)
-- 작업 브랜치: `claude/wonderful-mccarthy-g6wrjj` (main 과 같음, 미커밋 작업 없음)
-- 방금 끝낸 것: **1.0(빌드 31) 재제출 완료 10-13** — 2.1 정보 요청 답장(녹화+글, 10-06) + 연령 등급 Advertising=Yes. 빌드 31 은 고쳐진 서명(ITMS-90035 수정 후)
-- 진행 중이던 것: 없음. **심사 결과는 이 세션이 아직 모름** (사용자가 메일·ASC 캡처를 보내면 앎)
+- 마지막 저장: 2026-10-20 (tides 개발 세션)
+- 작업 브랜치: `claude/wonderful-mccarthy-g6wrjj`
+- 방금 끝낸 것: Glance Tides 1.0(31) **4.3 Spam + 4.2.6 반려**(10-19) → 사용자 결정 **"솔루나에 합치기"**(10-20). 계획 `plans/solunar-tides-merge.md`, `_shared` 공용 작업 중에 등록, PRODUCT 결정 로그
+- 진행 중이던 것: 솔루나에 물때 섹션 이식 시작 전
 - **다음 할 일**:
-  1. 사용자에게 심사 결과 확인 (ASC → Glance Tides → App Review 상태)
-  2. **반려면**: 메시지 원문 받아 고치기 — 2.1 이면 `docs/tides-review.html` 답장 재사용, 메타데이터면 `tides_app/store/ios-metadata.json` 고쳐 `App Store 등록 정보 채우기`(tides, build 31). 코드 수정이 필요하면 `Release iOS`(tides) 새 빌드 → 연결 → 재제출 (`Release iOS` 는 대기 줄 1칸 — 누르기 전 pending 확인)
-  3. **승인되면**: 출시(Manual 이면 Release 버튼) → AdMob(soulfulfillable 계정) → Glance Tides 앱 → **App Store 연결**(보상형 영상 재고가 생김) → 결제 정보 확인
-  4. 출시 1~2주 뒤: 리뷰·평점·AdMob 수익(배너 vs 30일 표 보상형) 확인 → 1.0.1 후보(관측소 지도, 위젯, 서핑·낚시 표시 등)는 사용자 A/B. 디자인은 손대지 않음(DESIGN.md 는 새 앱만)
-- 사용자 대기: 심사 결과 메일
+  1. `solunar_app/flutter` 에 물때 엔진 이식: `assets/stations.json`, `tides.dart`(NoaaApi·TideData·캐시), 가까운 관측소(30마일), 엔진 테스트 이식
+  2. 솔루나 다이얼에 물 높이 링 + 만조▲·간조▼, Major×들물 겹침 강조 (와 포인트) / 묶음 목록에 Tide 섹션 / 물때 상세 시트(곡선·7일) / 30일 달력에 고/저조
+  3. 로봇·웹 점검 갱신 → 스크린샷(DESIGN.md 체크리스트) → 사용자에게 보여 주기 + 부제 A/B(Tides 넣을지)
+  4. `Release iOS`(solunar) → TestFlight → 사용자 느낌. 제출은 속도계 5.6 해결 후(공용 규칙)
+  - Glance Tides 는 ASC 에 Rejected 로 둔다(답장·재제출 안 함)
+- 사용자 대기: 없음 (개발 진행)
 - 이어받는 세션에 붙여 넣을 말:
-  `soulfulfillable/test-mvp 의 board/tides.md "🔁 이어받기" 와 plans/tides-app.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+  `soulfulfillable/test-mvp 의 board/tides.md "🔁 이어받기" 와 plans/solunar-tides-merge.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md·DESIGN.md 규칙대로.`
 
 ## 지금 상태 (3줄 이내)
 **Glance Tides: Tide Chart 1.0(빌드 31) 심사 중** (10-13 재제출). 번들 `com.soulfulfill.tides`, 실제 AdMob ID(배너·보상형 30일 표).
@@ -34,6 +35,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-20 | (ASC 캡처) 1.0(31) Rejected — Guidelines 4.3 Spam and 4.2.6 (9문항 답장 요구) → A/B "솔루나에 합치기 (추천)" | 재제출·답장 안 함. 솔루나에 물때 기능으로 합치기 시작 (`plans/solunar-tides-merge.md`) |
 | 10-13 | "Age 변경은 햇어 광고잇음으로" → "응햇어" (재제출) | Waiting for Review. 승인 메일 오면 AdMob 스토어 연결 안내 |
 | 10-13 | (캡처: iOS Submission Removed, 2.3.6) "내가 뭐 잘못누른듯 리무브됏어" | 제출 취소일 뿐 — 빌드·등록 정보 그대로. 연령 등급 Advertising=Yes 고친 뒤 Add for Review 다시 안내 |
 | 10-13 | (Apple 메일·ASC 캡처) 10-12 재제출 → 자동 분석 "광고가 있는데 연령 등급의 Advertising 을 Yes 로 안 함" | App Information → Age Rating → Advertising **Yes** 로 바꾸고 Update Review 안내 (2.1 답장은 10-06 에 보냄) |

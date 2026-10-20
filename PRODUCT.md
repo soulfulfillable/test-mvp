@@ -43,7 +43,7 @@
 |---|---|---|
 | **Glance FX: Currency Converter** (`currency_app/`) | ITMS-90035 로 빌드 9·15 무효 → **빌드 39 연결해 재제출(10-12)**. 심사 결과 리포에 없음 | 사용자 ASC 상태 확인 → 승인 시 AdMob 스토어 링크 → v1.1(금·코인 스크린샷) |
 | **Cozy Coloring 정식판** (원형 `docs/coloring-book.html`) | **보류** (2026-10-02). 기획서 OK, 선화 수집·변환기·테스트 로봇까지 만듦 | 재개 시 `plans/coloring-app.md` 의 첫 메시지로 새 세션 |
-| **Glance Tides: Tide Chart** (물때, `tides_app/`, `plans/tides-app.md`, `board/tides.md`) | **1.0(빌드 31) 재제출 10-13**(2.1 답장 + 연령 등급 Advertising=Yes). 결과 미확인 | 결과 확인 → 승인 시 AdMob 스토어 연결 |
+| **Glance Tides: Tide Chart** (물때, `tides_app/`) | 2026-10-19 **4.3 반려 → 단독 출시 중단**, Glance Solunar 에 합치는 중 (`plans/solunar-tides-merge.md`) | 솔루나 물때 섹션 개발 → 솔루나 TestFlight |
 | **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-08 **Guideline 5.6 거절**("심사 중 숨긴 기능") — 빌드 32 에 숨긴 기능 없음 | 사실 설명 답장 + Resubmit(사용자) → 다시 거절되면 안내 문구·Always 문구 제거 새 빌드 + App Review Board |
 | **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 1.0(빌드 22) ITMS-90035 반려 → 1.1(빌드 30) 등록 정보 입력 완료, 재제출 대기 | 사용자 Resubmit → 승인 → AdMob 스토어 연결 |
 | **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-05 1.0(빌드 28) 제출 → 10-06 **2.1 정보 요청**(새 계정 정형) → 답장·재제출 중 (`docs/decibel-review.html`) | 승인 후 AdMob 스토어 링크. 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1 |
@@ -100,6 +100,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-20 | **Glance Tides 는 재제출하지 않고 Glance Solunar 에 물때 기능으로 합친다** (`plans/solunar-tides-merge.md`) | 10-19 4.3 Spam+4.2.6 반려. 솔루나와 해·달 코드 공유·낚시 용도 겹침 → 답장해도 6·7번 문항에서 불리, 계정에 5.6 도 있어 반복 반려 위험. 사용자 "솔루나에 합치기 (추천)" |
 | 2026-10-16 | **속도계 5.6 답이 올 때까지 다른 앱의 새 심사 제출 보류** (이미 심사 중인 건 유지, 개발·TestFlight 는 계속) | 5.6 이 같은 계정 앱에 연달아 오면 계정 정지 위험. 사용자 A/B "잠깐 멈추기 (추천)" |
 | 2026-10-16 | How It Works 이름 = **A `How Things Work: Engineering`** · 부제 `Everyday Objects, Explained` · 번들 `com.soulfulfill.howthingswork` (등록 Actions 실행) | 사용자 "A 추천대로 가자". 미국 스토어에서 'how things work' 를 잡은 전용 앱이 없음(`howitworks_app/research/names.md`) |
 | 2026-10-17 | **Claude 조직 플랜 취소 예정 → 개인 Claude 계정으로 이전.** 대화 기록·루틴·클라우드 환경은 옛 조직에 남고 따라오지 않음 → 새 계정에서 `ops/README.md` 로 복구(GitHub 재연결, 주간 루틴 재생성, 이어받기 문장). 권고: 새 계정 로그인은 회사 메일이 아닌 **개인 메일**(퇴사하면 로그인 불가) | 사용자: 회사가 플랜을 취소하고 각자 개인 계정으로 옮기라고 함 |
