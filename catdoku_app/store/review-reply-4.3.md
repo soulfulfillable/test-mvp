@@ -15,7 +15,7 @@ Adults and families who enjoy short logic puzzles (sudoku, crosswords, daily wor
 Many puzzle apps either give a single daily board or a short fixed pack, and players who get stuck often have no idea why a move is wrong. Kitty Queens combines (a) one shared Daily Puzzle that is the same for every player that day, (b) 500 progressive levels from 5×5 up to 9×9, each verified to have a unique solution, and (c) explanations of rule breaks and dead ends written for beginners. It works fully offline and needs no sign-in.
 
 4. Beta testing
-We tested through TestFlight on a physical iPhone across about 20 builds, plus an automated test suite that taps every button on every screen (32 tests) at real device sizes. Feedback from beta that changed the production build:
+We tested through TestFlight on a physical iPhone across several builds, plus an automated test suite that taps every button on every screen (32 tests) at real device sizes. Feedback from beta that changed the production build:
 - "It says there's no spot left, but I can see empty squares" → the message now names the exact row/column/region that is blocked.
 - The dead-end warning felt too loud and alarming → replaced with a calm one-line hint.
 - Players wanted to replay solved levels and see how many remain → added the Levels screen with progress and replay.
@@ -23,7 +23,7 @@ We tested through TestFlight on a physical iPhone across about 20 builds, plus a
 - When no reward video was available, players were stuck → the reward is now given anyway.
 
 5. Standalone or suite
-Standalone. It is the only game on this developer account. The other apps on the account are unrelated utilities (for example a currency converter and a tide chart); none of them contains puzzles or shares any content with this app.
+Standalone. It is the only game published or submitted on this developer account. The other apps on the account are unrelated utilities (for example a currency converter and a tide chart); none of them contains puzzles or shares any content with this app.
 
 6. Could it be an in-app purchase of another app?
 No. None of the other apps on the account is a game, so this puzzle would not fit as a feature of any of them.
