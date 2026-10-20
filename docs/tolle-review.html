@@ -21,7 +21,53 @@
 </head>
 <body>
 <main>
-  <h1>Tolle — 심사 답장 (2.1 정보 요청)</h1>
+  <h1>Tolle — 심사 답장 ② (4.3 스팸 · 4.2.6, 10-19)</h1>
+  <div class="sub"><b>Resubmit 하지 마세요.</b> 메시지 맨 아래 <b>Reply to App Review</b> 에 아래 글만 붙여 넣고 Send. (캣도쿠도 같은 걸 받아 같은 방식으로 답장)</div>
+  <h2>답장 글 (영어 그대로)</h2>
+  <div class="card"><pre id="reply43">Hello App Review team, thank you for the detailed questions. Answers below.
+
+1. What the app does / problem it solves
+Tolle helps a person read the whole Bible (or the New Testament, or Psalms and Proverbs) on a schedule they choose, and keeps track of exactly where they are. It shows one reading per day, for example &quot;Genesis 1–3, about 10 minutes&quot;, and the user checks it off with one tap after reading it in their own Bible; the app contains no Bible text. Each check-off fills squares on a map of all 1,189 chapters. The daily portions are not split by chapter count: our own plan generator divides the chapters by verse count (Psalm 117 has 2 verses, Psalm 119 has 176), so no day is suddenly three times longer than the day before. When the user falls behind, the app does not show red warnings or reset a streak; it offers two choices: spread the remaining chapters over the days left and still finish on the original date, or continue from today and finish later. Separately from the plan, the user can open any book on the map and check off chapters they have already read on their own. The main problem it solves: people who start a reading plan often quit once they fall behind or lose track, and many existing tools make that worse with guilt, uneven days, or accounts and feeds they don&#x27;t want.
+
+2. Intended user
+Christians in the U.S. who want to read through the Bible in a year (or faster) on their own, often for the first time, and who read from a printed Bible or a separate Bible app. Many of them have started a plan before and stopped after falling behind. They want something quiet: no account, no social feed, no daily streak pressure, works offline.
+
+3. Need or gap
+Before building it we read reviews of the existing reading plan apps and trackers. The repeated complaints were: daily readings that swing from very short to very long, streak counts that make people feel guilty and quit, no gentle way to get back on schedule, a start date that cannot be changed, required accounts, ads covering the check-off button, and tracker-only apps that record chapters but give no daily plan. Tolle addresses each of these directly: verse-balanced daily portions (15 plan variants, all automatically verified to cover every chapter exactly once with at least one chapter per day), two catch-up options that keep finished days untouched, any start date, no account, no ads on the Today screen, and both a daily plan and a free chapter log in one place. It also offers a chronological order (Job after Genesis 11, Psalms placed alongside David&#x27;s life, prophets with their kings, letters within Acts), arranged by us at the chapter level.
+
+4. Beta testing
+We tested through TestFlight on a physical iPhone (builds 35 and 36) and with an automated test suite that taps every button on every screen at three iPhone sizes, in light and dark mode and with large text (47 tests). Feedback from beta that changed the production build:
+- &quot;The plan always starts from Genesis, which is fine, but I also need to check off chapters I&#x27;ve already read.&quot; → In build 36, tapping a book on the Map opens its chapters, and the user can mark chapters read; these are stored separately from the plan, so the plan itself is not changed.
+- Testing with large text showed plan names and catch-up choices being cut off → those rows were redesigned so nothing is truncated.
+- On days with two books, the large title broke in the middle of a book name (&quot;2 / Samuel&quot;) → each book now gets its own line.
+A further beta request — a per-book reset with a confirmation step, because a full reset felt too risky — is implemented for the next update.
+
+5. Standalone or suite
+Standalone. It is the only Bible or faith app on this developer account. The other apps on the account are unrelated (for example a currency converter, a tide chart, a decibel meter, and puzzle games); none of them deals with Bible reading or shares any content with this app.
+
+6. Could it be an in-app purchase or feature of another app?
+No. None of the other apps on the account is related to Bible reading or reading plans, so this would not fit as a feature of any of them.
+
+7. Shared code/assets with other apps on the account
+The core of the app was written for it: the plan generator and verse balancing, the chronological order, the chapter map, the book screens, the catch-up logic, and all screens and text. A few small generic helpers are reused from my other apps: a wrapper that schedules local notifications, a wrapper around the banner ad, and small interface pieces such as a back button and list section headers. No content, artwork, or app-specific features are shared. Like most apps it uses standard third-party frameworks: Flutter, Google Mobile Ads, flutter_local_notifications, shared_preferences, share_plus and url_launcher. Our own build and upload scripts are reused across our apps, but they are not part of the app binary.
+
+8. Shared codebase/SDK/content with third-party apps
+No, beyond the standard frameworks listed above. The only outside data is the number of chapters and verses in each book of the Bible, taken from an open-source (MIT-licensed) dataset; it contains no Bible text. The app is not built from a template or an app generation service.
+
+9. Created for a client or third party?
+No. I am an individual developer; the concept, code, plan design and app icon are my own, and I submit it under my own account.
+
+Thank you for your time.</pre></div>
+  <button id="copy43">답장 글 복사 (4.3)</button>
+  <div class="ok" id="ok43"></div>
+  <div class="card" style="margin-top:12px"><ol>
+    <li>Apple 메시지(Yesterday) 아래 <b>Reply to App Review</b> → 붙여넣기 → <b>Send</b></li>
+    <li>영상은 다시 안 붙여도 돼요 (10-12 답장에 이미 있음)</li>
+    <li><b>Resubmit / Update Review 는 누르지 않기</b> — Apple 이 답장을 읽고 연락해요</li>
+  </ol></div>
+  <hr style="margin:32px 0;border:0;border-top:1px solid var(--line)">
+  <div class="sub">아래는 지난 10-12 답장(2.1 정보 요청) — 이미 보냄</div>
+  <h1 style="font-size:17px">Tolle — 심사 답장 ① (2.1 정보 요청)</h1>
   <div class="sub">반려가 아니라 신규 계정에 오는 '정보 요청'이에요. 영상 1개 + 아래 글이면 됩니다.</div>
 
   <h2>① 아이폰으로 화면 녹화 (30초 안팎)</h2>
@@ -68,6 +114,15 @@ document.getElementById('copy').onclick = async () => {
     const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
   }
   document.getElementById('ok').textContent = '복사됐어요 ✓';
+};
+document.getElementById('copy43').onclick = async () => {
+  const t = document.getElementById('reply43').innerText;
+  try { await navigator.clipboard.writeText(t); }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('reply43'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
+  }
+  document.getElementById('ok43').textContent = '복사됐어요 ✓';
 };
 </script>
 </body>
