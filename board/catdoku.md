@@ -4,8 +4,8 @@
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
 - 마지막 저장: 2026-10-20 (개발 세션)
 - 작업 브랜치: `claude/determined-feynman-sjoyxp` · 방금 끝낸 것: 빌드 16·23 이 ITMS-90035(Invalid Signature, 옛 Release iOS 가 인증서 revoke)로 Invalid Binary → 버전 번호를 1.1.0 으로 바꾸고 Release iOS 재실행 → **빌드 37(1.1.0, 조용한 막힘 안내 포함)** 을 연결해 재제출 안내(앱 + Unlock All Levels 함께).
-- 진행 중이던 것: **1.1.0(37) 4.3 Spam + 4.2.6 반려(10-19)** → 재제출 말고 9문항 답장. 초안 `catdoku_app/store/review-reply-4.3.md`, 사용자 붙여넣기 대기
-- **다음 할 일**: ① 답장 결과 확인. 또 4.3 이면 재제출 금지 → 핵심 차별 기능(기획 파트너와) 큰 변경 후에만, 또는 App Review Board. 계정에 5.6(Speed)도 있어 계정 위험 주의 ② 승인되면 AdMob 앱에 스토어 링크 연결 ③ v1.1 뉴스레터 아이디어는 출시 뒤.
+- 진행 중이던 것: **보류** — 8개 앱 일괄 반려(4.3). 4.3 답장 초안은 있으나 **보내지 않음**. 사용자가 기획 세션에 포트폴리오 방향(A: 2~3개만 남기고 통합 추천) 문의 중
+- **다음 할 일**: 기획 세션 결정 대기 → Kitty Queens 를 남기면 ① Kitty Path 를 두 번째 모드로 합칠지 ② 답장(`review-reply-4.3.md`) 손보고 보내기 ③ 승인 후 AdMob 스토어 링크. 결정 전엔 재제출·답장 금지
 - 참고: Glance FX 도 같은 ITMS-90035 — 이 세션이 Release iOS(currency) 를 한 번 돌려 둠(1.0.0, 빌드 38 이상). 제출은 Glance FX 세션 몫.
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/catdoku.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
