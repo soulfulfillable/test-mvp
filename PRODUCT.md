@@ -43,7 +43,8 @@
 |---|---|---|
 | **Glance FX: Currency Converter** (`currency_app/`) | ITMS-90035 로 빌드 9·15 무효 → **빌드 39 연결해 재제출(10-12)**. 심사 결과 리포에 없음 | 사용자 ASC 상태 확인 → 승인 시 AdMob 스토어 링크 → v1.1(금·코인 스크린샷) |
 | **Cozy Coloring 정식판** (원형 `docs/coloring-book.html`) | **보류** (2026-10-02). 기획서 OK, 선화 수집·변환기·테스트 로봇까지 만듦 | 재개 시 `plans/coloring-app.md` 의 첫 메시지로 새 세션 |
-| **Glance Tides: Tide Chart** (물때, `tides_app/`) | 2026-10-19 **4.3 반려 → 단독 출시 중단**, Glance Solunar 에 합치는 중 (`plans/solunar-tides-merge.md`) | 솔루나 물때 섹션 개발 → 솔루나 TestFlight |
+| **Glance Tides: Tide Chart** (물때, `tides_app/`) | 2026-10-20 | How It Works 앱 = **네이티브 그리기**(웹뷰 없이 Flutter CustomPainter). 30개 도해는 다시 손으로 그리지 않고, 웹 엔진에서 그림·움직임을 데이터(장면 JSON + 프레임)로 뽑아 앱이 그린다 → 웹 미리보기와 앱이 같은 원본(`howitworks_app/lessons/*.js`) | 사용자 "네이티브로 가" (A 웹뷰 / B 네이티브 중 B) |
+| 2026-10-19 **4.3 반려 → 단독 출시 중단**, Glance Solunar 에 합치는 중 (`plans/solunar-tides-merge.md`) | 솔루나 물때 섹션 개발 → 솔루나 TestFlight |
 | **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-08 **Guideline 5.6 거절**("심사 중 숨긴 기능") — 빌드 32 에 숨긴 기능 없음 | 사실 설명 답장 + Resubmit(사용자) → 다시 거절되면 안내 문구·Always 문구 제거 새 빌드 + App Review Board |
 | **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 1.0(빌드 22) ITMS-90035 반려 → 1.1(빌드 30) 등록 정보 입력 완료, 재제출 대기 | 사용자 Resubmit → 승인 → AdMob 스토어 연결 |
 | **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-05 1.0(빌드 28) 제출 → 10-06 **2.1 정보 요청**(새 계정 정형) → 답장·재제출 중 (`docs/decibel-review.html`) | 승인 후 AdMob 스토어 링크. 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1 |
