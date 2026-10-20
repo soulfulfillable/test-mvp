@@ -1,22 +1,22 @@
 # 성경 통독 앱 — 개발 세션 게시판
-마지막 갱신: 2026-10-17 (KST)
+마지막 갱신: 2026-10-20 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-17 (개발 세션) · 작업 브랜치: `claude/tender-brahmagupta-n0qp95` (main 과 같음)
-- 방금 끝낸 것: 2.1 정보 요청 답장+녹화 보냄(10-12) · 책 화면 "Clear" → **Reset Book**(확인 창) — 웹 미리보기에만, 앱 빌드엔 아직 없음
-- 진행 중이던 것: 심사 재제출 확인. 10-12 마지막 안내 = App Review → "Wednesday at 8:48 PM" 제출 → **Resubmit to App Review** → 상태 **Waiting for Review** 확인. 사용자가 실제로 눌렀는지·결과는 **아직 못 들음**
+- 마지막 저장: 2026-10-20 (개발 세션) · 작업 브랜치: `claude/tender-brahmagupta-n0qp95` (main 과 같음)
+- 방금 끝낸 것: **1.0(36) 4.3 Spam + 4.2.6 반려(10-19)** → 9문항 답장 초안 `tolle_app/store/review-reply-4.3.md`, 복사 페이지 `docs/tolle-review.html` 맨 위
+- 진행 중이던 것: 사용자 답장(Reply to App Review → Send) 대기. **Resubmit 금지**(Apple 지시 + 캣도쿠 방침)
 - **다음 할 일** (순서대로):
-  1. 사용자에게 ASC 상태 확인(Waiting for Review / In Review / 승인 / 반려). 반려면 메시지 캡처 받아 대응. 여전히 Resubmit 회색이면 그 화면 캡처 (Cancel Submission 은 답장·영상이 묶여 있어 마지막 수단)
-  2. AdMob(사용자, 클릭 안내는 대화에 줬음): soulfulfillable 계정 → Apps → Add app(iOS, 스토어 No, `Tolle`) → Add ad unit → **Banner** 카드 → 이름 `banner` → 완료 화면 캡처
-  3. 캡처 받으면: `tolle_app/flutter/lib/core/ads.dart` `AdIds.banner` + `ios/Runner/Info.plist` `GADApplicationIdentifier` 교체(지금 Google 테스트 ID) → `flutter test` → `Release iOS`(tolle, 대기 줄 먼저 확인) → 빌드 37 (Reset Book 포함). 같은 게시자 `pub-4724352880074547` 인지 테스트로 확인(연비 앱 방식)
-  4. AdMob 앱 설정 → Blocking controls → 민감 카테고리 차단(Religion 은 허용) 안내
-  5. 1.0 승인 뒤: AdMob 에 스토어 링크 연결, 빌드 37 로 1.0.1 제출(심사 메모·녹화는 `docs/tolle-review.html` 재사용)
-- 사용자 대기: ASC 재제출 결과 · AdMob 완료 화면 캡처
+  1. 사용자가 답장 보냈는지 확인 → Apple 응답 기다리기(보통 1~3일)
+  2. 응답이 **승인/재심사 진행** → AdMob 진짜 ID(아래 3) 넣은 빌드 37 을 1.0.1 로
+  3. AdMob(사용자): soulfulfillable 계정 → Apps → Add app(iOS, 스토어 No, `Tolle`) → Add ad unit → Banner → `banner` → 완료 캡처 → `lib/core/ads.dart`·`Info.plist` 교체 → `flutter test` → Release iOS(tolle) → 빌드 37 (Reset Book 포함)
+  4. 응답이 **또 4.3** → 재제출 금지. 계획 B(큰 차별 변경 후에만 새 빌드, 기획 파트너와): ① 오늘 화면 '와 포인트' 강화(읽은 순간 지도 애니메이션·연간 회고 카드) ② 잠금화면 위젯(2차로 미뤘던 것) ③ 기도·묵상 음악 탭(앰비언트 엔진) ④ Verse Weave 암송 퍼즐을 이 앱 기능으로 합치기 — 4.3 문항 3·6 에 답이 커진다. 그래도 안 되면 App Review Board 이의 제기
+  5. 계정 위험: Speed 5.6·Kitty Queens 4.3·Tolle 4.3 → `board/_shared.md` 의 "새 Submit 보류" 방침 따르기
+- 사용자 대기: 4.3 답장 Send · AdMob 완료 캡처(급하지 않음)
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/bible-reading.md "🔁 이어받기" 와 plans/bible-reading-app.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 ## 지금 상태 (3줄 이내)
-**Tolle: Bible Reading Plan** (`tolle_app/`, 번들 `com.soulfulfill.tolle`, ASC id 6819705454). 1.0(빌드 36) 10-07 제출 → 10-08 2.1 정보 요청 → 10-12 답장+영상 → 재제출 안내(결과 미확인). 광고는 아직 Google 테스트 ID.
+**Tolle: Bible Reading Plan** (`tolle_app/`, 번들 `com.soulfulfill.tolle`, ASC id 6819705454). 1.0(빌드 36) 10-07 제출 → 10-08 2.1 정보 요청 → 10-12 답장+영상 → 재심사 → **10-19 4.3 Spam + 4.2.6 반려** → 9문항 답장 준비(재제출 금지). 광고는 아직 Google 테스트 ID.
 기능: 오늘 분량(절 수 균형)·Mark as Read·1,189칸 지도·책별 장 직접 체크·Reset Book·계획 15종(성경순/연대순)·밀림 조정·알림·CSV. 테스트 47 · 웹 터치 17/17.
 웹 미리보기 https://soulfulfillable.github.io/test-mvp/bible-reading-app/index.html · 검수 https://soulfulfillable.github.io/test-mvp/bible-reading-qa.html · 심사 답장 https://soulfulfillable.github.io/test-mvp/tolle-review.html
 
@@ -28,6 +28,7 @@
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-20 | (ASC 캡처) 1.0(36) Rejected **4.3.0 Design: Spam** — "Guidelines 4.3 - Spam and 4.2.6 - App Generation Services" (10-19), 9문항 답하라·변경 없이 재제출 금지 | 캣도쿠와 같은 사례 → 재제출 말고 답장. 9문항 답 `tolle_app/store/review-reply-4.3.md`(7번 공유 코드는 사실대로: 알림·광고 래퍼·작은 UI 부품 재사용, 핵심은 이 앱 전용), `docs/tolle-review.html` 맨 위에 복사 버튼 |
 | 10-12 | (폰 캡처) App Review → 수요일 8:48 PM 제출 "Unresolved Issues" — "저거때문아님가?" | 맞음: 답장한 그 제출이 아직 열려 있음. 그 제출을 눌러 **Resubmit to App Review**(이제 파란색이어야 함) → Waiting for Review 확인. 회색이면 캡처 받기(Cancel Submission 은 답장 맥락을 잃을 수 있어 마지막 수단) |
 | 10-12 | "아예 싹 초기화하기 이런게잇어도 좋겟지? 전체는 위험하니 각 책마다 해노ㅗ을까 그래서 진짜할거냐면 확인한번 받고" | 이미 책마다 확인 창 있는 지우기가 있었음 → 눈에 띄게 **Reset Book** 으로 이름 바꾸고 확인 창 문구를 "Reset Psalms? … This can’t be undone. Chapters finished in your reading plan stay." 로. 전체 초기화는 만들지 않음(사용자 판단과 같음). 계획 진행은 Plan 에서 새 계획 시작(확인 창)으로만 초기화. 테스트 47·웹 17/17. 앱 반영은 다음 빌드 |
 | 10-12 | (폰 캡처) iOS App Version 1.0 "Ready for Review" — "이거는 이제 기다리는건가" | 아직 아님: Ready for Review = 제출 전 상태. **Add for Review → Submit to App Review** 해야 Waiting for Review. PC 에서 하라고 안내 |
