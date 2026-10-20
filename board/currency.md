@@ -1,20 +1,12 @@
 # Glance FX (환율 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-17 (KST)
+마지막 갱신: 2026-10-20 (KST)
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-17 (currency 개발 세션)
-- 작업 브랜치: `claude/app-store-justification-presentation-9ktgmm` · 방금 끝낸 것: v1.0 에 **빌드 39** 연결(사용자 Add Build → 39 → Update Review, 10-12). 빌드 38·39 는 고쳐진 Release iOS(인증서 보관)로 서명 — 9·15 는 ITMS-90035 로 못 씀
-- 진행 중이던 것: 없음 (심사 결과 대기. Waiting for Review 화면은 사용자에게서 아직 못 받음 — 확인 못 함)
-- **다음 할 일**: ① 사용자에게 상태 확인(Waiting for Review / In Review / Ready for Distribution / Rejected) ② 반려면 메시지 원문 받아 대응(2.1 답장 원문 `currency_app/store/review/2026-10-03-reply.md`) ③ 승인되면 AdMob 앱에 스토어 링크 연결 + 지급 정보 안내(AdMob 계정 = soulfulfillable, `board/_shared.md`) ④ 다음 버전: 금·코인 보이는 스크린샷 교체
+- 마지막 저장: 2026-10-20 (currency 개발 세션)
+- 작업 브랜치: `claude/app-store-justification-presentation-9ktgmm` · 방금 끝낸 것: 빌드 39 가 **4.3 Spam + 4.2.6** 반려(10-19). 9문항 답장 초안 `currency_app/store/review/2026-10-20-4.3-reply.md` + 폰 복사 페이지 `docs/currency-review.html`
+- 진행 중이던 것: 사용자 답장 붙여넣기·Send 대기 (재제출은 하지 않음)
+- **다음 할 일**: ① 사용자 Send 확인 ② 답장 결과 대기 — 통과면 AdMob 스토어 링크·지급 정보 ③ 또 4.3 이면 재제출 금지 → 큰 차별 변경(예: 여행 모드·오프라인 지갑 등, 기획 파트너와) 후에만, 또는 App Review Board 이의 ④ 계정에 4.3(Catdoku)·5.6 사례가 쌓임 — 새 앱 제출 속도 조절을 기획 파트너와 의논
 - 주의: Actions 는 MCP 로 owner `hugoseong0721` 호출. Release iOS 대기 줄 1칸 — 누르기 전 queued 확인. 빌드 번호 = 실행 번호
-- 이어받는 세션에 붙여 넣을 말:
-  `soulfulfillable/test-mvp 의 board/currency.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
-
-## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- 마지막 저장: 2026-10-12 (기획 파트너가 게시판 기준으로 채움 — 개발 세션이 다음 저장 때 덮어쓴다)
-- 작업 브랜치: (세션이 적기) · 방금 끝낸 것: v1.0 빌드 9 재제출 → 2.1 정보 요청 받음(새 계정 정형 요청)
-- 진행 중이던 것: 없음
-- **다음 할 일**: 사용자: 2.1 답장(녹화+글) → Resubmit. 승인되면 1.0.1(빌드 15) 제출, AdMob 스토어 링크
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/currency.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
@@ -26,12 +18,13 @@ v1.0 빌드 8 반려(2.1) → 빌드 9 재제출 → 10-12 **Invalid Binary** �
 
 ## 다음 할 일 / 사용자에게 받을 것
 - ✅ 빌드 39 연결 + 사용자 Update Review (10-12).
-- [대기] 심사 결과 메일.
+- ❌ 10-19 4.3 Spam + 4.2.6 반려 → 9문항 답장(재제출 X). [사용자] https://soulfulfillable.github.io/test-mvp/currency-review.html 에서 복사 → Reply → Send.
 - [세션] 승인되면: AdMob 에 스토어 링크 연결·결제 정보 안내, (1.0.1 은 다음 변경 생길 때)
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
 | 날짜 | 원문 | 반영 |
 |---|---|---|
+| 10-20 | 4.3 Spam + 4.2.6 반려 메시지 원문 | 9문항 답장 초안·복사 페이지. 재제출 안 함 |
 | 10-12 | "저거로 하라는거지 39?" (Add Build 화면) | 39 선택 → Done → Update Review 안내 |
 | 10-12 | ITMS-90035 메일(빌드 15) | 원인: 옛 release-ios 가 인증서 revoke. 다른 세션이 인증서 보관으로 수정함 → 빌드 39 재업로드 |
 | 10-12 | 왼쪽 메뉴 "1.0 Invalid Binary" 스크린샷 | asc-metadata 로 빌드 15 연결 → 사용자 Update Review → Waiting for Review |
