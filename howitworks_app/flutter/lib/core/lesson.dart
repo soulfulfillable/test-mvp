@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io' show gzip;
 
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'scene.dart';
 
@@ -78,9 +77,11 @@ class LessonIndexEntry {
         title = m['title'] as String,
         cat = m['cat'] as String,
         day = m['day'] as int,
-        mins = m['mins'] as int;
+        mins = m['mins'] as int,
+        thumb = Scene(m['thumb'] as Map<String, dynamic>, m['vb'] as List);
   final String key, title, cat;
   final int day, mins;
+  final Scene thumb;
 }
 
 /// 레슨 묶음. 목록은 index.json, 본문(도해 포함)은 열 때 한 개씩 풀어 읽는다.
@@ -92,7 +93,8 @@ class LessonLibrary {
 
   static Future<LessonLibrary> load([AssetBundle? bundle]) async {
     final b = bundle ?? rootBundle;
-    final idx = jsonDecode(await b.loadString('assets/lessons/index.json')) as List;
+    final raw = await b.load('assets/lessons/index.json.gz');
+    final idx = jsonDecode(utf8.decode(gzip.decode(raw.buffer.asUint8List(raw.offsetInBytes, raw.lengthInBytes)))) as List;
     final list = idx.map((e) => LessonIndexEntry(e as Map<String, dynamic>)).toList()..sort((a, b) => a.day.compareTo(b.day));
     return LessonLibrary(list, b);
   }

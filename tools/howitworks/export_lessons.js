@@ -1,6 +1,6 @@
 // How It Works: 웹 엔진(docs/how-it-works.html)의 레슨 30개를 Flutter 앱이 직접 그릴 수 있는 데이터로 뽑는다.
 //   node tools/howitworks/export_lessons.js [--only key1,key2] [--fps 30]
-// 출력: howitworks_app/flutter/assets/lessons/<key>.json.gz + index.json
+// 출력: howitworks_app/flutter/assets/lessons/<key>.json.gz + index.json.gz (목록 + 정지 썸네일)
 //
 // 장면(scene) = 그림을 "잎(leaf: path 또는 text)" 목록으로 평탄화한 것. 잎마다 viewBox 좌표로 가는 행렬, 계산된 색·선 굵기·투명도,
 // 소속 부품 번호(part)·최상위 그룹 정보(강조 때 흐릴지)·clip 을 담는다. CSS 는 브라우저가 계산한 값(getComputedStyle)을 그대로 쓴다.
@@ -177,9 +177,12 @@ function pageExport(key, fps) {
     fs.writeFileSync(path.join(OUT, k + '.json.gz'), zlib.gzipSync(json, { level: 9 }));
     const dynRuns = data.scene.runs.filter(r => r.dyn);
     console.log(`${k}: ${(json.length / 1024).toFixed(0)} KB, 잎 ${data.scene.runs.reduce((s, r) => s + (r.l ? r.l.length : r.s.length), 0)}, 움직이는 묶음 ${dynRuns.length} (고유 프레임 ${dynRuns.reduce((s, r) => s + r.u.length, 0)})`);
-    index.push({ key: k, title: data.title, cat: data.cat, day: data.day, mins: data.mins });
+    // 목록 썸네일: 정지 그림만 (움직임 프레임 없이)
+    const thumb = { fps: data.scene.fps, frames: 0, clips: data.scene.clips, lead0: null,
+      runs: data.scene.runs.map(r => ({ l: r.dyn ? r.s : r.l })) };
+    index.push({ key: k, title: data.title, cat: data.cat, day: data.day, mins: data.mins, vb: data.vb, thumb });
   }
-  if (!opt('--only')) fs.writeFileSync(path.join(OUT, 'index.json'), JSON.stringify(index));
+  if (!opt('--only')) { fs.writeFileSync(path.join(OUT, 'index.json.gz'), zlib.gzipSync(JSON.stringify(index), { level: 9 })); try { fs.unlinkSync(path.join(OUT, 'index.json')); } catch (e) {} }
   if (errs.length) { console.error('페이지 오류', errs); process.exit(1); }
   await b.close();
 })();
