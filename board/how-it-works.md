@@ -2,6 +2,7 @@
 마지막 갱신: 2026-10-17 (KST) — 레슨 30개·이름·번들 완료, Flutter 이식 A/B 대기
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- ⏸️ **2026-10-23 보류 (사용자 결정)**: 대표 앱이 Kitty Queens 로 바뀜 — 사용자 "how things work 도 말고, 이거로 해". 아래 내용(만져서 아는 앱 A 방향, 네이티브 1차 화면)은 재개할 때를 위해 그대로 둔다. **재개 지시 전엔 작업하지 않는다.**
 - 마지막 저장: 2026-10-20 (기획 파트너 — "만져서 아는 앱" A 방향 전환·Google Play 시도 기록) · 작업 브랜치: `claude/how-it-works` (main 반영, 커밋 안 된 작업 없음)
 - 방금 끝낸 것: 이름 확정 **How Things Work: Engineering** / 부제 Everyday Objects, Explained (`howitworks_app/store/ios-listing.md`),
   번들 **`com.soulfulfill.howthingswork` 등록 완료**(Actions iOS 번들 ID 등록 run 38916038511), `docs/todo.html` 에 앱 값 추가

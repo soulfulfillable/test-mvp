@@ -2,6 +2,13 @@
 마지막 갱신: 2026-10-17 (KST) — 1.1.0(빌드 37) 재제출
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- 🚩 **2026-10-23 (기획 파트너): Kitty Queens 가 계정의 대표 앱이 됐다**(How Things Work 대신, 사용자 결정). 사용자 원문: "how things work 도 말고, 이거로 해. 이거 베타 테스터 필요하면 구해보자".
+  **다음 할 일 (이 순서)**:
+  ① **TestFlight 외부 테스트 그룹 + 공개 링크** — `.github/scripts/asc_testflight.py` 는 지금 내부 그룹 `me` 만 만든다 → 외부 그룹(`isInternalGroup:false`, `publicLinkEnabled:true`, `publicLinkLimit` 100 정도) 생성 + 빌드 37 연결 + Beta App Review 제출(`betaAppReviewSubmissions`, 테스트 안내 문구 `betaBuildLocalizations.whatsNew`) 을 추가. 공용 스크립트라 고치기 전 `board/_shared.md` 에 적기. 외부 베타 심사는 보통 하루 안팎 — 결과 확인 못 하면 "확인 못 함"이라고 적기
+  ② 공개 링크가 나오면 `docs/beta.html` 의 [링크] 자리에 넣고 사용자에게 전달(문구는 이미 Kitty Queens 용으로 바뀜)
+  ③ 피드백 원문을 `catdoku_app/store/beta-feedback.md` 에 테스터 A/B/C…(이름·연락처 없이)로 모으고, 고친 것을 빌드별로 기록 → 반영 빌드(1.1.1 등) Release iOS
+  ④ 테스터 10명+·반영 빌드가 생기면 `review-reply-4.3.md` 4번을 **실제 외부 베타 내용으로 다시 쓰고**(지금 초안은 내부 테스트뿐 — 부풀리지 말 것), 5번 "유일한 게임" 문구도 계정 상태에 맞는지 다시 확인 → 기획 파트너·사용자 확인 뒤에만 답장/재제출
+  ⑤ (선택, 사용자 A/B 필요) Google Play 비공개 테스트(개인 계정 12명×14일)에 Kitty Queens 안드로이드를 같이 올려 같은 테스터를 쓴다
 - 마지막 저장: 2026-10-20 (개발 세션)
 - 작업 브랜치: `claude/determined-feynman-sjoyxp` · 방금 끝낸 것: 빌드 16·23 이 ITMS-90035(Invalid Signature, 옛 Release iOS 가 인증서 revoke)로 Invalid Binary → 버전 번호를 1.1.0 으로 바꾸고 Release iOS 재실행 → **빌드 37(1.1.0, 조용한 막힘 안내 포함)** 을 연결해 재제출 안내(앱 + Unlock All Levels 함께).
 - 진행 중이던 것: **보류** — 8개 앱 일괄 반려(4.3). 4.3 답장 초안은 있으나 **보내지 않음**. 사용자가 기획 세션에 포트폴리오 방향(A: 2~3개만 남기고 통합 추천) 문의 중
