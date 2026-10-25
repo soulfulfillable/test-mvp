@@ -4269,5 +4269,93 @@
       "TCM body constitution classification machine learning"
     ],
     "first_seen": "2026-10-22"
+  },
+  {
+    "id": "doi:10.2196/95851",
+    "title": "Comparative Evaluation of ChatGPT, DeepSeek, and Physician-Generated Acupuncture Treatment Protocols Across Chinese and English Language Settings: Cross-Sectional Evaluation Study.",
+    "authors": [
+      "Liu X",
+      "Guo Z."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.2196/95851",
+    "abstract": "<h4>Background</h4>Traditional Chinese medicine (TCM) has received increasing attention in evidence-based medicine. However, its largely experience-based and practice-oriented nature has slowed modernization and standardization. Advances in AI provide new opportunities for integrating AI with TCM.<h4>Objective</h4>This study evaluates the application of large language models (LLMs), including ChatGPT (OpenAI) and DeepSeek, in generating acupuncture treatment protocols. We compare the validity and clinical effectiveness of physician-generated protocols with those produced by LLMs, examine differences in outputs across language corpora (Chinese and English), and establish a standardized assessment framework for systematically assessing the effectiveness of acupuncture point selection. Ultimately, this research aims to support the standardization of acupoint selection and promote greater consistency, reliability, and evidence-based development in acupuncture practice.<h4>Methods</h4>Qualified acupuncture treatment cases published in Acupuncture in Medicine were identified and translated from English into Chinese to create a bilingual case dataset. Standardized case prompts were independently input into DeepSeek and ChatGPT to generate acupuncture treatment protocols. Ten senior TCM physicians evaluated the AI-generated and physician-generated protocols using 7 criteria: local point selection, distal point selection, syndrome-based point selection, meridian-tracing point selection, neuroanatomical point selection, core acupoint selection, and synergistic effects. Repeated-measures ANOVA with sphericity assessment was used to examine differences across LLMs, language corpora, and protocol groups.<h4>Results</h4>Blinded expert evaluations revealed significant differences among the 5 acupuncture groups for local point selection (P=.006), syndrome-based point selection (P=.005), neuroanatomical point selection (P<.001), and core acupoints coverage principle (P=.03). For local point selection, DeepSeek Chinese output received higher scores than the other evaluated outputs, while ChatGPT English output scored higher than ChatGPT Chinese output. For syndrome-based point selection, the journal physician-generated protocols received lower scores than the DeepSeek Chinese, DeepSeek English, and ChatGPT Chinese outputs. For neuroanatomical point selection, DeepSeek English output achieved the highest scores among the 5 groups. For core acupoints coverage, the journal physician-generated protocols received lower scores than the DeepSeek Chinese, DeepSeek English, and ChatGPT English outputs. No significant differences were observed among the 5 groups for distal point selection, meridian-tracing point selection, or therapeutic synergy. Overall, DeepSeek performed better in the Chinese-language setting, whereas ChatGPT performed better in the English-language setting.<h4>Conclusions</h4>AI has demonstrated substantial progress in encoding explicit acupuncture knowledge and performing systematic acupoint selection. However, challenges remain in individualized treatment and consistency across linguistic contexts. Enhancing bilingual or multilingual training corpora and developing syndrome-specific reasoning modules may improve the clinical applicability of AI-assisted TCM systems.",
+    "matched_queries": [
+      "tongue image constitution reasoning language model"
+    ],
+    "first_seen": "2026-10-25"
+  },
+  {
+    "id": "doi:10.1002/imt2.70185",
+    "title": "Artificial intelligence models Traditional Chinese Medicine principles to integrate with biomedicine.",
+    "authors": [
+      "Li H",
+      "Cheng X",
+      "Huang Z",
+      "Luo J",
+      "Xu Q",
+      "Zhao Q",
+      "Guo T",
+      "Zhang Y",
+      "Zhong LLD",
+      "Bian Z",
+      "Tang L",
+      "Lyu A",
+      "Tian L."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1002/imt2.70185",
+    "abstract": "Using 26,339 model-eligible Traditional Chinese Medicine (TCM) formula records, we trained an autoencoder following TCM's compression-expansion logic to learn the TCM embedding space (TCM-ES), quantifying symptom-pattern-formula mappings. TCM-ES aligns with conventional TCM principles not used in training. Biomedical entities were mapped post hoc into the fixed space, supporting formula prediction, retrospective clinical analyses, and exploratory therapeutic prioritization.",
+    "matched_queries": [
+      "traditional chinese medicine knowledge graph syndrome differentiation"
+    ],
+    "first_seen": "2026-10-25"
+  },
+  {
+    "id": "epmc:PMC/PMC13684383",
+    "title": "Quality criteria for measuring properties of diagnostic scale for Traditional Chinese Medicine syndromes",
+    "authors": [
+      "FANG G",
+      "LI L",
+      "LI X",
+      "CHEN J",
+      "ZHOU X",
+      "HU Z."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://europepmc.org/article/PMC/PMC13684383",
+    "abstract": "",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-10-25"
+  },
+  {
+    "id": "doi:10.2196/93369",
+    "title": "Application of Immersive and Semi-Immersive Extended Reality Training Systems in Acupuncture Education: Scoping Review.",
+    "authors": [
+      "Jeong H",
+      "Park H",
+      "Ahn J",
+      "Kim KH",
+      "Lee H",
+      "Bang T",
+      "Kang MJ",
+      "Lee S",
+      "Rhee Y",
+      "Kim SK",
+      "Ko SG."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.2196/93369",
+    "abstract": "<h4>Background</h4>Acupuncture training requires precise acupoint localization and needle control, yet peer-to-peer practice raises safety concerns and physical phantoms offer limited anatomical fidelity. Extended reality (XR) is increasingly used in health professions education, but immersive and semi-immersive XR training systems for acupuncture have not been mapped.<h4>Objective</h4>This scoping review aimed to map the applications, hardware modalities, and reported technical and educational outcomes of immersive and semi-immersive XR training systems in acupuncture education.<h4>Methods</h4>This review followed the PRISMA-ScR (Preferred Reporting Items for Systematic Reviews and Meta-Analyses extension for Scoping Reviews) and the five-stage scoping review framework of Arksey and O'Malley, as refined by Levac and colleagues. On September 19, 2026, we searched PubMed, Embase, Scopus, IEEE Xplore, CNKI, RISS, ScienceOn, and OASIS. No language or date restrictions were applied. Backward and forward citation searching supplemented the database search. Eligible sources were peer-reviewed original studies or full conference papers describing virtual reality (VR; either fully immersive [IVR] or semi-immersive [SIVR]), augmented reality (AR), or mixed reality (MR) systems for acupuncture training. Two reviewers independently screened records and charted the study design, hardware, training task, and outcomes. Each study was assigned an evidence tier.<h4>Results</h4>Of 6176 records, 3378 were screened after removal of duplicates and ineligible document types, 80 reports were assessed in full text, and 26 studies were included (25 from databases and 1 from citation searching). Most studies came from East Asia (25/26, 96.2%), mainly China (n=18), and 20 (76.9%) were published between 2020 and 2026. Systems used VR (n=15), AR (n=5), or MR (n=6); 19 were IVR and 7 were SIVR. Training tasks addressed acupoint localization (n=13), needling skills (n=11), and clinical reasoning (n=2). Localization errors were reported with different metrics and were not directly comparable across systems. In a randomized comparison, a VR group scored higher on practical skills than a conventional instruction group (32.52, SD 2.28 vs 28.62, SD 2.77 points; <i>P</i><.001). In an MR simulator with depth-responsive vibrotactile feedback active in both sessions, mean depth error decreased from 6.41 mm in the first practice session to 3.58 mm in the second. Of the 26 studies, 7 used a comparative design; the rest were technical validation (n=6), system development (n=10), or case and survey reports (n=3). Reported barriers included headset weight, narrow field of view, tracking instability, and limited tactile fidelity.<h4>Conclusions</h4>Immersive and semi-immersive XR systems for acupuncture training have been developed mainly for acupoint localization and needling. Randomized comparisons reported higher test scores than conventional instruction, but most evidence came from system development reports and small feasibility studies. Randomized trials comparing XR-based and conventional training on objective localization and needling outcomes are needed before these systems are adopted for competency assessment.",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-10-25"
   }
 ]
