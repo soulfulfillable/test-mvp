@@ -43,11 +43,11 @@
 |---|---|---|
 | **Glance FX: Currency Converter** (`currency_app/`) | ITMS-90035 로 빌드 9·15 무효 → **빌드 39 연결해 재제출(10-12)**. 심사 결과 리포에 없음 | 사용자 ASC 상태 확인 → 승인 시 AdMob 스토어 링크 → v1.1(금·코인 스크린샷) |
 | **Cozy Coloring 정식판** (원형 `docs/coloring-book.html`) | **보류** (2026-10-02). 기획서 OK, 선화 수집·변환기·테스트 로봇까지 만듦 | 재개 시 `plans/coloring-app.md` 의 첫 메시지로 새 세션 |
-| **Glance Tides: Tide Chart** (물때, `tides_app/`) | 2026-10-19 **4.3 반려 → 단독 출시 중단**, Glance Solunar 에 합치는 중 (`plans/solunar-tides-merge.md`) | 솔루나 물때 섹션 개발 → 솔루나 TestFlight |
+| **Glance Tides: Tide Chart** (물때, `tides_app/`, `board/tides.md`) | **4.3 반려(10-19)** → 재제출 안 하고 **Solunar 에 물때 기능으로 합치기**로 결정(10-20, `plans/solunar-tides-merge.md`) | 포트폴리오 통합 결정까지 코드 이식 보류 |
 | **Glance Speed: GPS Speedometer** (GPS 속도계, `speedometer_app/`, `plans/speedometer-app.md`, `board/speedometer.md`) | 2026-10-08 **Guideline 5.6 거절**("심사 중 숨긴 기능") — 빌드 32 에 숨긴 기능 없음 | 사실 설명 답장 + Resubmit(사용자) → 다시 거절되면 안내 문구·Always 문구 제거 새 빌드 + App Review Board |
 | **Glance: Mortgage Calculator** (대출 계산기, `mortgage_app/`, `plans/mortgage-app.md`, `board/mortgage.md`) | 2026-10-03 Flutter 1차 완성·테스트 20개 통과·웹 미리보기 `docs/mortgage-app/`. 번들 `com.soulfulfill.mortgage` 등록 | 1.0(빌드 22) ITMS-90035 반려 → 1.1(빌드 30) 등록 정보 입력 완료, 재제출 대기 | 사용자 Resubmit → 승인 → AdMob 스토어 연결 |
 | **Glance dB: Decibel Meter** (소음 측정기, `decibel_app/`, `plans/decibel-app.md`, `board/decibel.md`) | 2026-10-05 1.0(빌드 28) 제출 → 10-06 **2.1 정보 요청**(새 계정 정형) → 답장·재제출 중 (`docs/decibel-review.html`) | 승인 후 AdMob 스토어 링크. 보정값 +94 를 NIOSH SLM 과 비교 → 1.0.1 |
-| **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) | ITMS-90035 로 빌드 16·23 무효 → **1.1.0(빌드 37) 재제출 안내(10-17)**, 앱 + Unlock All Levels | 사용자가 Submit 했는지 ASC 확인 → 승인 시 AdMob |
+| **Kitty Queens: Cat Sudoku** (Catdoku 앱, `catdoku_app/`, `plans/catdoku-app.md`) — **대표 앱(10-23)** | 1.1.0(빌드 37) **4.3 반려(10-19)**. 9문항 답장 초안 있음(베타 부분은 아직 내부뿐). **Google Play 앱 생성·설문 완료(10-23)** | TestFlight 외부 그룹+공개 링크 → 베타 10명+ → 반영 빌드 → 답장. Play: Android 기기 확인 → 안드로이드 빌드 → 비공개 테스트 12명×14일 |
 | **Kitty Path: Number Puzzle** (한붓 경로 퍼즐, `kittypath_app/`, `plans/path-puzzle-app.md`, `board/path-puzzle.md`) | 2026-10-03 Flutter 1차 완성·테스트 36개·웹 실제 터치 점검 24/24·웹 미리보기 `docs/path-puzzle-app/`. 번들 `com.soulfulfill.kittypath` Apple 등록 완료 | 아이콘·스토어 문구 → ASC 앱 레코드(사용자) → Release iOS → TestFlight → AdMob(제출 전) |
 | **Glance Solunar: Fishing Times** (낚시·사냥 시간, `solunar_app/`, `plans/solunar-app.md`, `board/solunar.md`) | 2026-10-06 `DESIGN.md` 리터칭(Cupertino·24시간 다이얼·낚시/사냥) 완료·테스트 37개·웹 점검 43/43·웹 미리보기 `docs/solunar-app/`. 번들 `com.soulfulfill.solunar`, AdMob 실제 ID(배너·보상형) | ASC 앱 레코드(사용자) → `Release iOS`(solunar) → TestFlight(초대 자동) → 스크린샷·심사 메모 |
 | **Glance MPG: Gas Mileage Log** (연비·정비 기록, `fuellog_app/`, `plans/fuel-log-app.md`, `board/fuel-log.md`) | **2026-10-06 1.0(빌드 33) 심사 제출 — Waiting for Review.** 번들 `com.soulfulfill.fuellog`, AdMob 배너(실제 ID), 테스트 48개 | 심사 결과 → (2.1 요청 시 녹화) → 승인 후 AdMob 스토어 링크 연결 → 리뷰·수익 확인 |
@@ -57,7 +57,7 @@
 | **Verse Weave 암송 퍼즐** (`plans/verse-weave-app.md`, `board/verse-weave.md`) | 2026-10-06 결정, 세션 시작 대기 | 이름·번들 → 개발 → TestFlight |
 | **소그룹 은사·기질 키트** (`plans/gifts-kit-app.md`, `board/gifts-kit.md`) | 10-06 문항 초안 완료(은사 70·기질 40), 사용자 검토 대기 | 검토 반영 → 채점·코드 엔진 |
 | **Blessing Jar 가족 축복 항아리** (`plans/blessing-jar-app.md`, `board/blessing-jar.md`) | 웹 시제품 완성(로봇 99/99, 10-17). 완전 무료·보관함 배너 1곳 확정 | **사용자 느낌** → 이름 A/B → Flutter |
-| **How Things Work: Engineering** (사물의 원리, `plans/how-it-works-app.md`, `board/how-it-works.md`) | 레슨 30개 웹 완성·로봇 통과, 이름 확정, 번들 `com.soulfulfill.howthingswork` 등록(10-16) | Flutter 이식 방식 A/B(사용자) → Flutter → TestFlight (제출은 속도계 5.6 해결 후) |
+| **How Things Work: Engineering** (`plans/how-it-works-app.md`, `board/how-it-works.md`) | ⏸️ **보류(10-23)** — 대표 앱이 Kitty Queens 로 바뀜. '만져서 아는 앱' 방향·네이티브 1차 화면(브랜치)은 보존 | 재개 지시 전엔 작업 안 함 |
 | 웹 미니게임 9종 (`docs/*.html`) | 웹으로 공개 중 | 앱화 후보 고르기 (아래 백로그) |
 | 한의학(clinic) 앱 (`lib/`, `android/`) | 보류 | 재개 여부 미정 |
 
@@ -100,6 +100,11 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-23 | Google Play 에 Kitty Queens 앱 생성·앱 콘텐츠 설문·카테고리(Game/Puzzle)·연락처 완료(사용자). **스토어 연락처 메일은 정식 출시 전에 `soulfulfill` 이 들어간 새 Gmail 로 교체**(A). 남은 것: 스토어 등록·안드로이드 빌드·비공개 테스트(2. Dok 세션) | 지금 연락처 메일에 실명 일부가 들어 있어 스토어 공개 시 노출 — 실명 노출을 싫어하는 사용자 방침. 사용자 "A 괜찮아" |
+| 2026-10-23 | **Google Play 첫 앱 = Kitty Queens**(How Things Work 대신). 같은 베타 테스터로 iOS TestFlight + Play 비공개 테스트(12명×14일)를 함께 돌린다. Play 계정은 등록 거의 끝, 남은 것 = **Android 기기 접근 확인**(Play Console 홈 → "Verify that you have access to an Android mobile device" → QR 로 Play Console 앱 설치 → 같은 계정 로그인 → Verify, Android 10+ 실물 기기) | 사용자 "A로 같이 하자", "실제로 안드로이드에서 해보기 그런 거 하나만 남았던 것 같은데" |
+| 2026-10-23 | **대표 앱을 How Things Work → Kitty Queens 로 바꾼다.** How Things Work 는 보류(지우지 않음 — 웹 레슨 30개·네이티브 1차 화면 그대로, "만져서 아는 앱" 방향 기록 유지). Kitty Queens 는 **외부 베타 테스터를 실제로 모아** 피드백 반영 빌드를 만든 뒤, 그 근거로 4.3 9문항 답장(또는 큰 변경 재제출). 테스터 모집: TestFlight 외부 그룹 + 공개 링크, 모집 문구 `docs/beta.html` | 사용자 원문: "너 말 들어서 된 게 없는 것 같애. how things work 도 말고, 이거로 해. 이거 베타 테스터 필요하면 구해보자". 이미 심사까지 간 앱(1.1.0 빌드 37, 10-19 4.3 반려)이고, 답장 초안의 약점이 4번(외부 베타 없음)이라 테스터가 그 구멍을 직접 메운다 |
+| 2026-10-20 | **How Things Work 방향 = A "만져서 아는 앱"**: 배우는 앱은 그대로, 화면은 그림 위주·글은 단계마다 한 줄. ①**직접 작동시키기**(손잡이 내리면 변기 물이 빠지고, 레버 누르면 토스터가 튀어 오름 — 탭할 때마다 다음 단계) ②퀴즈는 글 보기 대신 **그림에서 부품 찾아 탭**. 30개 도해·사실 내용은 살린다. 순서: 웹 미리보기에서 레슨 2~3개(변기·토스터·지퍼) 먼저 바꿔 사용자 느낌 → OK 면 30개·네이티브 앱에 적용. B(조립·고장 찾기 게임으로 전면 전환)는 사실상 새 앱이라 안 함 | 사용자 웹 미리보기 직접 해 봄: "게임 같은 느낌은 아니네, 너무 텍스트 위주". 4.3 대비로도 "읽는 앱"보다 "돌려 보는 앱"이 차별점이 화면에서 바로 보임. 사용자 "A로 가자" |
+| 2026-10-20 | **Google Play 에도 시도** — 첫 앱은 How Things Work. Play 개발자 계정 = **개인**(최근 1~2달 전 생성, 개인 Gmail), AdMob 미연결. 개인 계정이라 프로덕션 전 **비공개 테스트 12명 × 14일 연속** 필수 → iOS 외부 베타 10명+ 모집과 한 번에 묶는다 | 사용자 "구글 안드로이드도 개발자 계정 등록했었는데 거기에 한번 해보자". 애플 4.3 과는 별개지만 Play 도 반복 콘텐츠 스팸 정책이 있어 여러 앱 동시 등록은 피함 |
 | 2026-10-20 | **Glance Tides 는 재제출하지 않고 Glance Solunar 에 물때 기능으로 합친다** (`plans/solunar-tides-merge.md`) | 10-19 4.3 Spam+4.2.6 반려. 솔루나와 해·달 코드 공유·낚시 용도 겹침 → 답장해도 6·7번 문항에서 불리, 계정에 5.6 도 있어 반복 반려 위험. 사용자 "솔루나에 합치기 (추천)" |
 | 2026-10-20 | Tolle 1.0 이 **4.3 Spam + 4.2.6** 반려(10-19) → 재제출 말고 9문항 답장(캣도쿠와 같은 방식). 또 4.3 이면 큰 차별 변경(위젯·음악 탭·암송 퍼즐 합치기 등) 후에만 새 빌드 | Apple "변경 없이 재제출하면 또 거절". 개인 계정에 앱이 몰린 패턴(Speed 5.6·Kitty Queens 4.3)과 같은 결 |
 | 2026-10-16 | **속도계 5.6 답이 올 때까지 다른 앱의 새 심사 제출 보류** (이미 심사 중인 건 유지, 개발·TestFlight 는 계속) | 5.6 이 같은 계정 앱에 연달아 오면 계정 정지 위험. 사용자 A/B "잠깐 멈추기 (추천)" |
@@ -218,6 +223,29 @@
 결과는 아래에 날짜별로 쌓는다 (최신이 위).
 
 <!-- 주간 점검 기록 -->
+
+### 2026-10-26
+
+**지난주 한 일** (커밋 약 20개, 앱 빌드·심사 Actions 실행 0건 — 제출 중지 기간이라 정상)
+- 10-19 **8개 앱 전부 4.3 스팸+4.2.6 반려** → 10-20 재제출·답장·새 제출 전면 중지.
+- 대표 앱: 10-20 How Things Work → **10-23 Kitty Queens 로 변경**(사용자: "너 말 들어서 된 게 없는 것 같애… 이거로 해"). How Things Work 보류.
+- **Google Play 시작**: 개인 계정, Kitty Queens 앱 생성·앱 콘텐츠 설문·카테고리·연락처 완료(10-23). 연락처 메일은 출시 전 soulfulfill 새 Gmail 로 교체(실명 노출 방지).
+- Tides 는 Solunar 에 합치기로(10-20). FX·Tolle·Kitty Queens 는 4.3 답장 초안을 만들어 둠.
+
+**막힌 것**
+- **Kitty Queens 외부 베타가 아직 시작 안 됨** — TestFlight 외부 그룹·공개 링크 스크립트(2. Dok 세션 ①번)가 남음. 이게 모든 것의 첫 단추.
+- Play: **Android 실물 기기 확인**(Android 10+) 이 남음 — 기기가 없으면 Play 는 여기서 멈춤.
+- ⚠️ 게시판 불일치: `board/currency.md`·`board/bible-reading.md` 는 아직 "사용자가 4.3 답장 Send" 를 다음 할 일로 적고 있음 → 공용 방침(대표 앱 외 답장 금지)과 충돌. 아래 결정 2 로 정리.
+- 확인 못 함 — 사용자 확인 필요: 사용자가 FX·Tolle 답장을 이미 보냈는지, Speed 5.6 결과, AdMob 수익.
+
+**트렌드** — 이번 주는 믿을 만한 최신 순위 자료를 못 찾음(검색 결과가 날짜 없는 요약뿐: [Barchart](https://www.barchart.com/story/news/22336042/apple-app-store-top-apps), [iDrop News 퍼즐](https://www.idropnews.com/?p=265608)). 새 후보 없음 — 지금은 새 앱보다 계정 회복이 먼저라 지난주 후보(색깔 정렬 퍼즐·파티 게임)는 그대로 백로그에.
+
+**이번 주 결정할 것 (A/B)**
+1. Kitty Queens 베타: **A. 2. Dok 세션이 이번 주 TestFlight 공개 링크까지 만들고, 링크 나오면 지인 + 레딧에 모집 (추천)** / B. 지인만 먼저
+2. FX·Tolle 4.3 답장: **A. Kitty Queens 결과 나올 때까지 보내지 않음 (추천 — 한 앱으로 계정 신뢰부터)** / B. 이미 써 둔 답장 지금 보냄 (이미 보냈다면 그대로 두고 알려 주기)
+3. Google Play: **A. Android 10+ 기기 빌리거나 중고로 구해 이번 주 확인 (추천 — 비공개 테스트 14일이 길어서 일찍 시작할수록 좋음)** / B. iOS 베타 끝나고
+
+**추천 작업 순서**: ①2. Dok 세션에 "외부 TestFlight 공개 링크 만들어" → ②링크로 베타 모집(`docs/beta.html`) → ③Android 기기 확인 → ④피드백 10개 모이면 반영 빌드 → ⑤그때 4.3 답장 검토
 
 ### 2026-10-19
 
