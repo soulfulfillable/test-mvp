@@ -4357,5 +4357,44 @@
       "TCM clinical decision support syndrome differentiation"
     ],
     "first_seen": "2026-10-25"
+  },
+  {
+    "id": "doi:10.1515/mr-2026-0006",
+    "title": "Rethinking large language model evaluation in traditional Chinese medicine: toward quality-grounded standards and fine-grained assessment.",
+    "authors": [
+      "Wang H",
+      "Wang J",
+      "Wang Q."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1515/mr-2026-0006",
+    "abstract": "Large language models (LLMs) are increasingly applied to clinical decision support for traditional Chinese medicine (TCM). However, current evaluation practices remain inadequate. Uncurated knowledge sources, such as un-selected ancient texts and web-crawled data, may contain outdated or prohibited recommendations. Specific clinical cases, even a single case, used as the benchmark may mislead the evaluation by individual experience instead of evidence-based consensus. Coarse-grained scoring strategies, such as true/false selections or holistic Likert ratings, obscure component-level errors and underestimate clinical complexity. TCM clinical reasoning is multidimensional, encompassing multiple coexisting syndromes and detailed procedural parameters. We propose a path forward built on two pillars: (1) structuring authoritative knowledge, including national clinical guidelines, industry standards, standard textbooks, the Chinese Pharmacopoeia, and consensus derived from large-scale high-quality cases; and (2) fine-grained, component-wise evaluation, in which complex TCM reasoning is decomposed into minimal assessable units across diagnosis and treatment, scored with component-level precision/recall and error grading, and judged primarily by the identification of critical errors that could cause medical harm, supplemented by expert-assessed global acceptability. Such quality-grounded, component-wise frameworks would enhance scientific credibility, support regulatory scrutiny and clinical adoption, and enable targeted model improvement aligned with the WHO Traditional Medicine Strategy 2025-2034.",
+    "matched_queries": [
+      "large language model traditional chinese medicine diagnosis dialogue"
+    ],
+    "first_seen": "2026-10-27"
+  },
+  {
+    "id": "doi:10.30498/ijb.2026.566118.4335",
+    "title": "Characteristics of Gut Microbiota in Patients with Polycystic Ovary Syndrome Across Different Traditional Chinese Medicine Syndrome Types.",
+    "authors": [
+      "Li H",
+      "Peng W",
+      "Huang X",
+      "Lv H",
+      "Chen J",
+      "Chen X",
+      "Feng Y",
+      "Xu Y."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.30498/ijb.2026.566118.4335",
+    "abstract": "<h4>Background</h4>Polycystic ovary syndrome (PCOS) is a common endocrine and metabolic disorder in women of reproductive age, and accumulating evidence suggests that gut microbiota dysbiosis plays an important role in its pathogenesis, although microbiota characteristics across different Traditional Chinese medicine (TCM) syndrome types remain poorly understood.<h4>Objective</h4>This study aimed to analyze the structural differences in intestinal microbiota between patients with PCOS and healthy women. It also sought to characterize the fecal microbiota features across three distinct PCOS subgroups based on TCM syndrome differentiation.<h4>Materials and methods</h4>A total of 107 newly diagnosed PCOS patients and 23 healthy controls were recruited. The PCOS cohort was subdivided according to TCM syndromes into liver meridian depression and fire (n=34), spleen deficiency and phlegm-dampness (n=41), and kidney deficiency and blood stasis (n=32). Fecal samples were analyzed by sequencing the V3-V4 regions of the bacterial 16S rDNA gene to assess variations in bacterial species, diversity, and structure.<h4>Results</h4>Significant differences in gut microbiota were observed. β-diversity indicated greater differences in gut microbial community composition in all PCOS subgroups compared to healthy controls, while α-diversity varied among the TCM subgroups. At the phylum level, Actinobacteria and Cyanobacteria abundances varied across the groups. At the genus level, the PCOS group showed elevated Megamonas. At the species level, Faecalibacterium prausnitzii was lower in the spleen deficiency and phlegm-dampness group, whereas Bacteroides uniformis was more abundant in healthy controls. Functional analysis indicated that differences were primarily related to bacterial metabolism and antibiotic synthesis.<h4>Conclusions</h4>The characteristics of intestinal microbiota vary among PCOS patients with different TCM syndrome types. This finding provides a basis for developing more precise diagnosis and treatment strategies for PCOS within the TCM framework.",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-10-27"
   }
 ]
