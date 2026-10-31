@@ -4438,5 +4438,172 @@
       "traditional chinese medicine syndrome differentiation decision tree"
     ],
     "first_seen": "2026-10-30"
+  },
+  {
+    "id": "doi:10.1016/j.chmed.2025.09.007",
+    "title": "Frankincense from &lt;i&gt;Boswellia&lt;/i&gt;: A review of species, traditional uses, phytochemistry, pharmacology and toxicology.",
+    "authors": [
+      "Sun X",
+      "Yang Y",
+      "Peng C",
+      "Huang Q",
+      "Wei J",
+      "Yang X."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.chmed.2025.09.007",
+    "abstract": "Frankincense, an oleogum resin from <i>Boswellia</i> species, has long been used in traditional medicine and rituals. However, unclear taxonomy, overharvesting, quality variation, and limited pharmacological insight hinder its sustainable use and scientific development. The aim of this review is to summarize the species, distribution, and current resource status of <i>Boswellia</i> plants as well as the formation process, harvesting, traditional uses, phytochemistry, pharmacology and toxicity of frankincense. It also discusses future research trends and development prospects for frankincense, providing guidance for further exploration and utilization. To achieve this, relevant information was systematically gathered from authoritative sources, including ancient books, doctoral and master's dissertations, the <i>Pharmacopoeia of the People's Republic of China</i>, Web of Science, PubMed, CNKI, Springer Link, Science Direct, Google Scholar, and Baidu Scholar. The genus <i>Boswellia</i> comprises approximately 24 known species, which produce frankincense, a highly aromatic resin widely used in traditional practices across Arabia, India, China, and Kenya. The <i>Pharmacopoeia of the People's Republic of China</i> notes the ability of frankincense to promote blood circulation, relieve pain, reduce swelling, and resolve stasis. Over 200 compounds have been identified and isolated from frankincense. Pharmacological studies have demonstrated that frankincense has antimicrobial, anti-inflammatory, anticancer, antiulcer, analgesic, antioxidant, hepatoprotective and neuroprotective effects, with no significant reported side effects or toxicity. However, owing to human activities and environmental degradation, <i>Boswellia</i> resources have become scarce. Some <i>Boswellia</i> species are now endangered, and current research is limited to only a few species, which restricts the development and utilization of frankincense. In summary, frankincense has a long history of medicinal use because of its complex chemical composition and diverse pharmacological activities. Therefore, a comprehensive scientific investigation is needed to ensure the sustainable utilization of frankincense resources, determine the material basis and mechanisms underlying its traditional uses, explore its potential applications in new fields, and increase its utilization.",
+    "matched_queries": [
+      "traditional chinese medicine syndrome differentiation decision tree"
+    ],
+    "first_seen": "2026-10-31"
+  },
+  {
+    "id": "doi:10.1016/j.chmed.2026.08.021",
+    "title": "A phenotype-molecule transfer learning model: Clinical analysis and mechanistic insights of Yinqiao Qingre Tablet in wind-heat syndrome common cold intervention.",
+    "authors": [
+      "Zhang T",
+      "Wang B",
+      "Zhang D",
+      "Liu P",
+      "Zhou Z",
+      "Fan Q",
+      "Wang L",
+      "He R",
+      "Xiao L",
+      "Cao L",
+      "Wang Z",
+      "Su W",
+      "Wu S",
+      "Zhao W",
+      "Liu Q",
+      "Xiao W",
+      "Li S",
+      "Wang Y."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.chmed.2026.08.021",
+    "abstract": "<h4>Objective</h4>With the advent of the precision medicine era, personalized treatment is becoming an increasingly important trend. However, despite the vast amounts of electronic medical records (EMR) data available, predicting an individual patient's genetic profile remains a significant challenge. Traditional Chinese medicine (TCM) may provide valuable insights into personalized precision medicine. This study aimed to develop a global prediction of syndrome/phenotype-molecule association within personalization (GPS-MAP) model for personalized syndrome/phenotype-molecule association prediction and to evaluate its potential application in identifying new clinical indications and underlying mechanisms of TCM formulas.<h4>Methods</h4>GPS-MAP integrates transfer learning, a multi-head mutual-attention mechanism, and large language models (LLMs) for personalized text descriptions. The model was pre-trained on diverse disease/phenotype data and subsequently fine-tuned using a limited TCM syndrome dataset. GPS-MAP was then combined with network target analysis to compare the potential therapeutic advantages of two clinically used TCM formulas and identify potential new clinical subtypes. The computational predictions were further evaluated by clinical Meta-analyses. Finally, <i>in vivo</i> experiments combined with multi-omics analyses were performed to investigate the mechanisms associated with key phenotypes of the newly identified indication.<h4>Results</h4>GPS-MAP achieved up to a 39.2% improvement in accuracy compared with two widely used TCM syndrome-molecule association prediction tools, SymMap and SoFDA. Using GPS-MAP and network target analysis, this study identified potential advantages of a TCM formula for treating wind-heat syndrome common cold (WHCC) compared with another clinically used formula and identified a new clinical subtype potentially responsive to this formula. Clinical Meta-analyses supported these predictions, demonstrating a significant clinical advantage of the formula in treating WHCC (<i>P</i> < 0.001) and significantly higher efficacy of YQQRT in the newly identified subtype (<i>P</i> < 0.05). Multi-omics analyses from <i>in vivo</i> experiments further indicated that the formula exerted multi-target effects primarily through restoration of immune regulation.<h4>Conclusion</h4>GPS-MAP provides a framework for personalized syndrome/phenotype-molecule association prediction by integrating transfer learning, attention mechanisms, and LLM-derived textual representations. Its application identified a potentially advantageous treatment and a new clinical subtype, while mechanistic analyses suggested that the associated therapeutic effects involve 14-3-3/forkhead box O1 (FOXO1)-centered signaling and the regulation of immune cell homeostasis, maturation, differentiation, and tracking.",
+    "matched_queries": [
+      "traditional chinese medicine syndrome differentiation decision tree"
+    ],
+    "first_seen": "2026-10-31"
+  },
+  {
+    "id": "doi:10.1016/j.chmed.2026.02.010",
+    "title": "HerbWise: A domain-specific large language model for traditional herbal medicine.",
+    "authors": [
+      "Xiao W",
+      "Cheng Q",
+      "Mao Y",
+      "Zhang P",
+      "Song C",
+      "Zhang S",
+      "Li Q",
+      "Wang B",
+      "Chen W."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.chmed.2026.02.010",
+    "abstract": "<h4>Objective</h4>Traditional herbal medicine (THM) plays a vital role in global healthcare, contributing significantly to health maintenance, disease prevention, and chronic illness management. Despite its widespread use, the modernization of THM faces significant challenges, including the lack of standardized methodologies and insufficient scientific validation. To bridge these gaps, this study presents HerbWise, a large language model (LLM) specifically designed for THM research and applications.<h4>Methods</h4>Built upon the ChatGLM3-6B framework, HerbWise integrates multidisciplinary knowledge from a high-quality dataset of 748 041 curated entries, encompassing herbal origins, medicinal parts, clinical applications, genomic data, and chemical constituents. HerbWise is trained using a multi-stage approach that combines pre-training, supervised fine-tuning (SFT), and reinforcement learning with human feedback (RLHF), enabling deep analysis and cross-disciplinary integration of THM knowledge. Additionally, HerbWise incorporates a retrieval-augmented generation (RAG) framework, enhancing its capabilities in compound interpretation, absorption, distribution, metabolism, excretion, and toxicity (ADMET) prediction, and knowledge-based question answering.<h4>Results</h4>Comprehensive benchmarking and case studies demonstrate that HerbWise outperforms existing general-purpose and domain-specific models across multiple traditional herbal medicine tasks. It not only accurately answers complex domain-specific knowledge questions but also effectively supports compound property prediction, demonstrating robust knowledge integration and reasoning capabilities. These functions are delivered through a user-friendly web interface (https://cbcb.cdutcm.edu.cn/HerbWise/) to support real-world applications.<h4>Conclusion</h4>By establishing a new standard for intelligent THM integration, this work underscores the transformative potential of LLMs in driving the scientific validation and global adoption of traditional medicine.",
+    "matched_queries": [
+      "large language model traditional chinese medicine diagnosis dialogue"
+    ],
+    "first_seen": "2026-10-31"
+  },
+  {
+    "id": "doi:10.1016/j.chmed.2026.08.013",
+    "title": "Generative models in traditional Chinese medicine: Advances and applications.",
+    "authors": [
+      "Sun D",
+      "Zhang C",
+      "Li G",
+      "Hu Y",
+      "Li S",
+      "Zhou W",
+      "Gao Y."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.chmed.2026.08.013",
+    "abstract": "Generative artificial intelligence is increasingly being applied across interdisciplinary fields, enabling cross-modal content generation-spanning text, images, and molecular structures-through self-supervised learning. Confronting persistent challenges in Traditional Chinese Medicine (TCM), such as compositional complexity, ambiguous mechanisms, and unstructured knowledge systems, generative models may provide useful approaches by bridging fragmented data sources and offering scalable tools for prescription generation, molecular design, and knowledge discovery. In practice, large language models (LLMs) convert classical texts and electronic records into structured knowledge for syndrome-aware prescription generation, while fragment-aware GPT-based chemical language models expand natural-product chemical space. This review systematically explores core paradigms and recent advances in applying generative models to TCM research, focusing on key domains including TCM knowledge Q&A, prescription generation, and molecular design. We further critically analyze methodological and ethical challenges while outlining future directions in the field, such as interpretable generative models, integration with TCM knowledge graphs, and novel multimodal training strategies.",
+    "matched_queries": [
+      "traditional chinese medicine knowledge graph syndrome differentiation"
+    ],
+    "first_seen": "2026-10-31"
+  },
+  {
+    "id": "doi:10.1016/j.apsb.2026.07.033",
+    "title": "Association between the use of traditional Chinese medicine patterns as an inclusion criterion and statistical significance in primary outcomes of randomized placebo-controlled trials of Chinese herbal formulas.",
+    "authors": [
+      "Bu Z",
+      "Song M",
+      "Chen C",
+      "Shi X",
+      "Wang X",
+      "Li Y",
+      "Chong J",
+      "Zhu Y",
+      "Jiang F",
+      "Chen Y."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.apsb.2026.07.033",
+    "abstract": "Randomized, placebo-controlled trials of Chinese herbal formulas (CHFs) are commonly used to evaluate efficacy, but a proportion of such trials fail to demonstrate statistically significant effects on primary outcomes. Some researchers have pointed out that excluding traditional Chinese medicine (TCM) pattern differentiation from inclusion criteria may reduce the alignment between treatment and enrolled patient characteristics, which could, in turn, affect observed efficacy. This study analyzed 378 randomized, placebo-controlled trials of CHFs with clearly defined primary outcomes that were published between January 1, 2020, and October 21, 2025, and identified through searches of eight databases. A total of 92,691 participants were included in the primary outcome analyses. Of these, 324 trials (85.7%) reported statistically significant results on primary outcomes, and 197 (52.1%) used TCM patterns as an inclusion criterion. Multivariable Poisson regression revealed that trials using TCM patterns were more likely to report statistically significant results (adjusted risk ratio [aRR] = 1.14; 95% CI: 1.06-1.23; <i>P</i> = 0.001). The association was generally consistent across prespecified subgroups and sensitivity analyses; however, only 52 studies (13.8%) were evaluated as low risk of bias according to the Cochrane Risk of Bias 2.0 tool. Because this study included only published trials and few published pattern-based trials reported statistically nonsignificant primary outcomes, the observed association should be interpreted cautiously and may be influenced by publication bias, selective outcome reporting, and contextual differences in research and reporting practices. Further high-quality, prospectively registered, methodologically rigorous, and better-standardized trials are needed to evaluate this association.",
+    "matched_queries": [
+      "traditional chinese medicine knowledge graph syndrome differentiation"
+    ],
+    "first_seen": "2026-10-31"
+  },
+  {
+    "id": "doi:10.1038/s43856-026-01875-1",
+    "title": "Benchmarking large language models for HIV medical decision support.",
+    "authors": [
+      "Cardenal-Antolin G",
+      "Fellay J",
+      "Jaha B",
+      "Günthard HF",
+      "Nemeth J",
+      "Kouyos R",
+      "Beerenwinkel N",
+      "Duroux D."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1038/s43856-026-01875-1",
+    "abstract": "<h4>Background</h4>Large language models (LLMs) are emerging as tools to support clinical decision making. HIV management is a compelling use case due to its complexity and dynamic nature, involving diverse treatment options, comorbidities, and adherence challenges. However, integrating LLMs into clinical practice raises concerns about accuracy, safety, and clinician acceptance. Despite growing interest, their performance in HIV care remains poorly studied, and benchmarking is lacking.<h4>Methods</h4>We developed HIVMedQA, a clinician-curated benchmark of HIV-related open-ended medical question-answer pairs spanning basic knowledge, clinical reasoning, complex patient vignettes, and bias-modified scenarios. We evaluated seven general-purpose and three medical LLMs. Performance was assessed using lexical similarity and an extended medical LLM-as-a-judge framework capturing key clinical dimensions, including question comprehension, reasoning, knowledge recall, bias, potential harm, and factual accuracy, to better capture nuances relevant to the medical domain, with additional evaluation by HIV-experienced physicians.<h4>Results</h4>Performance varies substantially across models and task complexity. Gemini 2.5 Pro achieves the highest overall scores, followed by Claude 3.5 Sonnet and MedGemma-27B. Knowledge recall is generally stronger than question comprehension or clinical reasoning. Medical LLMs do not consistently outperform general-purpose models, and model size alone does not predict performance. Several models are sensitive to cognitive bias prompts. LLM-as-a-judge scoring aligns better with clinician assessment than lexical metrics.<h4>Conclusions</h4>HIVMedQA provides a structured benchmark for evaluating LLMs in HIV clinical decision support. Current LLMs show promise, but limitations in reasoning, bias robustness, and safety indicate that careful validation, domain-specific evaluation, and clinician oversight remain essential before clinical deployment.",
+    "matched_queries": [
+      "chain of thought reasoning traditional chinese medicine"
+    ],
+    "first_seen": "2026-10-31"
+  },
+  {
+    "id": "doi:10.1097/md.0000000000051210",
+    "title": "Association between dampness syndrome severity and hyperuricemia after accounting for adiposity: A cross-sectional study.",
+    "authors": [
+      "Luo W",
+      "Liu W",
+      "Chen T",
+      "Xiang L",
+      "Liu M",
+      "Lu L",
+      "Huang J",
+      "Chen L",
+      "Zheng L",
+      "Cai X",
+      "Zhang W."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1097/md.0000000000051210",
+    "abstract": "Dampness syndrome is a symptom-based traditional Chinese medicine pattern frequently observed in individuals with metabolic disorders. However, whether dampness syndrome severity provides information on hyperuricemia (HUA) beyond conventional adiposity indicators remains unclear. This study examined the association between dampness syndrome severity and HUA and evaluated whether this association persisted after accounting for adiposity. This cross-sectional study used retrospective health-examination data from adults in 2024. Dampness syndrome severity was assessed using the Dampness Syndrome Scale of Chinese Medicine (DSSCM). Multivariable logistic regression and restricted cubic spline analyses were used to examine the association between DSSCM score and HUA. Body mass index (BMI) was included in the fully adjusted model, with waist circumference and waist-to-height ratio examined in sensitivity analyses. Because the DSSCM includes an explicit body obesity item, an additional sensitivity analysis recalculated the DSSCM score after excluding this item. Robust Poisson regression was performed to estimate prevalence ratios because HUA was common in the study population. Exploratory BMI-decomposition analysis was interpreted as statistical decomposition rather than causal mediation. Among 5973 participants, 3173 (53.1%) had HUA. In the model adjusted for demographic, renal, metabolic, and lifestyle covariates but not BMI, each 10-point increase in DSSCM score was weakly associated with higher odds of HUA (odds ratio = 1.041; 95% confidence interval: 1.004-1.079; P = .028). After additional adjustment for BMI, the association was attenuated and was no longer statistically significant (odds ratio = 1.011; 95% confidence interval: 0.975-1.048; P = .558). Sensitivity analyses using waist circumference and waist-to-height ratio as alternative adiposity indicators yielded consistent nonsignificant results. After excluding the body obesity item from the DSSCM score, the association was further weakened in multivariable models. BMI-stratified analyses showed no significant association across BMI strata. The association between dampness syndrome severity and HUA was substantially attenuated after accounting for adiposity. The DSSCM may help characterize symptom burden in integrative health assessment, but it was not independently associated with prevalent HUA after adjustment for adiposity indicators.",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-10-31"
   }
 ]
