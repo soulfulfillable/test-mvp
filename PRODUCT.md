@@ -101,6 +101,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-31 | YouTube Playables 퍼블리셔 채널 = **기존 Peblit 채널(A)** | 이미 있고 채널 이력이 승인에 유리할 수 있음. Playables 는 별도 탭이라 앰비언트 영상과 섞여도 무방. 사용자 "a" |
 | 2026-10-30 | **YouTube Playables 진출 — A(둘 다 동시)**: ①구글 Playables 관심 신청서 제출 ②파트너(Playgama 등) 경유로 게임 1~2개(캣도쿠·두더지) 신청. 재료 = `docs/` 의 HTML 게임(파일 1개·세로·탭 전용 → 기술 조건에 거의 그대로 맞음). Kitty Queens 애플·Play 베타는 그대로 병행. 준비물: 게임 카탈로그 페이지(`docs/games.html`), 영문 소개, Playables SDK 연동(개발 세션). 새 게시판 `board/playables.md` | 사용자가 유튜브 앱 안 Supersonic 게임(My Mini Mart 등, 플레이 수천만 회)을 보고 "이쪽으로 해볼 수 있을까" → 애플 4.3(비슷한 앱 다수) 문제가 여기선 없고 게임이 여럿인 게 오히려 유리. 아무나 못 올리는 구조(관심 신청서·초기 접근, 수익 배분 시범 단계)라 무료인 두 길을 동시에. 사용자 "추천대로 가자" |
 | 2026-10-23 | Google Play 에 Kitty Queens 앱 생성·앱 콘텐츠 설문·카테고리(Game/Puzzle)·연락처 완료(사용자). **스토어 연락처 메일은 정식 출시 전에 `soulfulfill` 이 들어간 새 Gmail 로 교체**(A). 남은 것: 스토어 등록·안드로이드 빌드·비공개 테스트(2. Dok 세션) | 지금 연락처 메일에 실명 일부가 들어 있어 스토어 공개 시 노출 — 실명 노출을 싫어하는 사용자 방침. 사용자 "A 괜찮아" |
 | 2026-10-23 | **Google Play 첫 앱 = Kitty Queens**(How Things Work 대신). 같은 베타 테스터로 iOS TestFlight + Play 비공개 테스트(12명×14일)를 함께 돌린다. Play 계정은 등록 거의 끝, 남은 것 = **Android 기기 접근 확인**(Play Console 홈 → "Verify that you have access to an Android mobile device" → QR 로 Play Console 앱 설치 → 같은 계정 로그인 → Verify, Android 10+ 실물 기기) | 사용자 "A로 같이 하자", "실제로 안드로이드에서 해보기 그런 거 하나만 남았던 것 같은데" |

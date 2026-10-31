@@ -35,7 +35,7 @@ button.done{opacity:.6}
 <script>
 const RAW='https://raw.githubusercontent.com/soulfulfillable/test-mvp/main/board/';
 // 세션 목록 = 사용자의 핀 순서·이름 그대로 (ops/sessions.md 와 같게 유지). 새 계정에서 이 순서대로 세션을 만들고 '이름 복사'로 제목을 붙인다.
-const SESSIONS=[['_planning','0. Head'],['currency','1. Currency'],['catdoku','2. Dok'],['mortgage','3. Calculate'],['decibel','4. Decibel'],['tides','5. Tid'],['speedometer','6. Speed'],['fuel-log','7. MPG Log'],['solunar','8. Solunar'],['ambient-engine','9. Music'],['bible-reading','10. Tolle'],['how-it-works','How It Works 앱 개발'],['path-puzzle','Kitty Path'],['blessing-jar','Blessing Jar'],['gifts-kit','Gifts Kit'],['verse-weave','Verse Weave']];
+const SESSIONS=[['_planning','0. Head'],['currency','1. Currency'],['catdoku','2. Dok'],['mortgage','3. Calculate'],['decibel','4. Decibel'],['tides','5. Tid'],['speedometer','6. Speed'],['fuel-log','7. MPG Log'],['solunar','8. Solunar'],['ambient-engine','9. Music'],['bible-reading','10. Tolle'],['playables','YouTube Playables'],['how-it-works','How It Works 앱 개발'],['path-puzzle','Kitty Path'],['blessing-jar','Blessing Jar'],['gifts-kit','Gifts Kit'],['verse-weave','Verse Weave']];
 const BOARDS=SESSIONS.map(x=>x[0]); const NAME=Object.fromEntries(SESSIONS);
 function pick(sec,label){const m=sec.match(new RegExp('^- \\**'+label+'\\**[^:：]*[:：]\\s*(.+)$','m'));return m?m[1].replace(/\*\*/g,'').trim():''}
 async function load(b){

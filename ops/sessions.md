@@ -16,7 +16,8 @@
 | ✅ | 8. Solunar | `board/solunar.md` | 공통 문장 (solunar) |
 | ✅ | 9. Music | `board/ambient-engine.md` | 공통 문장 (ambient-engine) |
 | ✅ | 10. Tolle | `board/bible-reading.md` | 공통 문장 (bible-reading) |
-| — | How It Works 앱 개발 | `board/how-it-works.md` | 공통 문장 (how-it-works) |
+| — | YouTube Playables | `board/playables.md` | 공통 문장 (playables) — 10-30 신설, 기존 HTML 게임을 유튜브 Playables 로 |
+| — | How It Works 앱 개발 | `board/how-it-works.md` | 공통 문장 (how-it-works) — 10-23 보류 |
 | — | Kitty Path / Blessing Jar / Gifts Kit / Verse Weave | `board/path-puzzle.md` 등 | 필요할 때만 |
 
 공통 문장: `soulfulfillable/test-mvp 의 board/<게시판>.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘.`

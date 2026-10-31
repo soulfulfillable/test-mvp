@@ -6,10 +6,10 @@
 - **다음 할 일 (순서)**:
   ① **게임 카탈로그 페이지 `docs/games.html`** — Supersonic 목록처럼 카드형(아이콘/스크린샷·이름·장르·한 줄 영문 설명·플레이 버튼). 대상 9개: catdoku(Kitty Queens), cats-vs-dogs, mole-mash, chicken-cross, daily-stairs, icecream-stack, firechase, poop-dodge, coloring-book. 헤드리스로 스크린샷 자동 캡처(1170×2532). 플레이 수 같은 지표는 없으니 적지 않는다
   ② **영문 소개 문안** `playables/pitch.md` — 스튜디오(Soulfulfill) 한 줄, 게임별 한 줄, 왜 Playables 에 맞는지(파일 1개·세로·탭 전용·오프라인·광고 자리 1곳). 회사명·실명 금지
-  ③ **사용자가 제출**: 구글 Playables 관심 신청서(developers.google.com/youtube/gaming/playables/support/contact 에서 링크) + Playgama 개발자 콘솔(캣도쿠·두더지 2개 먼저). 어느 유튜브 채널을 퍼블리셔로 쓸지 사용자 결정 필요 — A. 기존 Peblit 채널 / B. 게임 전용 새 채널
+  ③ **사용자가 제출**: 구글 Playables 관심 신청서(developers.google.com/youtube/gaming/playables/support/contact 에서 링크) + Playgama 개발자 콘솔(캣도쿠·두더지 2개 먼저). 퍼블리셔 채널 = ✅ **기존 Peblit 채널**(사용자 결정 10-31). 신청서의 채널 칸에 Peblit 채널 URL(사용자가 넣음 — 채널 관리 권한이 신청 계정에 있어야 함)
   ④ **Playables SDK 연동 1개 시범**(두더지 잡기가 가장 단순): 게임 준비 신호(`gameReady`/first frame), 일시정지·재개, 음소거, 저장(SDK 저장소 우선·localStorage 폴백), 외부 호출 0(폰트·CDN 없음 확인), 초기 용량 30MB 이하. **이 환경은 developers.google.com·playables.in 접속이 막혀 있어** SDK 문서는 사용자가 PDF/캡처로 주거나 네트워크 허용 뒤에
   ⑤ 승인/파트너 답이 오면 나머지 게임에 같은 틀 적용. 광고는 SDK 가 주는 방식만(AdMob 아님)
-- 사용자 대기: 퍼블리셔 채널 A/B, 신청서 제출(③)
+- 사용자 대기: 신청서 제출(③, 카탈로그 페이지 나온 뒤)
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 ## 지금 상태
