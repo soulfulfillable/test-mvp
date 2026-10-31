@@ -1,15 +1,18 @@
-name: Build Android (환율 앱)
+name: Build Android (앱 선택 → AAB/APK)
 
-# currency_app/flutter 가 바뀌면 안드로이드 앱 번들(AAB)과 APK를 만들어
-# Actions 아티팩트로 올린다. 내려받아 Play Console에 업로드하면 된다.
+# 앱을 골라 안드로이드 앱 번들(AAB)과 APK를 만들어 Actions 아티팩트로 올린다.
+# 내려받아 Play Console(비공개 테스트/프로덕션)에 업로드하면 된다.
+# 앱 추가: 아래 options 에 이름만 넣는다. 규칙: 폴더 <이름>_app/flutter, 패키지 com.soulfulfill.<이름>.
+# 빌드 번호(versionCode)는 실행 번호(run_number)라 올릴 때마다 커진다 (Play 는 같은 versionCode 를 두 번 안 받는다).
 #
 # 서명: 저장소 Secrets에 아래 4개가 있으면 그 키로 서명(=Play 업로드 가능),
-# 없으면 debug 키로 서명해 빌드만 확인한다 (Play 업로드는 불가).
+# 없으면 debug 키로 서명해 빌드만 확인한다 (Play 업로드는 불가). 업로드 키 하나를 모든 앱이 같이 쓴다
+# (Play App Signing 이 앱마다 다른 배포 키를 따로 관리하므로 괜찮다).
 #   ANDROID_KEYSTORE_BASE64  upload-keystore.jks 를 base64 로 인코딩한 문자열
 #   ANDROID_KEYSTORE_PASSWORD
 #   ANDROID_KEY_ALIAS
 #   ANDROID_KEY_PASSWORD
-# 만드는 법은 currency_app/flutter/README.md 참고.
+# 만드는 법은 currency_app/flutter/README.md 참고. 각 앱의 android/app/build.gradle.kts 가 android/key.properties 를 읽어야 한다.
 
 on:
   push:
@@ -18,20 +21,30 @@ on:
       - "currency_app/flutter/**"
       - ".github/workflows/build-android.yml"
   workflow_dispatch:
+    inputs:
+      app:
+        description: "앱 이름 — 폴더 <앱>_app/flutter, 패키지 com.soulfulfill.<앱>"
+        required: true
+        type: choice
+        default: currency
+        options: [currency, catdoku, mortgage, decibel, speedometer, tides, fuellog, solunar, kittypath, tolle]
 
 permissions:
   contents: read
 
 concurrency:
-  group: build-android
+  group: build-android-${{ inputs.app || 'currency' }}
   cancel-in-progress: true
+
+env:
+  APP: ${{ inputs.app || 'currency' }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: currency_app/flutter
+        working-directory: ${{ inputs.app || 'currency' }}_app/flutter
     env:
       # secrets 는 if 조건에서 바로 못 쓰므로 env 로 한 번 옮긴다
       KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
@@ -83,21 +96,28 @@ jobs:
         run: echo "::warning::서명 Secrets 가 없어 debug 키로 서명합니다. 이 빌드는 Play 업로드용이 아닙니다."
 
       - name: Build app bundle (Play 업로드용)
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --build-number=${{ github.run_number }}
 
       - name: Build APK (폰에 직접 설치해 볼 용도)
-        run: flutter build apk --release
+        run: flutter build apk --release --build-number=${{ github.run_number }}
+
+      - name: Summary
+        run: |
+          echo "### $APP 안드로이드 빌드 #${{ github.run_number }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- versionCode = ${{ github.run_number }} (Play Console 에 올릴 때 이 번호가 보인다)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 서명: $([ -n "$KEYSTORE_B64" ] && echo '업로드 키 (Play 업로드 가능)' || echo 'debug 키 (Play 업로드 불가)')" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 아래 Artifacts 의 \`$APP-aab\` 를 내려받아 Play Console → 테스트 트랙 → 새 릴리스에 업로드" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload AAB
         uses: actions/upload-artifact@v4
         with:
-          name: somrate-aab
-          path: currency_app/flutter/build/app/outputs/bundle/release/*.aab
+          name: ${{ env.APP }}-aab
+          path: ${{ env.APP }}_app/flutter/build/app/outputs/bundle/release/*.aab
           if-no-files-found: error
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: somrate-apk
-          path: currency_app/flutter/build/app/outputs/flutter-apk/app-release.apk
+          name: ${{ env.APP }}-apk
+          path: ${{ env.APP }}_app/flutter/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error

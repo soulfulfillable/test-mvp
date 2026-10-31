@@ -71,6 +71,9 @@
   누르기 전에 Actions 목록에서 `pending`/`queued` 인 Release iOS 가 있는지 보고, 있으면 그게 시작(in_progress)될 때까지 기다린다.
   (물때 세션이 10-03 에 소음 측정기 대기분을 이렇게 취소시켰다 → 바로 내 것 취소 + 그 실행 re-run 으로 되돌림.)
 
+- **`Build Android (앱 선택 → AAB/APK)`** (Dok 세션, 10-31): `build-android.yml` 도 앱 선택형. Run workflow → app 고르면 `<앱>-aab`/`<앱>-apk` 아티팩트.
+  versionCode = 실행 번호. 업로드 키는 Secrets `ANDROID_KEYSTORE_*` 하나를 모든 앱이 같이 쓴다 — 각 앱 `android/app/build.gradle.kts` 가 `key.properties` 를 읽게 해야 함(catdoku 것 복사).
+  Play 비공개 테스트 순서·등록 자료 양식: `catdoku_app/store/play-listing.md`. 스토어 그래픽 생성기 `catdoku_app/store/play/make.js`(1080×2160 폰 스크린샷·1024×500 피처).
 - `Release iOS` · `App Store 등록 정보 채우기` 워크플로: **앱 선택형으로 일반화됨** (Catdoku 세션, 2026-10-02).
   새 앱은 선택지(`options:`)에 자기 앱 이름만 추가한다 — 번들 ID 는 `com.soulfulfill.<이름>` 규칙으로 자동 (mortgage 세션, 10-03).
   번들 ID 가 이 규칙과 다르게 등록된 앱이 생기면 그때 매핑을 다시 넣는다.

@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Play Console "광고 ID 사용: 예" 선언과 맞춘다 (AdMob 광고·분석·사기 방지). 광고 SDK 도 넣지만 명시해 둔다. -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="Kitty Queens"
         android:name="${applicationName}"
@@ -30,7 +33,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <!-- AdMob 앱 ID (지금은 Google 테스트 ID). 없으면 광고 SDK 초기화 때 앱이 죽는다. -->
+        <!-- AdMob 앱 ID — ⚠️ 지금은 Google 테스트 ID. 사용자가 AdMob(soulfulfillable)에 Android 앱을 만들면 ~ 가 든 앱 ID 로 교체. 없으면 광고 SDK 초기화 때 앱이 죽는다. -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
