@@ -1,0 +1,67 @@
+name: TestFlight 외부 테스트 (외부 그룹 + 공개 링크 + Beta App Review)
+
+# 수동 실행 전용. 외부 테스터(아는 사람·공개 링크)용 그룹을 만들고 빌드를 Beta App Review 에 낸다.
+#   ① 수출 규정 → ② Beta App Review 연락처(비면 App Review 연락처 복사) → ③ 베타 앱 설명·피드백 메일
+#   → ④ What to Test(<앱>_app/store/testflight.json) → ⑤ 외부 그룹 "Beta Testers"(공개 링크, 정원 100)
+#   → ⑥ 빌드 연결 → ⑦ Beta App Review 제출(첫 빌드만 심사, 보통 하루 안팎) → 요약에 공개 링크.
+# 같은 빌드로 다시 돌리면 상태만 확인한다. `TestFlight 초대`(내부 그룹 자동) 와는 별개이고 Release iOS 대기 줄을 쓰지 않는다.
+# 이메일·연락처는 로그에서 가리고 요약에 쓰지 않는다 (.github/scripts/asc_testflight.py).
+
+on:
+  workflow_dispatch:
+    inputs:
+      build:
+        description: "빌드 번호 (= Release iOS 실행 번호, 예: 37)"
+        required: true
+      app:
+        description: "앱 이름 (예: catdoku) — 번들 com.soulfulfill.<앱>, 문구 <앱>_app/store/testflight.json"
+        required: true
+        type: choice
+        options: [catdoku, currency, mortgage, decibel, speedometer, tides, fuellog, solunar, kittypath, tolle]
+      group:
+        description: "외부 그룹 이름"
+        required: false
+        default: "Beta Testers"
+      limit:
+        description: "공개 링크 정원 (최대 10000)"
+        required: false
+        default: "100"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: testflight-external-${{ inputs.app }}
+  cancel-in-progress: false
+
+jobs:
+  external:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+      BUILD: ${{ inputs.build }}
+      BUNDLE: com.soulfulfill.${{ inputs.app }}
+      TF_INFO: ${{ inputs.app }}_app/store/testflight.json
+      GROUP_NAME: ${{ inputs.group }}
+      PUBLIC_LINK_LIMIT: ${{ inputs.limit }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write API key
+        run: |
+          mkdir -p "$RUNNER_TEMP/keys"
+          printf '%s\n' "$KEY_P8" > "$RUNNER_TEMP/keys/AuthKey.p8"
+          echo "KEY_PATH=$RUNNER_TEMP/keys/AuthKey.p8" >> "$GITHUB_ENV"
+
+      - name: External group, public link, Beta App Review
+        id: ext
+        run: |
+          python3 -m pip install -q pyjwt cryptography
+          python3 .github/scripts/asc_testflight.py external "$BUILD" "$BUNDLE"
+
+      - name: Remove API key
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/keys"
