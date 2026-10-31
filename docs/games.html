@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Soulfulfill Games</title>
+<meta name="description" content="Nine tap-only HTML5 games by Soulfulfill. Each one is a single file, portrait, works offline — built for YouTube Playables and other instant-play platforms.">
+<link rel="icon" href="favicon.png">
+<style>
+:root{--bg:#f2f2f7;--card:#fff;--ink:#1c1c1e;--sub:#6c6c70;--line:#e5e5ea;--acc:#0a7d6b;--acc-ink:#fff;--chip:#eef6f4}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--ink:#f2f2f7;--sub:#98989f;--line:#2c2c2e;--acc:#3fc7ad;--acc-ink:#00201a;--chip:#15302b}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font:16px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;padding:20px 16px 56px;-webkit-text-size-adjust:100%}
+main{max-width:1040px;margin:0 auto}
+header{margin:4px 0 20px}
+h1{font-size:28px;line-height:1.15;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.lead{color:var(--sub);font-size:15px;margin:0}
+.facts{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 0;padding:0;list-style:none;font-size:13px;color:var(--sub)}
+.facts li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--acc);margin:0 7px 2px 0;vertical-align:middle}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px 12px}
+.card{background:var(--card);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.shot{display:block;width:100%;height:auto;aspect-ratio:450/974;background:var(--line);object-fit:cover}
+.body{padding:10px 12px 12px;display:flex;flex-direction:column;flex:1;gap:4px}
+.name{font-size:15px;font-weight:600;line-height:1.25;margin:0}
+.genre{font-size:12px;color:var(--acc);font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+.desc{font-size:13px;color:var(--sub);margin:0;flex:1}
+.meta{font-size:12px;color:var(--sub);margin:2px 0 0}
+.play{margin-top:8px;display:flex;align-items:center;justify-content:center;height:40px;border-radius:10px;background:var(--acc);color:var(--acc-ink);font-weight:600;font-size:15px;text-decoration:none}
+.play:active{opacity:.75}
+section.notes{margin-top:28px;border-top:1px solid var(--line);padding-top:16px}
+h2{font-size:17px;font-weight:600;margin:0 0 8px}
+.notes p{margin:0 0 8px;font-size:14px;color:var(--sub)}
+.notes a{color:var(--acc)}
+@media (min-width:600px){.grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px 16px}.name{font-size:16px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Soulfulfill Games</h1>
+  <p class="lead">Nine short, tap-only games. Each one is a single HTML file that runs in any phone browser.</p>
+  <ul class="facts">
+    <li>Portrait, one-thumb play</li>
+    <li>30 seconds to a few minutes a round</li>
+    <li>No install, no login, no external calls</li>
+    <li>Works offline after the first load</li>
+  </ul>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<section class="notes">
+  <h2>About</h2>
+  <p>Soulfulfill is a one-person studio. Every game here is a self-contained file under 100 KB: no engine runtime, no fonts, no CDN, no analytics. Daily puzzles are seeded by the date so everyone plays the same board and the leaderboard is fair. Each game has a friend challenge link that puts your record on their screen.</p>
+  <p>Platforms: these games are built to fit instant-play catalogs such as YouTube Playables (portrait, single file, offline, one ad slot). Publisher channel: <a href="https://www.youtube.com/@peblit" rel="noopener">Peblit</a>.</p>
+</section>
+</main>
+<script>
+var GAMES = [
+  { file: 'catdoku', name: 'Catdoku', genre: 'Puzzle',
+    desc: 'One cat per color, row and column, and no two cats may touch. A new 7×7 board every day.' },
+  { file: 'cats-vs-dogs', name: 'Cats vs Dogs', genre: 'Puzzle',
+    desc: 'Fill the 6×6 grid with three cats and three dogs per line, never three of a kind in a row.' },
+  { file: 'mole-mash', name: 'Mole Mash', genre: 'Arcade',
+    desc: '45 seconds of county-fair whack-a-mole. Moles sink while you watch, so hit them before they’re gone.' },
+  { file: 'chicken-cross', name: 'Why Did the Chicken Cross the Road?', genre: 'Arcade',
+    desc: 'Tap to hop one lane at a time. A combine harvester is right behind you, so don’t stop.' },
+  { file: 'daily-stairs', name: 'Daily Stairs', genre: 'Arcade',
+    desc: 'Tap left or right to climb. Everyone gets the same staircase today, so the ranking is fair.' },
+  { file: 'icecream-stack', name: 'Ice Cream Tower', genre: 'Arcade',
+    desc: 'Drop scoops onto a swaying tower. Only the overlap stays, and hesitation melts the scoop.' },
+  { file: 'firechase', name: 'Climb or Burn', genre: 'Arcade',
+    desc: 'Jump platform to platform while the fire climbs below you. Catch water drops to cool it down.' },
+  { file: 'poop-dodge', name: 'Poop Dodge', genre: 'Arcade',
+    desc: 'Slide left and right and survive the falling poop. Seconds survived is your score.' },
+  { file: 'coloring-book', name: 'Cozy Coloring', genre: 'Relax',
+    desc: 'Paint by number: pick a color, tap the matching pieces. Six pictures, a free mode, pinch to zoom.' }
+];
+var SIZES = {"catdoku":36,"cats-vs-dogs":41,"mole-mash":42,"chicken-cross":44,"daily-stairs":33,"icecream-stack":31,"firechase":46,"poop-dodge":35,"coloring-book":59};
+var grid = document.getElementById('grid');
+GAMES.forEach(function (g) {
+  var a = document.createElement('article'); a.className = 'card';
+  var img = document.createElement('img'); img.className = 'shot'; img.loading = 'lazy'; img.width = 450; img.height = 974;
+  img.src = 'assets/games/' + g.file + '.jpg'; img.alt = g.name + ' screenshot';
+  var body = document.createElement('div'); body.className = 'body';
+  var genre = document.createElement('div'); genre.className = 'genre'; genre.textContent = g.genre;
+  var name = document.createElement('h3'); name.className = 'name'; name.textContent = g.name;
+  var desc = document.createElement('p'); desc.className = 'desc'; desc.textContent = g.desc;
+  var meta = document.createElement('p'); meta.className = 'meta'; meta.textContent = 'Single file · ' + (SIZES[g.file] || '?') + ' KB';
+  var play = document.createElement('a'); play.className = 'play'; play.href = g.file + '.html'; play.textContent = 'Play';
+  body.appendChild(genre); body.appendChild(name); body.appendChild(desc); body.appendChild(meta); body.appendChild(play);
+  a.appendChild(img); a.appendChild(body); grid.appendChild(a);
+});
+</script>
+</body>
+</html>
