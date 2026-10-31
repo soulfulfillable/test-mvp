@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>아이스크림 탑</title>
+<title>Ice Cream Tower</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   /* 인앱 브라우저 시트 대응: 문서에 240px 스크롤 완충지대를 깔아
@@ -112,15 +112,15 @@
 <body>
 <canvas id="game"></canvas>
 <div id="over-panel" class="hidden">
-  <div id="over-title">🍦 무너짐!</div>
+  <div id="over-title">🍦 It fell!</div>
   <div id="over-score"></div>
   <div id="over-sub"></div>
   <div id="board-title"></div>
   <div id="rank-board"></div>
-  <div id="name-row"><span>이름</span><input id="name-input" maxlength="8" placeholder="나"></div>
+  <div id="name-row"><span>Name</span><input id="name-input" maxlength="8" placeholder="me"></div>
   <div id="over-btns">
-    <button id="share-btn">⚔️ 도전장 보내기</button>
-    <button id="retry-btn">다시 쌓기</button>
+    <button id="share-btn">⚔️ Challenge a friend</button>
+    <button id="retry-btn">Stack again</button>
   </div>
   <div id="share-note"></div>
   <input id="share-fallback" class="hidden" readonly>
@@ -153,12 +153,12 @@
   function baseW() { return Math.min(Math.round(W * 0.6), 230); }
 
   var FLAVORS = [
-    { c: '#ff8fb2', d: '#e26a92', name: '딸기' },
-    { c: '#fff3d6', d: '#e8d7ae', name: '바닐라' },
-    { c: '#9be3c3', d: '#6fc39e', name: '민트' },
-    { c: '#a8794f', d: '#845c39', name: '초코' },
-    { c: '#9fb2ff', d: '#7a8fe0', name: '블루베리' },
-    { c: '#ffe37a', d: '#e3c353', name: '레몬' }
+    { c: '#ff8fb2', d: '#e26a92', name: 'strawberry' },
+    { c: '#fff3d6', d: '#e8d7ae', name: 'vanilla' },
+    { c: '#9be3c3', d: '#6fc39e', name: 'mint' },
+    { c: '#a8794f', d: '#845c39', name: 'chocolate' },
+    { c: '#9fb2ff', d: '#7a8fe0', name: 'blueberry' },
+    { c: '#ffe37a', d: '#e3c353', name: 'lemon' }
   ];
 
   // ---------- 상태 ----------
@@ -198,7 +198,7 @@
       if (!Array.isArray(raw)) return [];
       return raw
         .filter(function (r) { return r && typeof r.s === 'number' && isFinite(r.s); })
-        .map(function (r) { return { n: String(r.n || '나').slice(0, 8), s: Math.max(0, Math.round(r.s)), f: r.f ? 1 : 0, t: r.t || 0 }; })
+        .map(function (r) { return { n: String(r.n || 'me').slice(0, 8), s: Math.max(0, Math.round(r.s)), f: r.f ? 1 : 0, t: r.t || 0 }; })
         .sort(function (a, b) { return b.s - a.s; })
         .slice(0, RANK_MAX);
     } catch (e) { return []; }
@@ -217,7 +217,7 @@
     if (!ranks.length) {
       var empty = document.createElement('div');
       empty.className = 'rank-empty';
-      empty.textContent = '아직 기록이 없어요.';
+      empty.textContent = 'No records yet.';
       board.appendChild(empty);
       return;
     }
@@ -233,12 +233,12 @@
       if (r.f) {
         var tag = document.createElement('span');
         tag.className = 'rank-friend';
-        tag.textContent = '👥친구';
+        tag.textContent = '👥friend';
         name.appendChild(tag);
       }
       var s = document.createElement('span');
       s.className = 'rank-s';
-      s.textContent = r.s + '층';
+      s.textContent = r.s + ' scoops';
       row.append(pos, name, s);
       board.appendChild(row);
     });
@@ -248,7 +248,7 @@
 
   function recordRank(s) {
     ranks = loadRanks();
-    var entry = { n: loadName() || '나', s: Math.round(s), f: 0, t: Date.now() };
+    var entry = { n: loadName() || 'me', s: Math.round(s), f: 0, t: Date.now() };
     ranks.push(entry);
     ranks.sort(function (a, b) { return b.s - a.s; });
     ranks = ranks.slice(0, RANK_MAX);
@@ -265,9 +265,9 @@
     if (!mc) return false;
     var mn = /(?:^|[#&])n=([^&]{1,64})/.exec(hash);
     chSteps = Math.min(99999, parseInt(mc[1], 10) || 0);
-    chName = '친구';
+    chName = 'friend';
     if (mn) {
-      try { chName = decodeURIComponent(mn[1]).slice(0, 8) || '친구'; } catch (e) {}
+      try { chName = decodeURIComponent(mn[1]).slice(0, 8) || 'friend'; } catch (e) {}
     }
     return chSteps > 0;
   }
@@ -291,7 +291,7 @@
   function challengeUrl(s) {
     try {
       var u = new URL(location.href);
-      var n = loadName() || '나';
+      var n = loadName() || 'me';
       u.hash = 'c=' + Math.round(s) + '&n=' + encodeURIComponent(n);
       return u.href;
     } catch (e) { return ''; }
@@ -305,11 +305,11 @@
   function shareResult() {
     var s = Math.round(lastScore);
     var url = challengeUrl(s);
-    var text = '🍦 아이스크림 탑 ' + s + '층 쌓았다!\n녹기 전에 나보다 높이 쌓아 볼래?';
+    var text = '🍦 Ice Cream Tower — I stacked ' + s + ' scoops!\nCan you stack higher before it melts?';
     var full = url ? text + '\n' + url : text;
-    var done = function () { note('도전장 전송!'); };
+    var done = function () { note('Challenge sent!'); };
     if (navigator.share) {
-      navigator.share(url ? { title: '아이스크림 탑', text: text, url: url } : { title: '아이스크림 탑', text: text })
+      navigator.share(url ? { title: 'Ice Cream Tower', text: text, url: url } : { title: 'Ice Cream Tower', text: text })
         .then(done)
         .catch(function (e) {
           if (e && e.name === 'AbortError') return;   // 사용자가 취소한 것은 실패가 아니다
@@ -322,7 +322,7 @@
   function copyFallback(full) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(full)
-        .then(function () { note('도전장 링크 복사됨!'); })
+        .then(function () { note('Challenge link copied!'); })
         .catch(function () { manualCopy(full); });
       return;
     }
@@ -333,7 +333,7 @@
     fb.value = full;
     fb.classList.remove('hidden');
     fb.focus(); fb.select();
-    note('아래 링크를 복사해서 보내세요');
+    note('Copy the link below and send it');
   }
 
   // ---------- 판 리셋 ----------
@@ -399,7 +399,7 @@
       combo++;
       nx = prev.x;
       nw = Math.min(cur.w + 8, baseW());   // 퍼펙트 보상: 살짝 되살아난다
-      flashes.push({ text: combo >= 2 ? '퍼펙트 x' + combo + '!' : '퍼펙트!', t: 0.9, color: '#ff5f8f' });
+      flashes.push({ text: combo >= 2 ? 'PERFECT x' + combo + '!' : 'PERFECT!', t: 0.9, color: '#ff5f8f' });
       shake = 3;
     } else {
       combo = 0;
@@ -419,7 +419,7 @@
 
     if (chSteps > 0 && !chBeaten && floors > chSteps) {
       chBeaten = true;
-      flashes.push({ text: '🏆 ' + chName + ' 넘어섬!', t: 1.6, color: '#1d8a3c' });
+      flashes.push({ text: '🏆 Passed ' + chName + '!', t: 1.6, color: '#1d8a3c' });
       shake = 6;
     }
 
@@ -469,7 +469,7 @@
   nameInput.addEventListener('input', function () {
     var v = nameInput.value.slice(0, 8);
     saveName(v);
-    if (myRankRow) { myRankRow.n = v || '나'; saveRanks(ranks); renderRanks(); }
+    if (myRankRow) { myRankRow.n = v || 'me'; saveRanks(ranks); renderRanks(); }
   });
 
   // ---------- 게임오버 ----------
@@ -490,28 +490,28 @@
   }
 
   function showOverPanel() {
-    document.getElementById('over-title').textContent = overReason === 'melt' ? '🫠 다 녹았다!' : '🍦 떨어뜨렸다!';
-    document.getElementById('over-score').textContent = lastScore + '층';
+    document.getElementById('over-title').textContent = overReason === 'melt' ? '🫠 It all melted!' : '🍦 You dropped it!';
+    document.getElementById('over-score').textContent = lastScore + ' scoops';
     var sub = document.getElementById('over-sub');
     sub.className = '';
     if (chSteps > 0) {
       if (lastScore > chSteps) {
-        sub.textContent = '🏆 ' + chName + '(' + chSteps + '층) 꺾음!';
+        sub.textContent = '🏆 Beat ' + chName + ' (' + chSteps + ' scoops)!';
         sub.className = 'win';
       } else if (lastScore === chSteps) {
-        sub.textContent = '동점! ' + chName + ' ' + chSteps + '층';
+        sub.textContent = 'Tied with ' + chName + ' at ' + chSteps + ' scoops';
         sub.className = 'lose';
       } else {
-        sub.textContent = chName + '까지 ' + (chSteps - lastScore) + '층 남았다…';
+        sub.textContent = (chSteps - lastScore) + ' more to catch ' + chName + '…';
         sub.className = 'lose';
       }
     } else if (isNewBest) {
-      sub.textContent = '🎉 신기록!';
+      sub.textContent = '🎉 New record!';
       sub.className = 'newbest';
     } else {
-      sub.textContent = '최고 기록 ' + best + '층';
+      sub.textContent = 'Best ' + best + ' scoops';
     }
-    document.getElementById('board-title').textContent = '🏅 랭킹 — 제일 높이 쌓은 사람';
+    document.getElementById('board-title').textContent = '🏅 Ranking — tallest tower';
     ranks = loadRanks();
     renderRanks();
     document.getElementById('share-fallback').classList.add('hidden');
@@ -697,7 +697,7 @@
     ctx.fillStyle = 'rgba(70,140,255,0.95)';
     ctx.font = 'bold 13px -apple-system, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText('⚔️ ' + chName + ' ' + chSteps + '층', 8, y - 6);
+    ctx.fillText('⚔️ ' + chName + ' ' + chSteps, 8, y - 6);
     ctx.restore();
   }
 
@@ -773,7 +773,7 @@
         ctx.fillStyle = '#d1342a';
         ctx.font = 'bold 15px -apple-system, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('🫠 녹는 중!', sx(cur.x), sy((floors + 1) * BLOCK_H) - 10);
+        ctx.fillText('🫠 Melting!', sx(cur.x), sy((floors + 1) * BLOCK_H) - 10);
         ctx.restore();
       }
     }
@@ -783,10 +783,10 @@
     if (state === STATE_PLAY) {
       ctx.fillStyle = '#5a2c18';
       ctx.font = 'bold 46px -apple-system, sans-serif';
-      ctx.fillText(floors + '층', W / 2, 62);
+      ctx.fillText(floors + (floors === 1 ? ' scoop' : ' scoops'), W / 2, 62);
       ctx.font = '14px -apple-system, sans-serif';
       ctx.fillStyle = 'rgba(90,44,24,0.6)';
-      ctx.fillText('최고 ' + best + '층', W / 2, 86);
+      ctx.fillText('BEST ' + best, W / 2, 86);
 
       if (introT > 0) {
         var ia = Math.min(1, introT / 0.35);
@@ -795,9 +795,9 @@
         ctx.globalAlpha = ia * blink2;
         ctx.fillStyle = '#d1342a';
         ctx.font = 'bold 26px -apple-system, sans-serif';
-        ctx.fillText('탭해서 쌓기!', W / 2, H * 0.3);
+        ctx.fillText('TAP TO STACK!', W / 2, H * 0.3);
         ctx.font = 'bold 17px -apple-system, sans-serif';
-        ctx.fillText('망설이면 녹아서 줄어들어요', W / 2, H * 0.3 + 32);
+        ctx.fillText('Hesitate and it melts away', W / 2, H * 0.3 + 32);
         ctx.restore();
       }
 
@@ -817,29 +817,29 @@
       ctx.fillStyle = '#5a2c18';
       var ts = 50;
       ctx.font = 'bold ' + ts + 'px -apple-system, sans-serif';
-      while (ts > 24 && ctx.measureText('🍦 아이스크림 탑').width > W * 0.9) {
+      while (ts > 24 && ctx.measureText('🍦 Ice Cream Tower').width > W * 0.9) {
         ts -= 2;
         ctx.font = 'bold ' + ts + 'px -apple-system, sans-serif';
       }
-      ctx.fillText('🍦 아이스크림 탑', W / 2, H * 0.24);
+      ctx.fillText('🍦 Ice Cream Tower', W / 2, H * 0.24);
       ctx.font = '16px -apple-system, sans-serif';
       ctx.fillStyle = 'rgba(90,44,24,0.75)';
-      ctx.fillText('탭하면 아이스크림이 떨어져요', W / 2, H * 0.24 + 42);
-      ctx.fillText('겹친 만큼만 남아요 — 딱 맞추면 퍼펙트!', W / 2, H * 0.24 + 66);
+      ctx.fillText('Tap to drop a scoop', W / 2, H * 0.24 + 42);
+      ctx.fillText('Only the overlap stays — line it up for PERFECT!', W / 2, H * 0.24 + 66);
       ctx.fillStyle = '#d1342a';
       ctx.font = 'bold 16px -apple-system, sans-serif';
-      ctx.fillText('☀️ 망설이면 녹아서 점점 줄어들어요', W / 2, H * 0.24 + 94);
+      ctx.fillText('☀️ Hesitate and the scoop melts smaller', W / 2, H * 0.24 + 94);
       if (best > 0) {
         ctx.fillStyle = 'rgba(90,44,24,0.75)';
         ctx.font = '16px -apple-system, sans-serif';
-        ctx.fillText('최고 기록 ' + best + '층', W / 2, H * 0.24 + 124);
+        ctx.fillText('Best ' + best + ' scoops', W / 2, H * 0.24 + 124);
       }
       if (chSteps > 0) {
         ctx.fillStyle = '#2f6fd6';
         ctx.font = 'bold 17px -apple-system, sans-serif';
-        ctx.fillText('⚔️ ' + chName + '의 도전장: ' + chSteps + '층을 넘어라!', W / 2, H * 0.24 + 154);
+        ctx.fillText('⚔️ ' + chName + ' challenges you: beat ' + chSteps + ' scoops!', W / 2, H * 0.24 + 154);
       }
-      blinkText('탭해서 시작!', H * 0.72);
+      blinkText('TAP TO START!', H * 0.72);
     } else if (state === STATE_OVER) {
       ctx.fillStyle = 'rgba(0,0,0,0.35)';
       ctx.fillRect(-20, -20, W + 40, H + 40);
