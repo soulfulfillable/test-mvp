@@ -33,6 +33,12 @@
 
 ## 진행 기록 (개발 세션이 추가, 최신이 위)
 
+### 2026-10-31 개발 세션 (Dok) — 외부 베타 시작 + Google Play 준비
+- 10-23 결정(대표 앱 = Kitty Queens, 외부 베타 먼저)에 따라 **TestFlight 외부 그룹 "Beta Testers" + 공개 링크 https://testflight.apple.com/join/zUCgYY6g** (빌드 37 = 1.1.0, 정원 100). Beta App Review 제출 → WAITING_FOR_REVIEW. 도구: `asc_testflight.py external` + Actions `TestFlight 외부 테스트`.
+- 모집 문구 `docs/beta.html` 에 링크 반영(승인 뒤 발송 안내), 피드백 양식 `catdoku_app/store/beta-feedback.md`.
+- Google Play: `Build Android` 앱 선택형, catdoku 그래들에 업로드 키 서명, 매니페스트 `AD_ID` 권한, 방침에 Play 결제, 등록 자료 `catdoku_app/store/play-listing.md` + 그래픽 `store/play/`(아이콘 512·피처 1024×500·폰 1080×2160 5장). 첫 AAB 빌드는 Actions 로 실행(결과는 게시판).
+- 하지 않은 것: Apple App Review 답장·재제출(사용자 확인 뒤), AdMob Android 실제 ID(사용자가 AdMob 에 Android 앱 만든 뒤).
+
 ### 2026-10-03 개발 세션 1 (이어서) — TestFlight
 - ASC 앱 `Kitty Queens: Cat Sudoku`(id 6818637278) 생성(사용자), AdMob(`soulfulfillable` 계정) 앱·단위 3개 → 실제 ID 반영.
 - TestFlight 빌드 10(첫 설치 확인) → 11(점검 3차: 연타·저장 손상·Mark 붓) → 12(영상 없으면 무료 보상, 막다른 길 안내).
