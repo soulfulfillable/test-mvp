@@ -9,6 +9,7 @@ GitHub(`soulfulfillable`)만 살아 있으면 새 Claude 계정에서 그대로 
 |---|---|---|---|
 | 코드·문서·기획(`PRODUCT.md`, `CLAUDE.md`) | GitHub | 안전 | — (원본이 GitHub) |
 | GitHub Actions 비밀값(App Store API 키 등) | GitHub 리포 설정 | 안전 | — |
+| **서명 키 보관함** — iOS 배포 인증서 개인 키 + **안드로이드 Play 업로드 키**(10-31~) | GitHub `ci-signing` 브랜치 (`signing/state.json`, `signing/android-upload.json`), Secret `ASC_KEY_P8` 로 암호화 | 안전 | **브랜치를 지우지 말 것.** `ASC_KEY_P8` 을 바꾸면 못 푼다 — 바꾸기 전에 옛 키로 풀어 다시 잠근다. 안드로이드 키를 잃으면 Play Console → Setup → App signing → "Request upload key reset"(며칠 걸림) |
 | 대화 세션 기록 | Claude 계정 | **사라짐** | 중요한 결정은 세션이 끝나기 전 `PRODUCT.md` 결정 로그에 기록 (규칙: `CLAUDE.md`) |
 | 루틴(주간 점검 등) | Claude 계정 | **사라짐** | `ops/routines/*.md` 에 일정·프롬프트 원문 보관. 새 세션형 루틴은 저장소 쓰기 권한이 안 붙어서, 기획 파트너 세션을 깨우는 방식으로 돌린다 |
 | Claude 클라우드 환경 설정 | Claude 계정 | **사라짐** | 아래 "새 계정에서 복구" 참고 (특별한 설정 없음) |

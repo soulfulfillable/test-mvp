@@ -59,7 +59,7 @@ Levels 1–30 are free. Unlock more levels by watching a short video, or get all
 ## 비공개 테스트(Closed testing) 순서 — 개인 계정은 12명 × 14일 필수
 
 1. Actions **`Build Android (앱 선택 → AAB/APK)`** → Run workflow → app = `catdoku` → 끝나면 Artifacts `catdoku-aab` 다운로드(zip 안 `app-release.aab`).
-   서명 Secrets(`ANDROID_KEYSTORE_*`, 환율 앱 때 등록)가 있으면 업로드 키로 서명된다. 요약에 "업로드 키" 라고 떠야 Play 가 받는다.
+   서명은 **자동 보관 업로드 키**(10-31: Secrets `ANDROID_KEYSTORE_*` 는 실제로 비어 있었다 → `ci-signing` 브랜치에 ASC_KEY_P8 로 암호화해 자동 생성·재사용). Actions 요약의 "서명:" 줄이 "자동 보관 업로드 키 (Play 업로드 가능)" 이어야 Play 가 받는다. 첫 업로드 때 Play App Signing 에 동의하면 이 키가 그 앱의 업로드 키로 묶인다.
 2. Play Console → **Test and release → Testing → Closed testing** → 트랙(기본 "Alpha") → **Create new release** → AAB 업로드.
    처음엔 Play App Signing 동의. Release name 은 자동(versionCode = Actions 실행 번호). Release notes(en-US):
    ```
@@ -85,5 +85,5 @@ Levels 1–30 are free. Unlock more levels by watching a short video, or get all
 
 ## 아직 못 한 것 / 확인 못 한 것
 - Android 실기기·에뮬레이터에서 실제로 돌려 보지 못했다(이 환경엔 Flutter·에뮬레이터 없음). Actions 빌드의 `flutter test`(테스트 로봇 32개)·`flutter analyze` 통과와 AAB 생성까지가 이 세션의 증거. **첫 테스터(사용자 또는 안드로이드 쓰는 지인) 설치 확인이 필요**.
-- 서명 Secrets 가 실제로 유효한지(환율 앱 때 등록한 것) — Actions 요약의 "서명:" 줄로 확인.
+- ~~서명 Secrets~~ → 비어 있었음. 자동 보관 키로 대체(위 1번). ci-signing 브랜치의 `android-upload.json` 이 곧 업로드 키 — 지우지 말 것.
 - 태블릿 스크린샷 없음(폰 전용 등록).
