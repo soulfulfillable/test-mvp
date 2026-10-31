@@ -1,11 +1,11 @@
 # Kitty Queens: Cat Sudoku (Catdoku 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-31 09:25 (KST) — 외부 베타 공개 링크 생성·Beta App Review 제출
+마지막 갱신: 2026-10-31 09:35 (KST) — 외부 베타 공개 링크 생성·Beta App Review 제출
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- **마지막 저장: 2026-10-31 09:25 KST · 작업 브랜치 `claude/catdoku-external-beta` (main 에 ff 반영됨)**
+- **마지막 저장: 2026-10-31 09:35 KST · 작업 브랜치 `claude/catdoku-external-beta` (main 에 ff 반영됨)**
 - 방금 끝낸 것: **① 완료** — `asc_testflight.py external` + 워크플로 `TestFlight 외부 테스트`(testflight-external.yml) 로 외부 그룹 "Beta Testers"(공개 링크, 정원 100) 생성, 빌드 37 연결, 베타 설명·What to Test·연락처 채움, **Beta App Review 제출 → WAITING_FOR_REVIEW** (Actions run 41149487600, 10-31 09:19 KST).
   **공개 링크 `https://testflight.apple.com/join/zUCgYY6g`** — `docs/beta.html` 문구에 넣음(② 완료). 승인 전엔 링크를 열어도 설치가 안 된다. `catdoku_app/store/beta-feedback.md` 양식 만듦(③ 준비).
-- 진행 중이던 것: ⑤ Google Play 준비 (아래 "다음 할 일" 참고)
+- 진행 중이던 것: **⑤ Google Play 준비 — 코드·자료는 다 올림**(`Build Android` 앱 선택형 + catdoku 업로드 키 서명 + `AD_ID` 권한 + 방침 Play 결제 + `catdoku_app/store/play-listing.md` + 그래픽 `store/play/`). **첫 AAB 빌드 Actions run 41149998527(#18, app=catdoku) 결과 확인 중** — 성공하면 아티팩트 `catdoku-aab` 를 사용자가 내려받아 Play Console Closed testing 에 올린다(순서는 play-listing.md).
 - **다음 할 일 (이 순서)**:
   1. **Beta App Review 결과 확인** — Actions `TestFlight 외부 테스트` 를 build=37, app=catdoku 로 다시 돌리면 상태만 찍힌다(APPROVED / REJECTED). 승인되면 `beta-feedback.md`·`beta.html` 의 상태 문구 갱신 + 사용자에게 "지금 링크 보내도 된다" 알림. 거절이면 사유를 게시판에 적고 **재제출 전 사용자 확인**.
   2. **⑤ Google Play**: (a) `build-android.yml` 을 앱 선택형으로(공용 → `_shared.md` 먼저) (b) `AndroidManifest.xml` 에 `com.google.android.gms.permission.AD_ID` 명시 + AdMob Android 앱 ID 는 **사용자가 AdMob(`soulfulfillable`) 에 Android 앱을 만들어 줘야** 실제 ID 교체(그 전엔 테스트 ID) (c) `docs/catdoku-privacy.html` In-app purchase 절에 Google Play 결제 추가 (d) Play 스토어 등록 자료 `catdoku_app/store/play-listing.md`(짧은/긴 설명·아이콘 512·피처 1024×500·폰 스크린샷 1080×1920 이상) (e) 업로드 키: Secrets `ANDROID_KEYSTORE_*` 가 환율용으로 이미 있음 → 같은 키 재사용 가능(앱마다 키 달라도 되지만 하나로 충분) → AAB 빌드 → 사용자가 Play Console 비공개 테스트에 업로드.
