@@ -101,6 +101,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-10-31 | (Dok 개발 세션) **Kitty Queens 외부 베타 시작** — TestFlight 외부 그룹 "Beta Testers" 공개 링크 `https://testflight.apple.com/join/zUCgYY6g`(빌드 37, 정원 100), Beta App Review 제출. Google Play 첫 서명 AAB(Actions run 20). **안드로이드 업로드 키는 사용자가 만들지 않고 `ci-signing` 브랜치에 ASC_KEY_P8 로 암호화해 자동 보관**(모든 앱 공용). Apple 답장·재제출은 하지 않음 | 10-23 결정(대표 앱 = Kitty Queens, 외부 베타 먼저) 실행. 업로드 키 Secrets 가 비어 있었고 사용자에게 keytool 을 시키는 건 실수·분실 위험이 커서 iOS 인증서와 같은 방식으로 |
 | 2026-10-31 | (개발 세션) Playables 카탈로그 `docs/games.html`·영문 소개 `playables/pitch.md` 완료. **아이스크림 탑 UI 를 영어로 번역**(Ice Cream Tower) — 9개 중 유일한 한국어 게임이었음. 디자인은 손대지 않음 | Playables·파트너는 영어권 대상이라 카탈로그에 한국어 화면이 섞이면 안 됨. "기존 앱 디자인 안 만진다" 규칙은 문구 번역엔 해당 없다고 판단 |
 | 2026-10-31 | YouTube Playables 퍼블리셔 채널 = **기존 Peblit 채널(A)** | 이미 있고 채널 이력이 승인에 유리할 수 있음. Playables 는 별도 탭이라 앰비언트 영상과 섞여도 무방. 사용자 "a" |
 | 2026-10-30 | **YouTube Playables 진출 — A(둘 다 동시)**: ①구글 Playables 관심 신청서 제출 ②파트너(Playgama 등) 경유로 게임 1~2개(캣도쿠·두더지) 신청. 재료 = `docs/` 의 HTML 게임(파일 1개·세로·탭 전용 → 기술 조건에 거의 그대로 맞음). Kitty Queens 애플·Play 베타는 그대로 병행. 준비물: 게임 카탈로그 페이지(`docs/games.html`), 영문 소개, Playables SDK 연동(개발 세션). 새 게시판 `board/playables.md` | 사용자가 유튜브 앱 안 Supersonic 게임(My Mini Mart 등, 플레이 수천만 회)을 보고 "이쪽으로 해볼 수 있을까" → 애플 4.3(비슷한 앱 다수) 문제가 여기선 없고 게임이 여럿인 게 오히려 유리. 아무나 못 올리는 구조(관심 신청서·초기 접근, 수익 배분 시범 단계)라 무료인 두 길을 동시에. 사용자 "추천대로 가자" |

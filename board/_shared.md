@@ -4,7 +4,6 @@
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
-| catdoku(Dok) | `build-android.yml` 에 **업로드 키 자동 보관**(Secrets 없으면 ci-signing 브랜치에 ASC_KEY_P8 로 암호화해 생성·재사용, `android_keystore.py`) 추가 | 2026-10-31 | 진행 중 — catdoku 빌드로 확인 중 |
 | tides | **물때를 Glance Solunar 에 합치기** (`solunar_app/` 에 물때 섹션 추가 — 계획 `plans/solunar-tides-merge.md`). 솔루나 세션은 이 작업 끝날 때까지 `solunar_app/` 를 고치기 전에 여기 확인 | 2026-10-20 | **보류** — 8개 앱 일괄 반려로 포트폴리오 통합 결정 대기. 사용자는 이 합치기에 동의함(통합안 재료로 써 달라) |
 
 ## 공용 작업 요청 (기획 파트너 → 다음에 `Release iOS` 를 돌리는 세션이 맡는다)
@@ -73,7 +72,8 @@
   (물때 세션이 10-03 에 소음 측정기 대기분을 이렇게 취소시켰다 → 바로 내 것 취소 + 그 실행 re-run 으로 되돌림.)
 
 - **`Build Android (앱 선택 → AAB/APK)`** (Dok 세션, 10-31): `build-android.yml` 도 앱 선택형. Run workflow → app 고르면 `<앱>-aab`/`<앱>-apk` 아티팩트.
-  versionCode = 실행 번호. 업로드 키는 Secrets `ANDROID_KEYSTORE_*` 하나를 모든 앱이 같이 쓴다 — 각 앱 `android/app/build.gradle.kts` 가 `key.properties` 를 읽게 해야 함(catdoku 것 복사).
+  versionCode = 실행 번호. **업로드 키는 자동 보관**: Secrets `ANDROID_KEYSTORE_*` 는 실제로 비어 있어서, `ci-signing` 브랜치 `signing/android-upload.json` 에 ASC_KEY_P8 로 암호화한 keystore 를 만들어 두고 모든 앱이 재사용한다(`.github/scripts/android_keystore.py`, Kitty Queens run 20 으로 확인).
+  각 앱 `android/app/build.gradle.kts` 가 `key.properties` 를 읽게 해야 함(catdoku 것 복사). ⚠️ ci-signing 브랜치·ASC_KEY_P8 을 바꾸거나 지우면 Play 업데이트를 못 올린다(`ops/README.md`).
   Play 비공개 테스트 순서·등록 자료 양식: `catdoku_app/store/play-listing.md`. 스토어 그래픽 생성기 `catdoku_app/store/play/make.js`(1080×2160 폰 스크린샷·1024×500 피처).
 - `Release iOS` · `App Store 등록 정보 채우기` 워크플로: **앱 선택형으로 일반화됨** (Catdoku 세션, 2026-10-02).
   새 앱은 선택지(`options:`)에 자기 앱 이름만 추가한다 — 번들 ID 는 `com.soulfulfill.<이름>` 규칙으로 자동 (mortgage 세션, 10-03).

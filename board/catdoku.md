@@ -1,17 +1,20 @@
 # Kitty Queens: Cat Sudoku (Catdoku 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-31 09:35 (KST) — 외부 베타 공개 링크 생성·Beta App Review 제출
+마지막 갱신: 2026-10-31 09:45 (KST) — 외부 베타 공개 링크 생성·Beta App Review 제출
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
-- **마지막 저장: 2026-10-31 09:35 KST · 작업 브랜치 `claude/catdoku-external-beta` (main 에 ff 반영됨)**
+- **마지막 저장: 2026-10-31 09:45 KST · 작업 브랜치 `claude/catdoku-external-beta` (main 에 ff 반영됨)**
 - 방금 끝낸 것: **① 완료** — `asc_testflight.py external` + 워크플로 `TestFlight 외부 테스트`(testflight-external.yml) 로 외부 그룹 "Beta Testers"(공개 링크, 정원 100) 생성, 빌드 37 연결, 베타 설명·What to Test·연락처 채움, **Beta App Review 제출 → WAITING_FOR_REVIEW** (Actions run 41149487600, 10-31 09:19 KST).
   **공개 링크 `https://testflight.apple.com/join/zUCgYY6g`** — `docs/beta.html` 문구에 넣음(② 완료). 승인 전엔 링크를 열어도 설치가 안 된다. `catdoku_app/store/beta-feedback.md` 양식 만듦(③ 준비).
-- 진행 중이던 것: **⑤ Google Play 준비 — 코드·자료는 다 올림**(`Build Android` 앱 선택형 + catdoku 업로드 키 서명 + `AD_ID` 권한 + 방침 Play 결제 + `catdoku_app/store/play-listing.md` + 그래픽 `store/play/`). **첫 AAB 빌드 Actions run 41149998527(#18, app=catdoku) 결과 확인 중** — 성공하면 아티팩트 `catdoku-aab` 를 사용자가 내려받아 Play Console Closed testing 에 올린다(순서는 play-listing.md).
+- **⑤ Google Play 세션 몫 완료**: `Build Android` 앱 선택형 + **업로드 키 자동 보관**(Secrets `ANDROID_KEYSTORE_*` 는 비어 있었다 → `ci-signing` 브랜치 `signing/android-upload.json` 에 ASC_KEY_P8 로 암호화해 생성·재사용, `android_keystore.py`) + catdoku 그래들 서명 + `AD_ID` 권한 + 방침 Play 결제 + `catdoku_app/store/play-listing.md` + 그래픽 `store/play/`.
+  **첫 서명 AAB: Actions run 20** https://github.com/soulfulfillable/test-mvp/actions/runs/41150366754 — `flutter test` 32개 통과(로봇 232회 누름), AAB 52.8MB, versionCode 20, 서명 "자동 보관 업로드 키". 아티팩트 `catdoku-aab`(90일 보관, 만료되면 워크플로 다시 실행 — 같은 키로 서명됨).
+  **확인 못 한 것**: 안드로이드 실기기·에뮬레이터 실행(이 환경엔 없음). 첫 설치 확인은 사용자(또는 안드로이드 지인)가 해야 한다.
+- 진행 중이던 것: 없음 (사용자 작업 대기)
 - **다음 할 일 (이 순서)**:
   1. **Beta App Review 결과 확인** — Actions `TestFlight 외부 테스트` 를 build=37, app=catdoku 로 다시 돌리면 상태만 찍힌다(APPROVED / REJECTED). 승인되면 `beta-feedback.md`·`beta.html` 의 상태 문구 갱신 + 사용자에게 "지금 링크 보내도 된다" 알림. 거절이면 사유를 게시판에 적고 **재제출 전 사용자 확인**.
-  2. **⑤ Google Play**: (a) `build-android.yml` 을 앱 선택형으로(공용 → `_shared.md` 먼저) (b) `AndroidManifest.xml` 에 `com.google.android.gms.permission.AD_ID` 명시 + AdMob Android 앱 ID 는 **사용자가 AdMob(`soulfulfillable`) 에 Android 앱을 만들어 줘야** 실제 ID 교체(그 전엔 테스트 ID) (c) `docs/catdoku-privacy.html` In-app purchase 절에 Google Play 결제 추가 (d) Play 스토어 등록 자료 `catdoku_app/store/play-listing.md`(짧은/긴 설명·아이콘 512·피처 1024×500·폰 스크린샷 1080×1920 이상) (e) 업로드 키: Secrets `ANDROID_KEYSTORE_*` 가 환율용으로 이미 있음 → 같은 키 재사용 가능(앱마다 키 달라도 되지만 하나로 충분) → AAB 빌드 → 사용자가 Play Console 비공개 테스트에 업로드.
+  2. **⑤ Google Play — 사용자 차례**(순서·문구 전부 `catdoku_app/store/play-listing.md`): AAB 다운로드 → Closed testing 릴리스 → 테스터 이메일 목록 → 스토어 등록(설명·그래픽 붙여넣기) → 인앱 상품 `com.soulfulfill.catdoku.unlockall` $1.99. 세션은 사용자가 캡처를 주면 그 화면 기준으로 다음 클릭을 안내. **AdMob Android 앱 ID 가 오면** `AndroidManifest.xml`·`lib/core/ads.dart` Android 분기 교체 → `Build Android`(catdoku) 다시 → 새 AAB(versionCode 는 자동 증가).
   3. ③ 테스터 피드백이 오면 `beta-feedback.md` 에 원문 → 고친 것 → 1.1.1 Release iOS(app=catdoku) → 외부 그룹엔 **빌드 자동 추가 안 됨**: `TestFlight 외부 테스트` 를 새 빌드 번호로 다시 돌린다(두 번째 빌드부터는 보통 심사 없이 바로).
   4. ④ 10명+ 피드백·반영 빌드 뒤 `review-reply-4.3.md` 4번 다시 쓰기 → **기획 파트너·사용자 확인 뒤에만** 답장. **Apple 답장·재제출은 이 세션이 하지 않는다.**
-- 사용자 대기 중인 것: (급하지 않음) AdMob 에 Kitty Queens **Android** 앱 + 광고 단위 3개(배너·보상형 힌트·보상형 이어하기) 만들어 ID 캡처 → Android 실제 ID 교체. Beta App Review 승인 뒤 테스터에게 링크 보내기(`beta.html` 문구).
+- 사용자 대기 중인 것: ① Beta App Review 승인 뒤 테스터에게 링크 보내기(`beta.html` 문구, 승인 전엔 "곧 보낼게") ② Play Console: `catdoku-aab` 업로드(Closed testing) + 스토어 등록 붙여넣기 + 인앱 상품(play-listing.md) ③ (급하지 않음) AdMob(`soulfulfillable`)에 Kitty Queens **Android** 앱 + 광고 단위 3개(Banner / Rewarded 힌트 / Rewarded 이어하기) 만들어 ID 캡처 ④ 안드로이드 폰(본인 또는 지인)에서 첫 설치 확인.
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/catdoku.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Apple 답장·재제출은 사용자 확인 전엔 하지 말 것.`
 
@@ -85,6 +88,8 @@ App Store 심사는 **4.3 반려 상태로 보류**(10-19) — 외부 베타 10�
 - 퍼즐 난이도: 7×7 첫 판은 "어렵다" 했지만 풀어냄. 너무 쉽게 만들 필요는 없지만 첫 경험은 조심.
 
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
+- **안드로이드 업로드 키는 사용자가 만들 필요 없다** (10-31): `Build Android` 가 Secrets 없으면 `ci-signing` 브랜치에 ASC_KEY_P8 로 암호화한 keystore 를 만들어 두고 다음부터 재사용한다. 다른 앱도 `android/app/build.gradle.kts` 에 catdoku 와 같은 `key.properties` 읽기 블록만 넣으면 끝. **Secrets `ANDROID_KEYSTORE_*` 는 README 와 달리 실제로는 비어 있었다** — 워크플로 로그의 "Note when unsigned" 가 돌면 그 신호.
+- **Google Play 폰 스크린샷은 긴 변이 짧은 변의 2배 이하** — 아이폰 캡처(1170×2532)는 그대로 못 올린다. `catdoku_app/store/play/make.js` 가 1080×2160 틀로 다시 렌더(제목+폰 화면). 피처 1024×500 도 같은 스크립트.
 - **TestFlight 외부 테스트(공개 링크)도 API 로 한 번에 된다** (10-31, 빌드 37 로 확인): Actions `TestFlight 외부 테스트` → build·app 입력.
   `betaGroups` POST(`isInternalGroup:false, publicLinkEnabled:true, publicLinkLimitEnabled:true, publicLinkLimit:100`) 응답에 `publicLink` 가 바로 들어 있다(설치는 승인 뒤).
   Beta App Review 에 필요한 것: `betaAppReviewDetail` 연락처(비어 있으면 App Review 의 `appStoreReviewDetail` 연락처를 복사하면 됨), `betaAppLocalizations` 설명+피드백 메일, 빌드 `betaBuildLocalizations.whatsNew`, 수출 규정. 그 다음 `betaAppReviewSubmissions` POST → `WAITING_FOR_REVIEW`.
