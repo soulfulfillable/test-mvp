@@ -5,14 +5,14 @@ name: Build Android (앱 선택 → AAB/APK)
 # 앱 추가: 아래 options 에 이름만 넣는다. 규칙: 폴더 <이름>_app/flutter, 패키지 com.soulfulfill.<이름>.
 # 빌드 번호(versionCode)는 실행 번호(run_number)라 올릴 때마다 커진다 (Play 는 같은 versionCode 를 두 번 안 받는다).
 #
-# 서명: 저장소 Secrets에 아래 4개가 있으면 그 키로 서명(=Play 업로드 가능),
-# 없으면 debug 키로 서명해 빌드만 확인한다 (Play 업로드는 불가). 업로드 키 하나를 모든 앱이 같이 쓴다
-# (Play App Signing 이 앱마다 다른 배포 키를 따로 관리하므로 괜찮다).
-#   ANDROID_KEYSTORE_BASE64  upload-keystore.jks 를 base64 로 인코딩한 문자열
-#   ANDROID_KEYSTORE_PASSWORD
-#   ANDROID_KEY_ALIAS
-#   ANDROID_KEY_PASSWORD
-# 만드는 법은 currency_app/flutter/README.md 참고. 각 앱의 android/app/build.gradle.kts 가 android/key.properties 를 읽어야 한다.
+# 서명(업로드 키) — 셋 중 하나, 위에서부터:
+#   ① Secrets ANDROID_KEYSTORE_BASE64/PASSWORD, ANDROID_KEY_ALIAS/PASSWORD 가 있으면 그 키 (사용자가 직접 만든 키)
+#   ② 없으면 **자동 보관 키**: ci-signing 브랜치 signing/android-upload.json(ASC_KEY_P8 로 암호화)에서 복원,
+#      그것도 없으면 keytool 로 새로 만들어 거기 저장 (.github/scripts/android_keystore.py). 사용자 할 일 없음.
+#   ③ ASC_KEY_P8 도 없으면 debug 키 — 빌드 확인만 되고 Play 업로드는 불가.
+# 업로드 키 하나를 모든 앱이 같이 쓴다 (Play App Signing 이 앱마다 배포 키를 따로 관리하므로 괜찮다).
+# ⚠️ ci-signing 브랜치의 android-upload.json 을 지우면 Play 업데이트를 못 올린다 (복구: Play Console → App signing → upload key reset).
+# 각 앱의 android/app/build.gradle.kts 가 android/key.properties 를 읽어야 한다 (catdoku 것 복사).
 
 on:
   push:
@@ -30,7 +30,7 @@ on:
         options: [currency, catdoku, mortgage, decibel, speedometer, tides, fuellog, solunar, kittypath, tolle]
 
 permissions:
-  contents: read
+  contents: write   # 자동 보관 업로드 키(ci-signing 브랜치, 암호문만)를 저장하려고
 
 concurrency:
   group: build-android-${{ inputs.app || 'currency' }}
@@ -48,6 +48,7 @@ jobs:
     env:
       # secrets 는 if 조건에서 바로 못 쓰므로 env 로 한 번 옮긴다
       KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      KEY_P8: ${{ secrets.ASC_KEY_P8 }}
 
     steps:
       - name: Check out repository
@@ -91,8 +92,40 @@ jobs:
           } > android/key.properties
           echo "서명 키 복원 완료 — 릴리스 키로 서명합니다."
 
+      - name: Restore or create stored upload key (ci-signing)
+        if: env.KEYSTORE_B64 == '' && env.KEY_P8 != ''
+        working-directory: .
+        run: |
+          python3 -m pip install -q cryptography
+          if git fetch -q --depth 1 origin ci-signing 2>/dev/null && git show FETCH_HEAD:signing/android-upload.json > "$RUNNER_TEMP/android-upload.json" 2>/dev/null; then
+            export STORE_IN="$RUNNER_TEMP/android-upload.json"
+          fi
+          export STORE_OUT="$RUNNER_TEMP/android-upload-new.json"
+          python3 .github/scripts/android_keystore.py ensure "$APP"_app/flutter/android
+          echo "SIGNED_BY=자동 보관 업로드 키 (Play 업로드 가능)" >> "$GITHUB_ENV"
+          [ -s "$STORE_OUT" ] || exit 0
+          WT="$RUNNER_TEMP/ci-signing"
+          if git fetch -q origin ci-signing 2>/dev/null; then
+            git worktree add -q -B ci-signing "$WT" FETCH_HEAD
+          else
+            git worktree add -q --detach "$WT"
+            git -C "$WT" checkout -q --orphan ci-signing
+            git -C "$WT" rm -rqf .
+          fi
+          mkdir -p "$WT/signing"
+          cp "$STORE_OUT" "$WT/signing/android-upload.json"
+          cat > "$WT/signing/ANDROID.md" <<'EOF'
+          Build Android 공용 업로드 키 보관함. keystore 와 비밀번호는 GitHub Secret(ASC_KEY_P8)에서 만든 키로 암호화돼 있다.
+          **지우지 말 것** — 지우면 Play 에 올린 앱을 업데이트할 수 없다 (복구: Play Console → Setup → App signing → Request upload key reset).
+          EOF
+          git -C "$WT" add signing
+          git -C "$WT" -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -qm "ci-signing: 안드로이드 업로드 키 보관 (run ${{ github.run_number }})"
+          git -C "$WT" push -q origin HEAD:ci-signing
+          echo "새 업로드 키를 ci-signing 브랜치에 보관함"
+
       - name: Note when unsigned
-        if: env.KEYSTORE_B64 == ''
+        if: env.KEYSTORE_B64 == '' && env.KEY_P8 == ''
         run: echo "::warning::서명 Secrets 가 없어 debug 키로 서명합니다. 이 빌드는 Play 업로드용이 아닙니다."
 
       - name: Build app bundle (Play 업로드용)
@@ -105,7 +138,7 @@ jobs:
         run: |
           echo "### $APP 안드로이드 빌드 #${{ github.run_number }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- versionCode = ${{ github.run_number }} (Play Console 에 올릴 때 이 번호가 보인다)" >> "$GITHUB_STEP_SUMMARY"
-          echo "- 서명: $([ -n "$KEYSTORE_B64" ] && echo '업로드 키 (Play 업로드 가능)' || echo 'debug 키 (Play 업로드 불가)')" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 서명: $([ -n "$KEYSTORE_B64" ] && echo 'Secrets 업로드 키 (Play 업로드 가능)' || echo "${SIGNED_BY:-debug 키 (Play 업로드 불가)}")" >> "$GITHUB_STEP_SUMMARY"
           echo "- 아래 Artifacts 의 \`$APP-aab\` 를 내려받아 Play Console → 테스트 트랙 → 새 릴리스에 업로드" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload AAB

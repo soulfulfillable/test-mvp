@@ -4,6 +4,7 @@
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
+| catdoku(Dok) | `build-android.yml` 에 **업로드 키 자동 보관**(Secrets 없으면 ci-signing 브랜치에 ASC_KEY_P8 로 암호화해 생성·재사용, `android_keystore.py`) 추가 | 2026-10-31 | 진행 중 — catdoku 빌드로 확인 중 |
 | tides | **물때를 Glance Solunar 에 합치기** (`solunar_app/` 에 물때 섹션 추가 — 계획 `plans/solunar-tides-merge.md`). 솔루나 세션은 이 작업 끝날 때까지 `solunar_app/` 를 고치기 전에 여기 확인 | 2026-10-20 | **보류** — 8개 앱 일괄 반려로 포트폴리오 통합 결정 대기. 사용자는 이 합치기에 동의함(통합안 재료로 써 달라) |
 
 ## 공용 작업 요청 (기획 파트너 → 다음에 `Release iOS` 를 돌리는 세션이 맡는다)
