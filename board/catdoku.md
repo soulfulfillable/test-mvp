@@ -1,7 +1,22 @@
 # Kitty Queens: Cat Sudoku (Catdoku 앱) — 개발 세션 게시판
-마지막 갱신: 2026-10-17 (KST) — 1.1.0(빌드 37) 재제출
+마지막 갱신: 2026-10-31 09:25 (KST) — 외부 베타 공개 링크 생성·Beta App Review 제출
 
 ## 🔁 이어받기 (크레딧 막혀도 다른 계정에서 바로 이어서 — 매 단계마다 갱신)
+- **마지막 저장: 2026-10-31 09:25 KST · 작업 브랜치 `claude/catdoku-external-beta` (main 에 ff 반영됨)**
+- 방금 끝낸 것: **① 완료** — `asc_testflight.py external` + 워크플로 `TestFlight 외부 테스트`(testflight-external.yml) 로 외부 그룹 "Beta Testers"(공개 링크, 정원 100) 생성, 빌드 37 연결, 베타 설명·What to Test·연락처 채움, **Beta App Review 제출 → WAITING_FOR_REVIEW** (Actions run 41149487600, 10-31 09:19 KST).
+  **공개 링크 `https://testflight.apple.com/join/zUCgYY6g`** — `docs/beta.html` 문구에 넣음(② 완료). 승인 전엔 링크를 열어도 설치가 안 된다. `catdoku_app/store/beta-feedback.md` 양식 만듦(③ 준비).
+- 진행 중이던 것: ⑤ Google Play 준비 (아래 "다음 할 일" 참고)
+- **다음 할 일 (이 순서)**:
+  1. **Beta App Review 결과 확인** — Actions `TestFlight 외부 테스트` 를 build=37, app=catdoku 로 다시 돌리면 상태만 찍힌다(APPROVED / REJECTED). 승인되면 `beta-feedback.md`·`beta.html` 의 상태 문구 갱신 + 사용자에게 "지금 링크 보내도 된다" 알림. 거절이면 사유를 게시판에 적고 **재제출 전 사용자 확인**.
+  2. **⑤ Google Play**: (a) `build-android.yml` 을 앱 선택형으로(공용 → `_shared.md` 먼저) (b) `AndroidManifest.xml` 에 `com.google.android.gms.permission.AD_ID` 명시 + AdMob Android 앱 ID 는 **사용자가 AdMob(`soulfulfillable`) 에 Android 앱을 만들어 줘야** 실제 ID 교체(그 전엔 테스트 ID) (c) `docs/catdoku-privacy.html` In-app purchase 절에 Google Play 결제 추가 (d) Play 스토어 등록 자료 `catdoku_app/store/play-listing.md`(짧은/긴 설명·아이콘 512·피처 1024×500·폰 스크린샷 1080×1920 이상) (e) 업로드 키: Secrets `ANDROID_KEYSTORE_*` 가 환율용으로 이미 있음 → 같은 키 재사용 가능(앱마다 키 달라도 되지만 하나로 충분) → AAB 빌드 → 사용자가 Play Console 비공개 테스트에 업로드.
+  3. ③ 테스터 피드백이 오면 `beta-feedback.md` 에 원문 → 고친 것 → 1.1.1 Release iOS(app=catdoku) → 외부 그룹엔 **빌드 자동 추가 안 됨**: `TestFlight 외부 테스트` 를 새 빌드 번호로 다시 돌린다(두 번째 빌드부터는 보통 심사 없이 바로).
+  4. ④ 10명+ 피드백·반영 빌드 뒤 `review-reply-4.3.md` 4번 다시 쓰기 → **기획 파트너·사용자 확인 뒤에만** 답장. **Apple 답장·재제출은 이 세션이 하지 않는다.**
+- 사용자 대기 중인 것: (급하지 않음) AdMob 에 Kitty Queens **Android** 앱 + 광고 단위 3개(배너·보상형 힌트·보상형 이어하기) 만들어 ID 캡처 → Android 실제 ID 교체. Beta App Review 승인 뒤 테스터에게 링크 보내기(`beta.html` 문구).
+- 이어받는 세션에 붙여 넣을 말:
+  `soulfulfillable/test-mvp 의 board/catdoku.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Apple 답장·재제출은 사용자 확인 전엔 하지 말 것.`
+
+---
+(이전 이어받기 기록, 참고용)
 - 🚩 **2026-10-23 (기획 파트너): Kitty Queens 가 계정의 대표 앱이 됐다**(How Things Work 대신, 사용자 결정). 사용자 원문: "how things work 도 말고, 이거로 해. 이거 베타 테스터 필요하면 구해보자".
   **다음 할 일 (이 순서)**:
   ① **TestFlight 외부 테스트 그룹 + 공개 링크** — `.github/scripts/asc_testflight.py` 는 지금 내부 그룹 `me` 만 만든다 → 외부 그룹(`isInternalGroup:false`, `publicLinkEnabled:true`, `publicLinkLimit` 100 정도) 생성 + 빌드 37 연결 + Beta App Review 제출(`betaAppReviewSubmissions`, 테스트 안내 문구 `betaBuildLocalizations.whatsNew`) 을 추가. 공용 스크립트라 고치기 전 `board/_shared.md` 에 적기. 외부 베타 심사는 보통 하루 안팎 — 결과 확인 못 하면 "확인 못 함"이라고 적기
@@ -21,9 +36,9 @@
 
 
 ## 지금 상태 (3줄 이내)
-**2026-10-12 1.1.0(빌드 37) 재제출** (빌드 16·23 은 ITMS-90035 로 무효) · 처음 제출 10-03 — 148개국(EU 27 제외), 무료, 4+, Games/Puzzle·Board. 결제 상품 Unlock All Levels($1.99).
-등록 정보·스크린샷 5장은 Actions 로 입력(`catdoku_app/store/`). 유료 앱 계약·W-9·은행 Active.
-다음: 심사 결과 → 출시 후 AdMob 앱에 스토어 링크 연결.
+**2026-10-31 외부 베타 시작** — TestFlight 외부 그룹 "Beta Testers" 공개 링크 https://testflight.apple.com/join/zUCgYY6g (빌드 37 = 1.1.0), Beta App Review 대기 중.
+App Store 심사는 **4.3 반려 상태로 보류**(10-19) — 외부 베타 10명+ 피드백을 받아 반영한 뒤 기획 파트너·사용자 확인을 거쳐 답장. 이 세션은 답장·재제출을 하지 않는다.
+다음: Beta App Review 승인 확인 → 사용자가 링크 발송 → 피드백 수집(`catdoku_app/store/beta-feedback.md`) · 병행: Google Play 비공개 테스트 준비.
 
 ## 다음 할 일 / 사용자에게 받을 것
 - [v1.1 아이디어, 사용자 관심] 뉴스레터 구독: "Get new puzzles & apps first" 선택형 이메일 칸(로그인 없음) → 무료 뉴스레터 서비스, 모든 앱 공용 목록. 이메일 판매는 안 됨(Apple 규칙·주 개인정보법)으로 안내함. 넣을 때 개인정보처리방침·App Privacy(Email) 갱신.
@@ -70,6 +85,10 @@
 - 퍼즐 난이도: 7×7 첫 판은 "어렵다" 했지만 풀어냄. 너무 쉽게 만들 필요는 없지만 첫 경험은 조심.
 
 ## 다른 세션에 알리는 노하우 (다른 앱에서도 써먹을 것)
+- **TestFlight 외부 테스트(공개 링크)도 API 로 한 번에 된다** (10-31, 빌드 37 로 확인): Actions `TestFlight 외부 테스트` → build·app 입력.
+  `betaGroups` POST(`isInternalGroup:false, publicLinkEnabled:true, publicLinkLimitEnabled:true, publicLinkLimit:100`) 응답에 `publicLink` 가 바로 들어 있다(설치는 승인 뒤).
+  Beta App Review 에 필요한 것: `betaAppReviewDetail` 연락처(비어 있으면 App Review 의 `appStoreReviewDetail` 연락처를 복사하면 됨), `betaAppLocalizations` 설명+피드백 메일, 빌드 `betaBuildLocalizations.whatsNew`, 수출 규정. 그 다음 `betaAppReviewSubmissions` POST → `WAITING_FOR_REVIEW`.
+  내부 그룹과 달리 외부 그룹은 **빌드를 직접 붙여야 하고 새 빌드마다 다시 붙인다**(같은 워크플로를 새 빌드 번호로 재실행).
 - **새 앱 iOS 출시 순서 (이 세션에서 실제로 된 순서, 총 1시간 안쪽)**: ① `iOS 번들 ID 등록 · 앱 레코드 확인` Actions 로 번들 등록
   → ② 사용자가 ASC 웹에서 신규 앱(이름·언어·번들·SKU·Full Access) → ③ 같은 Actions 재실행으로 "앱 레코드: 있음" 확인
   → ④ `Release iOS` (앱 선택) — 서명~업로드 6분 → ⑤ 사용자: TestFlight 내부 그룹 + Invite Testers → 메일 "View in TestFlight" 의 Redeem 코드.

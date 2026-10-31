@@ -4,7 +4,6 @@
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
-| catdoku(Dok) | **`asc_testflight.py` 에 `external` 명령 추가**(외부 그룹+공개 링크+Beta App Review 제출) + 새 워크플로 `testflight-external.yml`. 기존 `invite` 명령·`TestFlight 초대` 자동 실행은 그대로 둔다 | 2026-10-31 | 진행 중 |
 | tides | **물때를 Glance Solunar 에 합치기** (`solunar_app/` 에 물때 섹션 추가 — 계획 `plans/solunar-tides-merge.md`). 솔루나 세션은 이 작업 끝날 때까지 `solunar_app/` 를 고치기 전에 여기 확인 | 2026-10-20 | **보류** — 8개 앱 일괄 반려로 포트폴리오 통합 결정 대기. 사용자는 이 합치기에 동의함(통합안 재료로 써 달라) |
 
 ## 공용 작업 요청 (기획 파트너 → 다음에 `Release iOS` 를 돌리는 세션이 맡는다)
@@ -59,6 +58,10 @@
   `App Store 등록 정보 채우기` 는 json 에 `versionString` 을 넣으면 편집 중인 버전 번호도 바꾼다.
 - **Cupertino 부품 (소음 측정기 세션, 10-05)**: `decibel_app/flutter/lib/screens/widgets.dart` 의 `BackLink`(VoiceOver 되는 뒤로 — Flutter 기본 뒤로 버튼은 접근성 tap 없음), `SectionHeader`/`SectionFooter`(설정 앱 13pt 회색), `PrimaryButton`(다크 대비), `LevelNumber`. 공용 테마 패키지를 만들 세션은 여기서 가져가도 된다.
 
+- **TestFlight 외부 테스트(공개 링크) 자동화** (Dok 세션, 2026-10-31, Kitty Queens 빌드 37 로 확인): Actions `TestFlight 외부 테스트`(`testflight-external.yml`,
+  `asc_testflight.py external`) → build 번호·앱 선택 → 외부 그룹 "Beta Testers"(공개 링크, 정원 100) 생성 → 베타 설명·What to Test(`<앱>_app/store/testflight.json`, 없으면 기본 문구)
+  → 연락처(App Review 것 복사) → 빌드 연결 → **Beta App Review 제출** → 요약에 공개 링크. 새 빌드마다 같은 워크플로를 다시 돌린다(외부 그룹은 자동 포함 안 됨).
+  첫 빌드는 심사(보통 하루 안팎), 그 뒤 빌드는 대개 바로. 외부 베타는 4.3 답장 4번의 근거이니 **대표 앱(Kitty Queens) 외에는 기획 파트너와 상의 뒤에**.
 - **TestFlight 초대 자동화** (속도계 세션, 2026-10-05, 빌드 26 으로 실제 확인): `Release iOS` 가 성공하면 워크플로
   `TestFlight 초대`(`testflight-invite.yml` + `.github/scripts/asc_testflight.py`)가 **자동으로** 돈다 → 빌드 처리 대기(보통 2~15분)
   → 수출 규정 비어 있으면 "해당 없음" → 앱에 내부 그룹 없으면 `me` 생성(모든 빌드 자동 포함) → 계정 소유자를 테스터로 → 초대 메일.
