@@ -1,11 +1,21 @@
 # YouTube Playables — 게시판 (기획 파트너가 염, 2026-10-30)
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-01 02:00 KST (개발 세션 ③-b) · 작업 브랜치: `claude/playables-molemash`
-- 방금 끝낸 것: **Mole Mash Playgama 판 빌드 완료** `playables/molemash/`(index.html + playgama-bridge.js 2.4.0 로컬 + playgama-bridge-config.json + audio/ CC0 음원 ogg·mp3 + CREDITS.md). 플레이 로봇 `robot.js` 53/53 통과(콘솔 에러 0·외부 요청 0·game_ready 1회·게임오버·저장 리로드·음소거·일시정지·광고 상태·보상형 이어하기·14개 크기 레이아웃). 커버 3종 `covers/`. zip 은 `./build.sh` → `dist/molemash.zip`(2.9MB, git 제외). **Playgama 게임 생성됨: id `cmvxme9mt1hvbj80hj6q0lokb`, 제목 "Mole Mash", 상태 DRAFT.**
-- 진행 중이던 것: 업로드 단계. 폼(update_application_form) → zip 업로드(start/confirm_archive_upload) → 커버 3종 → QA 툴 링크 → publish_sandbox → get_sandbox_share.
-- **다음 할 일 (순서)**: ① 위 업로드 단계를 끝내고 샌드박스 링크를 이 게시판·사용자 보고에 ② 체크리스트 번호별 결과표를 아래 "11-01 업로드 전 점검"에 적기 ③ `PLAYBOOK.md` 6장·`PRODUCT.md` 결정 로그·main 반영 ④ 사용자가 콘솔에서 Submit for review(모더레이션)·트래픽 캠페인을 할지 결정 ⑤ 다음 게임 Chicken Cross 에 같은 틀 적용(어댑터·오디오 컨트롤러·레이아웃 코드는 molemash/index.html 에서 복사)
-- 사용자 대기: 샌드박스 링크 받으면 폰에서 한 판(소리·음소거·이어하기 광고 느낌) → "Submit for review" 는 사용자가 콘솔에서 누름
+- 마지막 저장: 2026-11-01 19:00 KST (개발 세션 ③-b 완료) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
+- 방금 끝낸 것: **Mole Mash Playgama 샌드박스 게시 완료** — 게임 id `cmvxme9mt1hvbj80hj6q0lokb`, 아카이브 `molemash-1.0.0`(id `cmvxmi8l41hylj80hj24nwrhg`, 빌드 체크 PASSED, Bridge 2.4.0 FOUND), 커버 3종, 폼(제목·arcade·설명·조작법·story·EN·iOS/Android/Desktop·세로+가로·distributeEverywhere) 완료.
+  - 🎮 **샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv** (누구나 플레이, 모더레이션 없음)
+  - 🔧 QA 툴(Bridge 환경·크기 프리셋): https://developer.playgama.com/qa-tool/cmvxmi8l41hylj80hj24nwrhg
+  - 🌐 GitHub Pages 복사본(광고 없음, 저장은 됨): https://soulfulfillable.github.io/test-mvp/playables/molemash/
+  - 빌드: `playables/molemash/`(index.html·playgama-bridge.js·config·audio·CREDITS.md), `./build.sh` → `dist/molemash.zip` + docs 복사. 로봇 `robot.js` 53/53(`qa/report.json`). 규칙 번호별 점검표는 아래 "11-01 업로드 전 점검".
+  - ⚠️ **모더레이션(Submit for review)은 지금 열려 있지 않다**: `get_submission_state` = MODERATION_UNAVAILABLE("Publish it to the sandbox instead"). 새 게임은 **샌드박스가 콘솔의 샌드박스 카드에 적힌 목표(플레이 시간 등, 하루 1번 집계)에 도달해야** 모더레이션이 열린다. 즉 다음 단계는 플레이 모으기 = 링크 공유 또는 트래픽 캠페인(`start_sandbox_traffic`, 사용자 확인 전엔 안 함). 공유용 문구는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit 링크 제공; 문구에 "Made with AI… #PlaygamaMCP" 가 박혀 있음 — 사용자가 바꿔도 됨).
+- 진행 중이던 것: 없음
+- **다음 할 일 (순서)**:
+  ① 사용자: 폰에서 샌드박스 한 판(소리·음소거·일시정지·이어하기 광고 느낌). 아쉬운 점 피드백 → 이 게시판 "사용자 피드백 기록"
+  ② 사용자 결정: 트래픽 캠페인(`start_sandbox_traffic`, 공유 링크 또는 추천 보너스)을 돌릴지. 돌리면 세션이 `get_launch_steps` → traffic 단계 진행. 모더레이션 목표 도달은 콘솔 샌드박스 카드에서 확인
+  ③ BGM 교체(선택): 지금 곡은 CC0 "Battle Theme A"(카니발 느낌 아님). 사용자가 카니발/칼리오페 루프 음원(mp3, 라이선스 명시)을 주면 `audio/bgm.ogg`·`bgm.mp3` 만 바꾸고 `./build.sh` → 재업로드(`start_archive_upload` name `molemash-1.0.1`) → `publish_sandbox`(updateNote 필요)
+  ④ 다음 게임 **Chicken Cross** 를 같은 틀로: `playables/molemash/index.html` 의 ①Bridge 부트 ②store ③snd 컨트롤러 ④ads/frozen ⑤layout 세 모드 ⑥robot.js 를 복사해 시작. 음원은 같은 CC0 팩에서(`/tmp` 가 아니라 `npm pack @netforge/asset-library-files uisfx` 다시). 그다음 Daily Stairs → Ice Cream Tower. 캣도쿠·CvD 는 🐱🐶 그림 교체가 커서 뒤
+  ⑤ Bridge 리더보드(`create_leaderboard` + `bridge.leaderboards`)는 플레이가 모이면 다음 버전에
+- 사용자 대기: ① 느낌 피드백 ② 트래픽 캠페인 할지(A: 공유 링크로 자연 유입만 / B: start_sandbox_traffic) ③ (선택) 카니발 BGM 음원
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
@@ -122,7 +132,7 @@
 | 플랫폼별(YouTube Playables) | ✔ | 30MB 이하(3MB), 세로+가로, 외부 호출 0, 파일명 라틴, 파일 33개 |
 
 ## 지금 상태
-카탈로그 https://soulfulfillable.github.io/test-mvp/games.html + 영문 소개 `playables/pitch.md` 완료(10-31). 사용자 신청서 제출 대기. SDK 문서는 아직 없음.
+Mole Mash Playgama 샌드박스 게시(11-01) https://playgama.ai/play/cmnhxm72r5k4zv — 모더레이션은 샌드박스 목표 도달 뒤 열림. 카탈로그 https://soulfulfillable.github.io/test-mvp/games.html, 영문 소개 `playables/pitch.md`. 구글 Playables 신청서는 사용자 제출 대기.
 
 ## 다른 세션에 알리는 노하우
 - 게임 스크린샷은 `playables/capture.js` 가 실제 플레이(시작 탭→조작)까지 해서 찍는다. 날짜 시드 게임(계단)은 게임과 같은 시드 함수를 복사해 정답 방향을 계산해야 죽은 화면이 안 찍힌다.

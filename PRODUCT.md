@@ -101,6 +101,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-11-01 | (Playables 개발 세션) **Mole Mash 를 Playgama 샌드박스에 게시** — `playables/molemash/`(Bridge SDK 2.4.0 로컬 번들·Bridge storage·CC0 음원 파일·전면/보상형 광고·세로/가로/1:1 레이아웃·이모지 없는 HUD·첫 판 온보딩), 로봇 53/53, 빌드 체크 PASSED, 커버 3종, 샌드박스 https://playgama.ai/play/cmnhxm72r5k4zv (게임 id `cmvxme9mt1hvbj80hj6q0lokb`). **음원은 npm 의 CC0 팩(Kenney·uisfx·cynicmusic)** — Everygen 은 구독 없음(402). BGM 은 "Battle Theme A"(카니발 곡 아님, 알려진 아쉬움). 모더레이션 제출·트래픽 캠페인은 사용자가 결정 | 11-01 요건 대조표의 반려 사유(합성음·localStorage·이모지·SDK 8단계·1:1)를 전부 없앤 첫 게임. 같은 틀(어댑터·오디오 컨트롤러·레이아웃)을 Chicken Cross → Daily Stairs → Ice Cream Tower 에 복사하면 된다 |
 | 2026-10-31 | (Dok 개발 세션) **Kitty Queens 외부 베타 시작** — TestFlight 외부 그룹 "Beta Testers" 공개 링크 `https://testflight.apple.com/join/zUCgYY6g`(빌드 37, 정원 100), Beta App Review 제출. Google Play 첫 서명 AAB(Actions run 20). **안드로이드 업로드 키는 사용자가 만들지 않고 `ci-signing` 브랜치에 ASC_KEY_P8 로 암호화해 자동 보관**(모든 앱 공용). Apple 답장·재제출은 하지 않음 | 10-23 결정(대표 앱 = Kitty Queens, 외부 베타 먼저) 실행. 업로드 키 Secrets 가 비어 있었고 사용자에게 keytool 을 시키는 건 실수·분실 위험이 커서 iOS 인증서와 같은 방식으로 |
 | 2026-10-31 | (개발 세션) Playables 카탈로그 `docs/games.html`·영문 소개 `playables/pitch.md` 완료. **아이스크림 탑 UI 를 영어로 번역**(Ice Cream Tower) — 9개 중 유일한 한국어 게임이었음. 디자인은 손대지 않음 | Playables·파트너는 영어권 대상이라 카탈로그에 한국어 화면이 섞이면 안 됨. "기존 앱 디자인 안 만진다" 규칙은 문구 번역엔 해당 없다고 판단 |
 | 2026-10-31 | YouTube Playables 퍼블리셔 채널 = **기존 Peblit 채널(A)** | 이미 있고 채널 이력이 승인에 유리할 수 있음. Playables 는 별도 탭이라 앰비언트 영상과 섞여도 무방. 사용자 "a" |
