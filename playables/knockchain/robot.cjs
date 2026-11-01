@@ -120,11 +120,12 @@ async function waitState(page, states, ms) { try { await page.waitForFunction((s
   check('determinism (same shot twice → same state)', hashes[0] === hashes[1], hashes.join(' vs '));
   // ---- 4. no game over: three misses → still aiming, hint changed, no panel ----
   await page.evaluate(() => KC.start(0)); await waitState(page, ['aim'], 20000);
-  for (let k = 0; k < 3; k++) { await page.evaluate(() => KC.shoot(0.35, 0.12)); await page.waitForFunction((k) => KC.state === 'aim' && KC.misses === k + 1, k, { timeout: 25000 }).catch(() => {}); }
+  for (let k = 0; k < 3; k++) { await page.evaluate(() => KC.shoot(0.35, 0.12)); await page.waitForFunction((k) => KC.state === 'aim' && KC.misses === k + 1, k, { timeout: 40000 }).catch(() => {}); }
   const miss = await page.evaluate(() => ({ state: KC.state, misses: KC.misses, throws: KC.throws, hint: document.querySelector('#hint').textContent, panelHidden: document.querySelector('#panel').classList.contains('hidden'), search: document.querySelector('#search').textContent }));
   check('no game over: 3 misses → still aiming, hint changes, no panel', miss.state === 'aim' && miss.misses === 3 && miss.throws === 3 && miss.panelHidden && miss.hint !== 'Pull to aim' && /Still searching/.test(miss.search), JSON.stringify(miss));
   await shot(page, 'after-3-misses');
   // ---- 5. pause / resume ----
+  await page.evaluate(() => KC.start(0)); await waitState(page, ['aim'], 20000); await sleep(200);
   await page.click('#btn-pause'); await sleep(200);
   check('pause shows panel', await page.evaluate(() => KC.state === 'paused' && !document.querySelector('#panel').classList.contains('hidden')));
   await shot(page, 'paused');

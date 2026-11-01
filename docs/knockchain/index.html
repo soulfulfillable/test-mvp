@@ -37,9 +37,10 @@ body{margin:0;min-height:calc(100% + 240px);background:#0b1026;font:16px/1.3 -ap
 .card button{display:block;width:100%;height:46px;border:0;border-radius:13px;background:var(--acc);color:#fff;font:600 16px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;margin:8px 0 0;cursor:pointer}
 .card button.ghost{background:transparent;color:var(--acc);box-shadow:inset 0 0 0 1.5px var(--acc)}
 body[data-mode=portrait] #hud{--top:max(16px,env(safe-area-inset-top));--bottom:max(54px,calc(env(safe-area-inset-bottom) + 24px))}
-body[data-mode=square] #hud{--top:14px;--bottom:22px}
+body[data-mode=square] #hud{--top:14px;--bottom:60px}
 body[data-mode=landscape] #hud{--top:12px;--bottom:16px}
-body[data-mode=landscape] .goal{bottom:auto;top:62px;left:16px}
+body[data-mode=landscape] #search{top:calc(var(--top) + 11px);left:120px}
+body[data-mode=landscape] .goal{bottom:auto;top:64px;left:16px}
 body[data-mode=landscape] .motto{bottom:12px;right:16px}
 </style>
 </head>

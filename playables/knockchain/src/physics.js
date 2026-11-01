@@ -109,9 +109,9 @@ export class Sim {
     this.toDestroy.length = 0;
     if (this.ball) {
       const p = this.ball.getPosition(), v = this.ball.getLinearVelocity();
-      const slow = v.length() < 0.12;
+      const slow = v.length() < 0.25;
       this.restTimer = slow ? this.restTimer + DT : 0;
-      if (p.y < -6 || this.restTimer > 0.7 || this.time - this.shotAt > 12) {
+      if (p.y < -6 || this.restTimer > 0.6 || this.time - this.shotAt > 8) {
         this.meta.delete(this.ball); this.world.destroyBody(this.ball); this.ball = null;
         this.events.push({ type: 'ballDone', t: this.time, left: this.ballsLeft });
       }

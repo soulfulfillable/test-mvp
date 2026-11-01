@@ -1,0 +1,182 @@
+{
+  "startedAt": "2026-11-01T15:26:59.195Z",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "checks": [
+    {
+      "name": "layout phone-360x640 (portrait)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "layout phone-390x844 (portrait)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "layout phone-430x932 (portrait)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "layout land-844x390 (landscape)",
+      "ok": false,
+      "detail": " overlap: #search~.goal"
+    },
+    {
+      "name": "layout land-915x412 (landscape)",
+      "ok": false,
+      "detail": " overlap: #search~.goal"
+    },
+    {
+      "name": "layout tablet-768x1024 (portrait)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "layout tablet-1024x768 (landscape)",
+      "ok": false,
+      "detail": " overlap: #search~.goal"
+    },
+    {
+      "name": "layout square-640x640 (square)",
+      "ok": false,
+      "detail": "outside: .goal,.motto"
+    },
+    {
+      "name": "layout iframe-800x450 (landscape)",
+      "ok": false,
+      "detail": " overlap: #search~.goal"
+    },
+    {
+      "name": "layout iframe-1280x720 (landscape)",
+      "ok": false,
+      "detail": " overlap: #search~.goal"
+    },
+    {
+      "name": "layout desk-1366x768 (landscape)",
+      "ok": false,
+      "detail": " overlap: #search~.goal"
+    },
+    {
+      "name": "layout desk-1920x1080 (landscape)",
+      "ok": false,
+      "detail": " overlap: #search~.goal"
+    },
+    {
+      "name": "layout tall-9x21-390x910 (portrait)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "layout wide-21x9-910x390 (landscape)",
+      "ok": false,
+      "detail": " overlap: #search~.goal"
+    },
+    {
+      "name": "level 1 cleared by touch drag",
+      "ok": true,
+      "detail": "pull {\"dx\":0.942,\"dy\":0.66} state=won"
+    },
+    {
+      "name": "level 1 end panel",
+      "ok": true,
+      "detail": "Found. Always."
+    },
+    {
+      "name": "level 2 cleared by touch drag",
+      "ok": true,
+      "detail": "pull {\"dx\":0.376,\"dy\":1.034} state=won"
+    },
+    {
+      "name": "level 2 end panel",
+      "ok": true,
+      "detail": "Found. Always."
+    },
+    {
+      "name": "level 3 cleared by touch drag",
+      "ok": true,
+      "detail": "pull {\"dx\":0.919,\"dy\":0.771} state=won"
+    },
+    {
+      "name": "level 3 end panel",
+      "ok": true,
+      "detail": "Love conquers all."
+    },
+    {
+      "name": "determinism (same shot twice → same state)",
+      "ok": true,
+      "detail": "3112790805 vs 3112790805"
+    },
+    {
+      "name": "no game over: 3 misses → still aiming, hint changes, no panel",
+      "ok": false,
+      "detail": "{\"state\":\"flying\",\"misses\":1,\"throws\":2,\"hint\":\"\",\"panelHidden\":true,\"search\":\"Still searching… 2 throws\"}"
+    },
+    {
+      "name": "pause shows panel",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "resume",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "name": "mute persists after reload",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "level progress persists after reload",
+      "ok": true,
+      "detail": "2"
+    },
+    {
+      "name": "console errors = 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "page errors = 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "external requests = 0",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "screenshots": [
+    "layout-phone-360x640.png",
+    "layout-phone-390x844.png",
+    "layout-phone-430x932.png",
+    "layout-land-844x390.png",
+    "layout-land-915x412.png",
+    "layout-tablet-768x1024.png",
+    "layout-tablet-1024x768.png",
+    "layout-square-640x640.png",
+    "layout-iframe-800x450.png",
+    "layout-iframe-1280x720.png",
+    "layout-desk-1366x768.png",
+    "layout-desk-1920x1080.png",
+    "layout-tall-9x21-390x910.png",
+    "layout-wide-21x9-910x390.png",
+    "level1-aim.png",
+    "level1-flight.png",
+    "level1-won.png",
+    "level2-aim.png",
+    "level2-flight.png",
+    "level2-won.png",
+    "level3-aim.png",
+    "level3-flight.png",
+    "level3-won.png",
+    "after-3-misses.png",
+    "paused.png"
+  ],
+  "summary": "18/29 passed",
+  "finishedAt": "2026-11-01T15:30:34.478Z"
+}
