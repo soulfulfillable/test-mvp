@@ -84,11 +84,16 @@
     border-radius: 10px;
     font-size: 14px;
   }
-  .rank-row { display: flex; gap: 8px; align-items: baseline; padding: 6px 12px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .rank-row { display: flex; gap: 10px; align-items: center; padding: 6px 12px; border-bottom: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); }
   .rank-row:last-child { border-bottom: none; }
-  .rank-row.me { background: rgba(255, 201, 77, 0.18); }
-  .rank-pos { width: 30px; text-align: left; color: rgba(255,255,255,0.55); font-variant-numeric: tabular-nums; }
-  .rank-row.me .rank-pos { color: #ffc94d; }
+  .rank-row.me { background: rgba(255, 201, 77, 0.2); color: #fff; font-weight: 700; animation: mepulse 1.2s ease-in-out 3; }
+  @keyframes mepulse { 50% { background: rgba(255, 201, 77, 0.45); } }
+  .rank-pos { width: 26px; height: 26px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #4a2d10; background: rgba(255,255,255,0.18); flex: none; font-variant-numeric: tabular-nums; }
+  .rank-pos.m1 { background: #ffc94d; } .rank-pos.m2 { background: #d9dde3; } .rank-pos.m3 { background: #d59b63; }
+  .rank-pos.mx { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.75); }
+  #rank-line { margin-top: 6px; font-size: 15px; font-weight: 700; color: #fff; }
+  #rank-line.best { color: #ffc94d; font-size: 18px; }
+  #next-target { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 2px; }
   .rank-name { flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .rank-s { font-weight: 700; font-variant-numeric: tabular-nums; }
   .rank-empty { padding: 14px; font-size: 13px; color: rgba(255,255,255,0.5); }
@@ -154,13 +159,15 @@
     <span id="over-title-text">TIME'S UP!</span>
   </div>
   <div id="over-score"></div>
-  <div id="over-sub"></div>
+  <div id="rank-line"></div>
+  <div id="next-target"></div>
+  <div id="over-sub" class="hidden" style="display:none"></div>
   <div id="box-row">
     <div id="box-head"><svg viewBox="0 0 24 24" fill="none" stroke="#ffc94d" stroke-width="2"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M12 9v12M3 13h18M12 9c-2-4-6-4-6-1s4 1 6 1zm0 0c2-4 6-4 6-1s-4 1-6 1z"/></svg><span id="box-label">Gift box</span><span id="box-count" class="hidden">x1</span></div>
     <div id="box-bar"><i id="box-fill"></i></div>
     <div id="hammer-strip"></div>
   </div>
-  <div id="board-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h10v4a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M9 17h6"/></svg><span>Best runs on this device</span></div>
+  <div id="board-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h10v4a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M9 17h6"/></svg><span id="board-title-text">Top 5 runs on this device</span></div>
   <div id="rank-board"></div>
   <div id="name-row"><label for="name-input">Name</label><input id="name-input" maxlength="8" placeholder="Me" autocomplete="off"></div>
   <div class="btns">
@@ -210,8 +217,10 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.1.1';
-  var TIME_LIMIT = 45;           // seconds per round
+  var GAME_VERSION = '1.2.0';
+  var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
+  var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
+  var GOLD_TIME = 5, STREAK_EVERY = 15, STREAK_TIME = 5;   // time bonuses: gold mole, every 15th mole
   var CONTINUE_SECONDS = 10;     // rewarded continue bonus
   var hash = location.hash || '';
   var DEBUG = hash.indexOf('debug') >= 0;
@@ -380,7 +389,7 @@
   var score = 0, lives = 3, playT = 0, introT = 0, spawnTimer = 0;
   var shake = 0, overAt = 0, lastScore = 0, heartFlash = 0, hitStop = 0, flashA = 0;
   var timeLeft = 0, lastTick = -1, overReason = 'time';
-  var isNewBest = false;
+  var isNewBest = false, prevBestScore = 0;
   var RANK_MAX = 12;
   var ranks = [], myRankRow = null;
   var userPaused = false;
@@ -395,7 +404,7 @@
 
   // difficulty: time and score both tighten the window
   // pacing (player feedback 11-01 "it goes slack in the middle"): the ramp starts right after the opening moles
-  function heat()      { return Math.min(1, (playT / TIME_LIMIT) * 0.8 + (score / 45) * 0.4); }
+  function heat()      { return Math.min(1, (playT / HEAT_T) * 0.8 + (score / 45) * 0.4); }
   function stayTime()  { return 1.8 - 1.3 * heat(); }                 // 1.8 s at the start → 0.5 s at full heat
   function spawnGap()  { return 0.9 - 0.6 * heat(); }
   function maxActive() { if ((tutorial && tutHits < 3) || playT < (tutorial ? 8 : 4)) return 1; var h = heat(); return h < 0.15 ? 1 : (h < 0.5 ? 2 : 3); }
@@ -516,10 +525,13 @@
       empty.className = 'rank-empty'; empty.textContent = 'No runs yet.';
       board.appendChild(empty); return;
     }
-    ranks.forEach(function (r, i) {
+    var myIdx = ranks.indexOf(myRankRow), shown = ranks.slice(0, 5);
+    if (myIdx >= 5) shown.push(myRankRow);   // the new run always shows, even below the top five
+    shown.forEach(function (r) {
+      var i = ranks.indexOf(r);
       var row = document.createElement('div');
       row.className = 'rank-row' + (r === myRankRow ? ' me' : '');
-      var pos = document.createElement('span'); pos.className = 'rank-pos'; pos.textContent = '#' + (i + 1);
+      var pos = document.createElement('span'); pos.className = 'rank-pos ' + (i < 3 ? 'm' + (i + 1) : 'mx'); pos.textContent = String(i + 1);
       var name = document.createElement('span'); name.className = 'rank-name'; name.textContent = r.n;
       var s = document.createElement('span'); s.className = 'rank-s'; s.textContent = r.s + ' moles';
       row.append(pos, name, s);
@@ -612,6 +624,7 @@
       } else if (mo.kind === 'gold') {
         mo.phase = 'whacked'; mo.t = 0;
         score += 3; whacked++;
+        addTime(GOLD_TIME, hx, hy - moleH - 50 * UI);
         if (lives < 3) { lives++; floats.push({ x: hx, y: hy - moleH - 26, text: '+', icon: 'heart', color: '#ff5f6e', t: 0, size: 20 }); play('heart'); }
         floats.push({ x: hx, y: hy - moleH, text: '+3', color: '#e8a800', t: 0, size: 30 });
         spawnBurst(hx, hy - moleH * 0.5, ['#ffd94d', '#ffef9e', '#f4b820', '#fff'], 16, 260);
@@ -621,6 +634,7 @@
         mo.phase = 'whacked'; mo.t = 0;
         score += 1; whacked++;
         if (tutorial) tutHits++;
+        if (whacked % STREAK_EVERY === 0) addTime(STREAK_TIME, W / 2, grid.y + 40 * UI);
         floats.push({ x: hx, y: hy - moleH, text: 'BONK!', color: '#d1342a', t: 0, size: 24 });
         spawnBurst(hx, hy - moleH * 0.5, ['#8a5a34', '#a97544', '#5b3a1e', '#ffd94d'], 12, 220);
         hitStop = 0.055; shake = 6;
@@ -632,6 +646,12 @@
     play('whiff');
   }
 
+  function addTime(sec, x, y) {
+    timeLeft = Math.min(99, timeLeft + sec);
+    lastTick = -1;
+    floats.push({ x: x, y: y, text: '+' + sec + 's', color: '#1d8a3c', t: 0, size: 30 });
+    play('heart');
+  }
   function loseLife(text, x, y, color) {
     lives--;
     heartFlash = 1; shake = 6;
@@ -690,6 +710,7 @@
     shake = 10;
     lastScore = score;
     sndOver();
+    prevBestScore = store.progress.best;
     if (score > store.progress.best) { store.progress.best = score; isNewBest = true; }
     if (!continueUsed && !continueOffered) store.progress.played++;
     recordRank(score);
@@ -814,12 +835,21 @@
     document.getElementById('over-icon-time').style.display = overReason === 'time' ? '' : 'none';
     document.getElementById('over-icon-heart').style.display = overReason === 'time' ? 'none' : '';
     document.getElementById('over-score').textContent = lastScore + ' moles';
-    var sub = document.getElementById('over-sub');
-    sub.className = '';
-    if (isNewBest && lastScore > 0) { sub.textContent = 'New best!'; sub.className = 'newbest'; play('best'); }
-    else sub.textContent = 'Best: ' + store.progress.best + ' moles';
     ranks = store.progress.ranks.slice();
     renderRanks();
+    // one line that says where this run landed, one line that says what to beat next
+    var line = document.getElementById('rank-line'), tgt = document.getElementById('next-target');
+    var pos = ranks.indexOf(myRankRow) + 1, prevBest = isNewBest ? prevBestScore : store.progress.best;
+    line.className = '';
+    if (isNewBest && lastScore > 0) {
+      line.className = 'best';
+      line.textContent = 'NEW BEST!' + (prevBestScore > 0 ? ' +' + (lastScore - prevBestScore) + ' over your old record' : '');
+      tgt.textContent = 'Next target: ' + (lastScore + 3) + ' moles';
+      play('best');
+    } else if (pos > 0) {
+      line.textContent = '#' + pos + ' of your ' + ranks.length + ' run' + (ranks.length === 1 ? '' : 's');
+      tgt.textContent = (store.progress.best - lastScore) + ' more to beat your best (' + store.progress.best + ')';
+    } else { line.textContent = ''; tgt.textContent = 'Best: ' + store.progress.best + ' moles'; }
     renderBoxRow();
     document.getElementById('ad-note').textContent = '';
     // rewarded continue: opt-in, once per attempt, only where the platform supports it (rules 2.2.x, step 8)
@@ -1216,7 +1246,7 @@
     ctx.save();
     ctx.translate(cx, y + bh / 2); ctx.scale(pulse, pulse); ctx.translate(-cx, -(y + bh / 2));
     ctx.fillStyle = 'rgba(0,0,0,0.22)'; roundRect(bx - 2, y - 2, bw + 4, bh + 4, 8); ctx.fill();
-    var frac = Math.max(0, Math.min(1, timeLeft / Math.max(TIME_LIMIT, timeLeft)));
+    var frac = Math.max(0, Math.min(1, timeLeft / TIME_LIMIT));
     ctx.fillStyle = crit ? '#e4342c' : (low ? '#f08c1e' : '#3f9e3f');
     if (frac > 0) { roundRect(bx, y, Math.max(bh, bw * frac), bh, 7); ctx.fill(); }
     // small clock glyph + seconds
@@ -1356,6 +1386,17 @@
         var by = grid.y + 30 * UI, bwid = ctx.measureText(msg).width + 36 * UI;
         ctx.fillStyle = 'rgba(255,246,234,0.92)'; roundRect(W / 2 - bwid / 2, by - 24 * UI, bwid, 34 * UI, 17 * UI); ctx.fill();
         ctx.fillStyle = '#d1342a'; ctx.fillText(msg, W / 2, by);
+        ctx.restore();
+      }
+      if (timeLeft <= 10 && timeLeft > 0 && !frozen()) {
+        // last ten seconds: a big number in the middle of the board, popping on every second
+        var sec = Math.ceil(timeLeft), frac2 = sec - timeLeft, pop2 = 1 + 0.35 * Math.max(0, 1 - frac2 / 0.25);
+        ctx.save();
+        ctx.globalAlpha = 0.9; ctx.textAlign = 'center';
+        ctx.font = 'bold ' + Math.round(72 * UI * pop2) + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif';
+        ctx.lineWidth = 8 * UI; ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.fillStyle = sec <= 5 ? '#e4342c' : '#f08c1e';
+        var cy2 = Math.max(grid.y + 62 * UI, holes[0].y - moleH - 22 * UI);   // just above the top row, never over a mole
+        ctx.strokeText(String(sec), W / 2, cy2); ctx.fillText(String(sec), W / 2, cy2);
         ctx.restore();
       }
       if (userPaused || frozen()) { ctx.fillStyle = 'rgba(0,0,0,0.35)'; ctx.fillRect(-20, -20, W + 40, H + 40); }

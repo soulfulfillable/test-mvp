@@ -1,9 +1,9 @@
 # YouTube Playables — 게시판 (기획 파트너가 염, 2026-10-30)
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-01 21:20 KST (개발 세션 ③-b: v1 → v1.0.1 → v1.1.0 망치 수집 루프 → **v1.1.1 중반 속도 보정**, 사용자 "훨씬 나아짐") · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
+- 마지막 저장: 2026-11-01 21:20 KST (개발 세션 ③-b: v1 → v1.0.1 → v1.1.0 망치 수집 루프 → **v1.1.1 중반 속도 보정** → **v1.2.0 60초·카운트다운·시간 보너스·랭킹 개편**) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
 - 방금 끝낸 것: **Mole Mash v1.1.0** 아카이브 `molemash-1.1.0`(id `cmvxpcp0s1juwj80hkcbczua4`) 업로드 — 선물 상자 루프(방식 A, 결정 로그 11-01): 라운드 끝 패널에 **선물 상자 게이지**(잡은 두더지 수로 참, 첫 상자 12마리·다음부터 18마리, 애니메이션) + **망치 5칸 줄**(보유/잠김, 탭하면 장착) → Play again 때 상자가 있으면 **"WHAT'S IN THE BOX?" 화면**(이어하기 제안과 다른 화면): "Watch an ad: open the box / reward: a new hammer" 또는 "Later (keep the box)"(상자 쌓임) → `rewarded` 때만 개봉 → **NEW HAMMER!** 공개(Carnival Classic·Squeaky Rubber·Candy Cane·Frying Pan·Golden Mallet, 전부 코드 드로잉) → Equip and play / Keep my hammer → 플레이 중 장착 망치로 내려침, 타이틀에도 장착 망치. 광고 미지원 플랫폼은 무료 개봉, 광고 실패·취소 땐 상자·진척 보존 + "Your box is safe". 5개 완주 시 "All hammers collected"·상자 숨김. 측정 이벤트 round_end·progress_shown·bonus_ready·reward_offer_shown·ad_opt_in·ad_rewarded·ad_failed·reward_granted·equipped·next_round_started·box_later·box_opened_free. 로봇 62/62(`qa/report.json`, 스크린샷 `qa/phone-390x844-{over-box,box,reveal,play-new-hammer}.png`).
-  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (v1.1.0 게시 여부는 아래 "진행 중") · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.1.1): https://developer.playgama.com/qa-tool/cmvxpkm881kwrjm0h2iifxzqg
+  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (v1.1.0 게시 여부는 아래 "진행 중") · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.2.0): https://developer.playgama.com/qa-tool/cmvy93l5l20jrjm0h1s7our6c
   - 저장: `progress` v2 = {best, played, ranks, name, hammers[], equipped, boxFill, boxesReady, boxesOpened}(v1 저장은 기본값으로 이어짐). 보상형 배치 `continue`·`open_box`(config).
   - ⚠️ 모더레이션(Submit for review)은 샌드박스 목표 도달 뒤 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인은 사용자 확인 전엔 안 함.
 
@@ -16,18 +16,18 @@
 - 확인할 결과: 글의 공개 URL(threads.com/@…/post/…)을 이 게시판 "사용자 대기" 줄에 적기 → 개발 세션이 `start_sandbox_traffic` 으로 부스트 시작(결정 "A + 무료 부스트"로 기록). 회사명·실명 어디에도 쓰지 않는다.
 
 ### 🖱️ Codex 에게 (브라우저 작업) — Playgama QA 툴 인증(certification) (개발 세션 11-01)
-- URL: https://developer.playgama.com/qa-tool/cmvxpkm881kwrjm0h2iifxzqg (v1.1.1 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
+- URL: https://developer.playgama.com/qa-tool/cmvy93l5l20jrjm0h1s7our6c (v1.2.0 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
 - 할 것: QA 툴에서 **Test Game** 으로 열어 한 판 플레이(세로·가로·1:1 프리셋 각 1번) → 인증(certification) 체크 진행. `get_launch_steps` 의 form 단계가 `NO_CERTIFICATION` 이라 사람이 QA 툴에서 인증해야 폼이 완성됨. **Submit for review(모더레이션)·트래픽 캠페인은 누르지 말 것.**
 - 확인할 결과: 인증 항목 통과/실패 목록(실패하면 번호·문구 그대로 이 게시판에 적기), `get_launch_steps` form 단계가 BLOCKED 에서 풀림.
 - 진행 중이던 것: 없음 (v1.1.0 빌드 체크 PASSED·publish_sandbox 요청함 — 게시 확인은 다음 할 일 ①)
 - **다음 할 일 (순서)**:
-  ① v1.1.1 샌드박스 게시 확인(`get_publications` PUBLISHED, archive `cmvxpkm881kwrjm0h2iifxzqg`) — 아직이면 `publish_sandbox`(updateNote 필수)
+  ① v1.2.0 샌드박스 게시 확인(`get_publications` PUBLISHED, archive `cmvy93l5l20jrjm0h1s7our6c`) — 아직이면 `publish_sandbox`(updateNote 필수)
   ② 사용자가 v1.1.0 플레이 → 느낌·"다음 판 기대되나" 원문 기록. Playgama 텔레메트리는 트래픽이 모이면 `get_game_telemetry_analytics`(하루 1번 이하)로 옵트인율·다음 판 시작률 확인
   ③ Codex 인증(위 🖱️) 결과 반영
   ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. (참고 `get_sandbox_traffic` 11-01: 무료 부스트 3회 남음 — 3일간 약 50플레이 예상, 공유 글 링크가 필요. 사용자가 마음 바꾸면 그때.) **샌드박스 목표 수치(플레이 시간·인원)는 도구로 못 읽음 — 콘솔 샌드박스 카드에서만 보임, 하루 1번 집계.** 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
   ⑤ (선택) BGM 교체 — 카니발 루프 mp3 받으면 `audio/bgm.*` 교체 → `./build.sh` → 재업로드
   ⑥ 다음 트랙은 기획 결정에 따름(`plans/playables-core-fun.md` 7장: Chicken Cross 제외, 신규 코어 1순위 조준+물리 연쇄 — 착수 미승인). Mole Mash 틀 복사 시 `playables/molemash/index.html`·`robot.js`
-- 사용자 대기: ① v1.1.1 느낌 ② (선택) 카니발 BGM 음원 ③ Codex QA 툴 인증 결과
+- 사용자 대기: ① v1.2.0 느낌(60초·카운트다운·랭킹) ② Threads 글 URL(무료 부스트용, 위 🖱️) ③ (선택) 카니발 BGM 음원 ④ Codex QA 툴 인증 결과
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
@@ -193,6 +193,7 @@ Mole Mash Playgama 샌드박스 게시(11-01) https://playgama.ai/play/cmnhxm72r
 - 사용자 캡처(Supersonic): 게임 정보 카드 = 이름·장르·따옴표 한 줄 설명·개발자·제작사·게시 날짜. 목록 = 세로 썸네일 + 플레이 버튼 + 플레이 횟수. 전부 하이퍼캐주얼(탭/드래그 1조작, 30초~1분).
 
 ## 사용자 피드백 기록
+- **11-01 v1.1.1 플레이(원문)**: "시간 1뷴이 너무 짧은거같고 시간초과로 끝날거면 타임 몇초남은거 카윤트다운이라도 되게하던가 아니면 기프투받은거로 시건늘리게 하거나 하면어떠냐 그리고 끝나고 랭킹보이는거 좀더 자극족이고 딱 직관적이면 좋겟는데" → 반영(v1.2.0): ①한 판 45→60초(속도 램프는 45초 기준 유지) ②마지막 10초 화면 가운데 큰 카운트다운(초마다 튐, 5초부턴 빨강) ③시간 보너스: 황금 두더지 +5초, 15마리마다 +5초("+5s" 표시) ④결과 화면: 점수 아래 "NEW BEST! +N over your old record" 또는 "#N of your M runs", 그 아래 "Next target: X" / "X more to beat your best", 랭킹은 상위 5개에 금·은·동 메달, 내 기록 줄 강조(깜빡임), 5위 밖이면 내 줄을 따로 추가
 - **11-01 트래픽 결정(원문)**: "트래픽은 A로 가자" → 자연 유입만, 캠페인 없음(`PRODUCT.md` 결정 로그)
 - **11-01 v1.1.0 플레이(원문)**: "오 훨씬 나아짐 근데중간에 갑자기 루즈해지는게 좀 있어 막 빨라지기전에" → 반영(v1.1.1): 8~18초 구간이 한 마리씩·1.7초 머무름·1초 간격이라 비었음. heat 시간 가중 0.7→0.8, 머무름 1.8→0.5초, 간격 0.9→0.3초, 동시 2마리를 heat 0.15(≈8초)부터·3마리를 0.5부터, 첫 판 아닌 라운드는 4초 뒤부터 2마리
 - **11-01 Mole Mash 샌드박스 v1.0.0 첫 플레이(원문)**: "켜자마자 글씨너무많아 벌써 지겨워 심지어 뭐하라는건지 눈에 들어오지도 않아 / 한판 그냥 끝나버렸는데 광고부터나와서 frustrating / 처음부터 애들이 너무빨리 사라져 뭐하는건지도 모르고있는데 / 눌렸을때 떨어지는건 그나마 직관적인듯 / 맞추면 안되는애가 있느거같은데 왜안된건지도모르곘어 아예 폭탄같은모양으로 해버리던지 확 안눌르게, 오휴 누를뻔했다 이런게 생길정도로 / 그리고 하다보니까 너무 지겨워........ 다음판이 하나도 기대가 안돼 이거 게임 자체가 구성이 별로인건 아닌가.. 하나도 창의적인게 없이? / play again눌렀는데, watch an ad:Continue 안누르고 그래도 광고 나온게 이상한데 이거맞아? 마치 광고 안볼것처럼 싶었는데도 광고가 보인건데. 속인거같은데 이게 뭐야 싶을거같은데 / watch ad ad랑 차이가 없어보이는데"
