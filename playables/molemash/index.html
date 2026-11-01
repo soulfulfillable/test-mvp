@@ -135,6 +135,15 @@
   #reveal-name { font-size: 22px; font-weight: 800; color: #ffc94d; margin: 4px 0 2px; }
   #reveal-canvas { width: 120px; height: 120px; display: block; margin: 4px auto 6px; }
   .btn-ad small { display: block; }
+  .btn-ad .hrt { width: 16px; height: 16px; fill: #ff5f6e; stroke: none; margin: 0 1px; vertical-align: -2px; }
+  .strip { display: flex; gap: 6px; justify-content: center; margin: 4px 0 10px; }
+  .strip canvas { width: 40px; height: 40px; border-radius: 9px; background: rgba(255,255,255,0.08); border: 2px solid transparent; }
+  .strip canvas.equipped { border-color: #ffc94d; }
+  #world-title { margin-top: 10px; font-size: 13px; color: rgba(255,255,255,0.6); text-align: left; padding-left: 4px; display: flex; align-items: center; gap: 6px; }
+  #world-title svg { width: 14px; height: 14px; }
+  #world-title.hidden, #world-board.hidden { display: none; }
+  #world-board { margin: 6px 0 4px; max-height: min(150px, 24vh); overflow-y: auto; background: rgba(255,255,255,0.06); border-radius: 10px; font-size: 14px; }
+  #share-note { font-size: 12px; color: #7ee787; min-height: 15px; margin-top: 6px; }
   #pause-title { margin-bottom: 14px; }
   .pause-keys { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 10px; }
 </style>
@@ -167,16 +176,20 @@
     <div id="box-bar"><i id="box-fill"></i></div>
     <div id="hammer-strip"></div>
   </div>
+  <div id="world-title" class="hidden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span>World top 10</span></div>
+  <div id="world-board" class="hidden"></div>
   <div id="board-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h10v4a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M9 17h6"/></svg><span id="board-title-text">Top 5 runs on this device</span></div>
   <div id="rank-board"></div>
   <div id="name-row"><label for="name-input">Name</label><input id="name-input" maxlength="8" placeholder="Me" autocomplete="off"></div>
   <div class="btns">
     <button id="continue-btn" class="btn-ad hidden">
       <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg>
-      <span>Watch an ad to continue<br><small>reward: +10 seconds and 3 hearts</small></span>
+      <span><b>Continue</b> with +10 s and <svg class="hrt" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.3-9.4C1.4 8.1 3.6 4.5 7.2 4.5c2 0 3.6 1.2 4.8 2.6 1.2-1.4 2.8-2.6 4.8-2.6 3.6 0 5.8 3.6 4.5 7.1C19.5 16.4 12 21 12 21z"/></svg><svg class="hrt" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.3-9.4C1.4 8.1 3.6 4.5 7.2 4.5c2 0 3.6 1.2 4.8 2.6 1.2-1.4 2.8-2.6 4.8-2.6 3.6 0 5.8 3.6 4.5 7.1C19.5 16.4 12 21 12 21z"/></svg><svg class="hrt" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.3-9.4C1.4 8.1 3.6 4.5 7.2 4.5c2 0 3.6 1.2 4.8 2.6 1.2-1.4 2.8-2.6 4.8-2.6 3.6 0 5.8 3.6 4.5 7.1C19.5 16.4 12 21 12 21z"/></svg><small>watch one ad, keep this run going</small></span>
     </button>
     <button id="retry-btn" class="btn-main">Play again</button>
+    <button id="share-btn" class="btn-ghost"><svg viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>Share my score</button>
   </div>
+  <div id="share-note"></div>
   <div id="ad-note"></div>
 </div>
 
@@ -184,8 +197,9 @@
   <div class="ttl-row"><span>WHAT'S IN THE BOX?</span></div>
   <svg class="gift" width="110" height="110" viewBox="0 0 24 24" fill="none" stroke="#ffc94d" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="2" fill="#e4342c" stroke="#8a1f18"/><path d="M12 9v12" stroke="#ffc94d" stroke-width="2.2"/><path d="M3 13h18" stroke="#ffc94d" stroke-width="2.2"/><path d="M12 9c-2-4-6-4-6-1s4 1 6 1zm0 0c2-4 6-4 6-1s-4 1-6 1z" fill="#ffc94d" stroke="#c98f08"/></svg>
   <div id="box-sub">A new hammer is inside. Open it now or keep the box for later.</div>
+  <div id="box-strip" class="strip"></div>
   <div class="btns">
-    <button id="open-box-btn" class="btn-ad"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span>Watch an ad: open the box<small>reward: a new hammer</small></span></button>
+    <button id="open-box-btn" class="btn-ad"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span><b>Open it</b>: one ad, one new hammer<small>it goes in your collection below</small></span></button>
     <button id="open-free-btn" class="btn-main hidden">Open the box</button>
     <button id="later-btn" class="btn-ghost">Later (keep the box)</button>
   </div>
@@ -217,10 +231,10 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.2.0';
+  var GAME_VERSION = '1.3.0';
   var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
   var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
-  var GOLD_TIME = 5, STREAK_EVERY = 15, STREAK_TIME = 5;   // time bonuses: gold mole, every 15th mole
+  var CLOCK_TIME = 5;            // the clock mole adds five seconds
   var CONTINUE_SECONDS = 10;     // rewarded continue bonus
   var hash = location.hash || '';
   var DEBUG = hash.indexOf('debug') >= 0;
@@ -392,12 +406,54 @@
   var isNewBest = false, prevBestScore = 0;
   var RANK_MAX = 12;
   var ranks = [], myRankRow = null;
+  var LB_ID = 'moles', GAME_URL = 'https://playgama.ai/play/cmnhxm72r5k4zv';
+  function lbType() { return bridgeReady ? safe(function () { return B.leaderboards.type; }, 'not_available') : 'not_available'; }
+  function submitScore(sc) {
+    if (lbType() === 'not_available' || sc <= 0) return;
+    safe(function () { B.leaderboards.setScore(LB_ID, sc).then(renderWorld).catch(function () {}); });
+  }
+  function renderWorld() {
+    var title = document.getElementById('world-title'), board = document.getElementById('world-board');
+    if (lbType() !== 'in_game') { title.classList.add('hidden'); board.classList.add('hidden'); return; }
+    safe(function () {
+      B.leaderboards.getEntries(LB_ID).then(function (entries) {
+        board.textContent = '';
+        var myId = safe(function () { return B.player.id; }, null);
+        (entries || []).slice(0, 10).forEach(function (e) {
+          var row = document.createElement('div'); row.className = 'rank-row' + (myId && e.id === myId ? ' me' : '');
+          var pos = document.createElement('span'); pos.className = 'rank-pos ' + (e.rank <= 3 ? 'm' + e.rank : 'mx'); pos.textContent = String(e.rank);
+          var name = document.createElement('span'); name.className = 'rank-name'; name.textContent = String(e.name || 'Player').slice(0, 14);
+          var sc = document.createElement('span'); sc.className = 'rank-s'; sc.textContent = e.score + ' moles';
+          row.append(pos, name, sc); board.appendChild(row);
+        });
+        if (!board.childNodes.length) { var empty = document.createElement('div'); empty.className = 'rank-empty'; empty.textContent = 'Be the first on the board.'; board.appendChild(empty); }
+        title.classList.remove('hidden'); board.classList.remove('hidden');
+      }).catch(function () { title.classList.add('hidden'); board.classList.add('hidden'); });
+    });
+  }
+  function shareScore() {
+    var text = 'I whacked ' + lastScore + ' moles in Mole Mash. Beat me: ' + GAME_URL;
+    analytics('share_clicked', { score: lastScore });
+    var done = function () { shareNote('Shared!'); }, copy = function () {
+      var p = safe(function () { return B.clipboard && B.clipboard.isSupported ? B.clipboard.write(text) : null; }, null);
+      if (!p && navigator.clipboard && navigator.clipboard.writeText) p = navigator.clipboard.writeText(text);
+      if (p && p.then) p.then(function () { shareNote('Copied. Paste it to a friend.'); }).catch(function () { shareNote(text); });
+      else shareNote(text);
+    };
+    if (bridgeReady && safe(function () { return B.social.isShareSupported; }, false)) { safe(function () { B.social.share('score').then(done).catch(copy); }); return; }
+    if (navigator.share) { navigator.share({ text: text }).then(done).catch(function (e) { if (!e || e.name !== 'AbortError') copy(); }); return; }
+    copy();
+  }
+  function shareNote(msg) { var el = document.getElementById('share-note'); el.textContent = msg; clearTimeout(shareNote._t); shareNote._t = setTimeout(function () { el.textContent = ''; }, 4000); }
   var userPaused = false;
   var adOpen = false;
   var continueUsed = false, continueOffered = false, rewardPending = null;
   var tutorial = false, tutHits = 0;
   var roundIndex = 0;
   var whacked = 0;           // moles whacked this round (feeds the gift box)
+  var combo = 0, lastHitAt = -9; // consecutive hits within 0.9 s
+  var rings = [];            // impact rings {x, y, t}
+  var flashColor = '255,244,200';
   var boxGained = 0;         // fill added at the last round end (for the bar animation)
 
   function best() { return store.progress.best; }
@@ -490,7 +546,7 @@
       src.connect(g); g.connect(snd.master); src.start();
     } catch (e) {}
   }
-  function buzz(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} }
+  function buzz(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} }   // Android only: iOS Safari has no vibration API
   function sndBonk()  { play('bonk', 0.9 + Math.random() * 0.2); play('bonk2'); }
   function sndTick()  { play('tick'); }
   function sndGold()  { play('gold'); }
@@ -570,7 +626,7 @@
     continueUsed = false; continueOffered = false; rewardPending = null;
     tutorial = store.progress.played === 0; tutHits = 0;
     roundIndex++;
-    whacked = 0; boxGained = 0;
+    whacked = 0; boxGained = 0; combo = 0; lastHitAt = -9; rings = [];
   }
 
   function spawnBurst(x, y, colors, n, speed) {
@@ -592,10 +648,12 @@
     else if (!onboarding()) {
       if (score >= 5 && roll < 0.16) kind = 'bomb';
       else if (score >= 10 && roll > 0.92) kind = 'gold';
+      else if (score >= 6 && roll > 0.84) kind = 'clock';
     }
     var st = stayTime();
     if (onboarding()) st = [3.0, 2.6, 2.2][tutHits];   // onboarding: the first three moles wait for you
     if (kind === 'gold') st *= 0.62;
+    if (kind === 'clock') st *= 0.75;
     if (kind === 'bomb') st *= 0.9;
     moles.push({ hole: hole, kind: kind, phase: 'rise', p: 0, stayT: st, t: 0, face: Math.random() < 0.5 ? -1 : 1 });
   }
@@ -615,30 +673,42 @@
       if (mo.hole !== hitHole || mo.phase === 'whacked' || mo.p < 0.12) continue;
       var hx = holes[hitHole].x, hy = holes[hitHole].y;
       if (mo.kind === 'bomb') {
-        mo.phase = 'whacked'; mo.t = 0;
+        mo.phase = 'whacked'; mo.t = 0; combo = 0;
         loseLife('BOOM!', hx, hy - moleH * 0.6, '#d1342a');
+        floats[floats.length - 1].size = 36;
         puffs.push({ x: hx, y: hy - moleH * 0.5, t: 0, color: 'rgba(60,60,60,0.85)' });
-        spawnBurst(hx, hy - moleH * 0.5, ['#ff7a1a', '#ffd94d', '#333', '#fff'], 18, 300);
-        flashA = 0.5; hitStop = 0.1; shake = 14;
-        buzz(80); sndSkunk();
+        spawnBurst(hx, hy - moleH * 0.5, ['#ff7a1a', '#ffd94d', '#333', '#fff'], 30, 380);
+        rings.push({ x: hx, y: hy - moleH * 0.5, t: 0, big: true });
+        flashColor = '255,140,40'; flashA = 0.75; hitStop = 0.18; shake = 26;
+        buzz([60, 40, 120]); sndSkunk();
+      } else if (mo.kind === 'clock') {
+        mo.phase = 'whacked'; mo.t = 0;
+        whacked++; hitCombo();
+        addTime(CLOCK_TIME, hx, hy - moleH - 10 * UI);
+        spawnBurst(hx, hy - moleH * 0.5, ['#2f6fd6', '#8ecbff', '#fff'], 14, 240);
+        rings.push({ x: hx, y: hy - moleH * 0.5, t: 0 });
+        hitStop = 0.07; shake = 7; buzz(30);
+        analytics('clock_hit', { time_left: Math.round(timeLeft) });
       } else if (mo.kind === 'gold') {
         mo.phase = 'whacked'; mo.t = 0;
-        score += 3; whacked++;
-        addTime(GOLD_TIME, hx, hy - moleH - 50 * UI);
+        score += 3; whacked++; hitCombo();
         if (lives < 3) { lives++; floats.push({ x: hx, y: hy - moleH - 26, text: '+', icon: 'heart', color: '#ff5f6e', t: 0, size: 20 }); play('heart'); }
-        floats.push({ x: hx, y: hy - moleH, text: '+3', color: '#e8a800', t: 0, size: 30 });
-        spawnBurst(hx, hy - moleH * 0.5, ['#ffd94d', '#ffef9e', '#f4b820', '#fff'], 16, 260);
-        hitStop = 0.09; flashA = 0.28; shake = 9;
+        floats.push({ x: hx, y: hy - moleH, text: '+3', color: '#e8a800', t: 0, size: 34 });
+        spawnBurst(hx, hy - moleH * 0.5, ['#ffd94d', '#ffef9e', '#f4b820', '#fff'], 22, 300);
+        rings.push({ x: hx, y: hy - moleH * 0.5, t: 0 });
+        flashColor = '255,244,200'; hitStop = 0.11; flashA = 0.3; shake = 12;
         buzz(35); sndGold();
       } else {
         mo.phase = 'whacked'; mo.t = 0;
-        score += 1; whacked++;
+        score += 1; whacked++; hitCombo();
         if (tutorial) tutHits++;
-        if (whacked % STREAK_EVERY === 0) addTime(STREAK_TIME, W / 2, grid.y + 40 * UI);
-        floats.push({ x: hx, y: hy - moleH, text: 'BONK!', color: '#d1342a', t: 0, size: 24 });
-        spawnBurst(hx, hy - moleH * 0.5, ['#8a5a34', '#a97544', '#5b3a1e', '#ffd94d'], 12, 220);
-        hitStop = 0.055; shake = 6;
-        buzz(20); sndBonk();
+        var words = ['BONK!', 'WHAM!', 'SMASH!', 'CRUSH!', 'MEGA!'];
+        var ci = Math.min(words.length - 1, combo - 1);
+        floats.push({ x: hx, y: hy - moleH, text: words[ci] + (combo >= 3 ? ' x' + combo : ''), color: combo >= 3 ? '#b03020' : '#d1342a', t: 0, size: 28 + Math.min(14, combo * 2) });
+        spawnBurst(hx, hy - moleH * 0.5, ['#8a5a34', '#a97544', '#5b3a1e', '#ffd94d'], 18 + Math.min(10, combo * 2), 260);
+        rings.push({ x: hx, y: hy - moleH * 0.5, t: 0 });
+        hitStop = 0.085; shake = 9 + Math.min(6, combo);
+        buzz(30); sndBonk();
       }
       return;
     }
@@ -646,6 +716,10 @@
     play('whiff');
   }
 
+  function hitCombo() {
+    combo = (playT - lastHitAt <= 0.9) ? combo + 1 : 1;
+    lastHitAt = playT;
+  }
   function addTime(sec, x, y) {
     timeLeft = Math.min(99, timeLeft + sec);
     lastTick = -1;
@@ -682,7 +756,7 @@
   function panelOpen(id) { return !document.getElementById(id).classList.contains('hidden'); }
 
   function pauseGame(byPlatform) {
-    if (state !== STATE_PLAY || userPaused) return;
+    if (state !== STATE_PLAY || userPaused || adOpen) return;   // an open ad already freezes the game
     userPaused = true;
     document.getElementById('pause-keys').textContent = isDesktop ? 'Keys: 1–9 whack a hole · P pause · Space start' : '';
     document.getElementById('pause-panel').classList.remove('hidden');
@@ -715,6 +789,7 @@
     if (!continueUsed && !continueOffered) store.progress.played++;
     recordRank(score);
     feedBox(whacked);
+    submitScore(score);
     saveStore(['progress']);                      // before anything that can end the session (an ad)
     document.getElementById('pause-btn').classList.add('hidden');
     sendMsg(reason === 'time' ? 'level_completed' : 'level_failed', { level: String(roundIndex) });
@@ -756,8 +831,8 @@
     analytics('progress_shown', { box_fill: p.boxFill, boxes_ready: p.boxesReady });
     renderHammerStrip();
   }
-  function renderHammerStrip() {
-    var strip = document.getElementById('hammer-strip');
+  function renderHammerStrip(id) {
+    var strip = document.getElementById(id || 'hammer-strip');
     strip.textContent = '';
     HAMMERS.forEach(function (h) {
       var c = document.createElement('canvas'); c.width = 92; c.height = 92;
@@ -767,7 +842,7 @@
       var g = c.getContext('2d');
       g.save(); g.translate(46, 50); g.rotate(-0.6); g.scale(1.1, 1.1);
       drawHammerShape(g, owned ? h.id : 'locked'); g.restore();
-      if (owned) c.addEventListener('click', function () { equipHammer(h.id); renderHammerStrip(); });
+      if (owned && !id) c.addEventListener('click', function () { equipHammer(h.id); renderHammerStrip(); });
       strip.appendChild(c);
     });
   }
@@ -790,6 +865,7 @@
     document.getElementById('open-free-btn').classList.toggle('hidden', ad);
     document.getElementById('box-note').textContent = '';
     document.getElementById('box-sub').textContent = (store.progress.boxesReady > 1 ? store.progress.boxesReady + ' boxes are waiting. ' : '') + 'A new hammer is inside. Open it now or keep the box for later.';
+    renderHammerStrip('box-strip');
     document.getElementById('box-panel').classList.remove('hidden');
     analytics('reward_offer_shown', { offer: 'box', boxes_ready: store.progress.boxesReady, ad: ad ? 1 : 0 });
   }
@@ -837,6 +913,8 @@
     document.getElementById('over-score').textContent = lastScore + ' moles';
     ranks = store.progress.ranks.slice();
     renderRanks();
+    renderWorld();
+    document.getElementById('share-note').textContent = '';
     // one line that says where this run landed, one line that says what to beat next
     var line = document.getElementById('rank-line'), tgt = document.getElementById('next-target');
     var pos = ranks.indexOf(myRankRow) + 1, prevBest = isNewBest ? prevBestScore : store.progress.best;
@@ -876,15 +954,24 @@
     if (!rewardPending) return;
     var offer = rewardPending;
     if (st === 'rewarded') {
-      rewardPending = null;
+      // earned: apply it once the ad has closed, so the round never runs under the ad or behind a pause panel
+      rewardEarned = offer;
       analytics('ad_rewarded', { offer: offer });
-      if (offer === 'box') openBox(); else grantContinue();
+      clearTimeout(rewardT); rewardT = setTimeout(function () { if (rewardEarned && !adOpen) applyReward(); }, 1500);
     } else if (st === 'closed' || st === 'failed') {
+      if (rewardEarned) { applyReward(); return; }
       rewardPending = null;
       analytics('ad_failed', { offer: offer, stage: st });
       var msg = st === 'failed' ? 'Ad not available right now.' : 'Ad not finished, no reward this time.';
       if (offer === 'box') boxNote(msg + ' Your box is safe.'); else noteAd(msg);
     }
+  }
+  var rewardEarned = null, rewardT = null;
+  function applyReward() {
+    var offer = rewardEarned; rewardEarned = null; rewardPending = null; clearTimeout(rewardT);
+    if (!offer) return;
+    hidePanels(); userPaused = false;
+    if (offer === 'box') openBox(); else grantContinue();
   }
   function grantContinue() {
     // reward only after the ad was watched to the end (state 'rewarded')
@@ -914,9 +1001,9 @@
     safe(function () { if (B.advertisement.isInterstitialSupported) B.advertisement.showInterstitial(placement); });
   }
   function adStateChanged(st) {
-    adOpen = st === 'opened';
+    adOpen = st === 'opened' || st === 'rewarded';   // a rewarded ad is still on screen between 'rewarded' and 'closed'
     setReason('ad', adOpen);
-    if (!adOpen) last = performance.now();
+    if (!adOpen) { last = performance.now(); if (rewardEarned) applyReward(); }
   }
   function sendMsg(name, data) {
     if (DEBUG) (window.__msgs = window.__msgs || []).push(name);
@@ -962,6 +1049,7 @@
     if (state === STATE_OVER && performance.now() - overAt < 600) return;
     nextRound();
   });
+  document.getElementById('share-btn').addEventListener('click', function () { unlockAudio(); shareScore(); });
   document.getElementById('open-box-btn').addEventListener('click', function () { unlockAudio(); requestOpenBox(); });
   document.getElementById('open-free-btn').addEventListener('click', function () { unlockAudio(); requestOpenBox(); });
   document.getElementById('later-btn').addEventListener('click', function () { unlockAudio(); analytics('box_later', { boxes_ready: store.progress.boxesReady }); startRound(true); });
@@ -996,6 +1084,7 @@
     for (var i = floats.length - 1; i >= 0; i--) { floats[i].t += dt; if (floats[i].t > 1.1) floats.splice(i, 1); }
     for (var j = mallets.length - 1; j >= 0; j--) { mallets[j].t += dt; if (mallets[j].t > 0.28) mallets.splice(j, 1); }
     for (var k = puffs.length - 1; k >= 0; k--) { puffs[k].t += dt; if (puffs[k].t > 0.5) puffs.splice(k, 1); }
+    for (var rg = rings.length - 1; rg >= 0; rg--) { rings[rg].t += dt; if (rings[rg].t > 0.35) rings.splice(rg, 1); }
     for (var q = particles.length - 1; q >= 0; q--) {
       var pa = particles[q]; pa.t += dt; pa.vy += 900 * dt; pa.x += pa.vx * dt; pa.y += pa.vy * dt;
       if (pa.t > pa.life) particles.splice(q, 1);
@@ -1016,7 +1105,7 @@
         mo.p -= dt / mo.stayT;
         if (mo.p <= 0) {
           var h = holes[mo.hole];
-          if (mo.kind === 'mole' || mo.kind === 'gold') {
+          if (mo.kind === 'mole' || mo.kind === 'gold') {   // a bomb or a clock sinking costs nothing
             if (onboarding()) floats.push({ x: h.x, y: h.y - moleH * 0.7, text: 'FASTER!', color: '#d1342a', t: 0, size: 22 });
             else loseLife('MISSED!', h.x, h.y - moleH * 0.7, '#d1342a');
             sndMiss();
@@ -1107,7 +1196,29 @@
     ctx.save();
     ctx.beginPath(); ctx.rect(h.x - mw, h.y - mh - 26, mw * 2, mh + 26); ctx.clip();
     var bodyY = topY + (squash > 0 ? mh * 0.16 * squash : 0);
-    var bw = mw * (1 + 0.25 * squash), bh = mh * (1 - 0.2 * squash);
+    var bw = mw * (1 + 0.38 * squash), bh = mh * (1 - 0.3 * squash);
+    if (mo.kind === 'clock') {
+      // an alarm clock on legs: hit it for five more seconds
+      var cr = bw * 0.48, ccy = bodyY + bh * 0.55, tk = performance.now() / 1000;
+      ctx.fillStyle = '#2f6fd6';
+      [-1, 1].forEach(function (sg) { ctx.beginPath(); ctx.arc(h.x + sg * cr * 0.62, ccy - cr * 0.8, cr * 0.26, 0, Math.PI * 2); ctx.fill(); });
+      ctx.strokeStyle = '#2f6fd6'; ctx.lineWidth = 4;
+      [-1, 1].forEach(function (sg) { ctx.beginPath(); ctx.moveTo(h.x + sg * cr * 0.5, ccy + cr * 0.75); ctx.lineTo(h.x + sg * cr * 0.75, ccy + cr * 1.15); ctx.stroke(); });
+      ctx.fillStyle = '#2f6fd6'; ctx.beginPath(); ctx.arc(h.x, ccy, cr, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fff6ea'; ctx.beginPath(); ctx.arc(h.x, ccy, cr * 0.78, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#1b3f7a'; ctx.lineWidth = 2.2;
+      for (var tq = 0; tq < 4; tq++) { var ta = tq * Math.PI / 2; ctx.beginPath(); ctx.moveTo(h.x + Math.cos(ta) * cr * 0.62, ccy + Math.sin(ta) * cr * 0.62); ctx.lineTo(h.x + Math.cos(ta) * cr * 0.72, ccy + Math.sin(ta) * cr * 0.72); ctx.stroke(); }
+      ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(h.x, ccy); ctx.lineTo(h.x + Math.cos(tk * 6) * cr * 0.5, ccy + Math.sin(tk * 6) * cr * 0.5); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(h.x, ccy); ctx.lineTo(h.x, ccy - cr * 0.4); ctx.stroke();
+      ctx.fillStyle = '#1c1c1c'; ctx.beginPath(); ctx.arc(h.x - cr * 0.22, ccy - cr * 0.1, cr * 0.07, 0, 7); ctx.arc(h.x + cr * 0.22, ccy - cr * 0.1, cr * 0.07, 0, 7); ctx.fill();
+      ctx.restore();
+      ctx.save(); ctx.fillStyle = '#1d8a3c'; ctx.font = fontPx(14, 'bold'); ctx.textAlign = 'center';
+      ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 4;
+      var cly = Math.max(h.y - mh - 14 * UI, tentH + SA.top + 22 * UI);
+      ctx.strokeText('+5s', h.x, cly); ctx.fillText('+5s', h.x, cly);
+      ctx.restore();
+      return;
+    }
     if (mo.kind === 'bomb') {
       // a bomb: black ball, grey cap, lit fuse with a flickering spark — nothing to whack here
       var r = bw * 0.5, cyb = bodyY + bh * 0.55;
@@ -1358,6 +1469,11 @@
     for (var m = 0; m < moles.length; m++) drawMole(moles[m]);
     for (var j = 0; j < holes.length; j++) drawHoleFront(holes[j], j);
     for (var p = 0; p < puffs.length; p++) drawPuff(puffs[p]);
+    for (var rg2 = 0; rg2 < rings.length; rg2++) {
+      var ring = rings[rg2], rk = ring.t / 0.35;
+      ctx.save(); ctx.globalAlpha = 1 - rk; ctx.strokeStyle = ring.big ? '#ff7a1a' : '#fff'; ctx.lineWidth = (ring.big ? 10 : 6) * (1 - rk) + 1;
+      ctx.beginPath(); ctx.arc(ring.x, ring.y, (ring.big ? 40 : 18) + rk * (ring.big ? 160 : 70), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+    }
     for (var pt = 0; pt < particles.length; pt++) {
       var pa = particles[pt];
       ctx.save(); ctx.globalAlpha = Math.max(0, 1 - pa.t / pa.life); ctx.fillStyle = pa.color;
@@ -1375,7 +1491,7 @@
       else ctx.fillText(fl.text, fl.x, fy);
       ctx.restore();
     }
-    if (flashA > 0) { ctx.fillStyle = 'rgba(255,244,200,' + flashA.toFixed(3) + ')'; ctx.fillRect(-20, -20, W + 40, H + 40); }
+    if (flashA > 0) { ctx.fillStyle = 'rgba(' + flashColor + ',' + flashA.toFixed(3) + ')'; ctx.fillRect(-20, -20, W + 40, H + 40); }
     if (state === STATE_PLAY) {
       drawHud();
       if (introT > 0 && !frozen()) {
@@ -1514,7 +1630,8 @@
       gameOver: gameOver, onRewardedState: onRewardedState, adStateChanged: adStateChanged, setReason: setReason,
       requestContinue: requestContinue, resize: resize, perfFlush: perfFlush,
       nextRound: nextRound, requestOpenBox: requestOpenBox, feedBox: feedBox, equipHammer: equipHammer, saveStore: saveStore,
-      get hammers() { return HAMMERS.map(function (h) { return h.id; }); }, get whacked() { return whacked; }
+      get hammers() { return HAMMERS.map(function (h) { return h.id; }); }, get whacked() { return whacked; }, get combo() { return combo; },
+      get rewardEarned() { return rewardEarned; }, get lbType() { return lbType(); }
     };
   }
 

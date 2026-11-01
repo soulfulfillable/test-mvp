@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-01T19:53:09.827Z",
+  "startedAt": "2026-11-01T20:15:49.223Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -47,7 +47,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "bonk,bonk2,skunk,miss,tick,gold,heart,best,over,whiff,start,muteOn,muteOff,bgm"
+      "detail": "bonk,bonk2,skunk,gold,tick,miss,best,whiff,over,heart,muteOn,start,muteOff,bgm"
     },
     {
       "name": "music looping",
@@ -57,7 +57,7 @@
     {
       "name": "scored by whacking moles",
       "ok": true,
-      "detail": "score 14, whacks 14, lives 3"
+      "detail": "score 13, whacks 14, lives 3"
     },
     {
       "name": "P pauses and shows the pause panel",
@@ -67,7 +67,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "44.38 → 44.38"
+      "detail": "49.53 → 49.53"
     },
     {
       "name": "Resume continues the round",
@@ -97,17 +97,22 @@
     {
       "name": "round ends at 0 s with the game-over panel",
       "ok": true,
-      "detail": "{\"title\":\"TIME'S UP!\",\"score\":14}"
+      "detail": "{\"title\":\"TIME'S UP!\",\"score\":13}"
     },
     {
       "name": "best and rank recorded",
       "ok": true,
-      "detail": "best 14"
+      "detail": "best 13"
     },
     {
       "name": "level_completed message on time-up",
       "ok": true,
       "detail": "game_ready,level_started,level_paused,level_resumed,level_paused,level_resumed,level_completed"
+    },
+    {
+      "name": "Share my score copies or shares the score text",
+      "ok": true,
+      "detail": "I whacked 13 moles in Mole Mash. Beat me: https://playgama.a"
     },
     {
       "name": "mute button silences and shows the off icon",
@@ -127,7 +132,7 @@
     {
       "name": "reload restores best, name, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"best\":14,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
+      "detail": "{\"best\":13,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
     },
     {
       "name": "reload while muted stays silent from the first frame",
@@ -145,9 +150,19 @@
       "detail": "{\"state\":2,\"note\":\"Ad not finished, no reward this time.\",\"used\":false}"
     },
     {
+      "name": "reward earned but the round waits until the ad closes",
+      "ok": true,
+      "detail": "{\"state\":2,\"earned\":\"continue\",\"frozen\":true}"
+    },
+    {
+      "name": "after the ad closes the round runs, no pause panel in the way",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "rewarded: round continues with hearts back and +10 s",
       "ok": true,
-      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":9.849300000000033,\"used\":true,\"ranks\":1}"
+      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":9.850099999999998,\"used\":true,\"ranks\":1}"
     },
     {
       "name": "no second continue in the same attempt",
@@ -182,17 +197,17 @@
     {
       "name": "rewarded: box opens, a new hammer is revealed, box count drops",
       "ok": true,
-      "detail": "{\"open\":true,\"name\":\"Frying Pan\",\"hammers\":[\"classic\",\"pan\"],\"ready\":0}"
+      "detail": "{\"open\":true,\"name\":\"Candy Cane\",\"hammers\":[\"classic\",\"candy\"],\"ready\":0}"
     },
     {
       "name": "Equip and play: new hammer equipped, round starts",
       "ok": true,
-      "detail": "{\"state\":1,\"equipped\":\"pan\"}"
+      "detail": "{\"state\":1,\"equipped\":\"candy\"}"
     },
     {
       "name": "reload keeps owned hammers, the equipped one and the box fill",
       "ok": true,
-      "detail": "{\"equipped\":\"pan\",\"hammers\":2,\"fill\":2}"
+      "detail": "{\"equipped\":\"candy\",\"hammers\":2,\"fill\":2}"
     },
     {
       "name": "all hammers collected: bar reads so",
@@ -212,7 +227,7 @@
     {
       "name": "number key whacks the matching hole",
       "ok": true,
-      "detail": "hole 5"
+      "detail": "hole 9"
     },
     {
       "name": "Esc does nothing (1.5.2)",
@@ -267,7 +282,7 @@
     {
       "name": "game-over panel fits at square-640x640",
       "ok": true,
-      "detail": "panel 438px of 640"
+      "detail": "panel 513px of 640"
     },
     {
       "name": "layout iframe-800x450 (left): HUD and board separate, board on screen, buttons clear",
@@ -318,6 +333,7 @@
   "screenshots": [
     "phone-390x844-title.png",
     "phone-390x844-play-tutorial.png",
+    "phone-390x844-play-hit.png",
     "phone-390x844-play.png",
     "phone-390x844-paused.png",
     "phone-390x844-countdown.png",
@@ -346,6 +362,6 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "passed": 62,
+  "passed": 65,
   "failed": 0
 }

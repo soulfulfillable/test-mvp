@@ -4,16 +4,47 @@
             "preloadOnStart": "round_end",
             "placementFallback": "round_end",
             "placements": [
-                { "id": "round_end" }
+                {
+                    "id": "round_end"
+                }
             ]
         },
         "rewarded": {
             "preloadOnStart": "continue",
             "placementFallback": "continue",
             "placements": [
-                { "id": "continue" },
-                { "id": "open_box" }
+                {
+                    "id": "continue"
+                },
+                {
+                    "id": "open_box"
+                }
             ]
         }
+    },
+    "leaderboards": [
+        {
+            "id": "moles",
+            "isMain": true
+        }
+    ],
+    "saas": {
+        "publicToken": "cmvxme9mt1hvbj80hj6q0lokb",
+        "leaderboards": {
+            "platforms": [
+                "playgama",
+                "qa_tool",
+                "playgama_sandbox"
+            ]
+        }
+    },
+    "social": {
+        "shares": [
+            {
+                "id": "score",
+                "text": "Can you beat my Mole Mash score?",
+                "url": "https://playgama.ai/play/cmnhxm72r5k4zv"
+            }
+        ]
     }
 }
