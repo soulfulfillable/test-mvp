@@ -20,7 +20,7 @@ srv.listen(0, '127.0.0.1', async () => {
     await p.goto(base); await p.waitForFunction(() => document.body.classList.contains('ready'), null, { timeout: 90000 }); await p.evaluate(() => KC.start(0)); await p.waitForFunction(() => KC.state === 'aim', null, { timeout: 30000 }); await sleep(600);
     await p.screenshot({ path: path.join(OUT, name + '.png') }); console.log(name, w * 3 + '×' + h * 3, 'errors', errs.length);
     if (name === 'night-portrait') { // the found moment
-      await p.evaluate((s) => KC.shoot(s.dx, s.dy), sol); await p.waitForFunction(() => KC.state === 'won', null, { timeout: 20000 }); await sleep(1450);
+      await p.evaluate((s) => { KC.noPanel = true; KC.shoot(s.dx, s.dy); }, sol); await p.waitForFunction(() => KC.state === 'won', null, { timeout: 20000 }); await sleep(2000);
       await p.screenshot({ path: path.join(OUT, 'night-found.png') }); console.log('night-found', 'errors', errs.length);
     }
     await ctx.close();

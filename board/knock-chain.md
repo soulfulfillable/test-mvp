@@ -11,7 +11,7 @@
   - 입력: 어디서나 당겨 조준(궤적 점선, 최대 당김 1.3), 놓으면 발사. 터치는 `touchmove` preventDefault + 240px 스크롤 완충(PLAYBOOK 시트 대책). 마우스도 됨.
   - 효과음 10종 CC0(Kenney, `audio/` ogg+mp3), 일시정지·음소거·진행 저장(localStorage; Playgama 판은 Bridge storage 로 바꿀 것).
   - 빌드: `cd playables/knockchain && npm install && ./build.sh` → `docs/knockchain/`(esbuild 번들 game.js 0.8MB + audio + index). 로봇: `NODE_PATH=/opt/node-tools/node_modules node playables/knockchain/robot.cjs` → `qa/report.json`+스크린샷. 정지 화면: `tools/stills.cjs`.
-  - **로봇 결과: ROBOT_RESULT**
+  - **로봇 결과: 29/29 통과** (`playables/knockchain/qa/report.json`, 스크린샷 `qa/*.png`) — 14개 크기 HUD 안 겹침·화면 안 / Night 1·2·3 터치 드래그로 클리어 / 같은 당김 2회 지문 동일 / 3번 빗나가도 패널 없이 계속(힌트 바뀜) / 일시정지·재개 / 음소거·진행 저장 리로드 유지 / 콘솔 에러 0·페이지 에러 0·외부 요청 0
 - 진행 중이던 것: 없음
 - **다음 할 일**: ① 사용자 20초 플레이 피드백("첫 발에 뭘 맞히면 되는지 읽히나", "밤+등불이 진짜 게임 같나", 원문 기록) ② 피드백 반영 후 3단계 승인 요청 — 후보: 빗나갔을 때 "장면 변화"를 더 눈에 보이게(양이 자리를 옮기고 울음소리 — 양 울음 CC0 음원 찾기: npm 검색 `sheep bleat cc0`), 가면 쓴 아이들(유령) 장식, 마을 창문 애니메이션, 레벨 5~10개, 한 레벨 안의 연쇄 2단계 ③ Playgama 판은 Bridge SDK·전면 광고·storage 어댑터(Mole Mash `playables/molemash/` 틀 복사) — 아직 미승인 ④ 효과음 중 '양 울음'·'유리 깨짐' 전용 음원 교체
 - 사용자 대기: 플레이 느낌 1줄 + 3단계 범위 결정

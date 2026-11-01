@@ -66,12 +66,13 @@ function onWin() {
   setTimeout(() => { G.view.found(1); G.audio.play('win'); }, 900);
   G.progress.best = Math.max(G.progress.best || 0, G.level.id); save(G.progress);
   setTimeout(() => {
+    if (G.noPanel) return; // stills: keep the found moment on screen
     const last = G.levelIndex + 1 >= LEVELS.length;
     const n = G.throws;
     panel(last ? 'Love conquers all.' : 'Found. Always.',
       last ? 'Every sheep was found. That is the whole core test — tell us how it felt.' : `The sheep came out after ${n} throw${n === 1 ? '' : 's'}. It was never a race.`,
       [[last ? 'Search again' : 'Next night', nextLevel], ['Play this night again', () => startLevel(G.levelIndex), true]]);
-  }, 1600);
+  }, 2600);
 }
 function onMiss() { // never a game over: the scene changes and the search goes on
   G.misses++; G.view.deepen(G.misses);
@@ -173,7 +174,7 @@ function waitThenMiss() { // give the chain a moment to finish before calling it
 window.KC = {
   get state() { return G.state; }, get level() { return G.level && G.level.id; }, get sim() { return G.sim; },
   shoot: (dx, dy) => { if (G.state === 'aim') shoot(dx, dy); }, start: (i) => startLevel(i), pxPerUnit: () => G.view.pxPerUnit(), anchorPx: () => { const a = G.sim.anchor(); return a; },
-  hash: () => G.sim.hash(), settled: () => G.sim.settled(), levels: LEVELS.length, get throws() { return G.throws; }, get misses() { return G.misses; },
+  hash: () => G.sim.hash(), settled: () => G.sim.settled(), levels: LEVELS.length, get throws() { return G.throws; }, get misses() { return G.misses; }, set noPanel(v) { G.noPanel = !!v; },
 };
 
 // ---------- boot ----------

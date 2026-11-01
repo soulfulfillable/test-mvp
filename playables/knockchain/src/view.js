@@ -90,6 +90,7 @@ export function createView(container) {
     const tuft = new THREE.Mesh(new THREE.SphereGeometry(0.12, 10, 8), wool); tuft.position.set(0.4, 0.7, 0.02); g.add(tuft);
     for (const s of [-1, 1]) { const ear = new THREE.Mesh(new THREE.SphereGeometry(0.07, 8, 6), dark); ear.scale.set(1.8, 0.6, 1); ear.position.set(0.36, 0.6, s * 0.17); g.add(ear); const eye = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 6), mat(0xffffff, { emissive: 0xfff3c0, emissiveIntensity: 0.6 })); eye.position.set(0.55, 0.6, s * 0.08); g.add(eye); }
     for (const [dx, dz] of [[0.2, 0.14], [0.2, -0.14], [-0.2, 0.14], [-0.2, -0.14]]) { const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.3, 8), dark); leg.position.set(dx, 0.15, dz); leg.castShadow = true; g.add(leg); }
+    const sl = warmLight(0.3, 0.9, 0.3, 0, 2.6); g.add(sl); g.userData.light = sl; // lit when found
     g.userData.head = head; return g;
   }
   function makeShepherd(x, z) { // a child in a cloak holding a lantern on a staff; the lantern is the warm light
@@ -225,6 +226,7 @@ export function createView(container) {
       if (V.doorOpen > 0) {
         V.door.rotation.y += (-1.9 - V.door.rotation.y) * Math.min(1, dt * 5);
         V.insideLight.intensity += (1.8 - V.insideLight.intensity) * Math.min(1, dt * 3);
+        s.userData.light.intensity += (1.6 - s.userData.light.intensity) * Math.min(1, dt * 3);
         V.hop = (V.hop || 0) + dt;
         const k = Math.min(1, V.hop / 1.2);
         s.position.z = V.sheepHome.z + k * 1.1; s.position.y = 0.02 + Math.abs(Math.sin(V.hop * 9)) * (k < 1 ? 0.14 : 0.03);
@@ -255,7 +257,7 @@ export function createView(container) {
     const cx = V.level.crate.x + 0.7, cz = V.level.crate.z + 1.4;
     for (let i = 0; i < 40; i++) { const s = new THREE.Mesh(new THREE.SphereGeometry(0.035 + rnd() * 0.03, 6, 5), new THREE.MeshBasicMaterial({ color: i % 3 ? 0xffd27a : 0xffffff, transparent: true })); s.position.set(cx + (rnd() - 0.5) * 2, 0.2 + rnd() * 0.6, cz + (rnd() - 0.5) * 1.5); dyn.add(s); V.confetti.push({ m: s, vx: (rnd() - 0.5) * 0.6, vy: 0.8 + rnd() * 1.2, rx: 0, rz: 0, t: 2.5 + rnd() * 1.5 }); } }
   function deepen(k) { hemi.intensity = Math.max(0.3, 0.55 - k * 0.06); moon.intensity = Math.max(0.6, 0.9 - k * 0.08); } // the night deepens a little after each miss
-  function resetEffects() { V.doorOpen = 0; V.hop = 0; if (V.door) V.door.rotation.y = -0.55; if (V.sheep) { V.sheep.position.copy(V.sheepHome); V.sheep.rotation.y = Math.PI * 0.45; } if (V.insideLight) V.insideLight.intensity = 0; for (const s of V.shards) dyn.remove(s.m); for (const s of V.confetti) dyn.remove(s.m); V.shards = []; V.confetti = []; V.boxes.forEach(o => o.visible = true); deepen(0); V.found = 0; }
+  function resetEffects() { V.doorOpen = 0; V.hop = 0; if (V.door) V.door.rotation.y = -0.55; if (V.sheep) { V.sheep.position.copy(V.sheepHome); V.sheep.rotation.y = Math.PI * 0.45; } if (V.insideLight) V.insideLight.intensity = 0; if (V.sheep) V.sheep.userData.light.intensity = 0; for (const s of V.shards) dyn.remove(s.m); for (const s of V.confetti) dyn.remove(s.m); V.shards = []; V.confetti = []; V.boxes.forEach(o => o.visible = true); deepen(0); V.found = 0; }
 
   function render() { renderer.render(scene, camera); }
   window.addEventListener('resize', resize);

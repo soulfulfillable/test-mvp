@@ -33,4 +33,4 @@ C. Everygen 이미지 생성은 **"목표 룩" 참고 1장**으로만 — 게임
 ## 진행 기록
 - 2026-11-01 기획 파트너 작성. 1단계 승인.
 - 2026-11-01 개발 세션: **1단계 완료** — A(Canvas 2.5D 규칙 렌더)·B(three.js + CC0 고양이 모델) 정지 화면 각 2장 + 4상태 시트 + `playables/knockchain/CREDITS.md`. 페이지 https://soulfulfillable.github.io/test-mvp/knockchain-art.html . C(Everygen 참고 이미지)는 402 구독 없음으로 불가. 사용자 느낌 대기. 자세한 건 `board/knock-chain.md`.
-- 2026-11-01 개발 세션: 1단계 통과(사용자 "너무 좋아졌어") → B 로 **2단계 착수 승인**(사용자 "응 B 로 2단계 가자") → 주제(잃은 양) 적용한 **코어 테스트 빌드** https://soulfulfillable.github.io/test-mvp/knockchain/ . 레벨 3개(유리 다리/벽 넘기기/도미노), Planck.js 결정론 물리, 풀이기 성공률 14.0/4.5/6.2%, 로봇 ROBOT_RESULT. 자세한 건 `board/knock-chain.md`.
+- 2026-11-01 개발 세션: 1단계 통과(사용자 "너무 좋아졌어") → B 로 **2단계 착수 승인**(사용자 "응 B 로 2단계 가자") → 주제(잃은 양) 적용한 **코어 테스트 빌드** https://soulfulfillable.github.io/test-mvp/knockchain/ . 레벨 3개(유리 다리/벽 넘기기/도미노), Planck.js 결정론 물리, 풀이기 성공률 14.0/4.5/6.2%, 로봇 29/29 통과. 자세한 건 `board/knock-chain.md`.

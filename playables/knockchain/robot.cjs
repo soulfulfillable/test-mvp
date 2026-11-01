@@ -105,7 +105,7 @@ async function waitState(page, states, ms) { try { await page.waitForFunction((s
     await sleep(250); await shot(page, `level${i + 1}-flight`);
     const won = await waitState(page, ['won'], 15000);
     check(`level ${i + 1} cleared by touch drag`, won, `pull ${JSON.stringify(levels[i])} state=${await page.evaluate(() => KC.state)}`);
-    await sleep(1700); await shot(page, `level${i + 1}-won`);
+    await sleep(2000); await shot(page, `level${i + 1}-found`); await sleep(1000); await shot(page, `level${i + 1}-won`);
     const panelText = await page.evaluate(() => document.querySelector('#panel-title').textContent);
     check(`level ${i + 1} end panel`, /Found|Love conquers all/.test(panelText), panelText);
   }

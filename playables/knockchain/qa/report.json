@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-01T15:26:59.195Z",
+  "startedAt": "2026-11-01T15:31:23.615Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -21,13 +21,13 @@
     },
     {
       "name": "layout land-844x390 (landscape)",
-      "ok": false,
-      "detail": " overlap: #search~.goal"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "layout land-915x412 (landscape)",
-      "ok": false,
-      "detail": " overlap: #search~.goal"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "layout tablet-768x1024 (portrait)",
@@ -36,33 +36,33 @@
     },
     {
       "name": "layout tablet-1024x768 (landscape)",
-      "ok": false,
-      "detail": " overlap: #search~.goal"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "layout square-640x640 (square)",
-      "ok": false,
-      "detail": "outside: .goal,.motto"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "layout iframe-800x450 (landscape)",
-      "ok": false,
-      "detail": " overlap: #search~.goal"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "layout iframe-1280x720 (landscape)",
-      "ok": false,
-      "detail": " overlap: #search~.goal"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "layout desk-1366x768 (landscape)",
-      "ok": false,
-      "detail": " overlap: #search~.goal"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "layout desk-1920x1080 (landscape)",
-      "ok": false,
-      "detail": " overlap: #search~.goal"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "layout tall-9x21-390x910 (portrait)",
@@ -71,8 +71,8 @@
     },
     {
       "name": "layout wide-21x9-910x390 (landscape)",
-      "ok": false,
-      "detail": " overlap: #search~.goal"
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "level 1 cleared by touch drag",
@@ -111,8 +111,8 @@
     },
     {
       "name": "no game over: 3 misses → still aiming, hint changes, no panel",
-      "ok": false,
-      "detail": "{\"state\":\"flying\",\"misses\":1,\"throws\":2,\"hint\":\"\",\"panelHidden\":true,\"search\":\"Still searching… 2 throws\"}"
+      "ok": true,
+      "detail": "{\"state\":\"aim\",\"misses\":3,\"throws\":3,\"hint\":\"Still searching. Try a little higher\",\"panelHidden\":true,\"search\":\"Still searching… 3 throws\"}"
     },
     {
       "name": "pause shows panel",
@@ -121,7 +121,7 @@
     },
     {
       "name": "resume",
-      "ok": false,
+      "ok": true,
       "detail": ""
     },
     {
@@ -177,6 +177,6 @@
     "after-3-misses.png",
     "paused.png"
   ],
-  "summary": "18/29 passed",
-  "finishedAt": "2026-11-01T15:30:34.478Z"
+  "summary": "29/29 passed",
+  "finishedAt": "2026-11-01T15:33:26.215Z"
 }
