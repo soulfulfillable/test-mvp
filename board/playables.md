@@ -90,7 +90,8 @@
 - **측정(Bridge analytics, 개인정보 없음)**: round_end, progress_shown, bonus_ready, box_opened_free, reward_offer_shown, ad_opt_in, ad_rewarded, ad_failed, reward_granted, equipped, next_round_started. 볼 것 = 옵트인율·보상 도달·다음 판 시작률·이탈, 광고 노출 수 단독은 보지 않음.
 - **QA 체크리스트**: ①보상은 SDK `rewarded` 에서만, 더블클릭·중복 콜백·재시도·리로드에도 1회 ②no-fill/취소 때 상자 유지 ③광고 중 게임·소리 멈춤, 복귀 정상 ④리로드 후 보유·장착·진행률 유지(Bridge storage) ⑤5개 완주 상태 ⑥1:1·가로·세로에서 새 패널 안 깨짐 ⑦규칙 2.2.1~2.2.5·3.2.x·4.3.2(이모지 금지) 재점검 ⑧로봇 테스트에 위 경로 추가, 스크린샷 ⑨Playgama 테스트 광고 성공 ≠ 실서비스 준비 — 구분해 기록. YouTube Playables 로 갈 땐 광고·저장 API 가 다르므로 어댑터만 바꾸고 상태 기계는 유지.
 - **적용 시점**: Mole Mash v1 샌드박스가 올라간 **뒤**, 같은 게임의 v1.1 로. 다른 8개 게임엔 결과 보고 나서.
-- **사용자 결정 필요**: ① 실험 진행 여부(샌드박스 v1 뒤 v1.1) ② 진행이면 개봉 방식 **A(광고 개봉+Later 보관, 추천) / B(무료 기본+광고 추가)**. **지금은 연구·제안 전달 단계 — 수집 기능 구현은 시작하지 않고 기존 샌드박스 작업만 유지.**
+- ✅ **사용자 결정(11-01)**: **실험 진행, 방식 A**(광고로 선택 개봉 + Later 보관). 순서: **v1 샌드박스 검증 먼저 → 그다음 v1.1 로 구현·테스트.** 다시 묻지 않는다. 개발 세션은 v1 샌드박스가 끝나면 이어받기 "다음 할 일"에 v1.1(A) 을 넣고 진행.
+- 📌 **핵심 재미는 별개 문제**(사용자 "너무 단순·일차원"): 9개 비교·대표 후보(Chicken Cross)·막대기 게임 식별은 `plans/playables-core-fun.md`.
 ## 11-01 업로드 전 점검 — Playgama 규칙 번호별 (Mole Mash, 아카이브 molemash-1.0.0)
 
 증거: `playables/molemash/robot.js` 53/53 통과(`qa/report.json`), 스크린샷 `qa/*.png`, 코드 grep. ✔ = 확인됨, ✖ = 미충족, ? = 확인 못 함(사람·실기기·QA 툴 필요).
