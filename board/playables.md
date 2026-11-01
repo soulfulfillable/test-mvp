@@ -50,6 +50,77 @@
 - 사용자 대기: 없음(신청서는 Codex, Playgama 업로드는 세션). 샌드박스 링크가 나오면 사용자가 폰에서 느낌 확인 → 그 뒤 Playgama 콘솔 "Submit for review" 를 Codex 가.
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
+## 11-01 업로드 전 점검 — Playgama 규칙 번호별 (Mole Mash, 아카이브 molemash-1.0.0)
+
+증거: `playables/molemash/robot.js` 53/53 통과(`qa/report.json`), 스크린샷 `qa/*.png`, 코드 grep. ✔ = 확인됨, ✖ = 미충족, ? = 확인 못 함(사람·실기기·QA 툴 필요).
+
+| 규칙 | 결과 | 근거 |
+|---|---|---|
+| 1.1.1 현재 Bridge SDK | ✔ | npm `@playgama/bridge@2.4.0` 로컬 번들(`playgama-bridge.js`), 아카이브 분석 `bridgeVersion` 으로 재확인 |
+| 1.1.2 필수 8단계 | ✔ | ①config 동봉 ②head 첫 스크립트·`initialize()` 대기 후 게임 시작 ③`platform.language` 읽음(영어만) ④storage.get 1회·게임오버/이름/음소거 때만 set ⑤`isAudioEnabled`·PAUSE/AUDIO 이벤트 ⑥첫 프레임 뒤 `game_ready` 1회(로봇 확인) ⑦Play again·일시정지 때 `showInterstitial`, 타이머 없음 ⑧`isRewardedSupported` 아니면 이어하기 버튼 숨김 |
+| 1.2.1~1.2.3 로그인 없음 | ✔ | 로그인 없음 |
+| 1.2.4 외부 분석 없음 | ✔ | Bridge analytics 만 |
+| 1.2.5 외부 리소스 0 | ✔ | 로봇 "external requests: 0" |
+| 1.2.6 외부 링크 | ✔ | 도전장·공유 링크 제거(Playgama 판) |
+| 1.2.7 URL 제한 없음 | ✔ | — |
+| 1.3.1 300MB | ✔ | zip 2.9MB |
+| 1.3.2 index.html 루트·라틴 파일명 | ✔ | `unzip -l` |
+| 1.3.3 메모리 2GB | ✔ | 캔버스 1개·파일 3MB (자동 빌드 체크가 재확인) |
+| 1.4.1 전체 화면 | ? | 플랫폼 iframe 안에서 사람이 확인 |
+| 1.4.2 키보드 자동 | ✔ | 이름 칸 네이티브 `<input>` |
+| 1.4.3 방향 | ✔ | 세로·가로 둘 다 지원으로 폼 선언 |
+| 1.4.4 터치 | ✔ | pointerdown 탭, 로봇 터치 컨텍스트로 플레이 |
+| 1.4.5 길게 누름 | ✔ | user-select none·touch-callout none·contextmenu 막음, `touch-action:none`; 실기기 iOS 돋보기는 ? |
+| 1.4.6 WebGL 경고 | ✔ | 2D 캔버스 |
+| 1.5.1 키보드/마우스 | ✔ | 클릭 + 1~9·넘패드·Space·P·M (로봇: 숫자 키 명중) |
+| 1.5.2 Esc | ✔ | 로봇: Esc 아무 일 없음 |
+| 1.5.3 두 조작 동시 | ✔ | 같은 빌드에서 둘 다 |
+| 1.6.1~1.6.2 모든 비율 꽉 채움·잘림 없음 | ✔ | 14개 크기(세로 3·가로 2·태블릿 2·1:1·iframe 2·데스크톱 2·9:21·21:9) HUD/판 겹침 0·판 화면 안 |
+| 1.6.3 페이지 스크롤 없음 | ✔ | html/body 100%·overflow hidden |
+| 1.6.4 겹침 | ✔ | 스크린샷 눈으로 확인(인트로 문구는 알약 배경으로 분리) |
+| 1.6.5 팝업 닫기 | ✔ | 일시정지: Resume, 게임오버: Play again |
+| 1.6.6 한 손 | ✔ | 탭만 |
+| 1.6.7 글자 크기 | ✔ | 짧은 변 기준 스케일, 360×640 스크린샷 |
+| 1.6.8 1:1 | ✔ | 640×640 스크린샷(compact HUD) |
+| 1.7.1 오류·멈춤 | ✔ | 콘솔 에러 0·페이지 에러 0, 회전(resize)·숨김·광고 상태 전환 로봇 확인 |
+| 1.7.2 끝까지 플레이 | ✔ | 시간 종료·하트 소진 두 경로 모두 게임오버 |
+| 1.7.3 브라우저 5종 | ? | Chromium 만 돌림. Safari 용 mp3 분기는 코드로만 |
+| 1.8 비디오 | ✔ | 없음 |
+| 2.1.1 제3자 광고 없음 | ✔ | Bridge 만 |
+| 2.1.2 전면 광고 | ✔ | `showInterstitial('round_end')`·`('pause')` |
+| 2.1.3 논리적 멈춤에서만 | ✔ | Play again·일시정지 버튼 |
+| 2.1.4 손가락 밑 광고 | ? | 광고 위치는 플랫폼이 정함 |
+| 2.1.5 광고 방향 | ? | 플랫폼 |
+| 2.1.6 광고 중 멈춤·무음 | ✔ | 로봇 "interstitial opened: frozen and silent" |
+| 2.1.7 광고 실패 시 계속 | ✔ | 호출은 try 로 감싸고 결과를 기다리지 않음 |
+| 2.2.1 옵트인 버튼 문구 | ✔ | "Watch an ad: continue / +10 seconds and all hearts back" |
+| 2.2.2 거절 가능 | ✔ | Play again 이 항상 있음 |
+| 2.2.3~2.2.4 시도당 1회 | ✔ | 로봇 "no second continue in the same attempt" |
+| 2.2.5 rewarded 에서만 보상 | ✔ | 로봇 "ad closed early: no reward" |
+| 2.3 배너 | ✔ | 없음 |
+| 2.4~2.5 결제·실돈 | ✔ | 없음 |
+| 3.1.1~3.1.2 진행·난이도 | ✔ | heat 로 점점 빨라짐·동시 3마리, 점수 기록 |
+| 3.1.3 튜토리얼 | ✔ | 첫 판 TAP! 링+느린 두더지 3마리(로봇 스크린샷) |
+| 3.2.1 Bridge storage 만 | ✔ | 코드에 localStorage/sessionStorage/indexedDB/cookie 0건(grep) |
+| 3.2.2 최고 점수 저장 | ✔ | progress.best·ranks |
+| 3.2.3 리로드·회전·광고 뒤 유지 | ✔ | 로봇 리로드 복원(best·name·muted) |
+| 3.3.1 배경음악+효과음 | ✔ | bgm 루프 + 효과음 13종 |
+| 3.3.2 파일 음원(합성 금지) | ✔ | Kenney·uisfx·cynicmusic CC0, ogg/mp3 (`CREDITS.md`) — 코드 합성 0 |
+| 3.3.3 음소거 버튼 | ✔ | 오른쪽 위 + 일시정지 메뉴, 리로드 뒤 유지 |
+| 3.3.4 플랫폼 음소거 | ✔ | 시작 때 `isAudioEnabled`, 이벤트 구독 |
+| 3.3.5 숨김 때 무음 | ✔ | 로봇 "hidden page: silent and frozen" |
+| 3.4.1~3.4.2 영어 기본·언어는 Bridge 에서 | ✔ | 영어만, `platform.language` 읽음 |
+| 3.4.3 선언 언어 번역 | ✔ | EN 만 선언 |
+| 3.4.4 언어 선택기 | ✔ | 없음 |
+| 3.5.1 제목 일치 | ✔ | 게임 안 "MOLE MASH" = 폼 "Mole Mash" |
+| 4.1 금지 콘텐츠 | ✔ | 두더지·스컹크 |
+| 4.2 권리·독창성 | ✔ | 자체 그림·코드, CC0 음원, 카탈로그 중복은 ? (모더레이션 판단) |
+| 4.3.1 전부 AI 생성 아님 | ? | 그림은 코드로 그린 캔버스(사람이 스크린샷 보고 다듬음). 모더레이션 판단 |
+| 4.3.2 이모지·템플릿 티 | ✔ | HUD 하트·시계·아이콘 전부 캔버스/SVG, 이모지 0 |
+| 4.4 사용자 데이터 | ✔ | 이름 8자 로컬 저장만 |
+| 5.1 Unity | — | 해당 없음 |
+| 플랫폼별(YouTube Playables) | ✔ | 30MB 이하(3MB), 세로+가로, 외부 호출 0, 파일명 라틴, 파일 33개 |
+
 ## 지금 상태
 카탈로그 https://soulfulfillable.github.io/test-mvp/games.html + 영문 소개 `playables/pitch.md` 완료(10-31). 사용자 신청서 제출 대기. SDK 문서는 아직 없음.
 
