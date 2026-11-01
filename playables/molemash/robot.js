@@ -146,9 +146,12 @@ async function playAgain(page) {
     check('interstitial opened: frozen and silent', ad.frozen && !ad.audible, JSON.stringify(ad));
     await page.evaluate(() => window.__game.adStateChanged('closed'));
     check('interstitial closed: running again', await page.evaluate(() => !window.__game.frozen && window.__game.audible));
-    // finish the round fast
-    await page.evaluate(() => { window.__game.timeLeft = 2.5; });
-    await playUntilOver(page, 6000);
+    // last-ten-seconds countdown, then let the clock run out (time bonuses would extend it if we kept whacking)
+    await page.evaluate(() => { window.__game.timeLeft = 7.3; });
+    await page.waitForTimeout(350);
+    await shot(page, 'phone-390x844-countdown');
+    await page.evaluate(() => { window.__game.timeLeft = 0.6; });
+    await page.waitForTimeout(1500);
     await page.waitForTimeout(300);
     const over = await page.evaluate(() => ({ state: window.__game.state, score: window.__game.score, panel: !document.getElementById('over-panel').classList.contains('hidden'), title: document.getElementById('over-title-text').textContent, best: window.__game.store.progress.best, ranks: window.__game.store.progress.ranks.length, msgs: window.__msgs.slice() }));
     check('round ends at 0 s with the game-over panel', over.state === 2 && over.panel, JSON.stringify({ title: over.title, score: over.score }));
