@@ -138,12 +138,12 @@ export function createView(container) {
     addBox(g, sx - 0.45, 0, LANE - 0.45, 0.9, 0.22, 0.9, mat(C.slate, { roughness: 0.6, metalness: 0.2 }));
     const btn = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.22, 32), mat(C.accent, { roughness: 0.4, emissive: C.accent, emissiveIntensity: 0.15 })); btn.position.set(sx, 0.33, LANE); btn.castShadow = btn.receiveShadow = true; g.add(btn); V.switchBtn = btn;
     // hut with a door; the sheep hides inside and peeks out
-    const hx = level.crate.x, hz = level.crate.z, hw = 1.35, hd = 1.25, hh = 1.1, hutM = woodMat('#5a3b2c'), roofM = mat(C.roof, { roughness: 0.95 });
+    const hx = level.crate.x, hz = level.crate.z, hw = 1.35, hd = 1.25, hh = 1.1, hutM = woodMat('#7a5238'), roofM = mat(0x6b3a2a, { roughness: 0.95 });
     addBox(g, hx, 0, hz, hw, hh, hd, hutM, 0.02);
     const roof = new THREE.Mesh(new THREE.ConeGeometry(1.05, 0.6, 4), roofM); roof.rotation.y = Math.PI / 4; roof.position.set(hx + hw / 2, hh + 0.3, hz + hd / 2); roof.castShadow = roof.receiveShadow = true; g.add(roof);
     const dw = 0.55, dh = 0.78; const frame = new THREE.Mesh(new THREE.BoxGeometry(dw + 0.1, dh + 0.06, 0.08), mat(0x1a120e)); frame.position.set(hx + hw / 2, dh / 2 + 0.02, hz + hd + 0.02); g.add(frame);
     const door = new THREE.Group(); door.position.set(hx + hw / 2 - dw / 2, 0, hz + hd + 0.05); door.rotation.y = -0.55; /* ajar: the sheep peeks out */ const dm = new THREE.Mesh(new RoundedBoxGeometry(dw, dh, 0.06, 2, 0.01), woodMat('#6b4a2f')); dm.position.set(dw / 2, dh / 2, 0); dm.castShadow = true; door.add(dm); g.add(door); V.door = door;
-    const sheep = makeSheep(); sheep.scale.setScalar(0.62); sheep.position.set(hx + hw / 2 - 0.05, 0.02, hz + hd - 0.3); sheep.rotation.y = Math.PI * 0.45; g.add(sheep); V.sheep = sheep; V.sheepHome = sheep.position.clone();
+    const sheep = makeSheep(); sheep.scale.setScalar(0.8); sheep.position.set(hx + hw / 2 - 0.05, 0.02, hz + hd - 0.3); sheep.rotation.y = Math.PI * 0.45; g.add(sheep); V.sheep = sheep; V.sheepHome = sheep.position.clone();
     const inside = warmLight(hx + hw / 2, 0.6, hz + hd / 2, 0, 2.2); g.add(inside); V.insideLight = inside;
     const porch = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), new THREE.MeshBasicMaterial({ color: 0xffe2a8 })); porch.position.set(hx + hw / 2 + dw / 2 + 0.2, dh + 0.15, hz + hd + 0.08); g.add(porch); g.add(warmLight(porch.position.x, porch.position.y, porch.position.z + 0.1, 1.6, 4));
     // shepherd (thrower) stands beside the sling anchor; the thrown "stone of light" is the ball
@@ -224,13 +224,13 @@ export function createView(container) {
     if (V.sheep) {
       const s = V.sheep;
       if (V.doorOpen > 0) {
-        V.door.rotation.y += (-1.9 - V.door.rotation.y) * Math.min(1, dt * 5);
+        V.door.rotation.y += (-2.3 - V.door.rotation.y) * Math.min(1, dt * 5);
         V.insideLight.intensity += (1.8 - V.insideLight.intensity) * Math.min(1, dt * 3);
         s.userData.light.intensity += (1.6 - s.userData.light.intensity) * Math.min(1, dt * 3);
         V.hop = (V.hop || 0) + dt;
         const k = Math.min(1, V.hop / 1.2);
-        s.position.z = V.sheepHome.z + k * 1.1; s.position.y = 0.02 + Math.abs(Math.sin(V.hop * 9)) * (k < 1 ? 0.14 : 0.03);
-        s.rotation.y = Math.PI * 0.45 - k * 0.5;
+        s.position.z = V.sheepHome.z + k * 1.25; s.position.x = V.sheepHome.x + k * 0.55; s.position.y = 0.02 + Math.abs(Math.sin(V.hop * 9)) * (k < 1 ? 0.16 : 0.03);
+        s.rotation.y = Math.PI * 0.45 - k * 0.7;
       } else { s.position.y = 0.02 + Math.sin(V.t * 2.2) * 0.01; s.userData.head.rotation.y = Math.sin(V.t * 0.9) * 0.25; }
     }
     for (const sh of V.shards) { sh.vy -= 14 * dt; sh.m.position.x += sh.vx * dt; sh.m.position.y += sh.vy * dt; sh.m.position.z += sh.vz * dt; sh.m.rotation.x += sh.rx * dt; sh.m.rotation.z += sh.rz * dt; sh.t -= dt; sh.m.material.opacity = Math.max(0, Math.min(0.6, sh.t)); if (sh.t <= 0 || sh.m.position.y < -2) { dyn.remove(sh.m); sh.dead = true; } }
