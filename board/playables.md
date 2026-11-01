@@ -16,10 +16,10 @@
   ① v1.1.1 샌드박스 게시 확인(`get_publications` PUBLISHED, archive `cmvxpkm881kwrjm0h2iifxzqg`) — 아직이면 `publish_sandbox`(updateNote 필수)
   ② 사용자가 v1.1.0 플레이 → 느낌·"다음 판 기대되나" 원문 기록. Playgama 텔레메트리는 트래픽이 모이면 `get_game_telemetry_analytics`(하루 1번 이하)로 옵트인율·다음 판 시작률 확인
   ③ Codex 인증(위 🖱️) 결과 반영
-  ④ (사용자 결정 대기) 트래픽 A 자연 유입 / B `start_sandbox_traffic`
+  ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
   ⑤ (선택) BGM 교체 — 카니발 루프 mp3 받으면 `audio/bgm.*` 교체 → `./build.sh` → 재업로드
   ⑥ 다음 트랙은 기획 결정에 따름(`plans/playables-core-fun.md` 7장: Chicken Cross 제외, 신규 코어 1순위 조준+물리 연쇄 — 착수 미승인). Mole Mash 틀 복사 시 `playables/molemash/index.html`·`robot.js`
-- 사용자 대기: ① v1.1.0 느낌(상자·망치가 "다음 판 기대"를 만드나) ② 트래픽 A/B ③ (선택) 카니발 BGM 음원
+- 사용자 대기: ① v1.1.1 느낌 ② (선택) 카니발 BGM 음원 ③ Codex QA 툴 인증 결과
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
@@ -185,6 +185,7 @@ Mole Mash Playgama 샌드박스 게시(11-01) https://playgama.ai/play/cmnhxm72r
 - 사용자 캡처(Supersonic): 게임 정보 카드 = 이름·장르·따옴표 한 줄 설명·개발자·제작사·게시 날짜. 목록 = 세로 썸네일 + 플레이 버튼 + 플레이 횟수. 전부 하이퍼캐주얼(탭/드래그 1조작, 30초~1분).
 
 ## 사용자 피드백 기록
+- **11-01 트래픽 결정(원문)**: "트래픽은 A로 가자" → 자연 유입만, 캠페인 없음(`PRODUCT.md` 결정 로그)
 - **11-01 v1.1.0 플레이(원문)**: "오 훨씬 나아짐 근데중간에 갑자기 루즈해지는게 좀 있어 막 빨라지기전에" → 반영(v1.1.1): 8~18초 구간이 한 마리씩·1.7초 머무름·1초 간격이라 비었음. heat 시간 가중 0.7→0.8, 머무름 1.8→0.5초, 간격 0.9→0.3초, 동시 2마리를 heat 0.15(≈8초)부터·3마리를 0.5부터, 첫 판 아닌 라운드는 4초 뒤부터 2마리
 - **11-01 Mole Mash 샌드박스 v1.0.0 첫 플레이(원문)**: "켜자마자 글씨너무많아 벌써 지겨워 심지어 뭐하라는건지 눈에 들어오지도 않아 / 한판 그냥 끝나버렸는데 광고부터나와서 frustrating / 처음부터 애들이 너무빨리 사라져 뭐하는건지도 모르고있는데 / 눌렸을때 떨어지는건 그나마 직관적인듯 / 맞추면 안되는애가 있느거같은데 왜안된건지도모르곘어 아예 폭탄같은모양으로 해버리던지 확 안눌르게, 오휴 누를뻔했다 이런게 생길정도로 / 그리고 하다보니까 너무 지겨워........ 다음판이 하나도 기대가 안돼 이거 게임 자체가 구성이 별로인건 아닌가.. 하나도 창의적인게 없이? / play again눌렀는데, watch an ad:Continue 안누르고 그래도 광고 나온게 이상한데 이거맞아? 마치 광고 안볼것처럼 싶었는데도 광고가 보인건데. 속인거같은데 이게 뭐야 싶을거같은데 / watch ad ad랑 차이가 없어보이는데"
   - 반영(v1.0.1, 같은 날): ①타이틀의 설명 카드 삭제 — 간판·Best·TAP TO START 만, 가르치는 건 첫 판 TAP!/DON'T! 링 ②초반 속도: 머무는 시간 1.5→2.0초 시작, 첫 8초 한 마리, 첫 판 처음 3마리는 3.0/2.6/2.2초에 놓쳐도 하트 안 깎임("FASTER!") ③스컹크→**폭탄**(불붙은 심지·빨간 점선 위험 링·첫 판엔 "DON'T!" 라벨, 때리면 BOOM 폭발) ④광고 자리: Play again·일시정지에서 광고 호출 제거, 전면 광고는 **라운드가 끝난 순간**(결과 패널 전)에만, 그것도 세션 첫 판 뒤엔 안 부름 ⑤보상형 버튼 문구 "Watch an ad to continue / reward: +10 seconds and 3 hearts", 지급 때 "+10s and 3 hearts" 표시
