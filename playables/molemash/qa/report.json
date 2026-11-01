@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-01T09:59:59.373Z",
+  "startedAt": "2026-11-01T10:42:14.947Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -47,7 +47,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "bonk2,bonk,skunk,tick,miss,gold,heart,best,whiff,start,over,muteOn,muteOff,bgm"
+      "detail": "bonk2,bonk,skunk,tick,miss,heart,gold,best,whiff,muteOn,start,over,muteOff,bgm"
     },
     {
       "name": "music looping",
@@ -57,7 +57,7 @@
     {
       "name": "scored by whacking moles",
       "ok": true,
-      "detail": "score 12, whacks 12, lives 3"
+      "detail": "score 11, whacks 11, lives 3"
     },
     {
       "name": "P pauses and shows the pause panel",
@@ -67,7 +67,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "29.22 → 29.22"
+      "detail": "28.97 → 28.97"
     },
     {
       "name": "Resume continues the round",
@@ -97,12 +97,12 @@
     {
       "name": "round ends at 0 s with the game-over panel",
       "ok": true,
-      "detail": "{\"title\":\"TIME'S UP!\",\"score\":13}"
+      "detail": "{\"title\":\"TIME'S UP!\",\"score\":15}"
     },
     {
       "name": "best and rank recorded",
       "ok": true,
-      "detail": "best 13"
+      "detail": "best 15"
     },
     {
       "name": "level_completed message on time-up",
@@ -127,7 +127,7 @@
     {
       "name": "reload restores best, name, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"best\":13,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
+      "detail": "{\"best\":15,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
     },
     {
       "name": "reload while muted stays silent from the first frame",
@@ -142,12 +142,12 @@
     {
       "name": "ad closed early: no reward, game stays on the panel",
       "ok": true,
-      "detail": "{\"state\":2,\"note\":\"Ad not finished, no bonus this time.\",\"used\":false}"
+      "detail": "{\"state\":2,\"note\":\"Ad not finished, no reward this time.\",\"used\":false}"
     },
     {
       "name": "rewarded: round continues with hearts back and +10 s",
       "ok": true,
-      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":9.863200000000045,\"used\":true,\"ranks\":1}"
+      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":9.84969999999995,\"used\":true,\"ranks\":1}"
     },
     {
       "name": "no second continue in the same attempt",
@@ -160,6 +160,51 @@
       "detail": "{\"state\":2,\"lives\":0,\"title\":\"OUT OF HEARTS!\",\"msgs\":[\"level_completed\",\"level_started\",\"level_failed\"]}"
     },
     {
+      "name": "results panel shows the gift box bar and 5 hammer slots",
+      "ok": true,
+      "detail": "{\"label\":\"Gift box ready! next box 1 / 18\",\"fill\":1,\"ready\":1,\"hammers\":[\"classic\"]}"
+    },
+    {
+      "name": "Play again with a ready box opens the box screen first (not next to the continue offer)",
+      "ok": true,
+      "detail": "{\"open\":true,\"adBtn\":true,\"state\":2}"
+    },
+    {
+      "name": "Later keeps the box and starts the round",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "ad closed early: box kept, nothing granted",
+      "ok": true,
+      "detail": "{\"ready\":1,\"note\":\"Ad not finished, no reward this time. Your box is safe.\",\"open\":true,\"hammers\":1}"
+    },
+    {
+      "name": "rewarded: box opens, a new hammer is revealed, box count drops",
+      "ok": true,
+      "detail": "{\"open\":true,\"name\":\"Candy Cane\",\"hammers\":[\"classic\",\"candy\"],\"ready\":0}"
+    },
+    {
+      "name": "Equip and play: new hammer equipped, round starts",
+      "ok": true,
+      "detail": "{\"state\":1,\"equipped\":\"candy\"}"
+    },
+    {
+      "name": "reload keeps owned hammers, the equipped one and the box fill",
+      "ok": true,
+      "detail": "{\"equipped\":\"candy\",\"hammers\":2,\"fill\":1}"
+    },
+    {
+      "name": "all hammers collected: bar reads so",
+      "ok": true,
+      "detail": "{\"label\":\"All hammers collected\",\"state\":2}"
+    },
+    {
+      "name": "no box screen once everything is collected",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "desktop detected (keyboard hints)",
       "ok": true,
       "detail": ""
@@ -167,7 +212,7 @@
     {
       "name": "number key whacks the matching hole",
       "ok": true,
-      "detail": "hole 6"
+      "detail": "hole 5"
     },
     {
       "name": "Esc does nothing (1.5.2)",
@@ -197,7 +242,7 @@
     {
       "name": "game-over panel fits at land-844x390",
       "ok": true,
-      "detail": "panel 309px of 390"
+      "detail": "panel 366px of 390"
     },
     {
       "name": "layout land-915x412 (left): HUD and board separate, board on screen, buttons clear",
@@ -222,7 +267,7 @@
     {
       "name": "game-over panel fits at square-640x640",
       "ok": true,
-      "detail": "panel 309px of 640"
+      "detail": "panel 409px of 640"
     },
     {
       "name": "layout iframe-800x450 (left): HUD and board separate, board on screen, buttons clear",
@@ -278,6 +323,10 @@
     "phone-390x844-over.png",
     "phone-390x844-over-continue.png",
     "phone-390x844-over-hearts.png",
+    "phone-390x844-over-box.png",
+    "phone-390x844-box.png",
+    "phone-390x844-reveal.png",
+    "phone-390x844-play-new-hammer.png",
     "iframe-1280x720-play.png",
     "phone-360x640-play.png",
     "phone-390x844-play.png",
@@ -296,6 +345,6 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "passed": 53,
+  "passed": 62,
   "failed": 0
 }

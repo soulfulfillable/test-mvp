@@ -112,6 +112,24 @@
   .btn-ad small { font-weight: 600; opacity: 0.85; font-size: 12px; }
   .btn-ghost { background: rgba(255,255,255,0.14); color: #fff; }
   #ad-note { font-size: 12px; color: #ff8f7a; min-height: 15px; margin-top: 7px; }
+  /* gift box progress (results panel) */
+  #box-row { margin: 10px 0 2px; text-align: left; }
+  #box-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.75); }
+  #box-head svg { width: 18px; height: 18px; flex: none; }
+  #box-head b { color: #ffc94d; }
+  #box-count { margin-left: auto; background: #ffc94d; color: #4a2d10; border-radius: 10px; padding: 1px 8px; font-weight: 800; font-size: 12px; }
+  #box-count.hidden { display: none; }
+  #box-bar { height: 10px; border-radius: 5px; background: rgba(255,255,255,0.12); margin-top: 6px; overflow: hidden; }
+  #box-bar i { display: block; height: 100%; width: 0; border-radius: 5px; background: linear-gradient(90deg, #f08c1e, #ffc94d); transition: width 0.9s cubic-bezier(.2,.8,.2,1); }
+  #hammer-strip { display: flex; gap: 6px; justify-content: center; margin: 10px 0 6px; }
+  #hammer-strip canvas { width: 46px; height: 46px; border-radius: 10px; background: rgba(255,255,255,0.08); border: 2px solid transparent; }
+  #hammer-strip canvas.owned { cursor: pointer; }
+  #hammer-strip canvas.equipped { border-color: #ffc94d; background: rgba(255,201,77,0.18); }
+  #box-panel .gift, #reveal-panel .gift { display: block; margin: 6px auto 8px; }
+  #box-sub, #reveal-sub { font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 12px; }
+  #reveal-name { font-size: 22px; font-weight: 800; color: #ffc94d; margin: 4px 0 2px; }
+  #reveal-canvas { width: 120px; height: 120px; display: block; margin: 4px auto 6px; }
+  .btn-ad small { display: block; }
   #pause-title { margin-bottom: 14px; }
   .pause-keys { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 10px; }
 </style>
@@ -137,6 +155,11 @@
   </div>
   <div id="over-score"></div>
   <div id="over-sub"></div>
+  <div id="box-row">
+    <div id="box-head"><svg viewBox="0 0 24 24" fill="none" stroke="#ffc94d" stroke-width="2"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M12 9v12M3 13h18M12 9c-2-4-6-4-6-1s4 1 6 1zm0 0c2-4 6-4 6-1s-4 1-6 1z"/></svg><span id="box-label">Gift box</span><span id="box-count" class="hidden">x1</span></div>
+    <div id="box-bar"><i id="box-fill"></i></div>
+    <div id="hammer-strip"></div>
+  </div>
   <div id="board-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h10v4a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M9 17h6"/></svg><span>Best runs on this device</span></div>
   <div id="rank-board"></div>
   <div id="name-row"><label for="name-input">Name</label><input id="name-input" maxlength="8" placeholder="Me" autocomplete="off"></div>
@@ -148,6 +171,29 @@
     <button id="retry-btn" class="btn-main">Play again</button>
   </div>
   <div id="ad-note"></div>
+</div>
+
+<div id="box-panel" class="panel hidden" role="dialog">
+  <div class="ttl-row"><span>WHAT'S IN THE BOX?</span></div>
+  <svg class="gift" width="110" height="110" viewBox="0 0 24 24" fill="none" stroke="#ffc94d" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="2" fill="#e4342c" stroke="#8a1f18"/><path d="M12 9v12" stroke="#ffc94d" stroke-width="2.2"/><path d="M3 13h18" stroke="#ffc94d" stroke-width="2.2"/><path d="M12 9c-2-4-6-4-6-1s4 1 6 1zm0 0c2-4 6-4 6-1s-4 1-6 1z" fill="#ffc94d" stroke="#c98f08"/></svg>
+  <div id="box-sub">A new hammer is inside. Open it now or keep the box for later.</div>
+  <div class="btns">
+    <button id="open-box-btn" class="btn-ad"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span>Watch an ad: open the box<small>reward: a new hammer</small></span></button>
+    <button id="open-free-btn" class="btn-main hidden">Open the box</button>
+    <button id="later-btn" class="btn-ghost">Later (keep the box)</button>
+  </div>
+  <div id="box-note" class="" style="font-size:12px;color:#ff8f7a;min-height:15px;margin-top:7px"></div>
+</div>
+
+<div id="reveal-panel" class="panel hidden" role="dialog">
+  <div class="ttl-row"><span>NEW HAMMER!</span></div>
+  <canvas id="reveal-canvas" width="240" height="240"></canvas>
+  <div id="reveal-name"></div>
+  <div id="reveal-sub"></div>
+  <div class="btns">
+    <button id="equip-btn" class="btn-main">Equip and play</button>
+    <button id="keep-btn" class="btn-ghost">Keep my hammer</button>
+  </div>
 </div>
 
 <div id="pause-panel" class="panel hidden" role="dialog">
@@ -164,7 +210,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.0.1';
+  var GAME_VERSION = '1.1.0';
   var TIME_LIMIT = 45;           // seconds per round
   var CONTINUE_SECONDS = 10;     // rewarded continue bonus
   var hash = location.hash || '';
@@ -186,10 +232,23 @@
   function safe(fn, dflt) { try { return fn(); } catch (e) { return dflt; } }
 
   // ---------- persistent state (Bridge storage only; rule 3.2.1) ----------
+  // hammers: 'classic' is owned from the start, the other four come out of gift boxes
+  var HAMMERS = [
+    { id: 'classic', name: 'Carnival Classic', sub: 'The one you started with.' },
+    { id: 'rubber', name: 'Squeaky Rubber', sub: 'Bouncy. Blue. Loud.' },
+    { id: 'candy', name: 'Candy Cane', sub: 'Sticky, but it swings.' },
+    { id: 'pan', name: 'Frying Pan', sub: 'Breakfast is served.' },
+    { id: 'gold', name: 'Golden Mallet', sub: 'Shiny, heavy, showy.' }
+  ];
+  var BOX_GOAL_FIRST = 12, BOX_GOAL = 18;   // moles per gift box: the first box opens after a decent first round
   var store = {
-    progress: { v: 1, best: 0, played: 0, ranks: [], name: '' },
+    progress: { v: 2, best: 0, played: 0, ranks: [], name: '', hammers: ['classic'], equipped: 'classic', boxFill: 0, boxesReady: 0, boxesOpened: 0 },
     settings: { v: 1, muted: false }
   };
+  function hammerById(id) { for (var i = 0; i < HAMMERS.length; i++) if (HAMMERS[i].id === id) return HAMMERS[i]; return HAMMERS[0]; }
+  function ownedHammer(id) { return store.progress.hammers.indexOf(id) >= 0; }
+  function allCollected() { return store.progress.hammers.length >= HAMMERS.length; }
+  function boxGoal() { return store.progress.boxesOpened + store.progress.boxesReady === 0 ? BOX_GOAL_FIRST : BOX_GOAL; }
   function parseVal(v, dflt) {
     if (v === null || v === undefined) return dflt;
     if (typeof v === 'string') { try { v = JSON.parse(v); } catch (e) { return dflt; } }
@@ -205,6 +264,13 @@
       p.best = Math.max(0, parseInt(p.best, 10) || 0);
       p.played = Math.max(0, parseInt(p.played, 10) || 0);
       p.name = String(p.name || '').slice(0, 8);
+      p.v = 2;   // v1 saves get the hammer fields from the defaults above
+      p.hammers = Array.isArray(p.hammers) ? p.hammers.filter(function (h) { return HAMMERS.some(function (x) { return x.id === h; }); }) : ['classic'];
+      if (p.hammers.indexOf('classic') < 0) p.hammers.unshift('classic');
+      p.equipped = p.hammers.indexOf(p.equipped) >= 0 ? p.equipped : 'classic';
+      p.boxFill = Math.max(0, parseInt(p.boxFill, 10) || 0);
+      p.boxesReady = Math.max(0, parseInt(p.boxesReady, 10) || 0);
+      p.boxesOpened = Math.max(0, parseInt(p.boxesOpened, 10) || 0);
       p.ranks = Array.isArray(p.ranks) ? p.ranks
         .filter(function (r) { return r && typeof r.s === 'number' && isFinite(r.s); })
         .map(function (r) { return { n: String(r.n || 'Me').slice(0, 8), s: Math.max(0, Math.round(r.s)), t: r.t || 0 }; })
@@ -319,9 +385,11 @@
   var ranks = [], myRankRow = null;
   var userPaused = false;
   var adOpen = false;
-  var continueUsed = false, continueOffered = false, rewardPending = false;
+  var continueUsed = false, continueOffered = false, rewardPending = null;
   var tutorial = false, tutHits = 0;
   var roundIndex = 0;
+  var whacked = 0;           // moles whacked this round (feeds the gift box)
+  var boxGained = 0;         // fill added at the last round end (for the bar animation)
 
   function best() { return store.progress.best; }
 
@@ -486,9 +554,10 @@
     shake = 0; heartFlash = 0; hitStop = 0; flashA = 0;
     timeLeft = TIME_LIMIT; lastTick = -1;
     isNewBest = false;
-    continueUsed = false; continueOffered = false; rewardPending = false;
+    continueUsed = false; continueOffered = false; rewardPending = null;
     tutorial = store.progress.played === 0; tutHits = 0;
     roundIndex++;
+    whacked = 0; boxGained = 0;
   }
 
   function spawnBurst(x, y, colors, n, speed) {
@@ -541,7 +610,7 @@
         buzz(80); sndSkunk();
       } else if (mo.kind === 'gold') {
         mo.phase = 'whacked'; mo.t = 0;
-        score += 3;
+        score += 3; whacked++;
         if (lives < 3) { lives++; floats.push({ x: hx, y: hy - moleH - 26, text: '+', icon: 'heart', color: '#ff5f6e', t: 0, size: 20 }); play('heart'); }
         floats.push({ x: hx, y: hy - moleH, text: '+3', color: '#e8a800', t: 0, size: 30 });
         spawnBurst(hx, hy - moleH * 0.5, ['#ffd94d', '#ffef9e', '#f4b820', '#fff'], 16, 260);
@@ -549,7 +618,7 @@
         buzz(35); sndGold();
       } else {
         mo.phase = 'whacked'; mo.t = 0;
-        score += 1;
+        score += 1; whacked++;
         if (tutorial) tutHits++;
         floats.push({ x: hx, y: hy - moleH, text: 'BONK!', color: '#d1342a', t: 0, size: 24 });
         spawnBurst(hx, hy - moleH * 0.5, ['#8a5a34', '#a97544', '#5b3a1e', '#ffd94d'], 12, 220);
@@ -579,6 +648,7 @@
     play('start');
     sendMsg('level_started', { level: String(roundIndex) });
     analytics('progression_started', { step_id: 'round', tutorial: tutorial ? 1 : 0 });
+    if (fromOver) analytics('next_round_started', { hammer: store.progress.equipped });
     // no ad here: pressing Play again must never turn into an ad (player feedback 11-01)
   }
   function tryStart() {
@@ -586,9 +656,9 @@
     startRound(state === STATE_OVER);
   }
   function hidePanels() {
-    document.getElementById('over-panel').classList.add('hidden');
-    document.getElementById('pause-panel').classList.add('hidden');
+    ['over-panel', 'pause-panel', 'box-panel', 'reveal-panel'].forEach(function (id) { document.getElementById(id).classList.add('hidden'); });
   }
+  function panelOpen(id) { return !document.getElementById(id).classList.contains('hidden'); }
 
   function pauseGame(byPlatform) {
     if (state !== STATE_PLAY || userPaused) return;
@@ -622,6 +692,7 @@
     if (score > store.progress.best) { store.progress.best = score; isNewBest = true; }
     if (!continueUsed && !continueOffered) store.progress.played++;
     recordRank(score);
+    feedBox(whacked);
     saveStore(['progress']);                      // before anything that can end the session (an ad)
     document.getElementById('pause-btn').classList.add('hidden');
     sendMsg(reason === 'time' ? 'level_completed' : 'level_failed', { level: String(roundIndex) });
@@ -630,6 +701,111 @@
     // the round itself is the natural pause: the ad comes before the results, except after the session's first round
     if (roundIndex > 1 && !continueUsed) showInterstitial('round_end');
     showOverPanel();
+  }
+
+  function feedBox(n) {
+    boxGained = 0;
+    if (allCollected()) return;
+    var p = store.progress;
+    boxGained = n;
+    p.boxFill += n;
+    while (p.boxFill >= boxGoal() && !allCollected() && p.hammers.length + p.boxesReady < HAMMERS.length) {
+      p.boxFill -= boxGoal(); p.boxesReady++;
+      analytics('bonus_ready', { boxes_ready: p.boxesReady });
+    }
+    if (p.hammers.length + p.boxesReady >= HAMMERS.length) p.boxFill = 0;   // no more boxes to fill
+    analytics('round_end', { score: score, whacked: n, box_fill: p.boxFill, boxes_ready: p.boxesReady });
+  }
+  function renderBoxRow() {
+    var p = store.progress, row = document.getElementById('box-row'), label = document.getElementById('box-label');
+    var count = document.getElementById('box-count'), fill = document.getElementById('box-fill');
+    var noMore = allCollected() || p.hammers.length + p.boxesReady >= HAMMERS.length;
+    if (allCollected()) { label.textContent = 'All hammers collected'; count.classList.add('hidden'); fill.style.width = '100%'; }
+    else if (noMore) { label.innerHTML = '<b>Gift box ready!</b>'; count.classList.toggle('hidden', p.boxesReady < 2); count.textContent = 'x' + p.boxesReady; fill.style.width = '100%'; }
+    else {
+      var goal = boxGoal(), from = Math.max(0, p.boxFill - boxGained), pct = Math.min(100, p.boxFill / goal * 100);
+      if (p.boxesReady > 0) { label.innerHTML = '<b>Gift box ready!</b> next box ' + p.boxFill + ' / ' + goal; }
+      else label.innerHTML = 'Gift box: <b>' + p.boxFill + ' / ' + goal + '</b> moles';
+      count.classList.toggle('hidden', p.boxesReady < 1); count.textContent = 'x' + p.boxesReady;
+      fill.style.transition = 'none'; fill.style.width = Math.min(100, from / goal * 100) + '%';
+      void fill.offsetWidth;
+      fill.style.transition = ''; fill.style.width = pct + '%';
+    }
+    analytics('progress_shown', { box_fill: p.boxFill, boxes_ready: p.boxesReady });
+    renderHammerStrip();
+  }
+  function renderHammerStrip() {
+    var strip = document.getElementById('hammer-strip');
+    strip.textContent = '';
+    HAMMERS.forEach(function (h) {
+      var c = document.createElement('canvas'); c.width = 92; c.height = 92;
+      var owned = ownedHammer(h.id);
+      c.className = (owned ? 'owned' : '') + (store.progress.equipped === h.id ? ' equipped' : '');
+      c.setAttribute('aria-label', h.name + (owned ? '' : ' (locked)'));
+      var g = c.getContext('2d');
+      g.save(); g.translate(46, 50); g.rotate(-0.6); g.scale(1.1, 1.1);
+      drawHammerShape(g, owned ? h.id : 'locked'); g.restore();
+      if (owned) c.addEventListener('click', function () { equipHammer(h.id); renderHammerStrip(); });
+      strip.appendChild(c);
+    });
+  }
+  function equipHammer(id) {
+    if (!ownedHammer(id) || store.progress.equipped === id) return;
+    store.progress.equipped = id;
+    saveStore(['progress']);
+    analytics('equipped', { hammer: id });
+    play('start');
+  }
+  // between rounds: a ready box is offered on its own screen, never next to the continue offer
+  function nextRound() {
+    if (store.progress.boxesReady > 0 && !allCollected()) { showBoxPanel(); return; }
+    startRound(true);
+  }
+  function showBoxPanel() {
+    hidePanels();
+    var ad = rewardedSupported();
+    document.getElementById('open-box-btn').classList.toggle('hidden', !ad);
+    document.getElementById('open-free-btn').classList.toggle('hidden', ad);
+    document.getElementById('box-note').textContent = '';
+    document.getElementById('box-sub').textContent = (store.progress.boxesReady > 1 ? store.progress.boxesReady + ' boxes are waiting. ' : '') + 'A new hammer is inside. Open it now or keep the box for later.';
+    document.getElementById('box-panel').classList.remove('hidden');
+    analytics('reward_offer_shown', { offer: 'box', boxes_ready: store.progress.boxesReady, ad: ad ? 1 : 0 });
+  }
+  function requestOpenBox() {
+    if (store.progress.boxesReady <= 0 || rewardPending) return;
+    document.getElementById('box-note').textContent = '';
+    if (!rewardedSupported()) { analytics('box_opened_free', {}); openBox(); return; }
+    rewardPending = 'box';
+    analytics('ad_opt_in', { offer: 'box' });
+    if (DEBUG && window.__forceRewarded) return;
+    var ok = safe(function () { B.advertisement.showRewarded('open_box'); return true; }, false);
+    if (!ok) { rewardPending = null; boxNote('Ad not available right now. Your box is safe.'); analytics('ad_failed', { offer: 'box', stage: 'request' }); }
+  }
+  function boxNote(msg) { document.getElementById('box-note').textContent = msg; }
+  function openBox() {
+    // reward: one hammer the player does not own yet (only reached from 'rewarded', or free where ads are unsupported)
+    var p = store.progress;
+    if (p.boxesReady <= 0) return;
+    var pool = HAMMERS.filter(function (h) { return !ownedHammer(h.id); });
+    if (!pool.length) { p.boxesReady = 0; saveStore(['progress']); startRound(true); return; }
+    var h = pool[Math.floor(Math.random() * pool.length)];
+    p.hammers.push(h.id); p.boxesReady--; p.boxesOpened++;
+    if (p.hammers.length + p.boxesReady >= HAMMERS.length) p.boxFill = 0;
+    saveStore(['progress']);
+    analytics('reward_granted', { hammer: h.id, owned: p.hammers.length });
+    showReveal(h);
+  }
+  var revealed = null;
+  function showReveal(h) {
+    hidePanels();
+    revealed = h;
+    document.getElementById('reveal-name').textContent = h.name;
+    document.getElementById('reveal-sub').textContent = h.sub + (allCollected() ? ' That is all five!' : ' ' + (HAMMERS.length - store.progress.hammers.length) + ' more to find.');
+    var c = document.getElementById('reveal-canvas'), g = c.getContext('2d');
+    g.clearRect(0, 0, c.width, c.height);
+    g.save(); g.translate(118, 132); g.rotate(-0.6); g.scale(2.6, 2.6); drawHammerShape(g, h.id); g.restore();
+    document.getElementById('reveal-panel').classList.remove('hidden');
+    play('best');
   }
 
   function showOverPanel() {
@@ -643,6 +819,7 @@
     else sub.textContent = 'Best: ' + store.progress.best + ' moles';
     ranks = store.progress.ranks.slice();
     renderRanks();
+    renderBoxRow();
     document.getElementById('ad-note').textContent = '';
     // rewarded continue: opt-in, once per attempt, only where the platform supports it (rules 2.2.x, step 8)
     var canContinue = rewardedSupported() && !continueUsed && !continueOffered;
@@ -656,21 +833,26 @@
   }
   function requestContinue() {
     if (state !== STATE_OVER || continueUsed || continueOffered || rewardPending) return;
-    rewardPending = true;
+    rewardPending = 'continue';
     document.getElementById('ad-note').textContent = '';
+    analytics('ad_opt_in', { offer: 'continue' });
     if (DEBUG && window.__forceRewarded) return;   // the test drives onRewardedState() itself
     var ok = safe(function () { B.advertisement.showRewarded('continue'); return true; }, false);
-    if (!ok) { rewardPending = false; noteAd('Ad not available right now.'); }
+    if (!ok) { rewardPending = null; noteAd('Ad not available right now.'); analytics('ad_failed', { offer: 'continue', stage: 'request' }); }
   }
   function onRewardedState(st) {
     adStateChanged(st);
     if (!rewardPending) return;
+    var offer = rewardPending;
     if (st === 'rewarded') {
-      rewardPending = false;
-      grantContinue();
+      rewardPending = null;
+      analytics('ad_rewarded', { offer: offer });
+      if (offer === 'box') openBox(); else grantContinue();
     } else if (st === 'closed' || st === 'failed') {
-      rewardPending = false;
-      noteAd(st === 'failed' ? 'Ad not available right now.' : 'Ad not finished, no bonus this time.');
+      rewardPending = null;
+      analytics('ad_failed', { offer: offer, stage: st });
+      var msg = st === 'failed' ? 'Ad not available right now.' : 'Ad not finished, no reward this time.';
+      if (offer === 'box') boxNote(msg + ' Your box is safe.'); else noteAd(msg);
     }
   }
   function grantContinue() {
@@ -732,7 +914,7 @@
     if (code === 'Space' || code === 'Enter' || code === 'NumpadEnter') {
       e.preventDefault(); unlockAudio();
       if (state === STATE_TITLE) tryStart();
-      else if (state === STATE_OVER) tryStart();
+      else if (state === STATE_OVER) { if (performance.now() - overAt >= 600 && !panelOpen('box-panel') && !panelOpen('reveal-panel')) nextRound(); }
       else if (userPaused) resumeGame();
       return;
     }
@@ -744,7 +926,16 @@
     else if (/^Numpad[1-9]$/.test(code)) { var k = parseInt(code.slice(6), 10); n = (2 - Math.floor((k - 1) / 3)) * 3 + (k - 1) % 3; }  // numpad geometry
     if (n >= 0) { e.preventDefault(); unlockAudio(); var h = holes[n]; whackAt(h.x, h.y - moleH * 0.4); }
   });
-  document.getElementById('retry-btn').addEventListener('click', function () { unlockAudio(); tryStart(); });
+  document.getElementById('retry-btn').addEventListener('click', function () {
+    unlockAudio();
+    if (state === STATE_OVER && performance.now() - overAt < 600) return;
+    nextRound();
+  });
+  document.getElementById('open-box-btn').addEventListener('click', function () { unlockAudio(); requestOpenBox(); });
+  document.getElementById('open-free-btn').addEventListener('click', function () { unlockAudio(); requestOpenBox(); });
+  document.getElementById('later-btn').addEventListener('click', function () { unlockAudio(); analytics('box_later', { boxes_ready: store.progress.boxesReady }); startRound(true); });
+  document.getElementById('equip-btn').addEventListener('click', function () { unlockAudio(); if (revealed) equipHammer(revealed.id); startRound(true); });
+  document.getElementById('keep-btn').addEventListener('click', function () { unlockAudio(); startRound(true); });
   document.getElementById('continue-btn').addEventListener('click', function () { unlockAudio(); requestContinue(); });
   document.getElementById('pause-btn').addEventListener('click', function () { unlockAudio(); if (state === STATE_PLAY) pauseGame(false); });
   document.getElementById('resume-btn').addEventListener('click', function () { unlockAudio(); resumeGame(); });
@@ -964,13 +1155,47 @@
       ctx.restore();
     }
   }
+  // one hammer drawing for the swing, the reveal and the strip: origin at the handle's base, head on top
+  function drawHammerShape(g, id) {
+    function rr(x, y, w, h, r) { r = Math.min(r, w / 2, h / 2); g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+    if (id === 'locked') {
+      g.fillStyle = 'rgba(255,255,255,0.18)'; rr(-4, -6, 8, 52, 4); g.fill(); rr(-20, -30, 40, 26, 8); g.fill();
+      g.strokeStyle = 'rgba(255,255,255,0.6)'; g.lineWidth = 2.5; g.beginPath(); g.arc(0, -20, 6, Math.PI, 0); g.stroke();
+      g.fillStyle = 'rgba(255,255,255,0.6)'; rr(-8, -20, 16, 12, 3); g.fill();
+      return;
+    }
+    if (id === 'pan') {
+      g.fillStyle = '#6b4525'; rr(-4, -2, 8, 48, 4); g.fill();
+      g.fillStyle = '#2b2b30'; g.beginPath(); g.ellipse(0, -16, 24, 16, 0, 0, Math.PI * 2); g.fill();
+      g.fillStyle = '#4a4a52'; g.beginPath(); g.ellipse(0, -17, 17, 10, 0, 0, Math.PI * 2); g.fill();
+      g.fillStyle = 'rgba(255,255,255,0.25)'; g.beginPath(); g.ellipse(-6, -21, 6, 3, -0.4, 0, Math.PI * 2); g.fill();
+      return;
+    }
+    var handle = { classic: '#b5793a', rubber: '#3a3a44', candy: '#f6a6c1', gold: '#8a5a34' }[id] || '#b5793a';
+    g.fillStyle = handle; rr(-4, -6, 8, 52, 4); g.fill();
+    if (id === 'rubber') {
+      g.fillStyle = '#2f6fd6'; rr(-20, -30, 40, 26, 13); g.fill();
+      g.fillStyle = 'rgba(255,255,255,0.35)'; rr(-14, -27, 14, 7, 4); g.fill();
+    } else if (id === 'candy') {
+      g.save(); rr(-20, -30, 40, 26, 8); g.clip();
+      g.fillStyle = '#fff6ea'; g.fillRect(-20, -30, 40, 26);
+      g.fillStyle = '#e4342c';
+      for (var i = -3; i < 6; i++) { g.beginPath(); g.moveTo(-20 + i * 10, -30); g.lineTo(-14 + i * 10, -30); g.lineTo(-24 + i * 10, -4); g.lineTo(-30 + i * 10, -4); g.closePath(); g.fill(); }
+      g.restore();
+    } else if (id === 'gold') {
+      g.fillStyle = '#f4b820'; rr(-20, -30, 40, 26, 8); g.fill();
+      g.fillStyle = '#ffe9a8'; rr(-20, -30, 40, 8, 4); g.fill();
+      g.fillStyle = '#fff'; g.beginPath(); for (var j = 0; j < 8; j++) { var a = j * Math.PI / 4 - Math.PI / 2, r = j % 2 ? 2 : 5; g.lineTo(22 + Math.cos(a) * r, -32 + Math.sin(a) * r); } g.closePath(); g.fill();
+    } else {
+      g.fillStyle = '#d1342a'; rr(-20, -30, 40, 26, 8); g.fill();
+      g.fillStyle = '#f2eee4'; rr(-20, -30, 40, 8, 4); g.fill();
+    }
+  }
   function drawMallet(m) {
     var k = m.t / 0.28, ang = -1.1 + Math.min(1, k * 2.6) * 1.1, alpha = k < 0.75 ? 1 : (1 - (k - 0.75) / 0.25);
     ctx.save();
     ctx.globalAlpha = alpha; ctx.translate(m.x + 26, m.y - 20); ctx.rotate(ang);
-    ctx.fillStyle = '#b5793a'; roundRect(-4, -6, 8, 52, 4); ctx.fill();
-    ctx.fillStyle = '#d1342a'; roundRect(-20, -30, 40, 26, 8); ctx.fill();
-    ctx.fillStyle = '#f2eee4'; roundRect(-20, -30, 40, 8, 4); ctx.fill();
+    drawHammerShape(ctx, store.progress.equipped);
     ctx.restore();
     if (k > 0.3 && k < 0.8) {
       ctx.save(); ctx.globalAlpha = 1 - (k - 0.3) / 0.5; ctx.fillStyle = '#ffd94d';
@@ -1084,6 +1309,9 @@
       ctx.fillStyle = 'rgba(61,40,18,0.75)'; ctx.font = fontPx(15); ctx.textAlign = 'center';
       ctx.fillText('Best: ' + best() + ' moles', W / 2, after + 24 * UI);
     }
+    // the equipped hammer, bobbing under the sign
+    ctx.save(); ctx.translate(W / 2, after + 92 * UI + Math.sin(performance.now() / 400) * 4); ctx.rotate(-0.5); ctx.scale(UI, UI);
+    drawHammerShape(ctx, store.progress.equipped); ctx.restore();
     ctx.textBaseline = 'alphabetic';
     var a = 0.55 + 0.45 * Math.sin(performance.now() / 350);
     ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = '#3d2812'; ctx.font = fontPx(22, 'bold'); ctx.textAlign = 'center';
@@ -1242,7 +1470,9 @@
       holeCenter: function (i) { var h = holes[i]; return { x: h.x, y: h.y - moleH * 0.4 }; },
       whackAt: whackAt, tryStart: tryStart, spawnMole: spawnMole, pauseGame: pauseGame, resumeGame: resumeGame,
       gameOver: gameOver, onRewardedState: onRewardedState, adStateChanged: adStateChanged, setReason: setReason,
-      requestContinue: requestContinue, resize: resize, perfFlush: perfFlush
+      requestContinue: requestContinue, resize: resize, perfFlush: perfFlush,
+      nextRound: nextRound, requestOpenBox: requestOpenBox, feedBox: feedBox, equipHammer: equipHammer, saveStore: saveStore,
+      get hammers() { return HAMMERS.map(function (h) { return h.id; }); }, get whacked() { return whacked; }
     };
   }
 
