@@ -16,7 +16,7 @@
   ① v1.1.1 샌드박스 게시 확인(`get_publications` PUBLISHED, archive `cmvxpkm881kwrjm0h2iifxzqg`) — 아직이면 `publish_sandbox`(updateNote 필수)
   ② 사용자가 v1.1.0 플레이 → 느낌·"다음 판 기대되나" 원문 기록. Playgama 텔레메트리는 트래픽이 모이면 `get_game_telemetry_analytics`(하루 1번 이하)로 옵트인율·다음 판 시작률 확인
   ③ Codex 인증(위 🖱️) 결과 반영
-  ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
+  ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. (참고 `get_sandbox_traffic` 11-01: 무료 부스트 3회 남음 — 3일간 약 50플레이 예상, 공유 글 링크가 필요. 사용자가 마음 바꾸면 그때.) **샌드박스 목표 수치(플레이 시간·인원)는 도구로 못 읽음 — 콘솔 샌드박스 카드에서만 보임, 하루 1번 집계.** 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
   ⑤ (선택) BGM 교체 — 카니발 루프 mp3 받으면 `audio/bgm.*` 교체 → `./build.sh` → 재업로드
   ⑥ 다음 트랙은 기획 결정에 따름(`plans/playables-core-fun.md` 7장: Chicken Cross 제외, 신규 코어 1순위 조준+물리 연쇄 — 착수 미승인). Mole Mash 틀 복사 시 `playables/molemash/index.html`·`robot.js`
 - 사용자 대기: ① v1.1.1 느낌 ② (선택) 카니발 BGM 음원 ③ Codex QA 툴 인증 결과
