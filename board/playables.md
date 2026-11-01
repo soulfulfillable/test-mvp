@@ -7,6 +7,11 @@
   - 저장: `progress` v2 = {best, played, ranks, name, hammers[], equipped, boxFill, boxesReady, boxesOpened}(v1 저장은 기본값으로 이어짐). 보상형 배치 `continue`·`open_box`(config).
   - ⚠️ 모더레이션(Submit for review)은 샌드박스 목표 도달 뒤 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인은 사용자 확인 전엔 안 함.
 
+### 🖱️ Codex 에게 (브라우저 작업) — 귀여운 배경음악 1곡 구하기 (개발 세션 11-01, 사용자 "노래가 더 귀여우면")
+- 어디서: https://opengameart.org (검색 "cute loop", "happy chiptune loop", "carnival loop" + 라이선스 필터 **CC0**) 또는 https://kenney.nl/assets (Music 계열), https://freesound.org (CC0 필터)
+- 조건: **CC0(또는 CC-BY 면 저작자 표기 문구 함께)**, 30~90초 루프, 밝고 귀여운 느낌(칼리오페·우쿨렐레·치프튠), mp3 또는 ogg/wav. 파일을 `playables/molemash/audio/bgm-src.<확장자>` 로 커밋하고, 출처 URL·제목·작가·라이선스를 `playables/molemash/CREDITS.md` 끝에 한 줄 추가.
+- 확인할 결과: 파일 1개 + CREDITS 줄. 그 뒤는 개발 세션이 `audio/bgm.ogg`·`bgm.mp3` 로 변환·재업로드.
+
 ### 🖱️ Codex 에게 (브라우저 작업) — Threads 브랜드 계정 만들기 + 첫 글 (개발 세션 11-01, 사용자 "너가 만들 수 있니")
 - 목적: Playgama 샌드박스 무료 부스트(3일·약 50플레이, 3회)에 쓸 **공개 게시물 URL** 1개. 세션은 브라우저·전화 인증이 없어 직접 못 만든다.
 - URL: https://www.threads.com (Instagram 계정으로 로그인/가입). **개인 인스타 쓰지 말 것** — 실명 노출 금지. 새 Instagram 계정: 사용자 이름 `soulfulfill`(없으면 `soulfulfill.games`), 이름 "Soulfulfill", 이메일은 사용자가 지정하는 soulfulfill Gmail, 전화 인증은 사용자가.
@@ -193,6 +198,7 @@ Mole Mash Playgama 샌드박스 게시(11-01) https://playgama.ai/play/cmnhxm72r
 - 사용자 캡처(Supersonic): 게임 정보 카드 = 이름·장르·따옴표 한 줄 설명·개발자·제작사·게시 날짜. 목록 = 세로 썸네일 + 플레이 버튼 + 플레이 횟수. 전부 하이퍼캐주얼(탭/드래그 1조작, 30초~1분).
 
 ## 사용자 피드백 기록
+- **11-01 v1.2.0 플레이(원문)**: "광고보몀 뭐가좋은건지 바로알게하고싶은데 왜봐야되나 모르겟는데 / 때리는맛이 더있으면 좋겠다 그리고 폭탄치면 진동울리냐 / 시간늘어나게하는애도 하나만들어보자 시계모양으로 하면 어떠냐 직관적으로 / 노래가 더 귀여우면좋겠어 / 랭킹 공유되게 어케히지 / 광고보고 이어하기하면 처음에 멈추게되. 일시정지햇다 풀어야 다시돌아오네" → 반영(v1.3.0): ①보상 버튼이 보상을 그대로 보여줌("Continue with +10 s and ♥♥♥ / watch one ad", 상자: "Open it: one ad, one new hammer" + 아래 수집 줄) ②타격감: 히트스톱 0.055→0.085, 흔들림·파편 증가, 충격 링, 두더지 찌그러짐 강화, 연속 히트 콤보(BONK→WHAM→SMASH→CRUSH→MEGA, x3 부터 표시·커짐) ③폭탄: 주황 플래시·큰 링·히트스톱 0.18·흔들림 26·진동 패턴 — **진동은 안드로이드만**(iOS 사파리는 Vibration API 없음, 코드로 불가) ④**시계 두더지**(파란 알람시계, 위에 +5s, 6점부터 ~8% 등장, 놓쳐도 하트 안 깎임) — 15마리 보너스는 제거, 황금은 +3·하트만 ⑤이어하기 버그: 보상을 `rewarded` 때가 아니라 광고가 **닫힌 뒤** 적용(rewarded 상태도 '광고 열림'으로 취급), 광고 중 플랫폼 일시정지는 일시정지 패널을 띄우지 않음 ⑥랭킹 공유: Playgama SaaS 리더보드 `moles`(콘솔에 생성, 공개 토큰 config) — 라운드 끝 setScore → "World top 10" 표시(플랫폼이 in_game 지원할 때), "Share my score" 버튼(플랫폼 share → 웹 share → 클립보드 복사 순). 노래는 코드로 못 만듦(합성 금지·Everygen 없음) → Codex 요청(아래)
 - **11-01 v1.1.1 플레이(원문)**: "시간 1뷴이 너무 짧은거같고 시간초과로 끝날거면 타임 몇초남은거 카윤트다운이라도 되게하던가 아니면 기프투받은거로 시건늘리게 하거나 하면어떠냐 그리고 끝나고 랭킹보이는거 좀더 자극족이고 딱 직관적이면 좋겟는데" → 반영(v1.2.0): ①한 판 45→60초(속도 램프는 45초 기준 유지) ②마지막 10초 화면 가운데 큰 카운트다운(초마다 튐, 5초부턴 빨강) ③시간 보너스: 황금 두더지 +5초, 15마리마다 +5초("+5s" 표시) ④결과 화면: 점수 아래 "NEW BEST! +N over your old record" 또는 "#N of your M runs", 그 아래 "Next target: X" / "X more to beat your best", 랭킹은 상위 5개에 금·은·동 메달, 내 기록 줄 강조(깜빡임), 5위 밖이면 내 줄을 따로 추가
 - **11-01 트래픽 결정(원문)**: "트래픽은 A로 가자" → 자연 유입만, 캠페인 없음(`PRODUCT.md` 결정 로그)
 - **11-01 v1.1.0 플레이(원문)**: "오 훨씬 나아짐 근데중간에 갑자기 루즈해지는게 좀 있어 막 빨라지기전에" → 반영(v1.1.1): 8~18초 구간이 한 마리씩·1.7초 머무름·1초 간격이라 비었음. heat 시간 가중 0.7→0.8, 머무름 1.8→0.5초, 간격 0.9→0.3초, 동시 2마리를 heat 0.15(≈8초)부터·3마리를 0.5부터, 첫 판 아닌 라운드는 4초 뒤부터 2마리

@@ -116,6 +116,7 @@ async function playAgain(page) {
     const whacks = await playUntilOver(page, 12000);
     const mid = await page.evaluate(() => ({ score: window.__game.score, lives: window.__game.lives, state: window.__game.state, tut: window.__game.tutorial }));
     check('scored by whacking moles', mid.score > 0, `score ${mid.score}, whacks ${whacks}, lives ${mid.lives}`);
+    await shot(page, 'phone-390x844-play-hit');
     await shot(page, 'phone-390x844-play');
     // pause / resume by keyboard and button
     await page.keyboard.press('KeyP');
@@ -158,6 +159,10 @@ async function playAgain(page) {
     check('best and rank recorded', over.best === over.score && over.ranks === 1, `best ${over.best}`);
     check('level_completed message on time-up', over.msgs.includes('level_completed'), over.msgs.join(','));
     await shot(page, 'phone-390x844-over');
+    await page.click('#share-btn');
+    await page.waitForTimeout(300);
+    const sh = await page.evaluate(() => document.getElementById('share-note').textContent);
+    check('Share my score copies or shares the score text', /Copied|Shared|moles/.test(sh), sh.slice(0, 60));
     // name, mute → saved through the Bridge
     await page.fill('#name-input', 'Robo');
     await page.click('#mute-btn');
@@ -194,8 +199,11 @@ async function playAgain(page) {
     await page.click('#continue-btn');
     await page.evaluate(() => window.__game.onRewardedState('opened'));
     await page.evaluate(() => window.__game.onRewardedState('rewarded'));
+    const underAd = await page.evaluate(() => ({ state: window.__game.state, earned: window.__game.rewardEarned, frozen: window.__game.frozen }));
+    check('reward earned but the round waits until the ad closes', underAd.state === 2 && underAd.earned === 'continue' && underAd.frozen, JSON.stringify(underAd));
     await page.evaluate(() => window.__game.onRewardedState('closed'));
     await page.waitForTimeout(150);
+    check('after the ad closes the round runs, no pause panel in the way', await page.evaluate(() => window.__game.state === 1 && !window.__game.userPaused && document.getElementById('pause-panel').classList.contains('hidden')));
     const granted = await page.evaluate(() => ({ state: window.__game.state, lives: window.__game.lives, timeLeft: window.__game.timeLeft, used: window.__game.continueUsed, ranks: window.__game.store.progress.ranks.length }));
     check('rewarded: round continues with hearts back and +10 s', granted.state === 1 && granted.lives === 3 && granted.timeLeft > 9 && granted.used, JSON.stringify(granted));
     await page.evaluate(() => { window.__game.timeLeft = 0.2; });
@@ -300,7 +308,7 @@ async function playAgain(page) {
     const { context, page } = await newPage(browser, w, h, base + '#debug', { touch: w < 700 });
     await page.evaluate(() => { window.__game.tryStart(); });
     await page.waitForTimeout(80);
-    await page.evaluate(() => { window.__game.spawnMole('mole'); window.__game.spawnMole('gold'); window.__game.spawnMole('bomb'); });
+    await page.evaluate(() => { window.__game.spawnMole('mole'); window.__game.spawnMole('gold'); window.__game.spawnMole('bomb'); window.__game.spawnMole('clock'); });
     await page.waitForTimeout(400);
     const lay = await page.evaluate(() => {
       const g = window.__game, hud = g.hud, grid = g.grid, holes = g.holes;
