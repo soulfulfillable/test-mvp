@@ -30,7 +30,16 @@
   | 1.3.2 index.html 루트, 라틴 파일명 | 파일명 OK | zip 구조: index.html + audio/ + playgama-bridge-config.json |
   **첫 게임 = Mole Mash**(그림이 코드 드로잉, 키보드 있음, 45초 라운드, 광고 자리 명확). 그다음 Chicken Cross → Daily Stairs → Ice Cream Tower. 캣도쿠·CvD 는 🐱🐶 교체가 커서 뒤로.
   **지금 당장 올리면 반려** — 위 표를 다 맞춘 뒤 `get_game_checklist` 를 다시 읽고 번호별로 체크한 다음 `start_archive_upload`.
-- 사용자 대기: 구글 Playables 관심 신청서 제출(③) → "냈어". (Playgama 쪽은 세션이 진행, 샌드박스 링크가 나오면 전달)
+- 11-01 작업 세션 `Playgama: Mole Mash` 가 ③-b 진행 중(기획 파트너가 엶). 이 게시판 이어받기는 그 세션이 갱신한다.
+
+### 🖱️ Codex 에게 (브라우저 작업) — 구글 Playables 관심 신청서
+- URL: https://developers.google.com/youtube/gaming/playables/support/contact → 본문의 "Playables interest form" 링크
+- 로그인 계정: Peblit 채널(https://www.youtube.com/@peblit) 관리 권한이 있는 개인 Google 계정
+- 할 것: 폼 제출. 답안은 `playables/pitch.md` "Suggested answers" + "Studio (short paragraph)". 게임 URL 은 catdoku.html, 포트폴리오는 games.html. 회사명·실명·회사 메일 금지.
+- 준비된 파일: `playables/pitch.md`, `docs/games.html`(배포됨)
+- 확인할 결과: 제출 완료 화면/확인 메일. 끝나면 이 게시판 "사용자 대기"에 날짜 적기.
+
+- 사용자 대기: 없음(신청서는 Codex, Playgama 업로드는 세션). 샌드박스 링크가 나오면 사용자가 폰에서 느낌 확인 → 그 뒤 Playgama 콘솔 "Submit for review" 를 Codex 가.
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
 ## 지금 상태

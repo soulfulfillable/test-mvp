@@ -14,6 +14,12 @@
   2. **⑤ Google Play — 사용자 차례**(순서·문구 전부 `catdoku_app/store/play-listing.md`): AAB 다운로드 → Closed testing 릴리스 → 테스터 이메일 목록 → 스토어 등록(설명·그래픽 붙여넣기) → 인앱 상품 `com.soulfulfill.catdoku.unlockall` $1.99. 세션은 사용자가 캡처를 주면 그 화면 기준으로 다음 클릭을 안내. **AdMob Android 앱 ID 가 오면** `AndroidManifest.xml`·`lib/core/ads.dart` Android 분기 교체 → `Build Android`(catdoku) 다시 → 새 AAB(versionCode 는 자동 증가).
   3. ③ 테스터 피드백이 오면 `beta-feedback.md` 에 원문 → 고친 것 → 1.1.1 Release iOS(app=catdoku) → 외부 그룹엔 **빌드 자동 추가 안 됨**: `TestFlight 외부 테스트` 를 새 빌드 번호로 다시 돌린다(두 번째 빌드부터는 보통 심사 없이 바로).
   4. ④ 10명+ 피드백·반영 빌드 뒤 `review-reply-4.3.md` 4번 다시 쓰기 → **기획 파트너·사용자 확인 뒤에만** 답장. **Apple 답장·재제출은 이 세션이 하지 않는다.**
+### 🖱️ Codex 에게 (브라우저 작업) — Google Play 비공개 테스트 (기획 파트너 11-01)
+- URL: https://play.google.com/console → Kitty Queens: Cat Sudoku
+- 로그인 계정: Play 개발자 계정(개인 Gmail, 개발자명 Soulfulfill)
+- 할 것(순서·문구 전부 `catdoku_app/store/play-listing.md`): ① Actions `Build Android` 최신 성공 실행의 아티팩트 `catdoku-aab` 내려받아 zip 안 .aab 를 **Test and release → Closed testing → Create track/release → Upload** ② 테스터 이메일 목록 만들기(이메일은 사용자가 Codex 에게 직접) ③ **Store presence → Main store listing** 에 설명·아이콘 512·피처 1024×500·스크린샷(`catdoku_app/store/play/`) ④ **Monetize → In-app products** `com.soulfulfill.catdoku.unlockall` $1.99 ⑤ 릴리스 "Review and roll out"(비공개 테스트 게시 — 사용자 승인 범위 안). **Production 신청·실명 노출 바꾸기 전 연락처 메일 교체는 아직 아님.**
+- 확인할 결과: Closed testing 트랙에 릴리스 1개 "Available to testers"(또는 심사 중), 스토어 등록 항목 체크 완료, 대시보드 Closed testing 잠금 해제.
+
 - 사용자 대기 중인 것: ① Beta App Review 승인 뒤 테스터에게 링크 보내기(`beta.html` 문구, 승인 전엔 "곧 보낼게") ② Play Console: `catdoku-aab` 업로드(Closed testing) + 스토어 등록 붙여넣기 + 인앱 상품(play-listing.md) ③ (급하지 않음) AdMob(`soulfulfillable`)에 Kitty Queens **Android** 앱 + 광고 단위 3개(Banner / Rewarded 힌트 / Rewarded 이어하기) 만들어 ID 캡처 ④ 안드로이드 폰(본인 또는 지인)에서 첫 설치 확인.
 - 이어받는 세션에 붙여 넣을 말:
   `soulfulfillable/test-mvp 의 board/catdoku.md "🔁 이어받기" 와 관련 plans 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Apple 답장·재제출은 사용자 확인 전엔 하지 말 것.`
