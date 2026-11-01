@@ -78,6 +78,14 @@ async function playUntilOver(page, maxMs) {
   return whacks;
 }
 
+
+// Play again; when a gift box is ready the box screen comes first — keep it for later and go on
+async function playAgain(page) {
+  await page.click('#retry-btn');
+  await page.waitForTimeout(200);
+  if (await page.evaluate(() => !document.getElementById('box-panel').classList.contains('hidden'))) { await page.click('#later-btn'); await page.waitForTimeout(150); }
+}
+
 (async () => {
   const srv = await serve();
   const base = `http://127.0.0.1:${srv.address().port}/index.html`;
@@ -154,7 +162,7 @@ async function playUntilOver(page, maxMs) {
     const muted = await page.evaluate(() => ({ user: window.__game.reasons.user, attr: document.getElementById('mute-btn').getAttribute('data-muted'), audible: window.__game.audible }));
     check('mute button silences and shows the off icon', muted.user && muted.attr === '1' && !muted.audible, JSON.stringify(muted));
     // Play again → interstitial requested (Bridge decides), new round
-    await page.click('#retry-btn');
+    await playAgain(page);
     await page.waitForTimeout(300);
     check('Play again starts a new round', await page.evaluate(() => window.__game.state === 1 && window.__game.score === 0));
     check('tutorial off after the first round', await page.evaluate(() => !window.__game.tutorial));
@@ -193,7 +201,7 @@ async function playUntilOver(page, maxMs) {
     check('no second continue in the same attempt', o3.state === 2 && !o3.btn, JSON.stringify(o3));
     // out of hearts path
     await page.waitForTimeout(700);   // the panel ignores taps for 600 ms after game over (mis-tap guard)
-    await page.click('#retry-btn');
+    await playAgain(page);
     await page.waitForTimeout(2300);
     const t0 = Date.now();
     while (Date.now() - t0 < 20000) {
@@ -204,6 +212,64 @@ async function playUntilOver(page, maxMs) {
     const hearts = await page.evaluate(() => ({ state: window.__game.state, lives: window.__game.lives, title: document.getElementById('over-title-text').textContent, msgs: window.__msgs.slice(-3) }));
     check('ignoring moles loses 3 hearts → OUT OF HEARTS', hearts.state === 2 && hearts.lives === 0 && /HEARTS/.test(hearts.title), JSON.stringify(hearts));
     await shot(page, 'phone-390x844-over-hearts');
+
+    // ── gift box / hammer loop (v1.1, method A) ──
+    const box0 = await page.evaluate(() => ({ p: window.__game.store.progress, label: document.getElementById('box-label').textContent, strip: document.querySelectorAll('#hammer-strip canvas').length, eq: document.querySelectorAll('#hammer-strip canvas.equipped').length }));
+    check('results panel shows the gift box bar and 5 hammer slots', /Gift box/.test(box0.label) && box0.strip === 5 && box0.eq === 1, JSON.stringify({ label: box0.label, fill: box0.p.boxFill, ready: box0.p.boxesReady, hammers: box0.p.hammers }));
+    await shot(page, 'phone-390x844-over-box');
+    await page.evaluate(() => { window.__game.store.progress.boxesReady = 1; });
+    await page.waitForTimeout(700);
+    await page.click('#retry-btn');
+    await page.waitForTimeout(200);
+    const bp = await page.evaluate(() => ({ open: !document.getElementById('box-panel').classList.contains('hidden'), adBtn: !document.getElementById('open-box-btn').classList.contains('hidden'), state: window.__game.state }));
+    check('Play again with a ready box opens the box screen first (not next to the continue offer)', bp.open && bp.adBtn && bp.state === 2, JSON.stringify(bp));
+    await shot(page, 'phone-390x844-box');
+    await page.click('#later-btn');
+    await page.waitForTimeout(150);
+    check('Later keeps the box and starts the round', await page.evaluate(() => window.__game.state === 1 && window.__game.store.progress.boxesReady === 1));
+    await page.evaluate(() => { window.__game.timeLeft = 0.2; });
+    await page.waitForTimeout(900);
+    await page.click('#retry-btn');
+    await page.waitForTimeout(200);
+    await page.evaluate(() => { window.__forceRewarded = true; });
+    await page.click('#open-box-btn');
+    await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('closed'); });
+    await page.waitForTimeout(100);
+    const kept = await page.evaluate(() => ({ ready: window.__game.store.progress.boxesReady, note: document.getElementById('box-note').textContent, open: !document.getElementById('box-panel').classList.contains('hidden'), hammers: window.__game.store.progress.hammers.length }));
+    check('ad closed early: box kept, nothing granted', kept.ready === 1 && kept.hammers === 1 && kept.open && /safe/.test(kept.note), JSON.stringify(kept));
+    await page.click('#open-box-btn');
+    await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('rewarded'); window.__game.onRewardedState('closed'); });
+    await page.waitForTimeout(150);
+    const rev = await page.evaluate(() => ({ open: !document.getElementById('reveal-panel').classList.contains('hidden'), name: document.getElementById('reveal-name').textContent, hammers: window.__game.store.progress.hammers.slice(), ready: window.__game.store.progress.boxesReady }));
+    check('rewarded: box opens, a new hammer is revealed, box count drops', rev.open && rev.hammers.length === 2 && rev.ready === 0 && rev.name.length > 3, JSON.stringify(rev));
+    await shot(page, 'phone-390x844-reveal');
+    await page.click('#equip-btn');
+    await page.waitForTimeout(150);
+    const eq = await page.evaluate(() => ({ state: window.__game.state, equipped: window.__game.store.progress.equipped }));
+    check('Equip and play: new hammer equipped, round starts', eq.state === 1 && eq.equipped !== 'classic', JSON.stringify(eq));
+    await page.waitForTimeout(2600);
+    await page.evaluate(() => { window.__game.spawnMole('mole'); });
+    await page.waitForTimeout(250);
+    const hc = await page.evaluate(() => window.__game.holeCenter(window.__game.moles[window.__game.moles.length - 1].hole));
+    await page.mouse.click(hc.x, hc.y);
+    await page.waitForTimeout(60);
+    await shot(page, 'phone-390x844-play-new-hammer');
+    await page.reload({ waitUntil: 'load' });
+    await page.waitForFunction(() => window.__game && window.__game.state !== undefined);
+    const re2 = await page.evaluate(() => ({ equipped: window.__game.store.progress.equipped, hammers: window.__game.store.progress.hammers.length, fill: window.__game.store.progress.boxFill }));
+    check('reload keeps owned hammers, the equipped one and the box fill', re2.equipped !== 'classic' && re2.hammers === 2, JSON.stringify(re2));
+    // all five collected → bar says so, no box screen
+    await page.evaluate(() => { const p = window.__game.store.progress; p.hammers = window.__game.hammers.slice(); p.boxesReady = 0; p.boxFill = 0; window.__game.saveStore(['progress']); });
+    await page.tap('#game');
+    await page.waitForTimeout(200);
+    await page.evaluate(() => { window.__game.timeLeft = 0.2; });
+    await page.waitForTimeout(700);
+    const done = await page.evaluate(() => ({ label: document.getElementById('box-label').textContent, state: window.__game.state }));
+    check('all hammers collected: bar reads so', /All hammers collected/.test(done.label) && done.state === 2, JSON.stringify(done));
+    await page.waitForTimeout(700);
+    await page.click('#retry-btn');
+    await page.waitForTimeout(200);
+    check('no box screen once everything is collected', await page.evaluate(() => window.__game.state === 1 && document.getElementById('box-panel').classList.contains('hidden')));
     await context.close();
   }
 

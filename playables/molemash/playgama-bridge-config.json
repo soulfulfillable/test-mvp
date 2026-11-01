@@ -11,7 +11,8 @@
             "preloadOnStart": "continue",
             "placementFallback": "continue",
             "placements": [
-                { "id": "continue" }
+                { "id": "continue" },
+                { "id": "open_box" }
             ]
         }
     }
