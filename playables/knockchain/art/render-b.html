@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>loading</title>
+<!--
+  Knock Chain — Level 1 still, variant B: real-time 3D (three.js, orthographic 30° isometric camera) with
+  CC0 models (Kenney crate, Quaternius cat — see CREDITS.md) + primitives for blocks/slingshot/switch.
+  Same world coordinates, same light direction and same HUD as render-a.html, so the two can be compared 1:1.
+  Consistency is structural here: one directional light with shadow maps lights and shadows every object the same way.
+  ?mode=portrait|square  ?sheet=1 (cat sprite sheet: Idle / Walk / Jump / Death, transparent)
+-->
+<style>canvas{position:fixed;inset:0;width:100%;height:100%;display:block}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const Q = new URLSearchParams(location.search);
+const MODE = Q.get('mode') || 'portrait';
+const SHEET = Q.get('sheet') === '1';
+const W = window.innerWidth, H = window.innerHeight;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: SHEET, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1);
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement); // under the HUD
+
+const scene = new THREE.Scene();
+window.addEventListener('error', () => { document.title = 'error'; });
+
+// ---------- palette (same as A) ----------
+const C = { grass: 0x9ccb6c, grassDark: 0x7fb356, earth: 0x8a6a4a, deck: 0xd19a5f, deckAlt: 0xc88f55, wood: 0xc98b4f, stone: 0xa4a9ae, glass: 0x9fd9f0, slate: 0x5b6670, red: 0xe2552e, band: 0x5a3e2b, stem: 0x8b5a2b, accent: 0x1f7a8c };
+const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.85, metalness: 0.0, ...o });
+const woodMat = (hex) => new THREE.MeshStandardMaterial({ map: woodTex(hex), roughness: 0.8, metalness: 0 });
+
+// ---------- light: one directional (upper-left, same direction as A: (-1, 2, 0.6)) + hemisphere fill ----------
+const hemi = new THREE.HemisphereLight(0xdff3ff, 0xb7a27a, 0.85); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xfff4e0, 2.4);
+sun.position.set(-1 * 6, 2.0 * 6, 0.6 * 6).add(new THREE.Vector3(3.2, 0, 1.8));
+sun.target.position.set(3.2, 0, 1.8); scene.add(sun.target);
+sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -6, right: 6, top: 6, bottom: -6, near: 1, far: 40 });
+sun.shadow.radius = 4; sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02;
+scene.add(sun);
+
+// ---------- camera: orthographic, 30° elevation, 45° azimuth (2:1 iso), screen-right = +x -z like A ----------
+const U = MODE === 'square' ? 22 : 30;         // px per world x-unit on screen (same as A)
+const S = U / Math.SQRT1_2;                     // px per view unit
+const camera = new THREE.OrthographicCamera(-W / 2 / S, W / 2 / S, H / 2 / S, -H / 2 / S, -50, 100);
+if (!SHEET) scene.background = makeSky();
+const center = new THREE.Vector3(3.2, MODE === 'square' ? 0.35 : 0.55, 1.8);
+camera.position.copy(center).add(new THREE.Vector3(0.6124, 0.5, 0.6124).multiplyScalar(30));
+camera.lookAt(center);
+
+// ---------- helpers ----------
+function addBox(x, y, z, sx, sy, sz, m, r = 0.035) {
+  const g = r ? new RoundedBoxGeometry(sx, sy, sz, 2, r) : new THREE.BoxGeometry(sx, sy, sz);
+  const o = new THREE.Mesh(g, m); o.position.set(x + sx / 2, y + sy / 2, z + sz / 2); o.castShadow = true; o.receiveShadow = true; scene.add(o); return o;
+}
+function addCyl(x, y, z, r, h, m, seg = 32) { const o = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, seg), m); o.position.set(x, y + h / 2, z); o.castShadow = o.receiveShadow = true; scene.add(o); return o; }
+function tube(a, b, r, m) { const d = new THREE.Vector3().subVectors(b, a); const o = new THREE.Mesh(new THREE.CylinderGeometry(r, r, d.length(), 12), m); o.position.copy(a).add(b).multiplyScalar(0.5); o.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.clone().normalize()); o.castShadow = true; scene.add(o); return o; }
+function makeSky() { // same gradient + soft clouds as A, drawn once at screen size
+  const c = document.createElement('canvas'); c.width = W * 2; c.height = H * 2; const g = c.getContext('2d'); g.scale(2, 2);
+  const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, '#d7ebf3'); gr.addColorStop(1, '#f1efe6'); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.filter = 'blur(10px)';
+  const clouds = MODE === 'square' ? [[70, 180, 46], [330, 165, 36]] : [[64, 300, 54], [340, 262, 40], [250, 560, 34]];
+  for (const [cx, cy, r] of clouds) { g.fillStyle = 'rgba(255,255,255,0.75)'; for (const [dx, dy, k] of [[0, 0, 1], [-r * 0.8, r * 0.25, 0.7], [r * 0.85, r * 0.2, 0.75], [r * 0.2, -r * 0.35, 0.65]]) { g.beginPath(); g.ellipse(cx + dx, cy + dy, r * k, r * k * 0.62, 0, 0, 7); g.fill(); } }
+  g.filter = 'blur(28px)'; g.fillStyle = 'rgba(28,38,66,0.14)'; g.beginPath(); g.ellipse(W / 2 + 40, MODE === 'square' ? 262 : 530, 7 * U, 3 * U, 0, 0, 7); g.fill();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
+function woodTex(base, seam = 'rgba(80,40,10,.35)') { // procedural plank grain, shared by every wood material
+  const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d');
+  g.fillStyle = base; g.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 90; i++) { g.strokeStyle = `rgba(255,255,255,${0.05 + rnd() * 0.12})`; g.lineWidth = 1 + rnd() * 2; const y = rnd() * 256; g.beginPath(); g.moveTo(-10, y); g.bezierCurveTo(80, y + rnd() * 8 - 4, 180, y + rnd() * 8 - 4, 270, y + rnd() * 6 - 3); g.stroke(); }
+  for (let i = 0; i < 60; i++) { g.strokeStyle = `rgba(60,30,8,${0.04 + rnd() * 0.1})`; g.lineWidth = 1 + rnd() * 1.5; const y = rnd() * 256; g.beginPath(); g.moveTo(-10, y); g.bezierCurveTo(80, y + rnd() * 6 - 3, 180, y + rnd() * 6 - 3, 270, y + rnd() * 6 - 3); g.stroke(); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4; return t; }
+let seed = 11; const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+
+const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
+const load = (f) => loader.loadAsync('./assets/' + f + '.glb');
+// the Quaternius cat ships metalness 0.4 + vertex colours; without an environment map that renders almost black.
+// Use its colour atlas with a matte material so it takes the same light as everything else.
+function fixCat(root) { root.traverse(o => { if (o.isMesh) { const m = o.material; m.metalness = 0; m.roughness = 0.7; m.vertexColors = false; m.map = null; m.color.set(0xf2a65a); /* its atlas is dark grey in the cat's region → drop it, flat orange like A (eyes/nose are geometry) */ m.needsUpdate = true; o.castShadow = true; o.receiveShadow = false; o.frustumCulled = false; } }); }
+
+async function buildScene() {
+  // island: earth block + grass slab + tufts
+  const G = { x: -0.6, z: -0.6, sx: 7.6, sz: 4.8 };
+  addBox(G.x, -1.1, G.z, G.sx, 0.72, G.sz, mat(C.earth), 0.03);
+  addBox(G.x, -0.38, G.z, G.sx, 0.04, G.sz, mat(C.grass), 0.0);
+  const tuft = mat(C.grassDark);
+  for (let i = 0; i < 70; i++) { const o = new THREE.Mesh(new THREE.SphereGeometry(0.07 + rnd() * 0.06, 8, 6), tuft); o.scale.y = 0.45; o.position.set(G.x + rnd() * G.sx, -0.34, G.z + rnd() * G.sz); o.receiveShadow = true; scene.add(o); }
+  // deck: planks
+  const D = { x: 0, z: 0, sx: 6.4, sz: 3.6 };
+  const n = 8; for (let i = 0; i < n; i++) addBox(D.x, -0.35, D.z + i * D.sz / n, D.sx, 0.35, D.sz / n - 0.012, woodMat(i % 2 ? '#d19a5f' : '#c88f55'), 0.02);
+  // rails
+  const wood = woodMat('#c98b4f');
+  for (const z of [0.1, 1.7, 3.3]) addBox(0.1, 0, z, 0.18, 0.55, 0.18, wood);
+  for (const x of [2.1, 4.1, 6.1]) addBox(x, 0, 0.1, 0.18, 0.55, 0.18, wood);
+  addBox(0.1, 0.42, 0.1, 0.18, 0.1, 3.38, wood); addBox(0.1, 0.42, 0.1, 6.18, 0.1, 0.18, wood);
+  // tower: wood ×3, glass ×1, stone ×1
+  addBox(3.2, 0, 0.9, 0.8, 1.0, 0.8, wood); addBox(4.6, 0, 0.9, 0.8, 1.0, 0.8, wood);
+  addBox(3.1, 1.0, 0.9, 2.4, 0.35, 0.8, wood);
+  const glass = new THREE.MeshPhysicalMaterial({ color: C.glass, transparent: true, opacity: 0.42, roughness: 0.06, metalness: 0.0, clearcoat: 1, clearcoatRoughness: 0.05, side: THREE.DoubleSide });
+  const gb = addBox(3.9, 1.35, 0.9, 0.8, 0.8, 0.8, glass, 0.02); gb.castShadow = false; // glass: light passes
+  addBox(3.9, 2.15, 0.9, 0.8, 0.7, 0.8, mat(C.stone, { roughness: 0.95 }), 0.05);
+  // switch
+  addBox(5.35, 0, 0.85, 0.9, 0.22, 0.9, mat(C.slate, { roughness: 0.6, metalness: 0.2 }));
+  addCyl(5.8, 0.22, 1.3, 0.3, 0.22, mat(C.red, { roughness: 0.35 }));
+  // slingshot (aims along +x)
+  const stem = mat(C.stem);
+  addCyl(1.1, 0, 1.3, 0.14, 0.95, stem);
+  const top = new THREE.Vector3(1.1, 0.95, 1.3);
+  const tips = [new THREE.Vector3(1.1, 1.5, 1.3 - 0.42), new THREE.Vector3(1.1, 1.5, 1.3 + 0.42)];
+  for (const t of tips) { tube(top, t, 0.09, stem); const k = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 8), stem); k.position.copy(t); scene.add(k); }
+  const ballP = new THREE.Vector3(0.45, 0.75, 1.3);
+  for (const t of tips) tube(t, ballP.clone().add(new THREE.Vector3(-0.2, 0, (t.z - 1.3) * 0.5)), 0.03, mat(C.band));
+  const pouch = new THREE.Mesh(new THREE.SphereGeometry(0.27, 16, 12), mat(0x6e4b32)); pouch.scale.set(0.45, 0.85, 1.0); pouch.position.copy(ballP).add(new THREE.Vector3(-0.14, -0.02, 0)); pouch.castShadow = true; scene.add(pouch);
+  const ball = new THREE.Mesh(new THREE.SphereGeometry(0.26, 32, 24), mat(C.red, { roughness: 0.3 })); ball.position.copy(ballP); ball.castShadow = true; scene.add(ball);
+  // trajectory dots + target ring (billboarded)
+  const target = new THREE.Vector3(4.3, 1.75, 1.3); const N = 18; const dotM = mat(0xffffff, { emissive: 0xffffff, emissiveIntensity: 0.35 });
+  for (let i = 1; i < N; i++) { const t = i / N; const p = new THREE.Vector3().lerpVectors(ballP, target, t); p.y += 1.6 * Math.sin(Math.PI * t); const d = new THREE.Mesh(new THREE.SphereGeometry(0.075 - i * 0.0012, 12, 8), dotM); d.position.copy(p); scene.add(d); }
+  const ringM = new THREE.MeshBasicMaterial({ color: C.accent }); const ring = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.04, 8, 48), ringM); ring.position.copy(target); ring.quaternion.copy(camera.quaternion); scene.add(ring);
+  const dot = new THREE.Mesh(new THREE.CircleGeometry(0.07, 24), ringM); dot.position.copy(target); dot.quaternion.copy(camera.quaternion); scene.add(dot);
+  // pull-direction hint (dashed arrow behind the ball, billboarded, same accent)
+  const arrow = new THREE.Group(); arrow.quaternion.copy(camera.quaternion); arrow.position.copy(ballP).add(new THREE.Vector3(-0.12, -0.2, 0.12));
+  for (let i = 0; i < 3; i++) { const s = new THREE.Mesh(new THREE.PlaneGeometry(0.11, 0.05), ringM); s.position.set(-0.12 - i * 0.13, -0.12 - i * 0.13, 0); s.rotation.z = Math.PI / 4; arrow.add(s); }
+  const head = new THREE.Mesh(new THREE.ShapeGeometry(new THREE.Shape([new THREE.Vector2(0, 0), new THREE.Vector2(0.22, 0.02), new THREE.Vector2(0.02, 0.22)])), ringM); head.position.set(-0.6, -0.6, 0); arrow.add(head); scene.add(arrow);
+
+  // crate: wood primitives (body + frame slats + lid hinged on the far edge, open 60°) — same wood as the tower
+  const cx = 4.9, cz = 2.35, csz = 1.15, ch = 0.95, crateW = woodMat('#b9793f'), frame = mat(0x8a5a2e);
+  const wall = 0.08;
+  addBox(cx, 0, cz, csz, 0.1, csz, crateW, 0.02);                                   // floor
+  addBox(cx, 0, cz, csz, ch, wall, crateW, 0.02); addBox(cx, 0, cz + csz - wall, csz, ch, wall, crateW, 0.02);
+  addBox(cx, 0, cz, wall, ch, csz, crateW, 0.02); addBox(cx + csz - wall, 0, cz, wall, ch, csz, crateW, 0.02);
+  for (const [fx, fz] of [[0, 0], [csz - 0.1, 0], [0, csz - 0.1], [csz - 0.1, csz - 0.1]]) addBox(cx + fx, 0, cz + fz, 0.1, ch, 0.1, frame, 0.02); // corner posts
+  for (const yy of [0.08, ch - 0.1]) { addBox(cx - 0.01, yy, cz + csz - 0.02, csz + 0.02, 0.1, 0.05, frame, 0.01); addBox(cx + csz - 0.03, yy, cz - 0.01, 0.05, 0.1, csz + 0.02, frame, 0.01); }
+  const lid = new THREE.Group(); lid.position.set(cx, ch, cz); lid.rotation.x = -1.05;
+  const lidM = new THREE.Mesh(new RoundedBoxGeometry(csz + 0.04, 0.09, csz + 0.04, 2, 0.02), crateW); lidM.position.set(csz / 2, 0.045, csz / 2 + 0.02); lidM.castShadow = lidM.receiveShadow = true; lid.add(lidM);
+  for (const f of [0.08, csz - 0.12]) { const sl = new THREE.Mesh(new THREE.BoxGeometry(csz + 0.06, 0.05, 0.1), frame); sl.position.set(csz / 2, 0.11, f + 0.05); sl.castShadow = true; lid.add(sl); }
+  scene.add(lid);
+  // cat (Quaternius, CC0) sitting in the crate, head above the rim, looking toward the camera
+  const cat = await load('cat');
+  const ct = cat.scene; fixCat(ct);
+  ct.scale.setScalar(0.58); ct.position.set(cx + csz / 2, 0.5, cz + csz / 2 + 0.08); ct.rotation.y = Math.PI * 0.25;
+  const cmix = new THREE.AnimationMixer(ct); const idle = cmix.clipAction(cat.animations.find(a => /\|Idle$/.test(a.name))); idle.play(); cmix.update(1.2);
+  scene.add(ct);
+  return { cat, cmix };
+}
+
+async function buildSheet() {
+  // 4 states of the cat, each in a 200×200 cell, transparent background, same light
+  const cat = await load('cat');
+  const ct = cat.scene; fixCat(ct);
+  ct.scale.setScalar(0.6); scene.add(ct);
+  const states = [['Idle', 1.2], ['Walk', 0.5], ['Jump_Start', 0.25], ['Death', 0.85]];
+  const mix = new THREE.AnimationMixer(ct);
+  const cell = 200; const cam = new THREE.OrthographicCamera(-1.3, 1.3, 1.3, -1.3, -50, 100);
+  cam.position.set(0.6124, 0.5, 0.6124).multiplyScalar(20).add(new THREE.Vector3(0, 0.55, 0)); cam.lookAt(0, 0.55, 0);
+  renderer.setScissorTest(true); renderer.autoClear = false; renderer.clear();
+  for (let i = 0; i < states.length; i++) {
+    mix.stopAllAction(); const a = mix.clipAction(cat.animations.find(c => c.name.endsWith('|' + states[i][0]))); a.play(); mix.setTime(0); mix.update(states[i][1]);
+    ct.rotation.y = Math.PI * 0.25; ct.position.set(0, 0, 0);
+    renderer.setViewport(i * cell, 0, cell, cell); renderer.setScissor(i * cell, 0, cell, cell); renderer.render(scene, cam);
+  }
+}
+
+(async () => {
+  if (SHEET) { await buildSheet(); document.title = 'ready'; return; }
+  await buildScene();
+  renderer.render(scene, camera);
+  document.title = 'ready';
+})().catch(e => { console.error(e); document.title = 'error'; });
+</script>
+<script src="ui.js"></script>
+<script>if (new URLSearchParams(location.search).get('sheet') === '1') document.getElementById('hud').remove();</script>
+</body>
+</html>

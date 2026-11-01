@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>loading</title>
+<!--
+  Knock Chain — Level 1 still, variant A: procedural 2.5D isometric render on Canvas 2D.
+  One rule set for everything on screen (plans/knock-chain.md "아트 기준 5개"):
+    · one light, upper-left 45° (world vector L = (-1, 1.3, 0.6)): top face brightest, +z (left) face mid, +x (right) face dark
+    · every object casts the same ground shadow: corners projected along -L, convex hull, same blur, same color, clipped to the surface
+    · contact AO: dark gradient at the base of every side face + soft blob under every footprint
+    · one line weight for all edges (EDGE px), one palette (PAL), per-material face detail (wood grain, stone speckle, glass highlight)
+  ?mode=portrait|square  ?sheet=1 (cat sprite sheet, 4 states, transparent)  ?balls=3
+-->
+<style>canvas{position:fixed;inset:0;width:100%;height:100%;display:block}</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const Q = new URLSearchParams(location.search);
+const MODE = Q.get('mode') || 'portrait';
+const SHEET = Q.get('sheet') === '1';
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+const DPR = window.devicePixelRatio || 1;
+const W = window.innerWidth, H = window.innerHeight;
+cv.width = W * DPR; cv.height = H * DPR; ctx.scale(DPR, DPR);
+
+// ---------- palette (one set) ----------
+const PAL = {
+  skyTop: '#d7ebf3', skyBot: '#f1efe6',
+  grass: '#9ccb6c', grassDark: '#7fb356', earth: '#8a6a4a',
+  deck: '#d19a5f', deckSeam: 'rgba(80,40,10,.28)',
+  wood: '#c98b4f', crate: '#b9793f', stone: '#a4a9ae', glass: '#9fd9f0',
+  slate: '#5b6670', red: '#e2552e', redDark: '#a8371a',
+  shadow: 'rgba(28,38,66,0.36)', ao: 'rgba(20,25,40,0.30)',
+  edge: 'rgba(40,24,10,0.22)', hi: 'rgba(255,255,255,0.35)',
+  cat: '#f2a65a', catLight: '#fbd9a8', catDark: '#c97a2c', ink: '#2b2320',
+};
+const EDGE = 1.1;                 // one line weight everywhere
+const L = norm([-1, 2.0, 0.6]);   // light direction (towards the light)
+const SHADE = { top: 1.0, left: 0.80, right: 0.60 }; // Lambert-ish, baked once
+
+// ---------- projection ----------
+let U, CX, CY;
+if (MODE === 'square') { U = 22; CX = W / 2 - 1.4 * 22; CY = 192 - 2.5 * 22; }
+else { U = 30; CX = W / 2 - 1.4 * 30; CY = 440 - 2.5 * 30; }
+function P(x, y, z) { return [CX + (x - z) * U, CY + (x + z) * U * 0.5 - y * U]; }
+// shadow: slide a point down the light ray until y = ground
+function shadowPt(x, y, z, ground) { const t = (y - ground) / L[1]; return [x - L[0] * t, ground, z - L[2] * t]; }
+
+// ---------- helpers ----------
+function norm(v) { const l = Math.hypot(...v); return v.map(a => a / l); }
+function hex(c) { const n = parseInt(c.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; }
+function rgb(a, k = 1, toWhite = 0) { return `rgb(${a.map(v => Math.round(Math.min(255, (v * k) * (1 - toWhite) + 255 * toWhite))).join(',')})`; }
+function rgba(a, al) { return `rgba(${a.join(',')},${al})`; }
+let seed = 7; function rnd() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+function poly(pts) { ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath(); }
+function hull(pts) { // monotone chain convex hull of 2D points
+  pts = pts.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lo = [], up = [];
+  for (const p of pts) { while (lo.length > 1 && cross(lo[lo.length - 2], lo[lo.length - 1], p) <= 0) lo.pop(); lo.push(p); }
+  for (const p of pts.reverse()) { while (up.length > 1 && cross(up[up.length - 2], up[up.length - 1], p) <= 0) up.pop(); up.push(p); }
+  return lo.slice(0, -1).concat(up.slice(0, -1));
+}
+function boxCorners(x, y, z, sx, sy, sz) {
+  const c = [];
+  for (const dx of [0, sx]) for (const dy of [0, sy]) for (const dz of [0, sz]) c.push([x + dx, y + dy, z + dz]);
+  return c;
+}
+function edge(pts) { ctx.lineWidth = EDGE; ctx.strokeStyle = PAL.edge; ctx.lineJoin = 'round'; poly(pts); ctx.stroke(); }
+
+// ---------- shadows (same rule for everything) ----------
+// draws the ground shadow of a set of 3D points onto plane y=ground, clipped to clipPoly (screen pts)
+function castShadow(points3, ground, clipPoly, alpha = 1) {
+  const proj = points3.map(p => { const s = shadowPt(p[0], p[1], p[2], ground); return P(s[0], s[1], s[2]); });
+  const h = hull(proj);
+  ctx.save();
+  if (clipPoly) { poly(clipPoly); ctx.clip(); }
+  ctx.filter = 'blur(4px)';
+  ctx.fillStyle = PAL.shadow; ctx.globalAlpha = alpha;
+  poly(h); ctx.fill();
+  ctx.restore();
+}
+// contact ambient occlusion: soft dark blob on the footprint
+function contactAO(x, y, z, sx, sz, grow = 0.12) {
+  ctx.save(); ctx.filter = 'blur(3px)'; ctx.fillStyle = PAL.ao;
+  poly([P(x - grow, y, z - grow), P(x + sx + grow, y, z - grow), P(x + sx + grow, y, z + sz + grow), P(x - grow, y, z + sz + grow)]);
+  ctx.fill(); ctx.restore();
+}
+
+// ---------- box with material ----------
+function box(x, y, z, sx, sy, sz, mat, opts = {}) {
+  const base = hex(PAL[mat] || mat);
+  const top = [P(x, y + sy, z), P(x + sx, y + sy, z), P(x + sx, y + sy, z + sz), P(x, y + sy, z + sz)];
+  const left = [P(x, y, z + sz), P(x + sx, y, z + sz), P(x + sx, y + sy, z + sz), P(x, y + sy, z + sz)];
+  const right = [P(x + sx, y, z), P(x + sx, y, z + sz), P(x + sx, y + sy, z + sz), P(x + sx, y + sy, z)];
+  const glass = mat === 'glass';
+  const fill = (pts, k, tw) => {
+    ctx.fillStyle = glass ? rgba(base.map(v => Math.round(v * k)), 0.44) : rgb(base, k, tw);
+    poly(pts); ctx.fill();
+  };
+  const grad = (pts, k) => { // AO at the base of a side face
+    const g = ctx.createLinearGradient(0, pts[0][1], 0, pts[3][1]);
+    g.addColorStop(0, rgba([0, 0, 0], 0.30)); g.addColorStop(0.35, rgba([0, 0, 0], 0)); ctx.fillStyle = g; poly(pts); ctx.fill();
+  };
+  // faces: left (+z), right (+x), top (+y)
+  fill(left, SHADE.left); if (!glass) grad(left);
+  fill(right, SHADE.right); if (!glass) grad(right);
+  fill(top, SHADE.top, glass ? 0 : 0.10);
+  // material detail (same line weight)
+  if (mat === 'wood' || mat === 'crate' || mat === 'deck') woodDetail(x, y, z, sx, sy, sz, opts, mat === 'crate');
+  if (mat === 'stone' || mat === 'slate') stoneDetail(top, left, right);
+  if (glass) glassDetail(top, left, right);
+  edge(top); edge(left); edge(right);
+  // light-side highlight along the top-left edges
+  ctx.strokeStyle = PAL.hi; ctx.lineWidth = EDGE; ctx.beginPath(); ctx.moveTo(...top[3]); ctx.lineTo(...top[0]); ctx.lineTo(...top[1]); ctx.stroke();
+}
+function woodDetail(x, y, z, sx, sy, sz, opts, crate) {
+  ctx.lineWidth = EDGE; ctx.strokeStyle = PAL.deckSeam;
+  if (opts.planks) { // top-face planks along x
+    const n = Math.round(sz / opts.planks);
+    for (let i = 1; i < n; i++) { const zz = z + sz * i / n; ctx.beginPath(); ctx.moveTo(...P(x, y + sy, zz)); ctx.lineTo(...P(x + sx, y + sy, zz)); ctx.stroke(); }
+    // grain: short light strokes
+    ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+    for (let i = 0; i < n * 2; i++) { const zz = z + rnd() * sz, xx = x + rnd() * (sx - 1.2); ctx.beginPath(); ctx.moveTo(...P(xx, y + sy, zz)); ctx.lineTo(...P(xx + 0.5 + rnd() * 0.7, y + sy, zz)); ctx.stroke(); }
+    return;
+  }
+  // side faces: horizontal seams (2 per face) + crate frame
+  const seams = crate ? [0.15, 0.85] : [0.5];
+  for (const f of seams) {
+    const yy = y + sy * f;
+    ctx.strokeStyle = PAL.deckSeam; ctx.beginPath(); ctx.moveTo(...P(x, yy, z + sz)); ctx.lineTo(...P(x + sx, yy, z + sz)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(...P(x + sx, yy, z)); ctx.lineTo(...P(x + sx, yy, z + sz)); ctx.stroke();
+  }
+  if (crate) { // vertical frame + diagonal slat, left and right faces
+    for (const f of [0.15, 0.85]) {
+      ctx.beginPath(); ctx.moveTo(...P(x + sx * f, y, z + sz)); ctx.lineTo(...P(x + sx * f, y + sy, z + sz)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(...P(x + sx, y, z + sz * f)); ctx.lineTo(...P(x + sx, y + sy, z + sz * f)); ctx.stroke();
+    }
+    ctx.beginPath(); ctx.moveTo(...P(x + sx * 0.15, y + sy * 0.15, z + sz)); ctx.lineTo(...P(x + sx * 0.85, y + sy * 0.85, z + sz)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(...P(x + sx, y + sy * 0.15, z + sz * 0.85)); ctx.lineTo(...P(x + sx, y + sy * 0.85, z + sz * 0.15)); ctx.stroke();
+  } else { // grain
+    ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+    for (let i = 0; i < 3; i++) { const yy = y + sy * (0.2 + rnd() * 0.6); const a = x + rnd() * sx * 0.4; ctx.beginPath(); ctx.moveTo(...P(a, yy, z + sz)); ctx.lineTo(...P(a + sx * 0.3, yy, z + sz)); ctx.stroke(); }
+  }
+}
+function stoneDetail(top, left, right) {
+  const dots = (pts, n, col) => { ctx.save(); poly(pts); ctx.clip(); ctx.fillStyle = col;
+    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]); const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+    for (let i = 0; i < n; i++) { ctx.beginPath(); ctx.arc(x0 + rnd() * (x1 - x0), y0 + rnd() * (y1 - y0), 0.6 + rnd() * 0.9, 0, 7); ctx.fill(); } ctx.restore(); };
+  dots(top, 14, 'rgba(0,0,0,0.10)'); dots(left, 10, 'rgba(0,0,0,0.12)'); dots(right, 10, 'rgba(0,0,0,0.14)'); dots(top, 6, 'rgba(255,255,255,0.35)');
+}
+function glassDetail(top, left, right) {
+  // diagonal highlight streak on top and left faces, brighter edges
+  ctx.save(); poly(top); ctx.clip(); ctx.fillStyle = 'rgba(255,255,255,0.45)';
+  const [a, b, c, d] = top; ctx.beginPath(); ctx.moveTo(a[0] * 0.75 + d[0] * 0.25, a[1] * 0.75 + d[1] * 0.25); ctx.lineTo(b[0] * 0.7 + a[0] * 0.3, b[1] * 0.7 + a[1] * 0.3); ctx.lineTo(c[0] * 0.55 + b[0] * 0.45, c[1] * 0.55 + b[1] * 0.45); ctx.lineTo(d[0] * 0.6 + a[0] * 0.4, d[1] * 0.6 + a[1] * 0.4); ctx.closePath(); ctx.fill(); ctx.restore();
+  ctx.save(); poly(left); ctx.clip(); ctx.fillStyle = 'rgba(255,255,255,0.22)';
+  const [e, f, g, h] = left; ctx.beginPath(); ctx.moveTo(h[0] * 0.8 + e[0] * 0.2, h[1] * 0.8 + e[1] * 0.2); ctx.lineTo(h[0] * 0.55 + g[0] * 0.45, h[1] * 0.55 + g[1] * 0.45); ctx.lineTo(e[0] * 0.55 + f[0] * 0.45, e[1] * 0.55 + f[1] * 0.45); ctx.lineTo(e[0] * 0.8 + h[0] * 0.2, e[1] * 0.8 + h[1] * 0.2); ctx.closePath(); ctx.fill(); ctx.restore();
+  ctx.strokeStyle = 'rgba(255,255,255,0.75)'; ctx.lineWidth = EDGE; poly(top); ctx.stroke(); poly(left); ctx.stroke(); poly(right); ctx.stroke();
+}
+
+// ---------- cylinder (switch button, slingshot stem) ----------
+function cylinder(x, y, z, r, h, col) {
+  const base = hex(col); const rx = r * Math.SQRT2 * U, ry = rx / 2;
+  const [bx, by] = P(x, y, z), [tx, ty] = P(x, y + h, z);
+  // side: left lit → right dark
+  const g = ctx.createLinearGradient(bx - rx, 0, bx + rx, 0);
+  g.addColorStop(0, rgb(base, SHADE.left)); g.addColorStop(0.45, rgb(base, 0.9)); g.addColorStop(1, rgb(base, SHADE.right - 0.1));
+  ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(bx - rx, by); ctx.lineTo(bx - rx, ty); ctx.lineTo(bx + rx, ty); ctx.lineTo(bx + rx, by); ctx.ellipse(bx, by, rx, ry, 0, 0, Math.PI, false); ctx.closePath(); ctx.fill();
+  const ao = ctx.createLinearGradient(0, by, 0, by - h * U * 0.45); ao.addColorStop(0, 'rgba(0,0,0,.28)'); ao.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = ao; ctx.beginPath(); ctx.rect(bx - rx, ty, 2 * rx, by - ty); ctx.ellipse(bx, by, rx, ry, 0, 0, Math.PI, false); ctx.fill();
+  ctx.fillStyle = rgb(base, SHADE.top, 0.12); ctx.beginPath(); ctx.ellipse(tx, ty, rx, ry, 0, 0, 7); ctx.fill();
+  ctx.strokeStyle = PAL.edge; ctx.lineWidth = EDGE; ctx.beginPath(); ctx.ellipse(tx, ty, rx, ry, 0, 0, 7); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(bx - rx, by); ctx.lineTo(bx - rx, ty); ctx.moveTo(bx + rx, by); ctx.lineTo(bx + rx, ty); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(bx, by, rx, ry, 0, 0, Math.PI); ctx.stroke();
+  ctx.strokeStyle = PAL.hi; ctx.beginPath(); ctx.ellipse(tx, ty, rx * 0.8, ry * 0.8, 0, Math.PI * 1.05, Math.PI * 1.6); ctx.stroke();
+}
+function sphere(sx, sy, r, col, dark) {
+  const g = ctx.createRadialGradient(sx - r * 0.38, sy - r * 0.42, r * 0.1, sx, sy, r);
+  g.addColorStop(0, '#ffd2b0'); g.addColorStop(0.35, col); g.addColorStop(1, dark);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sx, sy, r, 0, 7); ctx.fill();
+  ctx.strokeStyle = PAL.edge; ctx.lineWidth = EDGE; ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.beginPath(); ctx.ellipse(sx - r * 0.38, sy - r * 0.42, r * 0.22, r * 0.14, -0.6, 0, 7); ctx.fill();
+}
+
+// ---------- cat (vector, 4 states for the sheet; 'peek' for the crate) ----------
+function cat(sx, sy, s, state) {
+  // s = head radius in px. Light upper-left baked into gradients. Same edge weight.
+  const c = hex(PAL.cat);
+  const g = (cx, cy, r) => { const gg = ctx.createRadialGradient(cx - r * 0.35, cy - r * 0.4, r * 0.1, cx, cy, r * 1.1); gg.addColorStop(0, PAL.catLight); gg.addColorStop(0.45, PAL.cat); gg.addColorStop(1, PAL.catDark); return gg; };
+  ctx.lineWidth = EDGE; ctx.strokeStyle = PAL.edge; ctx.lineJoin = 'round';
+  const body = state !== 'peek';
+  if (body) {
+    const tilt = state === 'fail' ? 1 : 0;
+    // tail
+    ctx.strokeStyle = PAL.catDark; ctx.lineWidth = s * 0.28; ctx.lineCap = 'round'; ctx.beginPath();
+    if (state === 'fail') { ctx.moveTo(sx + s * 1.0, sy + s * 1.9); ctx.quadraticCurveTo(sx + s * 2.2, sy + s * 2.0, sx + s * 2.4, sy + s * 1.5); }
+    else { ctx.moveTo(sx + s * 0.9, sy + s * 1.7); ctx.quadraticCurveTo(sx + s * 2.0, sy + s * 1.9, sx + s * 1.9, sy + s * (state === 'success' ? 0.3 : 0.8)); }
+    ctx.stroke(); ctx.lineWidth = EDGE;
+    // body
+    ctx.fillStyle = g(sx, sy + s * 1.5, s * 1.1); ctx.beginPath();
+    if (state === 'fail') ctx.ellipse(sx + s * 0.2, sy + s * 1.75, s * 1.35, s * 0.75, 0, 0, 7);
+    else ctx.ellipse(sx, sy + s * 1.45, s * 0.95, s * 1.05, 0, 0, 7);
+    ctx.fill(); ctx.strokeStyle = PAL.edge; ctx.stroke();
+    // legs
+    ctx.fillStyle = PAL.catDark;
+    const legs = state === 'walk' ? [[-0.55, 0.15], [-0.1, -0.1], [0.35, 0.15], [0.75, -0.05]] : state === 'success' ? [[-0.5, 0.0], [0.5, 0.0]] : state === 'fail' ? [[-0.9, 0.55], [1.2, 0.55]] : [[-0.5, 0.1], [0.5, 0.1]];
+    for (const [lx, ly] of legs) { ctx.beginPath(); ctx.ellipse(sx + lx * s, sy + s * (2.35 + ly), s * 0.26, s * 0.3, 0, 0, 7); ctx.fill(); ctx.stroke(); }
+    if (state === 'success') { // arms up
+      for (const d of [-1, 1]) { ctx.strokeStyle = PAL.catDark; ctx.lineWidth = s * 0.26; ctx.beginPath(); ctx.moveTo(sx + d * s * 0.7, sy + s * 1.2); ctx.lineTo(sx + d * s * 1.35, sy + s * 0.2); ctx.stroke(); ctx.lineWidth = EDGE; ctx.strokeStyle = PAL.edge; }
+    }
+  } else { // paws on the rim
+    ctx.fillStyle = PAL.catLight;
+    for (const d of [-1, 1]) { ctx.beginPath(); ctx.ellipse(sx + d * s * 0.75, sy + s * 1.05, s * 0.3, s * 0.2, 0, 0, 7); ctx.fill(); ctx.stroke(); }
+  }
+  // ears
+  ctx.fillStyle = PAL.cat;
+  for (const d of [-1, 1]) { ctx.beginPath(); ctx.moveTo(sx + d * s * 0.45, sy - s * 0.55); ctx.lineTo(sx + d * s * 0.95, sy - s * 1.35); ctx.lineTo(sx + d * s * 1.0, sy - s * 0.3); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+  ctx.fillStyle = '#f7b9a0';
+  for (const d of [-1, 1]) { ctx.beginPath(); ctx.moveTo(sx + d * s * 0.6, sy - s * 0.65); ctx.lineTo(sx + d * s * 0.9, sy - s * 1.15); ctx.lineTo(sx + d * s * 0.93, sy - s * 0.5); ctx.closePath(); ctx.fill(); }
+  // head
+  ctx.fillStyle = g(sx, sy, s); ctx.beginPath(); ctx.ellipse(sx, sy, s, s * 0.92, 0, 0, 7); ctx.fill(); ctx.stroke();
+  // muzzle
+  ctx.fillStyle = PAL.catLight; ctx.beginPath(); ctx.ellipse(sx, sy + s * 0.35, s * 0.5, s * 0.36, 0, 0, 7); ctx.fill();
+  // eyes
+  ctx.fillStyle = PAL.ink; ctx.strokeStyle = PAL.ink; ctx.lineWidth = s * 0.12; ctx.lineCap = 'round';
+  if (state === 'success') { for (const d of [-1, 1]) { ctx.beginPath(); ctx.arc(sx + d * s * 0.42, sy - s * 0.1, s * 0.2, Math.PI * 1.15, Math.PI * 1.85); ctx.stroke(); } }
+  else if (state === 'fail') { for (const d of [-1, 1]) { const ex = sx + d * s * 0.42, ey = sy - s * 0.12; ctx.beginPath(); ctx.moveTo(ex - s * 0.16, ey - s * 0.16); ctx.lineTo(ex + s * 0.16, ey + s * 0.16); ctx.moveTo(ex + s * 0.16, ey - s * 0.16); ctx.lineTo(ex - s * 0.16, ey + s * 0.16); ctx.stroke(); } }
+  else { for (const d of [-1, 1]) { ctx.beginPath(); ctx.ellipse(sx + d * s * 0.42, sy - s * 0.12, s * 0.17, s * 0.22, 0, 0, 7); ctx.fill(); } ctx.fillStyle = '#fff'; for (const d of [-1, 1]) { ctx.beginPath(); ctx.arc(sx + d * s * 0.42 - s * 0.05, sy - s * 0.2, s * 0.06, 0, 7); ctx.fill(); } }
+  // nose + mouth + whiskers
+  ctx.fillStyle = '#e07a6a'; ctx.beginPath(); ctx.moveTo(sx, sy + s * 0.32); ctx.lineTo(sx - s * 0.1, sy + s * 0.2); ctx.lineTo(sx + s * 0.1, sy + s * 0.2); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = PAL.ink; ctx.lineWidth = EDGE; ctx.beginPath();
+  if (state === 'fail') { ctx.arc(sx, sy + s * 0.55, s * 0.12, Math.PI * 1.1, Math.PI * 1.9); }
+  else { ctx.moveTo(sx, sy + s * 0.33); ctx.quadraticCurveTo(sx - s * 0.12, sy + s * 0.5, sx - s * 0.22, sy + s * 0.42); ctx.moveTo(sx, sy + s * 0.33); ctx.quadraticCurveTo(sx + s * 0.12, sy + s * 0.5, sx + s * 0.22, sy + s * 0.42); }
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(43,35,32,.55)';
+  for (const d of [-1, 1]) for (const k of [-0.05, 0.1]) { ctx.beginPath(); ctx.moveTo(sx + d * s * 0.5, sy + s * (0.3 + k)); ctx.lineTo(sx + d * s * 1.15, sy + s * (0.18 + k * 2.2)); ctx.stroke(); }
+  if (state === 'fail') { // dizzy stars
+    ctx.fillStyle = '#f5c543'; for (const [ox, oy] of [[-0.9, -1.5], [0.5, -1.8], [1.2, -1.2]]) { star(sx + ox * s, sy + oy * s, s * 0.17); } }
+}
+function star(x, y, r) { ctx.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); } ctx.closePath(); ctx.fill(); }
+
+// ======================================================================
+if (SHEET) {
+  ['idle', 'walk', 'success', 'fail'].forEach((st, i) => cat(100 + i * 200, 78, 30, st));
+  document.title = 'ready';
+} else {
+  drawScene();
+  document.title = 'ready';
+}
+
+function drawScene() {
+  // background: soft gradient (no horizon in an orthographic iso view — the island floats)
+  const bg = ctx.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, PAL.skyTop); bg.addColorStop(1, PAL.skyBot);
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  // soft clouds (same light: lit upper-left)
+  ctx.save(); ctx.filter = 'blur(10px)';
+  const clouds = MODE === 'square' ? [[70, 180, 46], [330, 165, 36]] : [[64, 300, 54], [340, 262, 40], [250, 560, 34]];
+  for (const [cx, cy, r] of clouds) { ctx.fillStyle = 'rgba(255,255,255,0.75)'; for (const [dx, dy, k] of [[0, 0, 1], [-r * 0.8, r * 0.25, 0.7], [r * 0.85, r * 0.2, 0.75], [r * 0.2, -r * 0.35, 0.65]]) { ctx.beginPath(); ctx.ellipse(cx + dx, cy + dy, r * k, r * k * 0.62, 0, 0, 7); ctx.fill(); } }
+  ctx.restore();
+  // subtle big soft shape behind the island (depth)
+  ctx.save(); ctx.filter = 'blur(28px)'; ctx.fillStyle = 'rgba(28,38,66,0.16)';
+  const [ix, iy] = P(3.2, -1.1, 1.8); ctx.beginPath(); ctx.ellipse(ix + 50, iy + 40, 7 * U, 3.2 * U, 0, 0, 7); ctx.fill(); ctx.restore();
+
+  // island (grass over earth)
+  const G = { x: -0.6, z: -0.6, sx: 7.6, sz: 4.8, y0: -1.1, y1: -0.35 };
+  box(G.x, G.y0, G.z, G.sx, G.y1 - G.y0, G.sz, 'earth');
+  // grass top (overdraw with grass colour + tufts)
+  const gtop = [P(G.x, G.y1, G.z), P(G.x + G.sx, G.y1, G.z), P(G.x + G.sx, G.y1, G.z + G.sz), P(G.x, G.y1, G.z + G.sz)];
+  ctx.fillStyle = PAL.grass; poly(gtop); ctx.fill();
+  ctx.save(); poly(gtop); ctx.clip(); ctx.fillStyle = PAL.grassDark;
+  for (let i = 0; i < 60; i++) { const x = G.x + rnd() * G.sx, z = G.z + rnd() * G.sz; const [a, b] = P(x, G.y1, z); ctx.beginPath(); ctx.ellipse(a, b, 2.2 + rnd() * 2, 1 + rnd(), 0, 0, 7); ctx.fill(); }
+  ctx.restore(); edge(gtop);
+
+  // deck (wood planks) sits on the island
+  const D = { x: 0, z: 0, sx: 6.4, sz: 3.6, y0: -0.35, y1: 0 };
+  castShadow(boxCorners(D.x, D.y0, D.z, D.sx, D.y1 - D.y0, D.sz), G.y1, gtop);
+  box(D.x, D.y0, D.z, D.sx, D.y1 - D.y0, D.sz, 'deck', { planks: 0.45 });
+  const deckTop = [P(D.x, 0, D.z), P(D.x + D.sx, 0, D.z), P(D.x + D.sx, 0, D.z + D.sz), P(D.x, 0, D.z + D.sz)];
+  // low rail along the two far edges
+  const rails = [];
+  for (const z of [0.1, 1.7, 3.3]) rails.push([0.1, 0, z, 0.18, 0.55, 0.18]);
+  for (const x of [2.1, 4.1, 6.1]) rails.push([x, 0, 0.1, 0.18, 0.55, 0.18]);
+  rails.push([0.1, 0.42, 0.1, 0.18, 0.1, 3.38]); rails.push([0.1, 0.42, 0.1, 6.18, 0.1, 0.18]);
+
+  // level objects (world units; 1 = one block)
+  const tower = [
+    [3.2, 0, 0.9, 0.8, 1.0, 0.8, 'wood'], [4.6, 0, 0.9, 0.8, 1.0, 0.8, 'wood'],
+    [3.1, 1.0, 0.9, 2.4, 0.35, 0.8, 'wood'],
+    [3.9, 1.35, 0.9, 0.8, 0.8, 0.8, 'glass'],
+    [3.9, 2.15, 0.9, 0.8, 0.7, 0.8, 'stone'],
+  ];
+  const sw = { x: 5.35, z: 0.85, s: 0.9, h: 0.22 };
+  const crate = { x: 4.9, z: 2.35, s: 1.15, h: 0.95 };
+  const sling = { x: 1.1, z: 1.3 };
+  const ball = { x: 0.45, y: 0.75, z: 1.3, r: 0.26 };
+
+  // --- shadows of everything onto the deck (one pass, one rule) ---
+  const all3 = [];
+  for (const b of tower) all3.push(boxCorners(...b.slice(0, 6)));
+  for (const r of rails) all3.push(boxCorners(...r));
+  all3.push(boxCorners(sw.x, 0, sw.z, sw.s, sw.h, sw.s));
+  all3.push(boxCorners(crate.x, 0, crate.z, crate.s, crate.h, crate.s).concat(lidCorners(crate)));
+  // slingshot: stem + prongs as points
+  all3.push([[sling.x, 0, sling.z], [sling.x, 0.9, sling.z], [sling.x, 1.5, sling.z + 0.42], [sling.x, 1.5, sling.z - 0.42]]);
+  // ball: a few points around
+  all3.push([[ball.x - ball.r, ball.y, ball.z], [ball.x + ball.r, ball.y, ball.z], [ball.x, ball.y, ball.z - ball.r], [ball.x, ball.y, ball.z + ball.r], [ball.x, ball.y + ball.r, ball.z], [ball.x, ball.y - ball.r, ball.z]]);
+  for (const pts of all3) castShadow(pts, 0, deckTop);
+
+  // --- objects, far to near: topological painter's order (A before B if A is left/behind/below B on a separating axis) ---
+  const items = [];
+  const bb = (x, y, z, sx, sy, sz) => ({ x0: x, x1: x + sx, y0: y, y1: y + sy, z0: z, z1: z + sz });
+  for (const r of rails) items.push({ b: bb(...r), draw: () => { contactAO(r[0], r[1], r[2], r[3], r[5], 0.05); box(...r, 'wood'); } });
+  for (const b of tower) items.push({ b: bb(...b.slice(0, 6)), draw: () => { contactAO(b[0], b[1], b[2], b[3], b[5]); box(...b); } });
+  items.push({ b: bb(sw.x, 0, sw.z, sw.s, sw.h + 0.25, sw.s), draw: () => {
+    contactAO(sw.x, 0, sw.z, sw.s, sw.s); box(sw.x, 0, sw.z, sw.s, sw.h, sw.s, 'slate');
+    contactAO(sw.x + sw.s / 2 - 0.3, sw.h, sw.z + sw.s / 2 - 0.3, 0.6, 0.6, 0.02);
+    cylinder(sw.x + sw.s / 2, sw.h, sw.z + sw.s / 2, 0.3, 0.22, PAL.red);
+  } });
+  items.push({ b: bb(crate.x, 0, crate.z, crate.s, crate.h + 1.0, crate.s), draw: () => drawCrate(crate) });
+  items.push({ b: bb(ball.x - ball.r, 0, sling.z - 0.45, sling.x - ball.x + 0.4, 1.5, 0.9), draw: () => drawSlingshot(sling, ball) });
+  paint(items);
+  // --- aiming trajectory: dotted arc from the ball to the glass block ---
+  const target = [4.3, 1.75, 1.3];
+  const pts = []; const N = 18;
+  for (let i = 0; i <= N; i++) { const t = i / N; const x = ball.x + (target[0] - ball.x) * t, z = ball.z + (target[2] - ball.z) * t; const y = ball.y + (target[1] - ball.y) * t + 1.6 * Math.sin(Math.PI * t); pts.push(P(x, y, z)); }
+  for (let i = 1; i < N; i++) { const a = 1 - i / N * 0.55; ctx.fillStyle = `rgba(255,255,255,${0.95 * a})`; ctx.strokeStyle = `rgba(40,24,10,${0.35 * a})`; ctx.lineWidth = EDGE; ctx.beginPath(); ctx.arc(pts[i][0], pts[i][1], 3.4 - i * 0.06, 0, 7); ctx.fill(); ctx.stroke(); }
+  // target ring on the glass block
+  const [tx, ty] = P(target[0], target[1], target[2]);
+  ctx.strokeStyle = '#1f7a8c'; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.arc(tx, ty, 11, 0, 7); ctx.stroke();
+  ctx.fillStyle = '#1f7a8c'; ctx.beginPath(); ctx.arc(tx, ty, 2.6, 0, 7); ctx.fill();
+}
+
+function paint(items) {
+  const E = 1e-3, n = items.length, after = items.map(() => []), indeg = new Array(n).fill(0);
+  const before = (A, B) => A.x1 <= B.x0 + E || A.z1 <= B.z0 + E || A.y1 <= B.y0 + E; // A can be drawn before B
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (i !== j) {
+    const A = items[i].b, B = items[j].b;
+    if (before(A, B) && !before(B, A)) { after[i].push(j); indeg[j]++; }
+    else if (before(A, B) && before(B, A) && i < j) { after[i].push(j); indeg[j]++; }
+  }
+  const q = []; for (let i = 0; i < n; i++) if (!indeg[i]) q.push(i);
+  const order = [];
+  while (q.length) { q.sort((a, b) => (items[a].b.x0 + items[a].b.z0) - (items[b].b.x0 + items[b].b.z0)); const i = q.shift(); order.push(i); for (const j of after[i]) if (--indeg[j] === 0) q.push(j); }
+  for (let i = 0; i < n; i++) if (!order.includes(i)) order.push(i); // cycle fallback
+  order.forEach(i => items[i].draw());
+}
+function lidCorners(c) { // lid hinged on the far (-z) edge, opened `A` radians
+  const A = 1.05, y0 = c.h, z0 = c.z, out = [];
+  for (const dx of [0, c.s]) for (const dz of [0, c.s]) for (const dy of [0, 0.1]) {
+    const yy = y0 + dz * Math.sin(A) + dy * Math.cos(A), zz = z0 + dz * Math.cos(A) - dy * Math.sin(A); out.push([c.x + dx, yy, zz]);
+  }
+  return out;
+}
+function drawCrate(c) {
+  contactAO(c.x, 0, c.z, c.s, c.s);
+  // open box: walls (crate material) — draw back walls, cat, then front walls so the cat sits inside
+  box(c.x, 0, c.z, c.s, c.h, c.s, 'crate');
+  // dark interior seen through the open top
+  const inner = [P(c.x + 0.08, c.h, c.z + 0.08), P(c.x + c.s - 0.08, c.h, c.z + 0.08), P(c.x + c.s - 0.08, c.h, c.z + c.s - 0.08), P(c.x + 0.08, c.h, c.z + c.s - 0.08)];
+  const g = ctx.createLinearGradient(inner[0][0], inner[0][1], inner[2][0], inner[2][1]); g.addColorStop(0, '#3b2a1c'); g.addColorStop(1, '#6b4a2e');
+  ctx.fillStyle = g; poly(inner); ctx.fill();
+  // cat peeking out of the opening
+  const [hx, hy] = P(c.x + c.s * 0.5, c.h + 0.05, c.z + c.s * 0.6);
+  cat(hx, hy - 0.5 * U, 0.4 * U, 'peek');
+  // lid: hinged at the far edge, open ~35°, lit by the same light
+  const L8 = lidCorners(c);
+  const topFace = [L8[1], L8[5], L8[7], L8[3]].map(p => P(...p));   // dy=0.1 side (upper surface)
+  const frontEdge = [L8[2], L8[3], L8[7], L8[6]].map(p => P(...p));  // the raised dz=c.s edge
+  const sideEdge = [L8[4], L8[5], L8[7], L8[6]].map(p => P(...p));   // +x thin side
+  const base = hex(PAL.crate);
+  const n = norm([0, Math.cos(1.05), -Math.sin(1.05)]); const lam = Math.max(0, n[0] * L[0] + n[1] * L[1] + n[2] * L[2]);
+  ctx.fillStyle = rgb(base, 0.55 + 0.5 * lam, 0.05); poly(topFace); ctx.fill(); edge(topFace);
+  ctx.fillStyle = rgb(base, SHADE.left + 0.1); poly(frontEdge); ctx.fill(); edge(frontEdge);
+  ctx.fillStyle = rgb(base, SHADE.right); poly(sideEdge); ctx.fill(); edge(sideEdge);
+  // lid slats
+  ctx.strokeStyle = PAL.deckSeam; ctx.lineWidth = EDGE;
+  for (const f of [0.33, 0.66]) { const dz = c.s * f; const yy = c.h + dz * Math.sin(1.05) + 0.1 * Math.cos(1.05), zz = c.z + dz * Math.cos(1.05) - 0.1 * Math.sin(1.05); ctx.beginPath(); ctx.moveTo(...P(c.x, yy, zz)); ctx.lineTo(...P(c.x + c.s, yy, zz)); ctx.stroke(); }
+}
+function drawSlingshot(s, ball) {
+  const stemCol = '#8b5a2b';
+  contactAO(s.x - 0.16, 0, s.z - 0.16, 0.32, 0.32);
+  cylinder(s.x, 0, s.z, 0.14, 0.9, stemCol);
+  // prongs: thick shaded strokes from the stem top out to two tips
+  const top = [s.x, 0.9, s.z];
+  const tips = [[s.x, 1.5, s.z - 0.42], [s.x, 1.5, s.z + 0.42]];
+  for (const t of tips) {
+    const [ax, ay] = P(...top), [bx, by] = P(...t);
+    ctx.lineCap = 'round'; ctx.lineWidth = 0.26 * U; ctx.strokeStyle = PAL.edge; ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+    ctx.lineWidth = 0.26 * U - 2 * EDGE; ctx.strokeStyle = rgb(hex(stemCol), 0.95); ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+    ctx.lineWidth = 0.08 * U; ctx.strokeStyle = 'rgba(255,255,255,.28)'; ctx.beginPath(); ctx.moveTo(ax - 2, ay - 2); ctx.lineTo(bx - 2, by - 2); ctx.stroke();
+  }
+  // bands to the pouch (pulled back toward the player: -x,+z, lower)
+  const pouch = [ball.x, ball.y, ball.z];
+  ctx.lineCap = 'round'; ctx.lineWidth = 2.4; ctx.strokeStyle = '#5a3e2b';
+  for (const t of tips) { const [ax, ay] = P(...t), [bx, by] = P(...pouch); ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke(); }
+  // pouch (leather) + ball
+  const [px, py] = P(...pouch);
+  ctx.fillStyle = '#6e4b32'; ctx.beginPath(); ctx.ellipse(px + 2, py + ball.r * U * 0.55, ball.r * U * 1.05, ball.r * U * 0.45, 0, 0, 7); ctx.fill(); ctx.strokeStyle = PAL.edge; ctx.lineWidth = EDGE; ctx.stroke();
+  sphere(px, py, ball.r * U, PAL.red, PAL.redDark);
+  // pull indicator: faint arrow behind the ball showing the drag direction
+  ctx.strokeStyle = 'rgba(31,122,140,.9)'; ctx.lineWidth = 2.2; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(px - 12, py + 12); ctx.lineTo(px - 30, py + 30); ctx.stroke(); ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(px - 30, py + 30); ctx.lineTo(px - 20, py + 29); ctx.moveTo(px - 30, py + 30); ctx.lineTo(px - 29, py + 20); ctx.stroke();
+}
+</script>
+<script src="ui.js"></script>
+<script>if (new URLSearchParams(location.search).get('sheet') === '1') document.getElementById('hud').remove();</script>
+</body>
+</html>
