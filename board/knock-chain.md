@@ -15,6 +15,9 @@
 - 사용자 대기: ① A/B 중 어느 쪽으로 갈지 ② 2단계(20초 코어 테스트, 레벨 3개) 착수 승인
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/knock-chain.md 와 plans/knock-chain.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. 2단계는 사용자 승인 뒤에만.`
 
+## 주제 (11-01 사용자)
+잃은 양 한 마리를 끝까지 찾는 목자. 게임 오버 없음 — 빗나가면 장면이 바뀌고 계속 찾는다. 마지막은 항상 발견 + "Love conquers all". 핼러윈 밤 배경, 유령은 가면 쓴 아이들. 노출 수위는 A(암시형) 기준으로 그림 — `plans/knock-chain.md` 주제 절.
+
 ## 지금 상태
 1단계 통과(사용자 "너무 좋아졌어"). 플레이 코드 없음. A/B 선택과 2단계 승인 대기.
 
