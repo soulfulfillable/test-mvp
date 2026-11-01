@@ -4,8 +4,7 @@
             "preloadOnStart": "round_end",
             "placementFallback": "round_end",
             "placements": [
-                { "id": "round_end" },
-                { "id": "pause" }
+                { "id": "round_end" }
             ]
         },
         "rewarded": {

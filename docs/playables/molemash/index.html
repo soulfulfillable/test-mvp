@@ -143,7 +143,7 @@
   <div class="btns">
     <button id="continue-btn" class="btn-ad hidden">
       <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg>
-      <span>Watch an ad: continue<br><small>+10 seconds and all hearts back</small></span>
+      <span>Watch an ad to continue<br><small>reward: +10 seconds and 3 hearts</small></span>
     </button>
     <button id="retry-btn" class="btn-main">Play again</button>
   </div>
@@ -164,7 +164,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.0.0';
+  var GAME_VERSION = '1.0.1';
   var TIME_LIMIT = 45;           // seconds per round
   var CONTINUE_SECONDS = 10;     // rewarded continue bonus
   var hash = location.hash || '';
@@ -326,10 +326,11 @@
   function best() { return store.progress.best; }
 
   // difficulty: time and score both tighten the window
-  function heat()      { return Math.min(1, (playT / TIME_LIMIT) * 0.62 + (score / 40) * 0.55); }
-  function stayTime()  { return 1.5 - 1.02 * heat(); }
-  function spawnGap()  { return 0.95 - 0.62 * heat(); }
-  function maxActive() { if (tutorial && tutHits < 3) return 1; var h = heat(); return h < 0.24 ? 1 : (h < 0.58 ? 2 : 3); }
+  function heat()      { return Math.min(1, (playT / TIME_LIMIT) * 0.7 + (score / 45) * 0.4); }
+  function stayTime()  { return 2.0 - 1.4 * heat(); }                 // 2.0 s at the start → 0.6 s at full heat
+  function spawnGap()  { return 1.1 - 0.75 * heat(); }
+  function maxActive() { if ((tutorial && tutHits < 3) || playT < 8) return 1; var h = heat(); return h < 0.3 ? 1 : (h < 0.62 ? 2 : 3); }
+  function onboarding() { return tutorial && tutHits < 3; }           // first round: the first three moles teach, misses are free
 
   // ---------- sound: files only, one volume controller ----------
   // every sound ships twice: OGG Vorbis (Chrome, Firefox, Edge) and MP3 (Safari, which cannot decode Vorbis)
@@ -506,14 +507,14 @@
     var hole = free[Math.floor(Math.random() * free.length)];
     var kind = 'mole', roll = Math.random();
     if (forceKind) kind = forceKind;
-    else if (!(tutorial && tutHits < 3)) {
-      if (score >= 6 && roll < 0.16) kind = 'skunk';
+    else if (!onboarding()) {
+      if (score >= 5 && roll < 0.16) kind = 'bomb';
       else if (score >= 10 && roll > 0.92) kind = 'gold';
     }
     var st = stayTime();
-    if (tutorial && tutHits < 3) st = [2.4, 2.0, 1.7][tutHits];   // onboarding: the first three moles wait for you
+    if (onboarding()) st = [3.0, 2.6, 2.2][tutHits];   // onboarding: the first three moles wait for you
     if (kind === 'gold') st *= 0.62;
-    if (kind === 'skunk') st *= 0.85;
+    if (kind === 'bomb') st *= 0.9;
     moles.push({ hole: hole, kind: kind, phase: 'rise', p: 0, stayT: st, t: 0, face: Math.random() < 0.5 ? -1 : 1 });
   }
 
@@ -531,12 +532,13 @@
       var mo = moles[m];
       if (mo.hole !== hitHole || mo.phase === 'whacked' || mo.p < 0.12) continue;
       var hx = holes[hitHole].x, hy = holes[hitHole].y;
-      if (mo.kind === 'skunk') {
+      if (mo.kind === 'bomb') {
         mo.phase = 'whacked'; mo.t = 0;
-        loseLife('P.U.!', hx, hy - moleH * 0.6, '#3aa02c');
-        puffs.push({ x: hx, y: hy - moleH * 0.5, t: 0, color: 'rgba(120,190,60,0.85)' });
-        spawnBurst(hx, hy - moleH * 0.5, ['#7fbf3c', '#a8d95e', '#4c7a22'], 10, 200);
-        buzz(60); sndSkunk();
+        loseLife('BOOM!', hx, hy - moleH * 0.6, '#d1342a');
+        puffs.push({ x: hx, y: hy - moleH * 0.5, t: 0, color: 'rgba(60,60,60,0.85)' });
+        spawnBurst(hx, hy - moleH * 0.5, ['#ff7a1a', '#ffd94d', '#333', '#fff'], 18, 300);
+        flashA = 0.5; hitStop = 0.1; shake = 14;
+        buzz(80); sndSkunk();
       } else if (mo.kind === 'gold') {
         mo.phase = 'whacked'; mo.t = 0;
         score += 3;
@@ -577,7 +579,7 @@
     play('start');
     sendMsg('level_started', { level: String(roundIndex) });
     analytics('progression_started', { step_id: 'round', tutorial: tutorial ? 1 : 0 });
-    if (fromOver) showInterstitial('round_end');   // natural pause between rounds; Bridge decides if it shows
+    // no ad here: pressing Play again must never turn into an ad (player feedback 11-01)
   }
   function tryStart() {
     if (state === STATE_OVER && performance.now() - overAt < 600) return;
@@ -594,7 +596,7 @@
     document.getElementById('pause-keys').textContent = isDesktop ? 'Keys: 1–9 whack a hole · P pause · Space start' : '';
     document.getElementById('pause-panel').classList.remove('hidden');
     sendMsg('level_paused', { level: String(roundIndex) });
-    if (!byPlatform) showInterstitial('pause');
+    // no ad on pause (player feedback 11-01): the only interstitial is at round end
   }
   function resumeGame() {
     if (!userPaused) return;
@@ -625,6 +627,8 @@
     sendMsg(reason === 'time' ? 'level_completed' : 'level_failed', { level: String(roundIndex) });
     analytics(reason === 'time' ? 'progression_completed' : 'progression_failed', { step_id: 'round', outcome: reason, continued: continueUsed ? 1 : 0 });
     if (tutorial && tutHits >= 3) analytics('tutorial_completed', { step_id: 'round' });
+    // the round itself is the natural pause: the ad comes before the results, except after the session's first round
+    if (roundIndex > 1 && !continueUsed) showInterstitial('round_end');
     showOverPanel();
   }
 
@@ -680,7 +684,7 @@
     lastTick = -1; introT = 1.2; spawnTimer = 0.8; moles = [];
     state = STATE_PLAY;
     document.getElementById('pause-btn').classList.remove('hidden');
-    floats.push({ x: W / 2, y: holes[4].y - moleH, text: '+' + CONTINUE_SECONDS + 's', color: '#1d8a3c', t: 0, size: 30 });
+    floats.push({ x: W / 2, y: holes[4].y - moleH, text: '+' + CONTINUE_SECONDS + 's  and 3 hearts', color: '#1d8a3c', t: 0, size: 26 });
     play('heart');
     analytics('continue_used', { step_id: 'round' });
   }
@@ -790,7 +794,11 @@
         mo.p -= dt / mo.stayT;
         if (mo.p <= 0) {
           var h = holes[mo.hole];
-          if (mo.kind === 'mole' || mo.kind === 'gold') { loseLife('MISSED!', h.x, h.y - moleH * 0.7, '#d1342a'); sndMiss(); }
+          if (mo.kind === 'mole' || mo.kind === 'gold') {
+            if (onboarding()) floats.push({ x: h.x, y: h.y - moleH * 0.7, text: 'FASTER!', color: '#d1342a', t: 0, size: 22 });
+            else loseLife('MISSED!', h.x, h.y - moleH * 0.7, '#d1342a');
+            sndMiss();
+          }
           moles.splice(m, 1);
           if (state !== STATE_PLAY) return;
         }
@@ -878,10 +886,29 @@
     ctx.beginPath(); ctx.rect(h.x - mw, h.y - mh - 26, mw * 2, mh + 26); ctx.clip();
     var bodyY = topY + (squash > 0 ? mh * 0.16 * squash : 0);
     var bw = mw * (1 + 0.25 * squash), bh = mh * (1 - 0.2 * squash);
-    if (mo.kind === 'skunk') {
-      ctx.fillStyle = '#26222b'; roundRect(h.x - bw / 2, bodyY, bw, bh + 20, bw * 0.42); ctx.fill();
-      ctx.fillStyle = '#f4f2ee'; roundRect(h.x - bw * 0.13, bodyY - 4, bw * 0.26, bh * 0.72, bw * 0.13); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(h.x, bodyY + 2, bw * 0.2, bw * 0.12, 0, Math.PI, 0); ctx.fill();
+    if (mo.kind === 'bomb') {
+      // a bomb: black ball, grey cap, lit fuse with a flickering spark — nothing to whack here
+      var r = bw * 0.5, cyb = bodyY + bh * 0.55;
+      ctx.fillStyle = '#23232a'; ctx.beginPath(); ctx.arc(h.x, cyb, r, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.14)'; ctx.beginPath(); ctx.arc(h.x - r * 0.3, cyb - r * 0.35, r * 0.28, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#8a8a94'; roundRect(h.x - r * 0.28, cyb - r - r * 0.18, r * 0.56, r * 0.3, 4); ctx.fill();
+      ctx.strokeStyle = '#c9a56a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(h.x, cyb - r - r * 0.15); ctx.quadraticCurveTo(h.x + r * 0.35, cyb - r - r * 0.6, h.x + r * 0.55, cyb - r - r * 0.4); ctx.stroke();
+      var fl = 0.7 + 0.3 * Math.sin(performance.now() / 60);
+      ctx.fillStyle = 'rgba(255,200,60,' + fl + ')'; starPath(h.x + r * 0.58, cyb - r - r * 0.42, 7 + 3 * fl); ctx.fill();
+      ctx.fillStyle = '#ff7a1a'; starPath(h.x + r * 0.58, cyb - r - r * 0.42, 3.5); ctx.fill();
+      ctx.restore();
+      // danger ring so nobody taps it by accident
+      ctx.save();
+      ctx.strokeStyle = 'rgba(228,52,44,' + (0.55 + 0.35 * Math.sin(performance.now() / 110)) + ')'; ctx.lineWidth = 4; ctx.setLineDash([8, 6]);
+      ctx.beginPath(); ctx.arc(h.x, cyb - r * 0.1, r * 1.35, 0, Math.PI * 2); ctx.stroke();
+      if (tutorial && mo.phase !== 'whacked' && mo.p > 0.5) {
+        ctx.setLineDash([]); ctx.fillStyle = '#ffdede'; ctx.font = fontPx(16, 'bold'); ctx.textAlign = 'center';
+        ctx.strokeStyle = 'rgba(160,20,20,0.95)'; ctx.lineWidth = 4;
+        var dy = Math.max(h.y - mh - 30 * UI, tentH + SA.top + 22 * UI);
+        ctx.strokeText("DON'T!", h.x, dy); ctx.fillText("DON'T!", h.x, dy);
+      }
+      ctx.restore();
+      return;
     } else {
       var bodyC = mo.kind === 'gold' ? '#f4b820' : '#8a5a34', bodyD = mo.kind === 'gold' ? '#c98f08' : '#6b4223';
       ctx.fillStyle = bodyC; roundRect(h.x - bw / 2, bodyY, bw, bh + 20, bw * 0.42); ctx.fill();
@@ -900,9 +927,9 @@
     } else {
       [-1, 1].forEach(function (s) { ctx.beginPath(); ctx.arc(h.x + s * bw * 0.18, eyeY, bw * 0.055, 0, Math.PI * 2); ctx.fill(); });
     }
-    ctx.fillStyle = mo.kind === 'skunk' ? '#e05a7a' : '#e07a9a';
+    ctx.fillStyle = '#e07a9a';
     ctx.beginPath(); ctx.ellipse(h.x, eyeY + bh * 0.14, bw * 0.1, bw * 0.075, 0, 0, Math.PI * 2); ctx.fill();
-    if (mo.kind !== 'skunk' && !isWhacked) {
+    if (!isWhacked) {
       ctx.fillStyle = '#fff';
       ctx.fillRect(h.x - bw * 0.07, eyeY + bh * 0.23, bw * 0.065, bh * 0.1);
       ctx.fillRect(h.x + bw * 0.005, eyeY + bh * 0.23, bw * 0.065, bh * 0.1);
@@ -913,7 +940,7 @@
         ctx.beginPath(); ctx.moveTo(h.x + s * bw * 0.14, eyeY + bh * 0.13 + wsk * 4); ctx.lineTo(h.x + s * bw * 0.4, eyeY + bh * 0.1 + wsk * 7); ctx.stroke();
       }
     });
-    if (!isWhacked && mo.kind !== 'skunk') {
+    if (!isWhacked) {
       ctx.fillStyle = mo.kind === 'gold' ? '#e0a812' : '#7a4e2b';
       [-1, 1].forEach(function (s) { ctx.beginPath(); ctx.ellipse(h.x + s * bw * 0.44, bodyY + bh * 0.55, bw * 0.1, bw * 0.14, s * 0.4, 0, Math.PI * 2); ctx.fill(); });
     }
@@ -925,7 +952,7 @@
     }
     ctx.restore();
     // onboarding: show where to tap on the first moles
-    if (tutorial && tutHits < 3 && mo.phase !== 'whacked' && mo.p > 0.5) {
+    if (onboarding() && mo.kind !== 'bomb' && mo.phase !== 'whacked' && mo.p > 0.5) {
       var pulse = 1 + 0.08 * Math.sin(performance.now() / 120);
       ctx.save();
       ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 4;
@@ -1034,7 +1061,7 @@
       ctx.fillStyle = '#1c1c1c'; ctx.beginPath(); ctx.arc(x - s * 0.2, y - s * 0.15, s * 0.09, 0, 7); ctx.arc(x + s * 0.2, y - s * 0.15, s * 0.09, 0, 7); ctx.fill();
       ctx.fillStyle = '#e07a9a'; ctx.beginPath(); ctx.ellipse(x, y + s * 0.08, s * 0.14, s * 0.1, 0, 0, 7); ctx.fill();
       ctx.fillStyle = '#fff'; ctx.fillRect(x - s * 0.1, y + s * 0.2, s * 0.09, s * 0.14); ctx.fillRect(x + s * 0.01, y + s * 0.2, s * 0.09, s * 0.14);
-    } else if (kind === 'skunk') {
+    } else if (kind === 'bomb') {
       ctx.fillStyle = '#26222b'; roundRect(x - s * 0.55, y - s * 0.6, s * 1.1, s * 1.2, s * 0.45); ctx.fill();
       ctx.fillStyle = '#f4f2ee'; roundRect(x - s * 0.14, y - s * 0.62, s * 0.28, s * 0.7, s * 0.14); ctx.fill();
       ctx.fillStyle = '#1c1c1c'; ctx.beginPath(); ctx.arc(x - s * 0.22, y + s * 0.02, s * 0.09, 0, 7); ctx.arc(x + s * 0.22, y + s * 0.02, s * 0.09, 0, 7); ctx.fill();
@@ -1052,31 +1079,10 @@
     var signY = COVER ? hud.y + 8 : Math.max(tentH + SA.top + 14, H * 0.1);
     var after = drawSign(signY);
     if (COVER) return;
-    var lines = [
-      ['mole', 'Tap moles before they hide'],
-      ['heart', 'Miss one, lose a heart'],
-      ['skunk', "DON'T tap the skunk!"],
-      ['gold', 'Gold mole: +3 and a heart back'],
-      ['clock', TIME_LIMIT + ' seconds on the clock']
-    ];
-    var lh = 26 * UI, cardW = Math.min(W * 0.88, 330), cardH = lines.length * lh + 24 * UI + (best() > 0 ? lh : 0);
-    var startY = after + 16 * UI;
     var tapY = H - Math.max(44, H * 0.1) - SA.bottom;
-    if (startY + cardH > tapY - 20) startY = Math.max(after + 6, tapY - 20 - cardH);
-    ctx.fillStyle = 'rgba(255,246,234,0.94)'; roundRect(W / 2 - cardW / 2, startY, cardW, cardH, 14); ctx.fill();
-    ctx.strokeStyle = 'rgba(138,90,52,0.6)'; ctx.lineWidth = 2; ctx.stroke();
-    var ix = W / 2 - cardW / 2 + 26 * UI, tx = ix + 22 * UI;
-    for (var i = 0; i < lines.length; i++) {
-      var ly = startY + 12 * UI + lh * (i + 0.5);
-      drawIcon(lines[i][0], ix, ly, 14 * UI);
-      ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-      ctx.fillStyle = i === 2 ? '#1c7a1c' : (i === 3 ? '#9a6b00' : '#3d2812');
-      ctx.font = fontPx(16, i === 2 ? 'bold' : '');
-      ctx.fillText(lines[i][1], tx, ly);
-    }
     if (best() > 0) {
       ctx.fillStyle = 'rgba(61,40,18,0.75)'; ctx.font = fontPx(15); ctx.textAlign = 'center';
-      ctx.fillText('Best: ' + best() + ' moles', W / 2, startY + 12 * UI + lh * (lines.length + 0.5));
+      ctx.fillText('Best: ' + best() + ' moles', W / 2, after + 24 * UI);
     }
     ctx.textBaseline = 'alphabetic';
     var a = 0.55 + 0.45 * Math.sin(performance.now() / 350);
@@ -1218,7 +1224,7 @@
   function setupCover() {
     // still frame for covers: title sign over a lively board
     document.getElementById('mute-btn').classList.add('hidden');
-    [[0, 'mole'], [4, 'gold'], [7, 'mole'], [2, 'skunk']].forEach(function (d) {
+    [[0, 'mole'], [4, 'gold'], [7, 'mole'], [2, 'bomb']].forEach(function (d) {
       moles.push({ hole: d[0], kind: d[1], phase: 'sink', p: 1, stayT: 9e9, t: 0, face: 1 });
     });
     state = STATE_TITLE;
