@@ -39,6 +39,8 @@
   **첫 게임 = Mole Mash**(그림이 코드 드로잉, 키보드 있음, 45초 라운드, 광고 자리 명확). 그다음 Chicken Cross → Daily Stairs → Ice Cream Tower. 캣도쿠·CvD 는 🐱🐶 교체가 커서 뒤로.
   **지금 당장 올리면 반려** — 위 표를 다 맞춘 뒤 `get_game_checklist` 를 다시 읽고 번호별로 체크한 다음 `start_archive_upload`.
 - 11-01 작업 세션 `Playgama: Mole Mash` 가 ③-b 진행 중(기획 파트너가 엶). 이 게시판 이어받기는 그 세션이 갱신한다.
+- 11-01 (기획 파트너, get_launch_steps 확인): archive ✅ bridge ✅ covers ✅ · **form = BLOCKED(NO_CERTIFICATION)** → `get_archive_qa_tool_link` 의 QA 툴을 **브라우저에서 돌려 인증**해야 폼이 열림(로그인 브라우저 작업 → 세션이 링크를 게시판에 적으면 **Codex** 몫) · sandbox = TODO(`publish_sandbox`, 사용자 동의 범위 안 — 개발 세션이 진행) · traffic 은 사용자 확인 전 안 함.
+- **권한 프롬프트 안내**: Playgama 쓰기 도구(update_application_form, start/confirm_archive_upload, start/confirm_cover_upload, publish_sandbox)는 전부 `destructive` 표시라 Auto 모드에서도 허용 창이 뜰 수 있다. 범위 = Playgama 계정의 Mole Mash 게임 1개. 매번 뜨는 게 불편하면 이 도구들만 세션 설정에서 허용(전체 bypass 아님). 읽기 도구(get_*, list_*)는 프롬프트 없음.
 
 ### 🖱️ Codex 에게 (브라우저 작업) — 구글 Playables 관심 신청서
 - URL: https://developers.google.com/youtube/gaming/playables/support/contact → 본문의 "Playables interest form" 링크
@@ -49,6 +51,31 @@
 
 - 사용자 대기: 없음(신청서는 Codex, Playgama 업로드는 세션). 샌드박스 링크가 나오면 사용자가 폰에서 느낌 확인 → 그 뒤 Playgama 콘솔 "Submit for review" 를 Codex 가.
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
+
+## 📚 참고 연구: Hamster Escape(YouTube Playables)의 보상 루프 — 배우되 베끼지 않음 (기획 파트너, 2026-11-01)
+
+**사용자 목표**: "광고 보기까지의 동기부여와 꾸미기/수집 구조를 배우고 싶다". 복제가 아니라 **놀이→진척→기대→선택→공개→장착→다음 판** 연결의 타이밍을 배우는 것.
+
+**증거 수준** (Codex 분석, 2026-11-01)
+- 📷 스크린샷 5장으로 확인: ①방·문·경비 시야콘을 피하는 짧은 스킬 게임(Level 3) ②"WHAT'S IN THE BOX?" 화면 — 큰 OPEN(영상 아이콘) + 작은 LOSE IT ③보상 화면 — 모자·단안경 코스튬 햄스터, EQUIP / MAYBE LATER ④CLOSET — SKINS·TRAILS 탭, 장착 체크, 잠긴 카드들, 하단 "SURPRISE GIFT! OPEN"(영상 아이콘 — 두 번째 광고 입구) ⑤Playables 목록의 제목.
+- 🗣️ 사용자 설명(독립 검증 안 됨): 판을 돌면 상자 진행률이 차고, 다 차면 OPEN→광고→꾸미기 보상, 장착한 꾸미기가 다음 판에 보임. 트레일도 보상일 수 있음(불확실).
+- ❓ 모름: 상자 임계값, 실패 시 보상, 중복 처리, LOSE IT 의 실제 효과, 광고 실패 시 동작, 저장 내구성. Codex 가 실제 플레이 링크를 열었으나 Unity 로딩에서 멈춰 **직접 플레이 검증 못 함.** 리텐션·수익 효과는 가설일 뿐 — 숫자 단정 금지.
+
+**배울 점(설계 가설)**: 보상이 **얻기 전·중·후에 계속 보인다**(진행률 → 상자 → 공개 → 장착 → 플레이 중 노출 → 옷장의 다음 목표). 광고 제안은 **플레이어가 먼저 진척을 쌓은 뒤**에 와서 맥락이 있다. 꾸미기는 승패에 영향 없이 정체성 가치를 준다. **배우지 않을 점**: LOSE IT 식 손실 암시(가진 보상을 빼앗는 듯한 기만), 광고 실패 시 진척 삭제, 광고 없이는 다음 판 못 하게 하기.
+
+**지금 Mole Mash Playgama 판에 실제 있는 것 (11-01 코드 확인)**: 보상형 광고는 **이어하기 1종**(`continue` 배치, +10초·하트 회복, 시도당 1회, `rewarded` 상태에서만 지급, 미지원 플랫폼에선 버튼 숨김). 전면 광고 `round_end`·`pause`. 저장은 `progress{best, played, ranks, name}` + `settings{muted}`. **꾸미기·수집·진행률 트랙은 없음.** 플레이 중 보이는 커스터마이즈 가능 요소 = 망치(탭할 때 그려짐), 두더지, 잔디/구멍 보드.
+
+### 제안: 가장 작은 실험 1개 — "망치 수집" (사용자 OK 전엔 구현하지 않음)
+- **범위**: 기존 라운드·점수·이어하기 광고는 그대로. 꾸미기 **1종류(망치)만**, 원작 디자인 5개(코드 드로잉, 예: 나무·고무·황금·사탕·프라이팬 — 햄스터·모자 같은 원작 요소 금지). 상점·화폐 없음.
+- **루프**: 라운드 중 잡은 두더지 수가 **'선물 상자' 진행 바**를 채움(라운드 끝 패널에서 애니메이션으로 차오름) → 다 차면 `bonus_ready` → **OPEN 은 무료**(쌓아서 얻은 기본 보상, 광고 없음) → 공개 연출 → 새 망치 → **EQUIP / LATER**(LOSE IT 류 문구 금지) → 다음 판에 장착 망치가 보임 → 패널 하단에 5칸 망치 줄(보유/잠김)로 다음 목표.
+- **광고의 자리(선택, 2.2 규칙 안)**: 상자가 열린 라운드 끝에만 "Watch an ad: open one more box now" **1회** — 추가 보너스일 뿐, 거절해도 다음 판 진행·무료 상자에 영향 없음. 같은 라운드 끝에 이어하기와 상자 광고가 동시에 뜨지 않게(이어하기가 떴으면 상자 광고는 다음에). 임계값은 로봇/실제 라운드 길이에서 **첫 상자가 2~3판 안에** 열리게 잡고 기록(원작 수치 추정 금지).
+- **상태**: collecting → bonus_ready → (무료 open) reveal → owned/equipped. 광고 경로: ad_pending → reward_earned(`rewarded` 상태에서만) → reveal. 취소/실패/no-fill 이면 미개봉 상자·진행률 **그대로 유지**, 안내 한 줄.
+- **중복·완주 정책(출시 전 확정)**: 5개 다 모으면 진행 바를 "All hammers collected" 로 바꾸고 상자 광고 버튼 숨김(중복 지급 없음).
+- **저장**: `progress.hammers[]`, `progress.equipped`, `progress.boxFill`, `progress.boxesReady` 를 Bridge storage 에(라운드 끝·장착 때만 set). 비밀값 없음.
+- **측정(Bridge analytics, 개인정보 없음)**: round_end, progress_shown, bonus_ready, box_opened_free, reward_offer_shown, ad_opt_in, ad_rewarded, ad_failed, reward_granted, equipped, next_round_started. 볼 것 = 옵트인율·보상 도달·다음 판 시작률·이탈, 광고 노출 수 단독은 보지 않음.
+- **QA 체크리스트**: ①보상은 SDK `rewarded` 에서만, 더블클릭·중복 콜백·재시도·리로드에도 1회 ②no-fill/취소 때 상자 유지 ③광고 중 게임·소리 멈춤, 복귀 정상 ④리로드 후 보유·장착·진행률 유지(Bridge storage) ⑤5개 완주 상태 ⑥1:1·가로·세로에서 새 패널 안 깨짐 ⑦규칙 2.2.1~2.2.5·3.2.x·4.3.2(이모지 금지) 재점검 ⑧로봇 테스트에 위 경로 추가, 스크린샷 ⑨Playgama 테스트 광고 성공 ≠ 실서비스 준비 — 구분해 기록. YouTube Playables 로 갈 땐 광고·저장 API 가 다르므로 어댑터만 바꾸고 상태 기계는 유지.
+- **적용 시점**: Mole Mash v1 샌드박스가 올라간 **뒤**, 같은 게임의 v1.1 로. 다른 8개 게임엔 결과 보고 나서.
+- **사용자 결정 필요**: A. 위 실험 진행(샌드박스 v1 뒤) / B. 보류.
 
 ## 지금 상태
 카탈로그 https://soulfulfillable.github.io/test-mvp/games.html + 영문 소개 `playables/pitch.md` 완료(10-31). 사용자 신청서 제출 대기. SDK 문서는 아직 없음.
