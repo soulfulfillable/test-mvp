@@ -11,7 +11,7 @@
 - URL: https://developer.playgama.com/qa-tool/cmvxpcp0s1juwj80hkcbczua4 (v1.1.0 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
 - 할 것: QA 툴에서 **Test Game** 으로 열어 한 판 플레이(세로·가로·1:1 프리셋 각 1번) → 인증(certification) 체크 진행. `get_launch_steps` 의 form 단계가 `NO_CERTIFICATION` 이라 사람이 QA 툴에서 인증해야 폼이 완성됨. **Submit for review(모더레이션)·트래픽 캠페인은 누르지 말 것.**
 - 확인할 결과: 인증 항목 통과/실패 목록(실패하면 번호·문구 그대로 이 게시판에 적기), `get_launch_steps` form 단계가 BLOCKED 에서 풀림.
-- 진행 중이던 것: v1.1.0 빌드 체크(CHECKING) → publish_sandbox. 이 세션이 이어서 함; 멈췄으면 위 ①
+- 진행 중이던 것: 없음 (v1.1.0 빌드 체크 PASSED·publish_sandbox 요청함 — 게시 확인은 다음 할 일 ①)
 - **다음 할 일 (순서)**:
   ① v1.1.0 샌드박스 게시 확인(`get_publications` PUBLISHED) — 아직이면 `publish_sandbox`(archive `cmvxpcp0s1juwj80hkcbczua4`, updateNote 필수)
   ② 사용자가 v1.1.0 플레이 → 느낌·"다음 판 기대되나" 원문 기록. Playgama 텔레메트리는 트래픽이 모이면 `get_game_telemetry_analytics`(하루 1번 이하)로 옵트인율·다음 판 시작률 확인
