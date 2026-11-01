@@ -90,7 +90,7 @@ const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
 const load = (f) => loader.loadAsync('./assets/' + f + '.glb');
 // the Quaternius cat ships metalness 0.4 + vertex colours; without an environment map that renders almost black.
 // Use its colour atlas with a matte material so it takes the same light as everything else.
-function fixCat(root) { root.traverse(o => { if (o.isMesh) { const m = o.material; m.metalness = 0; m.roughness = 0.75; m.vertexColors = false; m.color.set(0xffffff); m.needsUpdate = true; o.castShadow = true; o.frustumCulled = false; } }); }
+function fixCat(root) { root.traverse(o => { if (o.isMesh) { const m = o.material; m.metalness = 0; m.roughness = 0.7; m.vertexColors = false; m.map = null; m.color.set(0xf2a65a); /* its atlas is dark grey in the cat's region → drop it, flat orange like A (eyes/nose are geometry) */ m.needsUpdate = true; o.castShadow = true; o.receiveShadow = false; o.frustumCulled = false; } }); }
 
 async function buildScene() {
   // island: earth block + grass slab + tufts
@@ -151,7 +151,7 @@ async function buildScene() {
   // cat (Quaternius, CC0) sitting in the crate, head above the rim, looking toward the camera
   const cat = await load('cat');
   const ct = cat.scene; fixCat(ct);
-  ct.scale.setScalar(0.55); ct.position.set(cx + csz / 2, 0.38, cz + csz / 2 + 0.05); ct.rotation.y = Math.PI * 0.25;
+  ct.scale.setScalar(0.58); ct.position.set(cx + csz / 2, 0.5, cz + csz / 2 + 0.08); ct.rotation.y = Math.PI * 0.25;
   const cmix = new THREE.AnimationMixer(ct); const idle = cmix.clipAction(cat.animations.find(a => /\|Idle$/.test(a.name))); idle.play(); cmix.update(1.2);
   scene.add(ct);
   return { cat, cmix };
