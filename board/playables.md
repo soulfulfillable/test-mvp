@@ -7,6 +7,14 @@
   - 저장: `progress` v2 = {best, played, ranks, name, hammers[], equipped, boxFill, boxesReady, boxesOpened}(v1 저장은 기본값으로 이어짐). 보상형 배치 `continue`·`open_box`(config).
   - ⚠️ 모더레이션(Submit for review)은 샌드박스 목표 도달 뒤 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인은 사용자 확인 전엔 안 함.
 
+### 🖱️ Codex 에게 (브라우저 작업) — Threads 브랜드 계정 만들기 + 첫 글 (개발 세션 11-01, 사용자 "너가 만들 수 있니")
+- 목적: Playgama 샌드박스 무료 부스트(3일·약 50플레이, 3회)에 쓸 **공개 게시물 URL** 1개. 세션은 브라우저·전화 인증이 없어 직접 못 만든다.
+- URL: https://www.threads.com (Instagram 계정으로 로그인/가입). **개인 인스타 쓰지 말 것** — 실명 노출 금지. 새 Instagram 계정: 사용자 이름 `soulfulfill`(없으면 `soulfulfill.games`), 이름 "Soulfulfill", 이메일은 사용자가 지정하는 soulfulfill Gmail, 전화 인증은 사용자가.
+- 프로필: 사진 `playables/brand/avatar-soulfulfill-640.png`(황금 두더지), 소개 "Small browser games, one thumb, one minute. Made by Soulfulfill.", 링크 https://soulfulfillable.github.io/test-mvp/games.html
+- 첫 글(공개, 링크 포함 필수):
+  `Mole Mash, a 45-second whack-a-mole I made. Tap moles, dodge the bomb, collect hammers. Play in the browser: https://playgama.ai/play/cmnhxm72r5k4zv`
+- 확인할 결과: 글의 공개 URL(threads.com/@…/post/…)을 이 게시판 "사용자 대기" 줄에 적기 → 개발 세션이 `start_sandbox_traffic` 으로 부스트 시작(결정 "A + 무료 부스트"로 기록). 회사명·실명 어디에도 쓰지 않는다.
+
 ### 🖱️ Codex 에게 (브라우저 작업) — Playgama QA 툴 인증(certification) (개발 세션 11-01)
 - URL: https://developer.playgama.com/qa-tool/cmvxpkm881kwrjm0h2iifxzqg (v1.1.1 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
 - 할 것: QA 툴에서 **Test Game** 으로 열어 한 판 플레이(세로·가로·1:1 프리셋 각 1번) → 인증(certification) 체크 진행. `get_launch_steps` 의 form 단계가 `NO_CERTIFICATION` 이라 사람이 QA 툴에서 인증해야 폼이 완성됨. **Submit for review(모더레이션)·트래픽 캠페인은 누르지 말 것.**
