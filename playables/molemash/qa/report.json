@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-01T01:36:40.057Z",
+  "startedAt": "2026-11-01T09:59:59.373Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -47,7 +47,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "bonk2,bonk,gold,skunk,miss,tick,heart,best,whiff,start,over,muteOn,muteOff,bgm"
+      "detail": "bonk2,bonk,skunk,tick,miss,gold,heart,best,whiff,start,over,muteOn,muteOff,bgm"
     },
     {
       "name": "music looping",
@@ -57,7 +57,7 @@
     {
       "name": "scored by whacking moles",
       "ok": true,
-      "detail": "score 12, whacks 12, lives 2"
+      "detail": "score 12, whacks 12, lives 3"
     },
     {
       "name": "P pauses and shows the pause panel",
@@ -67,7 +67,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "29.10 → 29.10"
+      "detail": "29.22 → 29.22"
     },
     {
       "name": "Resume continues the round",
@@ -97,12 +97,12 @@
     {
       "name": "round ends at 0 s with the game-over panel",
       "ok": true,
-      "detail": "{\"title\":\"TIME'S UP!\",\"score\":14}"
+      "detail": "{\"title\":\"TIME'S UP!\",\"score\":13}"
     },
     {
       "name": "best and rank recorded",
       "ok": true,
-      "detail": "best 14"
+      "detail": "best 13"
     },
     {
       "name": "level_completed message on time-up",
@@ -127,7 +127,7 @@
     {
       "name": "reload restores best, name, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"best\":14,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
+      "detail": "{\"best\":13,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
     },
     {
       "name": "reload while muted stays silent from the first frame",
@@ -147,7 +147,7 @@
     {
       "name": "rewarded: round continues with hearts back and +10 s",
       "ok": true,
-      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":9.855899999999904,\"used\":true,\"ranks\":1}"
+      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":9.863200000000045,\"used\":true,\"ranks\":1}"
     },
     {
       "name": "no second continue in the same attempt",
@@ -167,7 +167,7 @@
     {
       "name": "number key whacks the matching hole",
       "ok": true,
-      "detail": "hole 7"
+      "detail": "hole 6"
     },
     {
       "name": "Esc does nothing (1.5.2)",

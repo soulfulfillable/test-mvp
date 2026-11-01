@@ -1,21 +1,19 @@
 # YouTube Playables — 게시판 (기획 파트너가 염, 2026-10-30)
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-01 19:00 KST (개발 세션 ③-b 완료) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
-- 방금 끝낸 것: **Mole Mash Playgama 샌드박스 게시 완료** — 게임 id `cmvxme9mt1hvbj80hj6q0lokb`, 아카이브 `molemash-1.0.0`(id `cmvxmi8l41hylj80hj24nwrhg`, 빌드 체크 PASSED, Bridge 2.4.0 FOUND), 커버 3종, 폼(제목·arcade·설명·조작법·story·EN·iOS/Android/Desktop·세로+가로·distributeEverywhere) 완료.
-  - 🎮 **샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv** (누구나 플레이, 모더레이션 없음)
-  - 🔧 QA 툴(Bridge 환경·크기 프리셋): https://developer.playgama.com/qa-tool/cmvxmi8l41hylj80hj24nwrhg
-  - 🌐 GitHub Pages 복사본(광고 없음, 저장은 됨): https://soulfulfillable.github.io/test-mvp/playables/molemash/
-  - 빌드: `playables/molemash/`(index.html·playgama-bridge.js·config·audio·CREDITS.md), `./build.sh` → `dist/molemash.zip` + docs 복사. 로봇 `robot.js` 53/53(`qa/report.json`). 규칙 번호별 점검표는 아래 "11-01 업로드 전 점검".
-  - ⚠️ **모더레이션(Submit for review)은 지금 열려 있지 않다**: `get_submission_state` = MODERATION_UNAVAILABLE("Publish it to the sandbox instead"). 새 게임은 **샌드박스가 콘솔의 샌드박스 카드에 적힌 목표(플레이 시간 등, 하루 1번 집계)에 도달해야** 모더레이션이 열린다. 즉 다음 단계는 플레이 모으기 = 링크 공유 또는 트래픽 캠페인(`start_sandbox_traffic`, 사용자 확인 전엔 안 함). 공유용 문구는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit 링크 제공; 문구에 "Made with AI… #PlaygamaMCP" 가 박혀 있음 — 사용자가 바꿔도 됨).
+- 마지막 저장: 2026-11-01 20:30 KST (개발 세션 ③-b, 피드백 1차 반영) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
+- 방금 끝낸 것: **Mole Mash v1.0.1 을 샌드박스에 재게시**(아카이브 `molemash-1.0.1` id `cmvxomyt51kdzjm0haxzav446`, PASSED) — 사용자 첫 플레이 피드백(아래 "사용자 피드백 기록" 11-01) 중 바로 고칠 수 있는 5가지 반영: 타이틀 글 제거·초반 느리게·스컹크→폭탄·광고는 라운드 끝에만(Play again 에 광고 없음, 세션 첫 판 뒤엔 없음)·보상형 문구. 게임 id `cmvxme9mt1hvbj80hj6q0lokb`.
+  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴: https://developer.playgama.com/qa-tool/cmvxomyt51kdzjm0haxzav446
+  - 빌드/검증: `playables/molemash/`, `./build.sh`(zip + docs 복사), `robot.js` 53/53. 규칙 점검표는 아래 "11-01 업로드 전 점검".
+  - ⚠️ 모더레이션(Submit for review)은 샌드박스가 콘솔 카드의 목표(플레이 시간 등)에 도달해야 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인(`start_sandbox_traffic`)은 사용자 확인 전엔 안 함.
 - 진행 중이던 것: 없음
 - **다음 할 일 (순서)**:
-  ① 사용자: 폰에서 샌드박스 한 판(소리·음소거·일시정지·이어하기 광고 느낌). 아쉬운 점 피드백 → 이 게시판 "사용자 피드백 기록"
-  ② 사용자 결정: 트래픽 캠페인(`start_sandbox_traffic`, 공유 링크 또는 추천 보너스)을 돌릴지. 돌리면 세션이 `get_launch_steps` → traffic 단계 진행. 모더레이션 목표 도달은 콘솔 샌드박스 카드에서 확인
-  ③ BGM 교체(선택): 지금 곡은 CC0 "Battle Theme A"(카니발 느낌 아님). 사용자가 카니발/칼리오페 루프 음원(mp3, 라이선스 명시)을 주면 `audio/bgm.ogg`·`bgm.mp3` 만 바꾸고 `./build.sh` → 재업로드(`start_archive_upload` name `molemash-1.0.1`) → `publish_sandbox`(updateNote 필요)
-  ④ 다음 게임 **Chicken Cross** 를 같은 틀로: `playables/molemash/index.html` 의 ①Bridge 부트 ②store ③snd 컨트롤러 ④ads/frozen ⑤layout 세 모드 ⑥robot.js 를 복사해 시작. 음원은 같은 CC0 팩에서(`/tmp` 가 아니라 `npm pack @netforge/asset-library-files uisfx` 다시). 그다음 Daily Stairs → Ice Cream Tower. 캣도쿠·CvD 는 🐱🐶 그림 교체가 커서 뒤
-  ⑤ Bridge 리더보드(`create_leaderboard` + `bridge.leaderboards`)는 플레이가 모이면 다음 버전에
-- 사용자 대기: ① 느낌 피드백 ② 트래픽 캠페인 할지(A: 공유 링크로 자연 유입만 / B: start_sandbox_traffic) ③ (선택) 카니발 BGM 음원
+  ① **사용자 A/B 대기 — "다음 판이 기대가 안 된다"(구성 문제)**: A. 기획 파트너의 "망치 수집" 실험(라운드마다 선물 상자 게이지 → 망치 5종 수집·장착, 위 📚 절) / B. 라운드 안에 '사건'을 넣는 변주(예: 10초마다 GOLD RUSH·BOMB ROW·DOUBLE TIME 같은 웨이브가 화면 전체에 예고되고 터짐 — 매 판 다른 흐름) / C. Mole Mash 는 여기까지 두고 다음 게임(Chicken Cross·Catdoku)으로. 결정 나면 v1.1 로 구현 → 재업로드(`start_archive_upload` name `molemash-1.1.0`) → `publish_sandbox`(updateNote 필수)
+  ② 사용자가 v1.0.1 을 다시 해 보고 느낌 → "사용자 피드백 기록"에 원문
+  ③ 트래픽: A 자연 유입 / B `start_sandbox_traffic` — 사용자 결정 뒤 `get_launch_steps` traffic 단계
+  ④ BGM 교체(선택): 카니발/칼리오페 루프 mp3 를 받으면 `audio/bgm.ogg`·`bgm.mp3` 교체 → `./build.sh` → 재업로드
+  ⑤ 다음 게임 Chicken Cross 를 같은 틀로(`playables/molemash/index.html` 의 Bridge 부트·store·snd·ads/frozen·layout 세 모드·robot.js 복사). 음원은 같은 CC0 팩(`npm pack @netforge/asset-library-files uisfx`)
+- 사용자 대기: ① 구성 A/B/C(위 ①) ② v1.0.1 느낌 ③ 트래픽 A/B ④ (선택) 카니발 BGM 음원
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
@@ -181,4 +179,7 @@ Mole Mash Playgama 샌드박스 게시(11-01) https://playgama.ai/play/cmnhxm72r
 - 사용자 캡처(Supersonic): 게임 정보 카드 = 이름·장르·따옴표 한 줄 설명·개발자·제작사·게시 날짜. 목록 = 세로 썸네일 + 플레이 버튼 + 플레이 횟수. 전부 하이퍼캐주얼(탭/드래그 1조작, 30초~1분).
 
 ## 사용자 피드백 기록
+- **11-01 Mole Mash 샌드박스 v1.0.0 첫 플레이(원문)**: "켜자마자 글씨너무많아 벌써 지겨워 심지어 뭐하라는건지 눈에 들어오지도 않아 / 한판 그냥 끝나버렸는데 광고부터나와서 frustrating / 처음부터 애들이 너무빨리 사라져 뭐하는건지도 모르고있는데 / 눌렸을때 떨어지는건 그나마 직관적인듯 / 맞추면 안되는애가 있느거같은데 왜안된건지도모르곘어 아예 폭탄같은모양으로 해버리던지 확 안눌르게, 오휴 누를뻔했다 이런게 생길정도로 / 그리고 하다보니까 너무 지겨워........ 다음판이 하나도 기대가 안돼 이거 게임 자체가 구성이 별로인건 아닌가.. 하나도 창의적인게 없이? / play again눌렀는데, watch an ad:Continue 안누르고 그래도 광고 나온게 이상한데 이거맞아? 마치 광고 안볼것처럼 싶었는데도 광고가 보인건데. 속인거같은데 이게 뭐야 싶을거같은데 / watch ad ad랑 차이가 없어보이는데"
+  - 반영(v1.0.1, 같은 날): ①타이틀의 설명 카드 삭제 — 간판·Best·TAP TO START 만, 가르치는 건 첫 판 TAP!/DON'T! 링 ②초반 속도: 머무는 시간 1.5→2.0초 시작, 첫 8초 한 마리, 첫 판 처음 3마리는 3.0/2.6/2.2초에 놓쳐도 하트 안 깎임("FASTER!") ③스컹크→**폭탄**(불붙은 심지·빨간 점선 위험 링·첫 판엔 "DON'T!" 라벨, 때리면 BOOM 폭발) ④광고 자리: Play again·일시정지에서 광고 호출 제거, 전면 광고는 **라운드가 끝난 순간**(결과 패널 전)에만, 그것도 세션 첫 판 뒤엔 안 부름 ⑤보상형 버튼 문구 "Watch an ad to continue / reward: +10 seconds and 3 hearts", 지급 때 "+10s and 3 hearts" 표시
+  - 아직 못 푼 것(사용자 결정 필요): "다음 판이 기대가 안 된다" = 구성 문제. 기획 파트너의 "망치 수집" 실험(위 📚 절) 또는 더 큰 변주. "watch ad 와 ad 차이 없음" — 광고 영상 자체는 플랫폼이 고르므로 같아 보일 수 있고, 차이는 보상(+10초·하트)뿐
 - 10-30 "유튜브 채널에 이렇게 게임으로 만들어놓네. 애플에 내려고 하는 거 계속 안 되는데 이쪽으로 해볼 수 있을까" → A 결정.

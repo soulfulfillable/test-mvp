@@ -68,7 +68,7 @@ async function playUntilOver(page, maxMs) {
   while (Date.now() - t0 < maxMs) {
     const st = await page.evaluate(() => {
       const g = window.__game;
-      const targets = g.moles.filter((m) => m.phase !== 'whacked' && m.kind !== 'skunk' && m.p > 0.35).map((m) => g.holeCenter(m.hole));
+      const targets = g.moles.filter((m) => m.phase !== 'whacked' && m.kind !== 'bomb' && m.p > 0.35).map((m) => g.holeCenter(m.hole));
       return { state: g.state, targets, timeLeft: g.timeLeft };
     });
     if (st.state !== 1) break;
@@ -231,7 +231,7 @@ async function playUntilOver(page, maxMs) {
     const { context, page } = await newPage(browser, w, h, base + '#debug', { touch: w < 700 });
     await page.evaluate(() => { window.__game.tryStart(); });
     await page.waitForTimeout(80);
-    await page.evaluate(() => { window.__game.spawnMole('mole'); window.__game.spawnMole('gold'); window.__game.spawnMole('skunk'); });
+    await page.evaluate(() => { window.__game.spawnMole('mole'); window.__game.spawnMole('gold'); window.__game.spawnMole('bomb'); });
     await page.waitForTimeout(400);
     const lay = await page.evaluate(() => {
       const g = window.__game, hud = g.hud, grid = g.grid, holes = g.holes;
