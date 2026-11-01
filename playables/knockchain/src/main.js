@@ -1,5 +1,5 @@
-// Knock Chain — game loop, input, HUD. Pull anywhere to aim (slingshot), release to shoot. Three balls per level;
-// the stone must land on the button; the crate opens and the cat is free.
+// Knock Chain — game loop, input, HUD. Pull anywhere to aim (slingshot), release to throw the light. Throws never
+// run out (theme: the shepherd keeps searching); the stone must land on the plate; the door opens and the sheep is found.
 import { LEVELS, DT, MAX_PULL } from './levels.js';
 import { Sim } from './physics.js';
 import { createView } from './view.js';
@@ -31,10 +31,8 @@ function layout() {
 window.addEventListener('resize', layout);
 
 // ---------- HUD ----------
-const hud = { balls: $('#balls'), level: $('#level'), goal: $('#goal'), hint: $('#hint'), hintSub: $('#hint-sub'), panel: $('#panel'), ptitle: $('#panel-title'), pbody: $('#panel-body'), pbtns: $('#panel-btns'), sound: $('#btn-sound'), pause: $('#btn-pause') };
-const BALL = '<svg viewBox="0 0 20 20"><defs><radialGradient id="bg" cx="35%" cy="32%" r="70%"><stop offset="0" stop-color="#ff9a5c"/><stop offset=".7" stop-color="#e2552e"/><stop offset="1" stop-color="#a8371a"/></radialGradient></defs><circle cx="10" cy="10" r="8.5" fill="url(#bg)"/><circle cx="7" cy="6.5" r="2" fill="#fff" opacity=".7"/></svg>';
-const BALL_OFF = '<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1c1c1e" stroke-opacity=".28" stroke-width="2"/></svg>';
-function hudBalls() { const n = G.sim ? G.sim.ballsLeft + (G.sim.ball ? 0 : 0) : 0; hud.balls.innerHTML = [0, 1, 2].map(i => i < n ? BALL : BALL_OFF).join(''); }
+const hud = { search: $('#search'), throws: $('#throws'), level: $('#level'), goal: $('#goal'), hint: $('#hint'), hintSub: $('#hint-sub'), panel: $('#panel'), ptitle: $('#panel-title'), pbody: $('#panel-body'), pbtns: $('#panel-btns'), sound: $('#btn-sound'), pause: $('#btn-pause') };
+function hudThrows() { const n = G.throws || 0; hud.throws.textContent = n === 0 ? '' : n === 1 ? '1 throw' : `${n} throws`; }
 function setHint(main, sub) { hud.hint.textContent = main; hud.hintSub.textContent = sub || ''; hud.hint.parentElement.classList.toggle('hidden', !main); }
 function panel(title, body, btns) {
   hud.ptitle.textContent = title; hud.pbody.textContent = body; hud.pbtns.innerHTML = '';
@@ -49,11 +47,11 @@ async function startLevel(idx, replay) {
   G.state = 'loading'; closePanel();
   const level = LEVELS[Math.max(0, Math.min(LEVELS.length - 1, idx))];
   G.level = level; G.levelIndex = LEVELS.indexOf(level);
-  G.sim = new Sim(level); G.aim = null; G.timeScale = 1; G.endTimer = 0;
+  G.sim = new Sim(level); G.aim = null; G.timeScale = 1; G.endTimer = 0; G.throws = 0; G.misses = 0;
   G.view.resetEffects();
   await G.view.loadLevel(level); layout();
-  hud.level.textContent = level.name; hud.goal.textContent = level.goal; hudBalls();
-  setHint(level.hint, 'Release to shoot');
+  hud.level.textContent = level.name; hud.goal.textContent = level.goal; hudThrows(); hud.search.firstChild.textContent = 'Still searching… ';
+  setHint(level.hint, 'Release to throw');
   G.progress.level = G.levelIndex; save(G.progress);
   G.state = 'aim';
   window.KC && window.KC.onLevelStart && window.KC.onLevelStart(level.id);
@@ -63,19 +61,23 @@ function nextLevel() { if (G.levelIndex + 1 < LEVELS.length) startLevel(G.levelI
 function onWin() {
   G.state = 'won'; G.timeScale = 0.45; G.slowUntil = G.now + 0.7;
   G.audio.play('switch'); G.view.hitShake(2);
-  setTimeout(() => { G.view.openCrate(); G.audio.play('open'); }, 350);
-  setTimeout(() => { G.view.celebrate(); G.audio.play('win'); }, 800);
+  hud.search.firstChild.textContent = 'Found. '; hud.throws.textContent = '';
+  setTimeout(() => { G.view.openDoor(); G.audio.play('open'); }, 350);
+  setTimeout(() => { G.view.found(1); G.audio.play('win'); }, 900);
   G.progress.best = Math.max(G.progress.best || 0, G.level.id); save(G.progress);
   setTimeout(() => {
     const last = G.levelIndex + 1 >= LEVELS.length;
-    panel(last ? 'All three cleared!' : 'Cat freed!', last ? 'That is the whole core test. Thanks for playing — tell us how it felt.' : `${G.level.name} done with ${G.sim.ballsLeft} ball${G.sim.ballsLeft === 1 ? '' : 's'} to spare.`,
-      [[last ? 'Play again' : 'Next level', nextLevel], ['Replay', () => startLevel(G.levelIndex), true]]);
-  }, 1500);
+    const n = G.throws;
+    panel(last ? 'Love conquers all.' : 'Found. Always.',
+      last ? 'Every sheep was found. That is the whole core test — tell us how it felt.' : `The sheep came out after ${n} throw${n === 1 ? '' : 's'}. It was never a race.`,
+      [[last ? 'Search again' : 'Next night', nextLevel], ['Play this night again', () => startLevel(G.levelIndex), true]]);
+  }, 1600);
 }
-function onLose() {
-  G.state = 'lost'; G.audio.play('fail');
-  setHint('', '');
-  setTimeout(() => panel('Out of balls', 'The stone never reached the button. Try a different angle or more pull.', [['Try again', () => startLevel(G.levelIndex)]]), 600);
+function onMiss() { // never a game over: the scene changes and the search goes on
+  G.misses++; G.view.deepen(G.misses);
+  const hints = G.level.missHints || [];
+  setHint(hints[(G.misses - 1) % hints.length] || G.level.hint, 'Pull to aim again');
+  G.audio.play('ui', { vol: 0.5, rate: 0.8 });
 }
 
 // ---------- input: pull to aim ----------
@@ -83,7 +85,7 @@ const canvas = G.view.canvas;
 function ptr(e) { const t = e.touches ? e.touches[0] || e.changedTouches[0] : e; const r = canvas.getBoundingClientRect(); return { x: t.clientX - r.left, y: t.clientY - r.top }; }
 function aimStart(e) {
   G.audio.unlock();
-  if (G.state !== 'aim' || G.sim.ball || G.sim.ballsLeft <= 0) return;
+  if (G.state !== 'aim' || G.sim.ball) return;
   G.aim = { start: ptr(e), pull: { dx: 0, dy: 0 }, ballPos: G.sim.anchor(), preview: [] };
   setHint('', '');
 }
@@ -99,12 +101,12 @@ function aimMove(e) {
 function aimEnd() {
   if (!G.aim) return;
   const { dx, dy } = G.aim.pull; const len = Math.hypot(dx, dy); G.aim = null;
-  if (len < 0.2 || dx < 0.05) { setHint(G.level.hint, 'Release to shoot'); return; } // tiny or backwards pull: cancel
+  if (len < 0.2 || dx < 0.05) { setHint(G.level.hint, 'Release to throw'); return; } // tiny or backwards pull: cancel
   shoot(dx, dy);
 }
 function shoot(dx, dy) {
   if (!G.sim.shoot(dx, dy)) return;
-  G.sim.shotAt = G.sim.time; G.state = 'flying'; hudBalls(); G.audio.play('shoot', { rate: 0.95 + Math.hypot(dx, dy) * 0.2 });
+  G.sim.shotAt = G.sim.time; G.state = 'flying'; G.throws++; hudThrows(); G.audio.play('shoot', { rate: 0.95 + Math.hypot(dx, dy) * 0.2 });
   setHint('', '');
 }
 canvas.addEventListener('touchstart', (e) => { aimStart(e); }, { passive: true });
@@ -140,7 +142,7 @@ function frame(nowMs) {
     for (const e of G.sim.events) handleEvent(e); G.sim.events.length = 0;
   }
   G.lastSnap = G.sim.snapshot();
-  const aim = G.aim || ((G.state === 'aim' && !G.sim.ball && G.sim.ballsLeft > 0) ? { ballPos: G.sim.anchor(), preview: [] } : null);
+  const aim = G.aim || ((G.state === 'aim' && !G.sim.ball) ? { ballPos: G.sim.anchor(), preview: [] } : null);
   G.view.sync(G.lastSnap, aim, dtv);
   G.view.render();
 }
@@ -157,23 +159,21 @@ function handleEvent(e) {
   } else if (e.type === 'switch') {
     if (G.state !== 'won') onWin();
   } else if (e.type === 'ballDone') {
-    hudBalls();
     if (G.state === 'won') return;
-    if (e.left > 0) { G.state = 'aim'; setHint(G.level.hint, 'Release to shoot'); }
-    else { G.state = 'ending'; G.endTimer = 0; waitThenLose(); }
+    G.state = 'ending'; waitThenMiss();
   }
 }
-function waitThenLose() { // give the chain a moment to finish before calling it
+function waitThenMiss() { // give the chain a moment to finish before calling it a miss
   const t0 = G.now;
-  const tick = () => { if (G.state !== 'ending') return; if (G.sim.pressed) return; if (G.sim.settled() || G.now - t0 > 3) onLose(); else setTimeout(tick, 120); };
-  setTimeout(tick, 400);
+  const tick = () => { if (G.state !== 'ending') return; if (G.sim.pressed) return; if (G.sim.settled() || G.now - t0 > 2.5) { G.state = 'aim'; onMiss(); } else setTimeout(tick, 120); };
+  setTimeout(tick, 300);
 }
 
 // ---------- debug / robot hooks (no gameplay effect) ----------
 window.KC = {
   get state() { return G.state; }, get level() { return G.level && G.level.id; }, get sim() { return G.sim; },
   shoot: (dx, dy) => { if (G.state === 'aim') shoot(dx, dy); }, start: (i) => startLevel(i), pxPerUnit: () => G.view.pxPerUnit(), anchorPx: () => { const a = G.sim.anchor(); return a; },
-  hash: () => G.sim.hash(), settled: () => G.sim.settled(), levels: LEVELS.length,
+  hash: () => G.sim.hash(), settled: () => G.sim.settled(), levels: LEVELS.length, get throws() { return G.throws; }, get misses() { return G.misses; },
 };
 
 // ---------- boot ----------

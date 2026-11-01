@@ -3,7 +3,7 @@
 // Chromium (WebGL via SwiftShader). Writes screenshots + qa/report.json. Run: NODE_PATH=/opt/node-tools/node_modules node playables/knockchain/robot.cjs
 //   checks: console errors 0, no external requests, HUD inside the viewport and not overlapping at 14 sizes,
 //           every level cleared by a REAL touch drag (the solver's launch vector replayed as a finger pull),
-//           same shot twice → identical physics fingerprint (determinism), out-of-balls → "Try again",
+//           same shot twice → identical physics fingerprint (determinism), 3 misses → no game over (hint changes),
 //           pause/resume, mute persists across reload, progress (level) persists across reload.
 'use strict';
 const http = require('http');
@@ -83,7 +83,7 @@ async function waitState(page, states, ms) { try { await page.waitForFunction((s
     const { context, page } = await newPage(browser, w, h, base);
     const r = await page.evaluate(() => {
       const vw = innerWidth, vh = innerHeight, out = { inside: [], overlap: [], mode: document.body.dataset.mode };
-      const els = ['#balls', '#level', '.btns', '.goal', '.hint'].map((s) => [s, document.querySelector(s).getBoundingClientRect()]);
+      const els = ['#search', '#level', '.btns', '.goal', '.hint', '.motto'].map((s) => [s, document.querySelector(s).getBoundingClientRect()]);
       for (const [s, b] of els) if (b.left < 0 || b.top < 0 || b.right > vw + 0.5 || b.bottom > vh + 0.5) out.inside.push(s);
       for (let i = 0; i < els.length; i++) for (let j = i + 1; j < els.length; j++) { const a = els[i][1], b = els[j][1]; if (a.left < b.right - 2 && b.left < a.right - 2 && a.top < b.bottom - 2 && b.top < a.bottom - 2) out.overlap.push(els[i][0] + '~' + els[j][0]); }
       const c = document.querySelector('#app canvas').getBoundingClientRect(); out.canvas = Math.round(c.width) === vw && Math.round(c.height) === vh;
@@ -107,7 +107,7 @@ async function waitState(page, states, ms) { try { await page.waitForFunction((s
     check(`level ${i + 1} cleared by touch drag`, won, `pull ${JSON.stringify(levels[i])} state=${await page.evaluate(() => KC.state)}`);
     await sleep(1700); await shot(page, `level${i + 1}-won`);
     const panelText = await page.evaluate(() => document.querySelector('#panel-title').textContent);
-    check(`level ${i + 1} end panel`, /freed|cleared/i.test(panelText), panelText);
+    check(`level ${i + 1} end panel`, /Found|Love conquers all/.test(panelText), panelText);
   }
   // ---- 3. determinism: same shot twice → same fingerprint ----
   const hashes = [];
@@ -118,14 +118,12 @@ async function waitState(page, states, ms) { try { await page.waitForFunction((s
     hashes.push(await page.evaluate(() => KC.hash()));
   }
   check('determinism (same shot twice → same state)', hashes[0] === hashes[1], hashes.join(' vs '));
-  // ---- 4. out of balls → Try again ----
+  // ---- 4. no game over: three misses → still aiming, hint changed, no panel ----
   await page.evaluate(() => KC.start(0)); await waitState(page, ['aim'], 20000);
-  for (let k = 0; k < 3; k++) { await page.evaluate(() => KC.shoot(0.35, 0.12)); await page.waitForFunction(() => KC.state === 'aim' || KC.state === 'ending' || KC.state === 'lost', null, { timeout: 20000 }).catch(() => {}); await sleep(100); }
-  const lost = await waitState(page, ['lost'], 8000); await sleep(800);
-  check('out of balls → lost panel', lost && await page.evaluate(() => /try again/i.test(document.querySelector('#panel-btns').textContent)), await page.evaluate(() => KC.state));
-  await shot(page, 'lost');
-  await page.click('#panel-btns button'); await waitState(page, ['aim'], 20000);
-  check('Try again restarts the level', await page.evaluate(() => KC.state === 'aim' && KC.sim.ballsLeft === 3));
+  for (let k = 0; k < 3; k++) { await page.evaluate(() => KC.shoot(0.35, 0.12)); await page.waitForFunction((k) => KC.state === 'aim' && KC.misses === k + 1, k, { timeout: 25000 }).catch(() => {}); }
+  const miss = await page.evaluate(() => ({ state: KC.state, misses: KC.misses, throws: KC.throws, hint: document.querySelector('#hint').textContent, panelHidden: document.querySelector('#panel').classList.contains('hidden'), search: document.querySelector('#search').textContent }));
+  check('no game over: 3 misses → still aiming, hint changes, no panel', miss.state === 'aim' && miss.misses === 3 && miss.throws === 3 && miss.panelHidden && miss.hint !== 'Pull to aim' && /Still searching/.test(miss.search), JSON.stringify(miss));
+  await shot(page, 'after-3-misses');
   // ---- 5. pause / resume ----
   await page.click('#btn-pause'); await sleep(200);
   check('pause shows panel', await page.evaluate(() => KC.state === 'paused' && !document.querySelector('#panel').classList.contains('hidden')));

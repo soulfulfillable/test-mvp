@@ -19,10 +19,13 @@ export const MATS = {
 };
 export const SWITCH_MIN_MASS = 0.8; // the ball (≈0.42) is too light: only the stone presses it
 
+// Theme (user, 2026-11-01): a shepherd looks for one lost sheep on a Halloween night. No game over: a miss
+// changes the scene (a bleat, the night deepens) and the search goes on. Throws never run out.
 export const LEVELS = [
   {
-    id: 1, name: 'Level 1', goal: 'Drop the stone on the button', hint: 'Pull to aim',
-    deck: { x0: 0, x1: 6.4 }, sling: { x: 1.1 }, balls: 3,
+    id: 1, name: 'Night 1', goal: 'Drop the stone on the plate to open the door', hint: 'Pull to aim',
+    missHints: ['A bleat… from inside the hut', 'Break the glass — the stone will fall', 'Still searching. Try a little higher'],
+    deck: { x0: 0, x1: 6.4 }, sling: { x: 1.1 }, balls: 999,
     // two posts carry a glass bridge; the stone sits on the glass; the button is between the posts
     bodies: [
       { id: 'postL', mat: 'wood', x: 3.4, y: 0.5, w: 0.8, h: 1.0, static: true },
@@ -35,8 +38,9 @@ export const LEVELS = [
     solution: { dx: 0.942, dy: 0.66 },
   },
   {
-    id: 2, name: 'Level 2', goal: 'No straight shot — go over the wall', hint: 'Lob it high',
-    deck: { x0: 0, x1: 6.4 }, sling: { x: 0.9 }, balls: 3,
+    id: 2, name: 'Night 2', goal: 'No straight path — lob the light over the wall', hint: 'Lob it high',
+    missHints: ['The bleat comes from behind the wall', 'Higher… let it drop onto the glass', 'Still searching. Pull almost straight up'],
+    deck: { x0: 0, x1: 6.4 }, sling: { x: 0.9 }, balls: 999,
     bodies: [
       { id: 'wall', mat: 'stone', x: 2.7, y: 1.2, w: 0.5, h: 2.4, static: true },
       { id: 'postL', mat: 'wood', x: 3.9, y: 0.4, w: 0.6, h: 0.8, static: true },
@@ -50,8 +54,9 @@ export const LEVELS = [
     solution: { dx: 0.376, dy: 1.034 },
   },
   {
-    id: 3, name: 'Level 3', goal: 'Knock the dominoes into the stone', hint: 'Hit the first domino',
-    deck: { x0: 0, x1: 6.4 }, sling: { x: 0.9 }, balls: 3,
+    id: 3, name: 'Night 3', goal: 'Tip the dominoes — they push the stone off', hint: 'Hit the first domino',
+    missHints: ['A faint bleat, far to the right', 'Hit the first domino near its top', 'Still searching. A bit more pull'],
+    deck: { x0: 0, x1: 6.4 }, sling: { x: 0.9 }, balls: 999,
     // a stone ledge carries four wooden dominoes and the stone at its right edge; the button waits below
     bodies: [
       { id: 'ledge', mat: 'stone', x: 4.1, y: 0.45, w: 3.0, h: 0.9, static: true },
