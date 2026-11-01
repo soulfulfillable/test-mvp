@@ -1,0 +1,19 @@
+{
+    "advertisement": {
+        "interstitial": {
+            "preloadOnStart": "round_end",
+            "placementFallback": "round_end",
+            "placements": [
+                { "id": "round_end" },
+                { "id": "pause" }
+            ]
+        },
+        "rewarded": {
+            "preloadOnStart": "continue",
+            "placementFallback": "continue",
+            "placements": [
+                { "id": "continue" }
+            ]
+        }
+    }
+}

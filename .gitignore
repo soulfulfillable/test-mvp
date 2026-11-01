@@ -58,3 +58,4 @@ app.*.map.json
 
 # Research collector transient artifacts
 research/.last_run.json
+playables/molemash/dist/
