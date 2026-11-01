@@ -2,7 +2,7 @@
   "name": "knockchain",
   "private": true,
   "type": "module",
-  "description": "Knock Chain — aim + physics chain (stage 2 core test). `npm install` then `./build.sh` → docs/knockchain/. Tests: `node robot.js`, level solver: `node tools/solve.js`.",
+  "description": "Knock Chain — aim + physics chain (stage 2 core test). `npm install` then `./build.sh` → docs/knockchain/. Tests: `node robot.cjs`, level solver: `node tools/solve.js`.",
   "dependencies": { "planck": "1.5.1", "three": "0.170.0" },
   "devDependencies": { "esbuild": "0.24.2" }
 }

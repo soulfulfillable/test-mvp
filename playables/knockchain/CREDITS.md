@@ -26,22 +26,29 @@ lists each pack and where its license was verified).
 Not produced: Everygen answered **402 No active subscription** (2026-11-01), same as for Mole Mash audio. No other image
 site is reachable from this environment. A generated image is never shipped in the game (unclear rights, not reproducible frame to frame).
 
-## Sound effects (criterion 5 — list only in stage 1; files come in stage 2)
+## Sound effects (stage 2, in the game) — Kenney, CC0 1.0
 
-Candidates, all CC0, reachable from this environment through npm: Kenney *Impact Sounds* / *Interface Sounds*
-(`@netforge/asset-library-files`, see `playables/molemash/CREDITS.md` for the exact file mapping we already use), UI
-sounds from `uisfx` (audio CC0).
+From `@netforge/asset-library-files@0.2.0` → `library/audio/sfx/*.ogg` (Kenney Impact / Interface / RPG / Digital
+Audio packs, each archive's License.txt "Creative Commons Zero, CC0"; see `art/assets/NOTICE-netforge.txt`).
+Re-encoded to mono OGG (q4) + MP3 (q5) with ffmpeg, no edits. Nothing is synthesized in code.
 
-| Action | Sound |
-|---|---|
-| pull the band | stretch creak (rising) |
-| release | snap + whoosh |
-| ball hits wood | thud (impactWood) |
-| ball hits glass | glass crack + shatter |
-| ball hits stone | dull knock (impactStone) |
-| block falls / tumbles | wood tumble, short |
-| switch pressed | click + mechanical thunk |
-| crate opens | lid creak + pop |
-| cat freed (success) | happy meow + chime |
-| last ball lost (fail) | sad meow + soft "wah" |
-| UI tap | soft click (uisfx arcade) |
+| In game (`audio/`) | Source file | Used for |
+|---|---|---|
+| `shoot` | `dash.ogg` | ball released |
+| `wood` | `hit.ogg` | ball hits wood |
+| `stone` | `impact.ogg` | stone/ball hits stone |
+| `glass` | `big_kill.ogg` | glass hit / shatter |
+| `tumble` | `land.ogg` | blocks tumbling, ground contact |
+| `switch` | `confirm.ogg` | button pressed |
+| `open` | `revive.ogg` | crate opens |
+| `win` | `level_up.ogg` | cat freed |
+| `fail` | `downed.ogg` | out of balls |
+| `ui` | `ui.ogg` | HUD taps |
+
+## Code libraries (stage 2)
+
+| Library | License | Use |
+|---|---|---|
+| three.js 0.170.0 (`three`) | MIT | rendering, GLTF + meshopt loaders, RoundedBoxGeometry |
+| Planck.js 1.5.1 (`planck`) | MIT | 2D rigid-body physics (Box2D port), fixed timestep |
+| esbuild 0.24.2 | MIT | bundling only (dev) |

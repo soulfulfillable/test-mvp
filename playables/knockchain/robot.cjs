@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Knock Chain — headless play robot (stage 2 core test). Serves docs/knockchain over local http and plays it in
-// Chromium (WebGL via SwiftShader). Writes screenshots + qa/report.json. Run: node playables/knockchain/robot.js
+// Chromium (WebGL via SwiftShader). Writes screenshots + qa/report.json. Run: NODE_PATH=/opt/node-tools/node_modules node playables/knockchain/robot.cjs
 //   checks: console errors 0, no external requests, HUD inside the viewport and not overlapping at 14 sizes,
 //           every level cleared by a REAL touch drag (the solver's launch vector replayed as a finger pull),
 //           same shot twice → identical physics fingerprint (determinism), out-of-balls → "Try again",
