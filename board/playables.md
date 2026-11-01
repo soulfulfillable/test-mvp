@@ -1,11 +1,21 @@
 # YouTube Playables — 게시판 (기획 파트너가 염, 2026-10-30)
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-01 02:00 KST (개발 세션 ③-b) · 작업 브랜치: `claude/playables-molemash`
-- 방금 끝낸 것: **Mole Mash Playgama 판 빌드 완료** `playables/molemash/`(index.html + playgama-bridge.js 2.4.0 로컬 + playgama-bridge-config.json + audio/ CC0 음원 ogg·mp3 + CREDITS.md). 플레이 로봇 `robot.js` 53/53 통과(콘솔 에러 0·외부 요청 0·game_ready 1회·게임오버·저장 리로드·음소거·일시정지·광고 상태·보상형 이어하기·14개 크기 레이아웃). 커버 3종 `covers/`. zip 은 `./build.sh` → `dist/molemash.zip`(2.9MB, git 제외). **Playgama 게임 생성됨: id `cmvxme9mt1hvbj80hj6q0lokb`, 제목 "Mole Mash", 상태 DRAFT.**
-- 진행 중이던 것: 업로드 단계. 폼(update_application_form) → zip 업로드(start/confirm_archive_upload) → 커버 3종 → QA 툴 링크 → publish_sandbox → get_sandbox_share.
-- **다음 할 일 (순서)**: ① 위 업로드 단계를 끝내고 샌드박스 링크를 이 게시판·사용자 보고에 ② 체크리스트 번호별 결과표를 아래 "11-01 업로드 전 점검"에 적기 ③ `PLAYBOOK.md` 6장·`PRODUCT.md` 결정 로그·main 반영 ④ 사용자가 콘솔에서 Submit for review(모더레이션)·트래픽 캠페인을 할지 결정 ⑤ 다음 게임 Chicken Cross 에 같은 틀 적용(어댑터·오디오 컨트롤러·레이아웃 코드는 molemash/index.html 에서 복사)
-- 사용자 대기: 샌드박스 링크 받으면 폰에서 한 판(소리·음소거·이어하기 광고 느낌) → "Submit for review" 는 사용자가 콘솔에서 누름
+- 마지막 저장: 2026-11-01 19:00 KST (개발 세션 ③-b 완료) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
+- 방금 끝낸 것: **Mole Mash Playgama 샌드박스 게시 완료** — 게임 id `cmvxme9mt1hvbj80hj6q0lokb`, 아카이브 `molemash-1.0.0`(id `cmvxmi8l41hylj80hj24nwrhg`, 빌드 체크 PASSED, Bridge 2.4.0 FOUND), 커버 3종, 폼(제목·arcade·설명·조작법·story·EN·iOS/Android/Desktop·세로+가로·distributeEverywhere) 완료.
+  - 🎮 **샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv** (누구나 플레이, 모더레이션 없음)
+  - 🔧 QA 툴(Bridge 환경·크기 프리셋): https://developer.playgama.com/qa-tool/cmvxmi8l41hylj80hj24nwrhg
+  - 🌐 GitHub Pages 복사본(광고 없음, 저장은 됨): https://soulfulfillable.github.io/test-mvp/playables/molemash/
+  - 빌드: `playables/molemash/`(index.html·playgama-bridge.js·config·audio·CREDITS.md), `./build.sh` → `dist/molemash.zip` + docs 복사. 로봇 `robot.js` 53/53(`qa/report.json`). 규칙 번호별 점검표는 아래 "11-01 업로드 전 점검".
+  - ⚠️ **모더레이션(Submit for review)은 지금 열려 있지 않다**: `get_submission_state` = MODERATION_UNAVAILABLE("Publish it to the sandbox instead"). 새 게임은 **샌드박스가 콘솔의 샌드박스 카드에 적힌 목표(플레이 시간 등, 하루 1번 집계)에 도달해야** 모더레이션이 열린다. 즉 다음 단계는 플레이 모으기 = 링크 공유 또는 트래픽 캠페인(`start_sandbox_traffic`, 사용자 확인 전엔 안 함). 공유용 문구는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit 링크 제공; 문구에 "Made with AI… #PlaygamaMCP" 가 박혀 있음 — 사용자가 바꿔도 됨).
+- 진행 중이던 것: 없음
+- **다음 할 일 (순서)**:
+  ① 사용자: 폰에서 샌드박스 한 판(소리·음소거·일시정지·이어하기 광고 느낌). 아쉬운 점 피드백 → 이 게시판 "사용자 피드백 기록"
+  ② 사용자 결정: 트래픽 캠페인(`start_sandbox_traffic`, 공유 링크 또는 추천 보너스)을 돌릴지. 돌리면 세션이 `get_launch_steps` → traffic 단계 진행. 모더레이션 목표 도달은 콘솔 샌드박스 카드에서 확인
+  ③ BGM 교체(선택): 지금 곡은 CC0 "Battle Theme A"(카니발 느낌 아님). 사용자가 카니발/칼리오페 루프 음원(mp3, 라이선스 명시)을 주면 `audio/bgm.ogg`·`bgm.mp3` 만 바꾸고 `./build.sh` → 재업로드(`start_archive_upload` name `molemash-1.0.1`) → `publish_sandbox`(updateNote 필요)
+  ④ 다음 게임 **Chicken Cross** 를 같은 틀로: `playables/molemash/index.html` 의 ①Bridge 부트 ②store ③snd 컨트롤러 ④ads/frozen ⑤layout 세 모드 ⑥robot.js 를 복사해 시작. 음원은 같은 CC0 팩에서(`/tmp` 가 아니라 `npm pack @netforge/asset-library-files uisfx` 다시). 그다음 Daily Stairs → Ice Cream Tower. 캣도쿠·CvD 는 🐱🐶 그림 교체가 커서 뒤
+  ⑤ Bridge 리더보드(`create_leaderboard` + `bridge.leaderboards`)는 플레이가 모이면 다음 버전에
+- 사용자 대기: ① 느낌 피드백 ② 트래픽 캠페인 할지(A: 공유 링크로 자연 유입만 / B: start_sandbox_traffic) ③ (선택) 카니발 BGM 음원
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
@@ -76,9 +86,79 @@
 - **QA 체크리스트**: ①보상은 SDK `rewarded` 에서만, 더블클릭·중복 콜백·재시도·리로드에도 1회 ②no-fill/취소 때 상자 유지 ③광고 중 게임·소리 멈춤, 복귀 정상 ④리로드 후 보유·장착·진행률 유지(Bridge storage) ⑤5개 완주 상태 ⑥1:1·가로·세로에서 새 패널 안 깨짐 ⑦규칙 2.2.1~2.2.5·3.2.x·4.3.2(이모지 금지) 재점검 ⑧로봇 테스트에 위 경로 추가, 스크린샷 ⑨Playgama 테스트 광고 성공 ≠ 실서비스 준비 — 구분해 기록. YouTube Playables 로 갈 땐 광고·저장 API 가 다르므로 어댑터만 바꾸고 상태 기계는 유지.
 - **적용 시점**: Mole Mash v1 샌드박스가 올라간 **뒤**, 같은 게임의 v1.1 로. 다른 8개 게임엔 결과 보고 나서.
 - **사용자 결정 필요**: A. 위 실험 진행(샌드박스 v1 뒤) / B. 보류.
+## 11-01 업로드 전 점검 — Playgama 규칙 번호별 (Mole Mash, 아카이브 molemash-1.0.0)
+
+증거: `playables/molemash/robot.js` 53/53 통과(`qa/report.json`), 스크린샷 `qa/*.png`, 코드 grep. ✔ = 확인됨, ✖ = 미충족, ? = 확인 못 함(사람·실기기·QA 툴 필요).
+
+| 규칙 | 결과 | 근거 |
+|---|---|---|
+| 1.1.1 현재 Bridge SDK | ✔ | npm `@playgama/bridge@2.4.0` 로컬 번들(`playgama-bridge.js`), 아카이브 분석 `bridgeVersion` 으로 재확인 |
+| 1.1.2 필수 8단계 | ✔ | ①config 동봉 ②head 첫 스크립트·`initialize()` 대기 후 게임 시작 ③`platform.language` 읽음(영어만) ④storage.get 1회·게임오버/이름/음소거 때만 set ⑤`isAudioEnabled`·PAUSE/AUDIO 이벤트 ⑥첫 프레임 뒤 `game_ready` 1회(로봇 확인) ⑦Play again·일시정지 때 `showInterstitial`, 타이머 없음 ⑧`isRewardedSupported` 아니면 이어하기 버튼 숨김 |
+| 1.2.1~1.2.3 로그인 없음 | ✔ | 로그인 없음 |
+| 1.2.4 외부 분석 없음 | ✔ | Bridge analytics 만 |
+| 1.2.5 외부 리소스 0 | ✔ | 로봇 "external requests: 0" |
+| 1.2.6 외부 링크 | ✔ | 도전장·공유 링크 제거(Playgama 판) |
+| 1.2.7 URL 제한 없음 | ✔ | — |
+| 1.3.1 300MB | ✔ | zip 2.9MB |
+| 1.3.2 index.html 루트·라틴 파일명 | ✔ | `unzip -l` |
+| 1.3.3 메모리 2GB | ✔ | 캔버스 1개·파일 3MB (자동 빌드 체크가 재확인) |
+| 1.4.1 전체 화면 | ? | 플랫폼 iframe 안에서 사람이 확인 |
+| 1.4.2 키보드 자동 | ✔ | 이름 칸 네이티브 `<input>` |
+| 1.4.3 방향 | ✔ | 세로·가로 둘 다 지원으로 폼 선언 |
+| 1.4.4 터치 | ✔ | pointerdown 탭, 로봇 터치 컨텍스트로 플레이 |
+| 1.4.5 길게 누름 | ✔ | user-select none·touch-callout none·contextmenu 막음, `touch-action:none`; 실기기 iOS 돋보기는 ? |
+| 1.4.6 WebGL 경고 | ✔ | 2D 캔버스 |
+| 1.5.1 키보드/마우스 | ✔ | 클릭 + 1~9·넘패드·Space·P·M (로봇: 숫자 키 명중) |
+| 1.5.2 Esc | ✔ | 로봇: Esc 아무 일 없음 |
+| 1.5.3 두 조작 동시 | ✔ | 같은 빌드에서 둘 다 |
+| 1.6.1~1.6.2 모든 비율 꽉 채움·잘림 없음 | ✔ | 14개 크기(세로 3·가로 2·태블릿 2·1:1·iframe 2·데스크톱 2·9:21·21:9) HUD/판 겹침 0·판 화면 안 |
+| 1.6.3 페이지 스크롤 없음 | ✔ | html/body 100%·overflow hidden |
+| 1.6.4 겹침 | ✔ | 스크린샷 눈으로 확인(인트로 문구는 알약 배경으로 분리) |
+| 1.6.5 팝업 닫기 | ✔ | 일시정지: Resume, 게임오버: Play again |
+| 1.6.6 한 손 | ✔ | 탭만 |
+| 1.6.7 글자 크기 | ✔ | 짧은 변 기준 스케일, 360×640 스크린샷 |
+| 1.6.8 1:1 | ✔ | 640×640 스크린샷(compact HUD) |
+| 1.7.1 오류·멈춤 | ✔ | 콘솔 에러 0·페이지 에러 0, 회전(resize)·숨김·광고 상태 전환 로봇 확인 |
+| 1.7.2 끝까지 플레이 | ✔ | 시간 종료·하트 소진 두 경로 모두 게임오버 |
+| 1.7.3 브라우저 5종 | ? | Chromium 만 돌림. Safari 용 mp3 분기는 코드로만 |
+| 1.8 비디오 | ✔ | 없음 |
+| 2.1.1 제3자 광고 없음 | ✔ | Bridge 만 |
+| 2.1.2 전면 광고 | ✔ | `showInterstitial('round_end')`·`('pause')` |
+| 2.1.3 논리적 멈춤에서만 | ✔ | Play again·일시정지 버튼 |
+| 2.1.4 손가락 밑 광고 | ? | 광고 위치는 플랫폼이 정함 |
+| 2.1.5 광고 방향 | ? | 플랫폼 |
+| 2.1.6 광고 중 멈춤·무음 | ✔ | 로봇 "interstitial opened: frozen and silent" |
+| 2.1.7 광고 실패 시 계속 | ✔ | 호출은 try 로 감싸고 결과를 기다리지 않음 |
+| 2.2.1 옵트인 버튼 문구 | ✔ | "Watch an ad: continue / +10 seconds and all hearts back" |
+| 2.2.2 거절 가능 | ✔ | Play again 이 항상 있음 |
+| 2.2.3~2.2.4 시도당 1회 | ✔ | 로봇 "no second continue in the same attempt" |
+| 2.2.5 rewarded 에서만 보상 | ✔ | 로봇 "ad closed early: no reward" |
+| 2.3 배너 | ✔ | 없음 |
+| 2.4~2.5 결제·실돈 | ✔ | 없음 |
+| 3.1.1~3.1.2 진행·난이도 | ✔ | heat 로 점점 빨라짐·동시 3마리, 점수 기록 |
+| 3.1.3 튜토리얼 | ✔ | 첫 판 TAP! 링+느린 두더지 3마리(로봇 스크린샷) |
+| 3.2.1 Bridge storage 만 | ✔ | 코드에 localStorage/sessionStorage/indexedDB/cookie 0건(grep) |
+| 3.2.2 최고 점수 저장 | ✔ | progress.best·ranks |
+| 3.2.3 리로드·회전·광고 뒤 유지 | ✔ | 로봇 리로드 복원(best·name·muted) |
+| 3.3.1 배경음악+효과음 | ✔ | bgm 루프 + 효과음 13종 |
+| 3.3.2 파일 음원(합성 금지) | ✔ | Kenney·uisfx·cynicmusic CC0, ogg/mp3 (`CREDITS.md`) — 코드 합성 0 |
+| 3.3.3 음소거 버튼 | ✔ | 오른쪽 위 + 일시정지 메뉴, 리로드 뒤 유지 |
+| 3.3.4 플랫폼 음소거 | ✔ | 시작 때 `isAudioEnabled`, 이벤트 구독 |
+| 3.3.5 숨김 때 무음 | ✔ | 로봇 "hidden page: silent and frozen" |
+| 3.4.1~3.4.2 영어 기본·언어는 Bridge 에서 | ✔ | 영어만, `platform.language` 읽음 |
+| 3.4.3 선언 언어 번역 | ✔ | EN 만 선언 |
+| 3.4.4 언어 선택기 | ✔ | 없음 |
+| 3.5.1 제목 일치 | ✔ | 게임 안 "MOLE MASH" = 폼 "Mole Mash" |
+| 4.1 금지 콘텐츠 | ✔ | 두더지·스컹크 |
+| 4.2 권리·독창성 | ✔ | 자체 그림·코드, CC0 음원, 카탈로그 중복은 ? (모더레이션 판단) |
+| 4.3.1 전부 AI 생성 아님 | ? | 그림은 코드로 그린 캔버스(사람이 스크린샷 보고 다듬음). 모더레이션 판단 |
+| 4.3.2 이모지·템플릿 티 | ✔ | HUD 하트·시계·아이콘 전부 캔버스/SVG, 이모지 0 |
+| 4.4 사용자 데이터 | ✔ | 이름 8자 로컬 저장만 |
+| 5.1 Unity | — | 해당 없음 |
+| 플랫폼별(YouTube Playables) | ✔ | 30MB 이하(3MB), 세로+가로, 외부 호출 0, 파일명 라틴, 파일 33개 |
 
 ## 지금 상태
-카탈로그 https://soulfulfillable.github.io/test-mvp/games.html + 영문 소개 `playables/pitch.md` 완료(10-31). 사용자 신청서 제출 대기. SDK 문서는 아직 없음.
+Mole Mash Playgama 샌드박스 게시(11-01) https://playgama.ai/play/cmnhxm72r5k4zv — 모더레이션은 샌드박스 목표 도달 뒤 열림. 카탈로그 https://soulfulfillable.github.io/test-mvp/games.html, 영문 소개 `playables/pitch.md`. 구글 Playables 신청서는 사용자 제출 대기.
 
 ## 다른 세션에 알리는 노하우
 - 게임 스크린샷은 `playables/capture.js` 가 실제 플레이(시작 탭→조작)까지 해서 찍는다. 날짜 시드 게임(계단)은 게임과 같은 시드 함수를 복사해 정답 방향을 계산해야 죽은 화면이 안 찍힌다.
