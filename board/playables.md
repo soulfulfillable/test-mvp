@@ -1,21 +1,19 @@
 # YouTube Playables — 게시판 (기획 파트너가 염, 2026-10-30)
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-01 19:00 KST (개발 세션 ③-b 완료) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
-- 방금 끝낸 것: **Mole Mash Playgama 샌드박스 게시 완료** — 게임 id `cmvxme9mt1hvbj80hj6q0lokb`, 아카이브 `molemash-1.0.0`(id `cmvxmi8l41hylj80hj24nwrhg`, 빌드 체크 PASSED, Bridge 2.4.0 FOUND), 커버 3종, 폼(제목·arcade·설명·조작법·story·EN·iOS/Android/Desktop·세로+가로·distributeEverywhere) 완료.
-  - 🎮 **샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv** (누구나 플레이, 모더레이션 없음)
-  - 🔧 QA 툴(Bridge 환경·크기 프리셋): https://developer.playgama.com/qa-tool/cmvxmi8l41hylj80hj24nwrhg
-  - 🌐 GitHub Pages 복사본(광고 없음, 저장은 됨): https://soulfulfillable.github.io/test-mvp/playables/molemash/
-  - 빌드: `playables/molemash/`(index.html·playgama-bridge.js·config·audio·CREDITS.md), `./build.sh` → `dist/molemash.zip` + docs 복사. 로봇 `robot.js` 53/53(`qa/report.json`). 규칙 번호별 점검표는 아래 "11-01 업로드 전 점검".
-  - ⚠️ **모더레이션(Submit for review)은 지금 열려 있지 않다**: `get_submission_state` = MODERATION_UNAVAILABLE("Publish it to the sandbox instead"). 새 게임은 **샌드박스가 콘솔의 샌드박스 카드에 적힌 목표(플레이 시간 등, 하루 1번 집계)에 도달해야** 모더레이션이 열린다. 즉 다음 단계는 플레이 모으기 = 링크 공유 또는 트래픽 캠페인(`start_sandbox_traffic`, 사용자 확인 전엔 안 함). 공유용 문구는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit 링크 제공; 문구에 "Made with AI… #PlaygamaMCP" 가 박혀 있음 — 사용자가 바꿔도 됨).
+- 마지막 저장: 2026-11-01 20:30 KST (개발 세션 ③-b, 피드백 1차 반영) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
+- 방금 끝낸 것: **Mole Mash v1.0.1 을 샌드박스에 재게시**(아카이브 `molemash-1.0.1` id `cmvxomyt51kdzjm0haxzav446`, PASSED) — 사용자 첫 플레이 피드백(아래 "사용자 피드백 기록" 11-01) 중 바로 고칠 수 있는 5가지 반영: 타이틀 글 제거·초반 느리게·스컹크→폭탄·광고는 라운드 끝에만(Play again 에 광고 없음, 세션 첫 판 뒤엔 없음)·보상형 문구. 게임 id `cmvxme9mt1hvbj80hj6q0lokb`.
+  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴: https://developer.playgama.com/qa-tool/cmvxomyt51kdzjm0haxzav446
+  - 빌드/검증: `playables/molemash/`, `./build.sh`(zip + docs 복사), `robot.js` 53/53. 규칙 점검표는 아래 "11-01 업로드 전 점검".
+  - ⚠️ 모더레이션(Submit for review)은 샌드박스가 콘솔 카드의 목표(플레이 시간 등)에 도달해야 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인(`start_sandbox_traffic`)은 사용자 확인 전엔 안 함.
 - 진행 중이던 것: 없음
 - **다음 할 일 (순서)**:
-  ① 사용자: 폰에서 샌드박스 한 판(소리·음소거·일시정지·이어하기 광고 느낌). 아쉬운 점 피드백 → 이 게시판 "사용자 피드백 기록"
-  ② 사용자 결정: 트래픽 캠페인(`start_sandbox_traffic`, 공유 링크 또는 추천 보너스)을 돌릴지. 돌리면 세션이 `get_launch_steps` → traffic 단계 진행. 모더레이션 목표 도달은 콘솔 샌드박스 카드에서 확인
-  ③ BGM 교체(선택): 지금 곡은 CC0 "Battle Theme A"(카니발 느낌 아님). 사용자가 카니발/칼리오페 루프 음원(mp3, 라이선스 명시)을 주면 `audio/bgm.ogg`·`bgm.mp3` 만 바꾸고 `./build.sh` → 재업로드(`start_archive_upload` name `molemash-1.0.1`) → `publish_sandbox`(updateNote 필요)
-  ④ 다음 게임 **Chicken Cross** 를 같은 틀로: `playables/molemash/index.html` 의 ①Bridge 부트 ②store ③snd 컨트롤러 ④ads/frozen ⑤layout 세 모드 ⑥robot.js 를 복사해 시작. 음원은 같은 CC0 팩에서(`/tmp` 가 아니라 `npm pack @netforge/asset-library-files uisfx` 다시). 그다음 Daily Stairs → Ice Cream Tower. 캣도쿠·CvD 는 🐱🐶 그림 교체가 커서 뒤
-  ⑤ Bridge 리더보드(`create_leaderboard` + `bridge.leaderboards`)는 플레이가 모이면 다음 버전에
-- 사용자 대기: ① 느낌 피드백 ② 트래픽 캠페인 할지(A: 공유 링크로 자연 유입만 / B: start_sandbox_traffic) ③ (선택) 카니발 BGM 음원
+  ① **사용자 A/B 대기 — "다음 판이 기대가 안 된다"(구성 문제)**: A. 기획 파트너의 "망치 수집" 실험(라운드마다 선물 상자 게이지 → 망치 5종 수집·장착, 위 📚 절) / B. 라운드 안에 '사건'을 넣는 변주(예: 10초마다 GOLD RUSH·BOMB ROW·DOUBLE TIME 같은 웨이브가 화면 전체에 예고되고 터짐 — 매 판 다른 흐름) / C. Mole Mash 는 여기까지 두고 다음 게임(Chicken Cross·Catdoku)으로. 결정 나면 v1.1 로 구현 → 재업로드(`start_archive_upload` name `molemash-1.1.0`) → `publish_sandbox`(updateNote 필수)
+  ② 사용자가 v1.0.1 을 다시 해 보고 느낌 → "사용자 피드백 기록"에 원문
+  ③ 트래픽: A 자연 유입 / B `start_sandbox_traffic` — 사용자 결정 뒤 `get_launch_steps` traffic 단계
+  ④ BGM 교체(선택): 카니발/칼리오페 루프 mp3 를 받으면 `audio/bgm.ogg`·`bgm.mp3` 교체 → `./build.sh` → 재업로드
+  ⑤ 다음 게임 Chicken Cross 를 같은 틀로(`playables/molemash/index.html` 의 Bridge 부트·store·snd·ads/frozen·layout 세 모드·robot.js 복사). 음원은 같은 CC0 팩(`npm pack @netforge/asset-library-files uisfx`)
+- 사용자 대기: ① 구성 A/B/C(위 ①) ② v1.0.1 느낌 ③ 트래픽 A/B ④ (선택) 카니발 BGM 음원
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
