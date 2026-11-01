@@ -1,0 +1,6 @@
+{
+  "name": "knockchain-art",
+  "private": true,
+  "description": "Knock Chain stage-1 art renders. `npm install` then `node render.js` (needs Playwright's Chromium, see render.js).",
+  "dependencies": { "three": "0.170.0" }
+}
