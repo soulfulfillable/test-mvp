@@ -1,6 +1,14 @@
 # YouTube Playables — 게시판 (기획 파트너가 염, 2026-10-30)
 
 ## 🔁 이어받기
+- 마지막 저장: 2026-11-01 02:00 KST (개발 세션 ③-b) · 작업 브랜치: `claude/playables-molemash`
+- 방금 끝낸 것: **Mole Mash Playgama 판 빌드 완료** `playables/molemash/`(index.html + playgama-bridge.js 2.4.0 로컬 + playgama-bridge-config.json + audio/ CC0 음원 ogg·mp3 + CREDITS.md). 플레이 로봇 `robot.js` 53/53 통과(콘솔 에러 0·외부 요청 0·game_ready 1회·게임오버·저장 리로드·음소거·일시정지·광고 상태·보상형 이어하기·14개 크기 레이아웃). 커버 3종 `covers/`. zip 은 `./build.sh` → `dist/molemash.zip`(2.9MB, git 제외). **Playgama 게임 생성됨: id `cmvxme9mt1hvbj80hj6q0lokb`, 제목 "Mole Mash", 상태 DRAFT.**
+- 진행 중이던 것: 업로드 단계. 폼(update_application_form) → zip 업로드(start/confirm_archive_upload) → 커버 3종 → QA 툴 링크 → publish_sandbox → get_sandbox_share.
+- **다음 할 일 (순서)**: ① 위 업로드 단계를 끝내고 샌드박스 링크를 이 게시판·사용자 보고에 ② 체크리스트 번호별 결과표를 아래 "11-01 업로드 전 점검"에 적기 ③ `PLAYBOOK.md` 6장·`PRODUCT.md` 결정 로그·main 반영 ④ 사용자가 콘솔에서 Submit for review(모더레이션)·트래픽 캠페인을 할지 결정 ⑤ 다음 게임 Chicken Cross 에 같은 틀 적용(어댑터·오디오 컨트롤러·레이아웃 코드는 molemash/index.html 에서 복사)
+- 사용자 대기: 샌드박스 링크 받으면 폰에서 한 판(소리·음소거·이어하기 광고 느낌) → "Submit for review" 는 사용자가 콘솔에서 누름
+- 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
+
+### 이전 이어받기 (10-31)
 - 마지막 저장: 2026-10-31 (개발 세션) · 작업 브랜치: `claude/playables-catalog` (main 반영됨)
 - 결정(사용자 "추천대로 가자", `PRODUCT.md` 결정 로그 10-30): **A = 구글 관심 신청서 + 파트너(Playgama 등) 경유를 동시에.** 재료는 `docs/` 의 기존 HTML 게임. 퍼블리셔 채널 = 기존 Peblit(10-31).
 - 방금 끝낸 것: ① **카탈로그 `docs/games.html`** (9개 카드: 실제 플레이 스크린샷·이름·장르·영문 한 줄·Play 버튼·파일 크기, 라이트/다크, 시스템 글꼴·강조색 1개) ② **영문 소개 `playables/pitch.md`** (스튜디오 한 줄·게임별 한 줄·Playables 적합 이유·신청서 답안) ③ 스크린샷 자동 캡처 `playables/capture.js`(1170×2532, 콘솔 에러 0·외부 요청 0 전부 확인) + 카드용 `playables/thumbs.js` ④ 아이스크림 탑 UI 를 영어로(Ice Cream Tower) — 9개 중 유일하게 한국어였음

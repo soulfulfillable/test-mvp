@@ -260,7 +260,12 @@
     var top = tentH + SA.top;
     var innerX = SA.left, innerW = W - SA.left - SA.right;
     var bottomPad = 10 + SA.bottom;
-    if (H >= W * 1.12) {
+    if (COVER) {
+      var k = Math.max(1.4, Math.min(W, H) / 420);
+      hud.mode = 'top';
+      hud.x = innerX; hud.y = top + 8; hud.w = innerW; hud.h = (88 + 48) * UI * k + 16;
+      grid.x = innerX; grid.y = hud.y + hud.h; grid.w = innerW; grid.h = H - grid.y - bottomPad;
+    } else if (H >= W * 1.12) {
       // portrait: HUD band on top, grid below
       hud.mode = 'top';
       hud.x = innerX; hud.y = top + 6 * UI; hud.w = innerW; hud.h = clamp(H * 0.17, 108, 136) * UI;
@@ -927,7 +932,8 @@
       ctx.beginPath(); ctx.ellipse(h.x, h.y - mh * 0.45, cellW * 0.55 * pulse, cellW * 0.55 * pulse, 0, 0, Math.PI * 2); ctx.stroke();
       ctx.fillStyle = '#fff6ea'; ctx.font = fontPx(16, 'bold'); ctx.textAlign = 'center';
       ctx.strokeStyle = 'rgba(61,40,18,0.9)'; ctx.lineWidth = 4;
-      ctx.strokeText('TAP!', h.x, h.y - mh - 30 * UI); ctx.fillText('TAP!', h.x, h.y - mh - 30 * UI);
+      var ly = Math.max(h.y - mh - 30 * UI, tentH + SA.top + 22 * UI);
+      ctx.strokeText('TAP!', h.x, ly); ctx.fillText('TAP!', h.x, ly);
       ctx.restore();
     }
   }
@@ -1043,7 +1049,7 @@
   }
   function drawTitle() {
     if (!COVER) { ctx.fillStyle = 'rgba(255,255,255,0.55)'; ctx.fillRect(0, 0, W, H); }
-    var signY = Math.max(tentH + SA.top + 14, H * (COVER ? 0.13 : 0.1));
+    var signY = COVER ? hud.y + 8 : Math.max(tentH + SA.top + 14, H * 0.1);
     var after = drawSign(signY);
     if (COVER) return;
     var lines = [
