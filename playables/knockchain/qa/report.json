@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-01T15:31:23.615Z",
+  "startedAt": "2026-11-01T15:38:28.121Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -167,16 +167,19 @@
     "layout-wide-21x9-910x390.png",
     "level1-aim.png",
     "level1-flight.png",
+    "level1-found.png",
     "level1-won.png",
     "level2-aim.png",
     "level2-flight.png",
+    "level2-found.png",
     "level2-won.png",
     "level3-aim.png",
     "level3-flight.png",
+    "level3-found.png",
     "level3-won.png",
     "after-3-misses.png",
     "paused.png"
   ],
   "summary": "29/29 passed",
-  "finishedAt": "2026-11-01T15:33:26.215Z"
+  "finishedAt": "2026-11-01T15:40:38.204Z"
 }

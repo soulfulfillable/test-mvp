@@ -1,8 +1,8 @@
 # Knock Chain (가칭, 조준+물리 연쇄 → "잃은 양 한 마리") — 개발 세션 게시판
-마지막 갱신: 2026-11-01 (KST)
+마지막 갱신: 2026-11-02 01:00 (KST)
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-01 · 작업 브랜치: `claude/knockchain-art` (main 반영됨)
+- 마지막 저장: 2026-11-02 01:00 KST · 작업 브랜치: `claude/knockchain-art` (main 반영됨)
 - 방금 끝낸 것: **2단계 코어 테스트 — 플레이 가능 빌드** https://soulfulfillable.github.io/test-mvp/knockchain/ (링크 페이지 `knockchain.html`, 소개·정지 화면 `knockchain-art.html`)
   - 주제 적용(사용자 결정, `plans/knock-chain.md` 주제 절): 핼러윈 밤, 등불 든 목자(아이)가 잃은 양 한 마리를 찾는다. 공 → 던지는 빛(발광 돌), 상자·고양이 → 오두막 문·양, 스위치 → 받침판, **게임 오버 없음**(빗나가면 힌트 문구가 바뀌고 밤이 조금 깊어질 뿐, 던질 것은 무제한), 끝은 항상 "Found. Always.", 마지막 밤은 "Love conquers all." HUD 구석에 작게 "Love conquers all". 노출 수위 A(이름·성구·십자가 없음).
   - 레벨 3개(`src/levels.js`): Night 1 유리 다리 위의 돌 → 유리 깨면 돌이 받침판에 / Night 2 벽 너머로 띄우기(바운서 벽) / Night 3 도미노 3개가 가장자리의 돌을 밀어 떨어뜨림. **풀이기(`tools/solve.js`) 증명**: 발사각 5~85°×세기 0.3~1.3 전수 693발 중 성공 Night 1 14.0% · Night 2 4.5% · Night 3 6.2%, 각 레벨 `solution` 1개 기록.
