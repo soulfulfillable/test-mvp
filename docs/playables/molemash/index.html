@@ -1395,7 +1395,7 @@
         ctx.globalAlpha = 0.9; ctx.textAlign = 'center';
         ctx.font = 'bold ' + Math.round(72 * UI * pop2) + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif';
         ctx.lineWidth = 8 * UI; ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.fillStyle = sec <= 5 ? '#e4342c' : '#f08c1e';
-        var cy2 = holes[4].y - cellW * 0.59;   // between the first and second row
+        var cy2 = Math.max(grid.y + 62 * UI, holes[0].y - moleH - 22 * UI);   // just above the top row, never over a mole
         ctx.strokeText(String(sec), W / 2, cy2); ctx.fillText(String(sec), W / 2, cy2);
         ctx.restore();
       }
