@@ -1,0 +1,301 @@
+{
+  "startedAt": "2026-11-01T01:36:40.057Z",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "checks": [
+    {
+      "name": "loading screen hidden before game_ready",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "bridge initialized (mock platform outside Playgama)",
+      "ok": true,
+      "detail": "mock"
+    },
+    {
+      "name": "game_ready sent exactly once",
+      "ok": true,
+      "detail": "[\"game_ready\"]"
+    },
+    {
+      "name": "title state before first tap",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tutorial on for a new player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tap starts the round",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "level_started message after start",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "AudioContext running after first tap",
+      "ok": true,
+      "detail": "running"
+    },
+    {
+      "name": "sound files decoded (effects + music)",
+      "ok": true,
+      "detail": "bonk2,bonk,gold,skunk,miss,tick,heart,best,whiff,start,over,muteOn,muteOff,bgm"
+    },
+    {
+      "name": "music looping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "scored by whacking moles",
+      "ok": true,
+      "detail": "score 12, whacks 12, lives 2"
+    },
+    {
+      "name": "P pauses and shows the pause panel",
+      "ok": true,
+      "detail": "{\"p\":true,\"vis\":true,\"frozen\":true}"
+    },
+    {
+      "name": "timer frozen while paused",
+      "ok": true,
+      "detail": "29.10 → 29.10"
+    },
+    {
+      "name": "Resume continues the round",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "hidden page: silent and frozen",
+      "ok": true,
+      "detail": "{\"hidden\":true,\"audible\":false,\"ctx\":\"suspended\",\"frozen\":true}"
+    },
+    {
+      "name": "back from hidden: sound allowed again, waits in pause panel",
+      "ok": true,
+      "detail": "{\"hidden\":false,\"audible\":true,\"paused\":true}"
+    },
+    {
+      "name": "interstitial opened: frozen and silent",
+      "ok": true,
+      "detail": "{\"frozen\":true,\"audible\":false}"
+    },
+    {
+      "name": "interstitial closed: running again",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "round ends at 0 s with the game-over panel",
+      "ok": true,
+      "detail": "{\"title\":\"TIME'S UP!\",\"score\":14}"
+    },
+    {
+      "name": "best and rank recorded",
+      "ok": true,
+      "detail": "best 14"
+    },
+    {
+      "name": "level_completed message on time-up",
+      "ok": true,
+      "detail": "game_ready,level_started,level_paused,level_resumed,level_paused,level_resumed,level_completed"
+    },
+    {
+      "name": "mute button silences and shows the off icon",
+      "ok": true,
+      "detail": "{\"user\":true,\"attr\":\"1\",\"audible\":false}"
+    },
+    {
+      "name": "Play again starts a new round",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tutorial off after the first round",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "reload restores best, name, mute (Bridge storage)",
+      "ok": true,
+      "detail": "{\"best\":14,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
+    },
+    {
+      "name": "reload while muted stays silent from the first frame",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "continue (rewarded) button offered once per attempt",
+      "ok": true,
+      "detail": "{\"state\":2,\"btn\":true}"
+    },
+    {
+      "name": "ad closed early: no reward, game stays on the panel",
+      "ok": true,
+      "detail": "{\"state\":2,\"note\":\"Ad not finished, no bonus this time.\",\"used\":false}"
+    },
+    {
+      "name": "rewarded: round continues with hearts back and +10 s",
+      "ok": true,
+      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":9.855899999999904,\"used\":true,\"ranks\":1}"
+    },
+    {
+      "name": "no second continue in the same attempt",
+      "ok": true,
+      "detail": "{\"state\":2,\"btn\":false}"
+    },
+    {
+      "name": "ignoring moles loses 3 hearts → OUT OF HEARTS",
+      "ok": true,
+      "detail": "{\"state\":2,\"lives\":0,\"title\":\"OUT OF HEARTS!\",\"msgs\":[\"level_completed\",\"level_started\",\"level_failed\"]}"
+    },
+    {
+      "name": "desktop detected (keyboard hints)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "number key whacks the matching hole",
+      "ok": true,
+      "detail": "hole 7"
+    },
+    {
+      "name": "Esc does nothing (1.5.2)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "layout phone-360x640 (top): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":119,\"top\":195,\"bottom\":583,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout phone-390x844 (top): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":128,\"top\":307,\"bottom\":724,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout phone-430x932 (top): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":142,\"top\":339,\"bottom\":796,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout land-844x390 (left): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":107,\"top\":27,\"bottom\":380,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "game-over panel fits at land-844x390",
+      "ok": true,
+      "detail": "panel 309px of 390"
+    },
+    {
+      "name": "layout land-915x412 (left): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":114,\"top\":29,\"bottom\":402,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout tablet-768x1024 (top): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":163,\"top\":358,\"bottom\":880,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout tablet-1024x768 (left): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":163,\"top\":145,\"bottom\":667,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout square-640x640 (compact): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":151,\"top\":144,\"bottom\":630,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "game-over panel fits at square-640x640",
+      "ok": true,
+      "detail": "panel 309px of 640"
+    },
+    {
+      "name": "layout iframe-800x450 (left): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":126,\"top\":32,\"bottom\":440,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout iframe-1280x720 (left): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":157,\"top\":129,\"bottom\":631,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout desk-1366x768 (left): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":163,\"top\":145,\"bottom\":667,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout desk-1920x1080 (left): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":230,\"top\":205,\"bottom\":925,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout tall-9x21-390x910 (top): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":128,\"top\":341,\"bottom\":758,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "layout wide-21x9-910x390 (left): HUD and board separate, board on screen, buttons clear",
+      "ok": true,
+      "detail": "{\"cell\":107,\"top\":27,\"bottom\":380,\"btnOverGrid\":false}"
+    },
+    {
+      "name": "console errors: 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "page errors: 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "external requests: 0 (everything ships in the archive)",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "screenshots": [
+    "phone-390x844-title.png",
+    "phone-390x844-play-tutorial.png",
+    "phone-390x844-play.png",
+    "phone-390x844-paused.png",
+    "phone-390x844-over.png",
+    "phone-390x844-over-continue.png",
+    "phone-390x844-over-hearts.png",
+    "iframe-1280x720-play.png",
+    "phone-360x640-play.png",
+    "phone-390x844-play.png",
+    "phone-430x932-play.png",
+    "land-844x390-play.png",
+    "land-844x390-over.png",
+    "land-915x412-play.png",
+    "tablet-768x1024-play.png",
+    "tablet-1024x768-play.png",
+    "square-640x640-play.png",
+    "square-640x640-over.png",
+    "iframe-800x450-play.png",
+    "iframe-1280x720-play.png",
+    "desk-1366x768-play.png",
+    "desk-1920x1080-play.png",
+    "tall-9x21-390x910-play.png",
+    "wide-21x9-910x390-play.png"
+  ],
+  "passed": 53,
+  "failed": 0
+}
