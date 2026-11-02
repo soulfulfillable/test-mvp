@@ -2,8 +2,8 @@
 
 ## 🔁 이어받기
 - 마지막 저장: 2026-11-02 10:50 KST (개발 세션 ③-b: v1 → … → v1.6.0 → **v1.7.0 10초 가속 틱·번들 폰트·광고 미제공 안내**) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
-- 방금 끝낸 것: **Mole Mash v1.7.0** 아카이브 `molemash-1.7.0`(id `cmvylee98260ej80hus357g2y`, 12.0MB) 빌드 체크 PASSED → `publish_sandbox`(01:42Z, 게시 확인은 다음 할 일 ①). 내용: 피드백 기록 11-02 v1.6.0 참고(가속 틱·Lilita One/Fredoka·광고 미제공 2회면 버튼 숨김). 직전 v1.6.0: 타이틀·일시정지의 **Music 버튼**(6곡 CC0, 기본 Chiptune, 고른 곡만 로드, 누르면 즉시 전환) — 피드백 기록 11-02 v1.5.0 참고. 로봇 77/77. 직전 v1.5.0 내용: 콤보 5부터 망치에 불꽃+점수 2배, 10부터 3배(`comboMult`, HUD 콤보 강조) · 결과 화면 World top 10 에 자기 줄 "You (이름)" 표시 + 로그인 지원 플랫폼이면 `#signin-btn`(이름은 Playgama 계정에서만 보임, 게임 안 이름은 기기 로컬) · 보상형 광고 중 페이지가 리로드돼도 `pendingRun`(10분)으로 결과 화면 복원("Welcome back. Your run is still here.") · 폭탄은 하트 1개만(다른 두더지 놀라 숨음, 패널티 없음) · 이어하기 뒤 SECOND WIND 카드+3·2·1·GO, 플랫폼 pause 무시 가드. 로봇 73/73(`qa/report.json`).
-  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (**v1.7.0 게시 요청됨**) · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.7.0): https://developer.playgama.com/qa-tool/cmvylee98260ej80hus357g2y
+- 방금 끝낸 것: **Mole Mash v1.7.0** 아카이브 `molemash-1.7.0`(id `cmvylee98260ej80hus357g2y`, 12.0MB) 빌드 체크 PASSED → `publish_sandbox` → **PUBLISHED(01:42Z)**. 내용: 피드백 기록 11-02 v1.6.0 참고(가속 틱·Lilita One/Fredoka·광고 미제공 2회면 버튼 숨김). 직전 v1.6.0: 타이틀·일시정지의 **Music 버튼**(6곡 CC0, 기본 Chiptune, 고른 곡만 로드, 누르면 즉시 전환) — 피드백 기록 11-02 v1.5.0 참고. 로봇 77/77. 직전 v1.5.0 내용: 콤보 5부터 망치에 불꽃+점수 2배, 10부터 3배(`comboMult`, HUD 콤보 강조) · 결과 화면 World top 10 에 자기 줄 "You (이름)" 표시 + 로그인 지원 플랫폼이면 `#signin-btn`(이름은 Playgama 계정에서만 보임, 게임 안 이름은 기기 로컬) · 보상형 광고 중 페이지가 리로드돼도 `pendingRun`(10분)으로 결과 화면 복원("Welcome back. Your run is still here.") · 폭탄은 하트 1개만(다른 두더지 놀라 숨음, 패널티 없음) · 이어하기 뒤 SECOND WIND 카드+3·2·1·GO, 플랫폼 pause 무시 가드. 로봇 73/73(`qa/report.json`).
+  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (**v1.7.0 라이브**) · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.7.0): https://developer.playgama.com/qa-tool/cmvylee98260ej80hus357g2y
   - 저장: `progress` v2 = {best, played, ranks, name, hammers[], equipped, boxFill, boxesReady, boxesOpened}(v1 저장은 기본값으로 이어짐). 보상형 배치 `continue`·`open_box`(config).
   - ⚠️ 모더레이션(Submit for review)은 샌드박스 목표 도달 뒤 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인은 사용자 확인 전엔 안 함.
 
@@ -26,7 +26,7 @@
 - 확인할 결과: 인증 항목 통과/실패 목록(실패하면 번호·문구 그대로 이 게시판에 적기), `get_launch_steps` form 단계가 BLOCKED 에서 풀림.
 - 진행 중이던 것: 없음 (v1.5.0 게시 확인 끝)
 - **다음 할 일 (순서)**:
-  ① v1.7.0 게시 확인(`get_publications` PUBLISHED, archive `cmvylee98260ej80hus357g2y`). ✅ 이어하기 실패 원인은 확정됨(샌드박스 광고 미제공, 피드백 기록 11-02 v1.6.0) — 사용자가 또 말하면 **코드가 아니라 샌드박스 광고 공급 문제**라고 설명. 정식 카탈로그 광고망에서 다시 봐야 함 — 사용자가 다시 '컨티뉴 안 됨'이라 하면 `get_game_telemetry_session_facts eventName=ad_state` 로 그 세션의 순서(seq)를 읽어 원인 확정 — 아직이면 `publish_sandbox`(updateNote 필수). **확인 못 한 것**: SaaS 리더보드가 실제 샌드박스에서 `in_game` 으로 잡히는지(mock 에선 not_available 이라 숨김) — 사용자가 플레이 뒤 결과 화면에 "World top 10" 이 뜨는지 알려 주면 됨. 안 뜨면 config `saas.leaderboards.platforms` 값 재확인
+  ① ✅ v1.7.0 게시 확인됨(PUBLISHED 01:42Z). ✅ 이어하기 실패 원인은 확정됨(샌드박스 광고 미제공, 피드백 기록 11-02 v1.6.0) — 사용자가 또 말하면 **코드가 아니라 샌드박스 광고 공급 문제**라고 설명. 정식 카탈로그 광고망에서 다시 봐야 함 — 사용자가 다시 '컨티뉴 안 됨'이라 하면 `get_game_telemetry_session_facts eventName=ad_state` 로 그 세션의 순서(seq)를 읽어 원인 확정 — 아직이면 `publish_sandbox`(updateNote 필수). **확인 못 한 것**: SaaS 리더보드가 실제 샌드박스에서 `in_game` 으로 잡히는지(mock 에선 not_available 이라 숨김) — 사용자가 플레이 뒤 결과 화면에 "World top 10" 이 뜨는지 알려 주면 됨. 안 뜨면 config `saas.leaderboards.platforms` 값 재확인
   ② 사용자가 v1.1.0 플레이 → 느낌·"다음 판 기대되나" 원문 기록. Playgama 텔레메트리는 트래픽이 모이면 `get_game_telemetry_analytics`(하루 1번 이하)로 옵트인율·다음 판 시작률 확인
   ③ Codex 인증(위 🖱️) 결과 반영
   ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. (참고 `get_sandbox_traffic` 11-01: 무료 부스트 3회 남음 — 3일간 약 50플레이 예상, 공유 글 링크가 필요. 사용자가 마음 바꾸면 그때.) **샌드박스 목표 수치(플레이 시간·인원)는 도구로 못 읽음 — 콘솔 샌드박스 카드에서만 보임, 하루 1번 집계.** 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
