@@ -232,7 +232,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.3.2';
+  var GAME_VERSION = '1.3.3';
   var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
   var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
   var CLOCK_TIME = 5;            // the clock mole adds five seconds
@@ -654,7 +654,7 @@
     else if (!onboarding()) {
       if (score >= 5 && roll < 0.16) kind = 'bomb';
       else if (score >= 10 && roll > 0.92) kind = 'gold';
-      else if (score >= 6 && roll > 0.84) kind = 'clock';
+      else if (score >= 6 && timeLeft <= 25 && roll > 0.84) kind = 'clock';   // only when the clock is actually low
     }
     var st = stayTime();
     if (onboarding()) st = [3.0, 2.6, 2.2][tutHits];   // onboarding: the first three moles wait for you
@@ -975,27 +975,41 @@
     var ok = safe(function () { B.advertisement.showRewarded('continue'); return true; }, false);
     if (!ok) { rewardPending = null; noteAd('Ad not available right now.'); analytics('ad_failed', { offer: 'continue', stage: 'request' }); }
   }
+  // Rewarded ads: platforms differ in whether 'rewarded' comes before or after 'closed'. The reward is applied
+  // once the ad is off the screen AND the reward was reported; a 'closed' without 'rewarded' waits a short
+  // grace period before it counts as "not finished". The round never restarts because of an ad.
+  var rewardEarned = null, rewardT = null, adSeenClosed = false, adSeenOpened = false;
   function onRewardedState(st) {
+    if (st === 'opened' || st === 'loading') { adSeenClosed = false; adSeenOpened = st === 'opened' || adSeenOpened; }
     adStateChanged(st);
     if (!rewardPending) return;
     var offer = rewardPending;
     if (st === 'rewarded') {
-      // earned: apply it once the ad has closed, so the round never runs under the ad or behind a pause panel
       rewardEarned = offer;
       analytics('ad_rewarded', { offer: offer });
-      clearTimeout(rewardT); rewardT = setTimeout(function () { if (rewardEarned && !adOpen) applyReward(); }, 1500);
-    } else if (st === 'closed' || st === 'failed') {
+      clearTimeout(rewardT);
+      if (adSeenClosed || !adOpen) applyReward();                     // the ad is already gone: continue now
+      else rewardT = setTimeout(function () { if (rewardEarned) applyReward(); }, 2500);   // never wait forever for 'closed'
+    } else if (st === 'closed') {
+      adSeenClosed = true;
       if (rewardEarned) { applyReward(); return; }
-      rewardPending = null;
-      analytics('ad_failed', { offer: offer, stage: st });
-      var msg = st === 'failed' ? 'Ad not available right now.' : 'Ad not finished, no reward this time.';
-      if (offer === 'box') boxNote(msg + ' Your box is safe.'); else noteAd(msg);
+      clearTimeout(rewardT);
+      rewardT = setTimeout(function () { if (rewardPending && !rewardEarned) rewardFailed(offer, 'closed'); }, 1500);   // 'rewarded' may still follow
+    } else if (st === 'failed') {
+      clearTimeout(rewardT);
+      rewardFailed(offer, 'failed');
     }
   }
-  var rewardEarned = null, rewardT = null;
+  function rewardFailed(offer, stage) {
+    rewardPending = null; rewardEarned = null;
+    analytics('ad_failed', { offer: offer, stage: stage });
+    var msg = stage === 'failed' ? 'Ad not available right now.' : 'Ad not finished, no reward this time.';
+    if (offer === 'box') boxNote(msg + ' Your box is safe.'); else noteAd(msg);
+  }
   function applyReward() {
     var offer = rewardEarned; rewardEarned = null; rewardPending = null; clearTimeout(rewardT);
     if (!offer) return;
+    adOpen = false; setReason('ad', false); last = performance.now();
     hidePanels(); userPaused = false;
     if (offer === 'box') openBox(); else grantContinue();
   }
@@ -1027,9 +1041,9 @@
     safe(function () { if (B.advertisement.isInterstitialSupported) B.advertisement.showInterstitial(placement); });
   }
   function adStateChanged(st) {
-    adOpen = st === 'opened' || st === 'rewarded';   // a rewarded ad is still on screen between 'rewarded' and 'closed'
+    adOpen = st === 'opened' || (st === 'rewarded' && !adSeenClosed);   // a rewarded ad can still be on screen until 'closed'
     setReason('ad', adOpen);
-    if (!adOpen) { last = performance.now(); if (rewardEarned) applyReward(); }
+    if (!adOpen) last = performance.now();
   }
   function sendMsg(name, data) {
     if (DEBUG) (window.__msgs = window.__msgs || []).push(name);
@@ -1073,6 +1087,7 @@
   document.getElementById('retry-btn').addEventListener('click', function () {
     unlockAudio();
     if (state === STATE_OVER && performance.now() - overAt < 600) return;
+    if (rewardPending || rewardEarned) return;   // an ad reward is still being settled
     nextRound();
   });
   document.getElementById('share-btn').addEventListener('click', function () { unlockAudio(); shareScore(); });

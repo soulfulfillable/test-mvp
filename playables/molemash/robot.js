@@ -192,8 +192,8 @@ async function playAgain(page) {
     await shot(page, 'phone-390x844-over-continue');
     await page.click('#continue-btn');
     await page.evaluate(() => window.__game.onRewardedState('opened'));
-    await page.evaluate(() => window.__game.onRewardedState('closed'));   // closed without reward → nothing granted
-    await page.waitForTimeout(100);
+    await page.evaluate(() => window.__game.onRewardedState('closed'));   // closed without reward → nothing granted (after a short grace)
+    await page.waitForTimeout(1800);
     const notGranted = await page.evaluate(() => ({ state: window.__game.state, note: document.getElementById('ad-note').textContent, used: window.__game.continueUsed }));
     check("ad closed early: no reward, game stays on the panel", notGranted.state === 2 && !notGranted.used && notGranted.note.length > 0, JSON.stringify(notGranted));
     await page.click('#continue-btn');
@@ -214,6 +214,26 @@ async function playAgain(page) {
     await page.waitForTimeout(600);
     const o3 = await page.evaluate(() => ({ state: window.__game.state, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
     check('no second continue in the same attempt', o3.state === 2 && !o3.btn, JSON.stringify(o3));
+    // ad states in the other order (closed before rewarded): the reward must still land, and nothing restarts
+    await page.waitForTimeout(700);
+    await playAgain(page);
+    await page.waitForTimeout(2400);
+    await page.evaluate(() => { window.__game.timeLeft = 0.2; });
+    await page.waitForTimeout(900);
+    const sc0 = await page.evaluate(() => ({ state: window.__game.state, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
+    if (sc0.btn) {
+      const scoreBefore = await page.evaluate(() => window.__game.score);
+      await page.click('#continue-btn');
+      await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('closed'); });
+      await page.waitForTimeout(300);
+      const mid = await page.evaluate(() => ({ state: window.__game.state, pending: !!window.__game.rewardEarned }));
+      await page.evaluate(() => { window.__game.onRewardedState('rewarded'); });
+      await page.waitForTimeout(200);
+      const after = await page.evaluate(() => ({ state: window.__game.state, score: window.__game.score, lives: window.__game.lives, used: window.__game.continueUsed, countIn: window.__game.countIn }));
+      check('closed-then-rewarded order still continues the same run (score kept)', mid.state === 2 && after.state === 1 && after.score === scoreBefore && after.lives === 3 && after.used, JSON.stringify({ mid, after, scoreBefore }));
+      await page.evaluate(() => { window.__game.countIn = 0; window.__game.timeLeft = 0.2; });
+      await page.waitForTimeout(900);
+    } else check('closed-then-rewarded order test reachable', false, JSON.stringify(sc0));
     // out of hearts path
     await page.waitForTimeout(700);   // the panel ignores taps for 600 ms after game over (mis-tap guard)
     await playAgain(page);
@@ -249,7 +269,7 @@ async function playAgain(page) {
     await page.evaluate(() => { window.__forceRewarded = true; });
     await page.click('#open-box-btn');
     await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('closed'); });
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(1800);
     const kept = await page.evaluate(() => ({ ready: window.__game.store.progress.boxesReady, note: document.getElementById('box-note').textContent, open: !document.getElementById('box-panel').classList.contains('hidden'), hammers: window.__game.store.progress.hammers.length }));
     check('ad closed early: box kept, nothing granted', kept.ready === 1 && kept.hammers === 1 && kept.open && /safe/.test(kept.note), JSON.stringify(kept));
     await page.click('#open-box-btn');
