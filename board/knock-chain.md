@@ -1,7 +1,10 @@
 # Knock Chain (가칭, 조준+물리 연쇄 → "잃은 양 한 마리") — 개발 세션 게시판
 마지막 갱신: 2026-11-02 01:00 (KST)
 
-## 🔁 이어받기
+## ⏹️ 중단 (사용자 결정 2026-11-02)
+**Knock Chain 은 중단한다.** 더 수정·레벨 추가 없음. 파일(`playables/knockchain/`, `docs/knockchain/`, `docs/knockchain-art.html`)은 **삭제하지 않고 보존.** 이 세션/브랜치로 새 작업을 열지 않는다. 이유: 1단계 아트·가독성 실패("전혀 모르겠는데"). 교훈은 PLAYBOOK 6장에.
+
+## 🔁 이어받기 (중단 시점 기록)
 - 마지막 저장: 2026-11-02 01:00 KST · 작업 브랜치: `claude/knockchain-art` (main 반영됨)
 - 방금 끝낸 것: **2단계 코어 테스트 — 플레이 가능 빌드** https://soulfulfillable.github.io/test-mvp/knockchain/ (링크 페이지 `knockchain.html`, 소개·정지 화면 `knockchain-art.html`)
   - 주제 적용(사용자 결정, `plans/knock-chain.md` 주제 절): 핼러윈 밤, 등불 든 목자(아이)가 잃은 양 한 마리를 찾는다. 공 → 던지는 빛(발광 돌), 상자·고양이 → 오두막 문·양, 스위치 → 받침판, **게임 오버 없음**(빗나가면 힌트 문구가 바뀌고 밤이 조금 깊어질 뿐, 던질 것은 무제한), 끝은 항상 "Found. Always.", 마지막 밤은 "Love conquers all." HUD 구석에 작게 "Love conquers all". 노출 수위 A(이름·성구·십자가 없음).

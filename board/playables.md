@@ -79,6 +79,39 @@
 - 사용자 대기: 없음(신청서는 Codex, Playgama 업로드는 세션). 샌드박스 링크가 나오면 사용자가 폰에서 느낌 확인 → 그 뒤 Playgama 콘솔 "Submit for review" 를 Codex 가.
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로.`
 
+## 🚀 Mole Mash 정식 출시까지 — API 로 확인한 사실 (기획 파트너, 2026-11-02 10:xx UTC)
+
+**샌드박스 게시 ≠ 카탈로그 출시.** 지금은 "링크 있는 사람만 하는 공개 테스트 페이지" 단계다.
+
+| 항목 | API 응답(원문 요지) | 뜻 |
+|---|---|---|
+| 게임 상태 | `list_applications` → status **DRAFT** | 카탈로그에 올라간 적 없음 |
+| 샌드박스 | `get_sandbox_state` → site ACTIVE, discovery VISIBLE, revision = 아카이브 `molemash-1.7.1`(cmvylmkb…), publishedAt 2026-11-02T01:51Z, `publish.allowed:true`, changeStatus UNCHANGED | v1.7.1 이 실제로 서비스 중. 같은 빌드 재게시는 의미 없음 |
+| 모더레이션(정식 심사) 제출 | `get_submission_state` → **allowed:false, reason MODERATION_UNAVAILABLE, catalogAvailable:false**, message: "This game cannot be submitted to moderation. Publish it to the sandbox instead", failedAttempts 0, certificationPassedLevel null, extendedCertResetAvailable true | **Submit 버튼은 잠겨 있다.** 잠금 사유는 "아직 샌드박스 목표 미달"(도구 설명: 샌드박스가 콘솔 카드의 목표치에 닿으면 열림, 하루 1회 집계; 목표 중 플레이 시간은 게임 카테고리별). **목표 수치와 현재값은 API 에 없다 → 콘솔 샌드박스 카드에서만 보임.** 만들어 내지 않는다 |
+| 런치 단계 | `get_launch_steps` → archive DONE · bridge DONE · covers DONE · **form BLOCKED(NO_CERTIFICATION, required:false)** · sandbox DONE · share AVAILABLE · **traffic TODO(required:true, source SHARE, askDeveloper:true)** — current = traffic | 남은 필수 단계는 트래픽 1개. 폼은 QA 툴 인증 뒤 열림 |
+| 인증 | QA 툴 링크 `https://developer.playgama.com/qa-tool/cmvylmkb82633j80hi0iu03j9` (브라우저에서 사람이 실행) | 모더레이션 전 필요(제출 거부 순서에 "missing certification" 이 MODERATION_UNAVAILABLE 다음) |
+| 트래픽 | `get_sandbox_traffic` → verdict allowed, offer **FREE** available, durationDays 3, expectedGameplays ≈50, remainingFreeRuns 3, referral 없음, hasCompletedRun false, runs [] | 무료 부스트 3회 남음(공개 글 URL 1개 필요). 유료는 콘솔. **시작은 미승인** |
+| 게시 기록 | `get_publications` → PLAYGAMA_SANDBOX PUBLISHED(01:51Z) 1건, PLAYGAMA(카탈로그) 기록 없음 | 카탈로그 게시 이력 0 |
+
+**정확히 무엇이 남았나 (순서)**
+1. **샌드박스 목표 도달** — 플레이 수·체류 시간 등. 수치는 콘솔 카드에서 읽어야 한다(아래 Codex 작업). 자연 유입(사용자 결정 11-01 A)만으로는 느릴 수 있음 → 무료 부스트는 사용자 승인 사항.
+2. **QA 툴 인증** — 브라우저에서 체크 실행(Codex). 인증되면 form 단계가 열리고 certificationPassedLevel 이 채워진다.
+3. **모더레이션 제출** — `catalogAvailable` 이 true 로 바뀐 뒤 **사용자가 콘솔에서 Submit for review**. 도구로는 못 한다. 무료. 출시일은 모더레이션 결과에 달려 있어 **확정 불가**.
+4. 승인 후 카탈로그 게시. 이후 업데이트는 `send_playgama_catalog_update`(사용자 yes 뒤에만).
+
+**누가 무엇을**: 세션(Claude) = 상태 조회·빌드·게시판. Codex = 콘솔 카드 읽기·QA 툴 인증·(승인 시) 공개 글. 사용자 = 부스트 승인 여부, Submit for review 클릭.
+**비용**: 지금까지 전부 무료. 유료 트래픽만 콘솔 결제(미승인).
+**출시 조건이 아닌 것**: 상자 A 실험(v1.1), 신규 기능, 리더보드 확인 — 선택 후속 업데이트. **로봇 77/77 ≠ 플랫폼 심사 승인.**
+**사용자에게 지금 필요한 단 1가지**: 샌드박스 **무료 부스트(3일·약 50플레이·무료, 공개 글 1개 필요)를 쓸지** 결정. 안 쓰면 자연 유입으로 목표를 채울 때까지 기다린다(기간 예측 불가).
+
+### 🖱️ Codex 에게 (브라우저 작업) — Mole Mash 출시 전 2건
+- URL: https://developer.playgama.com → 게임 **Mole Mash**(id cmvxme9mt1hvbj80hj6q0lokb)
+- 로그인 계정: Playgama 개발자 계정(Soulfulfill)
+- 할 것 ①: 게임 페이지의 **샌드박스 카드**에 적힌 **목표치(플레이 수·플레이 시간 등)와 현재값**을 그대로 옮겨 적기(화면 문구 원문). 어디에도 없으면 "없음"이라고.
+- 할 것 ②: **QA 툴** https://developer.playgama.com/qa-tool/cmvylmkb82633j80hi0iu03j9 를 열어 체크를 실행하고 결과(통과/실패 항목 원문)를 적기. 실패 항목이 있으면 고치는 건 Claude 세션.
+- 하지 않을 것: Submit for review, 트래픽 캠페인 시작, 결제, 계약 동의.
+- 확인할 결과: 이 게시판 "출시 조건" 표 아래에 "콘솔 카드(날짜): 목표 …, 현재 …" + "QA 툴(날짜): …" 두 줄.
+
 ## 📚 참고 연구: Hamster Escape(YouTube Playables)의 보상 루프 — 배우되 베끼지 않음 (기획 파트너, 2026-11-01)
 
 **사용자 목표**: "광고 보기까지의 동기부여와 꾸미기/수집 구조를 배우고 싶다". 복제가 아니라 **놀이→진척→기대→선택→공개→장착→다음 판** 연결의 타이밍을 배우는 것.
