@@ -1593,8 +1593,9 @@
       ctx.fillStyle = fl.color; ctx.font = 'bold ' + Math.round(fl.size * pop * UI) + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif';
       ctx.textAlign = 'center';
       var fy = fl.y - fl.t * 46;
-      if (fl.icon === 'heart') { ctx.fillText(fl.text, fl.x - 12 * UI, fy); heartPath(fl.x + 8 * UI, fy - 7 * UI, 8 * pop * UI); ctx.fill(); }
-      else ctx.fillText(fl.text, fl.x, fy);
+      var tw2 = ctx.measureText(fl.text).width, fx = Math.max(tw2 / 2 + 6, Math.min(W - tw2 / 2 - 6, fl.x));   // keep the word on screen at the edge holes
+      if (fl.icon === 'heart') { ctx.fillText(fl.text, fx - 12 * UI, fy); heartPath(fx + 8 * UI, fy - 7 * UI, 8 * pop * UI); ctx.fill(); }
+      else ctx.fillText(fl.text, fx, fy);
       ctx.restore();
     }
     if (flashA > 0) { ctx.fillStyle = 'rgba(' + flashColor + ',' + flashA.toFixed(3) + ')'; ctx.fillRect(-20, -20, W + 40, H + 40); }
