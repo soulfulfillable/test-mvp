@@ -3,7 +3,7 @@
 ## 🔁 이어받기
 - 마지막 저장: 2026-11-01 21:20 KST (개발 세션 ③-b: v1 → v1.0.1 → v1.1.0 망치 수집 루프 → **v1.1.1 중반 속도 보정** → **v1.2.0 60초·카운트다운·랭킹** → v1.3.0 → v1.3.1 → v1.3.2 → v1.3.3 → **v1.4.0 콤보 표시·타격음 5종·광고 뒤 패널 제거**) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
 - 방금 끝낸 것: **Mole Mash v1.1.0** 아카이브 `molemash-1.1.0`(id `cmvxpcp0s1juwj80hkcbczua4`) 업로드 — 선물 상자 루프(방식 A, 결정 로그 11-01): 라운드 끝 패널에 **선물 상자 게이지**(잡은 두더지 수로 참, 첫 상자 12마리·다음부터 18마리, 애니메이션) + **망치 5칸 줄**(보유/잠김, 탭하면 장착) → Play again 때 상자가 있으면 **"WHAT'S IN THE BOX?" 화면**(이어하기 제안과 다른 화면): "Watch an ad: open the box / reward: a new hammer" 또는 "Later (keep the box)"(상자 쌓임) → `rewarded` 때만 개봉 → **NEW HAMMER!** 공개(Carnival Classic·Squeaky Rubber·Candy Cane·Frying Pan·Golden Mallet, 전부 코드 드로잉) → Equip and play / Keep my hammer → 플레이 중 장착 망치로 내려침, 타이틀에도 장착 망치. 광고 미지원 플랫폼은 무료 개봉, 광고 실패·취소 땐 상자·진척 보존 + "Your box is safe". 5개 완주 시 "All hammers collected"·상자 숨김. 측정 이벤트 round_end·progress_shown·bonus_ready·reward_offer_shown·ad_opt_in·ad_rewarded·ad_failed·reward_granted·equipped·next_round_started·box_later·box_opened_free. 로봇 62/62(`qa/report.json`, 스크린샷 `qa/phone-390x844-{over-box,box,reveal,play-new-hammer}.png`).
-  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (v1.1.0 게시 여부는 아래 "진행 중") · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.3.3): https://developer.playgama.com/qa-tool/cmvyj2u6u26qajm0h0p4udn2w
+  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (v1.1.0 게시 여부는 아래 "진행 중") · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.4.0): https://developer.playgama.com/qa-tool/cmvyj9whu25b3j80h1yhw5jma
   - 저장: `progress` v2 = {best, played, ranks, name, hammers[], equipped, boxFill, boxesReady, boxesOpened}(v1 저장은 기본값으로 이어짐). 보상형 배치 `continue`·`open_box`(config).
   - ⚠️ 모더레이션(Submit for review)은 샌드박스 목표 도달 뒤 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인은 사용자 확인 전엔 안 함.
 
@@ -21,12 +21,12 @@
 - 확인할 결과: 글의 공개 URL(threads.com/@…/post/…)을 이 게시판 "사용자 대기" 줄에 적기 → 개발 세션이 `start_sandbox_traffic` 으로 부스트 시작(결정 "A + 무료 부스트"로 기록). 회사명·실명 어디에도 쓰지 않는다.
 
 ### 🖱️ Codex 에게 (브라우저 작업) — Playgama QA 툴 인증(certification) (개발 세션 11-01)
-- URL: https://developer.playgama.com/qa-tool/cmvyj2u6u26qajm0h0p4udn2w (v1.3.3 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
+- URL: https://developer.playgama.com/qa-tool/cmvyj9whu25b3j80h1yhw5jma (v1.4.0 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
 - 할 것: QA 툴에서 **Test Game** 으로 열어 한 판 플레이(세로·가로·1:1 프리셋 각 1번) → 인증(certification) 체크 진행. `get_launch_steps` 의 form 단계가 `NO_CERTIFICATION` 이라 사람이 QA 툴에서 인증해야 폼이 완성됨. **Submit for review(모더레이션)·트래픽 캠페인은 누르지 말 것.**
 - 확인할 결과: 인증 항목 통과/실패 목록(실패하면 번호·문구 그대로 이 게시판에 적기), `get_launch_steps` form 단계가 BLOCKED 에서 풀림.
 - 진행 중이던 것: 없음 (v1.1.0 빌드 체크 PASSED·publish_sandbox 요청함 — 게시 확인은 다음 할 일 ①)
 - **다음 할 일 (순서)**:
-  ① v1.4.0 샌드박스 게시 확인(`get_publications` PUBLISHED, archive — 아래 커밋 뒤 start_archive_upload 로 받은 id) — 아직이면 `publish_sandbox`(updateNote 필수). **확인 못 한 것**: SaaS 리더보드가 실제 샌드박스에서 `in_game` 으로 잡히는지(mock 에선 not_available 이라 숨김) — 사용자가 플레이 뒤 결과 화면에 "World top 10" 이 뜨는지 알려 주면 됨. 안 뜨면 config `saas.leaderboards.platforms` 값 재확인
+  ① v1.4.0 샌드박스 게시 확인(`get_publications` PUBLISHED, archive `cmvyj9whu25b3j80h1yhw5jma`) — 아직이면 `publish_sandbox`(updateNote 필수). **확인 못 한 것**: SaaS 리더보드가 실제 샌드박스에서 `in_game` 으로 잡히는지(mock 에선 not_available 이라 숨김) — 사용자가 플레이 뒤 결과 화면에 "World top 10" 이 뜨는지 알려 주면 됨. 안 뜨면 config `saas.leaderboards.platforms` 값 재확인
   ② 사용자가 v1.1.0 플레이 → 느낌·"다음 판 기대되나" 원문 기록. Playgama 텔레메트리는 트래픽이 모이면 `get_game_telemetry_analytics`(하루 1번 이하)로 옵트인율·다음 판 시작률 확인
   ③ Codex 인증(위 🖱️) 결과 반영
   ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. (참고 `get_sandbox_traffic` 11-01: 무료 부스트 3회 남음 — 3일간 약 50플레이 예상, 공유 글 링크가 필요. 사용자가 마음 바꾸면 그때.) **샌드박스 목표 수치(플레이 시간·인원)는 도구로 못 읽음 — 콘솔 샌드박스 카드에서만 보임, 하루 1번 집계.** 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
