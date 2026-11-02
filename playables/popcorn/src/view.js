@@ -305,6 +305,7 @@ export class View {
     const label = (text, x, y, ax, ay) => { // box at (x,y), arrow from box bottom to (ax,ay)
       c.font = `700 ${Math.max(14, 0.22 * S)}px -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif`;
       const tw = c.measureText(text).width, pw = tw + 0.3 * S, ph = 0.4 * S;
+      x = Math.max(pw / 2 + 8, Math.min(this.w - pw / 2 - 8, x)); // keep the box on screen
       c.strokeStyle = PAL.acc; c.lineWidth = Math.max(3, 0.06 * S); c.lineCap = 'round'; c.lineJoin = 'round';
       c.beginPath(); c.moveTo(x, y + ph / 2); c.lineTo(ax, ay); c.stroke();
       const ang = Math.atan2(ay - (y + ph / 2), ax - x), hl = 0.2 * S;
