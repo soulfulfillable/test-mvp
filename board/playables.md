@@ -29,10 +29,10 @@
   ① ✅ v1.7.1 게시 확인됨(PUBLISHED 01:51Z). ✅ ad_state 재조회 완료(14:53Z, 피드백 기록 참고): v1.7.1 에서 iOS·Windows 이어하기 정상. **기획 세션 11-02 우선순위: 정식 출시가 최우선** — 샌드박스 재게시는 플레이어가 느낄 변화가 있을 때만(UNCHANGED 재게시 금지, 시간당 15회), Submit·트래픽·결제 금지. Codex 가 QA 툴 결과를 적으면 실패 항목 수정이 이 세션 몫. ✅ 이어하기 실패 원인은 확정됨(샌드박스 광고 미제공, 피드백 기록 11-02 v1.6.0) — 사용자가 또 말하면 **코드가 아니라 샌드박스 광고 공급 문제**라고 설명. 정식 카탈로그 광고망에서 다시 봐야 함 — 사용자가 다시 '컨티뉴 안 됨'이라 하면 `get_game_telemetry_session_facts eventName=ad_state` 로 그 세션의 순서(seq)를 읽어 원인 확정 — 아직이면 `publish_sandbox`(updateNote 필수). **확인 못 한 것**: SaaS 리더보드가 실제 샌드박스에서 `in_game` 으로 잡히는지(mock 에선 not_available 이라 숨김) — 사용자가 플레이 뒤 결과 화면에 "World top 10" 이 뜨는지 알려 주면 됨. 안 뜨면 config `saas.leaderboards.platforms` 값 재확인
   ② 사용자가 v1.1.0 플레이 → 느낌·"다음 판 기대되나" 원문 기록. Playgama 텔레메트리는 트래픽이 모이면 `get_game_telemetry_analytics`(하루 1번 이하)로 옵트인율·다음 판 시작률 확인
   ③ Codex 인증(위 🖱️) 결과 반영
-  ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. (참고 `get_sandbox_traffic` 11-01: 무료 부스트 3회 남음 — 3일간 약 50플레이 예상, 공유 글 링크가 필요. 사용자가 마음 바꾸면 그때.) **샌드박스 목표 수치(플레이 시간·인원)는 도구로 못 읽음 — 콘솔 샌드박스 카드에서만 보임, 하루 1번 집계.** 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
+  ④ **무료 부스트 진행 중(run `cmvzetvks020dlf0h7c2m5w8e`, ~11-05 15:24Z)** — 하루 1회 `get_sandbox_traffic` 읽어 위 '부스트 일지'에 한 줄(status·goalProgress·spentRatio), FAILED 면 failureReason 적고 멈춤. `start_sandbox_traffic` 재호출 금지(남은 무료 2회는 다른 게임용), 캠페인 중 샌드박스 재게시 금지. (이전: 트래픽 = A 자연 유입(11-01) → 11-02 사용자 승인으로 부스트 1회로 바뀜.) (참고 `get_sandbox_traffic` 11-01: 무료 부스트 3회 남음 — 3일간 약 50플레이 예상, 공유 글 링크가 필요. 사용자가 마음 바꾸면 그때.) **샌드박스 목표 수치(플레이 시간·인원)는 도구로 못 읽음 — 콘솔 샌드박스 카드에서만 보임, 하루 1번 집계.** 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
   ⑤ (선택) BGM 교체 — 카니발 루프 mp3 받으면 `audio/bgm.*` 교체 → `./build.sh` → 재업로드
   ⑥ 다음 트랙은 기획 결정에 따름(`plans/playables-core-fun.md` 7장: Chicken Cross 제외, 신규 코어 1순위 조준+물리 연쇄 — 착수 미승인). Mole Mash 틀 복사 시 `playables/molemash/index.html`·`robot.js`
-- 사용자 대기: ⓪ **무료 부스트(3일·약 50플레이, 공개 글 1개 필요) 쓸지 결정** — 안 쓰면 자연 유입으로 샌드박스 목표를 채울 때까지 대기 ① v1.7.1: 새 폰트 느낌(Lilita One/Fredoka — 다른 후보 Bangers·Luckiest Guy·Baloo 2 도 받아 둠, scratchpad), 10초 틱 느낌, 음악 6곡 중 마음에 드는 것·이음새 어색한 곡 이름, 결과 화면에 World top 10 이 보이는지 ② Threads 글 URL(무료 부스트용, 위 🖱️) ③ Codex QA 툴 인증 결과(QA 툴 링크는 v1.6.0 으로 갱신)
+- 사용자 대기: ⓪ (선택) 부스트 일지를 매일 자동으로 적으려면 이 세션을 하루 1번 깨우는 예약 작업이 필요 — 사용자가 OK 하면 만들고 `ops/routines/` 에 기록 ① v1.7.1: 새 폰트 느낌(Lilita One/Fredoka — 다른 후보 Bangers·Luckiest Guy·Baloo 2 도 받아 둠, scratchpad), 10초 틱 느낌, 음악 6곡 중 마음에 드는 것·이음새 어색한 곡 이름, 결과 화면에 World top 10 이 보이는지 ② Threads 글 URL(무료 부스트용, 위 🖱️) ③ Codex QA 툴 인증 결과(QA 툴 링크는 v1.6.0 으로 갱신)
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
@@ -106,7 +106,9 @@
 - 시작 전 `get_sandbox_traffic`: offer FREE, priceUsd null, remainingFreeRuns 3, current null, runs [] (진행 중 없음 확인)
 - `start_sandbox_traffic(postUrls=[https://www.threads.com/@treasurefieldstudio/post/DfPnIRLoTqU])` → run **id `cmvzetvks020dlf0h7c2m5w8e`**, kind FREE, status **PENDING**, budgetUsd 6(플랫폼 내부 예산, 사용자 결제 아님), startsAt 2026-11-02T15:24:47Z, **endsAt 2026-11-05T15:24:47Z**(3일), goalProgress 0, creativeCount 0, failureReason null
 - 시작 직후 재조회(15:25Z): verdict allowed:false reason **RUN_IN_PROGRESS**(정상 — 진행 중이라 새 캠페인 불가), offer available:false, **remainingFreeRuns 2**, current = 위 run(status PENDING, goalProgress 0, spentRatio null), hasCompletedRun false. 비용 0. 링크는 1개만 넣음(2개까지 가능 — 두 번째 공개 글이 생기면 같은 캠페인에 추가해 예산·기간 연장 가능, 새 캠페인 아님). **중복 캠페인 금지 — 이 게임엔 이 1회뿐.**
-- 다음 확인: 하루 1회 `get_sandbox_traffic` 로 status(PENDING→RUNNING→완료)·goalProgress·spentRatio 읽기. 샌드박스 목표치 도달 여부는 콘솔 카드(Codex). 사용자에게 다시 "쓸지" 묻지 않는다.
+- 다음 확인: 하루 1회 `get_sandbox_traffic` 로 status(PENDING→RUNNING→완료)·goalProgress·spentRatio 읽기.
+- **부스트 일지(개발 세션, 하루 1줄)**:
+  - 11-02 15:26Z: status PENDING, goalProgress 0, spentRatio null, creativeCount 0, failureReason null, remainingFreeRuns 2, verdict RUN_IN_PROGRESS (시작 2분 뒤 — 아직 광고 소재 생성 전) 샌드박스 목표치 도달 여부는 콘솔 카드(Codex). 사용자에게 다시 "쓸지" 묻지 않는다.
 
 ### 🖱️ Codex 에게 (브라우저 작업) — Mole Mash 출시 전 2건
 - URL: https://developer.playgama.com → 게임 **Mole Mash**(id cmvxme9mt1hvbj80hj6q0lokb)
