@@ -99,6 +99,11 @@ async function playAgain(page) {
     const msgs = await page.evaluate(() => window.__msgs.slice());
     check('game_ready sent exactly once', msgs.filter((m) => m === 'game_ready').length === 1, JSON.stringify(msgs));
     await shot(page, 'phone-390x844-title');
+    await page.click('#sfx-btn');
+    await page.waitForTimeout(100);
+    check('hit-sound button cycles the style and saves it', await page.evaluate(() => window.__game.store.settings.sfx === 'cute' && /Cute/.test(document.getElementById('sfx-btn').textContent)));
+    await page.click('#sfx-btn'); await page.click('#sfx-btn'); await page.click('#sfx-btn'); await page.click('#sfx-btn');
+    check('five styles wrap around', await page.evaluate(() => window.__game.store.settings.sfx === 'classic'));
     check('title state before first tap', await page.evaluate(() => window.__game.state === 0));
     check('tutorial on for a new player', await page.evaluate(() => window.__game.store.progress.played === 0));
     await page.tap('#game');
@@ -209,6 +214,9 @@ async function playAgain(page) {
     check('SECOND WIND count-in holds the moles for a moment', await page.evaluate(() => window.__game.countIn > 2 && window.__game.moles.length === 0));
     await page.waitForTimeout(400);
     await shot(page, 'phone-390x844-second-wind');
+    // a platform pause blip right after the ad must not raise the pause panel
+    await page.evaluate(() => { window.__game.pauseGame(true); });
+    check('platform pause during the count-in shows no pause panel', await page.evaluate(() => !window.__game.userPaused && document.getElementById('pause-panel').classList.contains('hidden')));
     await page.evaluate(() => { window.__game.countIn = 0; });
     await page.evaluate(() => { window.__game.timeLeft = 0.2; });
     await page.waitForTimeout(600);
