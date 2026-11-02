@@ -308,10 +308,10 @@ export class View {
     };
     if (!cup.down) {
       const top = this.sy(cup.y + cup.h / 2);
-      label('Get this for Butter', this.sx(cup.x), top - 0.95 * S + bob, this.sx(cup.x), top - 0.45 * S);
+      label('Hit this. Butter wants it', this.sx(cup.x), top - 0.95 * S + bob, this.sx(cup.x), top - 0.45 * S);
     }
-    const g = sim.level.gaps[0];
-    label('Pop in the gap', this.sx(g.x + g.w / 2) + 0.95 * S, this.sy(g.y + g.h) - 0.3 * S - bob, this.sx(g.x + g.w / 2), this.sy(g.y + g.h * 0.5));
+    if (sim.levelIndex !== 0) { const g = sim.level.gaps[0];
+    label('Pop in the gap', this.sx(g.x + g.w / 2) + 0.95 * S, this.sy(g.y + g.h) - 0.3 * S - bob, this.sx(g.x + g.w / 2), this.sy(g.y + g.h * 0.5)); }
   }
 
   // ---------- Butter the dog (foreground, on the near part of the table) ----------

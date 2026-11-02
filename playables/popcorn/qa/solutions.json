@@ -2,73 +2,86 @@
  {
   "level": 0,
   "name": "Open Gap",
-  "winPct": 9.5,
-  "directPct": 0,
-  "gapShots": 44,
-  "gapWins": 44,
+  "winPct": 52.9,
+  "directPct": 21.7,
+  "gapShots": 42,
+  "gapWins": 42,
   "solution": [
    {
     "dx": 0.3825,
     "dy": 0.6625
    }
-  ]
+  ],
+  "directSolution": {
+   "dx": 0.7029,
+   "dy": 0.1558
+  }
  },
  {
   "level": 1,
   "name": "Side Push",
-  "winPct": 7.7,
+  "winPct": 8.2,
   "directPct": 0,
   "gapShots": 55,
-  "gapWins": 36,
+  "gapWins": 37,
   "solution": [
    {
     "dx": 0.1549,
     "dy": 0.2212
    }
-  ]
+  ],
+  "directSolution": null
  },
  {
   "level": 2,
   "name": "Narrow Slot",
-  "winPct": 9,
-  "directPct": 0,
-  "gapShots": 23,
-  "gapWins": 23,
+  "winPct": 33.5,
+  "directPct": 1.9,
+  "gapShots": 3,
+  "gapWins": 3,
   "solution": [
    {
-    "dx": 0.3825,
-    "dy": 0.6625
+    "dx": 0.2571,
+    "dy": 0.8154
    }
-  ]
+  ],
+  "directSolution": {
+   "dx": 0.8457,
+   "dy": 0.3078
+  }
  },
  {
   "level": 3,
   "name": "Chain Collapse",
-  "winPct": 24.3,
-  "directPct": 1.1,
-  "gapShots": 44,
-  "gapWins": 29,
+  "winPct": 27.3,
+  "directPct": 11.6,
+  "gapShots": 21,
+  "gapWins": 21,
   "solution": [
    {
-    "dx": 0.376,
-    "dy": 0.4481
+    "dx": 0.1461,
+    "dy": 0.659
    }
-  ]
+  ],
+  "directSolution": {
+   "dx": 0.5091,
+   "dy": 0.5091
+  }
  },
  {
   "level": 4,
   "name": "Two Seeds",
-  "oneShotPct": 0.2,
-  "openedPct": 16.6,
-  "secondWinPct": 40.6,
+  "oneShotPct": 1.9,
+  "openedPct": 17.6,
+  "secondWinPct": 35.9,
   "solution": [
    {
-    "dx": 0.2239,
-    "dy": 0.5405
+    "dx": 0.315,
+    "dy": 0.5456
    },
    {
-    "dx": 0.7908,
-    "dy": 0.1753
+    "dx": 0.6955,
+    "dy": 0.1863
    }
   ]
  }

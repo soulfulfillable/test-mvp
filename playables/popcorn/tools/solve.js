@@ -36,7 +36,9 @@ for (const li of only) {
     const gap = r.rows.filter((x) => x.inGap); const gapWin = gap.filter((x) => x.ph === 'won').length;
     const map = ANGLES.map((a) => POWERS.map((p) => { const x = r.rows.find((y) => y.a === a && y.p === p); return x.ph === 'won' ? (x.direct ? 'D' : '#') : (x.inGap ? 'g' : '.'); }).join('')).join('\n');
     console.log(`L${li + 1} ${L.name}: ${r.ok}/${r.total} win (${(100 * r.ok / r.total).toFixed(1)}%), ${r.direct} by direct hit (no pop), pops in gap ${gap.length} of which won ${gapWin}, best ${JSON.stringify(best)} neighbours ${bestN}  [${Date.now() - t0} ms]\n${map}`);
-    out[li] = { level: li, name: L.name, winPct: +(100 * r.ok / r.total).toFixed(1), directPct: +(100 * r.direct / r.total).toFixed(1), gapShots: gap.length, gapWins: gapWin, solution: best ? [{ dx: best.dx, dy: best.dy }] : null };
+    const directs = r.rows.filter((x) => x.ph === 'won' && x.direct); let dbest = null, dn = -1; const dset = new Set(directs.map(key));
+    for (const w of directs) { let n = 0; for (const da of [-2.5, 0, 2.5]) for (const dp of [-0.05, 0, 0.05]) if (dset.has((w.a + da) + '/' + (+(w.p + dp).toFixed(2)))) n++; if (n > dn) { dn = n; dbest = w; } }
+    out[li] = { level: li, name: L.name, winPct: +(100 * r.ok / r.total).toFixed(1), directPct: +(100 * r.direct / r.total).toFixed(1), gapShots: gap.length, gapWins: gapWin, solution: best ? [{ dx: best.dx, dy: best.dy }] : null, directSolution: dbest ? { dx: dbest.dx, dy: dbest.dy } : null };
   } else {
     // two-stage: first shots that topple the door column (col1) without winning, then a full second sweep from the best few
     const firsts = [];

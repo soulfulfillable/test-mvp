@@ -6,14 +6,14 @@ import { LEVELS, DT, MAX_PULL, MIN_PULL } from './levels.js';
 
 const $ = (s) => document.querySelector(s);
 const KEY_LEVEL = 'pc.level';
-const GHOST = { dx: 0.3825, dy: 0.6625 }; // level 1's proven shot (tools/solve.js) — the hand shows this pull
+const GHOST = { dx: 0.7029, dy: 0.1558 }; // level 1's proven direct hit (tools/solve.js directSolution) // level 1's proven shot (tools/solve.js) — the hand shows this pull
 
 const canvas = $('#game');
 const view = new View(canvas);
 const audio = new Audio('audio/');
 let sim = null, level = 0, ui = { pull: null, ghost: null }, drag = null, acc = 0, last = 0, shotsThisLevel = 0, firstShotEver = true;
 let bannerT = 0, demo = false;
-const HINTS = ['Pop in the gap. Drop the popcorn to Butter.', 'The front is closed. Slide in from the side.', 'A thin slot. Not too hard, not too soft.', 'Pop one end. Let the rest fall.', 'Two pops: clear the door, then the tunnel.'];
+const HINTS = ['Hit the bucket. Butter is waiting.', 'The front is closed. Slide in from the side.', 'A thin slot. Not too hard, not too soft.', 'Pop one end. Let the rest fall.', 'Two pops: clear the door, then the tunnel.'];
 try { level = Math.min(LEVELS.length - 1, Math.max(0, parseInt(localStorage.getItem(KEY_LEVEL) || '0', 10) || 0)); } catch (e) { /* ignore */ }
 try { firstShotEver = localStorage.getItem('pc.shot') !== '1'; } catch (e) { /* ignore */ }
 
@@ -35,7 +35,7 @@ function start(i, opts = {}) {
   $('#hintwrap').classList.toggle('hidden', false);
   $('#panel').classList.add('hidden'); $('#banner').classList.add('hidden');
   hud();
-  if (demo) { $('#hint').textContent = 'Butter can\'t reach the popcorn. Pop can.'; $('#hintsub').textContent = ''; setTimeout(() => { if (demo && sim.phase === 'aim') sim.shoot(GHOST.dx, GHOST.dy); }, 1300); }
+  if (demo) { $('#hint').textContent = 'Butter can\'t reach it. Pop can.'; $('#hintsub').textContent = ''; setTimeout(() => { if (demo && sim.phase === 'aim') sim.shoot(GHOST.dx, GHOST.dy); }, 1300); }
 }
 function hud() {
   const seeds = $('#seeds'); seeds.innerHTML = '';

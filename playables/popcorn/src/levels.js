@@ -20,9 +20,9 @@ export const FLOOR_DOWN = 0.45;       // a target whose bottom is this close to 
 export const MATS = {
   wood:  { density: 0.9, friction: 0.55, restitution: 0.08 },
   card:  { density: 0.45, friction: 0.5, restitution: 0.1 },
-  cup:   { density: 3.5, friction: 0.5, restitution: 0.12 },
+  cup:   { density: 1.6, friction: 0.5, restitution: 0.12 },
   static:{ density: 0, friction: 0.55, restitution: 0.1 },
-  seed:  { density: 1.2, friction: 0.35, restitution: 0.22 },
+  seed:  { density: 5.0, friction: 0.35, restitution: 0.15 },
   corn:  { friction: 0.65, restitution: 0.25 },
 };
 
@@ -37,8 +37,8 @@ const stand = (x, w = 0.4, h = 1.4, idc = 'col', idp = 'ped') => [
 
 export const LEVELS = [
   {
-    name: 'Open Gap', seeds: 3,
-    hint: 'Pull back. Drop the kernel into the gap.',
+    name: 'First Snack', seeds: 3,
+    hint: 'Hit the bucket. Butter is waiting.',
     bodies: [
       ...stand(2.6), cup('cup', 2.6, 1.7),
       { id: 'cab', kind: 'cabinet', mat: 'static', static: true, x: 3.98, y: 1.5, w: 1.0, h: 3.0 },
@@ -54,6 +54,7 @@ export const LEVELS = [
       { id: 'roof', kind: 'shelf', mat: 'static', static: true, x: 2.45, y: 0.78, w: 1.1, h: 0.16 },
       { id: 'cab', kind: 'cabinet', mat: 'static', static: true, x: 2.45, y: 1.88, w: 1.1, h: 2.04 },
       ...stand(3.47), cup('cup', 3.47, 1.7),
+      { id: 'hood', kind: 'cabinet', mat: 'static', static: true, x: 3.35, y: 2.75, w: 1.1, h: 0.5 },
       { id: 'kerb', kind: 'ledge', mat: 'static', static: true, x: 5.45, y: 0.175, w: 0.3, h: 0.35 },
     ],
     gaps: [{ x: 1.9, y: 0, w: 1.37, h: 0.7 }],
@@ -66,6 +67,7 @@ export const LEVELS = [
       ...stand(2.75), cup('cup', 2.75, 1.7),
       { id: 'cab', kind: 'cabinet', mat: 'static', static: true, x: 4.1, y: 1.5, w: 1.1, h: 3.0 },
       { id: 'lip', kind: 'ledge', mat: 'static', static: true, x: 3.41, y: 1.67, w: 0.28, h: 0.26 },
+      { id: 'hood', kind: 'cabinet', mat: 'static', static: true, x: 2.55, y: 2.75, w: 0.9, h: 0.5 },
     ],
     gaps: [{ x: 2.95, y: 0, w: 0.6, h: 1.54 }],
     cam: { x1: 4.75 },
@@ -80,7 +82,7 @@ export const LEVELS = [
       { id: 'd1', kind: 'plank', mat: 'wood', x: 2.75, y: 1.3, w: 0.26, h: 1.2 },
       { id: 'd2', kind: 'plank', mat: 'wood', x: 3.4, y: 1.3, w: 0.26, h: 1.2 },
       { id: 'd3', kind: 'plank', mat: 'wood', x: 4.05, y: 1.3, w: 0.26, h: 1.2 },
-      cup('cup', 4.52, 0.7, true, 1.6),
+      cup('cup', 4.52, 0.7, true, 1.2),
       { id: 'hood', kind: 'cabinet', mat: 'static', static: true, x: 4.55, y: 2.3, w: 0.7, h: 0.5 },
     ],
     gaps: [{ x: 2.2, y: 1.0, w: 0.42, h: 0.9 }, { x: 2.88, y: 0.7, w: 0.39, h: 1.2 }, { x: 3.53, y: 0.7, w: 0.39, h: 1.2 }],
