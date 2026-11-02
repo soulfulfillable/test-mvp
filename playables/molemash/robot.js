@@ -129,7 +129,7 @@ async function playAgain(page) {
     const livesBefore = await page.evaluate(() => window.__game.lives);
     const bc = await page.evaluate(() => { const g = window.__game; return g.holeCenter(g.moles.find((m) => m.kind === 'bomb').hole); });
     await page.mouse.click(bc.x, bc.y);
-    await page.waitForTimeout(2200);
+    await page.waitForTimeout(600);   // before any newly spawned mole could sink on its own
     const afterBomb = await page.evaluate(() => ({ lives: window.__game.lives, state: window.__game.state }));
     check('one bomb = one heart (the other moles duck, no second miss)', afterBomb.lives === livesBefore - 1 && afterBomb.state === 1, JSON.stringify({ livesBefore, afterBomb }));
     await page.evaluate(() => { window.__game.lives = 3; });   // give the heart back so the rest of the session plays out as before
@@ -311,9 +311,25 @@ async function playAgain(page) {
     await page.waitForFunction(() => window.__game && window.__game.state !== undefined);
     const re2 = await page.evaluate(() => ({ equipped: window.__game.store.progress.equipped, hammers: window.__game.store.progress.hammers.length, fill: window.__game.store.progress.boxFill }));
     check('reload keeps owned hammers, the equipped one and the box fill', re2.equipped !== 'classic' && re2.hammers === 2, JSON.stringify(re2));
+    // a run interrupted by an ad (page reload) comes back on the results screen with continue still offered
+    await page.evaluate(() => { window.__game.store.progress.pendingRun = { ts: Date.now(), score: 23, timeLeft: 0, whacked: 20, playT: 60, reason: 'time', round: 4, bestCombo: 6 }; window.__game.saveStore(['progress']); });
+    await page.waitForTimeout(400);
+    await page.reload({ waitUntil: 'load' });
+    await page.waitForFunction(() => window.__game && window.__game.state !== undefined);
+    await page.evaluate(() => { window.__forceRewarded = true; window.__game.showOverPanel(); });   // the mock platform has no rewarded ads; re-render with the test flag
+    const rr = await page.evaluate(() => ({ state: window.__game.state, score: window.__game.score, panel: !document.getElementById('over-panel').classList.contains('hidden'), line: document.getElementById('rank-line').textContent, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
+    check('interrupted run restored after reload, continue still available', rr.state === 2 && rr.score === 23 && rr.panel && rr.btn, JSON.stringify(rr));
+    await shot(page, 'phone-390x844-restored');
+    await page.click('#continue-btn');
+    await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('rewarded'); window.__game.onRewardedState('closed'); });
+    await page.waitForTimeout(200);
+    check('continue from the restored run keeps the score and clears the saved run', await page.evaluate(() => window.__game.state === 1 && window.__game.score === 23 && !window.__game.store.progress.pendingRun));
+    await page.evaluate(() => { window.__game.countIn = 0; window.__game.timeLeft = 0.2; });
+    await page.waitForTimeout(900);
     // all five collected → bar says so, no box screen
     await page.evaluate(() => { const p = window.__game.store.progress; p.hammers = window.__game.hammers.slice(); p.boxesReady = 0; p.boxFill = 0; window.__game.saveStore(['progress']); });
-    await page.tap('#game');
+    await page.waitForTimeout(700);
+    if (await page.evaluate(() => window.__game.state === 2)) await playAgain(page); else await page.tap('#game');
     await page.waitForTimeout(200);
     await page.evaluate(() => { window.__game.timeLeft = 0.2; });
     await page.waitForTimeout(700);

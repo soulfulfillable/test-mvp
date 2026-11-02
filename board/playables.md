@@ -1,9 +1,9 @@
 # YouTube Playables — 게시판 (기획 파트너가 염, 2026-10-30)
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-01 21:20 KST (개발 세션 ③-b: v1 → v1.0.1 → v1.1.0 망치 수집 루프 → **v1.1.1 중반 속도 보정** → **v1.2.0 60초·카운트다운·랭킹** → v1.3.0 → v1.3.1 → v1.3.2 → v1.3.3 → v1.4.0 → **v1.4.1 폭탄 1하트 보장·광고 실패 문구·ad_state 텔레메트리**) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
+- 마지막 저장: 2026-11-01 21:20 KST (개발 세션 ③-b: v1 → v1.0.1 → v1.1.0 망치 수집 루프 → **v1.1.1 중반 속도 보정** → **v1.2.0 60초·카운트다운·랭킹** → v1.3.0 → v1.3.1 → v1.3.2 → v1.3.3 → v1.4.0 → v1.4.1 → **v1.5.0 콤보 배수·불꽃, 월드 보드 이름/로그인, 광고 중 리로드 복원**) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
 - 방금 끝낸 것: **Mole Mash v1.1.0** 아카이브 `molemash-1.1.0`(id `cmvxpcp0s1juwj80hkcbczua4`) 업로드 — 선물 상자 루프(방식 A, 결정 로그 11-01): 라운드 끝 패널에 **선물 상자 게이지**(잡은 두더지 수로 참, 첫 상자 12마리·다음부터 18마리, 애니메이션) + **망치 5칸 줄**(보유/잠김, 탭하면 장착) → Play again 때 상자가 있으면 **"WHAT'S IN THE BOX?" 화면**(이어하기 제안과 다른 화면): "Watch an ad: open the box / reward: a new hammer" 또는 "Later (keep the box)"(상자 쌓임) → `rewarded` 때만 개봉 → **NEW HAMMER!** 공개(Carnival Classic·Squeaky Rubber·Candy Cane·Frying Pan·Golden Mallet, 전부 코드 드로잉) → Equip and play / Keep my hammer → 플레이 중 장착 망치로 내려침, 타이틀에도 장착 망치. 광고 미지원 플랫폼은 무료 개봉, 광고 실패·취소 땐 상자·진척 보존 + "Your box is safe". 5개 완주 시 "All hammers collected"·상자 숨김. 측정 이벤트 round_end·progress_shown·bonus_ready·reward_offer_shown·ad_opt_in·ad_rewarded·ad_failed·reward_granted·equipped·next_round_started·box_later·box_opened_free. 로봇 62/62(`qa/report.json`, 스크린샷 `qa/phone-390x844-{over-box,box,reveal,play-new-hammer}.png`).
-  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (v1.1.0 게시 여부는 아래 "진행 중") · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.4.1): https://developer.playgama.com/qa-tool/cmvyji1y326vkjm0hyscl16cy
+  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (v1.1.0 게시 여부는 아래 "진행 중") · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.5.0): https://developer.playgama.com/qa-tool/cmvyjudps25hxj80hidq1282d
   - 저장: `progress` v2 = {best, played, ranks, name, hammers[], equipped, boxFill, boxesReady, boxesOpened}(v1 저장은 기본값으로 이어짐). 보상형 배치 `continue`·`open_box`(config).
   - ⚠️ 모더레이션(Submit for review)은 샌드박스 목표 도달 뒤 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인은 사용자 확인 전엔 안 함.
 
@@ -21,18 +21,18 @@
 - 확인할 결과: 글의 공개 URL(threads.com/@…/post/…)을 이 게시판 "사용자 대기" 줄에 적기 → 개발 세션이 `start_sandbox_traffic` 으로 부스트 시작(결정 "A + 무료 부스트"로 기록). 회사명·실명 어디에도 쓰지 않는다.
 
 ### 🖱️ Codex 에게 (브라우저 작업) — Playgama QA 툴 인증(certification) (개발 세션 11-01)
-- URL: https://developer.playgama.com/qa-tool/cmvyji1y326vkjm0hyscl16cy (v1.4.1 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
+- URL: https://developer.playgama.com/qa-tool/cmvyjudps25hxj80hidq1282d (v1.5.0 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
 - 할 것: QA 툴에서 **Test Game** 으로 열어 한 판 플레이(세로·가로·1:1 프리셋 각 1번) → 인증(certification) 체크 진행. `get_launch_steps` 의 form 단계가 `NO_CERTIFICATION` 이라 사람이 QA 툴에서 인증해야 폼이 완성됨. **Submit for review(모더레이션)·트래픽 캠페인은 누르지 말 것.**
 - 확인할 결과: 인증 항목 통과/실패 목록(실패하면 번호·문구 그대로 이 게시판에 적기), `get_launch_steps` form 단계가 BLOCKED 에서 풀림.
 - 진행 중이던 것: 없음 (v1.1.0 빌드 체크 PASSED·publish_sandbox 요청함 — 게시 확인은 다음 할 일 ①)
 - **다음 할 일 (순서)**:
-  ① v1.4.1 샌드박스 게시 확인(`get_publications` PUBLISHED, archive `cmvyji1y326vkjm0hyscl16cy`) — 사용자가 다시 '컨티뉴 안 됨'이라 하면 `get_game_telemetry_session_facts eventName=ad_state` 로 그 세션의 순서(seq)를 읽어 원인 확정 — 아직이면 `publish_sandbox`(updateNote 필수). **확인 못 한 것**: SaaS 리더보드가 실제 샌드박스에서 `in_game` 으로 잡히는지(mock 에선 not_available 이라 숨김) — 사용자가 플레이 뒤 결과 화면에 "World top 10" 이 뜨는지 알려 주면 됨. 안 뜨면 config `saas.leaderboards.platforms` 값 재확인
+  ① v1.5.0 샌드박스 게시 확인(`get_publications` PUBLISHED, archive `cmvyjudps25hxj80hidq1282d`) + **`get_game_telemetry_session_facts eventName=ad_state`(11-02)로 사용자 이어하기 실패 원인 확정** — 사용자가 다시 '컨티뉴 안 됨'이라 하면 `get_game_telemetry_session_facts eventName=ad_state` 로 그 세션의 순서(seq)를 읽어 원인 확정 — 아직이면 `publish_sandbox`(updateNote 필수). **확인 못 한 것**: SaaS 리더보드가 실제 샌드박스에서 `in_game` 으로 잡히는지(mock 에선 not_available 이라 숨김) — 사용자가 플레이 뒤 결과 화면에 "World top 10" 이 뜨는지 알려 주면 됨. 안 뜨면 config `saas.leaderboards.platforms` 값 재확인
   ② 사용자가 v1.1.0 플레이 → 느낌·"다음 판 기대되나" 원문 기록. Playgama 텔레메트리는 트래픽이 모이면 `get_game_telemetry_analytics`(하루 1번 이하)로 옵트인율·다음 판 시작률 확인
   ③ Codex 인증(위 🖱️) 결과 반영
   ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. (참고 `get_sandbox_traffic` 11-01: 무료 부스트 3회 남음 — 3일간 약 50플레이 예상, 공유 글 링크가 필요. 사용자가 마음 바꾸면 그때.) **샌드박스 목표 수치(플레이 시간·인원)는 도구로 못 읽음 — 콘솔 샌드박스 카드에서만 보임, 하루 1번 집계.** 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
   ⑤ (선택) BGM 교체 — 카니발 루프 mp3 받으면 `audio/bgm.*` 교체 → `./build.sh` → 재업로드
   ⑥ 다음 트랙은 기획 결정에 따름(`plans/playables-core-fun.md` 7장: Chicken Cross 제외, 신규 코어 1순위 조준+물리 연쇄 — 착수 미승인). Mole Mash 틀 복사 시 `playables/molemash/index.html`·`robot.js`
-- 사용자 대기: ① v1.4.1: 컨티뉴가 되는지(광고가 안 뜨면 빨간 문구가 뜨는지)·폭탄 1하트 + 결과 화면에 World top 10 이 보이는지 ② Threads 글 URL(무료 부스트용, 위 🖱️) ③ (선택) 카니발 BGM 음원 ④ Codex QA 툴 인증 결과
+- 사용자 대기: ① v1.5.0: 콤보 불꽃/배수 느낌, 이어하기(안 되면 몇 시 몇 분에 했는지 알려 달라고 — 텔레메트리로 추적) + 결과 화면에 World top 10 이 보이는지 ② Threads 글 URL(무료 부스트용, 위 🖱️) ③ (선택) 카니발 BGM 음원 ④ Codex QA 툴 인증 결과
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
@@ -198,6 +198,7 @@ Mole Mash Playgama 샌드박스 게시(11-01) https://playgama.ai/play/cmnhxm72r
 - 사용자 캡처(Supersonic): 게임 정보 카드 = 이름·장르·따옴표 한 줄 설명·개발자·제작사·게시 날짜. 목록 = 세로 썸네일 + 플레이 버튼 + 플레이 횟수. 전부 하이퍼캐주얼(탭/드래그 1조작, 30초~1분).
 
 ## 사용자 피드백 기록
+- **11-02 v1.4.1 플레이(원문)**: "콤보 근데 생기면 뭐가 되나 좀 때렸을때 막 불도나고 점점 막 5 이상부터는 막 더쌔게 때려지는거같고 그렇게 해볼까 콤보효과로 / 아니근데 사람들이 지인들이 이거하면 이름 올라간건가? 내이름 지정은 못하나 각자들이? 할수잇나? / 그리고 내친구가 햇는데 월드 탑10 에 이름 안올라간대 야 그리고 광고보고 이어하기가 앙돼 계속 / 아니 올라가긴하는데 친구가 지정한 이름으로 안올라간대" → v1.5.0: ①콤보 5부터 망치에 불꽃·파편이 불꽃색·링 커짐·**점수 2배**, 10부터 **3배**("2x POINTS" 표시, +2/+3 떠오름, 외침에 2x/3x) ②월드 보드 이름: Playgama 계정 이름만 올라감(게스트는 "Player N") — 게임 안 이름 칸은 기기 랭킹 전용이라 라벨을 "Your name (this device)"로 바꾸고, 월드 보드엔 내 줄을 "You (이름)"로, 플랫폼이 허용하면 "Sign in to show your name" 버튼(1.2.2: 강제 아님) ③이어하기: iOS 세션 팩트에서 **광고 요청 순간 세션이 끝난 기록**(page unload) 발견 → 광고 직전에 라운드를 Bridge storage 에 저장하고, 다시 열리면 결과 화면을 "Welcome back. Your run is still here." 로 복원(이어하기 버튼 유지, 10분 이내). 로봇 73/73. 사용자 세션의 `ad_state` 순서는 집계(약 30분~1시간 주기) 뒤 `get_game_telemetry_session_facts eventName=ad_state` 로 읽을 것
 - **11-02 v1.4.0 플레이(원문)**: "야 컨티뉴가 안되는거같은데?????? 빨리 봐줘 ㅠ / 아니 시간도 있고 목숨도있는데 폭탄하나 누르면 바로끝나버리는 버그가 있어" → ①폭탄: 재현됨 — 폭탄 자체는 하트 1개지만 그 순간 올라와 있던 두더지들이 폭발 멈칫 사이에 가라앉아 MISSED 가 연달아 터져 하트 2~3개가 한 번에 날아감. v1.4.1: 폭탄이 터지면 다른 두더지는 전부 놀라 숨고(페널티 없음) 0.9초 쉬어 감 → 폭탄 1개 = 하트 1개 보장(로봇 검사) ②컨티뉴: 텔레메트리(`get_game_telemetry_analytics` 11-02)에 `advertisement_rewarded_failed`·`ad_failed` 가 00:25Z 에 1건 — 샌드박스에서 보상형 광고가 **로드 실패(no fill)** 한 세션. 규칙 2.2.5 상 광고 실패엔 보상 불가 → v1.4.1 은 실패 문구를 크고 길게("No ad could be loaded right now. Tap again to retry.") + 재시도 가능. 또 모든 광고 상태를 `ad_state`(seq 포함)·`reward_applied` 이벤트로 보내 다음부턴 세션 팩트로 순서를 읽을 수 있게 함. 샌드박스는 광고 fill 이 불안정(interstitial_failed 7건)하다는 점을 사용자에게 설명
 - **11-02 v1.3.3 플레이(원문)**: "두더지 연속해서 패면 그 콤보 나오는거 점점 강조되게 막 되는거 있어야돼 / 광고보면 삼이일 하면서 다시 안나오잖아 아직도. Resume 해야플레이돼 아직도 / 소리 아 좀 귀여운 띠리릭 그런거로 밤구던가 아니면 버튼 있어서 눌러서 바꿔할수잇게 버전 5개로 만들어놔줘" → 반영(v1.4.0): ①콤보 표시: 판 위에 "xN COMBO" 가 칠 때마다 튀고 커지고 색이 바뀜(주황→빨강→금), 아래 작은 바가 0.9초 창을 보여줌, 5·10·15·20 콤보에 "ON FIRE! / UNSTOPPABLE! / LEGENDARY! / MOLE MASHER!" 외침, 결과에 best combo ②광고 뒤 일시정지 패널: 광고 직후 6초·카운트인 중에는 플랫폼 일시정지/탭 숨김 신호가 와도 패널을 띄우지 않고 얼리기만(Resume 불필요). 로봇 검사 추가 ③타격음 5종 버튼(타이틀 하단 알약 + 일시정지 메뉴): Classic thump / Cute blip / Rubber pop / Arcade / Glass chime — uisfx CC0 팩에서, 콤보 3부터 두 번째 소리 겹침, 설정은 Bridge storage 에 저장
 - **11-02 v1.3.2 플레이(원문)**: "시간이 다 차있는데 타임 나오는이유가 뭐야. 플러스되게하던가 타임 먹는거는 나중에 나오던가 / 뭔가 점수가 줄어들었어? / ㅇ니 광고보고 이어하기했는데 갑자기 처음부터돼 이럼 절대안더ㅐ" → 반영(v1.3.3): ①시계 두더지는 남은 시간 25초 이하일 때만 등장 ②이어하기 흐름을 플랫폼이 보내는 광고 상태 순서(rewarded→closed 또는 closed→rewarded)에 상관없이 같은 판을 이어가도록 다시 씀 — 'closed' 만 오면 1.5초 기다렸다가 'rewarded' 가 따라오면 이어하기, 'rewarded' 뒤 'closed' 가 안 와도 2.5초 뒤 이어하기, 보상 결정 중엔 Play again 잠금(실수로 새 판 시작 금지). 로봇에 closed→rewarded 순서 검사 추가(점수 유지 확인) ③"점수가 줄었다"는 상자 게이지(상자가 열리면 남은 수로 돌아감)로 추정 — 라벨은 그대로, 사용자에게 설명. **확인 못 함**: 실제 Playgama 가 보내는 상태 순서(헤드리스 mock 은 보상형 미지원) — 사용자 재현 결과로 판단
