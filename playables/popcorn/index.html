@@ -26,10 +26,10 @@ body{margin:0;min-height:calc(100% + 240px);background:#f4ece0;font:16px/1.3 -ap
 #seeds i.kernel.used{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(138,82,8,.35)}
 #target{right:16px;top:calc(var(--top) + 54px)}
 #target i{display:block;width:14px;height:16px;background:repeating-linear-gradient(90deg,var(--acc) 0 3px,#fff 3px 6px);border:1.5px solid #9a2f24;border-radius:1px 1px 3px 3px}
-#banner{position:absolute;left:50%;top:24%;transform:translate(-50%,-50%);background:var(--acc);color:#fff;font-weight:700;font-size:26px;letter-spacing:-.01em;padding:12px 22px;border-radius:16px;box-shadow:0 8px 24px rgba(120,40,20,.25);animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
+#banner{position:absolute;left:50%;top:24%;transform:translate(-50%,-50%);background:var(--acc);color:#fff;font-weight:700;font-size:24px;white-space:nowrap;letter-spacing:-.01em;padding:12px 22px;border-radius:16px;box-shadow:0 8px 24px rgba(120,40,20,.25);animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
 #banner.hidden{display:none}
 @keyframes pop{from{transform:translate(-50%,-50%) scale(.4);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
-#hintwrap{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--bottom) + 34px);display:flex;flex-direction:column;align-items:center;gap:4px;transition:opacity .25s;white-space:nowrap}
+#hintwrap{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--bottom) + 34px);display:flex;flex-direction:column;align-items:center;gap:4px;transition:opacity .25s;width:max-content;max-width:calc(100vw - 32px);text-align:center}
 #hintwrap.hidden{opacity:0}
 #hint{font-size:17px;font-weight:600;background:#fff;padding:10px 16px;border-radius:14px;box-shadow:0 0 0 1px var(--line)}
 #hintwrap .sub{font-size:13px;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(60,40,20,.5)}
@@ -59,7 +59,7 @@ body[data-mode=square] #hintwrap{bottom:calc(var(--bottom) + 10px)}
       <button class="btn" id="btn-sound" aria-label="Sound"><svg viewBox="0 0 20 20"><path d="M3.5 7.5h3l4-3.2v11.4l-4-3.2h-3z"/><g class="w"><path d="M13 7a4.2 4.2 0 0 1 0 6"/><path d="M15.2 4.8a7.3 7.3 0 0 1 0 10.4"/></g><g class="x"><path d="M13 7.5l5 5M18 7.5l-5 5"/></g></svg></button>
     </div>
     <div class="pill" id="seeds"></div>
-    <div class="pill" id="target"><i></i><span id="tcount">1</span>&nbsp;<span id="tword">target</span>&nbsp;up</div>
+    <div class="pill" id="target"><i></i><span id="tcount">1</span>&nbsp;<span id="tword">bucket</span>&nbsp;for Butter</div>
     <div id="banner" class="hidden">Target down!</div>
     <div id="hintwrap"><div id="hint">Pull back. Drop the kernel into the gap.</div><div class="sub" id="hintsub">Release to shoot</div></div>
     <div class="studio">Treasurefield Studio</div>

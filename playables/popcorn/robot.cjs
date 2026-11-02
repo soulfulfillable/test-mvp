@@ -132,7 +132,7 @@ async function waitFn(page, fn, ms) { try { await page.waitForFunction(fn, null,
     }
     await sleep(1400); await shot(page, `level${i + 1}-result`);
     const panel = await page.evaluate(() => ({ hidden: document.querySelector('#panel').classList.contains('hidden'), title: document.querySelector('#panel-title').textContent, count: document.querySelector('#tcount').textContent }));
-    check(`level ${i + 1} (${sol.name}) cleared by touch drag`, won && !panel.hidden && /down|toppled/i.test(panel.title) && panel.count === '0', `panel="${panel.title}" targets-up=${panel.count}`);
+    check(`level ${i + 1} (${sol.name}) cleared by touch drag`, won && !panel.hidden && /Butter|Kernel/i.test(panel.title) && panel.count === '0', `panel="${panel.title}" targets-up=${panel.count}`);
     lv.won = won; report.levels.push(lv);
     if (!won) { // leave evidence of what happened
       await shot(page, `level${i + 1}-FAILED`);

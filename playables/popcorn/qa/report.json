@@ -1,5 +1,5 @@
 {
- "startedAt": "2026-11-02T17:51:32.372Z",
+ "startedAt": "2026-11-02T18:31:00.497Z",
  "consoleErrors": [],
  "pageErrors": [],
  "externalRequests": [],
@@ -52,7 +52,7 @@
   {
    "name": "level 1 (Open Gap) cleared by touch drag",
    "ok": true,
-   "detail": "panel=\"Target down!\" targets-up=0"
+   "detail": "panel=\"Butter got it!\" targets-up=0"
   },
   {
    "name": "level 2 shot 1: drag → flight → fuse → pop → resolved",
@@ -62,7 +62,7 @@
   {
    "name": "level 2 (Side Push) cleared by touch drag",
    "ok": true,
-   "detail": "panel=\"Target down!\" targets-up=0"
+   "detail": "panel=\"Butter got it!\" targets-up=0"
   },
   {
    "name": "level 3 shot 1: drag → flight → fuse → pop → resolved",
@@ -72,7 +72,7 @@
   {
    "name": "level 3 (Narrow Slot) cleared by touch drag",
    "ok": true,
-   "detail": "panel=\"Target down!\" targets-up=0"
+   "detail": "panel=\"Butter got it!\" targets-up=0"
   },
   {
    "name": "level 4 shot 1: drag → flight → fuse → pop → resolved",
@@ -82,7 +82,7 @@
   {
    "name": "level 4 (Chain Collapse) cleared by touch drag",
    "ok": true,
-   "detail": "panel=\"Target down!\" targets-up=0"
+   "detail": "panel=\"Butter got it!\" targets-up=0"
   },
   {
    "name": "level 5 shot 1: drag → flight → fuse → pop → resolved",
@@ -97,7 +97,7 @@
   {
    "name": "level 5 (Two Seeds) cleared by touch drag",
    "ok": true,
-   "detail": "panel=\"All five toppled!\" targets-up=0"
+   "detail": "panel=\"Best. Kernel. Ever.\" targets-up=0"
   },
   {
    "name": "determinism (same pull twice → identical body positions)",
@@ -335,7 +335,7 @@
    "won": true
   }
  ],
- "finishedAt": "2026-11-02T17:52:48.283Z",
+ "finishedAt": "2026-11-02T18:32:16.464Z",
  "passed": 31,
  "failed": 0,
  "solver": [

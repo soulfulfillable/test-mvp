@@ -13,6 +13,7 @@ const view = new View(canvas);
 const audio = new Audio('audio/');
 let sim = null, level = 0, ui = { pull: null, ghost: null }, drag = null, acc = 0, last = 0, shotsThisLevel = 0, firstShotEver = true;
 let bannerT = 0, demo = false;
+const HINTS = ['Pop in the gap. Drop the popcorn to Butter.', 'The front is closed. Slide in from the side.', 'A thin slot. Not too hard, not too soft.', 'Pop one end. Let the rest fall.', 'Two pops: clear the door, then the tunnel.'];
 try { level = Math.min(LEVELS.length - 1, Math.max(0, parseInt(localStorage.getItem(KEY_LEVEL) || '0', 10) || 0)); } catch (e) { /* ignore */ }
 try { firstShotEver = localStorage.getItem('pc.shot') !== '1'; } catch (e) { /* ignore */ }
 
@@ -23,24 +24,24 @@ function resize() {
 addEventListener('resize', resize);
 
 function start(i, opts = {}) {
-  level = i; sim = new Sim(i); demo = !!opts.demo; shotsThisLevel = 0; ui.pull = null; drag = null; view.particles.length = 0; view.puffs.length = 0; view.rings.length = 0; view.cornLobes.clear();
+  level = i; sim = new Sim(i); demo = !!opts.demo; shotsThisLevel = 0; ui.pull = null; drag = null; view.particles.length = 0; view.puffs.length = 0; view.rings.length = 0; view.cornLobes.clear(); view.dogEat = 0; view.dogSad = 0; view.hearts.length = 0;
   try { localStorage.setItem(KEY_LEVEL, String(i)); } catch (e) { /* ignore */ }
   ui.ghost = (i === 0 && firstShotEver && !demo) ? GHOST : null;
   ui.callouts = (i === 0 && firstShotEver);
   resize();
   $('#lnum').textContent = `Level ${i + 1} of ${LEVELS.length}`;
   $('#lname').textContent = LEVELS[i].name;
-  $('#hint').textContent = LEVELS[i].hint; $('#hintsub').textContent = 'Release to shoot';
+  $('#hint').textContent = HINTS[i] || LEVELS[i].hint; $('#hintsub').textContent = 'Release to shoot';
   $('#hintwrap').classList.toggle('hidden', false);
   $('#panel').classList.add('hidden'); $('#banner').classList.add('hidden');
   hud();
-  if (demo) { $('#hint').textContent = 'Watch: pop in the gap, the bucket falls.'; $('#hintsub').textContent = ''; sim.shoot(GHOST.dx, GHOST.dy); }
+  if (demo) { $('#hint').textContent = 'Butter can\'t reach the popcorn. Pop can.'; $('#hintsub').textContent = ''; setTimeout(() => { if (demo && sim.phase === 'aim') sim.shoot(GHOST.dx, GHOST.dy); }, 1300); }
 }
 function hud() {
   const seeds = $('#seeds'); seeds.innerHTML = '';
   for (let k = 0; k < sim.level.seeds; k++) { const s = document.createElement('i'); s.className = 'kernel' + (k < sim.seedsLeft ? '' : ' used'); seeds.appendChild(s); }
   $('#tcount').textContent = String(sim.targetsLeft);
-  $('#tword').textContent = sim.targetsLeft === 1 ? 'target' : 'targets';
+  $('#tword').textContent = sim.targetsLeft === 1 ? 'bucket' : 'buckets';
 }
 function panel(title, body, btn, onBtn) {
   $('#panel-title').textContent = title; $('#panel-body').textContent = body;
@@ -62,16 +63,16 @@ function handle(e) {
       else if (e.strength > 0.5) audio.play('tumble', 0.3 + s * 0.6, 120);
       if (e.strength > 0.6 && !k.includes('seed')) view.dust(e.x, e.y, 4);
       break; }
-    case 'down': audio.play('down', 0.9); banner('Target down!'); hud(); break;
+    case 'down': audio.play('down', 0.9); banner('Butter got it!'); view.dogEat = 3.2; hud(); break;
     case 'won': audio.play('win', 0.9); if (demo) { setTimeout(() => { start(0); banner('Your turn!'); }, 1600); } else setTimeout(showWin, 1100); break;
-    case 'lost-level': audio.play('fail', 0.8); setTimeout(() => panel('Out of seeds', 'The target is still up.', 'Try again', () => start(level)), 500); break;
+    case 'lost-level': audio.play('fail', 0.8); view.dogSad = 4; setTimeout(() => panel('Out of seeds', 'Butter is still hungry.', 'Try again', () => start(level)), 600); break;
     case 'ready': hud(); break;
     case 'lost': hud(); break;
   }
 }
 function showWin() {
-  if (level + 1 < LEVELS.length) panel('Target down!', `Level ${level + 1} cleared with ${shotsThisLevel} ${shotsThisLevel === 1 ? 'seed' : 'seeds'}.`, 'Next level', () => start(level + 1));
-  else panel('All five toppled!', 'Every target is on the table.', 'Play again', () => start(0));
+  if (level + 1 < LEVELS.length) panel('Butter got it!', `Level ${level + 1} done with ${shotsThisLevel} ${shotsThisLevel === 1 ? 'seed' : 'seeds'}.`, 'Next snack', () => start(level + 1));
+  else panel('Best. Kernel. Ever.', 'Butter is full and happy.', 'Play again', () => start(0));
 }
 
 // ---- input: pull anywhere, release to shoot ----

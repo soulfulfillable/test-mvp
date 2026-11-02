@@ -22,6 +22,7 @@ export class View {
     this.scale = 70; this.offX = 0; this.floorY = 0; this.w = 0; this.h = 0; this.dpr = 1; this.mode = 'portrait';
     this.particles = []; this.puffs = []; this.rings = []; this.t = 0;
     this.cornLobes = new Map();
+    this.dogEat = 0; this.dogSad = 0; this.hearts = [];
   }
   resize(w, h, dpr, cam = {}) {
     this.w = w; this.h = h; this.dpr = dpr; this.cam = cam;
@@ -59,6 +60,7 @@ export class View {
     for (const b of dyn) if (b.kind !== 'seed' && b.kind !== 'corn') this.body(b, sim);
     for (const b of dyn) if (b.kind === 'corn') this.corn(b);
     this.markers(sim, snap);
+    this.dog(sim, snap, dt);
     // the kernel: in flight, fusing, or sitting in the pouch
     const seed = dyn.find((b) => b.kind === 'seed');
     if (seed) this.kernel(seed.x, seed.y, seed.angle, seed.fuse || 0, sim.phase === 'fuse');
@@ -69,6 +71,7 @@ export class View {
     if (ui.ghost && sim.phase === 'aim' && !ui.pull) this.ghost(sim, ui.ghost);
     if (ui.callouts && !ui.pull) this.callouts(sim, snap);
     this.effects(dt);
+    this.bubble(sim, snap);
   }
 
   background() {
@@ -282,17 +285,7 @@ export class View {
         c.strokeStyle = PAL.acc; c.lineWidth = Math.max(2, 0.04 * S); c.globalAlpha = 0.55 + 0.3 * Math.sin(this.t * 4);
         c.strokeRect(-b.w / 2 * S - 0.06 * S, -b.h / 2 * S - 0.1 * S, b.w * S + 0.12 * S, b.h * S + 0.16 * S);
         c.setTransform(this.dpr, 0, 0, this.dpr, 0, 0); c.globalAlpha = 1;
-        // flag pin bobbing above
-        const top = y - (Math.abs(Math.cos(b.angle)) * b.h / 2 + Math.abs(Math.sin(b.angle)) * b.w / 2) * S - 0.22 * S + Math.sin(this.t * 3) * 0.04 * S;
-        c.strokeStyle = PAL.ink; c.lineWidth = Math.max(2, 0.03 * S); c.beginPath(); c.moveTo(x, top); c.lineTo(x, top - 0.42 * S); c.stroke();
-        c.fillStyle = PAL.acc; c.beginPath(); c.moveTo(x, top - 0.42 * S); c.lineTo(x + 0.34 * S, top - 0.33 * S); c.lineTo(x, top - 0.22 * S); c.closePath(); c.fill();
-        c.strokeStyle = PAL.ink; c.lineWidth = 1.5; c.stroke();
-        // drop marker on the table: chevron pointing down at the landing line
-        const fx = this.sx(b.x0 ?? b.x), fy = this.sy(0) + 0.5 * S;
-        c.strokeStyle = PAL.acc; c.lineWidth = Math.max(2, 0.035 * S); c.lineCap = 'round'; c.globalAlpha = 0.9;
-        c.beginPath(); c.moveTo(fx - 0.16 * S, fy - 0.12 * S); c.lineTo(fx, fy); c.lineTo(fx + 0.16 * S, fy - 0.12 * S); c.stroke();
-        c.setLineDash([0.08 * S, 0.08 * S]); c.lineWidth = Math.max(1.5, 0.02 * S); c.globalAlpha = 0.6;
-        c.beginPath(); c.ellipse(fx, fy + 0.12 * S, 0.55 * S, 0.14 * S, 0, 0, Math.PI * 2); c.stroke();
+        c.globalAlpha = 1;
       }
       c.restore();
     }
@@ -315,10 +308,78 @@ export class View {
     };
     if (!cup.down) {
       const top = this.sy(cup.y + cup.h / 2);
-      label('Knock this down', this.sx(cup.x), top - 1.05 * S + bob, this.sx(cup.x), top - 0.55 * S);
+      label('Get this for Butter', this.sx(cup.x), top - 0.95 * S + bob, this.sx(cup.x), top - 0.45 * S);
     }
     const g = sim.level.gaps[0];
     label('Pop in the gap', this.sx(g.x + g.w / 2) + 0.95 * S, this.sy(g.y + g.h) - 0.3 * S - bob, this.sx(g.x + g.w / 2), this.sy(g.y + g.h * 0.5));
+  }
+
+  // ---------- Butter the dog (foreground, on the near part of the table) ----------
+  dogPose(sim) {
+    const cup = sim.snapshot().find((b) => b.target);
+    const x = this.sx((cup ? cup.x0 : 2.6) - 0.45), y = this.floorY + 1.22 * this.scale; // feet
+    return { x, y, cup };
+  }
+  dog(sim, snap, dt) {
+    const c = this.ctx, S = this.scale, { x, y, cup } = this.dogPose(sim);
+    const t = this.t;
+    if (this.dogEat > 0) this.dogEat -= dt; if (this.dogSad > 0) this.dogSad -= dt;
+    const eating = this.dogEat > 0, sad = this.dogSad > 0 && !eating;
+    const excited = !eating && !sad && (sim.phase === 'flying' || sim.phase === 'fuse' || sim.phase === 'settling');
+    const wag = Math.sin(t * (excited ? 22 : eating ? 16 : 5)) * (sad ? 0.1 : 1);
+    const bob = eating ? Math.abs(Math.sin(t * 12)) * 0.04 * S : Math.sin(t * 2.2) * 0.015 * S;
+    const u = S / 86; // dog ~1.25 m tall
+    c.save(); c.translate(x, y - bob);
+    const body = '#e9c58c', bodyDark = '#c99a5a', ear = '#a86f3b', line = '#6b4a2e';
+    c.lineJoin = 'round'; c.lineCap = 'round'; c.lineWidth = Math.max(1.5, 2 * u); c.strokeStyle = line;
+    // shadow on the table
+    c.fillStyle = 'rgba(60,40,20,.2)'; c.beginPath(); c.ellipse(0, 4 * u, 46 * u, 9 * u, 0, 0, Math.PI * 2); c.fill();
+    // tail
+    c.save(); c.translate(34 * u, -40 * u); c.rotate(-0.6 + wag * 0.5); c.strokeStyle = line; c.lineWidth = 14 * u; c.beginPath(); c.moveTo(0, 0); c.lineTo(26 * u, -16 * u); c.stroke(); c.strokeStyle = body; c.lineWidth = 10 * u; c.beginPath(); c.moveTo(0, 0); c.lineTo(26 * u, -16 * u); c.stroke(); c.restore();
+    // body (sitting)
+    c.fillStyle = body; c.beginPath(); c.ellipse(0, -36 * u, 36 * u, 38 * u, 0, 0, Math.PI * 2); c.fill(); c.stroke();
+    // chest patch
+    c.fillStyle = '#fbf1dc'; c.beginPath(); c.ellipse(-4 * u, -28 * u, 18 * u, 22 * u, 0, 0, Math.PI * 2); c.fill();
+    // front paws
+    for (const px of [-18, 10]) { c.fillStyle = body; c.beginPath(); c.ellipse(px * u, -4 * u, 12 * u, 7 * u, 0, 0, Math.PI * 2); c.fill(); c.stroke(); }
+    // collar
+    c.fillStyle = PAL.acc; c.beginPath(); c.ellipse(-2 * u, -66 * u, 24 * u, 7 * u, 0, 0, Math.PI * 2); c.fill();
+    // head (looking up-right toward the bucket)
+    const hx = -2 * u, hy = -86 * u;
+    c.fillStyle = body; c.beginPath(); c.ellipse(hx, hy, 30 * u, 27 * u, 0, 0, Math.PI * 2); c.fill(); c.stroke();
+    // ears (floppy; droop when sad, lift when excited)
+    for (const sgn of [-1, 1]) { c.save(); c.translate(hx + sgn * 24 * u, hy - 14 * u); c.rotate(sgn * (sad ? 0.9 : excited ? 0.25 : 0.55)); c.fillStyle = ear; c.beginPath(); c.ellipse(0, 16 * u, 9 * u, 20 * u, 0, 0, Math.PI * 2); c.fill(); c.stroke(); c.restore(); }
+    // muzzle
+    c.fillStyle = '#fbf1dc'; c.beginPath(); c.ellipse(hx + 10 * u, hy + 6 * u, 16 * u, 12 * u, 0, 0, Math.PI * 2); c.fill();
+    // eyes (looking up at the bucket)
+    const look = sad ? 2 : -3;
+    for (const ex of [-10, 12]) { c.fillStyle = '#fff'; c.beginPath(); c.ellipse(hx + ex * u, hy - 4 * u, 6 * u, 7 * u, 0, 0, Math.PI * 2); c.fill(); c.stroke(); c.fillStyle = line; c.beginPath(); c.arc(hx + ex * u + 2 * u, hy - 4 * u + look * u, 3.2 * u, 0, Math.PI * 2); c.fill(); }
+    if (sad) { c.beginPath(); c.moveTo(hx - 16 * u, hy - 14 * u); c.lineTo(hx - 4 * u, hy - 10 * u); c.moveTo(hx + 18 * u, hy - 14 * u); c.lineTo(hx + 6 * u, hy - 10 * u); c.stroke(); }
+    // nose
+    c.fillStyle = line; c.beginPath(); c.ellipse(hx + 16 * u, hy + 2 * u, 5 * u, 4 * u, 0, 0, Math.PI * 2); c.fill();
+    // mouth: open + tongue (waiting), chewing (eating), small (sad)
+    if (eating) { const o = 3 + Math.abs(Math.sin(t * 12)) * 6; c.fillStyle = '#b8342a'; c.beginPath(); c.ellipse(hx + 12 * u, hy + 12 * u, 9 * u, o * u, 0, 0, Math.PI * 2); c.fill(); c.stroke(); }
+    else if (sad) { c.beginPath(); c.moveTo(hx + 4 * u, hy + 15 * u); c.quadraticCurveTo(hx + 12 * u, hy + 11 * u, hx + 20 * u, hy + 15 * u); c.stroke(); }
+    else { c.fillStyle = '#b8342a'; c.beginPath(); c.ellipse(hx + 12 * u, hy + 13 * u, 10 * u, 8 * u, 0, 0, Math.PI * 2); c.fill(); c.stroke(); c.fillStyle = '#f29aa6'; c.beginPath(); c.ellipse(hx + 13 * u, hy + 18 * u, 6 * u, 5 * u, 0, 0, Math.PI * 2); c.fill(); }
+    c.restore();
+    // hearts while eating
+    for (const h of this.hearts) { h.t += dt; h.y -= 40 * u * dt; }
+    this.hearts = this.hearts.filter((h) => h.t < 1.2);
+    for (const h of this.hearts) { c.globalAlpha = 1 - h.t / 1.2; this.heart(h.x, h.y, 9 * u * (0.6 + h.t)); }
+    c.globalAlpha = 1;
+    if (eating && Math.random() < 0.08) this.hearts.push({ x: x + (Math.random() - 0.5) * 50 * u, y: y - 120 * u, t: 0 });
+  }
+  heart(x, y, r) { const c = this.ctx; c.fillStyle = PAL.acc; c.beginPath(); c.moveTo(x, y + r); c.bezierCurveTo(x - r * 1.5, y - r * 0.2, x - r * 0.6, y - r * 1.2, x, y - r * 0.4); c.bezierCurveTo(x + r * 0.6, y - r * 1.2, x + r * 1.5, y - r * 0.2, x, y + r); c.fill(); }
+  // Butter's thought bubble: a little popcorn bucket (why we are doing this). Hidden while eating/sad.
+  bubble(sim, snap) {
+    if (this.dogEat > 0 || this.dogSad > 0) return;
+    const c = this.ctx, S = this.scale, { x, y } = this.dogPose(sim);
+    const u = S / 86, bx = x - 66 * u, by = y - 150 * u + Math.sin(this.t * 2) * 3 * u;
+    c.save(); c.fillStyle = '#fff'; c.strokeStyle = PAL.ink; c.lineWidth = Math.max(1.5, 2 * u);
+    for (const [dx, dy, r] of [[34, 28, 5], [26, 18, 8]]) { c.beginPath(); c.arc(bx + dx * u, by + dy * u, r * u, 0, Math.PI * 2); c.fill(); c.stroke(); }
+    c.beginPath(); c.ellipse(bx, by, 40 * u, 32 * u, 0, 0, Math.PI * 2); c.fill(); c.stroke();
+    // mini bucket
+    c.translate(bx, by + 4 * u); this.cup({ w: 0.36, h: 0.4 }, 0.36 * S * 0.75, 0.4 * S * 0.75); c.restore();
   }
 
   // ---------- effects ----------
