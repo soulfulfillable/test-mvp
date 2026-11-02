@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-02T00:55:38.773Z",
+  "startedAt": "2026-11-02T01:14:10.474Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -26,6 +26,26 @@
     },
     {
       "name": "five styles wrap around",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "music button shows the default track",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "only the chosen music track is downloaded",
+      "ok": true,
+      "detail": "bgm_chiptune"
+    },
+    {
+      "name": "music button switches the track mid-play and saves it",
+      "ok": true,
+      "detail": "bgm_rush rush"
+    },
+    {
+      "name": "six music tracks wrap around to the first",
       "ok": true,
       "detail": ""
     },
@@ -57,7 +77,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "bonk,bonk2,gold,skunk,miss,tick,heart,over,whiff,best,start,hit_cute,hit2_cute,hit_pop,hit2_pop,hit_arcade,hit2_arcade,hit_chime,hit2_chime,muteOn,muteOff,bgm"
+      "detail": "bonk,bonk2,skunk,miss,gold,tick,best,over,heart,start,whiff,hit_cute,hit2_cute,hit_pop,hit2_pop,hit_arcade,hit2_arcade,hit_chime,muteOn,muteOff,hit2_chime,bgm_chiptune,bgm_rush,bgm_ragtime,bgm_funky,bgm_ukulele,bgm_battle"
     },
     {
       "name": "music looping",
@@ -67,7 +87,7 @@
     {
       "name": "scored by whacking moles",
       "ok": true,
-      "detail": "score 27, whacks 16, lives 3"
+      "detail": "score 16, whacks 13, lives 3"
     },
     {
       "name": "one bomb = one heart (the other moles duck, no second miss)",
@@ -82,7 +102,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "44.10 → 44.10"
+      "detail": "44.08 → 44.08"
     },
     {
       "name": "Resume continues the round",
@@ -112,12 +132,12 @@
     {
       "name": "round ends at 0 s with the game-over panel",
       "ok": true,
-      "detail": "{\"title\":\"TIME'S UP!\",\"score\":27}"
+      "detail": "{\"title\":\"TIME'S UP!\",\"score\":16}"
     },
     {
       "name": "best and rank recorded",
       "ok": true,
-      "detail": "best 27"
+      "detail": "best 16"
     },
     {
       "name": "level_completed message on time-up",
@@ -127,7 +147,7 @@
     {
       "name": "Share my score copies or shares the score text",
       "ok": true,
-      "detail": "I whacked 27 moles in Mole Mash. Beat me: https://playgama.a"
+      "detail": "I whacked 16 moles in Mole Mash. Beat me: https://playgama.a"
     },
     {
       "name": "mute button silences and shows the off icon",
@@ -147,7 +167,7 @@
     {
       "name": "reload restores best, name, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"best\":27,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
+      "detail": "{\"best\":16,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
     },
     {
       "name": "reload while muted stays silent from the first frame",
@@ -197,7 +217,7 @@
     {
       "name": "closed-then-rewarded order still continues the same run (score kept)",
       "ok": true,
-      "detail": "{\"mid\":{\"state\":2,\"pending\":false},\"after\":{\"state\":1,\"score\":0,\"lives\":3,\"used\":true,\"countIn\":3.969900000000092},\"scoreBefore\":0}"
+      "detail": "{\"mid\":{\"state\":2,\"pending\":false},\"after\":{\"state\":1,\"score\":0,\"lives\":3,\"used\":true,\"countIn\":3.9994999999999985},\"scoreBefore\":0}"
     },
     {
       "name": "ignoring moles loses 3 hearts → OUT OF HEARTS",
@@ -207,7 +227,7 @@
     {
       "name": "results panel shows the gift box bar and 5 hammer slots",
       "ok": true,
-      "detail": "{\"label\":\"Gift box ready! next box 4 / 18\",\"fill\":4,\"ready\":1,\"hammers\":[\"classic\"]}"
+      "detail": "{\"label\":\"Gift box ready! next box 1 / 18\",\"fill\":1,\"ready\":1,\"hammers\":[\"classic\"]}"
     },
     {
       "name": "Play again with a ready box opens the box screen first (not next to the continue offer)",
@@ -227,17 +247,17 @@
     {
       "name": "rewarded: box opens, a new hammer is revealed, box count drops",
       "ok": true,
-      "detail": "{\"open\":true,\"name\":\"Candy Cane\",\"hammers\":[\"classic\",\"candy\"],\"ready\":0}"
+      "detail": "{\"open\":true,\"name\":\"Squeaky Rubber\",\"hammers\":[\"classic\",\"rubber\"],\"ready\":0}"
     },
     {
       "name": "Equip and play: new hammer equipped, round starts",
       "ok": true,
-      "detail": "{\"state\":1,\"equipped\":\"candy\"}"
+      "detail": "{\"state\":1,\"equipped\":\"rubber\"}"
     },
     {
       "name": "reload keeps owned hammers, the equipped one and the box fill",
       "ok": true,
-      "detail": "{\"equipped\":\"candy\",\"hammers\":2,\"fill\":4}"
+      "detail": "{\"equipped\":\"rubber\",\"hammers\":2,\"fill\":1}"
     },
     {
       "name": "interrupted run restored after reload, continue still available",
@@ -267,7 +287,7 @@
     {
       "name": "number key whacks the matching hole",
       "ok": true,
-      "detail": "hole 3"
+      "detail": "hole 9"
     },
     {
       "name": "Esc does nothing (1.5.2)",
@@ -322,7 +342,7 @@
     {
       "name": "game-over panel fits at square-640x640",
       "ok": true,
-      "detail": "panel 563px of 640"
+      "detail": "panel 564px of 640"
     },
     {
       "name": "layout iframe-800x450 (left): HUD and board separate, board on screen, buttons clear",
@@ -404,6 +424,6 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "passed": 73,
+  "passed": 77,
   "failed": 0
 }

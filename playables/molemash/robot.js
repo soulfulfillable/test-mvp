@@ -104,6 +104,14 @@ async function playAgain(page) {
     check('hit-sound button cycles the style and saves it', await page.evaluate(() => window.__game.store.settings.sfx === 'cute' && /Cute/.test(document.getElementById('sfx-btn').textContent)));
     await page.click('#sfx-btn'); await page.click('#sfx-btn'); await page.click('#sfx-btn'); await page.click('#sfx-btn');
     check('five styles wrap around', await page.evaluate(() => window.__game.store.settings.sfx === 'classic'));
+    check('music button shows the default track', await page.evaluate(() => window.__game.store.settings.bgm === 'chiptune' && /Chiptune/.test(document.getElementById('bgm-btn').textContent)));
+    check('only the chosen music track is downloaded', await page.evaluate(() => window.__game.bufs.filter((k) => k.indexOf('bgm_') === 0).join(',') === 'bgm_chiptune'), await page.evaluate(() => window.__game.bufs.filter((k) => k.indexOf('bgm_') === 0).join(',')));
+    await page.click('#bgm-btn');
+    await page.waitForFunction(() => window.__game.bgmKey === 'bgm_rush', null, { timeout: 8000 }).catch(() => {});
+    check('music button switches the track mid-play and saves it', await page.evaluate(() => window.__game.store.settings.bgm === 'rush' && window.__game.bgmPlaying && window.__game.bgmKey === 'bgm_rush' && /rush/.test(document.getElementById('bgm-btn').textContent)), await page.evaluate(() => window.__game.bgmKey + ' ' + window.__game.store.settings.bgm));
+    for (let i = 0; i < 5; i++) await page.click('#bgm-btn');
+    await page.waitForFunction(() => window.__game.bgmKey === 'bgm_chiptune', null, { timeout: 8000 }).catch(() => {});
+    check('six music tracks wrap around to the first', await page.evaluate(() => window.__game.store.settings.bgm === 'chiptune' && window.__game.bgmKey === 'bgm_chiptune'));
     check('title state before first tap', await page.evaluate(() => window.__game.state === 0));
     check('tutorial on for a new player', await page.evaluate(() => window.__game.store.progress.played === 0));
     await page.tap('#game');
@@ -114,7 +122,7 @@ async function playAgain(page) {
     await page.waitForTimeout(1500);
     const audio = await page.evaluate(() => ({ ctx: window.__game.ctxState, bufs: window.__game.bufs, bgm: window.__game.bgmPlaying, audible: window.__game.audible }));
     check('AudioContext running after first tap', audio.ctx === 'running', audio.ctx);
-    check('sound files decoded (effects + music)', audio.bufs.length >= 12 && audio.bufs.includes('bgm'), audio.bufs.join(','));
+    check('sound files decoded (effects + music)', audio.bufs.length >= 12 && audio.bufs.includes('bgm_chiptune'), audio.bufs.join(','));
     check('music looping', audio.bgm);
     await page.waitForTimeout(2600);  // let the tutorial mole come up
     await shot(page, 'phone-390x844-play-tutorial');

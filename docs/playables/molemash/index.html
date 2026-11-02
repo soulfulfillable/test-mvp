@@ -49,9 +49,14 @@
   }
   .corner svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
   .corner.hidden { display: none; }
-  .pill {
-    position: fixed; z-index: 20; left: 50%; transform: translateX(-50%);
+  #pills {
+    position: fixed; z-index: 20; left: 8px; right: 8px;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; pointer-events: none;
+  }
+  #pills.hidden { display: none; }
+  .pill {
+    pointer-events: auto;
     height: 36px; padding: 0 14px; border-radius: 18px; border: 1.5px solid rgba(61,40,18,0.35);
     background: rgba(255,246,234,0.92); color: #3d2812; font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
@@ -170,7 +175,7 @@
   <svg class="off" viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
 </button>
 
-<button id="sfx-btn" class="pill">Hit sound: Classic thump</button>
+<div id="pills"><button id="sfx-btn" class="pill">Hit sound: Classic thump</button><button id="bgm-btn" class="pill">Music: Chiptune</button></div>
 <div id="over-panel" class="panel hidden" role="dialog">
   <div class="ttl-row" id="over-title">
     <svg id="over-icon-time" viewBox="0 0 24 24" fill="none" stroke="#ffc94d" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6"/></svg>
@@ -235,6 +240,7 @@
     <button id="resume-btn" class="btn-main"><svg viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></svg>Resume</button>
     <button id="pause-mute-btn" class="btn-ghost">Sound: on</button>
     <button id="pause-sfx-btn" class="btn-ghost">Hit sound: Classic thump</button>
+    <button id="pause-bgm-btn" class="btn-ghost">Music: Chiptune</button>
     <button id="quit-btn" class="btn-ghost">Quit to title</button>
   </div>
   <div class="pause-keys" id="pause-keys"></div>
@@ -244,7 +250,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.5.0';
+  var GAME_VERSION = '1.6.0';
   var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
   var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
   var CLOCK_TIME = 5;            // the clock mole adds five seconds
@@ -279,7 +285,7 @@
   var BOX_GOAL_FIRST = 12, BOX_GOAL = 18;   // moles per gift box: the first box opens after a decent first round
   var store = {
     progress: { v: 2, best: 0, played: 0, ranks: [], name: '', hammers: ['classic'], equipped: 'classic', boxFill: 0, boxesReady: 0, boxesOpened: 0, pendingRun: null },
-    settings: { v: 1, muted: false, sfx: 'classic' }
+    settings: { v: 1, muted: false, sfx: 'classic', bgm: 'chiptune' }
   };
   function hammerById(id) { for (var i = 0; i < HAMMERS.length; i++) if (HAMMERS[i].id === id) return HAMMERS[i]; return HAMMERS[0]; }
   function ownedHammer(id) { return store.progress.hammers.indexOf(id) >= 0; }
@@ -315,6 +321,7 @@
       var s = parseVal(data[1], store.settings);
       s.muted = !!s.muted;
       s.sfx = SFX_STYLES.some(function (x) { return x.id === s.sfx; }) ? s.sfx : 'classic';
+      s.bgm = BGM_STYLES.some(function (x) { return x.id === s.bgm; }) ? s.bgm : 'chiptune';
       store.settings = s;
     }).catch(function () { /* treat unreadable data as a new player */ });
   }
@@ -493,7 +500,7 @@
   // every sound ships twice: OGG Vorbis (Chrome, Firefox, Edge) and MP3 (Safari, which cannot decode Vorbis)
   var AUDIO_EXT = safe(function () { return document.createElement('audio').canPlayType('audio/ogg; codecs=vorbis') ? '.ogg' : '.mp3'; }, '.mp3');
   var SFX = {};
-  ['bonk', 'bonk2', 'gold', 'skunk', 'miss', 'tick', 'heart', 'best', 'over', 'whiff', 'start', 'bgm'].forEach(function (k) { SFX[k] = 'audio/' + k + AUDIO_EXT; });
+  ['bonk', 'bonk2', 'gold', 'skunk', 'miss', 'tick', 'heart', 'best', 'over', 'whiff', 'start'].forEach(function (k) { SFX[k] = 'audio/' + k + AUDIO_EXT; });
   // hit-sound styles the player can switch (title screen and pause menu); 'classic' is the Kenney thump
   var SFX_STYLES = [
     { id: 'classic', name: 'Classic thump' }, { id: 'cute', name: 'Cute blip' }, { id: 'pop', name: 'Rubber pop' },
@@ -501,9 +508,17 @@
   ];
   SFX_STYLES.forEach(function (st) { if (st.id !== 'classic') { SFX['hit_' + st.id] = 'audio/hit-' + st.id + AUDIO_EXT; SFX['hit2_' + st.id] = 'audio/hit2-' + st.id + AUDIO_EXT; } });
   SFX.muteOn = 'audio/mute-on' + AUDIO_EXT; SFX.muteOff = 'audio/mute-off' + AUDIO_EXT;
+  // music the player can switch (title screen and pause menu); only the chosen track is downloaded
+  var BGM_STYLES = [
+    { id: 'chiptune', name: 'Chiptune', file: 'bgm-chiptune' }, { id: 'rush', name: 'Chiptune rush', file: 'bgm-rush' },
+    { id: 'ragtime', name: 'Ragtime', file: 'bgm-ragtime' }, { id: 'funky', name: 'Funky', file: 'bgm-funky' },
+    { id: 'ukulele', name: 'Ukulele', file: 'bgm-ukulele' }, { id: 'battle', name: 'Battle march', file: 'bgm' }
+  ];
+  BGM_STYLES.forEach(function (st) { SFX['bgm_' + st.id] = 'audio/' + st.file + AUDIO_EXT; });
+  function bgmKey() { return 'bgm_' + (store.settings.bgm || 'chiptune'); }
   var GAIN = { hit_cute: 0.9, hit2_cute: 0.8, hit_pop: 0.9, hit2_pop: 0.8, hit_arcade: 0.9, hit2_arcade: 0.8, hit_chime: 0.9, hit2_chime: 0.8, bonk: 1.0, bonk2: 0.8, gold: 1.0, skunk: 0.8, miss: 0.55, tick: 0.5, heart: 0.8, best: 0.8, over: 0.8, whiff: 0.35, start: 0.6, muteOn: 0.5, muteOff: 0.5, bgm: 0.42 };
   var snd = {
-    ctx: null, master: null, bufs: {}, raw: {}, bgm: null, bgmGain: null, unlocked: false,
+    ctx: null, master: null, bufs: {}, raw: {}, fetching: {}, bgm: null, bgmKey: null, bgmGain: null, unlocked: false,
     reasons: { user: false, platform: false, paused: false, ad: false, hidden: false },
     audible: true
   };
@@ -522,17 +537,20 @@
   function setReason(name, on) { if (snd.reasons[name] === on) return; snd.reasons[name] = on; applyAudio(); }
   function fetchAudio() {
     // after game_ready: the player never waits for sound
-    Object.keys(SFX).forEach(function (k) {
-      fetch(SFX[k]).then(function (r) { return r.ok ? r.arrayBuffer() : null; })
-        .then(function (ab) { if (ab) { snd.raw[k] = ab; decodeOne(k); } })
-        .catch(function () {});
-    });
+    Object.keys(SFX).forEach(function (k) { if (k.indexOf('bgm_') === 0 && k !== bgmKey()) return; fetchOne(k); });
+  }
+  function fetchOne(k) {
+    if (snd.fetching[k] || snd.raw[k] || snd.bufs[k]) return;
+    snd.fetching[k] = true;
+    fetch(SFX[k]).then(function (r) { return r.ok ? r.arrayBuffer() : null; })
+      .then(function (ab) { if (ab) { snd.raw[k] = ab; decodeOne(k); } else delete snd.fetching[k]; })
+      .catch(function () { delete snd.fetching[k]; });
   }
   function decodeOne(k) {
     if (!snd.ctx || !snd.raw[k] || snd.bufs[k]) return;
     var ab = snd.raw[k];
     try {
-      var p = snd.ctx.decodeAudioData(ab.slice(0), function (buf) { snd.bufs[k] = buf; delete snd.raw[k]; if (k === 'bgm') startBgm(); }, function () {});
+      var p = snd.ctx.decodeAudioData(ab.slice(0), function (buf) { snd.bufs[k] = buf; delete snd.raw[k]; if (k === bgmKey()) startBgm(); }, function () {});
       if (p && p.catch) p.catch(function () {});
     } catch (e) {}
   }
@@ -557,14 +575,35 @@
     startBgm();
   }
   function startBgm() {
-    if (snd.bgm || !snd.ctx || !snd.bufs.bgm) return;
+    var k = bgmKey();
+    if (snd.bgm && snd.bgmKey !== k) stopBgm();
+    if (snd.bgm || !snd.ctx || !snd.bufs[k]) return;
     try {
       var src = snd.ctx.createBufferSource();
-      src.buffer = snd.bufs.bgm; src.loop = true;
+      src.buffer = snd.bufs[k]; src.loop = true;
       src.connect(snd.bgmGain); src.start();
-      snd.bgm = src;
+      snd.bgm = src; snd.bgmKey = k;
     } catch (e) {}
   }
+  function stopBgm() {
+    if (!snd.bgm) return;
+    try { snd.bgm.stop(); } catch (e) {}
+    snd.bgm = null; snd.bgmKey = null;
+  }
+  function cycleBgm() {
+    var i = 0; for (var k = 0; k < BGM_STYLES.length; k++) if (BGM_STYLES[k].id === (store.settings.bgm || 'chiptune')) i = k;
+    store.settings.bgm = BGM_STYLES[(i + 1) % BGM_STYLES.length].id;
+    saveStore(['settings']); renderBgm();
+    stopBgm();
+    if (snd.bufs[bgmKey()]) startBgm(); else fetchOne(bgmKey());   // the new track starts as soon as it is decoded
+    analytics('settings_changed', { setting: 'bgm', value: store.settings.bgm });
+  }
+  function bgmName() { for (var k = 0; k < BGM_STYLES.length; k++) if (BGM_STYLES[k].id === (store.settings.bgm || 'chiptune')) return BGM_STYLES[k].name; return BGM_STYLES[0].name; }
+  function renderBgm() {
+    document.getElementById('bgm-btn').textContent = 'Music: ' + bgmName();
+    document.getElementById('pause-bgm-btn').textContent = 'Music: ' + bgmName();
+  }
+  function showPills(on) { document.getElementById('pills').classList.toggle('hidden', !on); }
   function play(k, rate) {
     if (!snd.ctx || !snd.bufs[k] || !snd.audible) return;
     try {
@@ -593,6 +632,7 @@
   function renderSfx() {
     document.getElementById('sfx-btn').textContent = 'Hit sound: ' + sfxName();
     document.getElementById('pause-sfx-btn').textContent = 'Hit sound: ' + sfxName();
+    renderBgm();
   }
   function sndTick()  { play('tick'); }
   function sndGold()  { play('gold'); }
@@ -832,7 +872,7 @@
   // ---------- flow: start / pause / game over / continue ----------
   function startRound(fromOver) {
     hidePanels();
-    document.getElementById('sfx-btn').classList.add('hidden');
+    showPills(false);
     clearPendingRun();
     reset();
     state = STATE_PLAY;
@@ -873,7 +913,7 @@
     userPaused = false;
     hidePanels();
     state = STATE_TITLE;
-    document.getElementById('sfx-btn').classList.remove('hidden');
+    showPills(true);
     moles = []; floats = []; mallets = []; puffs = []; particles = [];
     document.getElementById('pause-btn').classList.add('hidden');
   }
@@ -1105,7 +1145,7 @@
     roundIndex = pr.round || roundIndex;
     state = STATE_OVER; overAt = performance.now() - 1000;
     isNewBest = false; boxGained = 0; myRankRow = null;
-    document.getElementById('sfx-btn').classList.add('hidden');
+    showPills(false);
     showOverPanel();
     document.getElementById('rank-line').textContent = 'Welcome back. Your run is still here.';
     analytics('run_restored', { score: score });
@@ -1191,6 +1231,8 @@
   });
   document.getElementById('sfx-btn').addEventListener('click', function () { unlockAudio(); cycleSfx(); });
   document.getElementById('pause-sfx-btn').addEventListener('click', function () { unlockAudio(); cycleSfx(); });
+  document.getElementById('bgm-btn').addEventListener('click', function () { unlockAudio(); cycleBgm(); });
+  document.getElementById('pause-bgm-btn').addEventListener('click', function () { unlockAudio(); cycleBgm(); });
   document.getElementById('signin-btn').addEventListener('click', function () {
     unlockAudio();
     safe(function () { B.player.authorize().then(function () { analytics('signed_in', {}); renderWorld(); }).catch(function () {}); });
@@ -1772,7 +1814,7 @@
   function setupCover() {
     // still frame for covers: title sign over a lively board
     document.getElementById('mute-btn').classList.add('hidden');
-    document.getElementById('sfx-btn').classList.add('hidden');
+    showPills(false);
     [[0, 'mole'], [4, 'gold'], [7, 'mole'], [2, 'bomb']].forEach(function (d) {
       moles.push({ hole: d[0], kind: d[1], phase: 'sink', p: 1, stayT: 9e9, t: 0, face: 1 });
     });
@@ -1787,7 +1829,7 @@
       get store() { return store; }, get bridgeReady() { return bridgeReady; }, get audible() { return snd.audible; },
       get reasons() { return snd.reasons; }, get frozen() { return frozen(); }, get userPaused() { return userPaused; },
       get continueUsed() { return continueUsed; }, get tutorial() { return tutorial; }, get isDesktop() { return isDesktop; },
-      get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; }, get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; },
+      get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; }, get bgmKey() { return snd.bgmKey; }, get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; },
       holeCenter: function (i) { var h = holes[i]; return { x: h.x, y: h.y - moleH * 0.4 }; },
       whackAt: whackAt, tryStart: tryStart, spawnMole: spawnMole, pauseGame: pauseGame, resumeGame: resumeGame,
       gameOver: gameOver, onRewardedState: onRewardedState, adStateChanged: adStateChanged, setReason: setReason,
