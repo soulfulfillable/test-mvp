@@ -97,6 +97,9 @@ Claude 세션이 그런 단계에 닿으면 사용자에게 캡처를 반복 요
 - 번들 ID 등록 Actions (Catdoku 세션).
 - AdMob 보상형 광고 처리(대기·실패·중간 닫기): `catdoku_app/` 참고.
 
+## 스튜디오 표기 (2026-11-02 사용자)
+- 새 게임(Popcorn 이후)의 화면·소개 표기는 **Treasurefield Studio**(Threads @treasurefieldstudio). 기존 `Soulfulfill` 표기(Playgama 계정명·Apple/Play 개발자명·pitch.md)는 그대로 두고, 바꿀지는 기획 파트너가 사용자에게 따로 확인한 뒤.
+
 ## 계정 (어느 계정으로 로그인하나)
 
 - **AdMob = `soulfulfillable` Google 계정** (게시자 ID `pub-4724352880074547`, Currency Exchange 앱이 있는 계정). 사용자 확인 2026-10-02.
