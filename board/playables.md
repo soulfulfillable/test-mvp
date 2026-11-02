@@ -2,8 +2,8 @@
 
 ## 🔁 이어받기
 - 마지막 저장: 2026-11-02 10:30 KST (개발 세션 ③-b: v1 → … → v1.5.0 → **v1.6.0 배경음악 6곡 선택 버튼(CC0, GitHub raw 로 입수)**) · 작업 브랜치: `claude/playables-molemash` (main 반영됨)
-- 방금 끝낸 것: **Mole Mash v1.5.0** 아카이브 `molemash-1.5.0`(id `cmvyjudps25hxj80hidq1282d`) 빌드 체크 PASSED → `publish_sandbox` → `get_publications` **PUBLISHED(01:00Z)**. 내용: 콤보 5부터 망치에 불꽃+점수 2배, 10부터 3배(`comboMult`, HUD 콤보 강조) · 결과 화면 World top 10 에 자기 줄 "You (이름)" 표시 + 로그인 지원 플랫폼이면 `#signin-btn`(이름은 Playgama 계정에서만 보임, 게임 안 이름은 기기 로컬) · 보상형 광고 중 페이지가 리로드돼도 `pendingRun`(10분)으로 결과 화면 복원("Welcome back. Your run is still here.") · 폭탄은 하트 1개만(다른 두더지 놀라 숨음, 패널티 없음) · 이어하기 뒤 SECOND WIND 카드+3·2·1·GO, 플랫폼 pause 무시 가드. 로봇 73/73(`qa/report.json`).
-  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (**v1.5.0 라이브**) · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.5.0): https://developer.playgama.com/qa-tool/cmvyjudps25hxj80hidq1282d
+- 방금 끝낸 것: **Mole Mash v1.6.0** 아카이브 `molemash-1.6.0`(id `cmvykietd25p6j80hmlze23kh`, 11.9MB) 빌드 체크 PASSED → `publish_sandbox` → **PUBLISHED(01:17Z)**. 내용: 타이틀·일시정지의 **Music 버튼**(6곡 CC0, 기본 Chiptune, 고른 곡만 로드, 누르면 즉시 전환) — 피드백 기록 11-02 v1.5.0 참고. 로봇 77/77. 직전 v1.5.0 내용: 콤보 5부터 망치에 불꽃+점수 2배, 10부터 3배(`comboMult`, HUD 콤보 강조) · 결과 화면 World top 10 에 자기 줄 "You (이름)" 표시 + 로그인 지원 플랫폼이면 `#signin-btn`(이름은 Playgama 계정에서만 보임, 게임 안 이름은 기기 로컬) · 보상형 광고 중 페이지가 리로드돼도 `pendingRun`(10분)으로 결과 화면 복원("Welcome back. Your run is still here.") · 폭탄은 하트 1개만(다른 두더지 놀라 숨음, 패널티 없음) · 이어하기 뒤 SECOND WIND 카드+3·2·1·GO, 플랫폼 pause 무시 가드. 로봇 73/73(`qa/report.json`).
+  - 🎮 샌드박스: https://playgama.ai/play/cmnhxm72r5k4zv (**v1.6.0 라이브**) · 🌐 Pages 복사본: https://soulfulfillable.github.io/test-mvp/playables/molemash/ · 🔧 QA 툴(v1.6.0): https://developer.playgama.com/qa-tool/cmvykietd25p6j80hmlze23kh
   - 저장: `progress` v2 = {best, played, ranks, name, hammers[], equipped, boxFill, boxesReady, boxesOpened}(v1 저장은 기본값으로 이어짐). 보상형 배치 `continue`·`open_box`(config).
   - ⚠️ 모더레이션(Submit for review)은 샌드박스 목표 도달 뒤 열림(MODERATION_UNAVAILABLE). 트래픽 캠페인은 사용자 확인 전엔 안 함.
 
@@ -21,7 +21,7 @@
 - 확인할 결과: 글의 공개 URL(threads.com/@…/post/…)을 이 게시판 "사용자 대기" 줄에 적기 → 개발 세션이 `start_sandbox_traffic` 으로 부스트 시작(결정 "A + 무료 부스트"로 기록). 회사명·실명 어디에도 쓰지 않는다.
 
 ### 🖱️ Codex 에게 (브라우저 작업) — Playgama QA 툴 인증(certification) (개발 세션 11-01)
-- URL: https://developer.playgama.com/qa-tool/cmvyjudps25hxj80hidq1282d (v1.5.0 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
+- URL: https://developer.playgama.com/qa-tool/cmvykietd25p6j80hmlze23kh (v1.6.0 아카이브; 로그인 = Playgama 개발자 계정, 스튜디오 Soulfulfill)
 - 할 것: QA 툴에서 **Test Game** 으로 열어 한 판 플레이(세로·가로·1:1 프리셋 각 1번) → 인증(certification) 체크 진행. `get_launch_steps` 의 form 단계가 `NO_CERTIFICATION` 이라 사람이 QA 툴에서 인증해야 폼이 완성됨. **Submit for review(모더레이션)·트래픽 캠페인은 누르지 말 것.**
 - 확인할 결과: 인증 항목 통과/실패 목록(실패하면 번호·문구 그대로 이 게시판에 적기), `get_launch_steps` form 단계가 BLOCKED 에서 풀림.
 - 진행 중이던 것: 없음 (v1.5.0 게시 확인 끝)
@@ -32,7 +32,7 @@
   ④ ✅ 트래픽 = A 자연 유입(사용자 11-01). `start_sandbox_traffic` 은 쓰지 않는다. (참고 `get_sandbox_traffic` 11-01: 무료 부스트 3회 남음 — 3일간 약 50플레이 예상, 공유 글 링크가 필요. 사용자가 마음 바꾸면 그때.) **샌드박스 목표 수치(플레이 시간·인원)는 도구로 못 읽음 — 콘솔 샌드박스 카드에서만 보임, 하루 1번 집계.** 공유 링크는 `get_sandbox_share`(X·Threads·Facebook·LinkedIn·Reddit) — 사용자가 올리고 싶을 때 문구 바꿔 사용
   ⑤ (선택) BGM 교체 — 카니발 루프 mp3 받으면 `audio/bgm.*` 교체 → `./build.sh` → 재업로드
   ⑥ 다음 트랙은 기획 결정에 따름(`plans/playables-core-fun.md` 7장: Chicken Cross 제외, 신규 코어 1순위 조준+물리 연쇄 — 착수 미승인). Mole Mash 틀 복사 시 `playables/molemash/index.html`·`robot.js`
-- 사용자 대기: ① v1.5.0: 콤보 불꽃/배수 느낌, 이어하기(안 되면 몇 시 몇 분에 했는지 알려 달라고 — 텔레메트리로 추적) + 결과 화면에 World top 10 이 보이는지 ② Threads 글 URL(무료 부스트용, 위 🖱️) ③ (선택) 카니발 BGM 음원 ④ Codex QA 툴 인증 결과
+- 사용자 대기: ① v1.6.0: 음악 6곡 중 마음에 드는 것·이음새 어색한 곡 이름, 콤보 불꽃/배수 느낌, 이어하기(안 되면 몇 시 몇 분에 했는지 알려 달라고 — 텔레메트리로 추적) + 결과 화면에 World top 10 이 보이는지 ② Threads 글 URL(무료 부스트용, 위 🖱️) ③ Codex QA 툴 인증 결과(QA 툴 링크는 v1.6.0 으로 갱신)
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/playables.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구가 있는지 먼저 확인.`
 
 ### 이전 이어받기 (10-31)
