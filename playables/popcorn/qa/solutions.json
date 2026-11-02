@@ -1,0 +1,66 @@
+[
+ {
+  "level": 0,
+  "name": "Open Gap",
+  "winPct": 9.5,
+  "directPct": 0,
+  "gapShots": 44,
+  "gapWins": 44,
+  "solution": [
+   {
+    "dx": 0.3825,
+    "dy": 0.6625
+   }
+  ]
+ },
+ {
+  "level": 1,
+  "name": "Side Push",
+  "winPct": 8,
+  "directPct": 0,
+  "gapShots": 55,
+  "gapWins": 37,
+  "solution": [
+   {
+    "dx": 0.1549,
+    "dy": 0.2212
+   }
+  ]
+ },
+ {
+  "level": 2,
+  "name": "Narrow Slot",
+  "winPct": 9,
+  "directPct": 0,
+  "gapShots": 23,
+  "gapWins": 23,
+  "solution": [
+   {
+    "dx": 0.3825,
+    "dy": 0.6625
+   }
+  ]
+ },
+ {
+  "level": 3,
+  "name": "Chain Collapse",
+  "winPct": 24.3,
+  "directPct": 1.1,
+  "gapShots": 44,
+  "gapWins": 29,
+  "solution": [
+   {
+    "dx": 0.376,
+    "dy": 0.4481
+   }
+  ]
+ },
+ {
+  "level": 4,
+  "name": "Two Seeds",
+  "oneShotPct": 0,
+  "openedPct": 15.1,
+  "secondWinPct": 0,
+  "solution": null
+ }
+]
