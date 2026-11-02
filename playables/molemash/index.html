@@ -125,7 +125,7 @@
   .btn-ad { background: #3f9e3f; color: #fff; }
   .btn-ad small { font-weight: 600; opacity: 0.85; font-size: 12px; }
   .btn-ghost { background: rgba(255,255,255,0.14); color: #fff; }
-  #ad-note { font-size: 12px; color: #ff8f7a; min-height: 15px; margin-top: 7px; }
+  #ad-note { font-size: 13px; font-weight: 600; color: #ff8f7a; min-height: 16px; margin-top: 8px; }
   /* gift box progress (results panel) */
   #box-row { margin: 10px 0 2px; text-align: left; }
   #box-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.75); }
@@ -242,7 +242,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.4.0';
+  var GAME_VERSION = '1.4.1';
   var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
   var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
   var CLOCK_TIME = 5;            // the clock mole adds five seconds
@@ -721,6 +721,9 @@
         rings.push({ x: hx, y: hy - moleH * 0.5, t: 0, big: true });
         flashColor = '255,140,40'; flashA = 0.28; hitStop = 0.18; jolt(11);
         buzz([60, 40, 120]); sndSkunk();
+        // the blast scares every other mole back down: none of them counts as a miss (one bomb = one heart, never two)
+        for (var b2 = 0; b2 < moles.length; b2++) if (moles[b2] !== mo && moles[b2].phase !== 'whacked') { moles[b2].phase = 'whacked'; moles[b2].t = 0; }
+        spawnTimer = Math.max(spawnTimer, 0.9);
       } else if (mo.kind === 'clock') {
         mo.phase = 'whacked'; mo.t = 0;
         whacked++; hitCombo();
@@ -1039,7 +1042,9 @@
   // once the ad is off the screen AND the reward was reported; a 'closed' without 'rewarded' waits a short
   // grace period before it counts as "not finished". The round never restarts because of an ad.
   var rewardEarned = null, rewardT = null, adSeenClosed = false, adSeenOpened = false;
+  var adSeq = 0;
   function onRewardedState(st) {
+    analytics('ad_state', { kind: 'rewarded', state: String(st), seq: ++adSeq, offer: String(rewardPending || 'none'), earned: rewardEarned ? 1 : 0 });
     if (st === 'opened' || st === 'loading') { adSeenClosed = false; adSeenOpened = st === 'opened' || adSeenOpened; }
     adStateChanged(st);
     if (!rewardPending) return;
@@ -1063,12 +1068,13 @@
   function rewardFailed(offer, stage) {
     rewardPending = null; rewardEarned = null;
     analytics('ad_failed', { offer: offer, stage: stage });
-    var msg = stage === 'failed' ? 'Ad not available right now.' : 'Ad not finished, no reward this time.';
+    var msg = stage === 'failed' ? 'No ad could be loaded right now. Tap again to retry.' : 'The ad was closed early, so no reward this time. You can try again.';
     if (offer === 'box') boxNote(msg + ' Your box is safe.'); else noteAd(msg);
   }
   function applyReward() {
     var offer = rewardEarned; rewardEarned = null; rewardPending = null; clearTimeout(rewardT);
     if (!offer) return;
+    analytics('reward_applied', { offer: offer, state: state, time_left: Math.round(timeLeft) });
     adOpen = false; setReason('ad', false); last = performance.now();
     resumeGuardUntil = performance.now() + 6000;
     hidePanels(); userPaused = false;
@@ -1093,7 +1099,7 @@
     var el = document.getElementById('ad-note');
     el.textContent = msg;
     clearTimeout(noteAd._t);
-    noteAd._t = setTimeout(function () { el.textContent = ''; }, 3200);
+    noteAd._t = setTimeout(function () { el.textContent = ''; }, 6000);
   }
 
   // ---------- ads / platform helpers ----------
@@ -1728,7 +1734,7 @@
 
   function installDebug() {
     window.__game = {
-      get state() { return state; }, get score() { return score; }, get lives() { return lives; },
+      get state() { return state; }, get score() { return score; }, get lives() { return lives; }, set lives(v) { lives = v; },
       get timeLeft() { return timeLeft; }, set timeLeft(v) { timeLeft = v; }, get countIn() { return countIn; }, set countIn(v) { countIn = v; },
       get moles() { return moles; }, get holes() { return holes; }, get hud() { return hud; }, get grid() { return grid; },
       get store() { return store; }, get bridgeReady() { return bridgeReady; }, get audible() { return snd.audible; },
