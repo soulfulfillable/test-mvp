@@ -150,11 +150,11 @@ async function waitFn(page, fn, ms) { try { await page.waitForFunction(fn, null,
   // ---- 4. miss flow: seeds count down, out of seeds → Try again → instant retry on the same level ----
   await page.evaluate(() => PC.start(0)); await waitState(page, ['aim'], 5000);
   const seedsBefore = await page.evaluate(() => document.querySelectorAll('#seeds .kernel:not(.used)').length);
-  const d0 = await pullFor(page, { dx: 0.2, dy: 0.1 }); await drag(page, d0.from, d0.to);
+  const d0 = await pullFor(page, { dx: 0.3, dy: 0.85 }); await drag(page, d0.from, d0.to); // a high lob over the cabinet: misses three times in a row (checked in the solver sim)
   await waitState(page, ['flying', 'fuse', 'settling'], 2000); await waitState(page, ['aim', 'lost'], 15000); await sleep(200);
   const seedsAfter = await page.evaluate(() => document.querySelectorAll('#seeds .kernel:not(.used)').length);
   check('HUD seeds count down after a shot', seedsBefore === 3 && seedsAfter === 2, `${seedsBefore} → ${seedsAfter}`);
-  for (let k = 0; k < 2; k++) { await page.evaluate(() => PC.shoot(0.2, 0.1)); await waitState(page, ['aim', 'lost'], 15000); await sleep(200); }
+  for (let k = 0; k < 2; k++) { await page.evaluate(() => PC.shoot(0.3, 0.85)); await waitState(page, ['aim', 'lost'], 15000); await sleep(200); }
   const lost = await waitFn(page, () => PC.state === 'lost' && !document.querySelector('#panel').classList.contains('hidden'), 4000);
   const lostTitle = await page.evaluate(() => document.querySelector('#panel-title').textContent);
   check('out of seeds → "Out of seeds" panel', lost && /out of seeds/i.test(lostTitle), lostTitle);

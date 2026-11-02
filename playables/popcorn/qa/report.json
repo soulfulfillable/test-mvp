@@ -1,5 +1,5 @@
 {
- "startedAt": "2026-11-02T18:43:39.021Z",
+ "startedAt": "2026-11-02T18:48:09.435Z",
  "consoleErrors": [],
  "pageErrors": [],
  "externalRequests": [],
@@ -111,13 +111,13 @@
   },
   {
    "name": "out of seeds → \"Out of seeds\" panel",
-   "ok": false,
-   "detail": "Butter got it!"
+   "ok": true,
+   "detail": "Out of seeds"
   },
   {
    "name": "Try again → same level, seeds refilled, instant",
-   "ok": false,
-   "detail": "{\"state\":\"aim\",\"level\":1,\"seeds\":3,\"panelHidden\":true}"
+   "ok": true,
+   "detail": "{\"state\":\"aim\",\"level\":0,\"seeds\":3,\"panelHidden\":true}"
   },
   {
    "name": "too-short pull cancels, no seed spent",
@@ -335,9 +335,9 @@
    "won": true
   }
  ],
- "finishedAt": "2026-11-02T18:45:36.041Z",
- "passed": 29,
- "failed": 2,
+ "finishedAt": "2026-11-02T18:49:28.813Z",
+ "passed": 31,
+ "failed": 0,
  "solver": [
   {
    "level": 1,
