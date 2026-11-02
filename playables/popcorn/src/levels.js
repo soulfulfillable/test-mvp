@@ -14,7 +14,7 @@ export const MAX_PULL = 0.9;          // metres of pull-back
 export const MIN_PULL = 0.15;         // shorter pulls cancel the shot
 export const PULL_K = 9.6;            // launch speed per metre of pull
 export const SLING = { x: 0.8, y: 1.4 };  // pouch rest position (the kernel sits here)
-export const WORLD = { x0: -0.3, x1: 6.0 }; // walls; anything beyond is lost
+export const WORLD = { x0: -0.3, x1: 6.8 }; // walls; anything beyond is lost
 export const FLOOR_DOWN = 0.45;       // a target whose bottom is this close to the table counts as down
 
 export const MATS = {
@@ -54,9 +54,10 @@ export const LEVELS = [
       { id: 'roof', kind: 'shelf', mat: 'static', static: true, x: 2.45, y: 0.78, w: 1.1, h: 0.16 },
       { id: 'cab', kind: 'cabinet', mat: 'static', static: true, x: 2.45, y: 1.88, w: 1.1, h: 2.04 },
       ...stand(3.47), cup('cup', 3.47, 1.7),
+      { id: 'kerb', kind: 'ledge', mat: 'static', static: true, x: 5.45, y: 0.175, w: 0.3, h: 0.35 },
     ],
     gaps: [{ x: 1.9, y: 0, w: 1.37, h: 0.7 }],
-    cam: { x1: 5.5 },
+    cam: { x1: 5.9 },
   },
   {
     name: 'Narrow Slot', seeds: 3,
@@ -89,12 +90,12 @@ export const LEVELS = [
     name: 'Two Seeds', seeds: 4,
     hint: 'Two pops: clear the door, then the tunnel.',
     bodies: [
-      ...stand(2.4, 0.4, 1.4, 'col1', 'ped1'),
-      { id: 'cab', kind: 'cabinet', mat: 'static', static: true, x: 3.55, y: 1.75, w: 0.9, h: 2.1 },
-      { id: 'hood', kind: 'cabinet', mat: 'static', static: true, x: 4.35, y: 2.6, w: 0.7, h: 0.4 },
-      ...stand(4.22, 0.4, 1.4, 'col2', 'ped2'), cup('cup', 4.22, 1.7),
+      ...stand(2.1, 0.4, 1.4, 'col1', 'ped1'),
+      { id: 'cab', kind: 'cabinet', mat: 'static', static: true, x: 3.25, y: 1.75, w: 0.9, h: 2.1 },
+      { id: 'hood', kind: 'cabinet', mat: 'static', static: true, x: 4.3, y: 2.85, w: 1.2, h: 0.5 },
+      ...stand(3.92, 0.4, 1.4, 'col2', 'ped2'), cup('cup', 3.92, 1.7),
     ],
-    gaps: [{ x: 2.6, y: 0, w: 0.5, h: 1.7 }, { x: 3.1, y: 0, w: 0.92, h: 0.7 }],
-    cam: { x1: 4.8 },
+    gaps: [{ x: 2.3, y: 0, w: 0.5, h: 1.7 }, { x: 2.8, y: 0, w: 0.92, h: 0.7 }],
+    cam: { x1: 5.6 },
   },
 ];

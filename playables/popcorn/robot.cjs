@@ -112,10 +112,7 @@ async function waitFn(page, fn, ms) { try { await page.waitForFunction(fn, null,
     let won = false;
     for (let k = 0; k < (sol.solution || []).length; k++) {
       const d = await pullFor(page, sol.solution[k]);
-      // mid-drag screenshot: dotted preview + gauge
-      await drag(page, d.from, { x: (d.from.x + d.to.x) / 2, y: (d.from.y + d.to.y) / 2 }, 6).catch(() => {});
-      // (that drag released early — a short pull cancels; do the real one now)
-      await waitState(page, ['aim'], 3000);
+      await waitState(page, ['aim'], 15000);
       const cdp = await page.context().newCDPSession(page);
       await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: d.from.x, y: d.from.y }] });
       for (let s = 1; s <= 14; s++) { const t = s / 14; await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: d.from.x + (d.to.x - d.from.x) * t, y: d.from.y + (d.to.y - d.from.y) * t }] }); await sleep(16); }

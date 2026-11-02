@@ -43,7 +43,7 @@ function hud() {
 function panel(title, body, btn, onBtn) {
   $('#panel-title').textContent = title; $('#panel-body').textContent = body;
   const b = $('#panel-btn'); b.textContent = btn; b.onclick = () => { audio.play('ui'); onBtn(); };
-  $('#panel').classList.remove('hidden');
+  $('#panel').classList.remove('hidden'); $('#banner').classList.add('hidden'); bannerT = 0;
 }
 function banner(text) { const b = $('#banner'); b.textContent = text; b.classList.remove('hidden'); bannerT = 2.2; }
 

@@ -44,7 +44,7 @@ for (const li of only) {
       const s = new Sim(li); const v = pull(a, p); const r = shot(s, v);
       if (r.ph !== 'aim') { if (r.ph === 'won') firsts.push({ a, p, ...v, oneShot: true }); continue; }
       const c1 = s.bodies.get('col1'); const q = c1.getPosition();
-      const fallen = Math.abs(c1.getAngle()) > 1.2 || q.y < 0.45;
+      const fallen = (Math.abs(c1.getAngle()) > 1.2 || q.y < 0.45) && q.x < 1.9; // fell LEFT, clear of the tunnel mouth
       firsts.push({ a, p, ...v, fallen, cx: +q.x.toFixed(2) });
     }
     const oneShot = firsts.filter((f) => f.oneShot).length;

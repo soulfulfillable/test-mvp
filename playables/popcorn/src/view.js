@@ -1,6 +1,6 @@
 // Pop & Topple — Canvas 2D renderer. One palette, one light (upper-left), one ground shadow for everything.
 // World → screen: x right, y up, table top at y = 0. Everything here is drawing only; physics lives in physics.js.
-import { SLING, MAX_PULL, SEED_R, POP_R, WORLD } from './levels.js';
+import { SLING, MAX_PULL, SEED_R, POP_R, WORLD, CORN_LIFE } from './levels.js';
 
 export const PAL = {
   wall: '#f4ece0', wallDeep: '#ebe1d1', tile: '#f9f5ee', tileLine: '#e6dccb',
@@ -84,6 +84,19 @@ export class View {
     c.stroke();
     // a shelf line with a trim above the tiles
     c.fillStyle = PAL.wallDeep; c.fillRect(0, tileTop - 0.08 * S, w, 0.08 * S);
+    // set dressing: a wall shelf with two jars and a popcorn box, left of centre
+    const shY = tileTop - 1.4 * S, shX = this.sx(0.5), shW = 1.6 * S;
+    if (shY > 70) {
+      c.fillStyle = PAL.woodSide; c.fillRect(shX, shY, shW, 0.1 * S);
+      c.fillStyle = PAL.wood; c.fillRect(shX, shY, shW, 0.06 * S);
+      const jar = (x, hh, fill) => { c.fillStyle = fill; c.fillRect(x, shY - hh, 0.3 * S, hh); c.strokeStyle = 'rgba(43,37,32,.35)'; c.lineWidth = 1; c.strokeRect(x + .5, shY - hh + .5, 0.3 * S - 1, hh - 1); c.fillStyle = PAL.woodLine; c.fillRect(x - 0.02 * S, shY - hh - 0.07 * S, 0.34 * S, 0.07 * S); };
+      jar(shX + 0.12 * S, 0.5 * S, '#f3cf6b'); jar(shX + 0.5 * S, 0.38 * S, '#e9b45a');
+      // striped popcorn box
+      const bx = shX + 1.0 * S, bh = 0.46 * S, bw = 0.36 * S;
+      c.fillStyle = PAL.cupWhite; c.fillRect(bx, shY - bh, bw, bh);
+      c.fillStyle = PAL.acc; for (let i = 0; i < 5; i += 2) c.fillRect(bx + bw * i / 5, shY - bh, bw / 5, bh);
+      c.strokeStyle = PAL.cupLine; c.lineWidth = 1; c.strokeRect(bx + .5, shY - bh + .5, bw - 1, bh - 1);
+    }
     // table top (seen slightly from above), then its front edge
     const band = 1.3 * S;
     const g = c.createLinearGradient(0, fy, 0, fy + band); g.addColorStop(0, PAL.table); g.addColorStop(1, PAL.tableDeep);
@@ -185,7 +198,9 @@ export class View {
   }
 
   corn(b) {
-    const c = this.ctx, S = this.scale, R = b.r * S;
+    const c = this.ctx, S = this.scale;
+    const left = CORN_LIFE - (b.age || 0); const k = left < 0.35 ? Math.max(0.05, left / 0.35) : 1; // shrinks away at the end
+    const R = b.r * S * k;
     let lobes = this.cornLobes.get(b.id);
     if (!lobes) { lobes = []; for (let i = 0; i < 7; i++) { const a = (i / 7) * Math.PI * 2 + 0.4; lobes.push([Math.cos(a) * 0.48, Math.sin(a) * 0.48, 0.5 + ((i * 37) % 5) * 0.05]); } lobes.push([0, 0, 0.62]); this.cornLobes.set(b.id, lobes); }
     c.save(); c.translate(this.sx(b.x), this.sy(b.y)); c.rotate(-b.angle);

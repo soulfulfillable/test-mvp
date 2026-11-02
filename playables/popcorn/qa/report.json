@@ -1,0 +1,416 @@
+{
+ "startedAt": "2026-11-02T16:41:07.371Z",
+ "consoleErrors": [],
+ "pageErrors": [],
+ "externalRequests": [],
+ "checks": [
+  {
+   "name": "layout phone-390x844 (portrait, 88px/m)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout phone-360x640 (portrait, 66px/m)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout phone-430x932 (portrait, 97px/m)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout land-844x390 (landscape, 49px/m)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout tablet-768x1024 (portrait, 135px/m)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout square-640x640 (square, 83px/m)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout desk-1366x768 (landscape, 116px/m)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout desk-1920x1080 (landscape, 172px/m)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "level 1 shot 1: drag → flight → fuse → pop → resolved",
+   "ok": true,
+   "detail": "{\"state\":\"won\",\"seeds\":2,\"targets\":0}"
+  },
+  {
+   "name": "level 1 (Open Gap) cleared by touch drag",
+   "ok": true,
+   "detail": "panel=\"Target down!\" targets-up=0"
+  },
+  {
+   "name": "level 2 shot 1: drag → flight → fuse → pop → resolved",
+   "ok": true,
+   "detail": "{\"state\":\"won\",\"seeds\":2,\"targets\":0}"
+  },
+  {
+   "name": "level 2 (Side Push) cleared by touch drag",
+   "ok": true,
+   "detail": "panel=\"Target down!\" targets-up=0"
+  },
+  {
+   "name": "level 3 shot 1: drag → flight → fuse → pop → resolved",
+   "ok": true,
+   "detail": "{\"state\":\"won\",\"seeds\":2,\"targets\":0}"
+  },
+  {
+   "name": "level 3 (Narrow Slot) cleared by touch drag",
+   "ok": true,
+   "detail": "panel=\"Target down!\" targets-up=0"
+  },
+  {
+   "name": "level 4 shot 1: drag → flight → fuse → pop → resolved",
+   "ok": true,
+   "detail": "{\"state\":\"won\",\"seeds\":2,\"targets\":0}"
+  },
+  {
+   "name": "level 4 (Chain Collapse) cleared by touch drag",
+   "ok": true,
+   "detail": "panel=\"Target down!\" targets-up=0"
+  },
+  {
+   "name": "level 5 shot 1: drag → flight → fuse → pop → resolved",
+   "ok": true,
+   "detail": "{\"state\":\"aim\",\"seeds\":3,\"targets\":1}"
+  },
+  {
+   "name": "level 5 shot 2: drag → flight → fuse → pop → resolved",
+   "ok": true,
+   "detail": "{\"state\":\"won\",\"seeds\":2,\"targets\":0}"
+  },
+  {
+   "name": "level 5 (Two Seeds) cleared by touch drag",
+   "ok": true,
+   "detail": "panel=\"All five toppled!\" targets-up=0"
+  },
+  {
+   "name": "determinism (same pull twice → identical body positions)",
+   "ok": true,
+   "detail": "d835c58b vs d835c58b"
+  },
+  {
+   "name": "HUD seeds count down after a shot",
+   "ok": true,
+   "detail": "3 → 2"
+  },
+  {
+   "name": "out of seeds → \"Out of seeds\" panel",
+   "ok": true,
+   "detail": "Out of seeds"
+  },
+  {
+   "name": "Try again → same level, seeds refilled, instant",
+   "ok": true,
+   "detail": "{\"state\":\"aim\",\"level\":0,\"seeds\":3,\"panelHidden\":true}"
+  },
+  {
+   "name": "too-short pull cancels, no seed spent",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "restart button refills seeds",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "mute persists after reload",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "level progress persists after reload",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "name": "desktop mouse drag clears level 1",
+   "ok": true,
+   "detail": "won"
+  },
+  {
+   "name": "console errors = 0",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "page errors = 0",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "no external requests",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "screenshots": [
+  "layout-phone-390x844.png",
+  "layout-phone-360x640.png",
+  "layout-phone-430x932.png",
+  "layout-land-844x390.png",
+  "layout-tablet-768x1024.png",
+  "layout-square-640x640.png",
+  "layout-desk-1366x768.png",
+  "layout-desk-1920x1080.png",
+  "level1-first-screen-1170x2532.png",
+  "level1-aim.png",
+  "level1-shot1-aiming.png",
+  "level1-shot1-flight.png",
+  "level1-shot1-fuse.png",
+  "level1-shot1-pop.png",
+  "level1-result.png",
+  "level2-aim.png",
+  "level2-shot1-aiming.png",
+  "level2-shot1-flight.png",
+  "level2-shot1-fuse.png",
+  "level2-shot1-pop.png",
+  "level2-result.png",
+  "level3-aim.png",
+  "level3-shot1-aiming.png",
+  "level3-shot1-flight.png",
+  "level3-shot1-fuse.png",
+  "level3-shot1-pop.png",
+  "level3-result.png",
+  "level4-aim.png",
+  "level4-shot1-aiming.png",
+  "level4-shot1-flight.png",
+  "level4-shot1-fuse.png",
+  "level4-shot1-pop.png",
+  "level4-result.png",
+  "level5-aim.png",
+  "level5-shot1-aiming.png",
+  "level5-shot1-flight.png",
+  "level5-shot1-fuse.png",
+  "level5-shot1-pop.png",
+  "level5-shot2-aiming.png",
+  "level5-shot2-flight.png",
+  "level5-shot2-fuse.png",
+  "level5-shot2-pop.png",
+  "level5-result.png",
+  "out-of-seeds.png",
+  "desktop-aiming.png",
+  "desktop-level1-won.png"
+ ],
+ "levels": [
+  {
+   "level": 1,
+   "name": "Open Gap",
+   "shots": [
+    {
+     "pull": {
+      "dx": 0.3825,
+      "dy": 0.6625
+     },
+     "flying": true,
+     "fused": true,
+     "popped": true,
+     "done": true,
+     "after": {
+      "state": "won",
+      "seeds": 2,
+      "targets": 0
+     }
+    }
+   ],
+   "won": true
+  },
+  {
+   "level": 2,
+   "name": "Side Push",
+   "shots": [
+    {
+     "pull": {
+      "dx": 0.1549,
+      "dy": 0.2212
+     },
+     "flying": true,
+     "fused": true,
+     "popped": true,
+     "done": true,
+     "after": {
+      "state": "won",
+      "seeds": 2,
+      "targets": 0
+     }
+    }
+   ],
+   "won": true
+  },
+  {
+   "level": 3,
+   "name": "Narrow Slot",
+   "shots": [
+    {
+     "pull": {
+      "dx": 0.3825,
+      "dy": 0.6625
+     },
+     "flying": true,
+     "fused": true,
+     "popped": true,
+     "done": true,
+     "after": {
+      "state": "won",
+      "seeds": 2,
+      "targets": 0
+     }
+    }
+   ],
+   "won": true
+  },
+  {
+   "level": 4,
+   "name": "Chain Collapse",
+   "shots": [
+    {
+     "pull": {
+      "dx": 0.376,
+      "dy": 0.4481
+     },
+     "flying": true,
+     "fused": true,
+     "popped": true,
+     "done": true,
+     "after": {
+      "state": "won",
+      "seeds": 2,
+      "targets": 0
+     }
+    }
+   ],
+   "won": true
+  },
+  {
+   "level": 5,
+   "name": "Two Seeds",
+   "shots": [
+    {
+     "pull": {
+      "dx": 0.2239,
+      "dy": 0.5405
+     },
+     "flying": true,
+     "fused": true,
+     "popped": true,
+     "done": true,
+     "after": {
+      "state": "aim",
+      "seeds": 3,
+      "targets": 1
+     }
+    },
+    {
+     "pull": {
+      "dx": 0.7908,
+      "dy": 0.1753
+     },
+     "flying": true,
+     "fused": true,
+     "popped": true,
+     "done": true,
+     "after": {
+      "state": "won",
+      "seeds": 2,
+      "targets": 0
+     }
+    }
+   ],
+   "won": true
+  }
+ ],
+ "finishedAt": "2026-11-02T16:42:22.764Z",
+ "passed": 31,
+ "failed": 0,
+ "solver": [
+  {
+   "level": 1,
+   "name": "Open Gap",
+   "winPct": 9.5,
+   "directPct": 0,
+   "gapShots": 44,
+   "gapWins": 44,
+   "solution": [
+    {
+     "dx": 0.3825,
+     "dy": 0.6625
+    }
+   ]
+  },
+  {
+   "level": 2,
+   "name": "Side Push",
+   "winPct": 7.7,
+   "directPct": 0,
+   "gapShots": 55,
+   "gapWins": 36,
+   "solution": [
+    {
+     "dx": 0.1549,
+     "dy": 0.2212
+    }
+   ]
+  },
+  {
+   "level": 3,
+   "name": "Narrow Slot",
+   "winPct": 9,
+   "directPct": 0,
+   "gapShots": 23,
+   "gapWins": 23,
+   "solution": [
+    {
+     "dx": 0.3825,
+     "dy": 0.6625
+    }
+   ]
+  },
+  {
+   "level": 4,
+   "name": "Chain Collapse",
+   "winPct": 24.3,
+   "directPct": 1.1,
+   "gapShots": 44,
+   "gapWins": 29,
+   "solution": [
+    {
+     "dx": 0.376,
+     "dy": 0.4481
+    }
+   ]
+  },
+  {
+   "level": 5,
+   "name": "Two Seeds",
+   "oneShotPct": 0.2,
+   "openedPct": 16.6,
+   "secondWinPct": 40.6,
+   "solution": [
+    {
+     "dx": 0.2239,
+     "dy": 0.5405
+    },
+    {
+     "dx": 0.7908,
+     "dy": 0.1753
+    }
+   ]
+  }
+ ]
+}

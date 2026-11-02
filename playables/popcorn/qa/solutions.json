@@ -16,10 +16,10 @@
  {
   "level": 1,
   "name": "Side Push",
-  "winPct": 8,
+  "winPct": 7.7,
   "directPct": 0,
   "gapShots": 55,
-  "gapWins": 37,
+  "gapWins": 36,
   "solution": [
    {
     "dx": 0.1549,
@@ -58,9 +58,18 @@
  {
   "level": 4,
   "name": "Two Seeds",
-  "oneShotPct": 0,
-  "openedPct": 15.1,
-  "secondWinPct": 0,
-  "solution": null
+  "oneShotPct": 0.2,
+  "openedPct": 16.6,
+  "secondWinPct": 40.6,
+  "solution": [
+   {
+    "dx": 0.2239,
+    "dy": 0.5405
+   },
+   {
+    "dx": 0.7908,
+    "dy": 0.1753
+   }
+  ]
  }
 ]

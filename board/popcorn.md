@@ -1,16 +1,23 @@
 # Popcorn (팝콘 물리 조준) — 개발 세션 게시판
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-02 17:20 KST · 작업 브랜치: `claude/popcorn`
-- 방금 끝낸 것: `playables/popcorn/` 뼈대 전부 — Planck 결정론 물리(`src/physics.js`, 고정 1/120, 난수 없음, 팝 = 반지름 14스텝 성장 + 접촉체에 방사 임펄스, 팝콘 2.2초 뒤 소멸), 레벨 5개(`src/levels.js`), 풀이기(`tools/solve.js` → `qa/solutions.json`), Canvas 주방 장면(`src/view.js`), HUD/입력/루프(`src/main.js`, `index.html`), CC0 효과음 10종(`audio/`, `CREDITS.md`), 빌드 `./build.sh` → `docs/popcorn/`, 소개 `docs/popcorn.html`. 첫 화면 폰·데스크톱 스크린샷 콘솔 에러 0.
-- 풀이기 결과(각도 10~85°×세기 0.3~1.0, 465발): L1 9.5%(틈 안 팝 44/44 성공, 직격 0) · L2 8.0%(틈 55 중 37) · L3 9.0%(23/23) · L4 24.3%(끝 포켓 29/44, 직격 5) · L5 2단계 풀이 돌리는 중.
-- 진행 중이던 것: `robot.cjs` 방금 작성, 아직 안 돌림. L5 풀이기 결과 확인 필요.
-- **다음 할 일**: ① `NODE_PATH=/opt/node-tools/node_modules node playables/popcorn/robot.cjs` 돌려 실패 고치기(터치 드래그로 5레벨 클리어·결정론·재시도·레이아웃 8크기) ② L5 풀이 해가 없으면 레벨 5 기하 수정(`col2` 가 터널 끝에서 안 넘어가면 받침 폭/임펄스) ③ 스크린샷 "처음 보는 사람" 점검 후 main 머지·푸시(Pages) ④ PLAYBOOK 6장·PRODUCT 결정 로그·plans 진행 기록 ⑤ 보고(링크 + 질문 2개)
-- 사용자 대기: 완성 뒤 "첫 발 이해했나 / 팝콘 붕괴가 재밌나"
-- 이어받기 문장: `soulfulfillable/test-mvp 의 board/popcorn.md 와 plans/popcorn.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. 승인 범위 밖(광고·상점·수집·업로드)은 하지 말 것.`
+- 마지막 저장: 2026-11-02 18:40 KST · 작업 브랜치: `claude/popcorn` (main 반영됨)
+- 방금 끝낸 것: **시제품 완성·검증·배포.** 플레이 https://soulfulfillable.github.io/test-mvp/popcorn/ (소개 `popcorn.html`). 로봇 31/31 통과(`playables/popcorn/qa/report.json`, 스크린샷 50여 장): 8개 화면 크기 HUD 안 겹침·장면 요소 화면 안 / 5레벨 전부 **실제 터치 드래그**로 클리어(드래그→비행→떨림→팝→판정) / 같은 당김 2회 지문 동일 / 씨앗 카운트·소진→"Out of seeds"→Try again 즉시 / 짧은 당김 취소 / 재시작·음소거·진행 저장 / 데스크톱 마우스 클리어 / 콘솔·페이지 에러 0·외부 요청 0. 폰 1170×2532 첫 화면 `qa/level1-first-screen-1170x2532.png`.
+- 진행 중이던 것: 없음.
+- **다음 할 일**: ① 사용자 20초 플레이 답 2개 받기(첫 발 이해 / 붕괴 재미) ② 답에 따라: 이해 안 됨 → 레벨 1 첫 화면만 다시(손 안내를 더 길게·틈에 화살표) / 재미 없음 → 팝 반응(히트스톱·파편·소리 레이어) 보강 / 둘 다 OK → 기획 파트너와 다음 단계(레벨 수·Playgama 판)는 **승인 뒤에만** ③ 실기기에서 인앱 시트 제스처 충돌("당기다 창 닫힘") 확인 요청 ④ 아래 "아쉬운 점" 중 L5 잘못된 첫 발 처리.
+- 사용자 대기: "첫 발 이해했나 / 팝콘 붕괴가 재밌나"
+- 이어받기 문장: `soulfulfillable/test-mvp 의 board/popcorn.md 와 plans/popcorn.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. 승인 범위 밖(광고·상점·수집·업로드·레벨 추가)은 사용자 승인 뒤에만.`
 
 ## 지금 상태
-코드 완성, 로봇 검증 전. 플레이 링크(main 반영 후): https://soulfulfillable.github.io/test-mvp/popcorn/
+시제품 Pages 배포됨, 사용자 플레이 느낌 대기. 빌드 `cd playables/popcorn && ./build.sh`, 로봇 `NODE_PATH=/opt/node-tools/node_modules node playables/popcorn/robot.cjs`, 풀이기 `node tools/solve.js [레벨]`.
+
+## 아쉬운 점 (숨기지 않음)
+- **폰 세로에서 장면이 화면 아래 절반**(위 절반은 벽·선반 장식). 슬링샷 게임은 가로로 긴 장면이라 폭 맞춤 시 그렇게 됨. 쏘면 궤적이 위 공간을 쓰긴 한다. 카메라 줌/팬을 넣으면 더 크게 보일 수 있음(미구현).
+- 성공 창이 좁은 편(L1~L3 전체 발사의 8~10%). 궤적 점선이 있어 조준은 되지만 "운"으로 느끼면 포켓을 넓힌다(풀이기로 % 보며).
+- L5 는 첫 발을 기둥 **왼쪽**에 떨어뜨리면 기둥이 찬장에 기대 터널 입구를 막아 그 판은 사실상 실패(재시도로 해결). 첫 발 중 길이 제대로 열리는 비율 16.6%.
+- 효과음은 귀로 못 들어봤다(CC0 팩에서 이름·길이로 고름). 팝 소리가 "팝콘" 같은지 사용자 확인 필요. 진짜 팝콘 튀는 음원은 이 환경에서 못 구함.
+- iOS 인앱 브라우저 시트 제스처 충돌은 이 환경에서 확인 못 함(완충지대·pan-y 대책은 넣음).
+- 헤드리스라 실제 폰 fps 는 못 쟀다(Canvas 2D·바디 ≤ 12 라 가벼울 것).
 
 ## 사용자 피드백 기록
 - 11-02 (Codex 경유) 차기 시제품 = 팝콘 물리 조준 게임, 제작 승인. Pen Sort·추적 찾기는 선택 안 함. 스튜디오 표기 Treasurefield Studio.
