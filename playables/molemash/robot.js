@@ -206,6 +206,10 @@ async function playAgain(page) {
     check('after the ad closes the round runs, no pause panel in the way', await page.evaluate(() => window.__game.state === 1 && !window.__game.userPaused && document.getElementById('pause-panel').classList.contains('hidden')));
     const granted = await page.evaluate(() => ({ state: window.__game.state, lives: window.__game.lives, timeLeft: window.__game.timeLeft, used: window.__game.continueUsed, ranks: window.__game.store.progress.ranks.length }));
     check('rewarded: round continues with hearts back and +10 s', granted.state === 1 && granted.lives === 3 && granted.timeLeft > 9 && granted.used, JSON.stringify(granted));
+    check('SECOND WIND count-in holds the moles for a moment', await page.evaluate(() => window.__game.countIn > 2 && window.__game.moles.length === 0));
+    await page.waitForTimeout(400);
+    await shot(page, 'phone-390x844-second-wind');
+    await page.evaluate(() => { window.__game.countIn = 0; });
     await page.evaluate(() => { window.__game.timeLeft = 0.2; });
     await page.waitForTimeout(600);
     const o3 = await page.evaluate(() => ({ state: window.__game.state, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
