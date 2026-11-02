@@ -123,6 +123,16 @@ async function playAgain(page) {
     check('scored by whacking moles', mid.score > 0, `score ${mid.score}, whacks ${whacks}, lives ${mid.lives}`);
     await shot(page, 'phone-390x844-play-hit');
     await shot(page, 'phone-390x844-play');
+    // a bomb costs exactly one heart: the moles that were up get scared back down, no extra misses
+    await page.evaluate(() => { window.__game.spawnMole('mole'); window.__game.spawnMole('bomb'); });
+    await page.waitForTimeout(250);
+    const livesBefore = await page.evaluate(() => window.__game.lives);
+    const bc = await page.evaluate(() => { const g = window.__game; return g.holeCenter(g.moles.find((m) => m.kind === 'bomb').hole); });
+    await page.mouse.click(bc.x, bc.y);
+    await page.waitForTimeout(2200);
+    const afterBomb = await page.evaluate(() => ({ lives: window.__game.lives, state: window.__game.state }));
+    check('one bomb = one heart (the other moles duck, no second miss)', afterBomb.lives === livesBefore - 1 && afterBomb.state === 1, JSON.stringify({ livesBefore, afterBomb }));
+    await page.evaluate(() => { window.__game.lives = 3; });   // give the heart back so the rest of the session plays out as before
     // pause / resume by keyboard and button
     await page.keyboard.press('KeyP');
     await page.waitForTimeout(150);
