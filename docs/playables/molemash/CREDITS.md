@@ -18,7 +18,7 @@ Zero, CC0" in each archive's License.txt). We re-encoded to mono OGG and matched
 | `gold.ogg` | `library/audio/sfx/coin.ogg` | gold mole |
 | `skunk.ogg` | `library/audio/sfx/hurt.ogg` | hit the skunk |
 | `miss.ogg` | `library/audio/sfx/downed.ogg` | mole escaped |
-| `tick.ogg` | `library/audio/sfx/ui.ogg` | last-5-seconds tick |
+| `tick.ogg` | (replaced in v1.7.1 by uisfx `mechanical/press`, CC0 — see below) | last-10-seconds tick |
 | `heart.ogg` | `library/audio/sfx/revive.ogg` | heart restored / continue |
 | `best.ogg` | `library/audio/sfx/level_up.ogg` | new best |
 | `over.ogg` | `library/audio/sfx/boss.ogg` | round over |

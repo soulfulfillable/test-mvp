@@ -253,7 +253,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.7.0';
+  var GAME_VERSION = '1.7.1';
   var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
   var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
   var CLOCK_TIME = 5;            // the clock mole adds five seconds
@@ -426,7 +426,7 @@
   var moles = [], floats = [], mallets = [], puffs = [], particles = [];
   var score = 0, lives = 3, playT = 0, introT = 0, spawnTimer = 0;
   var shake = 0, overAt = 0, lastScore = 0, heartFlash = 0, hitStop = 0, flashA = 0;
-  var timeLeft = 0, lastTick = -1, tickAcc = 0, overReason = 'time';
+  var timeLeft = 0, lastTick = -1, tickAcc = 0, tickTock = false, overReason = 'time';
   var isNewBest = false, prevBestScore = 0;
   var RANK_MAX = 12;
   var ranks = [], myRankRow = null;
@@ -1302,7 +1302,8 @@
       tickAcc -= dt;
       if (tickAcc <= 0) {
         tickAcc += timeLeft > 5 ? 1 : (0.2 + 0.16 * timeLeft);
-        sndTick(1 + (10 - timeLeft) * 0.06, timeLeft > 5 ? 0.5 : 0.65 + (5 - timeLeft) * 0.07);
+        tickTock = !tickTock;   // tick… tock… like a real clock, then faster and higher as the seconds run out
+        sndTick((tickTock ? 1 : 0.9) + (10 - timeLeft) * 0.07, timeLeft > 5 ? 0.6 : 0.75 + (5 - timeLeft) * 0.06);
       }
     } else tickAcc = 0;
     if (timeLeft <= 0) { timeLeft = 0; gameOver('time'); return; }
