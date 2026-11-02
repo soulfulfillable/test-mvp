@@ -78,3 +78,12 @@ GitHub repositories that redistribute the original CC0 files unchanged (paths no
 FreePD closed in 2025; CC0 is irrevocable, and the SoundSafari mirror keeps the files as published. Loop points
 were chosen by waveform self-similarity (no one listened to them in the build environment) — if a seam is
 audible, re-cut from the original with `playables/molemash/tools` notes in the board.
+
+## Fonts (v1.7.0) — SIL Open Font License 1.1, bundled in `fonts/`
+
+| File | Family | Author | Source |
+|---|---|---|---|
+| `fonts/LilitaOne.ttf` | Lilita One (signs, scores, shouts) | Juan Montoreano | github.com/google/fonts `ofl/lilitaone/LilitaOne-Regular.ttf` (OFL.txt alongside) |
+| `fonts/Fredoka.ttf` | Fredoka, variable weight 300–700 (interface text) | Milena Brandão and the Fredoka Project Authors | github.com/google/fonts `ofl/fredoka/Fredoka[wdth,wght].ttf` (OFL.txt alongside) |
+
+The OFL permits bundling and redistribution with software; the font files are unmodified apart from the file name.
