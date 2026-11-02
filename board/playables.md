@@ -106,7 +106,7 @@
 - 시작 전 `get_sandbox_traffic`: offer FREE, priceUsd null, remainingFreeRuns 3, current null, runs [] (진행 중 없음 확인)
 - `start_sandbox_traffic(postUrls=[https://www.threads.com/@treasurefieldstudio/post/DfPnIRLoTqU])` → run **id `cmvzetvks020dlf0h7c2m5w8e`**, kind FREE, status **PENDING**, budgetUsd 6(플랫폼 내부 예산, 사용자 결제 아님), startsAt 2026-11-02T15:24:47Z, **endsAt 2026-11-05T15:24:47Z**(3일), goalProgress 0, creativeCount 0, failureReason null
 - 시작 직후 재조회(15:25Z): verdict allowed:false reason **RUN_IN_PROGRESS**(정상 — 진행 중이라 새 캠페인 불가), offer available:false, **remainingFreeRuns 2**, current = 위 run(status PENDING, goalProgress 0, spentRatio null), hasCompletedRun false. 비용 0. 링크는 1개만 넣음(2개까지 가능 — 두 번째 공개 글이 생기면 같은 캠페인에 추가해 예산·기간 연장 가능, 새 캠페인 아님). **중복 캠페인 금지 — 이 게임엔 이 1회뿐.**
-- 다음 확인: 하루 1회 `get_sandbox_traffic` 로 status(PENDING→RUNNING→완료)·goalProgress·spentRatio 읽기.
+- 다음 확인: 개발 세션은 스스로 깨어나지 않으므로, **기획 세션(0. Head)이 캠페인 종료 시각에 1회 자체 확인 예약**(send_later, trig_01BvmifQzovWYKtkANfHE9yx, 2026-11-05 15:40Z — 조회·기록만, 새 캠페인·Submit 없음). 중간 확인은 사용자가 세션을 열 때.
 - **부스트 일지(개발 세션, 하루 1줄)**:
   - 11-02 15:26Z: status PENDING, goalProgress 0, spentRatio null, creativeCount 0, failureReason null, remainingFreeRuns 2, verdict RUN_IN_PROGRESS (시작 2분 뒤 — 아직 광고 소재 생성 전) 샌드박스 목표치 도달 여부는 콘솔 카드(Codex). 사용자에게 다시 "쓸지" 묻지 않는다.
 
