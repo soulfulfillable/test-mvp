@@ -12,7 +12,7 @@ const canvas = $('#game');
 const view = new View(canvas);
 const audio = new Audio('audio/');
 let sim = null, level = 0, ui = { pull: null, ghost: null }, drag = null, acc = 0, last = 0, shotsThisLevel = 0, firstShotEver = true;
-let bannerT = 0;
+let bannerT = 0, demo = false;
 try { level = Math.min(LEVELS.length - 1, Math.max(0, parseInt(localStorage.getItem(KEY_LEVEL) || '0', 10) || 0)); } catch (e) { /* ignore */ }
 try { firstShotEver = localStorage.getItem('pc.shot') !== '1'; } catch (e) { /* ignore */ }
 
@@ -22,17 +22,19 @@ function resize() {
 }
 addEventListener('resize', resize);
 
-function start(i) {
-  level = i; sim = new Sim(i); shotsThisLevel = 0; ui.pull = null; drag = null; view.particles.length = 0; view.puffs.length = 0; view.rings.length = 0; view.cornLobes.clear();
+function start(i, opts = {}) {
+  level = i; sim = new Sim(i); demo = !!opts.demo; shotsThisLevel = 0; ui.pull = null; drag = null; view.particles.length = 0; view.puffs.length = 0; view.rings.length = 0; view.cornLobes.clear();
   try { localStorage.setItem(KEY_LEVEL, String(i)); } catch (e) { /* ignore */ }
-  ui.ghost = (i === 0 && firstShotEver) ? GHOST : null;
+  ui.ghost = (i === 0 && firstShotEver && !demo) ? GHOST : null;
+  ui.callouts = (i === 0 && firstShotEver);
   resize();
   $('#lnum').textContent = `Level ${i + 1} of ${LEVELS.length}`;
   $('#lname').textContent = LEVELS[i].name;
-  $('#hint').textContent = LEVELS[i].hint;
+  $('#hint').textContent = LEVELS[i].hint; $('#hintsub').textContent = 'Release to shoot';
   $('#hintwrap').classList.toggle('hidden', false);
   $('#panel').classList.add('hidden'); $('#banner').classList.add('hidden');
   hud();
+  if (demo) { $('#hint').textContent = 'Watch: pop in the gap, the bucket falls.'; $('#hintsub').textContent = ''; sim.shoot(GHOST.dx, GHOST.dy); }
 }
 function hud() {
   const seeds = $('#seeds'); seeds.innerHTML = '';
@@ -50,7 +52,7 @@ function banner(text) { const b = $('#banner'); b.textContent = text; b.classLis
 // ---- events from the physics ----
 function handle(e) {
   switch (e.type) {
-    case 'shoot': audio.play('shoot', 0.8); shotsThisLevel++; ui.ghost = null; if (firstShotEver) { firstShotEver = false; try { localStorage.setItem('pc.shot', '1'); } catch (x) { /* */ } } $('#hintwrap').classList.add('hidden'); break;
+    case 'shoot': audio.play('shoot', 0.8); shotsThisLevel++; ui.ghost = null; if (demo) break; if (firstShotEver) { firstShotEver = false; try { localStorage.setItem('pc.shot', '1'); } catch (x) { /* */ } } $('#hintwrap').classList.add('hidden'); break;
     case 'fuse': audio.play('fuse', 0.9); break;
     case 'pop': audio.play('pop', 1); view.burst(e.x, e.y); if (navigator.vibrate) navigator.vibrate(18); break;
     case 'hit': {
@@ -61,7 +63,7 @@ function handle(e) {
       if (e.strength > 0.6 && !k.includes('seed')) view.dust(e.x, e.y, 4);
       break; }
     case 'down': audio.play('down', 0.9); banner('Target down!'); hud(); break;
-    case 'won': audio.play('win', 0.9); setTimeout(showWin, 1100); break;
+    case 'won': audio.play('win', 0.9); if (demo) { setTimeout(() => { start(0); banner('Your turn!'); }, 1600); } else setTimeout(showWin, 1100); break;
     case 'lost-level': audio.play('fail', 0.8); setTimeout(() => panel('Out of seeds', 'The target is still up.', 'Try again', () => start(level)), 500); break;
     case 'ready': hud(); break;
     case 'lost': hud(); break;
@@ -77,7 +79,7 @@ function pointerPos(ev) { const r = canvas.getBoundingClientRect(); return { x: 
 function pullFrom(p) { const a = view.toWorld(drag.x, drag.y), b = view.toWorld(p.x, p.y); let dx = a.x - b.x, dy = a.y - b.y; const len = Math.hypot(dx, dy); if (len > MAX_PULL) { dx *= MAX_PULL / len; dy *= MAX_PULL / len; } return { dx: Math.round(dx * 1e4) / 1e4, dy: Math.round(dy * 1e4) / 1e4, len: Math.min(len, MAX_PULL) }; }
 canvas.addEventListener('pointerdown', (ev) => {
   audio.unlock();
-  if (!sim || sim.phase !== 'aim' || sim.seedsLeft <= 0 || !$('#panel').classList.contains('hidden')) return;
+  if (!sim || demo || sim.phase !== 'aim' || sim.seedsLeft <= 0 || !$('#panel').classList.contains('hidden')) return;
   drag = pointerPos(ev); ui.pull = { dx: 0, dy: 0, len: 0 }; canvas.setPointerCapture(ev.pointerId);
 });
 canvas.addEventListener('pointermove', (ev) => { if (!drag) return; ui.pull = pullFrom(pointerPos(ev)); });
@@ -112,10 +114,10 @@ function frame(now) {
 // ---- robot / debug API ----
 window.PC = {
   get state() { return sim ? sim.phase : 'loading'; }, get level() { return level; }, get seedsLeft() { return sim.seedsLeft; }, get targetsLeft() { return sim.targetsLeft; },
-  get shots() { return shotsThisLevel; },
+  get shots() { return shotsThisLevel; }, get demo() { return demo; },
   start, shoot: (dx, dy) => sim.shoot(dx, dy), hash: () => sim.hash(), settled: () => sim.maxSpeed() < 0.06, pxPerUnit: () => view.scale,
   pouchPx: () => ({ x: view.sx(sim.pouch(0, 0).x), y: view.sy(sim.pouch(0, 0).y) }), levels: LEVELS.length, view, sim: () => sim,
 };
 
-resize(); start(level); document.body.classList.add('ready'); requestAnimationFrame(frame);
+resize(); start(level, { demo: level === 0 && firstShotEver }); document.body.classList.add('ready'); requestAnimationFrame(frame);
 scrollTo(0, 120);

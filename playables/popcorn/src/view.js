@@ -67,6 +67,7 @@ export class View {
     this.slingFront(pouch, ui.pull);
     if (ui.pull && sim.phase === 'aim') { this.trajectory(sim.preview(ui.pull.dx, ui.pull.dy)); this.gauge(pouch); }
     if (ui.ghost && sim.phase === 'aim' && !ui.pull) this.ghost(sim, ui.ghost);
+    if (ui.callouts && !ui.pull) this.callouts(sim, snap);
     this.effects(dt);
   }
 
@@ -295,6 +296,28 @@ export class View {
       }
       c.restore();
     }
+  }
+
+  // big labels with arrows: what to knock down, where to pop (level 1, until the first shot)
+  callouts(sim, snap) {
+    const c = this.ctx, S = this.scale, cup = snap.find((b) => b.target); if (!cup) return;
+    const bob = Math.sin(this.t * 3) * 0.05 * S;
+    const label = (text, x, y, ax, ay) => { // box at (x,y), arrow from box bottom to (ax,ay)
+      c.font = `700 ${Math.max(14, 0.22 * S)}px -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif`;
+      const tw = c.measureText(text).width, pw = tw + 0.3 * S, ph = 0.4 * S;
+      c.strokeStyle = PAL.acc; c.lineWidth = Math.max(3, 0.06 * S); c.lineCap = 'round'; c.lineJoin = 'round';
+      c.beginPath(); c.moveTo(x, y + ph / 2); c.lineTo(ax, ay); c.stroke();
+      const ang = Math.atan2(ay - (y + ph / 2), ax - x), hl = 0.2 * S;
+      c.fillStyle = PAL.acc; c.beginPath(); c.moveTo(ax, ay); c.lineTo(ax - hl * Math.cos(ang - 0.5), ay - hl * Math.sin(ang - 0.5)); c.lineTo(ax - hl * Math.cos(ang + 0.5), ay - hl * Math.sin(ang + 0.5)); c.closePath(); c.fill();
+      c.fillStyle = PAL.acc; c.beginPath(); c.roundRect(x - pw / 2, y - ph / 2, pw, ph, 0.12 * S); c.fill();
+      c.fillStyle = '#fff'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(text, x, y + 1);
+    };
+    if (!cup.down) {
+      const top = this.sy(cup.y + cup.h / 2);
+      label('Knock this down', this.sx(cup.x), top - 1.05 * S + bob, this.sx(cup.x), top - 0.55 * S);
+    }
+    const g = sim.level.gaps[0];
+    label('Pop in the gap', this.sx(g.x + g.w / 2) + 0.95 * S, this.sy(g.y + g.h) - 0.3 * S - bob, this.sx(g.x + g.w / 2), this.sy(g.y + g.h * 0.5));
   }
 
   // ---------- effects ----------
