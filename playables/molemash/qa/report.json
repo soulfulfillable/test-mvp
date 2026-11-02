@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-02T00:30:53.620Z",
+  "startedAt": "2026-11-02T00:39:13.587Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -18,6 +18,16 @@
       "name": "game_ready sent exactly once",
       "ok": true,
       "detail": "[\"game_ready\"]"
+    },
+    {
+      "name": "hit-sound button cycles the style and saves it",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "five styles wrap around",
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "title state before first tap",
@@ -47,7 +57,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "bonk2,bonk,skunk,gold,miss,heart,tick,best,whiff,over,start,muteOn,muteOff,bgm"
+      "detail": "bonk,skunk,bonk2,gold,tick,heart,best,miss,whiff,over,start,hit_cute,hit2_cute,hit_pop,hit2_arcade,hit2_pop,hit_chime,hit_arcade,hit2_chime,muteOn,muteOff,bgm"
     },
     {
       "name": "music looping",
@@ -57,7 +67,7 @@
     {
       "name": "scored by whacking moles",
       "ok": true,
-      "detail": "score 14, whacks 14, lives 3"
+      "detail": "score 13, whacks 13, lives 3"
     },
     {
       "name": "P pauses and shows the pause panel",
@@ -67,7 +77,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "44.65 → 44.65"
+      "detail": "44.45 → 44.45"
     },
     {
       "name": "Resume continues the round",
@@ -97,12 +107,12 @@
     {
       "name": "round ends at 0 s with the game-over panel",
       "ok": true,
-      "detail": "{\"title\":\"TIME'S UP!\",\"score\":14}"
+      "detail": "{\"title\":\"TIME'S UP!\",\"score\":13}"
     },
     {
       "name": "best and rank recorded",
       "ok": true,
-      "detail": "best 14"
+      "detail": "best 13"
     },
     {
       "name": "level_completed message on time-up",
@@ -112,7 +122,7 @@
     {
       "name": "Share my score copies or shares the score text",
       "ok": true,
-      "detail": "I whacked 14 moles in Mole Mash. Beat me: https://playgama.a"
+      "detail": "I whacked 13 moles in Mole Mash. Beat me: https://playgama.a"
     },
     {
       "name": "mute button silences and shows the off icon",
@@ -132,7 +142,7 @@
     {
       "name": "reload restores best, name, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"best\":14,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
+      "detail": "{\"best\":13,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
     },
     {
       "name": "reload while muted stays silent from the first frame",
@@ -170,6 +180,11 @@
       "detail": ""
     },
     {
+      "name": "platform pause during the count-in shows no pause panel",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "no second continue in the same attempt",
       "ok": true,
       "detail": "{\"state\":2,\"btn\":false}"
@@ -177,7 +192,7 @@
     {
       "name": "closed-then-rewarded order still continues the same run (score kept)",
       "ok": true,
-      "detail": "{\"mid\":{\"state\":2,\"pending\":false},\"after\":{\"state\":1,\"score\":0,\"lives\":3,\"used\":true,\"countIn\":4.008099999999999},\"scoreBefore\":0}"
+      "detail": "{\"mid\":{\"state\":2,\"pending\":false},\"after\":{\"state\":1,\"score\":0,\"lives\":3,\"used\":true,\"countIn\":4.000200000000091},\"scoreBefore\":0}"
     },
     {
       "name": "ignoring moles loses 3 hearts → OUT OF HEARTS",
@@ -187,7 +202,7 @@
     {
       "name": "results panel shows the gift box bar and 5 hammer slots",
       "ok": true,
-      "detail": "{\"label\":\"Gift box ready! next box 2 / 18\",\"fill\":2,\"ready\":1,\"hammers\":[\"classic\"]}"
+      "detail": "{\"label\":\"Gift box ready! next box 1 / 18\",\"fill\":1,\"ready\":1,\"hammers\":[\"classic\"]}"
     },
     {
       "name": "Play again with a ready box opens the box screen first (not next to the continue offer)",
@@ -217,7 +232,7 @@
     {
       "name": "reload keeps owned hammers, the equipped one and the box fill",
       "ok": true,
-      "detail": "{\"equipped\":\"candy\",\"hammers\":2,\"fill\":2}"
+      "detail": "{\"equipped\":\"candy\",\"hammers\":2,\"fill\":1}"
     },
     {
       "name": "all hammers collected: bar reads so",
@@ -237,7 +252,7 @@
     {
       "name": "number key whacks the matching hole",
       "ok": true,
-      "detail": "hole 6"
+      "detail": "hole 4"
     },
     {
       "name": "Esc does nothing (1.5.2)",
@@ -373,6 +388,6 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "passed": 67,
+  "passed": 70,
   "failed": 0
 }

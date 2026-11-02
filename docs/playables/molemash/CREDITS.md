@@ -53,3 +53,9 @@ license in the package. Refresh it with `npm pack @playgama/bridge` before each 
 ## Everything else
 
 Code, art (canvas drawings) and text: © 2026 Soulfulfill. Fonts: system fonts only, nothing bundled.
+
+## Hit-sound styles (v1.4.0) — UI SFX by Romain Simon, audio CC0 1.0
+
+From the same `uisfx@0.4.0` package: `hit-cute` = `dreamy/snap`, `hit2-cute` = `dreamy/reaction`; `hit-pop` = `rubber/press`,
+`hit2-pop` = `rubber/reaction`; `hit-arcade` = `arcade/snap`, `hit2-arcade` = `arcade/success`; `hit-chime` = `glass/press`,
+`hit2-chime` = `glass/reaction`. Re-encoded to mono OGG/MP3, loudness matched. "Classic thump" stays the Kenney pair above.
