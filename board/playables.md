@@ -108,7 +108,8 @@
 - 시작 직후 재조회(15:25Z): verdict allowed:false reason **RUN_IN_PROGRESS**(정상 — 진행 중이라 새 캠페인 불가), offer available:false, **remainingFreeRuns 2**, current = 위 run(status PENDING, goalProgress 0, spentRatio null), hasCompletedRun false. 비용 0. 링크는 1개만 넣음(2개까지 가능 — 두 번째 공개 글이 생기면 같은 캠페인에 추가해 예산·기간 연장 가능, 새 캠페인 아님). **중복 캠페인 금지 — 이 게임엔 이 1회뿐.**
 - 다음 확인: 개발 세션은 스스로 깨어나지 않으므로, **기획 세션(0. Head)이 캠페인 종료 시각에 1회 자체 확인 예약**(send_later, trig_01BvmifQzovWYKtkANfHE9yx, 2026-11-05 15:40Z — 조회·기록만, 새 캠페인·Submit 없음). 중간 확인은 사용자가 세션을 열 때.
 - **부스트 일지(개발 세션, 하루 1줄)**:
-  - 11-02 15:26Z: status PENDING, goalProgress 0, spentRatio null, creativeCount 0, failureReason null, remainingFreeRuns 2, verdict RUN_IN_PROGRESS (시작 2분 뒤 — 아직 광고 소재 생성 전) 샌드박스 목표치 도달 여부는 콘솔 카드(Codex). 사용자에게 다시 "쓸지" 묻지 않는다.
+  - 11-02 15:26Z: status PENDING, goalProgress 0, spentRatio null, creativeCount 0, failureReason null, remainingFreeRuns 2, verdict RUN_IN_PROGRESS (시작 2분 뒤 — 아직 광고 소재 생성 전)
+  - 11-03 (조회 시각 UTC 기준): status **FINISHED**(예정 종료 11-05 15:24Z 보다 일찍 끝남), goalProgress 1, spentRatio 0.993, spentFinal false, creativeCount 20, failureReason null, hasCompletedRun true, current null, verdict allowed(새 캠페인 가능하지만 시작 안 함), remainingFreeRuns 2. 실제 유입 수·플레이 시간은 API 에 없음(콘솔 카드). 심사: 여전히 MODERATION_UNAVAILABLE(하루 1회 집계) 샌드박스 목표치 도달 여부는 콘솔 카드(Codex). 사용자에게 다시 "쓸지" 묻지 않는다.
 
 ### 🖱️ Codex 에게 (브라우저 작업) — Mole Mash 출시 전 2건
 - URL: https://developer.playgama.com → 게임 **Mole Mash**(id cmvxme9mt1hvbj80hj6q0lokb)
