@@ -108,6 +108,8 @@ function markup(text, phrases){
   return h;
 }
 const ins = id => D.insights.find(i => i.id === id);
+// Promise a reason only when a sourced explanation exists; held notes only report what the text says.
+const seeLabel = n => n.public && n.public.status === 'hold' ? 'What the text says' : 'See why';
 
 function load(){
   fetch('data.json', {cache:'no-cache'}).then(r => { if (!r.ok) throw 0; return r.json(); })
@@ -137,7 +139,7 @@ function render(){
       <p class="eyebrow">${esc(lead.ref)} · ${esc(base)}</p>
       <h1 id="q">${esc(L.question)}</h1>
       <div class="ctx">${ctx}</div>
-      <button class="see" data-note="${lead.id}" aria-expanded="false">${ARROW}<span>See why</span></button>
+      <button class="see" data-note="${lead.id}" aria-expanded="false">${ARROW}<span>${seeLabel(lead)}</span></button>
       <div class="slot" id="slot-${lead.id}"></div>
     </section>
     <main>
@@ -186,7 +188,7 @@ function lightUp(root){ requestAnimationFrame(() => requestAnimationFrame(() => 
 
 function setToggle(id, on){
   const b = document.querySelector(`[data-note="${id}"]`); b.setAttribute('aria-expanded', on);
-  if (b.classList.contains('see')) b.querySelector('span').textContent = on ? 'Hide' : 'See why';
+  if (b.classList.contains('see')) b.querySelector('span').textContent = on ? 'Hide' : seeLabel(ins(id));
 }
 function closeNote(){
   if (!openId) return;
