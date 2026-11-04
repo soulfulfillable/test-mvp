@@ -4605,5 +4605,76 @@
       "TCM clinical decision support syndrome differentiation"
     ],
     "first_seen": "2026-10-31"
+  },
+  {
+    "id": "doi:10.1186/s12909-026-09650-5",
+    "title": "Teacher-student-machine interaction autonomous learning: a structured LLM-integrated framework for developing independent clinical reasoning in residency training.",
+    "authors": [
+      "Wang P",
+      "Li H",
+      "Tu D",
+      "Qu H",
+      "Chang M",
+      "Zhang Q",
+      "Xu G",
+      "Li B",
+      "Wang Y",
+      "Xu W."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1186/s12909-026-09650-5",
+    "abstract": "<h4>Background</h4>This study evaluated whether a structured pedagogical framework integrating large language models (LLMs) into residency training could develop clinical reasoning competencies that transfer to independent performance.<h4>Methods</h4>In this prospective randomized controlled trial, residents were assigned to Teacher-Student-Machine Interaction Autonomous Learning (TSM-AL) group or traditional teaching group. The TSM-AL framework positioned LLMs as supervised cognitive auxiliaries within a five-step case analysis process featuring controlled information release, predefined reasoning tasks, and structured utilization guidelines. Six formative assessments were conducted over 16 weeks, followed by summative examinations under both LLM-assisted and unassisted conditions. Outcomes included clinical reasoning scores, entrustable professional activity (EPA) levels, global faculty ratings, expert-aligned diagnostic accuracy, and standardized patient examination performance.<h4>Results</h4>Significant between-group differences in diagnostic pathway completeness emerged at week 14 (3.53 ± 1.36 vs. 2.68 ± 1.49, P = 0.018) and week 16 (3.35 ± 1.43 vs. 2.37 ± 1.51, P = 0.009). In the unassisted final examination, the TSM-AL group demonstrated significantly higher clinical reasoning scores (7.32 ± 2.30 vs. 5.12 ± 1.66, P < 0.001). EPA distributions differed significantly (P = 0.034), with fewer TSM-AL residents requiring complete supervision (11.76% vs. 29.41%). Global faculty ratings also differed significantly (P = 0.019), with 23.53% of TSM-AL residents achieving Level 5 compared to none in the traditional group. Expert alignment for core problem identification (67.65% vs. 44.12%, P = 0.042) and differential diagnosis matching (73.53% vs. 50.00%, P = 0.046) favored the TSM-AL group. Standardized patient examination scores were significantly higher in the TSM-AL group (80.88 ± 3.82 vs. 78.71 ± 3.90, P = 0.025). Notably, TSM-AL residents performed better without LLM assistance than with assistance.<h4>Conclusions</h4>The TSM-AL framework significantly enhanced clinical reasoning competencies that transferred to independent performance, demonstrating that structured LLM integration develops autonomous reasoning rather than fostering technological dependency.",
+    "matched_queries": [
+      "large language model traditional chinese medicine diagnosis dialogue"
+    ],
+    "first_seen": "2026-11-04"
+  },
+  {
+    "id": "doi:10.1002/brb3.71887",
+    "title": "Evidence Mapping, Certainty Appraisal, and Acupoint Prescription Pattern Mining of Acupuncture for Poststroke Dysphagia: An Overview of Systematic Reviews.",
+    "authors": [
+      "Lan G",
+      "Wu M",
+      "Zhang J",
+      "Li Y",
+      "Wang Y",
+      "Su Y",
+      "Dong Z",
+      "Wei X",
+      "Zhu L."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1002/brb3.71887",
+    "abstract": "<h4>Background</h4>To characterize the methodological quality, certainty of evidence, primary-study overlap, outcome coverage, and recurrent acupuncture prescription patterns in the existing secondary evidence on acupuncture for poststroke dysphagia (PSD).<h4>Method</h4>Systematic reviews and meta-analyses (SRs/MAs) evaluating acupuncture for PSD were identified. Methodological quality was assessed using A Measurement Tool to Assess Systematic Reviews 2 (AMSTAR 2), certainty of evidence using the Grading of Recommendations Assessment, Development and Evaluation (GRADE) approach, and primary-study overlap using the corrected covered area (CCA). Evidence mapping summarized outcome coverage and certainty, and prescription pattern mining explored frequently used acupoints and combinations.<h4>Result</h4>Forty-five SRs/MAs were included. Under the original AMSTAR 2 critical-domain configuration, one review was rated moderate, eight low, and 36 critically low. GRADE indicated that most outcome evidence was of low or very low certainty. The CCA was 0.34%, indicating slight overlap of primary studies across reviews. Evidence was concentrated on total effective rate and swallowing-function outcomes, whereas patient-important outcomes, including aspiration/pneumonia, nutritional status, safety, and quality of life, were underrepresented. Frequently used acupoints included Fengchi (GB20), Lianquan (RN23), Jinjin (EX-HN12), and Yuye (EX-HN13), with recurrent combinations reflecting local stimulation and swallowing-related functional regulation.<h4>Conclusion</h4>Current secondary evidence suggests that acupuncture, primarily as an adjunctive intervention, may improve swallowing-related outcomes in PSD, but confidence remains limited by methodological weaknesses and low certainty of evidence. Future studies should improve methodological rigor, standardize clinically important outcomes, and prospectively validate recurrent prescription patterns.",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-11-04"
+  },
+  {
+    "id": "doi:10.1136/bmjopen-2026-121215",
+    "title": "Quality indicators, reliability, transparency and content completeness of short-video information on traditional Chinese medicine for insomnia across three major Chinese platforms: a cross-sectional study.",
+    "authors": [
+      "Yang Y",
+      "Wang X",
+      "Huang Z",
+      "Chen R",
+      "Wu L",
+      "Fan J",
+      "Yuan Y",
+      "Tan Q",
+      "Yu Z",
+      "Yu G."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1136/bmjopen-2026-121215",
+    "abstract": "",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-11-04"
   }
 ]
