@@ -41,6 +41,41 @@ async function run(browser, base, name, ctxOpts, shots) {
   await noOverflow('on load');
   if (shots.first) await page.screenshot({ path: path.join(OUT, `${name}-1-first.png`) });
 
+
+  // Real pointer/touch at actual coordinates (no JS click): each line of a wrapped underlined phrase,
+  // the union bounding-box centre (what a plain locator.click aims at), and a plain spot in the verse.
+  const tapAt = async (x, y) => { touch ? await page.touchscreen.tap(x, y) : await page.mouse.click(x, y); };
+  for (const id of ['v46', 'v47', 'v51']) {
+    const anc = page.locator(`.mark[data-note="${id}"] .anc`);
+    await anc.scrollIntoViewIfNeeded();
+    await page.evaluate(id => document.querySelector(`.mark[data-note="${id}"]`).scrollIntoView({ block: 'center' }), id);
+    const geo = await page.evaluate(id => {
+      const a = document.querySelector(`.mark[data-note="${id}"] .anc`);
+      const rs = [...a.getClientRects()].filter(r => r.width > 4);
+      const b = a.getBoundingClientRect();
+      const v = a.closest('.v').getBoundingClientRect();
+      return { lines: rs.map(r => ({ x: r.left + r.width / 2, y: r.top + r.height / 2 })), centre: { x: b.left + b.width / 2, y: b.top + b.height / 2 }, plain: { x: v.left + 4, y: v.top + 12 } };
+    }, id);
+    const targets = [['first line', geo.lines[0]], ['last line', geo.lines[geo.lines.length - 1]], ['box centre', geo.centre], ['verse start', geo.plain]];
+    log.push(`      [${name}] ${id}: phrase spans ${geo.lines.length} line(s)`);
+    for (const [label, pt] of targets) {
+      await tapAt(pt.x, pt.y); tapped.push(`${id} real ${touch ? 'touch' : 'pointer'} @${label}`);
+      const opened = await page.locator(`#note-${id}`).count() === 1;
+      ok(opened, `[${name}] ${id}: real ${touch ? 'touch' : 'pointer'} on ${label} (${Math.round(pt.x)},${Math.round(pt.y)}) opens the note`);
+      if (opened) {
+        // close with the same real input on the same spot (toggle), then confirm closed
+        await tapAt(pt.x, pt.y);
+        ok(await page.locator(`#note-${id}`).count() === 0, `[${name}] ${id}: second real tap on ${label} closes it`);
+      }
+    }
+  }
+  // a verse without a note must not open anything
+  const v45 = await page.locator('#verse-45').boundingBox();
+  await page.locator('#verse-45').scrollIntoViewIfNeeded();
+  const b45 = await page.locator('#verse-45').boundingBox();
+  await tapAt(b45.x + b45.width / 2, b45.y + b45.height / 2);
+  ok(await page.locator('.note').count() === 0, `[${name}] tapping unmarked verse 45 opens nothing`);
+
   for (const id of ['v46', 'v47', 'v51']) {
     const mk = page.locator(`.mark[data-note="${id}"]`);
     await press(mk); tapped.push(`marker ${id}`);
@@ -123,6 +158,8 @@ async function run(browser, base, name, ctxOpts, shots) {
   await run(browser, base, 'iphone13-dark', { ...phone, deviceScaleFactor: 3, colorScheme: 'dark' }, { first: true, link: true });
   await run(browser, base, 'small320', { ...phone, viewport: { width: 320, height: 568 }, deviceScaleFactor: 2 }, {});
   await run(browser, base, 'desktop', { viewport: { width: 1280, height: 900 } }, { first: true });
+  for (const w of [700, 900, 1024]) await run(browser, base, `desktop${w}`, { viewport: { width: w, height: 800 } }, {});
+  await run(browser, base, 'phone375', { ...phone, viewport: { width: 375, height: 667 }, deviceScaleFactor: 2 }, {});
 
   // load-error state + retry
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });

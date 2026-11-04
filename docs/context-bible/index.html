@@ -43,6 +43,7 @@ h1{font-size:1.65rem; line-height:1.15; font-weight:700; margin:2px 0 10px; lett
 /* passage */
 .passage{font-family:var(--serif); font-size:1.12rem; line-height:1.62}
 .v{margin:0; padding:3px 0}
+.v.has-note{cursor:pointer; -webkit-tap-highlight-color:transparent}
 .v sup{font-family:var(--sans); font-size:.62em; color:var(--label3); font-weight:600; margin-right:3px; vertical-align:.45em}
 .v.flash{animation:flash 1.6s ease-out}
 @keyframes flash{0%,30%{background:var(--accent-soft)}100%{background:transparent}}
@@ -176,7 +177,7 @@ function render(){
       const a = esc(ins.anchor);
       body = body.replace(a, `<span class="mark" role="button" tabindex="0" data-note="${ins.id}" aria-expanded="false" aria-controls="note-${ins.id}"><span class="anc">${a}</span><span class="pin" aria-hidden="true"></span></span>`);
     }
-    verses += `<p class="v" id="verse-${v}"><sup>${v}</sup>${body}</p>`;
+    verses += `<p class="v${ins ? ' has-note' : ''}" id="verse-${v}"><sup>${v}</sup>${body}</p>`;
     if (ins) verses += `<div class="slot" id="slot-${ins.id}"></div>`;
   }
   const legend = ['text','link','view'].map(g => `<span class="chip c-${g}"><span class="dot"></span><span>${esc(D.grades[g].label)}</span></span>`).join('');
@@ -301,7 +302,10 @@ function jump(target){
 }
 
 app.addEventListener('click', e => {
-  const t = e.target.closest('button, [data-note]'); if (!t) return;
+  let t = e.target.closest('button, [data-note]');
+  // a marked verse is tappable anywhere: a phrase that wraps over two lines has gaps where a tap would miss it
+  if (!t){ const v = e.target.closest('.v.has-note'); if (v) t = v.querySelector('[data-note]'); }
+  if (!t) return;
   if (t.dataset.note){ openId === t.dataset.note ? closeNote() : openNote(t.dataset.note, false); }
   else if (t.dataset.close){ const v = D.insights.find(i => i.id === t.dataset.close).verse; closeNote(); document.getElementById('verse-' + v).scrollIntoView({block:'nearest'}); }
   else if (t.dataset.step){ const [id, k] = t.dataset.step.split(':'); toggle(t, document.getElementById(`panel-${id}-${k}`)); }
