@@ -1,0 +1,404 @@
+PASS [phone390] 3 markers visible on first screen (found 3)
+PASS [phone390] first marker is above the fold (y=451)
+PASS [phone390] no sideways scroll on load (scrollWidth 390 ≤ 390)
+PASS [phone390] v46: note opens
+PASS [phone390] v46: marker shows open state
+PASS [phone390] v46: 5 steps (found 5)
+PASS [phone390] v46: step 1 opens with content
+PASS [phone390] v46: step 1 row tap height 44 ≥ 44
+PASS [phone390] v46: step 2 opens with content
+PASS [phone390] v46: step 2 row tap height 44 ≥ 44
+PASS [phone390] v46: step 3 opens with content
+PASS [phone390] v46: step 3 row tap height 44 ≥ 44
+PASS [phone390] v46: step 4 opens with content
+PASS [phone390] v46: step 4 row tap height 44 ≥ 44
+PASS [phone390] v46: step 5 opens with content
+PASS [phone390] v46: step 5 row tap height 44 ≥ 44
+PASS [phone390] v46: link 1 opens passage (13 verses, 3 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [phone390] v46: link 1 closes
+PASS [phone390] v46: link 2 opens passage (1 verses, 2 highlighted phrases)
+      source verse highlights after link 2: 0
+PASS [phone390] v46: link 2 closes
+PASS [phone390] v46: link 3 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 3: 1
+PASS [phone390] v46: link 3 closes
+PASS [phone390] no sideways scroll with v46 fully open (scrollWidth 390 ≤ 390)
+PASS [phone390] v46: note closes
+PASS [phone390] v47: note opens
+PASS [phone390] v47: marker shows open state
+PASS [phone390] v47: 5 steps (found 5)
+PASS [phone390] v47: step 1 opens with content
+PASS [phone390] v47: step 1 row tap height 44 ≥ 44
+PASS [phone390] v47: step 2 opens with content
+PASS [phone390] v47: step 2 row tap height 44 ≥ 44
+PASS [phone390] v47: step 3 opens with content
+PASS [phone390] v47: step 3 row tap height 44 ≥ 44
+PASS [phone390] v47: step 4 opens with content
+PASS [phone390] v47: step 4 row tap height 44 ≥ 44
+PASS [phone390] v47: step 5 opens with content
+PASS [phone390] v47: step 5 row tap height 44 ≥ 44
+PASS [phone390] v47: link 1 opens passage (2 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [phone390] v47: link 1 closes
+PASS [phone390] v47: link 2 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 2: 1
+PASS [phone390] v47: link 2 closes
+PASS [phone390] no sideways scroll with v47 fully open (scrollWidth 390 ≤ 390)
+PASS [phone390] v47: note closes
+PASS [phone390] v51: note opens
+PASS [phone390] v51: marker shows open state
+PASS [phone390] v51: 5 steps (found 5)
+PASS [phone390] v51: step 1 opens with content
+PASS [phone390] v51: step 1 row tap height 44 ≥ 44
+PASS [phone390] v51: step 2 opens with content
+PASS [phone390] v51: step 2 row tap height 44 ≥ 44
+PASS [phone390] v51: step 3 opens with content
+PASS [phone390] v51: step 3 row tap height 44 ≥ 44
+PASS [phone390] v51: step 4 opens with content
+PASS [phone390] v51: step 4 row tap height 44 ≥ 44
+PASS [phone390] v51: step 5 opens with content
+PASS [phone390] v51: step 5 row tap height 44 ≥ 44
+PASS [phone390] v51: link 1 opens passage (8 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [phone390] v51: link 1 closes
+PASS [phone390] no sideways scroll with v51 fully open (scrollWidth 390 ≤ 390)
+PASS [phone390] v51: note closes
+PASS [phone390] 3 "Check what you heard" examples (found 3)
+PASS [phone390] check 1: verdict shows graded lines
+PASS [phone390] check 1: opens note v46
+PASS [phone390] check 1: closes
+PASS [phone390] check 2: verdict shows graded lines
+PASS [phone390] check 2: opens note v51
+PASS [phone390] check 2: closes
+PASS [phone390] check 3: verdict shows graded lines
+PASS [phone390] check 3: jumps to verse 48
+PASS [phone390] check 3: closes
+PASS [phone390] Escape closes the open note
+PASS [phone390] deep link #v51 opens the note
+PASS [phone390] console errors: 0
+      [phone390] pressed 42: marker v46, v46 step 1, v46 step 2, v46 step 3, v46 step 4, v46 step 5, v46 link 1 open, v46 link 1 close, v46 link 2 open, v46 link 2 close, v46 link 3 open, v46 link 3 close, v46 × close, marker v47, v47 step 1, v47 step 2, v47 step 3, v47 step 4, v47 step 5, v47 link 1 open, v47 link 1 close, v47 link 2 open, v47 link 2 close, v47 marker re-tap close, marker v51, v51 step 1, v51 step 2, v51 step 3, v51 step 4, v51 step 5, v51 link 1 open, v51 link 1 close, v51 marker re-tap close, check 1, check 1 go → v46, check 1 close, check 2, check 2 go → v51, check 2 close, check 3, check 3 go → verse:48, check 3 close
+PASS [iphone13] 3 markers visible on first screen (found 3)
+PASS [iphone13] first marker is above the fold (y=451)
+PASS [iphone13] no sideways scroll on load (scrollWidth 390 ≤ 390)
+PASS [iphone13] v46: note opens
+PASS [iphone13] v46: marker shows open state
+PASS [iphone13] v46: 5 steps (found 5)
+PASS [iphone13] v46: step 1 opens with content
+PASS [iphone13] v46: step 1 row tap height 44 ≥ 44
+PASS [iphone13] v46: step 2 opens with content
+PASS [iphone13] v46: step 2 row tap height 44 ≥ 44
+PASS [iphone13] v46: step 3 opens with content
+PASS [iphone13] v46: step 3 row tap height 44 ≥ 44
+PASS [iphone13] v46: step 4 opens with content
+PASS [iphone13] v46: step 4 row tap height 44 ≥ 44
+PASS [iphone13] v46: step 5 opens with content
+PASS [iphone13] v46: step 5 row tap height 44 ≥ 44
+PASS [iphone13] v46: link 1 opens passage (13 verses, 3 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [iphone13] v46: link 1 closes
+PASS [iphone13] v46: link 2 opens passage (1 verses, 2 highlighted phrases)
+      source verse highlights after link 2: 0
+PASS [iphone13] v46: link 2 closes
+PASS [iphone13] v46: link 3 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 3: 1
+PASS [iphone13] v46: link 3 closes
+PASS [iphone13] no sideways scroll with v46 fully open (scrollWidth 390 ≤ 390)
+PASS [iphone13] v46: note closes
+PASS [iphone13] v47: note opens
+PASS [iphone13] v47: marker shows open state
+PASS [iphone13] v47: 5 steps (found 5)
+PASS [iphone13] v47: step 1 opens with content
+PASS [iphone13] v47: step 1 row tap height 44 ≥ 44
+PASS [iphone13] v47: step 2 opens with content
+PASS [iphone13] v47: step 2 row tap height 44 ≥ 44
+PASS [iphone13] v47: step 3 opens with content
+PASS [iphone13] v47: step 3 row tap height 44 ≥ 44
+PASS [iphone13] v47: step 4 opens with content
+PASS [iphone13] v47: step 4 row tap height 44 ≥ 44
+PASS [iphone13] v47: step 5 opens with content
+PASS [iphone13] v47: step 5 row tap height 44 ≥ 44
+PASS [iphone13] v47: link 1 opens passage (2 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [iphone13] v47: link 1 closes
+PASS [iphone13] v47: link 2 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 2: 1
+PASS [iphone13] v47: link 2 closes
+PASS [iphone13] no sideways scroll with v47 fully open (scrollWidth 390 ≤ 390)
+PASS [iphone13] v47: note closes
+PASS [iphone13] v51: note opens
+PASS [iphone13] v51: marker shows open state
+PASS [iphone13] v51: 5 steps (found 5)
+PASS [iphone13] v51: step 1 opens with content
+PASS [iphone13] v51: step 1 row tap height 44 ≥ 44
+PASS [iphone13] v51: step 2 opens with content
+PASS [iphone13] v51: step 2 row tap height 44 ≥ 44
+PASS [iphone13] v51: step 3 opens with content
+PASS [iphone13] v51: step 3 row tap height 44 ≥ 44
+PASS [iphone13] v51: step 4 opens with content
+PASS [iphone13] v51: step 4 row tap height 44 ≥ 44
+PASS [iphone13] v51: step 5 opens with content
+PASS [iphone13] v51: step 5 row tap height 44 ≥ 44
+PASS [iphone13] v51: link 1 opens passage (8 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [iphone13] v51: link 1 closes
+PASS [iphone13] no sideways scroll with v51 fully open (scrollWidth 390 ≤ 390)
+PASS [iphone13] v51: note closes
+PASS [iphone13] 3 "Check what you heard" examples (found 3)
+PASS [iphone13] check 1: verdict shows graded lines
+PASS [iphone13] check 1: opens note v46
+PASS [iphone13] check 1: closes
+PASS [iphone13] check 2: verdict shows graded lines
+PASS [iphone13] check 2: opens note v51
+PASS [iphone13] check 2: closes
+PASS [iphone13] check 3: verdict shows graded lines
+PASS [iphone13] check 3: jumps to verse 48
+PASS [iphone13] check 3: closes
+PASS [iphone13] Escape closes the open note
+PASS [iphone13] deep link #v51 opens the note
+PASS [iphone13] console errors: 0
+      [iphone13] pressed 42: marker v46, v46 step 1, v46 step 2, v46 step 3, v46 step 4, v46 step 5, v46 link 1 open, v46 link 1 close, v46 link 2 open, v46 link 2 close, v46 link 3 open, v46 link 3 close, v46 × close, marker v47, v47 step 1, v47 step 2, v47 step 3, v47 step 4, v47 step 5, v47 link 1 open, v47 link 1 close, v47 link 2 open, v47 link 2 close, v47 marker re-tap close, marker v51, v51 step 1, v51 step 2, v51 step 3, v51 step 4, v51 step 5, v51 link 1 open, v51 link 1 close, v51 marker re-tap close, check 1, check 1 go → v46, check 1 close, check 2, check 2 go → v51, check 2 close, check 3, check 3 go → verse:48, check 3 close
+PASS [iphone13-dark] 3 markers visible on first screen (found 3)
+PASS [iphone13-dark] first marker is above the fold (y=451)
+PASS [iphone13-dark] no sideways scroll on load (scrollWidth 390 ≤ 390)
+PASS [iphone13-dark] v46: note opens
+PASS [iphone13-dark] v46: marker shows open state
+PASS [iphone13-dark] v46: 5 steps (found 5)
+PASS [iphone13-dark] v46: step 1 opens with content
+PASS [iphone13-dark] v46: step 1 row tap height 44 ≥ 44
+PASS [iphone13-dark] v46: step 2 opens with content
+PASS [iphone13-dark] v46: step 2 row tap height 44 ≥ 44
+PASS [iphone13-dark] v46: step 3 opens with content
+PASS [iphone13-dark] v46: step 3 row tap height 44 ≥ 44
+PASS [iphone13-dark] v46: step 4 opens with content
+PASS [iphone13-dark] v46: step 4 row tap height 44 ≥ 44
+PASS [iphone13-dark] v46: step 5 opens with content
+PASS [iphone13-dark] v46: step 5 row tap height 44 ≥ 44
+PASS [iphone13-dark] v46: link 1 opens passage (13 verses, 3 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [iphone13-dark] v46: link 1 closes
+PASS [iphone13-dark] v46: link 2 opens passage (1 verses, 2 highlighted phrases)
+      source verse highlights after link 2: 0
+PASS [iphone13-dark] v46: link 2 closes
+PASS [iphone13-dark] v46: link 3 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 3: 1
+PASS [iphone13-dark] v46: link 3 closes
+PASS [iphone13-dark] no sideways scroll with v46 fully open (scrollWidth 390 ≤ 390)
+PASS [iphone13-dark] v46: note closes
+PASS [iphone13-dark] v47: note opens
+PASS [iphone13-dark] v47: marker shows open state
+PASS [iphone13-dark] v47: 5 steps (found 5)
+PASS [iphone13-dark] v47: step 1 opens with content
+PASS [iphone13-dark] v47: step 1 row tap height 44 ≥ 44
+PASS [iphone13-dark] v47: step 2 opens with content
+PASS [iphone13-dark] v47: step 2 row tap height 44 ≥ 44
+PASS [iphone13-dark] v47: step 3 opens with content
+PASS [iphone13-dark] v47: step 3 row tap height 44 ≥ 44
+PASS [iphone13-dark] v47: step 4 opens with content
+PASS [iphone13-dark] v47: step 4 row tap height 44 ≥ 44
+PASS [iphone13-dark] v47: step 5 opens with content
+PASS [iphone13-dark] v47: step 5 row tap height 44 ≥ 44
+PASS [iphone13-dark] v47: link 1 opens passage (2 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [iphone13-dark] v47: link 1 closes
+PASS [iphone13-dark] v47: link 2 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 2: 1
+PASS [iphone13-dark] v47: link 2 closes
+PASS [iphone13-dark] no sideways scroll with v47 fully open (scrollWidth 390 ≤ 390)
+PASS [iphone13-dark] v47: note closes
+PASS [iphone13-dark] v51: note opens
+PASS [iphone13-dark] v51: marker shows open state
+PASS [iphone13-dark] v51: 5 steps (found 5)
+PASS [iphone13-dark] v51: step 1 opens with content
+PASS [iphone13-dark] v51: step 1 row tap height 44 ≥ 44
+PASS [iphone13-dark] v51: step 2 opens with content
+PASS [iphone13-dark] v51: step 2 row tap height 44 ≥ 44
+PASS [iphone13-dark] v51: step 3 opens with content
+PASS [iphone13-dark] v51: step 3 row tap height 44 ≥ 44
+PASS [iphone13-dark] v51: step 4 opens with content
+PASS [iphone13-dark] v51: step 4 row tap height 44 ≥ 44
+PASS [iphone13-dark] v51: step 5 opens with content
+PASS [iphone13-dark] v51: step 5 row tap height 44 ≥ 44
+PASS [iphone13-dark] v51: link 1 opens passage (8 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [iphone13-dark] v51: link 1 closes
+PASS [iphone13-dark] no sideways scroll with v51 fully open (scrollWidth 390 ≤ 390)
+PASS [iphone13-dark] v51: note closes
+PASS [iphone13-dark] 3 "Check what you heard" examples (found 3)
+PASS [iphone13-dark] check 1: verdict shows graded lines
+PASS [iphone13-dark] check 1: opens note v46
+PASS [iphone13-dark] check 1: closes
+PASS [iphone13-dark] check 2: verdict shows graded lines
+PASS [iphone13-dark] check 2: opens note v51
+PASS [iphone13-dark] check 2: closes
+PASS [iphone13-dark] check 3: verdict shows graded lines
+PASS [iphone13-dark] check 3: jumps to verse 48
+PASS [iphone13-dark] check 3: closes
+PASS [iphone13-dark] Escape closes the open note
+PASS [iphone13-dark] deep link #v51 opens the note
+PASS [iphone13-dark] console errors: 0
+      [iphone13-dark] pressed 42: marker v46, v46 step 1, v46 step 2, v46 step 3, v46 step 4, v46 step 5, v46 link 1 open, v46 link 1 close, v46 link 2 open, v46 link 2 close, v46 link 3 open, v46 link 3 close, v46 × close, marker v47, v47 step 1, v47 step 2, v47 step 3, v47 step 4, v47 step 5, v47 link 1 open, v47 link 1 close, v47 link 2 open, v47 link 2 close, v47 marker re-tap close, marker v51, v51 step 1, v51 step 2, v51 step 3, v51 step 4, v51 step 5, v51 link 1 open, v51 link 1 close, v51 marker re-tap close, check 1, check 1 go → v46, check 1 close, check 2, check 2 go → v51, check 2 close, check 3, check 3 go → verse:48, check 3 close
+PASS [small320] 3 markers visible on first screen (found 3)
+PASS [small320] first marker is above the fold (y=535)
+PASS [small320] no sideways scroll on load (scrollWidth 320 ≤ 320)
+PASS [small320] v46: note opens
+PASS [small320] v46: marker shows open state
+PASS [small320] v46: 5 steps (found 5)
+PASS [small320] v46: step 1 opens with content
+PASS [small320] v46: step 1 row tap height 68 ≥ 44
+PASS [small320] v46: step 2 opens with content
+PASS [small320] v46: step 2 row tap height 44 ≥ 44
+PASS [small320] v46: step 3 opens with content
+PASS [small320] v46: step 3 row tap height 44 ≥ 44
+PASS [small320] v46: step 4 opens with content
+PASS [small320] v46: step 4 row tap height 68 ≥ 44
+PASS [small320] v46: step 5 opens with content
+PASS [small320] v46: step 5 row tap height 44 ≥ 44
+PASS [small320] v46: link 1 opens passage (13 verses, 3 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [small320] v46: link 1 closes
+PASS [small320] v46: link 2 opens passage (1 verses, 2 highlighted phrases)
+      source verse highlights after link 2: 0
+PASS [small320] v46: link 2 closes
+PASS [small320] v46: link 3 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 3: 1
+PASS [small320] v46: link 3 closes
+PASS [small320] no sideways scroll with v46 fully open (scrollWidth 320 ≤ 320)
+PASS [small320] v46: note closes
+PASS [small320] v47: note opens
+PASS [small320] v47: marker shows open state
+PASS [small320] v47: 5 steps (found 5)
+PASS [small320] v47: step 1 opens with content
+PASS [small320] v47: step 1 row tap height 68 ≥ 44
+PASS [small320] v47: step 2 opens with content
+PASS [small320] v47: step 2 row tap height 44 ≥ 44
+PASS [small320] v47: step 3 opens with content
+PASS [small320] v47: step 3 row tap height 44 ≥ 44
+PASS [small320] v47: step 4 opens with content
+PASS [small320] v47: step 4 row tap height 44 ≥ 44
+PASS [small320] v47: step 5 opens with content
+PASS [small320] v47: step 5 row tap height 44 ≥ 44
+PASS [small320] v47: link 1 opens passage (2 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [small320] v47: link 1 closes
+PASS [small320] v47: link 2 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 2: 1
+PASS [small320] v47: link 2 closes
+PASS [small320] no sideways scroll with v47 fully open (scrollWidth 320 ≤ 320)
+PASS [small320] v47: note closes
+PASS [small320] v51: note opens
+PASS [small320] v51: marker shows open state
+PASS [small320] v51: 5 steps (found 5)
+PASS [small320] v51: step 1 opens with content
+PASS [small320] v51: step 1 row tap height 68 ≥ 44
+PASS [small320] v51: step 2 opens with content
+PASS [small320] v51: step 2 row tap height 44 ≥ 44
+PASS [small320] v51: step 3 opens with content
+PASS [small320] v51: step 3 row tap height 44 ≥ 44
+PASS [small320] v51: step 4 opens with content
+PASS [small320] v51: step 4 row tap height 44 ≥ 44
+PASS [small320] v51: step 5 opens with content
+PASS [small320] v51: step 5 row tap height 44 ≥ 44
+PASS [small320] v51: link 1 opens passage (8 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [small320] v51: link 1 closes
+PASS [small320] no sideways scroll with v51 fully open (scrollWidth 320 ≤ 320)
+PASS [small320] v51: note closes
+PASS [small320] 3 "Check what you heard" examples (found 3)
+PASS [small320] check 1: verdict shows graded lines
+PASS [small320] check 1: opens note v46
+PASS [small320] check 1: closes
+PASS [small320] check 2: verdict shows graded lines
+PASS [small320] check 2: opens note v51
+PASS [small320] check 2: closes
+PASS [small320] check 3: verdict shows graded lines
+PASS [small320] check 3: jumps to verse 48
+PASS [small320] check 3: closes
+PASS [small320] Escape closes the open note
+PASS [small320] deep link #v51 opens the note
+PASS [small320] console errors: 0
+      [small320] pressed 42: marker v46, v46 step 1, v46 step 2, v46 step 3, v46 step 4, v46 step 5, v46 link 1 open, v46 link 1 close, v46 link 2 open, v46 link 2 close, v46 link 3 open, v46 link 3 close, v46 × close, marker v47, v47 step 1, v47 step 2, v47 step 3, v47 step 4, v47 step 5, v47 link 1 open, v47 link 1 close, v47 link 2 open, v47 link 2 close, v47 marker re-tap close, marker v51, v51 step 1, v51 step 2, v51 step 3, v51 step 4, v51 step 5, v51 link 1 open, v51 link 1 close, v51 marker re-tap close, check 1, check 1 go → v46, check 1 close, check 2, check 2 go → v51, check 2 close, check 3, check 3 go → verse:48, check 3 close
+PASS [desktop] 3 markers visible on first screen (found 3)
+PASS [desktop] first marker is above the fold (y=359)
+PASS [desktop] no sideways scroll on load (scrollWidth 1280 ≤ 1280)
+PASS [desktop] v46: note opens
+PASS [desktop] v46: marker shows open state
+PASS [desktop] v46: 5 steps (found 5)
+PASS [desktop] v46: step 1 opens with content
+PASS [desktop] v46: step 1 row tap height 44 ≥ 44
+PASS [desktop] v46: step 2 opens with content
+PASS [desktop] v46: step 2 row tap height 44 ≥ 44
+PASS [desktop] v46: step 3 opens with content
+PASS [desktop] v46: step 3 row tap height 44 ≥ 44
+PASS [desktop] v46: step 4 opens with content
+PASS [desktop] v46: step 4 row tap height 44 ≥ 44
+PASS [desktop] v46: step 5 opens with content
+PASS [desktop] v46: step 5 row tap height 44 ≥ 44
+PASS [desktop] v46: link 1 opens passage (13 verses, 3 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [desktop] v46: link 1 closes
+PASS [desktop] v46: link 2 opens passage (1 verses, 2 highlighted phrases)
+      source verse highlights after link 2: 0
+PASS [desktop] v46: link 2 closes
+PASS [desktop] v46: link 3 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 3: 1
+PASS [desktop] v46: link 3 closes
+PASS [desktop] no sideways scroll with v46 fully open (scrollWidth 1280 ≤ 1280)
+PASS [desktop] v46: note closes
+PASS [desktop] v47: note opens
+PASS [desktop] v47: marker shows open state
+PASS [desktop] v47: 5 steps (found 5)
+PASS [desktop] v47: step 1 opens with content
+PASS [desktop] v47: step 1 row tap height 44 ≥ 44
+PASS [desktop] v47: step 2 opens with content
+PASS [desktop] v47: step 2 row tap height 44 ≥ 44
+PASS [desktop] v47: step 3 opens with content
+PASS [desktop] v47: step 3 row tap height 44 ≥ 44
+PASS [desktop] v47: step 4 opens with content
+PASS [desktop] v47: step 4 row tap height 44 ≥ 44
+PASS [desktop] v47: step 5 opens with content
+PASS [desktop] v47: step 5 row tap height 44 ≥ 44
+PASS [desktop] v47: link 1 opens passage (2 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [desktop] v47: link 1 closes
+PASS [desktop] v47: link 2 opens passage (1 verses, 1 highlighted phrases)
+      source verse highlights after link 2: 1
+PASS [desktop] v47: link 2 closes
+PASS [desktop] no sideways scroll with v47 fully open (scrollWidth 1280 ≤ 1280)
+PASS [desktop] v47: note closes
+PASS [desktop] v51: note opens
+PASS [desktop] v51: marker shows open state
+PASS [desktop] v51: 5 steps (found 5)
+PASS [desktop] v51: step 1 opens with content
+PASS [desktop] v51: step 1 row tap height 44 ≥ 44
+PASS [desktop] v51: step 2 opens with content
+PASS [desktop] v51: step 2 row tap height 44 ≥ 44
+PASS [desktop] v51: step 3 opens with content
+PASS [desktop] v51: step 3 row tap height 44 ≥ 44
+PASS [desktop] v51: step 4 opens with content
+PASS [desktop] v51: step 4 row tap height 44 ≥ 44
+PASS [desktop] v51: step 5 opens with content
+PASS [desktop] v51: step 5 row tap height 44 ≥ 44
+PASS [desktop] v51: link 1 opens passage (8 verses, 2 highlighted phrases)
+      source verse highlights after link 1: 1
+PASS [desktop] v51: link 1 closes
+PASS [desktop] no sideways scroll with v51 fully open (scrollWidth 1280 ≤ 1280)
+PASS [desktop] v51: note closes
+PASS [desktop] 3 "Check what you heard" examples (found 3)
+PASS [desktop] check 1: verdict shows graded lines
+PASS [desktop] check 1: opens note v46
+PASS [desktop] check 1: closes
+PASS [desktop] check 2: verdict shows graded lines
+PASS [desktop] check 2: opens note v51
+PASS [desktop] check 2: closes
+PASS [desktop] check 3: verdict shows graded lines
+PASS [desktop] check 3: jumps to verse 48
+PASS [desktop] check 3: closes
+PASS [desktop] Escape closes the open note
+PASS [desktop] deep link #v51 opens the note
+PASS [desktop] console errors: 0
+      [desktop] pressed 42: marker v46, v46 step 1, v46 step 2, v46 step 3, v46 step 4, v46 step 5, v46 link 1 open, v46 link 1 close, v46 link 2 open, v46 link 2 close, v46 link 3 open, v46 link 3 close, v46 × close, marker v47, v47 step 1, v47 step 2, v47 step 3, v47 step 4, v47 step 5, v47 link 1 open, v47 link 1 close, v47 link 2 open, v47 link 2 close, v47 marker re-tap close, marker v51, v51 step 1, v51 step 2, v51 step 3, v51 step 4, v51 step 5, v51 link 1 open, v51 link 1 close, v51 marker re-tap close, check 1, check 1 go → v46, check 1 close, check 2, check 2 go → v51, check 2 close, check 3, check 3 go → verse:48, check 3 close
+PASS [error] load failure shows a message with Try again
+PASS [error] Try again recovers
+
+TOTAL 367 pass / 0 fail

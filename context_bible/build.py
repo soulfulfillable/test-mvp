@@ -73,8 +73,9 @@ for t, refs in need.items():
         else:
             out_texts[t][r] = texts[t][r]
 
-blob = json.dumps(content, ensure_ascii=False)
-for bad in [r"\bNIV\b", r"\bESV\b", r"\bNLT\b", r"(?i)hidden meaning", r"(?i)real meaning", r"(?i)shocking", r"(?i)what they don't tell you"]:
+shown = {**content, "insights": [{k: v for k, v in i.items() if k != "checked"} for i in content["insights"]]}  # scan what the reader sees
+blob = json.dumps(shown, ensure_ascii=False)
+for bad in [r"\bNIV\b", r"\bESV\b", r"\bNLT\b", r"(?i)hidden meaning", r"(?i)real meaning", r"(?i)shocking", r"(?i)what they don't tell you", r"(?i)commentators?", r"(?i)fine as a guess", r"Esau says"]:
     if re.search(bad, blob):
         errors.append(f"banned wording: {bad}")
 

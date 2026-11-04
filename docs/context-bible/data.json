@@ -37,7 +37,7 @@
   },
   "view": {
    "label": "Interpretation",
-   "meaning": "A reading or background that commentators offer. The verse does not state it, and views can differ."
+   "meaning": "A way of reading the passage. The verse doesn't state it, and readers take it differently. Shown so you can weigh it against the text yourself."
   }
  },
  "linkKinds": {
@@ -99,8 +99,11 @@
     },
     "original": {
      "needed": false,
+     "grade": "text",
      "text": "Nothing hidden here. The Greek (ti agathon) is an everyday way to say “anything good.” This verse isn't a place to look for a secret word meaning.",
-     "grade": "text"
+     "sources": [
+      "SBLGNT John 1:46"
+     ]
     }
    },
    "links": [
@@ -129,7 +132,7 @@
      "ref": "Micah 5:2",
      "kind": "reading",
      "grade": "link",
-     "reason": "John 7:42 says “the Scripture” names Bethlehem but doesn't say where. Micah 5:2 is the passage readers identify, and Matthew 2:5-6 quotes it for this very point.",
+     "reason": "John 7:42 says “the Scripture” names Bethlehem but doesn't say where. Micah 5:2 is the passage it points to — Matthew 2:5-6 quotes it for the same point.",
      "caution": "Micah is linked to John 7:42, not to 1:46 directly.",
      "highlightSource": [],
      "highlight": {
@@ -178,7 +181,7 @@
     },
     {
      "grade": "view",
-     "ref": "Commentaries",
+     "ref": "Reading",
      "line": "Whether Nathanael was thinking of Micah 5:2 is interpretation. John 1:46 does not say so."
     }
    ],
@@ -187,22 +190,24 @@
     "question": "Was Nathanael thinking of the Bethlehem prophecy?",
     "items": [
      {
-      "label": "A small-town doubt",
-      "text": "Many commentators read 1:46 as doubt about an obscure village. They note that Nazareth is never named in the Old Testament and seems to have been small."
+      "label": "A hometown doubt",
+      "text": "Read on its own, 1:46 is doubt about a hometown. One checkable fact fits this: Nazareth is never named anywhere in the Old Testament."
      },
      {
-      "label": "John's irony",
-      "text": "Some read 1:46 and 7:41-42 as deliberate irony. John never tells the Bethlehem birth story (Matthew 2 and Luke 2 do), so readers who know it see what the speakers miss."
+      "label": "A deliberate echo",
+      "text": "Read with John 7:41-42, the scene can look like irony: John never mentions Jesus' birth in Bethlehem (only 7:42 names the town), so readers who know Matthew 2 and Luke 2 see what the speakers don't."
      }
     ],
-    "note": "Either way, John 1:46 itself does not say Nathanael had Micah 5:2 in mind."
+    "note": "Both are ways of reading. John 1:46 itself does not say Nathanael had Micah 5:2 in mind."
    },
    "checked": {
     "by": "Claude (draft) — human review pending",
     "date": "2026-11-04",
     "compared": [
-     "WEB/KJV/ASV text files listed under translations",
-     "John 1:39, 1:45, 7:40-52, 21:2; Micah 5:2"
+     "WEB/KJV/ASV source files",
+     "SBLGNT John 1:46",
+     "KJV whole-Bible search: 'Nazareth' (NT only), 'Bethlehem' in John (7:42 only)",
+     "WEB Matthew 2:5-6"
     ]
    }
   },
@@ -212,7 +217,7 @@
    "verse": 47,
    "anchor": "an Israelite indeed, in whom is no deceit",
    "hook": "Why call him an Israelite “in whom is no deceit”?",
-   "summary": "Jesus praises Nathanael's honesty right after Nathanael's blunt doubt. “Israel” and “deceit” both belong to the story of Jacob — the story this passage returns to in verse 51.",
+   "summary": "Jesus praises Nathanael's honesty right after Nathanael's blunt doubt. “Israel” and “deceit” both appear in the story of Jacob — the story this passage returns to in verse 51.",
    "detail": {
     "situation": [
      {
@@ -247,8 +252,12 @@
     },
     "original": {
      "needed": true,
-     "text": "The Greek word for “deceit” here is dolos. The ancient Greek translation of Genesis (the Septuagint) uses the same word in Genesis 27:35, where Esau says Jacob came “with deceit.” Genesis was first written in Hebrew, so this word link runs through that Greek translation.",
-     "grade": "link"
+     "grade": "link",
+     "text": "The Greek word for “deceit” in 1:47 is dolos. The Greek translation of Genesis (the Septuagint) uses the same word in Genesis 27:35, where Isaac tells Esau that his brother Jacob came “with deceit” (meta dolou). Genesis was first written in Hebrew, so this word link runs through that Greek translation.",
+     "sources": [
+      "SBLGNT John 1:47",
+      "LXX Genesis 27:35"
+     ]
     }
    },
    "links": [
@@ -256,8 +265,8 @@
      "ref": "Genesis 27:35-36",
      "kind": "wording",
      "grade": "link",
-     "reason": "Esau says Jacob “came with deceit” and took his blessing. It is the same word Jesus uses about Nathanael (see Original language).",
-     "caution": "Whether Jesus meant a contrast with Jacob is interpretation — John 1:47 doesn't say so.",
+     "reason": "Isaac tells Esau that Jacob “came with deceit” and took his blessing. In Greek it is the same word Jesus uses about Nathanael (see Original language).",
+     "caution": "A shared word is something you can check. Whether Jesus meant a contrast with Jacob is interpretation — John 1:47 doesn't say so.",
      "highlightSource": [
       "no deceit"
      ],
@@ -295,7 +304,7 @@
     {
      "grade": "link",
      "ref": "Genesis 27:35",
-     "line": "Same word for “deceit” (Greek dolos in the Septuagint)."
+     "line": "Isaac's words to Esau use the same Greek word for “deceit” (dolos) in the Septuagint."
     },
     {
      "grade": "link",
@@ -304,8 +313,8 @@
     },
     {
      "grade": "view",
-     "ref": "Commentaries",
-     "line": "Reading 1:47 as a deliberate contrast with Jacob is a commentators' view."
+     "ref": "Reading",
+     "line": "Reading 1:47 as a deliberate contrast with Jacob is interpretation."
     }
    ],
    "views": {
@@ -314,21 +323,25 @@
     "items": [
      {
       "label": "A contrast with Jacob",
-      "text": "Many commentators hear one: Jacob, who became “Israel,” was known for deceit; here is an Israelite without it. They point to verse 51's allusion to Jacob's dream as support."
+      "text": "Jacob, who was renamed “Israel,” took the blessing “with deceit”; here is an Israelite without it. Verse 51's echo of Jacob's dream fits this reading."
      },
      {
       "label": "Plain praise",
-      "text": "Others read it simply as praise for an honest, straightforward man — the same man who just asked his blunt question — with no deliberate Jacob reference."
+      "text": "Jesus is simply praising an honest, straightforward man — the same man who just asked a blunt question — without pointing to Jacob."
      }
     ],
-    "note": "The word links are checkable. The intent behind them is not stated."
+    "note": "The shared words are checkable. The intent behind them is not stated."
    },
    "checked": {
     "by": "Claude (draft) — human review pending",
     "date": "2026-11-04",
     "compared": [
      "WEB/KJV/ASV John 1:47, Genesis 27:35-36, 32:28",
-     "Septuagint Genesis 27:35 wording (from memory — confirm against a printed edition before release)"
+     "SBLGNT John 1:47 (dolos)",
+     "Swete LXX Genesis 27:35 (meta dolou; speaker Isaac, 27:34-35)"
+    ],
+    "corrections": [
+     "Draft said “Esau says” for Genesis 27:35 — the speaker is Isaac. Fixed after Codex review."
     ]
    }
   },
@@ -350,7 +363,7 @@
      },
      {
       "grade": "text",
-      "text": "The “you” changes. In 1:50 Jesus speaks to Nathanael alone; in 1:51 it is plural — “I tell you all.” The promise widens beyond Nathanael.",
+      "text": "The “you” changes. In 1:50 Jesus speaks to Nathanael alone; in 1:51 the Greek “you” is plural — WEB shows it as “I tell you all.” The promise widens beyond Nathanael.",
       "refs": [
        "John 1:50",
        "John 1:51"
@@ -368,14 +381,18 @@
       },
       {
        "grade": "text",
-       "text": "ASV has no “hereafter.” Ancient Greek manuscripts differ on that word; the promise itself is the same."
+       "text": "ASV has no “hereafter.” The Greek editions behind the translations differ on that word; the promise itself is the same."
       }
      ]
     },
     "original": {
      "needed": true,
-     "text": "In Genesis 28:12 the Hebrew word translated “on it” (bo) can also mean “on him.” Translations read “on it,” the stairway. Some interpreters notice this when they read John 1:51, where the angels are “on the Son of Man.” Also: “Most certainly, I tell you” is a doubled “Amen, amen” in Greek — the first of many in John.",
-     "grade": "text"
+     "grade": "text",
+     "text": "In Genesis 28:12 the Hebrew for “on it” is bo — “on” plus a word meaning “it” or “him.” Translations read “it,” the stairway; grammatically it could also point to a person. In John 1:51 the angels are “on the Son of Man.” Also: “Most certainly, I tell you” is a doubled “Amen, amen” in Greek — the first in John's Gospel.",
+     "sources": [
+      "WLC Genesis 28:12",
+      "SBLGNT John 1:50-51"
+     ]
     }
    },
    "links": [
@@ -411,21 +428,21 @@
     },
     {
      "grade": "view",
-     "ref": "Commentaries",
+     "ref": "Reading",
      "line": "Whether the Son of Man stands for the stairway, the place, or Jacob is interpretation."
     }
    ],
    "views": {
     "split": true,
-    "question": "What does Jesus mean by putting “the Son of Man” in this picture?",
+    "question": "What does it mean to put “the Son of Man” in this picture?",
     "items": [
      {
       "label": "Jesus as the stairway",
-      "text": "Many readers take it to mean Jesus himself is the link between heaven and earth — the “stairway.”"
+      "text": "Jesus himself is the link between heaven and earth — the “stairway” of Jacob's dream."
      },
      {
       "label": "Jesus as the place, or as Jacob",
-      "text": "Others point out that 1:51 never says “stairway.” They compare the Son of Man to Bethel, “God's house … the gate of heaven,” or to Jacob, on whom the vision came."
+      "text": "1:51 never says “stairway.” The Son of Man may instead be compared to Bethel, “God's house … the gate of heaven,” or to Jacob, the one who saw the vision."
      }
     ],
     "note": "Both read 1:51 alongside Genesis 28. They differ on which part of the dream Jesus is compared to."
@@ -435,7 +452,8 @@
     "date": "2026-11-04",
     "compared": [
      "WEB/KJV/ASV John 1:50-51, Genesis 28:10-17",
-     "Hebrew/Greek points from memory — confirm against an interlinear before release"
+     "SBLGNT John 1:50 (opsē, singular) / 1:51 (opsesthe, hymin plural; first doubled amēn in John)",
+     "WLC Genesis 28:12 (bô = preposition + 3rd masc. sing. suffix)"
     ]
    }
   }
@@ -444,7 +462,7 @@
   {
    "id": "c1",
    "heard": "Nathanael looked down on Nazareth because of the Bethlehem prophecy.",
-   "tag": "Linked passage + interpretation",
+   "tag": "Related passage, plus a reading",
    "verdict": [
     {
      "grade": "link",
@@ -455,16 +473,16 @@
     },
     {
      "grade": "view",
-     "text": "But 1:46 doesn't say Nathanael was thinking of that prophecy. That part is interpretation."
+     "text": "1:46 itself doesn't say Nathanael was thinking of that prophecy. That part is a reading of the scene."
     }
    ],
-   "bottom": "The preacher's link is a reasonable way to read it — but it isn't something the text states.",
+   "bottom": "The text gives you a related scene to read next to 1:46. Whether Nathanael was thinking of it is left open.",
    "go": "v46"
   },
   {
    "id": "c2",
    "heard": "Jesus is the ladder in Jacob's dream.",
-   "tag": "Linked passage + interpretation",
+   "tag": "Shared wording, plus a reading",
    "verdict": [
     {
      "grade": "link",
@@ -479,38 +497,50 @@
     },
     {
      "grade": "view",
-     "text": "“Jesus is the ladder” is one reading. Others compare him to Bethel or to Jacob."
+     "text": "“Jesus is the ladder” is one way to read the echo. Others compare him to Bethel or to Jacob."
     }
    ],
-   "bottom": "The link is in the text. “Jesus = the ladder” is one way to read it.",
+   "bottom": "The echo of Genesis 28 is in the wording. What it means is something readers understand in more than one way.",
    "go": "v51"
   },
   {
    "id": "c3",
    "heard": "Nathanael was studying the Scriptures under the fig tree.",
-   "tag": "Not in the text",
+   "tag": "Not stated in the text",
    "verdict": [
     {
      "grade": "text",
-     "text": "The text says only that Jesus saw Nathanael under the fig tree before Philip called him."
+     "text": "The text says Jesus saw Nathanael under the fig tree before Philip called him.",
+     "refs": [
+      "John 1:48"
+     ]
     },
     {
      "grade": "view",
-     "text": "What he was doing there isn't stated. Some commentators suggest Scripture study from later Jewish traditions; others say it can't be known."
+     "text": "What he was doing there isn't stated. Any answer — praying, reading, resting — is an idea added to the scene."
     }
    ],
-   "bottom": "Fine as a guess. Not something the text tells us.",
+   "bottom": "The text tells us where Nathanael was, not what he was doing there.",
    "go": "verse:48"
   }
  ],
- "furtherReading": {
-  "note": "Titles only. These commentaries discuss this passage; no text is quoted and no view above is attributed to a specific book. Page numbers not yet checked.",
-  "items": [
-   "Raymond E. Brown, The Gospel According to John I–XII (Anchor Bible, 1966)",
-   "D. A. Carson, The Gospel According to John (Pillar New Testament Commentary, 1991)",
-   "Craig S. Keener, The Gospel of John: A Commentary (2003)",
-   "Leon Morris, The Gospel According to John (NICNT, revised 1995)"
-  ]
+ "originalSources": {
+  "SBLGNT": {
+   "name": "SBL Greek New Testament",
+   "source": "https://github.com/morphgnt/sblgnt"
+  },
+  "LXX": {
+   "name": "Septuagint, ed. H. B. Swete",
+   "source": "https://github.com/OpenGreekAndLatin/First1KGreek (tlg0527.tlg001)"
+  },
+  "WLC": {
+   "name": "Westminster Leningrad Codex",
+   "source": "https://github.com/openscriptures/morphhb"
+  }
+ },
+ "checksIntro": {
+  "title": "Heard it in a sermon?",
+  "sub": "See which parts you can find in the text, and which parts are explanation added to it."
  },
  "texts": {
   "WEB": {
