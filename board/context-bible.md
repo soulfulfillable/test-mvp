@@ -2,7 +2,8 @@
 
 ## 🔁 이어받기
 - 마지막 저장: 2026-11-04 (개발 세션) · 작업 브랜치: `claude/context-bible` (main 반영)
-- 방금 끝낸 것: **요 1:51 리뷰 초안 1개(첫 화면 질문)** — 켈러 "You Shall See Heaven Open"(2009-12-20, 요 1:43-51) 근거. 공식 페이지는 Codex 가 읽음, 제3자 녹취 PDF 는 Codex·이 세션 둘 다 읽음(02:26–05:05 야곱의 꿈, 09:07–11:31 예수 자신이 하늘과 땅의 연결). **공식 오디오와 타임스탬프 대조는 아직** → 상태 "transcript read, audio not verified", 최종 아님. 46·47 은 계속 보류(46: 같은 녹취 11:31–12:52 에서 켈러는 '하찮은 시골 마을 경멸'로 읽음, 베들레헴 예언 인식 아님 — 아직 화면에 안 씀). 핵심 목표는 1개만 초안, 나머지 미완. 로봇 91/91.
+- 방금 끝낸 것: **"Quiet Journal" 디자인 적용**(사용자 선택, Codex 시안) — 종이색 편집 페이지, 워드마크 "context.", 질문 "Why does Jesus talk about angels going up and down?"(마지막 구 이탤릭 브론즈), 요 1:51 WEB 바로 아래, "Understand this verse" 버튼 → 문서 흐름 안에서 펼침("The earlier story." + 2문단, 켈러 출처 명시) → View sources(창 28:12·요 1:51·설교, "Transcript read; official audio not yet checked. Review draft." 유지). 전체 본문·보류 46/47 은 아래. 글꼴: Instrument Serif·DM Sans(Google Fonts, 사용자 선택 → DESIGN.md '시스템 글꼴만' 규칙의 예외), 성경 본문 Georgia. 로봇 186/186(320·390·데스크톱 × 라이트·다크, 실제 터치, 겹침 없음, 닫을 때 읽던 위치 유지, 콘솔 0). 클라우드에선 Google Fonts 가 막혀 로봇은 google/fonts 저장소의 같은 글꼴 파일을 로컬로 물려 확인.
+- 핵심 목표 상태: 요 1:51 리뷰 초안 1개(오디오 미대조), 46·47 보류 — **미완**.
 - 진행 중이던 것: 없음
 - 다음 할 일:
   0. **Codex 가 아래 '🖱️ Codex 에게' 를 열어 켈러 원문 대목을 리포에 적어 주면** → 그 대목 범위 안에서만 46(그리고 근거가 있으면 47·51) 해설 재작성, View sources 에 설교 제목·URL·타임스탬프

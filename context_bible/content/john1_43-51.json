@@ -562,7 +562,12 @@
           ],
           "keller": "Keller's reading: Jesus does not only point to a way to God; heaven and earth meet in him (transcript 09:07–11:31). Paraphrase, not a quote.",
           "label": "review draft — transcript read (third-party PDF), official audio not verified"
-        }
+        },
+        "heading": "The earlier story.",
+        "paras": [
+          "Jesus is pointing back to a dream in Genesis 28. Jacob — the ancestor of the people of Israel — saw a stairway joining earth and heaven, with angels of God going up and down on it.",
+          "Here Jesus puts himself where the stairway was. In a sermon on this passage, Tim Keller reads it as Jesus saying that he himself brings people to God — not simply that he can show them the way."
+        ]
       },
       "heldEarlyCommentaries": [
         {
@@ -689,9 +694,13 @@
   },
   "lead": {
     "insight": "v51",
-    "question": "What did Jesus mean by “angels … ascending and descending on the Son of Man”?",
+    "question": "Why does Jesus talk about angels going up and down?",
+    "questionLines": [
+      "Why does Jesus talk",
+      "about angels"
+    ],
+    "questionItalic": "going up and down?",
     "context": [
-      50,
       51
     ]
   },

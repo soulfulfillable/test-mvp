@@ -4,85 +4,93 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>John 1:43–51 · Context</title>
+<title>context. · John 1:51</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#ffffff; --bg2:#f2f2f7; --label:#1c1c1e; --label2:#6c6c70; --label3:#8e8e93;
-  --sep:rgba(60,60,67,.16); --accent:#b4233c; --accent-soft:rgba(180,35,60,.10);
-  --hl:rgba(10,100,200,.16); --open:rgba(180,35,60,.06);
-  --serif: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --paper:#f7f4ec; --ink:#28352e; --muted:#6c7267; --rule:#d3d5c8; --bronze:#896345;
+  --hl:rgba(137,99,69,.16); --open:rgba(137,99,69,.08);
+  --display:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --bible:Georgia, "Times New Roman", serif;
+  --ui:"DM Sans", -apple-system, BlinkMacSystemFont, system-ui, "Helvetica Neue", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark){
-  :root{
-    --bg:#000000; --bg2:#1c1c1e; --label:#f2f2f7; --label2:#a1a1a8; --label3:#7c7c82;
-    --sep:rgba(84,84,88,.55); --accent:#ff6b7f; --accent-soft:rgba(255,107,127,.16);
-    --hl:rgba(100,168,255,.24); --open:rgba(255,107,127,.08);
-  }
+  :root{ --paper:#262722; --ink:#e8e9df; --muted:#abb3a5; --rule:#4a5146; --bronze:#c9ab85; --hl:rgba(201,171,133,.22); --open:rgba(201,171,133,.10); }
 }
 *{box-sizing:border-box}
-html{font-size:17px; font:-apple-system-body; -webkit-text-size-adjust:100%}
-body{margin:0; background:var(--bg); color:var(--label); font-family:var(--sans); line-height:1.45}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--ui); font-size:14px; line-height:1.5}
 button{font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent; text-align:left}
-button:focus-visible,.mark:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
-.wrap{max-width:640px; margin:0 auto; padding:calc(env(safe-area-inset-top) + 20px) 20px calc(env(safe-area-inset-bottom) + 40px)}
+button:focus-visible,.mark:focus-visible{outline:2px solid var(--bronze); outline-offset:3px; border-radius:6px}
+.wrap{width:100%; max-width:420px; margin:0 auto; padding:calc(env(safe-area-inset-top) + 23px) 27px calc(env(safe-area-inset-bottom) + 48px)}
+@media (max-width:360px){ .wrap{padding-left:23px; padding-right:23px} }
 
-.eyebrow{font-size:.76rem; color:var(--label2); margin:0}
-h1{font-size:1.65rem; line-height:1.15; font-weight:700; margin:2px 0 8px; letter-spacing:-.01em}
-.hint{font-size:.76rem; color:var(--label2); display:flex; align-items:center; gap:6px; margin:0 0 20px}
-.lead{margin:0 0 30px}
-.lead .ctx{font-family:var(--serif); font-size:1.12rem; line-height:1.62; margin:10px 0 4px}
-.lead .ctx p{margin:0; padding:3px 0}
-.lead .ctx sup{font-family:var(--sans); font-size:.62em; color:var(--label3); font-weight:600; margin-right:3px; vertical-align:.45em}
-.see{color:var(--accent); font-weight:600; min-height:44px; display:inline-flex; align-items:center; gap:7px}
-.see svg{width:7px; height:12px; transition:transform .2s}
-.see[aria-expanded="true"] svg{transform:rotate(90deg)}
-h2{font-size:1.12rem; font-weight:700; margin:0 0 2px}
-.com{margin:0 0 10px}
-.com:last-child{margin:0}
-.com a{color:var(--accent); text-decoration:none; font-weight:600}
-.dot{width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none}
+/* masthead */
+.mast{display:flex; align-items:baseline; justify-content:space-between; margin:0 0 26px}
+.word{font-family:var(--display); font-size:29px; line-height:1; letter-spacing:-.01em}
+.meta{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.book{padding-bottom:10px; border-bottom:1px solid var(--rule); margin:0 0 24px}
 
-.passage{font-family:var(--serif); font-size:1.12rem; line-height:1.62}
-.v{margin:0; padding:3px 0}
-.v.has-note{cursor:pointer; -webkit-tap-highlight-color:transparent}
-.v sup{font-family:var(--sans); font-size:.62em; color:var(--label3); font-weight:600; margin-right:3px; vertical-align:.45em}
-.mark{cursor:pointer; -webkit-box-decoration-break:clone; box-decoration-break:clone;
-  text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:1.5px; text-underline-offset:4px; border-radius:4px}
-.mark .pin{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-left:5px; vertical-align:.18em}
-.mark[aria-expanded="true"]{background:var(--open)}
-.intro .pin{animation:pulse 1.4s ease-out 2}
-@keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent-soft)}60%{box-shadow:0 0 0 9px rgba(0,0,0,0)}100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}}
+/* question + verse */
+.q{font-family:var(--display); font-weight:400; font-size:38px; line-height:1.13; letter-spacing:-.005em; margin:0 0 22px}
+.q em{font-style:italic; color:var(--bronze)}
+@media (max-width:360px){ .q{font-size:35px} }
+.verse{border-left:1px solid var(--bronze); padding-left:18px; margin:0 0 26px}
+.verse .meta{display:block; margin-bottom:6px}
+.verse p{font-family:var(--bible); font-size:18px; line-height:1.85; margin:0}
 
-mark.hl{color:inherit; background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 0 / 0% 100%; border-radius:3px; padding:0 1px;
-  transition:background-size .55s cubic-bezier(.3,.7,.3,1)}
+/* the one button */
+.understand{width:100%; min-height:52px; border-radius:7px; padding:0 18px; display:flex; align-items:center; justify-content:space-between;
+  background:var(--ink); color:var(--paper); border:1px solid var(--ink); font-weight:500; font-size:15px; transition:background .2s, color .2s}
+.understand svg{width:14px; height:14px; transition:transform .35s ease}
+.understand[aria-expanded="true"]{background:transparent; color:var(--ink); border-color:var(--rule)}
+.understand[aria-expanded="true"] svg{transform:rotate(180deg)}
+
+/* explanation: in document flow, grid-row height animation */
+.reveal{display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease}
+.reveal.open{grid-template-rows:1fr}
+.reveal > .inner{overflow:hidden; min-height:0}
+.explain{padding:26px 0 4px}
+.explain h2{font-family:var(--display); font-weight:400; font-size:28px; line-height:1.15; margin:0 0 12px}
+.explain p{font-size:15.5px; line-height:1.8; margin:0 0 14px}
+.textline{color:var(--bronze); font-weight:500; min-height:44px; display:inline-flex; align-items:center; gap:8px; border-bottom:1px solid transparent}
+.textline svg{width:10px; height:10px; transition:transform .25s ease}
+.textline[aria-expanded="true"] svg{transform:rotate(90deg)}
+.sources{border-top:1px solid var(--rule); padding:14px 0 2px}
+.src{margin:0 0 16px}
+.src .meta{display:block; margin-bottom:4px}
+.src p{font-family:var(--bible); font-size:16px; line-height:1.75; margin:0}
+.src.sermon p{font-family:var(--ui); font-size:14px; line-height:1.65}
+.src a{color:var(--bronze); font-weight:500}
+.label{font-size:11px; letter-spacing:.06em; color:var(--muted); margin:6px 0 0}
+mark.hl{color:inherit; background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 0 / 0% 100%; border-radius:2px; padding:0 1px; transition:background-size .55s cubic-bezier(.3,.7,.3,1)}
 mark.hl.on{background-size:100% 100%}
 
-.note{font-family:var(--sans); font-size:1rem; margin:10px 0 16px; border-left:2px solid var(--accent); padding:2px 0 2px 14px; animation:open .25s ease-out}
-@keyframes open{from{opacity:0; transform:translateY(-4px)}to{opacity:1; transform:none}}
+/* full passage further down */
+.passage-sec{margin-top:56px; border-top:1px solid var(--rule); padding-top:20px}
+.passage-sec h3{font-family:var(--display); font-weight:400; font-size:24px; margin:4px 0 4px}
+.hint{font-size:12px; color:var(--muted); margin:0 0 14px; display:flex; align-items:center; gap:7px}
+.dot{width:6px; height:6px; border-radius:50%; background:var(--bronze); flex:none}
+.passage{font-family:var(--bible); font-size:17px; line-height:1.8}
+.v{margin:0; padding:2px 0}
+.v.has-note{cursor:pointer; -webkit-tap-highlight-color:transparent}
+.v sup{font-family:var(--ui); font-size:10px; color:var(--muted); font-weight:600; margin-right:4px; vertical-align:.5em}
+.mark{cursor:pointer; -webkit-box-decoration-break:clone; box-decoration-break:clone; text-decoration:underline; text-decoration-color:var(--bronze); text-decoration-thickness:1px; text-underline-offset:4px; border-radius:3px}
+.mark .pin{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--bronze); margin-left:5px; vertical-align:.2em}
+.mark[aria-expanded="true"]{background:var(--open)}
+.note{font-family:var(--ui); font-size:14.5px; line-height:1.7; margin:8px 0 14px; border-left:1px solid var(--bronze); padding:2px 0 2px 16px}
 .note-head{display:flex; gap:8px; align-items:flex-start}
 .easy{flex:1; margin:0}
-.x{width:32px; height:32px; margin:-4px -6px 0 0; display:grid; place-items:center; color:var(--label3); flex:none; border-radius:16px}
-.x svg{width:12px; height:12px}
-.src-btn{color:var(--accent); font-weight:600; min-height:44px; display:inline-flex; align-items:center; gap:7px; margin-top:4px}
-.src-btn svg{width:7px; height:12px; transition:transform .2s}
-.src-btn[aria-expanded="true"] svg{transform:rotate(90deg)}
-.sources{background:var(--bg2); border-radius:12px; padding:12px 14px; font-size:.88rem}
-.sources h3{font-size:.76rem; font-weight:600; color:var(--label2); margin:0 0 6px}
-.sources section + section{border-top:.5px solid var(--sep); margin-top:12px; padding-top:12px}
-.ref{font-weight:600}
-.kind{color:var(--label2)}
-.reason{margin:2px 0 6px}
-.excerpt{font-family:var(--serif); font-size:1rem; line-height:1.55; margin:0 0 4px}
-.excerpt p{margin:0 0 4px}
-.limits p{margin:0 0 6px}
-.limits p:last-child{margin:0}
-.fine{color:var(--label2); font-size:.76rem; margin:0 0 4px}
+.x{width:32px; height:32px; margin:-4px -6px 0 0; display:grid; place-items:center; color:var(--muted); flex:none}
+.x svg{width:11px; height:11px}
+.note .sources{margin-top:4px}
 
-footer{margin-top:36px; font-size:.76rem; color:var(--label2); border-top:.5px solid var(--sep); padding-top:14px}
-footer p{margin:0 0 8px}
-.err{padding:40px 0; text-align:center; color:var(--label2); font-size:.88rem}
-.err button{color:var(--accent); font-weight:600; margin-top:8px; min-height:44px}
+footer{margin-top:44px; border-top:1px solid var(--rule); padding-top:14px; font-size:11px; line-height:1.6; color:var(--muted)}
+footer p{margin:0 0 6px}
+.err{padding:40px 0; text-align:center; color:var(--muted)}
+.err button{color:var(--bronze); font-weight:600; margin-top:8px; min-height:44px}
 @media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} }
 </style>
 </head>
@@ -91,12 +99,14 @@ footer p{margin:0 0 8px}
 <script>
 (() => {
 const app = document.getElementById('app');
-const ARROW = '<svg viewBox="0 0 7 12" aria-hidden="true"><path d="M1.2 1.2 5.8 6 1.2 10.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const XSVG = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const CHEV_DOWN = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 5l4.5 4.5L11.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CHEV_RIGHT = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5 6.5 5 3 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const XSVG = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
 let D, openId = null;
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const prettyRef = r => r.replace(/-(\d+)$/, '–$1');
+const ins = id => D.insights.find(i => i.id === id);
 function expand(ref){
   const m = ref.match(/^(.+) (\d+):(\d+)(?:-(\d+))?$/); const out = [];
   for (let v = +m[3]; v <= +(m[4] || m[3]); v++) out.push(`${m[1]} ${m[2]}:${v}`);
@@ -107,9 +117,7 @@ function markup(text, phrases){
   (phrases || []).forEach(p => { const e = esc(p); h = h.replace(e, `<mark class="hl">${e}</mark>`); });
   return h;
 }
-const ins = id => D.insights.find(i => i.id === id);
-// Promise a reason only when a sourced explanation exists; held notes only report what the text says.
-const seeLabel = n => n.public && n.public.status === 'hold' ? 'What the text says' : 'See why';
+const lightUp = root => requestAnimationFrame(() => requestAnimationFrame(() => root.querySelectorAll('mark.hl').forEach((m, i) => setTimeout(() => m.classList.add('on'), i * 150))));
 
 function load(){
   fetch('data.json', {cache:'no-cache'}).then(r => { if (!r.ok) throw 0; return r.json(); })
@@ -118,15 +126,31 @@ function load(){
       document.getElementById('retry').onclick = () => { app.innerHTML = '<p class="err">Loading…</p>'; load(); }; });
 }
 
+// Sources: the Bible text the note cites (shared words highlighted) + the sermon it relies on.
+function sourcesHTML(n){
+  const P = n.public, shared = [...new Set(n.links.flatMap(l => l.highlightSource))];
+  const cites = P.cite.map(ref => `
+    <div class="src"><span class="meta">${esc(prettyRef(ref))} · WEB</span>
+      ${expand(ref).map(r => `<p>${markup(D.texts.WEB[r], P.status !== 'hold' ? (r === n.ref ? shared : (n.links.find(l => l.highlight[r]) || {highlight:{}}).highlight[r]) : [])}</p>`).join('')}
+    </div>`).join('');
+  const K = P.keller;
+  const sermon = K ? `
+    <div class="src sermon"><span class="meta">Sermon</span>
+      <p>${esc(K.speaker)}, “${esc(K.title)}” · ${esc(K.date)} · ${esc(K.scripture)}. ${K.parts.map(x => `${esc(x.at)} ${esc(x.about)}`).join('; ')}. <a href="${esc(K.url)}" target="_blank" rel="noopener">Sermon page</a></p>
+      <p class="label">The explanation is a paraphrase, not a quote. ${esc(K.status)} Review draft.</p>
+    </div>` : '';
+  const hold = P.status === 'hold' ? '<p class="label">This note sticks to what the text says. A fuller explanation is on hold until its sources are checked.</p>' : '';
+  return cites + sermon + hold + '<p class="label">Bible text: World English Bible, public domain.</p>';
+}
+
 function render(){
-  const P = D.passage, base = D.baseTranslation, byVerse = {};
-  const L = D.lead, lead = ins(L.insight);
+  const P = D.passage, base = D.baseTranslation, L = D.lead, lead = ins(L.insight), byVerse = {};
   D.insights.forEach(i => { if (i.id !== L.insight) byVerse[i.verse] = i; });
-  const ctx = L.context.map(v => `<p id="ctx-${v}"><sup>${v}</sup>${esc(D.texts[base][`${P.book} ${P.chapter}:${v}`])}</p>`).join('');
+  const leadVerses = L.context.map(v => `<p>${esc(D.texts[base][`${P.book} ${P.chapter}:${v}`])}</p>`).join('');
   let verses = '';
   for (let v = P.from; v <= P.to; v++){
-    const t = D.texts[base][`${P.book} ${P.chapter}:${v}`], n = byVerse[v];
-    let body = esc(t);
+    const n = byVerse[v];
+    let body = esc(D.texts[base][`${P.book} ${P.chapter}:${v}`]);
     if (n){
       const a = esc(n.anchor);
       body = body.replace(a, `<span class="mark" role="button" tabindex="0" data-note="${n.id}" aria-expanded="false" aria-controls="note-${n.id}"><span class="anc">${a}</span><span class="pin" aria-hidden="true"></span></span>`);
@@ -134,110 +158,103 @@ function render(){
     verses += `<p class="v${n ? ' has-note' : ''}" id="verse-${v}"><sup>${v}</sup>${body}</p>`;
     if (n) verses += `<div class="slot" id="slot-${n.id}"></div>`;
   }
+  const lp = lead.public;
   app.innerHTML = `
-    <section class="lead" aria-labelledby="q">
-      <p class="eyebrow">${esc(lead.ref)} · ${esc(base)}</p>
-      <h1 id="q">${esc(L.question)}</h1>
-      <div class="ctx">${ctx}</div>
-      <button class="see" data-note="${lead.id}" aria-expanded="false">${ARROW}<span>${seeLabel(lead)}</span></button>
-      <div class="slot" id="slot-${lead.id}"></div>
-    </section>
+    <header class="mast"><span class="word">context.</span><span class="meta">A closer reading</span></header>
     <main>
-      <p class="eyebrow">${esc(prettyRef(P.ref))}</p>
-      <h2>${esc(P.title)}</h2>
-      <p class="hint"><span class="dot"></span>Tap an underlined line</p>
-      <div class="passage intro">${verses}</div>
+      <p class="meta book">The Gospel of ${esc(P.book)}</p>
+      <h1 class="q">${L.questionLines.map(esc).join('<br>')}<br><em>${esc(L.questionItalic)}</em></h1>
+      <div class="verse" id="lead-verse"><span class="meta">${esc(lead.ref)} · ${esc(base)}</span>${leadVerses}</div>
+      <button class="understand" id="understand" aria-expanded="false" aria-controls="explain"><span>Understand this verse</span>${CHEV_DOWN}</button>
+      <div class="reveal" id="explain" aria-hidden="true">
+        <div class="inner"><section class="explain" aria-labelledby="explain-h">
+          <h2 id="explain-h">${esc(lp.heading)}</h2>
+          ${lp.paras.map(x => `<p>${esc(x)}</p>`).join('')}
+          <button class="textline" id="lead-src-btn" aria-expanded="false" aria-controls="lead-src">${CHEV_RIGHT}<span>View sources</span></button>
+          <div class="reveal" id="lead-src-wrap"><div class="inner"><div class="sources" id="lead-src">${sourcesHTML(lead)}</div></div></div>
+        </section></div>
+      </div>
+
+      <section class="passage-sec" aria-labelledby="passage-h">
+        <p class="meta">${esc(prettyRef(P.ref))} · ${esc(base)}</p>
+        <h3 id="passage-h">Read the whole passage</h3>
+        <p class="hint"><span class="dot"></span>Underlined lines show what the text says</p>
+        <div class="passage">${verses}</div>
+      </section>
     </main>
     <footer>
-      <p>Scripture: World English Bible (WEB), public domain. </p>
-      <p>Early preview. Notes are a draft and have not yet been reviewed by a scholar.</p>
+      <p>Bible text: World English Bible (WEB), public domain.</p>
+      <p>Early preview. Notes are drafts and have not been reviewed by a scholar. Sermon references are for further listening; this is not an official app of any church or ministry.</p>
     </footer>`;
-  setTimeout(() => app.querySelector('.intro')?.classList.remove('intro'), 3200);
-  if (location.hash.length > 1 && ins(location.hash.slice(1))) openNote(location.hash.slice(1), true);
+  setInert();
 }
 
-function sourcesHTML(n){
-  // Notes on hold show only Scripture the paragraph cites; interpretation waits for a checked source.
-  const P = n.public;
-  const cites = P.cite.map(ref => `
-    <section>
-      <div><span class="ref">${esc(prettyRef(ref))}</span> <span class="kind">\u00B7 WEB</span></div>
-      <div class="excerpt">${expand(ref).map(r => `<p><sup>${r.split(':')[1]}</sup> ${markup(D.texts.WEB[r], r === n.ref && P.status !== 'hold' ? [...new Set(n.links.flatMap(l => l.highlightSource))] : (n.links.find(l => l.highlight[r]) || {highlight:{}}).highlight[r])}</p>`).join('')}</div>
-    </section>`).join('');
-  const K = P.keller;
-  const sermon = K ? `
-    <section><h3>Source</h3>
-      <p class="com"><span class="ref">${esc(K.speaker)}, \u201C${esc(K.title)}\u201D</span> \u00B7 ${esc(K.date)} \u00B7 ${esc(K.scripture)}.
-      ${K.parts.map(x => `${esc(x.at)} ${esc(x.about)}`).join('; ')}. <a href="${esc(K.url)}" target="_blank" rel="noopener">Sermon page</a></p>
-      <p class="fine">Explanation is a paraphrase, not a quote. ${esc(K.status)} Review draft.</p>
-    </section>` : '';
-  return `${cites}${sermon}
-    <section><p class="fine">${P.status === 'hold' ? 'This note sticks to what the text says. A fuller explanation is on hold until its sources are checked. ' : ''}Bible text: World English Bible, public domain.</p></section>`;
+// keep collapsed content out of the tab order / screen readers
+function setInert(){
+  const ex = document.getElementById('explain'), open = ex.classList.contains('open');
+  ex.setAttribute('aria-hidden', !open); ex.inert = !open;
+  const sw = document.getElementById('lead-src-wrap'), sopen = sw.classList.contains('open');
+  sw.inert = !sopen;
 }
 
-const verseOf = n => document.getElementById((n.id === D.lead.insight ? 'ctx-' : 'verse-') + n.verse);
-function setSourceHighlight(n, on){
-  const verseEl = verseOf(n);
-  verseEl.querySelectorAll('mark.hl').forEach(m => m.replaceWith(...m.childNodes));
-  verseEl.normalize();
-  if (!on) return;
-  const phrases = n.public.cite.some(c => c.startsWith('Genesis')) ? [...new Set(n.links.flatMap(l => l.highlightSource))] : [];
-  phrases.forEach(p => {
-    const tw = document.createTreeWalker(verseEl, NodeFilter.SHOW_TEXT); let t;
-    while ((t = tw.nextNode())){
-      const i = t.data.indexOf(p); if (i < 0) continue;
-      const r = document.createRange(); r.setStart(t, i); r.setEnd(t, i + p.length);
-      const m = document.createElement('mark'); m.className = 'hl'; r.surroundContents(m); break;
-    }
-  });
+function toggleLead(){
+  const b = document.getElementById('understand'), ex = document.getElementById('explain');
+  const on = !ex.classList.contains('open');
+  ex.classList.toggle('open', on);
+  b.setAttribute('aria-expanded', on);
+  b.querySelector('span').textContent = on ? 'Close explanation' : 'Understand this verse';
+  if (!on) toggleLeadSources(false);
+  setInert();
 }
-function lightUp(root){ requestAnimationFrame(() => requestAnimationFrame(() => root.querySelectorAll('mark.hl').forEach((m, i) => setTimeout(() => m.classList.add('on'), i * 150)))); }
+function toggleLeadSources(force){
+  const b = document.getElementById('lead-src-btn'), w = document.getElementById('lead-src-wrap');
+  const on = typeof force === 'boolean' ? force : !w.classList.contains('open');
+  w.classList.toggle('open', on);
+  b.setAttribute('aria-expanded', on);
+  b.querySelector('span').textContent = on ? 'Hide sources' : 'View sources';
+  if (on) lightUp(w);
+  setInert();
+}
 
-function setToggle(id, on){
-  const b = document.querySelector(`[data-note="${id}"]`); b.setAttribute('aria-expanded', on);
-  if (b.classList.contains('see')) b.querySelector('span').textContent = on ? 'Hide' : seeLabel(ins(id));
-}
+// held notes in the full passage
 function closeNote(){
   if (!openId) return;
-  const n = ins(openId);
   document.getElementById('slot-' + openId).innerHTML = '';
-  setToggle(openId, false);
-  setSourceHighlight(n, false);
+  document.querySelector(`[data-note="${openId}"]`).setAttribute('aria-expanded', 'false');
   openId = null;
 }
-function openNote(id, scroll){
+function openNote(id){
   if (openId === id) return;
   closeNote();
   const n = ins(id);
   document.getElementById('slot-' + id).innerHTML = `
     <div class="note" id="note-${id}" role="region" aria-label="Note on ${esc(n.ref)}">
       <div class="note-head"><p class="easy">${esc(n.public.text)}</p><button class="x" data-close="${id}" aria-label="Close">${XSVG}</button></div>
-      <button class="src-btn" data-src="${id}" aria-expanded="false" aria-controls="src-${id}">${ARROW}<span>View sources</span></button>
+      <button class="textline src-btn" data-src="${id}" aria-expanded="false">${CHEV_RIGHT}<span>View sources</span></button>
       <div class="sources" id="src-${id}" hidden></div>
     </div>`;
-  setToggle(id, true);
+  document.querySelector(`[data-note="${id}"]`).setAttribute('aria-expanded', 'true');
   openId = id;
-  if (scroll) verseOf(n).scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 app.addEventListener('click', e => {
   if (e.target.closest('a')) return;
+  if (e.target.closest('#understand')) return toggleLead();
+  if (e.target.closest('#lead-src-btn')) return toggleLeadSources();
   let t = e.target.closest('button, [data-note]');
   // a marked verse is tappable anywhere: a phrase that wraps over two lines has gaps where a tap would miss it
   if (!t){ const v = e.target.closest('.v.has-note'); if (v) t = v.querySelector('[data-note]'); }
   if (!t) return;
-  if (t.dataset.note){ openId === t.dataset.note ? closeNote() : openNote(t.dataset.note, false); }
-  else if (t.dataset.close){ const el = verseOf(ins(t.dataset.close)); closeNote(); el.scrollIntoView({block:'nearest'}); }
+  if (t.dataset.note){ openId === t.dataset.note ? closeNote() : openNote(t.dataset.note); }
+  else if (t.dataset.close){ closeNote(); }
   else if (t.dataset.src){
-    const id = t.dataset.src, n = ins(id), box = document.getElementById('src-' + id);
+    const id = t.dataset.src, box = document.getElementById('src-' + id);
     const on = t.getAttribute('aria-expanded') !== 'true';
     t.setAttribute('aria-expanded', on); box.hidden = !on;
     t.querySelector('span').textContent = on ? 'Hide sources' : 'View sources';
-    if (on){ box.innerHTML = sourcesHTML(n); setSourceHighlight(n, true); lightUp(box); lightUp(verseOf(n)); }
-    else setSourceHighlight(n, false);
+    if (on) box.innerHTML = sourcesHTML(ins(id));
   }
 });
-window.addEventListener('hashchange', () => { if (D && ins(location.hash.slice(1))) openNote(location.hash.slice(1), true); });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeNote();
   if ((e.key === 'Enter' || e.key === ' ') && e.target.dataset && e.target.dataset.note){ e.preventDefault(); e.target.click(); }

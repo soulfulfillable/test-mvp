@@ -1,93 +1,188 @@
-PASS [phone390] removed UI is gone (legend, 5 steps, sermon checks)
-PASS [phone390] first screen starts with a question
-PASS [phone390] lead: See why opens the explanation
-PASS [phone390] lead: one short paragraph (374 chars)
-PASS [phone390] lead: View sources shows Genesis 28:12 + John 1:51 (2 verses) and the one sermon source
-PASS [phone390] lead: Hide sources closes
-PASS [phone390] lead: Hide closes the explanation
-PASS [phone390] verse 51 isn't marked twice
-PASS [phone390] lead button says See why (sourced draft)
-PASS [phone390] v46: real touch on line 1/2 opens
-PASS [phone390] v46: same spot again closes
-PASS [phone390] v46: real touch on line 2/2 opens
-PASS [phone390] v46: same spot again closes
-PASS [phone390] v46: one short explanation (229 chars)
-PASS [phone390] v46: only Close + View sources buttons
-PASS [phone390] v46: View sources shows passages (2 verses, 0 highlighted) + what the text does/doesn't say
-PASS [phone390] v46: no sideways scroll (390)
-PASS [phone390] v46: Hide sources closes
-PASS [phone390] v47: real touch on line 1/2 opens
-PASS [phone390] v47: same spot again closes
-PASS [phone390] v47: real touch on line 2/2 opens
-PASS [phone390] v47: same spot again closes
-PASS [phone390] opening v47 closes v46
-PASS [phone390] v47: one short explanation (204 chars)
-PASS [phone390] v47: only Close + View sources buttons
-PASS [phone390] v47: View sources shows passages (3 verses, 0 highlighted) + what the text does/doesn't say
-PASS [phone390] v47: no sideways scroll (390)
-PASS [phone390] v47: Hide sources closes
-PASS [phone390] × closes
-PASS [phone390] unmarked verse 45 opens nothing
+PASS [phone390] opening question is exact ("Why does Jesus talk about angels going up and down?")
+PASS [phone390] final phrase is italic
+PASS [phone390] John 1:51 (WEB) right under the question
+PASS [phone390] question → verse → button, no overlap
+PASS [phone390] button min-height 52 (52)
+PASS [phone390] question, verse and button fit the first screen (button bottom 514 ≤ 844)
+PASS [phone390] explanation starts closed
+PASS [phone390] no sideways scroll on load (390 ≤ 390)
+PASS [phone390] button turns into "Close explanation"
+PASS [phone390] explanation opens with "The earlier story."
+PASS [phone390] explanation is two short paragraphs (2)
+PASS [phone390] explanation sits under the button (does not cover question/verse)
+PASS [phone390] button did not move when opening
+PASS [phone390] Keller attribution is in the explanation
+PASS [phone390] sources collapsed by default
+PASS [phone390] sources show Genesis 28:12
+PASS [phone390] sources link the sermon page
+PASS [phone390] status label kept (not marked verified)
+PASS [phone390] shared words highlighted in both passages
+PASS [phone390] no sideways scroll with sources open (390 ≤ 390)
+PASS [phone390] Hide sources closes
+PASS [phone390] Close explanation collapses it
+PASS [phone390] closing keeps the reading position (scroll 66→66)
+PASS [phone390] v46: tap in the passage opens the held note
+PASS [phone390] v46: View sources shows the cited verses
+PASS [phone390] v46: × closes
+PASS [phone390] v47: tap in the passage opens the held note
+PASS [phone390] v47: View sources shows the cited verses
+PASS [phone390] v47: × closes
+PASS [phone390] no sideways scroll at the end (390 ≤ 390)
 PASS [phone390] console errors: 0
-PASS [phone390-dark] removed UI is gone (legend, 5 steps, sermon checks)
-PASS [phone390-dark] first screen starts with a question
-PASS [phone390-dark] lead: See why opens the explanation
-PASS [phone390-dark] lead: one short paragraph (374 chars)
-PASS [phone390-dark] lead: View sources shows Genesis 28:12 + John 1:51 (2 verses) and the one sermon source
-PASS [phone390-dark] lead: Hide sources closes
-PASS [phone390-dark] lead: Hide closes the explanation
-PASS [phone390-dark] verse 51 isn't marked twice
-PASS [phone390-dark] lead button says See why (sourced draft)
-PASS [phone390-dark] v46: real touch on line 1/2 opens
-PASS [phone390-dark] v46: same spot again closes
-PASS [phone390-dark] v46: real touch on line 2/2 opens
-PASS [phone390-dark] v46: same spot again closes
-PASS [phone390-dark] v46: one short explanation (229 chars)
-PASS [phone390-dark] v46: only Close + View sources buttons
-PASS [phone390-dark] v46: View sources shows passages (2 verses, 0 highlighted) + what the text does/doesn't say
-PASS [phone390-dark] v46: no sideways scroll (390)
-PASS [phone390-dark] v46: Hide sources closes
-PASS [phone390-dark] v47: real touch on line 1/2 opens
-PASS [phone390-dark] v47: same spot again closes
-PASS [phone390-dark] v47: real touch on line 2/2 opens
-PASS [phone390-dark] v47: same spot again closes
-PASS [phone390-dark] opening v47 closes v46
-PASS [phone390-dark] v47: one short explanation (204 chars)
-PASS [phone390-dark] v47: only Close + View sources buttons
-PASS [phone390-dark] v47: View sources shows passages (3 verses, 0 highlighted) + what the text does/doesn't say
-PASS [phone390-dark] v47: no sideways scroll (390)
-PASS [phone390-dark] v47: Hide sources closes
-PASS [phone390-dark] × closes
-PASS [phone390-dark] unmarked verse 45 opens nothing
+PASS [phone390-dark] opening question is exact ("Why does Jesus talk about angels going up and down?")
+PASS [phone390-dark] final phrase is italic
+PASS [phone390-dark] John 1:51 (WEB) right under the question
+PASS [phone390-dark] question → verse → button, no overlap
+PASS [phone390-dark] button min-height 52 (52)
+PASS [phone390-dark] question, verse and button fit the first screen (button bottom 514 ≤ 844)
+PASS [phone390-dark] explanation starts closed
+PASS [phone390-dark] no sideways scroll on load (390 ≤ 390)
+PASS [phone390-dark] button turns into "Close explanation"
+PASS [phone390-dark] explanation opens with "The earlier story."
+PASS [phone390-dark] explanation is two short paragraphs (2)
+PASS [phone390-dark] explanation sits under the button (does not cover question/verse)
+PASS [phone390-dark] button did not move when opening
+PASS [phone390-dark] Keller attribution is in the explanation
+PASS [phone390-dark] sources collapsed by default
+PASS [phone390-dark] sources show Genesis 28:12
+PASS [phone390-dark] sources link the sermon page
+PASS [phone390-dark] status label kept (not marked verified)
+PASS [phone390-dark] shared words highlighted in both passages
+PASS [phone390-dark] no sideways scroll with sources open (390 ≤ 390)
+PASS [phone390-dark] Hide sources closes
+PASS [phone390-dark] Close explanation collapses it
+PASS [phone390-dark] closing keeps the reading position (scroll 66→66)
+PASS [phone390-dark] v46: tap in the passage opens the held note
+PASS [phone390-dark] v46: View sources shows the cited verses
+PASS [phone390-dark] v46: × closes
+PASS [phone390-dark] v47: tap in the passage opens the held note
+PASS [phone390-dark] v47: View sources shows the cited verses
+PASS [phone390-dark] v47: × closes
+PASS [phone390-dark] no sideways scroll at the end (390 ≤ 390)
 PASS [phone390-dark] console errors: 0
-PASS [desktop1280] removed UI is gone (legend, 5 steps, sermon checks)
-PASS [desktop1280] first screen starts with a question
-PASS [desktop1280] lead: See why opens the explanation
-PASS [desktop1280] lead: one short paragraph (374 chars)
-PASS [desktop1280] lead: View sources shows Genesis 28:12 + John 1:51 (2 verses) and the one sermon source
-PASS [desktop1280] lead: Hide sources closes
-PASS [desktop1280] lead: Hide closes the explanation
-PASS [desktop1280] verse 51 isn't marked twice
-PASS [desktop1280] lead button says See why (sourced draft)
-PASS [desktop1280] v46: real click on line 1/1 opens
-PASS [desktop1280] v46: same spot again closes
-PASS [desktop1280] v46: one short explanation (229 chars)
-PASS [desktop1280] v46: only Close + View sources buttons
-PASS [desktop1280] v46: View sources shows passages (2 verses, 0 highlighted) + what the text does/doesn't say
-PASS [desktop1280] v46: no sideways scroll (1280)
-PASS [desktop1280] v46: Hide sources closes
-PASS [desktop1280] v47: real click on line 1/2 opens
-PASS [desktop1280] v47: same spot again closes
-PASS [desktop1280] v47: real click on line 2/2 opens
-PASS [desktop1280] v47: same spot again closes
-PASS [desktop1280] opening v47 closes v46
-PASS [desktop1280] v47: one short explanation (204 chars)
-PASS [desktop1280] v47: only Close + View sources buttons
-PASS [desktop1280] v47: View sources shows passages (3 verses, 0 highlighted) + what the text does/doesn't say
-PASS [desktop1280] v47: no sideways scroll (1280)
-PASS [desktop1280] v47: Hide sources closes
-PASS [desktop1280] × closes
-PASS [desktop1280] unmarked verse 45 opens nothing
-PASS [desktop1280] console errors: 0
+PASS [phone320] opening question is exact ("Why does Jesus talk about angels going up and down?")
+PASS [phone320] final phrase is italic
+PASS [phone320] John 1:51 (WEB) right under the question
+PASS [phone320] question → verse → button, no overlap
+PASS [phone320] button min-height 52 (52)
+PASS [phone320] question, verse and button fit the first screen (button bottom 537 ≤ 640)
+PASS [phone320] explanation starts closed
+PASS [phone320] no sideways scroll on load (320 ≤ 320)
+PASS [phone320] button turns into "Close explanation"
+PASS [phone320] explanation opens with "The earlier story."
+PASS [phone320] explanation is two short paragraphs (2)
+PASS [phone320] explanation sits under the button (does not cover question/verse)
+PASS [phone320] button did not move when opening
+PASS [phone320] Keller attribution is in the explanation
+PASS [phone320] sources collapsed by default
+PASS [phone320] sources show Genesis 28:12
+PASS [phone320] sources link the sermon page
+PASS [phone320] status label kept (not marked verified)
+PASS [phone320] shared words highlighted in both passages
+PASS [phone320] no sideways scroll with sources open (320 ≤ 320)
+PASS [phone320] Hide sources closes
+PASS [phone320] Close explanation collapses it
+PASS [phone320] closing keeps the reading position (scroll 191→191)
+PASS [phone320] v46: tap in the passage opens the held note
+PASS [phone320] v46: View sources shows the cited verses
+PASS [phone320] v46: × closes
+PASS [phone320] v47: tap in the passage opens the held note
+PASS [phone320] v47: View sources shows the cited verses
+PASS [phone320] v47: × closes
+PASS [phone320] no sideways scroll at the end (320 ≤ 320)
+PASS [phone320] console errors: 0
+PASS [phone320-dark] opening question is exact ("Why does Jesus talk about angels going up and down?")
+PASS [phone320-dark] final phrase is italic
+PASS [phone320-dark] John 1:51 (WEB) right under the question
+PASS [phone320-dark] question → verse → button, no overlap
+PASS [phone320-dark] button min-height 52 (52)
+PASS [phone320-dark] question, verse and button fit the first screen (button bottom 537 ≤ 640)
+PASS [phone320-dark] explanation starts closed
+PASS [phone320-dark] no sideways scroll on load (320 ≤ 320)
+PASS [phone320-dark] button turns into "Close explanation"
+PASS [phone320-dark] explanation opens with "The earlier story."
+PASS [phone320-dark] explanation is two short paragraphs (2)
+PASS [phone320-dark] explanation sits under the button (does not cover question/verse)
+PASS [phone320-dark] button did not move when opening
+PASS [phone320-dark] Keller attribution is in the explanation
+PASS [phone320-dark] sources collapsed by default
+PASS [phone320-dark] sources show Genesis 28:12
+PASS [phone320-dark] sources link the sermon page
+PASS [phone320-dark] status label kept (not marked verified)
+PASS [phone320-dark] shared words highlighted in both passages
+PASS [phone320-dark] no sideways scroll with sources open (320 ≤ 320)
+PASS [phone320-dark] Hide sources closes
+PASS [phone320-dark] Close explanation collapses it
+PASS [phone320-dark] closing keeps the reading position (scroll 191→191)
+PASS [phone320-dark] v46: tap in the passage opens the held note
+PASS [phone320-dark] v46: View sources shows the cited verses
+PASS [phone320-dark] v46: × closes
+PASS [phone320-dark] v47: tap in the passage opens the held note
+PASS [phone320-dark] v47: View sources shows the cited verses
+PASS [phone320-dark] v47: × closes
+PASS [phone320-dark] no sideways scroll at the end (320 ≤ 320)
+PASS [phone320-dark] console errors: 0
+PASS [desktop] opening question is exact ("Why does Jesus talk about angels going up and down?")
+PASS [desktop] final phrase is italic
+PASS [desktop] John 1:51 (WEB) right under the question
+PASS [desktop] question → verse → button, no overlap
+PASS [desktop] button min-height 52 (52)
+PASS [desktop] question, verse and button fit the first screen (button bottom 514 ≤ 860)
+PASS [desktop] explanation starts closed
+PASS [desktop] no sideways scroll on load (1280 ≤ 1280)
+PASS [desktop] button turns into "Close explanation"
+PASS [desktop] explanation opens with "The earlier story."
+PASS [desktop] explanation is two short paragraphs (2)
+PASS [desktop] explanation sits under the button (does not cover question/verse)
+PASS [desktop] button did not move when opening
+PASS [desktop] Keller attribution is in the explanation
+PASS [desktop] sources collapsed by default
+PASS [desktop] sources show Genesis 28:12
+PASS [desktop] sources link the sermon page
+PASS [desktop] status label kept (not marked verified)
+PASS [desktop] shared words highlighted in both passages
+PASS [desktop] no sideways scroll with sources open (1280 ≤ 1280)
+PASS [desktop] Hide sources closes
+PASS [desktop] Close explanation collapses it
+PASS [desktop] closing keeps the reading position (scroll 58→58)
+PASS [desktop] v46: tap in the passage opens the held note
+PASS [desktop] v46: View sources shows the cited verses
+PASS [desktop] v46: × closes
+PASS [desktop] v47: tap in the passage opens the held note
+PASS [desktop] v47: View sources shows the cited verses
+PASS [desktop] v47: × closes
+PASS [desktop] no sideways scroll at the end (1280 ≤ 1280)
+PASS [desktop] console errors: 0
+PASS [desktop-dark] opening question is exact ("Why does Jesus talk about angels going up and down?")
+PASS [desktop-dark] final phrase is italic
+PASS [desktop-dark] John 1:51 (WEB) right under the question
+PASS [desktop-dark] question → verse → button, no overlap
+PASS [desktop-dark] button min-height 52 (52)
+PASS [desktop-dark] question, verse and button fit the first screen (button bottom 514 ≤ 860)
+PASS [desktop-dark] explanation starts closed
+PASS [desktop-dark] no sideways scroll on load (1280 ≤ 1280)
+PASS [desktop-dark] button turns into "Close explanation"
+PASS [desktop-dark] explanation opens with "The earlier story."
+PASS [desktop-dark] explanation is two short paragraphs (2)
+PASS [desktop-dark] explanation sits under the button (does not cover question/verse)
+PASS [desktop-dark] button did not move when opening
+PASS [desktop-dark] Keller attribution is in the explanation
+PASS [desktop-dark] sources collapsed by default
+PASS [desktop-dark] sources show Genesis 28:12
+PASS [desktop-dark] sources link the sermon page
+PASS [desktop-dark] status label kept (not marked verified)
+PASS [desktop-dark] shared words highlighted in both passages
+PASS [desktop-dark] no sideways scroll with sources open (1280 ≤ 1280)
+PASS [desktop-dark] Hide sources closes
+PASS [desktop-dark] Close explanation collapses it
+PASS [desktop-dark] closing keeps the reading position (scroll 58→58)
+PASS [desktop-dark] v46: tap in the passage opens the held note
+PASS [desktop-dark] v46: View sources shows the cited verses
+PASS [desktop-dark] v46: × closes
+PASS [desktop-dark] v47: tap in the passage opens the held note
+PASS [desktop-dark] v47: View sources shows the cited verses
+PASS [desktop-dark] v47: × closes
+PASS [desktop-dark] no sideways scroll at the end (1280 ≤ 1280)
+PASS [desktop-dark] console errors: 0
 
-TOTAL 91 pass / 0 fail
+TOTAL 186 pass / 0 fail
