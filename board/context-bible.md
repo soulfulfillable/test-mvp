@@ -2,11 +2,13 @@
 
 ## 🔁 이어받기
 - 마지막 저장: 2026-11-04 (개발 세션) · 작업 브랜치: `claude/context-bible` (main 반영)
-- 방금 끝낸 것: **사용자 요청으로 단순화**("구절 누르면 쉬운 설명 하나, 더 궁금하면 근거 보기만") — 구절 탭 → 쉬운 영어 설명 한 문단(`easy`) → **View sources** 하나(연결 본문 원문+하이라이트, 연결 이유, "본문이 말하는 것/말하지 않는 것" 2줄(`limits`), 출처). 5단계 메뉴·색 등급 범례·"Heard it in a sermon" UI 제거(데이터·검수 파일 `REVIEW.md`·`sources/` 는 보존). 두 줄에 걸친 밑줄 클릭 누락 수정(표시 절 전체가 탭 대상). 로봇(실제 터치/마우스 좌표, 390×844 라이트·다크 + 데스크톱 1280) 95/95, 콘솔 에러 0.
+- 방금 끝낸 것: **첫 화면 = 질문 하나**("Why did Nathanael ask if anything good could come from Nazareth?" + 45-46절 → See why → 쉬운 설명 → View sources), 나머지 47·51 은 본문에서 탭. 설명 3개를 **실제로 열어 읽은 초기 주석**(Chrysostom·Augustine·Cyril·Aquinas, HistoricalChristianFaith DB)으로 다시 다듬고 출처(저자·자료·위치·링크)를 View sources 에. 47절 원인 단정 삭제, 야곱-속임은 "one possible reading". 로봇 88/88(실제 터치, 390 라이트·다크 + 데스크톱).
+- 막힌 자료: biblehub·studylight·ccel·netbible·archive.org·sacred-texts·biblestudytools·wikisource·gutenberg·bible.helloao.org 접속 거부 → Westcott·Ellicott·JFB·Meyer·NET 노트는 못 열어서 근거로 안 씀(`context_bible/sources/commentaries.md`). github.com clone·raw.githubusercontent 은 됨.
 - 진행 중이던 것: 없음
 - 다음 할 일:
   1. 사용자 답 2개: "설명이 쉬웠나 / 근거 보기로 충분히 확인됐나"
-  2. 답에 따라 `easy` 문장 다듬기(JSON 만 고치고 `python3 context_bible/build.py` → `node context_bible/robot.js`)
+  2. 막힌 사이트가 열리는 환경이면 Westcott *St John*·NET 노트로 47절 야곱 연결 재확인
+  3. 답에 따라 `easy` 문장 다듬기(JSON 만 고치고 `python3 context_bible/build.py` → `node context_bible/robot.js`)
   3. 출시 전 필수: 사람(신학 배경) 검수. 견해 문장은 주석 위치를 대조해 붙이거나 지금처럼 'some readers' 수준 유지
   4. 사용자 OK 시 두 번째 단락(같은 JSON 형식) → 영어권 지인 검증 → iOS 전환
 - 사용자 대기: 질문 2개 답

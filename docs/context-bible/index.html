@@ -30,6 +30,17 @@ button:focus-visible,.mark:focus-visible{outline:2px solid var(--accent); outlin
 .eyebrow{font-size:.76rem; color:var(--label2); margin:0}
 h1{font-size:1.65rem; line-height:1.15; font-weight:700; margin:2px 0 8px; letter-spacing:-.01em}
 .hint{font-size:.76rem; color:var(--label2); display:flex; align-items:center; gap:6px; margin:0 0 20px}
+.lead{margin:0 0 30px}
+.lead .ctx{font-family:var(--serif); font-size:1.12rem; line-height:1.62; margin:10px 0 4px}
+.lead .ctx p{margin:0; padding:3px 0}
+.lead .ctx sup{font-family:var(--sans); font-size:.62em; color:var(--label3); font-weight:600; margin-right:3px; vertical-align:.45em}
+.see{color:var(--accent); font-weight:600; min-height:44px; display:inline-flex; align-items:center; gap:7px}
+.see svg{width:7px; height:12px; transition:transform .2s}
+.see[aria-expanded="true"] svg{transform:rotate(90deg)}
+h2{font-size:1.12rem; font-weight:700; margin:0 0 2px}
+.com{margin:0 0 10px}
+.com:last-child{margin:0}
+.com a{color:var(--accent); text-decoration:none; font-weight:600}
 .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none}
 
 .passage{font-family:var(--serif); font-size:1.12rem; line-height:1.62}
@@ -107,7 +118,9 @@ function load(){
 
 function render(){
   const P = D.passage, base = D.baseTranslation, byVerse = {};
-  D.insights.forEach(i => byVerse[i.verse] = i);
+  const L = D.lead, lead = ins(L.insight);
+  D.insights.forEach(i => { if (i.id !== L.insight) byVerse[i.verse] = i; });
+  const ctx = L.context.map(v => `<p id="ctx-${v}"><sup>${v}</sup>${esc(D.texts[base][`${P.book} ${P.chapter}:${v}`])}</p>`).join('');
   let verses = '';
   for (let v = P.from; v <= P.to; v++){
     const t = D.texts[base][`${P.book} ${P.chapter}:${v}`], n = byVerse[v];
@@ -120,13 +133,21 @@ function render(){
     if (n) verses += `<div class="slot" id="slot-${n.id}"></div>`;
   }
   app.innerHTML = `
-    <header>
-      <p class="eyebrow">${esc(prettyRef(P.ref))} · ${esc(base)}</p>
-      <h1>${esc(P.title)}</h1>
+    <section class="lead" aria-labelledby="q">
+      <p class="eyebrow">${esc(lead.ref)} · ${esc(base)}</p>
+      <h1 id="q">${esc(L.question)}</h1>
+      <div class="ctx">${ctx}</div>
+      <button class="see" data-note="${lead.id}" aria-expanded="false">${ARROW}<span>See why</span></button>
+      <div class="slot" id="slot-${lead.id}"></div>
+    </section>
+    <main>
+      <p class="eyebrow">${esc(prettyRef(P.ref))}</p>
+      <h2>${esc(P.title)}</h2>
       <p class="hint"><span class="dot"></span>Tap an underlined line</p>
-    </header>
-    <main><div class="passage intro">${verses}</div></main>
+      <div class="passage intro">${verses}</div>
+    </main>
     <footer>
+      <p>Commentaries: early Christian writers in public-domain translations, read from the HistoricalChristianFaith Commentaries Database.</p>
       <p>Scripture: World English Bible (WEB), public domain. Greek and Hebrew checked against the SBL Greek New Testament, the Septuagint (Swete) and the Westminster Leningrad Codex.</p>
       <p>Early preview. Notes are a draft and have not yet been reviewed by a scholar.</p>
     </footer>`;
@@ -144,11 +165,13 @@ function sourcesHTML(n){
   const orig = n.detail.original.sources ? `Greek/Hebrew: ${n.detail.original.sources.map(esc).join(', ')}. ` : '';
   return `${links}
     <section class="limits"><h3>What the text says, and what it doesn’t</h3>${n.limits.map(x => `<p>${esc(x)}</p>`).join('')}</section>
+    <section><h3>Commentaries checked</h3>${n.commentaries.map(c => `<p class="com"><span class="ref">${esc(c.author)}</span>, ${esc(c.work)} — ${esc(c.loc)}. ${esc(c.note)} <a href="${esc(c.url)}" target="_blank" rel="noopener">Read it</a></p>`).join('')}</section>
     <section><p class="fine">Bible text: WEB, public domain. ${orig}Draft notes, ${esc(n.checked.date)}.</p></section>`;
 }
 
+const verseOf = n => document.getElementById((n.id === D.lead.insight ? 'ctx-' : 'verse-') + n.verse);
 function setSourceHighlight(n, on){
-  const verseEl = document.getElementById('verse-' + n.verse);
+  const verseEl = verseOf(n);
   verseEl.querySelectorAll('mark.hl').forEach(m => m.replaceWith(...m.childNodes));
   verseEl.normalize();
   if (!on) return;
@@ -164,11 +187,15 @@ function setSourceHighlight(n, on){
 }
 function lightUp(root){ requestAnimationFrame(() => requestAnimationFrame(() => root.querySelectorAll('mark.hl').forEach((m, i) => setTimeout(() => m.classList.add('on'), i * 150)))); }
 
+function setToggle(id, on){
+  const b = document.querySelector(`[data-note="${id}"]`); b.setAttribute('aria-expanded', on);
+  if (b.classList.contains('see')) b.querySelector('span').textContent = on ? 'Hide' : 'See why';
+}
 function closeNote(){
   if (!openId) return;
   const n = ins(openId);
   document.getElementById('slot-' + openId).innerHTML = '';
-  document.querySelector(`.mark[data-note="${openId}"]`).setAttribute('aria-expanded', 'false');
+  setToggle(openId, false);
   setSourceHighlight(n, false);
   openId = null;
 }
@@ -182,24 +209,25 @@ function openNote(id, scroll){
       <button class="src-btn" data-src="${id}" aria-expanded="false" aria-controls="src-${id}">${ARROW}<span>View sources</span></button>
       <div class="sources" id="src-${id}" hidden></div>
     </div>`;
-  document.querySelector(`.mark[data-note="${id}"]`).setAttribute('aria-expanded', 'true');
+  setToggle(id, true);
   openId = id;
-  if (scroll) document.getElementById('verse-' + n.verse).scrollIntoView({behavior:'smooth', block:'start'});
+  if (scroll) verseOf(n).scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 app.addEventListener('click', e => {
+  if (e.target.closest('a')) return;
   let t = e.target.closest('button, [data-note]');
   // a marked verse is tappable anywhere: a phrase that wraps over two lines has gaps where a tap would miss it
   if (!t){ const v = e.target.closest('.v.has-note'); if (v) t = v.querySelector('[data-note]'); }
   if (!t) return;
   if (t.dataset.note){ openId === t.dataset.note ? closeNote() : openNote(t.dataset.note, false); }
-  else if (t.dataset.close){ const v = ins(t.dataset.close).verse; closeNote(); document.getElementById('verse-' + v).scrollIntoView({block:'nearest'}); }
+  else if (t.dataset.close){ const el = verseOf(ins(t.dataset.close)); closeNote(); el.scrollIntoView({block:'nearest'}); }
   else if (t.dataset.src){
     const id = t.dataset.src, n = ins(id), box = document.getElementById('src-' + id);
     const on = t.getAttribute('aria-expanded') !== 'true';
     t.setAttribute('aria-expanded', on); box.hidden = !on;
     t.querySelector('span').textContent = on ? 'Hide sources' : 'View sources';
-    if (on){ box.innerHTML = sourcesHTML(n); setSourceHighlight(n, true); lightUp(box); lightUp(document.getElementById('verse-' + n.verse)); }
+    if (on){ box.innerHTML = sourcesHTML(n); setSourceHighlight(n, true); lightUp(box); lightUp(verseOf(n)); }
     else setSourceHighlight(n, false);
   }
 });

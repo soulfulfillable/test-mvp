@@ -208,12 +208,37 @@
      "SBLGNT John 1:46",
      "KJV whole-Bible search: 'Nazareth' (NT only), 'Bethlehem' in John (7:42 only)",
      "WEB Matthew 2:5-6"
-    ]
+    ],
+    "commentaries": "Opened and read: HistoricalChristianFaith/Commentaries-Database @ 9da765b (public-domain translations of early commentaries)."
    },
-   "easy": "Philip has just said Jesus is the one Moses and the prophets wrote about — then adds that he's from Nazareth. Nathanael questions whether anything good can come from Nazareth; John does not explain exactly why. Later in John (7:41-42), a crowd asks the same kind of question about where the Messiah should come from.",
+   "easy": "Philip has just told Nathanael that he has found the one the Scriptures promised — and that he comes from Nazareth, a town the Old Testament never mentions. Nathanael asks whether anything good can come from there; John does not explain exactly why. Later in John, a crowd doubts Jesus for a similar reason: they expected the promised king, the Messiah, to come from Bethlehem (John 7:41-42). One early reader, John Chrysostom, thought Nathanael had that prophecy in mind.",
    "limits": [
-    "In the text: Philip's claim and Nathanael's question sit side by side (1:45-46), and the crowd's question in 7:41-42.",
-    "Not in the text: that Nathanael was thinking of the Bethlehem prophecy (Micah 5:2). John doesn't say so; some readers connect the two scenes that way."
+    "In the text: Philip's claim and Nathanael's question side by side (1:45-46), and the crowd's Bethlehem question in 7:41-42.",
+    "Not in the text: why Nathanael asked. Early readers already differed — Chrysostom heard doubt based on the Bethlehem prophecy; Augustine and Cyril of Alexandria read the words as hopeful."
+   ],
+   "commentaries": [
+    {
+     "author": "John Chrysostom (d. 407)",
+     "work": "Homilies on the Gospel of John",
+     "loc": "Homily 20, on John 1:46-47",
+     "note": "Thinks Nathanael knew from the prophets that the Christ must come from Bethlehem, so he doubted “Nazareth” — but went to see instead of arguing.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/John%20Chrysostom/John%201_46.toml",
+     "also": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/John%20Chrysostom/John%201_47.toml"
+    },
+    {
+     "author": "Augustine of Hippo (d. 430)",
+     "work": "Tractates on the Gospel of John, as quoted in Thomas Aquinas, Catena Aurea",
+     "loc": "Tractate 7, on John 1:46",
+     "note": "Says the words can also be read as a statement — “Something good can come out of Nazareth” — and prefers that reading.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/Augustine%20of%20Hippo/John%201_46.toml"
+    },
+    {
+     "author": "Cyril of Alexandria (d. 444)",
+     "work": "Commentary on the Gospel of John",
+     "loc": "Book 2, on John 1:46",
+     "note": "Also reads Nathanael as expecting something good from Nazareth.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/Cyril%20of%20Alexandria/John%201_46.toml"
+    }
    ]
   },
   {
@@ -347,12 +372,29 @@
     ],
     "corrections": [
      "Draft said “Esau says” for Genesis 27:35 — the speaker is Isaac. Fixed after Codex review."
-    ]
+    ],
+    "commentaries": "Opened and read: HistoricalChristianFaith/Commentaries-Database @ 9da765b (public-domain translations of early commentaries)."
    },
-   "easy": "Nathanael has just doubted Jesus out loud, and Jesus praises him for it: an Israelite with no deceit — nothing hidden, no pretending. Both words point back to Jacob, who was renamed “Israel” and who took his brother's blessing “with deceit” (Genesis 27:35). John's Greek word for “deceit” is the same one the Greek Old Testament uses there.",
+   "easy": "Jesus calls Nathanael “an Israelite … in whom is no deceit” — someone who doesn't say one thing and mean another. The text doesn't give Jesus' reason. One possible reading looks back to Jacob, the ancestor of the people of Israel, who was given the name “Israel” (Genesis 32:28) and who once took a blessing “with deceit” (Genesis 27:35). The early commentaries we checked don't make that deceit link; they connect Nathanael with Jacob at verse 51.",
    "limits": [
-    "In the text: “Israel” is Jacob's new name (Genesis 32:28), and Isaac says Jacob came “with deceit” (Genesis 27:35). The Greek word matches John 1:47.",
-    "Not in the text: that Jesus meant a contrast with Jacob. John doesn't say; it's one way readers take it."
+    "In the text: Jesus calls him an Israelite with no deceit, right after Nathanael's open question (1:46-47).",
+    "Not in the text: Jesus' reason. Chrysostom ties the praise to Nathanael weighing Philip's news against the prophets; Augustine to his not pretending. The Jacob-and-deceit link is a word match you can check, not something these commentaries say."
+   ],
+   "commentaries": [
+    {
+     "author": "Augustine of Hippo (d. 430)",
+     "work": "Tractates on the Gospel of John",
+     "loc": "Tractate 7, on John 1:47",
+     "note": "Explains guile as saying one thing and thinking another; Nathanael is called without guile because he does not pretend.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/Augustine%20of%20Hippo/John%201_47.toml"
+    },
+    {
+     "author": "John Chrysostom (d. 407)",
+     "work": "Homilies on the Gospel of John",
+     "loc": "Homily 20, on John 1:47",
+     "note": "Says Jesus praises Nathanael's question as honest and grounded in the prophets, not as unbelief.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/John%20Chrysostom/John%201_47.toml"
+    }
    ]
   },
   {
@@ -464,12 +506,43 @@
      "WEB/KJV/ASV John 1:50-51, Genesis 28:10-17",
      "SBLGNT John 1:50 (opsē, singular) / 1:51 (opsesthe, hymin plural; first doubled amēn in John)",
      "WLC Genesis 28:12 (bô = preposition + 3rd masc. sing. suffix)"
-    ]
+    ],
+    "commentaries": "Opened and read: HistoricalChristianFaith/Commentaries-Database @ 9da765b (public-domain translations of early commentaries)."
    },
-   "easy": "Jesus promises Nathanael — and now all of them, because the Greek “you” turns plural here — that they'll see more. The picture comes from Jacob's dream in Genesis 28:12: angels of God going up and down between heaven and earth. In the dream they go up and down on a stairway; here they go up and down on “the Son of Man.”",
+   "easy": "Jesus borrows a picture from an old story: Jacob, the ancestor later named Israel, dreamed of a stairway reaching heaven with “the angels of God ascending and descending on it” (Genesis 28:12). Here Jesus says the angels will go up and down on “the Son of Man,” a title Jesus uses in John's Gospel. Augustine read it as Jesus telling Nathanael, a true Israelite, that Israel's own dream points to him.",
    "limits": [
     "In the text: the same words, “angels of God ascending and descending,” in Genesis 28:12 and John 1:51.",
-    "Not in the text: what exactly the comparison means. John doesn't explain it; readers take Jesus as the stairway, or as the place (Bethel, “the gate of heaven”), or compare him to Jacob."
+    "Not in the text: what the comparison means. Augustine and Thomas Aquinas read it through Jacob's dream; Chrysostom and Cyril of Alexandria focus on angels serving Jesus."
+   ],
+   "commentaries": [
+    {
+     "author": "Augustine of Hippo (d. 430)",
+     "work": "Tractates on the Gospel of John",
+     "loc": "Tractate 7, on John 1:51",
+     "note": "Jacob, named Israel, saw the ladder; Nathanael is “an Israelite indeed,” so Jesus fittingly speaks of Jacob's dream.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/Augustine%20of%20Hippo/John%201_51.toml"
+    },
+    {
+     "author": "Thomas Aquinas (d. 1274)",
+     "work": "Commentary on the Gospel of John",
+     "loc": "Chapter 1, on John 1:51",
+     "note": "Reads it as: because you are truly an Israelite, pay attention to what Israel (Jacob) saw.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/Thomas%20Aquinas/John%201_51.toml"
+    },
+    {
+     "author": "John Chrysostom (d. 407)",
+     "work": "Homilies on the Gospel of John",
+     "loc": "Homily 21, on John 1:50-51",
+     "note": "Takes the angels as serving Jesus — at his birth, temptation, crucifixion, resurrection and ascension. Does not mention Jacob here.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/John%20Chrysostom/John%201_50-51.toml"
+    },
+    {
+     "author": "Cyril of Alexandria (d. 444)",
+     "work": "Commentary on the Gospel of John",
+     "loc": "Book 2, on John 1:51",
+     "note": "Angels serving the Son of Man show he is Son of God.",
+     "url": "https://github.com/HistoricalChristianFaith/Commentaries-Database/blob/9da765b0bf53852e1dfacfee2ccc87d5681a89db/Cyril%20of%20Alexandria/John%201_51.toml"
+    }
    ]
   }
  ],
@@ -556,6 +629,14 @@
  "checksIntro": {
   "title": "Heard it in a sermon?",
   "sub": "See which parts you can find in the text, and which parts are explanation added to it."
+ },
+ "lead": {
+  "insight": "v46",
+  "question": "Why did Nathanael ask if anything good could come from Nazareth?",
+  "context": [
+   45,
+   46
+  ]
  },
  "texts": {
   "WEB": {

@@ -55,6 +55,13 @@
    "본문이 열어 두는 두 가지 읽기"로만 보여 준다. `build.py` 가 화면 문구에 'commentator' 가 들어가면 실패하게 함.
 4. 판정 말투 → 섹션 이름 "Heard it in a sermon?", 결론 문장은 "본문이 보여 주는 것 / 열어 두는 것"으로(예: "The text tells us where Nathanael was, not what he was doing there."). "Fine as a guess" 류 삭제.
 
+## 주석 대조 (11-04, Head 요청 — 설명 3개)
+실제로 열어 읽은 주석만 출처로 씀: Chrysostom(Homily 20·21), Augustine(Tractate 7), Cyril of Alexandria(Book 2), Thomas Aquinas(Commentary on John 1). 저자·위치·링크는 `sources/commentaries.md`.
+- 46: 베들레헴 연결 = Chrysostom 실제 견해(✅), 긍정문 읽기 = Augustine·Cyril(✅) → '견해가 갈린다'가 실제 출처로 뒷받침됨.
+- 47: "의심했기 때문에 칭찬" 원인 단정 삭제. 야곱-속임 대비는 대조한 주석에 없음 → "one possible reading" + 주석은 51절에서 야곱을 연결한다고 명시.
+- 51: 야곱의 꿈 연결 = Augustine·Aquinas(✅), 천사 섬김 읽기 = Chrysostom·Cyril(✅).
+- 막힌 자료 목록은 `sources/commentaries.md` 맨 아래. 열어 보지 못한 현대·19세기 주석은 화면·데이터 어디에도 근거로 없음.
+
 ## 남은 한계 (출시 전 사람 검수 필요)
 - 사람(신학 배경) 검수 아직 없음 — 화면 하단에 "draft, not yet checked by a scholar" 표시.
 - 견해 두 개씩은 대표성을 주석서로 확인하지 못했다. 출시 전 공개 도메인 주석(예: 19세기) 또는 사용 허가 받은 현대 주석의 **해당 위치**를 붙이거나, 지금처럼 '읽기'로만 둔다.
