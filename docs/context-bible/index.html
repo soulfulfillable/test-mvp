@@ -7,18 +7,16 @@
 <title>John 1:43–51 · Context</title>
 <style>
 :root{
-  --bg:#ffffff; --bg2:#f2f2f7; --bg3:#ffffff; --label:#1c1c1e; --label2:#6c6c70; --label3:#8e8e93;
+  --bg:#ffffff; --bg2:#f2f2f7; --label:#1c1c1e; --label2:#6c6c70; --label3:#8e8e93;
   --sep:rgba(60,60,67,.16); --accent:#b4233c; --accent-soft:rgba(180,35,60,.10);
-  --g-text:#248a3d; --g-link:#0a64c8; --g-view:#b25f00;
   --hl:rgba(10,100,200,.16); --open:rgba(180,35,60,.06);
   --serif: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#000000; --bg2:#1c1c1e; --bg3:#2c2c2e; --label:#f2f2f7; --label2:#a1a1a8; --label3:#7c7c82;
+    --bg:#000000; --bg2:#1c1c1e; --label:#f2f2f7; --label2:#a1a1a8; --label3:#7c7c82;
     --sep:rgba(84,84,88,.55); --accent:#ff6b7f; --accent-soft:rgba(255,107,127,.16);
-    --g-text:#30d158; --g-link:#64a8ff; --g-view:#ffb340;
     --hl:rgba(100,168,255,.24); --open:rgba(255,107,127,.08);
   }
 }
@@ -26,108 +24,52 @@
 html{font-size:17px; font:-apple-system-body; -webkit-text-size-adjust:100%}
 body{margin:0; background:var(--bg); color:var(--label); font-family:var(--sans); line-height:1.45}
 button{font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent; text-align:left}
-button:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
+button:focus-visible,.mark:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
 .wrap{max-width:640px; margin:0 auto; padding:calc(env(safe-area-inset-top) + 20px) 20px calc(env(safe-area-inset-bottom) + 40px)}
 
-/* header */
-.eyebrow{font-size:.76rem; color:var(--label2); letter-spacing:.02em; margin:0}
-h1{font-size:1.65rem; line-height:1.15; font-weight:700; margin:2px 0 10px; letter-spacing:-.01em}
-.legend{display:flex; flex-wrap:wrap; gap:4px 14px; font-size:.76rem; color:var(--label2); margin:0 0 6px}
-.chip{display:inline-flex; align-items:center; gap:6px; white-space:nowrap}
-.dot{width:8px; height:8px; border-radius:50%; flex:none; background:currentColor}
-.c-text{color:var(--g-text)} .c-link{color:var(--g-link)} .c-view{color:var(--g-view)}
-.legend .chip span:last-child{color:var(--label2)}
-.hint{font-size:.76rem; color:var(--label2); display:flex; align-items:center; gap:6px; margin:0 0 22px}
-.hint .dot{background:var(--accent)}
+.eyebrow{font-size:.76rem; color:var(--label2); margin:0}
+h1{font-size:1.65rem; line-height:1.15; font-weight:700; margin:2px 0 8px; letter-spacing:-.01em}
+.hint{font-size:.76rem; color:var(--label2); display:flex; align-items:center; gap:6px; margin:0 0 20px}
+.dot{width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none}
 
-/* passage */
 .passage{font-family:var(--serif); font-size:1.12rem; line-height:1.62}
 .v{margin:0; padding:3px 0}
 .v.has-note{cursor:pointer; -webkit-tap-highlight-color:transparent}
 .v sup{font-family:var(--sans); font-size:.62em; color:var(--label3); font-weight:600; margin-right:3px; vertical-align:.45em}
-.v.flash{animation:flash 1.6s ease-out}
-@keyframes flash{0%,30%{background:var(--accent-soft)}100%{background:transparent}}
-.mark{cursor:pointer; -webkit-tap-highlight-color:transparent; -webkit-box-decoration-break:clone; box-decoration-break:clone; display:inline;
-  text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:1.5px; text-underline-offset:4px;
-  border-radius:4px; transition:background .2s}
-.mark:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.mark{cursor:pointer; -webkit-box-decoration-break:clone; box-decoration-break:clone;
+  text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:1.5px; text-underline-offset:4px; border-radius:4px}
 .mark .pin{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-left:5px; vertical-align:.18em}
 .mark[aria-expanded="true"]{background:var(--open)}
-.mark[aria-expanded="true"] .pin{box-shadow:0 0 0 3px var(--accent-soft)}
 .intro .pin{animation:pulse 1.4s ease-out 2}
 @keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent-soft)}60%{box-shadow:0 0 0 9px rgba(0,0,0,0)}100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}}
 
-/* highlight sweep (signature) */
 mark.hl{color:inherit; background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 0 / 0% 100%; border-radius:3px; padding:0 1px;
   transition:background-size .55s cubic-bezier(.3,.7,.3,1)}
 mark.hl.on{background-size:100% 100%}
 
-/* note card */
-.note{font-family:var(--sans); font-size:.88rem; margin:10px 0 16px; border-left:2px solid var(--accent); padding:2px 0 2px 14px;
-  animation:open .28s ease-out}
+.note{font-family:var(--sans); font-size:1rem; margin:10px 0 16px; border-left:2px solid var(--accent); padding:2px 0 2px 14px; animation:open .25s ease-out}
 @keyframes open{from{opacity:0; transform:translateY(-4px)}to{opacity:1; transform:none}}
-.note-head{display:flex; align-items:flex-start; gap:10px}
-.hook{font-weight:600; flex:1; margin:2px 0 0}
+.note-head{display:flex; gap:8px; align-items:flex-start}
+.easy{flex:1; margin:0}
 .x{width:32px; height:32px; margin:-4px -6px 0 0; display:grid; place-items:center; color:var(--label3); flex:none; border-radius:16px}
 .x svg{width:12px; height:12px}
-.summary{margin:6px 0 12px; color:var(--label)}
-.steps{background:var(--bg2); border-radius:12px; overflow:hidden}
-.step + .step{border-top:.5px solid var(--sep)}
-.row{display:flex; align-items:center; gap:10px; width:100%; min-height:44px; padding:10px 12px}
-.row .n{font-size:.76rem; color:var(--label3); width:12px; font-variant-numeric:tabular-nums}
-.row .t{flex:1}
-.row .dots{display:flex; gap:3px}
-.row .dots .dot{width:6px; height:6px}
-.chev{width:8px; height:13px; color:var(--label3); transition:transform .2s; flex:none}
-.row[aria-expanded="true"] .chev{transform:rotate(90deg)}
-.panel{padding:0 12px 12px 34px}
-.claim{margin:0 0 10px}
-.claim:last-child{margin-bottom:0}
-.g{font-size:.76rem; font-weight:600; display:inline-flex; align-items:center; gap:5px; margin-right:6px}
-.g .dot{width:7px; height:7px}
-.refs{color:var(--label2); font-size:.76rem; white-space:nowrap}
-.muted{color:var(--label2)}
-.link{border-top:.5px solid var(--sep); padding:10px 0}
-.link:first-child{border-top:0; padding-top:2px}
-.link-ref{font-weight:600}
-.kind{font-size:.76rem; color:var(--label2)}
-.link p{margin:4px 0}
-.open-btn{color:var(--accent); font-weight:600; min-height:36px; display:inline-flex; align-items:center; gap:6px}
-.open-btn svg{width:7px; height:12px; transition:transform .2s}
-.open-btn[aria-expanded="true"] svg{transform:rotate(90deg)}
-.excerpt{font-family:var(--serif); font-size:1rem; line-height:1.55; background:var(--bg3); border-radius:10px; padding:10px 12px; margin:4px 0 2px; border:.5px solid var(--sep)}
+.src-btn{color:var(--accent); font-weight:600; min-height:44px; display:inline-flex; align-items:center; gap:7px; margin-top:4px}
+.src-btn svg{width:7px; height:12px; transition:transform .2s}
+.src-btn[aria-expanded="true"] svg{transform:rotate(90deg)}
+.sources{background:var(--bg2); border-radius:12px; padding:12px 14px; font-size:.88rem}
+.sources h3{font-size:.76rem; font-weight:600; color:var(--label2); margin:0 0 6px}
+.sources section + section{border-top:.5px solid var(--sep); margin-top:12px; padding-top:12px}
+.ref{font-weight:600}
+.kind{color:var(--label2)}
+.reason{margin:2px 0 6px}
+.excerpt{font-family:var(--serif); font-size:1rem; line-height:1.55; margin:0 0 4px}
 .excerpt p{margin:0 0 4px}
-.excerpt .src{font-family:var(--sans); font-size:.72rem; color:var(--label3); margin:6px 0 0}
-.tr{margin:0 0 8px}
-.tr b{font-size:.76rem; color:var(--label2); font-weight:600; display:block}
-.tr span{font-family:var(--serif); font-size:1rem}
-.verdict{font-weight:600; margin:10px 0 8px}
-.views{margin:12px 0 0; padding:10px 12px; border-radius:10px; background:var(--bg3); border:.5px solid var(--sep)}
-.views h4{margin:0 0 6px; font-size:.88rem; font-weight:600}
-.views .split{color:var(--g-view); font-size:.76rem; font-weight:600; display:flex; align-items:center; gap:5px; margin:0 0 4px}
-.views p{margin:0 0 6px}
-.views p:last-child{margin:0}
-.reading{margin:12px 0 0; font-size:.76rem; color:var(--label2)}
-.reading ul{margin:4px 0 0; padding-left:16px}
-
-/* checks */
-.checks{margin-top:34px}
-h2{font-size:1.12rem; font-weight:700; margin:0 0 2px}
-.sub{color:var(--label2); font-size:.88rem; margin:0 0 12px}
-.list{background:var(--bg2); border-radius:12px; overflow:hidden; font-size:.88rem}
-.item + .item{border-top:.5px solid var(--sep)}
-.heard{display:flex; gap:10px; align-items:center; width:100%; min-height:52px; padding:12px}
-.heard .q{flex:1; font-family:var(--serif); font-size:1rem}
-.result{padding:0 12px 14px}
-.tag{font-size:.76rem; font-weight:600; color:var(--label2); margin:0 0 8px}
-.bottom{font-weight:600; margin:10px 0 6px}
-.go{color:var(--accent); font-weight:600; min-height:40px}
+.limits p{margin:0 0 6px}
+.limits p:last-child{margin:0}
+.fine{color:var(--label2); font-size:.76rem; margin:0 0 4px}
 
 footer{margin-top:36px; font-size:.76rem; color:var(--label2); border-top:.5px solid var(--sep); padding-top:14px}
 footer p{margin:0 0 8px}
-footer dl{margin:0 0 12px; display:grid; grid-template-columns:auto 1fr; gap:4px 10px}
-footer dt{font-weight:600}
-footer dd{margin:0}
 .err{padding:40px 0; text-align:center; color:var(--label2); font-size:.88rem}
 .err button{color:var(--accent); font-weight:600; margin-top:8px; min-height:44px}
 @media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} }
@@ -138,26 +80,23 @@ footer dd{margin:0}
 <script>
 (() => {
 const app = document.getElementById('app');
-const CHEV = '<svg class="chev" viewBox="0 0 8 13" aria-hidden="true"><path d="M1.5 1.5 6.5 6.5 1.5 11.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const ARROW = '<svg viewBox="0 0 7 12" aria-hidden="true"><path d="M1.2 1.2 5.8 6 1.2 10.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const XSVG = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
 let D, openId = null;
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const grade = g => `<span class="g c-${g}"><span class="dot"></span>${esc(D.grades[g].label)}</span>`;
 const prettyRef = r => r.replace(/-(\d+)$/, '–$1');
 function expand(ref){
   const m = ref.match(/^(.+) (\d+):(\d+)(?:-(\d+))?$/); const out = [];
   for (let v = +m[3]; v <= +(m[4] || m[3]); v++) out.push(`${m[1]} ${m[2]}:${v}`);
   return out;
 }
-// wrap each phrase in <mark class="hl"> (text is escaped first; phrases are matched on the escaped text)
 function markup(text, phrases){
   let h = esc(text);
   (phrases || []).forEach(p => { const e = esc(p); h = h.replace(e, `<mark class="hl">${e}</mark>`); });
   return h;
 }
-const claim = c => `<p class="claim">${grade(c.grade)}${esc(c.text)}${c.refs ? ` <span class="refs">${c.refs.map(prettyRef).join(' · ')}</span>` : ''}</p>`;
+const ins = id => D.insights.find(i => i.id === id);
 
 function load(){
   fetch('data.json', {cache:'no-cache'}).then(r => { if (!r.ok) throw 0; return r.json(); })
@@ -171,134 +110,81 @@ function render(){
   D.insights.forEach(i => byVerse[i.verse] = i);
   let verses = '';
   for (let v = P.from; v <= P.to; v++){
-    const ref = `${P.book} ${P.chapter}:${v}`, t = D.texts[base][ref], ins = byVerse[v];
+    const t = D.texts[base][`${P.book} ${P.chapter}:${v}`], n = byVerse[v];
     let body = esc(t);
-    if (ins){
-      const a = esc(ins.anchor);
-      body = body.replace(a, `<span class="mark" role="button" tabindex="0" data-note="${ins.id}" aria-expanded="false" aria-controls="note-${ins.id}"><span class="anc">${a}</span><span class="pin" aria-hidden="true"></span></span>`);
+    if (n){
+      const a = esc(n.anchor);
+      body = body.replace(a, `<span class="mark" role="button" tabindex="0" data-note="${n.id}" aria-expanded="false" aria-controls="note-${n.id}"><span class="anc">${a}</span><span class="pin" aria-hidden="true"></span></span>`);
     }
-    verses += `<p class="v${ins ? ' has-note' : ''}" id="verse-${v}"><sup>${v}</sup>${body}</p>`;
-    if (ins) verses += `<div class="slot" id="slot-${ins.id}"></div>`;
+    verses += `<p class="v${n ? ' has-note' : ''}" id="verse-${v}"><sup>${v}</sup>${body}</p>`;
+    if (n) verses += `<div class="slot" id="slot-${n.id}"></div>`;
   }
-  const legend = ['text','link','view'].map(g => `<span class="chip c-${g}"><span class="dot"></span><span>${esc(D.grades[g].label)}</span></span>`).join('');
-  const checks = D.checks.map(c => `
-    <div class="item">
-      <button class="heard" aria-expanded="false" data-check="${c.id}"><span class="q">“${esc(c.heard)}”</span>${CHEV}</button>
-      <div class="result" id="check-${c.id}" hidden>
-        <p class="tag">${esc(c.tag)}</p>
-        ${c.verdict.map(claim).join('')}
-        <p class="bottom">${esc(c.bottom)}</p>
-        <button class="go" data-go="${c.go}">${goLabel(c.go)}</button>
-      </div>
-    </div>`).join('');
-  const T = D.translations;
   app.innerHTML = `
     <header>
       <p class="eyebrow">${esc(prettyRef(P.ref))} · ${esc(base)}</p>
       <h1>${esc(P.title)}</h1>
-      <div class="legend" aria-label="How notes are marked">${legend}</div>
-      <p class="hint intro-hint"><span class="dot"></span>${D.insights.length} places worth a closer look</p>
+      <p class="hint"><span class="dot"></span>Tap an underlined line</p>
     </header>
-    <main>
-      <div class="passage intro">${verses}</div>
-      <section class="checks" aria-labelledby="ch">
-        <h2 id="ch">${esc(D.checksIntro.title)}</h2>
-        <p class="sub">${esc(D.checksIntro.sub)}</p>
-        <div class="list">${checks}</div>
-      </section>
-    </main>
+    <main><div class="passage intro">${verses}</div></main>
     <footer>
-      <dl>${['text','link','view'].map(g => `<dt class="c-${g}">${esc(D.grades[g].label)}</dt><dd>${esc(D.grades[g].meaning)}</dd>`).join('')}</dl>
-      <p>Scripture: ${esc(T.WEB.name)} (WEB). Compared with ${esc(T.KJV.name)} and ${esc(T.ASV.name)}. All public domain.</p>
-      <p>Greek and Hebrew checked against: SBL Greek New Testament, Septuagint (Swete), Westminster Leningrad Codex.</p>
-      <p>Preview. Notes are a draft written for review and have not yet been checked by a scholar.</p>
+      <p>Scripture: World English Bible (WEB), public domain. Greek and Hebrew checked against the SBL Greek New Testament, the Septuagint (Swete) and the Westminster Leningrad Codex.</p>
+      <p>Early preview. Notes are a draft and have not yet been reviewed by a scholar.</p>
     </footer>`;
   setTimeout(() => app.querySelector('.intro')?.classList.remove('intro'), 3200);
-  if (location.hash.length > 1) jump(location.hash.slice(1));
+  if (location.hash.length > 1 && ins(location.hash.slice(1))) openNote(location.hash.slice(1), true);
 }
 
-function goLabel(go){ return go.startsWith('verse:') ? `Show verse ${go.slice(6)}` : `See the note on verse ${D.insights.find(i => i.id === go).verse}`; }
-
-function noteHTML(ins){
-  const d = ins.detail, tr = d.translation;
-  const dots = gs => `<span class="dots">${[...new Set(gs)].map(g => `<span class="dot c-${g}"></span>`).join('')}</span>`;
-  const links = ins.links.map((l, k) => `
-    <div class="link">
-      <div><span class="link-ref">${esc(prettyRef(l.ref))}</span> <span class="kind">· ${esc(D.linkKinds[l.kind])}</span></div>
-      <p>${grade(l.grade)}${esc(l.reason)}</p>
-      ${l.caution ? `<p class="muted">${esc(l.caution)}</p>` : ''}
-      <button class="open-btn" data-link="${ins.id}:${k}" aria-expanded="false">${ARROW}<span>Read ${esc(prettyRef(l.ref))}</span></button>
-      <div class="excerpt" id="ex-${ins.id}-${k}" hidden></div>
-    </div>`).join('');
-  const trRows = ['WEB','KJV','ASV'].map(t => `<p class="tr"><b>${t}</b><span>${esc(D.texts[t][tr.verse])}</span></p>`).join('');
-  const steps = [
-    ['Who’s speaking, and when', dots(d.situation.map(c => c.grade)), d.situation.map(claim).join('')],
-    [`Connected passages (${ins.links.length})`, dots(ins.links.map(l => l.grade)), links],
-    ['Translations', dots(tr.notes.map(n => n.grade)), `${trRows}<p class="verdict">${esc(tr.verdict)}</p>${tr.notes.map(claim).join('')}`],
-    ['Original language', d.original.needed ? dots([d.original.grade]) : '<span class="kind">Not needed here</span>', `<p class="claim">${d.original.needed ? grade(d.original.grade) : ''}${esc(d.original.text)}</p>${d.original.sources ? `<p class="reading">Source: ${d.original.sources.map(esc).join(' \u00B7 ')}</p>` : ''}`],
-    ['Sources & limits', dots(ins.evidence.map(e => e.grade)), `
-      ${ins.evidence.map(e => `<p class="claim">${grade(e.grade)}${esc(e.line)} <span class="refs">${esc(prettyRef(e.ref))}</span></p>`).join('')}
-      ${ins.views && ins.views.split ? `<div class="views"><p class="split"><span class="dot"></span>Readings differ</p><h4>${esc(ins.views.question)}</h4>
-        ${ins.views.items.map(v => `<p><b>${esc(v.label)}.</b> ${esc(v.text)}</p>`).join('')}<p class="muted">${esc(ins.views.note)}</p></div>` : ''}
-      <p class="reading">Checked against: ${ins.checked.compared.map(esc).join(' \u00B7 ')}</p>
-      <p class="reading">${esc(ins.checked.by)} \u00B7 ${esc(ins.checked.date)}</p>`]
-  ];
-  return `<div class="note" id="note-${ins.id}" role="region" aria-label="Note on ${esc(ins.ref)}">
-    <div class="note-head"><p class="hook">${esc(ins.hook)}</p><button class="x" data-close="${ins.id}" aria-label="Close note">${XSVG}</button></div>
-    <p class="summary">${esc(ins.summary)}</p>
-    <div class="steps">${steps.map((s, k) => `<div class="step">
-      <button class="row" aria-expanded="false" data-step="${ins.id}:${k}"><span class="n">${k + 1}</span><span class="t">${s[0]}</span>${s[1]}${CHEV}</button>
-      <div class="panel" id="panel-${ins.id}-${k}" hidden>${s[2]}</div></div>`).join('')}</div>
-  </div>`;
+function sourcesHTML(n){
+  const links = n.links.map(l => `
+    <section>
+      <div><span class="ref">${esc(prettyRef(l.ref))}</span> <span class="kind">· ${esc(D.linkKinds[l.kind])}</span></div>
+      <p class="reason">${esc(l.reason)}</p>
+      <div class="excerpt">${expand(l.ref).map(r => `<p><sup>${r.split(':')[1]}</sup> ${markup(D.texts.WEB[r], l.highlight[r])}</p>`).join('')}</div>
+    </section>`).join('');
+  const orig = n.detail.original.sources ? `Greek/Hebrew: ${n.detail.original.sources.map(esc).join(', ')}. ` : '';
+  return `${links}
+    <section class="limits"><h3>What the text says, and what it doesn’t</h3>${n.limits.map(x => `<p>${esc(x)}</p>`).join('')}</section>
+    <section><p class="fine">Bible text: WEB, public domain. ${orig}Draft notes, ${esc(n.checked.date)}.</p></section>`;
 }
 
-function setSourceHighlight(ins, phrases){
-  const anc = document.querySelector(`.mark[data-note="${ins.id}"] .anc`);
-  if (!anc) return;
-  const verseEl = anc.closest('.v');
-  // clear previous source highlights in this verse
+function setSourceHighlight(n, on){
+  const verseEl = document.getElementById('verse-' + n.verse);
   verseEl.querySelectorAll('mark.hl').forEach(m => m.replaceWith(...m.childNodes));
   verseEl.normalize();
-  if (!phrases.length) return;
-  const walk = (root) => { // highlight inside the verse text nodes only
-    phrases.forEach(p => {
-      const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-      let n; while ((n = tw.nextNode())){
-        const i = n.data.indexOf(p); if (i < 0) continue;
-        const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + p.length);
-        const m = document.createElement('mark'); m.className = 'hl'; r.surroundContents(m); break;
-      }
-    });
-  };
-  walk(verseEl);
-  requestAnimationFrame(() => requestAnimationFrame(() => verseEl.querySelectorAll('mark.hl').forEach(m => m.classList.add('on'))));
+  if (!on) return;
+  const phrases = [...new Set(n.links.flatMap(l => l.highlightSource))];
+  phrases.forEach(p => {
+    const tw = document.createTreeWalker(verseEl, NodeFilter.SHOW_TEXT); let t;
+    while ((t = tw.nextNode())){
+      const i = t.data.indexOf(p); if (i < 0) continue;
+      const r = document.createRange(); r.setStart(t, i); r.setEnd(t, i + p.length);
+      const m = document.createElement('mark'); m.className = 'hl'; r.surroundContents(m); break;
+    }
+  });
 }
+function lightUp(root){ requestAnimationFrame(() => requestAnimationFrame(() => root.querySelectorAll('mark.hl').forEach((m, i) => setTimeout(() => m.classList.add('on'), i * 150)))); }
 
 function closeNote(){
   if (!openId) return;
-  const ins = D.insights.find(i => i.id === openId);
+  const n = ins(openId);
   document.getElementById('slot-' + openId).innerHTML = '';
-  const b = document.querySelector(`.mark[data-note="${openId}"]`); b.setAttribute('aria-expanded', 'false');
-  setSourceHighlight(ins, []);
+  document.querySelector(`.mark[data-note="${openId}"]`).setAttribute('aria-expanded', 'false');
+  setSourceHighlight(n, false);
   openId = null;
 }
 function openNote(id, scroll){
   if (openId === id) return;
   closeNote();
-  const ins = D.insights.find(i => i.id === id);
-  document.getElementById('slot-' + id).innerHTML = noteHTML(ins);
+  const n = ins(id);
+  document.getElementById('slot-' + id).innerHTML = `
+    <div class="note" id="note-${id}" role="region" aria-label="Note on ${esc(n.ref)}">
+      <div class="note-head"><p class="easy">${esc(n.easy)}</p><button class="x" data-close="${id}" aria-label="Close">${XSVG}</button></div>
+      <button class="src-btn" data-src="${id}" aria-expanded="false" aria-controls="src-${id}">${ARROW}<span>View sources</span></button>
+      <div class="sources" id="src-${id}" hidden></div>
+    </div>`;
   document.querySelector(`.mark[data-note="${id}"]`).setAttribute('aria-expanded', 'true');
   openId = id;
-  if (scroll) document.getElementById('verse-' + ins.verse).scrollIntoView({behavior:'smooth', block:'start'});
-}
-function toggle(btn, el){ const on = btn.getAttribute('aria-expanded') !== 'true'; btn.setAttribute('aria-expanded', on); el.hidden = !on; return on; }
-
-function jump(target){
-  if (target.startsWith('verse:') || target.startsWith('verse-')){
-    const el = document.getElementById('verse-' + target.slice(6)); if (!el) return;
-    el.scrollIntoView({behavior:'smooth', block:'center'});
-    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
-  } else if (D.insights.some(i => i.id === target)) openNote(target, true);
+  if (scroll) document.getElementById('verse-' + n.verse).scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 app.addEventListener('click', e => {
@@ -307,24 +193,17 @@ app.addEventListener('click', e => {
   if (!t){ const v = e.target.closest('.v.has-note'); if (v) t = v.querySelector('[data-note]'); }
   if (!t) return;
   if (t.dataset.note){ openId === t.dataset.note ? closeNote() : openNote(t.dataset.note, false); }
-  else if (t.dataset.close){ const v = D.insights.find(i => i.id === t.dataset.close).verse; closeNote(); document.getElementById('verse-' + v).scrollIntoView({block:'nearest'}); }
-  else if (t.dataset.step){ const [id, k] = t.dataset.step.split(':'); toggle(t, document.getElementById(`panel-${id}-${k}`)); }
-  else if (t.dataset.link){
-    const [id, k] = t.dataset.link.split(':'), ins = D.insights.find(i => i.id === id), l = ins.links[k];
-    const ex = document.getElementById(`ex-${id}-${k}`);
-    const on = toggle(t, ex);
-    t.querySelector('span').textContent = (on ? 'Hide ' : 'Read ') + prettyRef(l.ref);
-    if (on){
-      ex.innerHTML = expand(l.ref).map(r => `<p><sup>${r.split(':')[1]}</sup> ${markup(D.texts.WEB[r], l.highlight[r])}</p>`).join('')
-        + `<p class="src">${esc(prettyRef(l.ref))} · WEB · public domain</p>`;
-      requestAnimationFrame(() => requestAnimationFrame(() => ex.querySelectorAll('mark.hl').forEach((m, i) => setTimeout(() => m.classList.add('on'), i * 180))));
-      setSourceHighlight(ins, l.highlightSource);
-    } else setSourceHighlight(ins, []);
+  else if (t.dataset.close){ const v = ins(t.dataset.close).verse; closeNote(); document.getElementById('verse-' + v).scrollIntoView({block:'nearest'}); }
+  else if (t.dataset.src){
+    const id = t.dataset.src, n = ins(id), box = document.getElementById('src-' + id);
+    const on = t.getAttribute('aria-expanded') !== 'true';
+    t.setAttribute('aria-expanded', on); box.hidden = !on;
+    t.querySelector('span').textContent = on ? 'Hide sources' : 'View sources';
+    if (on){ box.innerHTML = sourcesHTML(n); setSourceHighlight(n, true); lightUp(box); lightUp(document.getElementById('verse-' + n.verse)); }
+    else setSourceHighlight(n, false);
   }
-  else if (t.dataset.check){ toggle(t, document.getElementById('check-' + t.dataset.check)); }
-  else if (t.dataset.go){ jump(t.dataset.go); }
 });
-window.addEventListener('hashchange', () => { if (D && location.hash.length > 1) jump(location.hash.slice(1)); });
+window.addEventListener('hashchange', () => { if (D && ins(location.hash.slice(1))) openNote(location.hash.slice(1), true); });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeNote();
   if ((e.key === 'Enter' || e.key === ' ') && e.target.dataset && e.target.dataset.note){ e.preventDefault(); e.target.click(); }

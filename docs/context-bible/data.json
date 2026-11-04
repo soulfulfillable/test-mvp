@@ -209,7 +209,12 @@
      "KJV whole-Bible search: 'Nazareth' (NT only), 'Bethlehem' in John (7:42 only)",
      "WEB Matthew 2:5-6"
     ]
-   }
+   },
+   "easy": "Philip has just said Jesus is the one Moses and the prophets wrote about — then adds that he's from Nazareth. Nathanael can't make those fit: a promised figure from a village the Old Testament never mentions. Later in John (7:41-42), a crowd asks the same kind of question about where the Messiah should come from.",
+   "limits": [
+    "In the text: Philip's claim and Nathanael's question sit side by side (1:45-46), and the crowd's question in 7:41-42.",
+    "Not in the text: that Nathanael was thinking of the Bethlehem prophecy (Micah 5:2). John doesn't say so; some readers connect the two scenes that way."
+   ]
   },
   {
    "id": "v47",
@@ -343,7 +348,12 @@
     "corrections": [
      "Draft said “Esau says” for Genesis 27:35 — the speaker is Isaac. Fixed after Codex review."
     ]
-   }
+   },
+   "easy": "Nathanael has just doubted Jesus out loud, and Jesus praises him for it: an Israelite with no deceit — nothing hidden, no pretending. Both words point back to Jacob, who was renamed “Israel” and who took his brother's blessing “with deceit” (Genesis 27:35). John's Greek word for “deceit” is the same one the Greek Old Testament uses there.",
+   "limits": [
+    "In the text: “Israel” is Jacob's new name (Genesis 32:28), and Isaac says Jacob came “with deceit” (Genesis 27:35). The Greek word matches John 1:47.",
+    "Not in the text: that Jesus meant a contrast with Jacob. John doesn't say; it's one way readers take it."
+   ]
   },
   {
    "id": "v51",
@@ -455,7 +465,12 @@
      "SBLGNT John 1:50 (opsē, singular) / 1:51 (opsesthe, hymin plural; first doubled amēn in John)",
      "WLC Genesis 28:12 (bô = preposition + 3rd masc. sing. suffix)"
     ]
-   }
+   },
+   "easy": "Jesus promises Nathanael — and now all of them, because the Greek “you” turns plural here — that they'll see more. The picture comes from Jacob's dream in Genesis 28:12: angels of God going up and down between heaven and earth. In the dream they go up and down on a stairway; here they go up and down on “the Son of Man.”",
+   "limits": [
+    "In the text: the same words, “angels of God ascending and descending,” in Genesis 28:12 and John 1:51.",
+    "Not in the text: what exactly the comparison means. John doesn't explain it; readers take Jesus as the stairway, or as the place (Bethel, “the gate of heaven”), or compare him to Jacob."
+   ]
   }
  ],
  "checks": [
