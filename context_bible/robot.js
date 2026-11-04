@@ -12,6 +12,7 @@ const server = http.createServer((q, s) => {
   const f = path.join(DOCS, decodeURIComponent(q.url.split('?')[0].split('#')[0]));
   fs.readFile(f, (e, b) => { if (e) { s.writeHead(404); s.end(); } else { s.writeHead(200, { 'content-type': types[path.extname(f)] || 'text/plain' }); s.end(b); } });
 });
+const LEAD = 'v51'; // opening question (the one with a sourced explanation)
 const log = []; let pass = 0, fail = 0;
 const ok = (c, m) => { c ? pass++ : fail++; log.push(`${c ? 'PASS' : 'FAIL'} ${m}`); };
 
@@ -42,22 +43,24 @@ async function run(browser, base, name, opts, shots) {
   // lead question → See why → explanation → View sources (with checked commentaries) → hide
   ok(await page.locator('#q').isVisible() && (await page.locator('#q').innerText()).endsWith('?'), `[${name}] first screen starts with a question`);
   await tapEl('.lead .see');
-  ok(await page.locator('#note-v46').isVisible(), `[${name}] lead: See why opens the explanation`);
-  const leadEasy = await page.locator('#note-v46 .easy').innerText();
+  ok(await page.locator(`#note-${LEAD}`).isVisible(), `[${name}] lead: See why opens the explanation`);
+  const leadEasy = await page.locator(`#note-${LEAD} .easy`).innerText();
   ok(leadEasy.length > 80 && leadEasy.length < 560, `[${name}] lead: one short paragraph (${leadEasy.length} chars)`);
   if (shots) { await page.waitForTimeout(400); await page.screenshot({ path: path.join(OUT, `${name}-2-explanation.png`) }); }
-  await tapEl('#note-v46 .src-btn'); await page.waitForTimeout(1600);
-  const cited = await page.locator('#src-v46 .excerpt p').count(), coms = await page.locator('#src-v46 .com').count();
-  ok(cited >= 2 && coms === 0, `[${name}] lead: View sources shows the cited verses (${cited}) and no unchecked commentary`);
-  if (shots) await page.locator('#note-v46').screenshot({ path: path.join(OUT, `${name}-3-sources.png`) });
-  await tapEl('#note-v46 .src-btn');
-  ok(await page.locator('#src-v46').isHidden(), `[${name}] lead: Hide sources closes`);
+  await tapEl(`#note-${LEAD} .src-btn`); await page.waitForTimeout(1600);
+  const cited = await page.locator(`#src-${LEAD} .excerpt p`).count(), coms = await page.locator(`#src-${LEAD} .com`).count();
+  const sermon = await page.locator(`#src-${LEAD} .com a[href^="https://gospelinlife.com/sermon/"]`).count();
+  ok(cited >= 2 && coms === 1 && sermon === 1, `[${name}] lead: View sources shows Genesis 28:12 + John 1:51 (${cited} verses) and the one sermon source`);
+  if (shots) await page.locator(`#note-${LEAD}`).screenshot({ path: path.join(OUT, `${name}-3-sources.png`) });
+  await tapEl(`#note-${LEAD} .src-btn`);
+  ok(await page.locator(`#src-${LEAD}`).isHidden(), `[${name}] lead: Hide sources closes`);
   await tapEl('.lead .see');
-  ok(await page.locator('#note-v46').count() === 0, `[${name}] lead: Hide closes the explanation`);
-  ok(await page.locator('.mark[data-note="v46"]').count() === 0, `[${name}] verse 46 isn't marked twice`);
+  ok(await page.locator(`#note-${LEAD}`).count() === 0, `[${name}] lead: Hide closes the explanation`);
+  ok(await page.locator(`.mark[data-note="${LEAD}"]`).count() === 0, `[${name}] verse 51 isn't marked twice`);
+  ok((await page.locator('.lead .see').innerText()).includes('See why'), `[${name}] lead button says See why (sourced draft)`);
 
   let prev = null;
-  for (const id of ['v47', 'v51']) {
+  for (const id of ['v46', 'v47']) {
     const ls = await lines(id);
     // every line of the underlined phrase opens and closes the note with a real tap
     for (let k = 0; k < ls.length; k++) {
@@ -75,12 +78,12 @@ async function run(browser, base, name, opts, shots) {
     const easy = (await page.locator(`#note-${id} .easy`).innerText()).trim();
     ok(easy.length > 80 && easy.length < 520, `[${name}] ${id}: one short explanation (${easy.length} chars)`);
     ok(await page.locator(`#note-${id} button`).count() === 2, `[${name}] ${id}: only Close + View sources buttons`);
-    if (shots && id === 'v51') { await page.waitForTimeout(400); await page.screenshot({ path: path.join(OUT, `${name}-4-verse51.png`) }); }
+    if (shots && id === 'v46') { await page.waitForTimeout(400); await page.screenshot({ path: path.join(OUT, `${name}-4-verse46.png`) }); }
     await tapEl(`#note-${id} .src-btn`);
     await page.waitForTimeout(1600);
     const box = page.locator(`#src-${id}`);
     const ex = await box.locator('.excerpt p').count(), hl = await box.locator('mark.hl.on').count();
-    ok(await box.isVisible() && ex >= 2 && (id !== 'v51' || hl >= 1) && await box.locator('.com').count() === 0,
+    ok(await box.isVisible() && ex >= 2 && true && await box.locator('.com').count() === 0,
       `[${name}] ${id}: View sources shows passages (${ex} verses, ${hl} highlighted) + what the text does/doesn't say`);
     const sw = await page.evaluate(() => document.documentElement.scrollWidth);
     ok(sw <= opts.viewport.width, `[${name}] ${id}: no sideways scroll (${sw})`);

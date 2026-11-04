@@ -162,9 +162,16 @@ function sourcesHTML(n){
   const cites = P.cite.map(ref => `
     <section>
       <div><span class="ref">${esc(prettyRef(ref))}</span> <span class="kind">\u00B7 WEB</span></div>
-      <div class="excerpt">${expand(ref).map(r => `<p><sup>${r.split(':')[1]}</sup> ${markup(D.texts.WEB[r], (n.links.find(l => l.highlight[r]) || {highlight:{}}).highlight[r])}</p>`).join('')}</div>
+      <div class="excerpt">${expand(ref).map(r => `<p><sup>${r.split(':')[1]}</sup> ${markup(D.texts.WEB[r], r === n.ref && P.status !== 'hold' ? [...new Set(n.links.flatMap(l => l.highlightSource))] : (n.links.find(l => l.highlight[r]) || {highlight:{}}).highlight[r])}</p>`).join('')}</div>
     </section>`).join('');
-  return `${cites}
+  const K = P.keller;
+  const sermon = K ? `
+    <section><h3>Source</h3>
+      <p class="com"><span class="ref">${esc(K.speaker)}, \u201C${esc(K.title)}\u201D</span> \u00B7 ${esc(K.date)} \u00B7 ${esc(K.scripture)}.
+      ${K.parts.map(x => `${esc(x.at)} ${esc(x.about)}`).join('; ')}. <a href="${esc(K.url)}" target="_blank" rel="noopener">Sermon page</a></p>
+      <p class="fine">Explanation is a paraphrase, not a quote. ${esc(K.status)} Review draft.</p>
+    </section>` : '';
+  return `${cites}${sermon}
     <section><p class="fine">${P.status === 'hold' ? 'This note sticks to what the text says. A fuller explanation is on hold until its sources are checked. ' : ''}Bible text: World English Bible, public domain.</p></section>`;
 }
 

@@ -217,7 +217,7 @@
     "cite": [
      "John 1:45-46"
     ],
-    "holdReason": "Waiting for Tim Keller source check (see board/context-bible.md)."
+    "holdReason": "Keller's sermon (same transcript, 11:31–12:52) reads Nathanael's remark as scorn for a backwater town, not as awareness of the Bethlehem prophecy. Not yet written up; held."
    },
    "heldEarlyCommentaries": [
     {
@@ -530,13 +530,39 @@
     "commentaries": "Opened and read: HistoricalChristianFaith/Commentaries-Database @ 9da765b (public-domain translations of early commentaries)."
    },
    "public": {
-    "status": "hold",
-    "text": "Jesus says this right after telling Nathanael he will see “greater things.” The words “angels of God ascending and descending” also appear in Jacob's dream in Genesis 28:12 — you can read both below. What Jesus means by the comparison isn't explained here.",
+    "status": "draft",
+    "text": "Jesus is pointing back to a dream in Genesis 28. Jacob — the ancestor of the people of Israel — saw a stairway joining earth and heaven, with angels of God going up and down on it. Here Jesus puts himself where the stairway was. In a sermon on this passage, Tim Keller reads it as Jesus saying that he himself brings people to God — not simply that he can show them the way.",
     "cite": [
-     "John 1:50-51",
-     "Genesis 28:12"
+     "Genesis 28:12",
+     "John 1:51"
     ],
-    "holdReason": "Waiting for Tim Keller source check (see board/context-bible.md)."
+    "keller": {
+     "title": "You Shall See Heaven Open",
+     "speaker": "Tim Keller",
+     "date": "December 20, 2009",
+     "scripture": "John 1:43-51",
+     "duration": "26:08",
+     "url": "https://gospelinlife.com/sermon/you-shall-see-heaven-open/",
+     "parts": [
+      {
+       "at": "02:26–05:05",
+       "about": "Jacob's dream in Genesis 28"
+      },
+      {
+       "at": "09:07–11:31",
+       "about": "Jesus as the connection between heaven and earth"
+      }
+     ],
+     "status": "Transcript read; official audio not yet checked."
+    },
+    "evidence": {
+     "text": [
+      "Genesis 28:12 and John 1:51 share the words “angels of God ascending and descending” (WEB, both shown).",
+      "Genesis 28:12: “on it” (the stairway); John 1:51: “on the Son of Man”."
+     ],
+     "keller": "Keller's reading: Jesus does not only point to a way to God; heaven and earth meet in him (transcript 09:07–11:31). Paraphrase, not a quote.",
+     "label": "review draft — transcript read (third-party PDF), official audio not verified"
+    }
    },
    "heldEarlyCommentaries": [
     {
@@ -662,11 +688,11 @@
   "sub": "See which parts you can find in the text, and which parts are explanation added to it."
  },
  "lead": {
-  "insight": "v46",
-  "question": "Why did Nathanael ask if anything good could come from Nazareth?",
+  "insight": "v51",
+  "question": "What did Jesus mean by “angels … ascending and descending on the Son of Man”?",
   "context": [
-   45,
-   46
+   50,
+   51
   ]
  },
  "sourcePolicy": {

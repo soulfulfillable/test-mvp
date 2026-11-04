@@ -2,8 +2,7 @@
 
 ## 🔁 이어받기
 - 마지막 저장: 2026-11-04 (개발 세션) · 작업 브랜치: `claude/context-bible` (main 반영)
-- 방금 끝낸 것: 켈러 기준 적용 → 46·47·51 **모두 보류(본문 요약만, 해석 없음)**. **핵심 목표("맥락 이해 돕기")는 아직 미완** — 켈러 근거 해설은 하나도 없다. 보류 중엔 버튼을 "See why" 대신 **"What the text says"** 로(이유를 약속하지 않게). 켈러 원자료 기록 `context_bible/sources/keller.md`("Nazareth?!" URL 확정, 날짜 2006-12-24 vs 2010-12-25 충돌 미해결, 아무도 아직 안 들음 → 근거 아님). 오디오는 이 환경에서 못 받음(gospelinlife·애플 팟캐스트·피드 호스트 전부 차단).
-- ⚠️ 사용자 확인 필요: 다운로드가 "개인 청취 한정" 약관 뒤에 있다는 검색 요약이 있음. 앱 콘텐츠용 요약에 써도 되는지(인용·요약 범위) 사용자 판단 필요 — 약관 원문 확인도 Codex 요청에 포함.
+- 방금 끝낸 것: **요 1:51 리뷰 초안 1개(첫 화면 질문)** — 켈러 "You Shall See Heaven Open"(2009-12-20, 요 1:43-51) 근거. 공식 페이지는 Codex 가 읽음, 제3자 녹취 PDF 는 Codex·이 세션 둘 다 읽음(02:26–05:05 야곱의 꿈, 09:07–11:31 예수 자신이 하늘과 땅의 연결). **공식 오디오와 타임스탬프 대조는 아직** → 상태 "transcript read, audio not verified", 최종 아님. 46·47 은 계속 보류(46: 같은 녹취 11:31–12:52 에서 켈러는 '하찮은 시골 마을 경멸'로 읽음, 베들레헴 예언 인식 아님 — 아직 화면에 안 씀). 핵심 목표는 1개만 초안, 나머지 미완. 로봇 91/91.
 - 진행 중이던 것: 없음
 - 다음 할 일:
   0. **Codex 가 아래 '🖱️ Codex 에게' 를 열어 켈러 원문 대목을 리포에 적어 주면** → 그 대목 범위 안에서만 46(그리고 근거가 있으면 47·51) 해설 재작성, View sources 에 설교 제목·URL·타임스탬프
@@ -17,6 +16,11 @@
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/context-bible.md 와 plans/context-bible.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. 범위 밖(피드·결제·제출·자동 생성)은 하지 말 것.`
 
 ## 🖱️ Codex 에게 (브라우저 작업) — 켈러 원자료 (2026-11-04 갱신)
+**A0. 요 1:51 오디오 대조 (최우선)**
+- URL: https://gospelinlife.com/sermon/you-shall-see-heaven-open/
+- 할 것: Play Audio 로 **02:26–05:05**(야곱의 꿈)과 **09:07–11:31**("heaven and earth intersect upon me" — 예수 자신이 연결)이 실제 오디오의 그 시각에 있는지 확인, 어긋나면 실제 시각 기록. 11:31–12:52(나사렛) 도 확인
+- 확인할 결과: `context_bible/sources/keller.md` 의 상태를 "transcript read, audio verified (YYYY-MM-DD)" 로 바꾸고 실제 시각 기록
+
 **A. "Nazareth?!" 요 1:46 대목**
 - URL: https://gospelinlife.com/sermon/nazareth/
 - 로그인 계정: 필요 없음. 결제 요구 시 멈추고 사용자에게 알림(구매 금지)

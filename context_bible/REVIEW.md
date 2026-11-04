@@ -67,6 +67,16 @@
 - 화면에서 뺀 것: 교부·아퀴나스 출처, 요 7:41-42·미 5:2·창 27:35·32:28 연결 이유(③), 'one possible reading' 류 해석 문장.
 - 다음: Codex 가 켈러 원문 대목을 확인해 주면 그 범위 안에서만 해설 복원.
 
+## John 1:51 — review draft (11-04, Keller source)
+Status: **review draft, not final.** Evidence: "You Shall See Heaven Open" (Tim Keller, 20 Dec 2009, John 1:43–51) — official page read by Codex; third-party transcript PDF read by Codex and by this session. **Official audio not yet checked** against the transcript timestamps.
+| Sentence on screen | Kind | Checked against |
+|---|---|---|
+| Jesus is pointing back to a dream in Genesis 28. | text echo | Gen 28:12 / John 1:51 same words (WEB) ✅ |
+| Jacob — the ancestor of the people of Israel — saw a stairway joining earth and heaven, with angels of God going up and down on it. | text | Gen 28:12 (stairway, top reached heaven, angels ascending/descending) ✅; "ancestor of Israel" — Gen 32:28 + transcript 02:26 ✅ |
+| Here Jesus puts himself where the stairway was. | text echo (on it → on the Son of Man) | Gen 28:12 "on it" / John 1:51 "on the Son of Man" ✅ (Son of Man = Jesus as Keller reads, "on me") |
+| Tim Keller reads it as Jesus saying that he himself brings people to God — not simply that he can show them the way. | Keller's reading (paraphrase) | transcript 09:07–11:31 ✅ (audio not verified) |
+No original-language claims. 1:46 and 1:47 still on hold (1:46: Keller's 2009 transcript 11:31–12:52 reads it as scorn for a backwater town, not Bethlehem awareness — not yet written up).
+
 ## 남은 한계 (출시 전 사람 검수 필요)
 - 사람(신학 배경) 검수 아직 없음 — 화면 하단에 "draft, not yet checked by a scholar" 표시.
 - 견해 두 개씩은 대표성을 주석서로 확인하지 못했다. 출시 전 공개 도메인 주석(예: 19세기) 또는 사용 허가 받은 현대 주석의 **해당 위치**를 붙이거나, 지금처럼 '읽기'로만 둔다.
