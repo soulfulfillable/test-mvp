@@ -1,7 +1,7 @@
 # 🧭 기획 파트너 — 게시판
 
 ## 🔁 이어받기 (이 세션이 막히면 다른 계정에서 기획 파트너를 새로 연다)
-- **11-04 장기 목표 기록**: Treasurefield Studio = 예수님의 사랑을 전하는 스튜디오. 사례(Scroll The Bible 소개 게시물) 분석과 작은 검증 방향 3개(A 마음에 맞는 한 구절 / B 1분 성경 이야기 / C 스와이프+설명) = `plans/faith-direction.md`. 사용자 선택 대기. Popcorn 삭제(11-04). Mole Mash 출시 대기 별도.
+- **11-04 장기 목표 기록**: Treasurefield Studio = 예수님의 사랑을 전하는 스튜디오. 사례(Scroll The Bible 소개 게시물) 분석과 작은 검증 방향 3개(A 마음에 맞는 한 구절 / B 1분 성경 이야기 / C 스와이프+설명) = `plans/faith-direction.md`. → **11-04 수정: A 추천 철회, "맥락을 따라가는 성경 읽기 동반자"로 구체화(`plans/context-bible.md`, 요 1:46 화면 흐름·MVP 범위). 사용자 MVP 진행 결정 대기.** Popcorn 삭제(11-04). Mole Mash 출시 대기 별도.
 - 마지막 저장: 2026-10-26 · 기억은 전부 `PRODUCT.md`(방향·포트폴리오·백로그·결정 로그·주간 점검), `plans/`, `board/`, `DESIGN.md`, `PLAYBOOK.md` 에 있다.
 - 최근: 2026-10-19 주간 점검(`PRODUCT.md` 8장). 속도계 5.6 해결 전 새 제출 보류, How Things Work 진행 중, **조직 플랜 취소 → 개인 계정 이전**(`ops/sessions.md` 핀 순서).
 - 10-20 추가 결정: How Things Work 를 **"만져서 아는 앱"(A)** 으로 — 글 줄이고 직접 작동시키기·그림 퀴즈, 레슨 2~3개 웹에서 먼저 느낌. **Google Play 도 이 앱으로**(개인 계정 → 비공개 테스트 12명×14일, iOS 베타와 묶음). `PRODUCT.md` 결정 로그.
