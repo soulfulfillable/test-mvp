@@ -1,0 +1,260 @@
+{
+  "id": "john1_43-51",
+  "passage": { "ref": "John 1:43-51", "book": "John", "chapter": 1, "from": 43, "to": 51, "title": "Philip and Nathanael" },
+  "baseTranslation": "WEB",
+  "translations": {
+    "WEB": { "name": "World English Bible", "license": "Public domain", "source": "https://github.com/TehShrike/world-english-bible (json/*.json)" },
+    "KJV": { "name": "King James Version (1769)", "license": "Public domain", "source": "https://github.com/scrollmapper/bible_databases (formats/json/KJV.json)" },
+    "ASV": { "name": "American Standard Version (1901)", "license": "Public domain", "source": "https://github.com/scrollmapper/bible_databases (formats/json/ASV.json)" }
+  },
+  "grades": {
+    "text": { "label": "In the text", "meaning": "The verse itself says this. You can read it right here." },
+    "link": { "label": "Text to text", "meaning": "Two passages connect in wording or theme. You can open both and check. A connection is not proof that both writers meant the same thing." },
+    "view": { "label": "Interpretation", "meaning": "A reading or background that commentators offer. The verse does not state it, and views can differ." }
+  },
+  "linkKinds": {
+    "quote": "Direct quotation",
+    "wording": "Same wording",
+    "theme": "Same theme",
+    "reading": "Link made by interpreters"
+  },
+  "insights": [
+    {
+      "id": "v46",
+      "ref": "John 1:46",
+      "verse": 46,
+      "anchor": "Can any good thing come out of Nazareth?",
+      "hook": "Why does Nathanael's first question focus on Nazareth?",
+      "summary": "Nathanael questions Jesus because of where he comes from. Later in John, others raise questions about where the Messiah should come from — a related scene worth reading together.",
+      "detail": {
+        "situation": [
+          { "grade": "text", "text": "Nathanael is answering Philip, who has just said: “We have found him, of whom Moses in the law, and the prophets, wrote: Jesus of Nazareth, the son of Joseph.”", "refs": ["John 1:45"] },
+          { "grade": "text", "text": "So one sentence holds two things: a claim about what Scripture promised, and an ordinary hometown. Nathanael's question is about the hometown.", "refs": ["John 1:45", "John 1:46"] },
+          { "grade": "text", "text": "Nathanael himself was from Cana in Galilee.", "refs": ["John 21:2"] },
+          { "grade": "text", "text": "Philip doesn't argue. He answers, “Come and see.”", "refs": ["John 1:46"] }
+        ],
+        "translation": {
+          "verse": "John 1:46",
+          "changesMeaning": false,
+          "verdict": "Here the translations don't change the meaning.",
+          "notes": [
+            { "grade": "text", "text": "KJV's “Can there any good thing” is older English word order for the same question." }
+          ]
+        },
+        "original": {
+          "needed": false,
+          "text": "Nothing hidden here. The Greek (ti agathon) is an everyday way to say “anything good.” This verse isn't a place to look for a secret word meaning.",
+          "grade": "text"
+        }
+      },
+      "links": [
+        {
+          "ref": "John 7:40-52",
+          "kind": "theme",
+          "grade": "link",
+          "reason": "In John 7 a crowd argues about Jesus: “Does the Christ come out of Galilee?” and points to Bethlehem. Both scenes set where Jesus comes from against what people expected from Scripture.",
+          "caution": "Not a quotation. It does not prove Nathanael had the same thought — it's a related scene John lets you read alongside.",
+          "highlightSource": ["come out of Nazareth"],
+          "highlight": { "John 7:41": ["does the Christ come out of Galilee?"], "John 7:42": ["from Bethlehem, the village where David was"], "John 7:52": ["no prophet has arisen out of Galilee"] }
+        },
+        {
+          "ref": "Micah 5:2",
+          "kind": "reading",
+          "grade": "link",
+          "reason": "John 7:42 says “the Scripture” names Bethlehem but doesn't say where. Micah 5:2 is the passage readers identify, and Matthew 2:5-6 quotes it for this very point.",
+          "caution": "Micah is linked to John 7:42, not to 1:46 directly.",
+          "highlightSource": [],
+          "highlight": { "Micah 5:2": ["Bethlehem Ephrathah", "one will come out to me that is to be ruler in Israel"] }
+        },
+        {
+          "ref": "John 1:39",
+          "kind": "wording",
+          "grade": "link",
+          "reason": "“Come and see” is what Jesus said to the first two disciples a few verses earlier. Philip answers doubt with the same invitation, not with an argument.",
+          "caution": "",
+          "highlightSource": ["Come and see"],
+          "highlight": { "John 1:39": ["Come, and see"] }
+        }
+      ],
+      "evidence": [
+        { "grade": "text", "ref": "John 1:45-46", "line": "Philip's claim (“Moses … and the prophets wrote”) and Nathanael's question about Nazareth sit side by side." },
+        { "grade": "text", "ref": "John 21:2", "line": "Nathanael was from Cana in Galilee." },
+        { "grade": "link", "ref": "John 7:41-42, 52", "line": "Others in John question a Messiah from Galilee and point to Bethlehem." },
+        { "grade": "link", "ref": "Micah 5:2", "line": "The Bethlehem passage John 7:42 most likely refers to." },
+        { "grade": "view", "ref": "Commentaries", "line": "Whether Nathanael was thinking of Micah 5:2 is interpretation. John 1:46 does not say so." }
+      ],
+      "views": {
+        "split": true,
+        "question": "Was Nathanael thinking of the Bethlehem prophecy?",
+        "items": [
+          { "label": "A small-town doubt", "text": "Many commentators read 1:46 as doubt about an obscure village. They note that Nazareth is never named in the Old Testament and seems to have been small." },
+          { "label": "John's irony", "text": "Some read 1:46 and 7:41-42 as deliberate irony. John never tells the Bethlehem birth story (Matthew 2 and Luke 2 do), so readers who know it see what the speakers miss." }
+        ],
+        "note": "Either way, John 1:46 itself does not say Nathanael had Micah 5:2 in mind."
+      },
+      "checked": { "by": "Claude (draft) — human review pending", "date": "2026-11-04", "compared": ["WEB/KJV/ASV text files listed under translations", "John 1:39, 1:45, 7:40-52, 21:2; Micah 5:2"] }
+    },
+    {
+      "id": "v47",
+      "ref": "John 1:47",
+      "verse": 47,
+      "anchor": "an Israelite indeed, in whom is no deceit",
+      "hook": "Why call him an Israelite “in whom is no deceit”?",
+      "summary": "Jesus praises Nathanael's honesty right after Nathanael's blunt doubt. “Israel” and “deceit” both belong to the story of Jacob — the story this passage returns to in verse 51.",
+      "detail": {
+        "situation": [
+          { "grade": "text", "text": "Jesus says this as Nathanael is walking toward him — just after Nathanael openly doubted him.", "refs": ["John 1:46", "John 1:47"] },
+          { "grade": "text", "text": "Nathanael is surprised that Jesus knows him: “How do you know me?”", "refs": ["John 1:48"] }
+        ],
+        "translation": {
+          "verse": "John 1:47",
+          "changesMeaning": false,
+          "verdict": "“Deceit” and “guile” mean the same thing here.",
+          "notes": [
+            { "grade": "text", "text": "One thing the translations do change: whether you can see the echo. WEB uses “deceit” in both John 1:47 and Genesis 27:35. ASV uses “guile” in both. KJV says “guile” here but “subtilty” in Genesis, so the echo disappears.", "refs": ["Genesis 27:35"] }
+          ]
+        },
+        "original": {
+          "needed": true,
+          "text": "The Greek word for “deceit” here is dolos. The ancient Greek translation of Genesis (the Septuagint) uses the same word in Genesis 27:35, where Esau says Jacob came “with deceit.” Genesis was first written in Hebrew, so this word link runs through that Greek translation.",
+          "grade": "link"
+        }
+      },
+      "links": [
+        {
+          "ref": "Genesis 27:35-36",
+          "kind": "wording",
+          "grade": "link",
+          "reason": "Esau says Jacob “came with deceit” and took his blessing. It is the same word Jesus uses about Nathanael (see Original language).",
+          "caution": "Whether Jesus meant a contrast with Jacob is interpretation — John 1:47 doesn't say so.",
+          "highlightSource": ["no deceit"],
+          "highlight": { "Genesis 27:35": ["came with deceit"], "Genesis 27:36": ["Jacob"] }
+        },
+        {
+          "ref": "Genesis 32:28",
+          "kind": "theme",
+          "grade": "link",
+          "reason": "“Israel” is the new name given to Jacob. So “an Israelite in whom is no deceit” uses two words tied to Jacob's story.",
+          "caution": "",
+          "highlightSource": ["an Israelite"],
+          "highlight": { "Genesis 32:28": ["Jacob, but Israel"] }
+        }
+      ],
+      "evidence": [
+        { "grade": "text", "ref": "John 1:46-48", "line": "The praise comes right after Nathanael's open doubt." },
+        { "grade": "link", "ref": "Genesis 27:35", "line": "Same word for “deceit” (Greek dolos in the Septuagint)." },
+        { "grade": "link", "ref": "Genesis 32:28", "line": "“Israel” is Jacob's new name." },
+        { "grade": "view", "ref": "Commentaries", "line": "Reading 1:47 as a deliberate contrast with Jacob is a commentators' view." }
+      ],
+      "views": {
+        "split": true,
+        "question": "Is Jesus contrasting Nathanael with Jacob?",
+        "items": [
+          { "label": "A contrast with Jacob", "text": "Many commentators hear one: Jacob, who became “Israel,” was known for deceit; here is an Israelite without it. They point to verse 51's allusion to Jacob's dream as support." },
+          { "label": "Plain praise", "text": "Others read it simply as praise for an honest, straightforward man — the same man who just asked his blunt question — with no deliberate Jacob reference." }
+        ],
+        "note": "The word links are checkable. The intent behind them is not stated."
+      },
+      "checked": { "by": "Claude (draft) — human review pending", "date": "2026-11-04", "compared": ["WEB/KJV/ASV John 1:47, Genesis 27:35-36, 32:28", "Septuagint Genesis 27:35 wording (from memory — confirm against a printed edition before release)"] }
+    },
+    {
+      "id": "v51",
+      "ref": "John 1:51",
+      "verse": 51,
+      "anchor": "the angels of God ascending and descending on the Son of Man",
+      "hook": "Where have we heard “angels ascending and descending” before?",
+      "summary": "These words match Jacob's dream at Bethel (Genesis 28:12) almost exactly. But where Genesis says the angels go up and down “on it” — the stairway — Jesus says “on the Son of Man.”",
+      "detail": {
+        "situation": [
+          { "grade": "text", "text": "Jesus has just told Nathanael, “You will see greater things than these!” Verse 51 continues that promise.", "refs": ["John 1:50"] },
+          { "grade": "text", "text": "The “you” changes. In 1:50 Jesus speaks to Nathanael alone; in 1:51 it is plural — “I tell you all.” The promise widens beyond Nathanael.", "refs": ["John 1:50", "John 1:51"] }
+        ],
+        "translation": {
+          "verse": "John 1:51",
+          "changesMeaning": false,
+          "verdict": "The wording differs, but the meaning stays the same.",
+          "notes": [
+            { "grade": "text", "text": "The older “ye” (KJV, ASV) shows what modern “you” hides: it's plural. WEB adds “all” to show the same thing." },
+            { "grade": "text", "text": "ASV has no “hereafter.” Ancient Greek manuscripts differ on that word; the promise itself is the same." }
+          ]
+        },
+        "original": {
+          "needed": true,
+          "text": "In Genesis 28:12 the Hebrew word translated “on it” (bo) can also mean “on him.” Translations read “on it,” the stairway. Some interpreters notice this when they read John 1:51, where the angels are “on the Son of Man.” Also: “Most certainly, I tell you” is a doubled “Amen, amen” in Greek — the first of many in John.",
+          "grade": "text"
+        }
+      },
+      "links": [
+        {
+          "ref": "Genesis 28:10-17",
+          "kind": "wording",
+          "grade": "link",
+          "reason": "“The angels of God … ascending and descending” appears in Genesis 28:12, in Jacob's dream at Bethel — the place Jacob calls “the gate of heaven.”",
+          "caution": "The shared wording is in the text. What Jesus means by it is where readings differ (see Sources & limits).",
+          "highlightSource": ["the angels of God ascending and descending"],
+          "highlight": { "Genesis 28:12": ["the angels of God were ascending and descending on it"], "Genesis 28:17": ["the gate of heaven"] }
+        }
+      ],
+      "evidence": [
+        { "grade": "text", "ref": "John 1:50-51", "line": "Singular “you” in 1:50, plural in 1:51." },
+        { "grade": "link", "ref": "Genesis 28:12", "line": "Same wording: angels of God ascending and descending." },
+        { "grade": "view", "ref": "Commentaries", "line": "Whether the Son of Man stands for the stairway, the place, or Jacob is interpretation." }
+      ],
+      "views": {
+        "split": true,
+        "question": "What does Jesus mean by putting “the Son of Man” in this picture?",
+        "items": [
+          { "label": "Jesus as the stairway", "text": "Many readers take it to mean Jesus himself is the link between heaven and earth — the “stairway.”" },
+          { "label": "Jesus as the place, or as Jacob", "text": "Others point out that 1:51 never says “stairway.” They compare the Son of Man to Bethel, “God's house … the gate of heaven,” or to Jacob, on whom the vision came." }
+        ],
+        "note": "Both read 1:51 alongside Genesis 28. They differ on which part of the dream Jesus is compared to."
+      },
+      "checked": { "by": "Claude (draft) — human review pending", "date": "2026-11-04", "compared": ["WEB/KJV/ASV John 1:50-51, Genesis 28:10-17", "Hebrew/Greek points from memory — confirm against an interlinear before release"] }
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "heard": "Nathanael looked down on Nazareth because of the Bethlehem prophecy.",
+      "tag": "Linked passage + interpretation",
+      "verdict": [
+        { "grade": "link", "text": "A related scene is in the text: in John 7:41-42 people question a Messiah from Galilee and point to Bethlehem.", "refs": ["John 7:40-52"] },
+        { "grade": "view", "text": "But 1:46 doesn't say Nathanael was thinking of that prophecy. That part is interpretation." }
+      ],
+      "bottom": "The preacher's link is a reasonable way to read it — but it isn't something the text states.",
+      "go": "v46"
+    },
+    {
+      "id": "c2",
+      "heard": "Jesus is the ladder in Jacob's dream.",
+      "tag": "Linked passage + interpretation",
+      "verdict": [
+        { "grade": "link", "text": "The wording of 1:51 does echo Genesis 28:12: “angels of God ascending and descending.”", "refs": ["Genesis 28:10-17"] },
+        { "grade": "text", "text": "But 1:51 never says “ladder” or “stairway.” The angels ascend and descend “on the Son of Man.”" },
+        { "grade": "view", "text": "“Jesus is the ladder” is one reading. Others compare him to Bethel or to Jacob." }
+      ],
+      "bottom": "The link is in the text. “Jesus = the ladder” is one way to read it.",
+      "go": "v51"
+    },
+    {
+      "id": "c3",
+      "heard": "Nathanael was studying the Scriptures under the fig tree.",
+      "tag": "Not in the text",
+      "verdict": [
+        { "grade": "text", "text": "The text says only that Jesus saw Nathanael under the fig tree before Philip called him." },
+        { "grade": "view", "text": "What he was doing there isn't stated. Some commentators suggest Scripture study from later Jewish traditions; others say it can't be known." }
+      ],
+      "bottom": "Fine as a guess. Not something the text tells us.",
+      "go": "verse:48"
+    }
+  ],
+  "furtherReading": {
+    "note": "Titles only. These commentaries discuss this passage; no text is quoted and no view above is attributed to a specific book. Page numbers not yet checked.",
+    "items": [
+      "Raymond E. Brown, The Gospel According to John I–XII (Anchor Bible, 1966)",
+      "D. A. Carson, The Gospel According to John (Pillar New Testament Commentary, 1991)",
+      "Craig S. Keener, The Gospel of John: A Commentary (2003)",
+      "Leon Morris, The Gospel According to John (NICNT, revised 1995)"
+    ]
+  }
+}
