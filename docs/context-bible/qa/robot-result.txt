@@ -1,8 +1,8 @@
 PASS [phone390] removed UI is gone (legend, 5 steps, sermon checks)
 PASS [phone390] first screen starts with a question
 PASS [phone390] lead: See why opens the explanation
-PASS [phone390] lead: one short paragraph (472 chars)
-PASS [phone390] lead: View sources lists 3 checked commentaries, each with a link
+PASS [phone390] lead: one short paragraph (229 chars)
+PASS [phone390] lead: View sources shows the cited verses (2) and no unchecked commentary
 PASS [phone390] lead: Hide sources closes
 PASS [phone390] lead: Hide closes the explanation
 PASS [phone390] verse 46 isn't marked twice
@@ -10,9 +10,9 @@ PASS [phone390] v47: real touch on line 1/2 opens
 PASS [phone390] v47: same spot again closes
 PASS [phone390] v47: real touch on line 2/2 opens
 PASS [phone390] v47: same spot again closes
-PASS [phone390] v47: one short explanation (448 chars)
+PASS [phone390] v47: one short explanation (204 chars)
 PASS [phone390] v47: only Close + View sources buttons
-PASS [phone390] v47: View sources shows passages (3 verses, 3 highlighted) + what the text does/doesn't say
+PASS [phone390] v47: View sources shows passages (3 verses, 0 highlighted) + what the text does/doesn't say
 PASS [phone390] v47: no sideways scroll (390)
 PASS [phone390] v47: Hide sources closes
 PASS [phone390] v51: real touch on line 1/2 opens
@@ -20,9 +20,9 @@ PASS [phone390] v51: same spot again closes
 PASS [phone390] v51: real touch on line 2/2 opens
 PASS [phone390] v51: same spot again closes
 PASS [phone390] opening v51 closes v47
-PASS [phone390] v51: one short explanation (401 chars)
+PASS [phone390] v51: one short explanation (256 chars)
 PASS [phone390] v51: only Close + View sources buttons
-PASS [phone390] v51: View sources shows passages (8 verses, 2 highlighted) + what the text does/doesn't say
+PASS [phone390] v51: View sources shows passages (3 verses, 1 highlighted) + what the text does/doesn't say
 PASS [phone390] v51: no sideways scroll (390)
 PASS [phone390] v51: Hide sources closes
 PASS [phone390] × closes
@@ -31,8 +31,8 @@ PASS [phone390] console errors: 0
 PASS [phone390-dark] removed UI is gone (legend, 5 steps, sermon checks)
 PASS [phone390-dark] first screen starts with a question
 PASS [phone390-dark] lead: See why opens the explanation
-PASS [phone390-dark] lead: one short paragraph (472 chars)
-PASS [phone390-dark] lead: View sources lists 3 checked commentaries, each with a link
+PASS [phone390-dark] lead: one short paragraph (229 chars)
+PASS [phone390-dark] lead: View sources shows the cited verses (2) and no unchecked commentary
 PASS [phone390-dark] lead: Hide sources closes
 PASS [phone390-dark] lead: Hide closes the explanation
 PASS [phone390-dark] verse 46 isn't marked twice
@@ -40,9 +40,9 @@ PASS [phone390-dark] v47: real touch on line 1/2 opens
 PASS [phone390-dark] v47: same spot again closes
 PASS [phone390-dark] v47: real touch on line 2/2 opens
 PASS [phone390-dark] v47: same spot again closes
-PASS [phone390-dark] v47: one short explanation (448 chars)
+PASS [phone390-dark] v47: one short explanation (204 chars)
 PASS [phone390-dark] v47: only Close + View sources buttons
-PASS [phone390-dark] v47: View sources shows passages (3 verses, 3 highlighted) + what the text does/doesn't say
+PASS [phone390-dark] v47: View sources shows passages (3 verses, 0 highlighted) + what the text does/doesn't say
 PASS [phone390-dark] v47: no sideways scroll (390)
 PASS [phone390-dark] v47: Hide sources closes
 PASS [phone390-dark] v51: real touch on line 1/2 opens
@@ -50,9 +50,9 @@ PASS [phone390-dark] v51: same spot again closes
 PASS [phone390-dark] v51: real touch on line 2/2 opens
 PASS [phone390-dark] v51: same spot again closes
 PASS [phone390-dark] opening v51 closes v47
-PASS [phone390-dark] v51: one short explanation (401 chars)
+PASS [phone390-dark] v51: one short explanation (256 chars)
 PASS [phone390-dark] v51: only Close + View sources buttons
-PASS [phone390-dark] v51: View sources shows passages (8 verses, 2 highlighted) + what the text does/doesn't say
+PASS [phone390-dark] v51: View sources shows passages (3 verses, 1 highlighted) + what the text does/doesn't say
 PASS [phone390-dark] v51: no sideways scroll (390)
 PASS [phone390-dark] v51: Hide sources closes
 PASS [phone390-dark] × closes
@@ -61,8 +61,8 @@ PASS [phone390-dark] console errors: 0
 PASS [desktop1280] removed UI is gone (legend, 5 steps, sermon checks)
 PASS [desktop1280] first screen starts with a question
 PASS [desktop1280] lead: See why opens the explanation
-PASS [desktop1280] lead: one short paragraph (472 chars)
-PASS [desktop1280] lead: View sources lists 3 checked commentaries, each with a link
+PASS [desktop1280] lead: one short paragraph (229 chars)
+PASS [desktop1280] lead: View sources shows the cited verses (2) and no unchecked commentary
 PASS [desktop1280] lead: Hide sources closes
 PASS [desktop1280] lead: Hide closes the explanation
 PASS [desktop1280] verse 46 isn't marked twice
@@ -70,17 +70,17 @@ PASS [desktop1280] v47: real click on line 1/2 opens
 PASS [desktop1280] v47: same spot again closes
 PASS [desktop1280] v47: real click on line 2/2 opens
 PASS [desktop1280] v47: same spot again closes
-PASS [desktop1280] v47: one short explanation (448 chars)
+PASS [desktop1280] v47: one short explanation (204 chars)
 PASS [desktop1280] v47: only Close + View sources buttons
-PASS [desktop1280] v47: View sources shows passages (3 verses, 3 highlighted) + what the text does/doesn't say
+PASS [desktop1280] v47: View sources shows passages (3 verses, 0 highlighted) + what the text does/doesn't say
 PASS [desktop1280] v47: no sideways scroll (1280)
 PASS [desktop1280] v47: Hide sources closes
 PASS [desktop1280] v51: real click on line 1/1 opens
 PASS [desktop1280] v51: same spot again closes
 PASS [desktop1280] opening v51 closes v47
-PASS [desktop1280] v51: one short explanation (401 chars)
+PASS [desktop1280] v51: one short explanation (256 chars)
 PASS [desktop1280] v51: only Close + View sources buttons
-PASS [desktop1280] v51: View sources shows passages (8 verses, 2 highlighted) + what the text does/doesn't say
+PASS [desktop1280] v51: View sources shows passages (3 verses, 1 highlighted) + what the text does/doesn't say
 PASS [desktop1280] v51: no sideways scroll (1280)
 PASS [desktop1280] v51: Hide sources closes
 PASS [desktop1280] × closes

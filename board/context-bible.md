@@ -2,10 +2,10 @@
 
 ## 🔁 이어받기
 - 마지막 저장: 2026-11-04 (개발 세션) · 작업 브랜치: `claude/context-bible` (main 반영)
-- 방금 끝낸 것: **첫 화면 = 질문 하나**("Why did Nathanael ask if anything good could come from Nazareth?" + 45-46절 → See why → 쉬운 설명 → View sources), 나머지 47·51 은 본문에서 탭. 설명 3개를 **실제로 열어 읽은 초기 주석**(Chrysostom·Augustine·Cyril·Aquinas, HistoricalChristianFaith DB)으로 다시 다듬고 출처(저자·자료·위치·링크)를 View sources 에. 47절 원인 단정 삭제, 야곱-속임은 "one possible reading". 로봇 88/88(실제 터치, 390 라이트·다크 + 데스크톱).
-- 막힌 자료: biblehub·studylight·ccel·netbible·archive.org·sacred-texts·biblestudytools·wikisource·gutenberg·bible.helloao.org 접속 거부 → Westcott·Ellicott·JFB·Meyer·NET 노트는 못 열어서 근거로 안 씀(`context_bible/sources/commentaries.md`). github.com clone·raw.githubusercontent 은 됨.
+- 방금 끝낸 것: **새 출처 기준(팀 켈러 실제 설교·저술만) 적용 → 46·47·51 해설 모두 '보류'**. 이 환경에서 gospelinlife.com·timothykeller.com·YouTube·TGC 가 전부 막혀(웹 검색은 됨, 열기는 DNS 차단) 켈러 원문을 하나도 읽지 못함. 화면은 각 절마다 **본문 명시 범위 한 문단 + View sources(인용 본문만)**. 교부·아퀴나스 출처는 화면에서 빼고 `content` JSON(`heldEarlyCommentaries`)·`sources/commentaries.md` 에 보존. 이전 해설 초안은 `draftBeforeKeller` 에 보존. 로봇 88/88.
 - 진행 중이던 것: 없음
 - 다음 할 일:
+  0. **Codex 가 아래 '🖱️ Codex 에게' 를 열어 켈러 원문 대목을 리포에 적어 주면** → 그 대목 범위 안에서만 46(그리고 근거가 있으면 47·51) 해설 재작성, View sources 에 설교 제목·URL·타임스탬프
   1. 사용자 답 2개: "설명이 쉬웠나 / 근거 보기로 충분히 확인됐나"
   2. 막힌 사이트가 열리는 환경이면 Westcott *St John*·NET 노트로 47절 야곱 연결 재확인
   3. 답에 따라 `easy` 문장 다듬기(JSON 만 고치고 `python3 context_bible/build.py` → `node context_bible/robot.js`)
@@ -14,6 +14,13 @@
 - 사용자 대기: 질문 2개 답
 - 공유 표현: "초기 미리보기" (완성 iOS 앱·신학 전문가 검수 완료 아님)
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/context-bible.md 와 plans/context-bible.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. 범위 밖(피드·결제·제출·자동 생성)은 하지 말 것.`
+
+## 🖱️ Codex 에게 (브라우저 작업) — 켈러 원자료 확인 (2026-11-04)
+- URL: https://gospelinlife.com/sermons/ → 검색 "Nazareth" (웹 검색으로 확인된 목록: **"Nazareth?!", Timothy J. Keller, Redeemer Presbyterian Church, 2010-12-25, John 1:43-46** — https://gospelinlife.com/book-of-the-bible/john/page/8 에 실려 있다고 검색 결과에 나옴). 같은 사이트에서 "Nathanael", "John 1:47", "John 1:51", "Jacob's ladder" 도 검색
+- 로그인 계정: 필요 없음(무료 설교면). 유료 결제가 필요하면 멈추고 사용자에게 알림 — 구매 금지
+- 할 것: ① 설교 페이지의 정확한 URL ② 원고(transcript)가 있으면 요 1:46(나사렛에서 무슨 선한 것이) 를 다루는 대목 — 문단 첫·끝 문장과 문단 위치, 없으면 오디오 타임스탬프(시작~끝)와 그 구간에서 켈러가 하는 말 2~3줄 요약(긴 원문 복사 금지) ③ 47절(간사함 없는 이스라엘 사람)·51절(천사들이 오르락내리락, 야곱의 사다리)을 다루는 켈러 설교·저서가 있으면 같은 방식으로 ④ 결과를 `context_bible/sources/keller.md` 에 적고 main 에 푸시(또는 이 게시판에 붙여 넣기)
+- 준비된 파일: `context_bible/content/john1_43-51.json`(현재 보류 상태, `sourcePolicy`), `context_bible/sources/commentaries.md`(이전 교부 대조, 새 기준 출처 아님)
+- 확인할 결과: keller.md 에 설교 제목·날짜·URL·위치(문단/타임스탬프)·짧은 요약이 있다. 실제로 듣거나 읽은 대목만.
 
 ## 지금 상태
 - 콘텐츠 수정은 `context_bible/content/*.json` → `python3 context_bible/build.py`(본문·하이라이트·금지어 검사 후 `docs/context-bible/data.json` 생성) → `node context_bible/robot.js`.

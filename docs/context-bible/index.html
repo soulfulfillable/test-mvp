@@ -147,8 +147,7 @@ function render(){
       <div class="passage intro">${verses}</div>
     </main>
     <footer>
-      <p>Commentaries: early Christian writers in public-domain translations, read from the HistoricalChristianFaith Commentaries Database.</p>
-      <p>Scripture: World English Bible (WEB), public domain. Greek and Hebrew checked against the SBL Greek New Testament, the Septuagint (Swete) and the Westminster Leningrad Codex.</p>
+      <p>Scripture: World English Bible (WEB), public domain. </p>
       <p>Early preview. Notes are a draft and have not yet been reviewed by a scholar.</p>
     </footer>`;
   setTimeout(() => app.querySelector('.intro')?.classList.remove('intro'), 3200);
@@ -156,17 +155,15 @@ function render(){
 }
 
 function sourcesHTML(n){
-  const links = n.links.map(l => `
+  // Notes on hold show only Scripture the paragraph cites; interpretation waits for a checked source.
+  const P = n.public;
+  const cites = P.cite.map(ref => `
     <section>
-      <div><span class="ref">${esc(prettyRef(l.ref))}</span> <span class="kind">· ${esc(D.linkKinds[l.kind])}</span></div>
-      <p class="reason">${esc(l.reason)}</p>
-      <div class="excerpt">${expand(l.ref).map(r => `<p><sup>${r.split(':')[1]}</sup> ${markup(D.texts.WEB[r], l.highlight[r])}</p>`).join('')}</div>
+      <div><span class="ref">${esc(prettyRef(ref))}</span> <span class="kind">\u00B7 WEB</span></div>
+      <div class="excerpt">${expand(ref).map(r => `<p><sup>${r.split(':')[1]}</sup> ${markup(D.texts.WEB[r], (n.links.find(l => l.highlight[r]) || {highlight:{}}).highlight[r])}</p>`).join('')}</div>
     </section>`).join('');
-  const orig = n.detail.original.sources ? `Greek/Hebrew: ${n.detail.original.sources.map(esc).join(', ')}. ` : '';
-  return `${links}
-    <section class="limits"><h3>What the text says, and what it doesn’t</h3>${n.limits.map(x => `<p>${esc(x)}</p>`).join('')}</section>
-    <section><h3>Commentaries checked</h3>${n.commentaries.map(c => `<p class="com"><span class="ref">${esc(c.author)}</span>, ${esc(c.work)} — ${esc(c.loc)}. ${esc(c.note)} <a href="${esc(c.url)}" target="_blank" rel="noopener">Read it</a></p>`).join('')}</section>
-    <section><p class="fine">Bible text: WEB, public domain. ${orig}Draft notes, ${esc(n.checked.date)}.</p></section>`;
+  return `${cites}
+    <section><p class="fine">${P.status === 'hold' ? 'This note sticks to what the text says. A fuller explanation is on hold until its sources are checked. ' : ''}Bible text: World English Bible, public domain.</p></section>`;
 }
 
 const verseOf = n => document.getElementById((n.id === D.lead.insight ? 'ctx-' : 'verse-') + n.verse);
@@ -175,7 +172,7 @@ function setSourceHighlight(n, on){
   verseEl.querySelectorAll('mark.hl').forEach(m => m.replaceWith(...m.childNodes));
   verseEl.normalize();
   if (!on) return;
-  const phrases = [...new Set(n.links.flatMap(l => l.highlightSource))];
+  const phrases = n.public.cite.some(c => c.startsWith('Genesis')) ? [...new Set(n.links.flatMap(l => l.highlightSource))] : [];
   phrases.forEach(p => {
     const tw = document.createTreeWalker(verseEl, NodeFilter.SHOW_TEXT); let t;
     while ((t = tw.nextNode())){
@@ -205,7 +202,7 @@ function openNote(id, scroll){
   const n = ins(id);
   document.getElementById('slot-' + id).innerHTML = `
     <div class="note" id="note-${id}" role="region" aria-label="Note on ${esc(n.ref)}">
-      <div class="note-head"><p class="easy">${esc(n.easy)}</p><button class="x" data-close="${id}" aria-label="Close">${XSVG}</button></div>
+      <div class="note-head"><p class="easy">${esc(n.public.text)}</p><button class="x" data-close="${id}" aria-label="Close">${XSVG}</button></div>
       <button class="src-btn" data-src="${id}" aria-expanded="false" aria-controls="src-${id}">${ARROW}<span>View sources</span></button>
       <div class="sources" id="src-${id}" hidden></div>
     </div>`;

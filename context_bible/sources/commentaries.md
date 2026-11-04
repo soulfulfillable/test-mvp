@@ -1,3 +1,5 @@
+> ⚠️ 2026-11-04 사용자 결정으로 해설 출처 기준이 **팀 켈러 실제 설교·저술**로 바뀜. 아래 교부·아퀴나스 자료는 검토 기록으로만 보존하며 새 기준의 승인 출처가 아니다(화면에서 제거).
+
 # 주석 대조 기록 (2026-11-04, 개발 세션) — 실제로 열어 읽은 것만
 
 자료: **HistoricalChristianFaith/Commentaries-Database** (GitHub, 커밋 `9da765b`), 초기 교부·중세 주석의 공개 도메인 영역 번역(NPNF 등)을 절별 TOML 로 모은 것.
@@ -23,3 +25,8 @@
 ## 막힌 자료 (이 환경에서 접속 불가, 2026-11-04)
 biblehub.com, studylight.org, ccel.org, netbible.org, archive.org, sacred-texts.com, biblestudytools.com, preceptaustin.org, en.wikisource.org, gutenberg.org, bible.helloao.org — 전부 연결 거부.
 → Westcott *St John*, Ellicott, JFB, Meyer, NET Bible 노트는 **열어 보지 못했으므로 근거로 쓰지 않음**. GitHub 에서 JFB·Clarke·Gill·Henry 가 든 저장소(SOTW-Historical-Commentaries)는 창세기 일부만 있어 요한복음 없음.
+
+## 켈러 자료 시도 기록 (2026-11-04)
+- 웹 검색으로 확인: gospelinlife.com 목록에 "Nazareth?!"(Timothy J. Keller, Redeemer Presbyterian Church, 2010-12-25, John 1:43-46). **내용은 열어 보지 못함** — 제목·날짜만 아는 상태라 근거로 쓰지 않음.
+- 요 1:47-51 켈러 설교·저술은 검색에서 찾지 못함(다른 목사 설교만).
+- 막힘: gospelinlife.com(WebFetch DNS 차단·curl 연결 거부), timothykeller.com, youtube.com, thegospelcoalition.org.
