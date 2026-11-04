@@ -1,6 +1,9 @@
 # Popcorn (팝콘 물리 조준) — 개발 세션 게시판
 
-## 🔁 이어받기
+## 🗑️ 삭제 (사용자 결정 2026-11-04)
+사용자 원문: "팝콘 이거 그냥 하지 마 삭제해 버려". 게임 파일(`playables/popcorn/`, `docs/popcorn/`, `docs/popcorn.html`)을 main 에서 삭제하고 handoff 목록에서 뺐다. 기록(이 게시판·`plans/popcorn.md`)은 결정 이력으로 남긴다. 코드는 git 기록과 `claude/popcorn` 브랜치에만 남아 있다. **다시 만들지 않는다.**
+
+## 🔁 이어받기 (삭제 시점 기록)
 - 마지막 저장: 2026-11-02 22:00 KST · 작업 브랜치: `claude/popcorn` (main 반영됨)
 - 방금 끝낸 것: **핵심 조작 A 적용(사용자 "응 그래해봐 에이로")** — 씨앗 밀도 1.2→5.0, 컵 3.5→1.6: **통을 직접 맞히면 떨어진다**. 팝은 어디 떨어지든 항상 터지는 보너스. L2·L3 에 통 위 후드(찬장)를 달아 직격이 안 되고 팝이 필요하게, L4·L5 는 이미 가려짐. 풀이기: L1 52.9%(직격 101발) · L2 8.2%(터널만) · L3 33.5% · L4 27.3% · L5 길 열기 17.6%→둘째 발 35.9%. 레벨 1 이름 'First Snack', 시범 발사 = 직격, 라벨 "Hit this. Butter wants it", 안내 "Hit the bucket. Butter is waiting." 로봇 31/31.
 - 그 전: **스토리 '팝과 배고픈 강아지 버터' 적용(사용자 ㄱㄱ)** — 화면 아래 버터(입 벌리고 통을 올려다봄, 생각 풍선에 팝콘 통), 씨앗이 날면 귀가 서고 꼬리 빨라짐, 통이 떨어지면 받아먹기+하트+"Butter got it!", 씨앗 다 쓰면 귀 처지고 "Butter is still hungry." 라벨 "Get this for Butter"/"Pop in the gap", 시작 안내 "Butter can't reach the popcorn. Pop can." 1.3초 뒤 시범 발사. 마지막 레벨 뒤 "Best. Kernel. Ever." 로봇 31/31 재통과. 스크린샷 `qa/level1-demo-*.png`, `qa/level1-butter-got-it.png`.
