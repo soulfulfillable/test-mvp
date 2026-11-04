@@ -2,7 +2,8 @@
 
 ## 🔁 이어받기
 - 마지막 저장: 2026-11-04 (개발 세션) · 작업 브랜치: `claude/context-bible` (main 반영)
-- 방금 끝낸 것: **새 출처 기준(팀 켈러 실제 설교·저술만) 적용 → 46·47·51 해설 모두 '보류'**. 이 환경에서 gospelinlife.com·timothykeller.com·YouTube·TGC 가 전부 막혀(웹 검색은 됨, 열기는 DNS 차단) 켈러 원문을 하나도 읽지 못함. 화면은 각 절마다 **본문 명시 범위 한 문단 + View sources(인용 본문만)**. 교부·아퀴나스 출처는 화면에서 빼고 `content` JSON(`heldEarlyCommentaries`)·`sources/commentaries.md` 에 보존. 이전 해설 초안은 `draftBeforeKeller` 에 보존. 로봇 88/88.
+- 방금 끝낸 것: 켈러 기준 적용 → 46·47·51 **모두 보류(본문 요약만, 해석 없음)**. **핵심 목표("맥락 이해 돕기")는 아직 미완** — 켈러 근거 해설은 하나도 없다. 보류 중엔 버튼을 "See why" 대신 **"What the text says"** 로(이유를 약속하지 않게). 켈러 원자료 기록 `context_bible/sources/keller.md`("Nazareth?!" URL 확정, 날짜 2006-12-24 vs 2010-12-25 충돌 미해결, 아무도 아직 안 들음 → 근거 아님). 오디오는 이 환경에서 못 받음(gospelinlife·애플 팟캐스트·피드 호스트 전부 차단).
+- ⚠️ 사용자 확인 필요: 다운로드가 "개인 청취 한정" 약관 뒤에 있다는 검색 요약이 있음. 앱 콘텐츠용 요약에 써도 되는지(인용·요약 범위) 사용자 판단 필요 — 약관 원문 확인도 Codex 요청에 포함.
 - 진행 중이던 것: 없음
 - 다음 할 일:
   0. **Codex 가 아래 '🖱️ Codex 에게' 를 열어 켈러 원문 대목을 리포에 적어 주면** → 그 대목 범위 안에서만 46(그리고 근거가 있으면 47·51) 해설 재작성, View sources 에 설교 제목·URL·타임스탬프
@@ -15,12 +16,18 @@
 - 공유 표현: "초기 미리보기" (완성 iOS 앱·신학 전문가 검수 완료 아님)
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/context-bible.md 와 plans/context-bible.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. 범위 밖(피드·결제·제출·자동 생성)은 하지 말 것.`
 
-## 🖱️ Codex 에게 (브라우저 작업) — 켈러 원자료 확인 (2026-11-04)
-- URL: https://gospelinlife.com/sermons/ → 검색 "Nazareth" (웹 검색으로 확인된 목록: **"Nazareth?!", Timothy J. Keller, Redeemer Presbyterian Church, 2010-12-25, John 1:43-46** — https://gospelinlife.com/book-of-the-bible/john/page/8 에 실려 있다고 검색 결과에 나옴). 같은 사이트에서 "Nathanael", "John 1:47", "John 1:51", "Jacob's ladder" 도 검색
-- 로그인 계정: 필요 없음(무료 설교면). 유료 결제가 필요하면 멈추고 사용자에게 알림 — 구매 금지
-- 할 것: ① 설교 페이지의 정확한 URL ② 원고(transcript)가 있으면 요 1:46(나사렛에서 무슨 선한 것이) 를 다루는 대목 — 문단 첫·끝 문장과 문단 위치, 없으면 오디오 타임스탬프(시작~끝)와 그 구간에서 켈러가 하는 말 2~3줄 요약(긴 원문 복사 금지) ③ 47절(간사함 없는 이스라엘 사람)·51절(천사들이 오르락내리락, 야곱의 사다리)을 다루는 켈러 설교·저서가 있으면 같은 방식으로 ④ 결과를 `context_bible/sources/keller.md` 에 적고 main 에 푸시(또는 이 게시판에 붙여 넣기)
-- 준비된 파일: `context_bible/content/john1_43-51.json`(현재 보류 상태, `sourcePolicy`), `context_bible/sources/commentaries.md`(이전 교부 대조, 새 기준 출처 아님)
-- 확인할 결과: keller.md 에 설교 제목·날짜·URL·위치(문단/타임스탬프)·짧은 요약이 있다. 실제로 듣거나 읽은 대목만.
+## 🖱️ Codex 에게 (브라우저 작업) — 켈러 원자료 (2026-11-04 갱신)
+**A. "Nazareth?!" 요 1:46 대목**
+- URL: https://gospelinlife.com/sermon/nazareth/
+- 로그인 계정: 필요 없음. 결제 요구 시 멈추고 사용자에게 알림(구매 금지)
+- 할 것: ① "Download Audio" 를 누르면 나오는 **약관(agreement) 문구**를 읽고 요점 2줄 기록(개인 청취 한정인지, 인용·요약 허용 여부) ② Download Audio 링크의 실제 주소(마우스 오른쪽 → 링크 주소 복사) 기록 ③ Play Audio 로 00:00–20:33 을 듣고, 켈러가 "Can anything good come out of Nazareth?"(요 1:46)을 다루는 **구간 타임스탬프(시작–끝)** 와 그 구간에서 하는 말을 **자기 말로 2–3줄 요약**(원문 길게 받아 적기 금지) ④ 화면에 보이는 설교 날짜를 다시 확인
+- 준비된 파일: `context_bible/sources/keller.md`(빈칸을 채우면 됨)
+- 확인할 결과: keller.md 의 "Timestamp range" 와 "own-words summary" 가 채워지고 main 에 푸시됨(또는 이 게시판에 붙여 넣기)
+
+**B. 요 1:47·1:51 켈러 설교 찾기**
+- URL: https://gospelinlife.com/sermons/ (사이트 검색)
+- 할 것: "John 1:47", "John 1:51", "Nathanael", "Jacob's ladder", "Son of Man" 를 각각 검색해 나온 **설교 제목·날짜·성경 범위·정확한 URL** 목록 작성(내용은 아직 안 들어도 됨)
+- 확인할 결과: keller.md 의 "John 1:47, 1:51" 칸에 URL 목록. 없으면 "검색어별 결과 없음"이라고 기록
 
 ## 지금 상태
 - 콘텐츠 수정은 `context_bible/content/*.json` → `python3 context_bible/build.py`(본문·하이라이트·금지어 검사 후 `docs/context-bible/data.json` 생성) → `node context_bible/robot.js`.
