@@ -110,6 +110,7 @@
 - **부스트 일지(개발 세션, 하루 1줄)**:
   - 11-02 15:26Z: status PENDING, goalProgress 0, spentRatio null, creativeCount 0, failureReason null, remainingFreeRuns 2, verdict RUN_IN_PROGRESS (시작 2분 뒤 — 아직 광고 소재 생성 전)
   - 11-03 (조회 시각 UTC 기준): status **FINISHED**(예정 종료 11-05 15:24Z 보다 일찍 끝남), goalProgress 1, spentRatio 0.993, spentFinal false, creativeCount 20, failureReason null, hasCompletedRun true, current null, verdict allowed(새 캠페인 가능하지만 시작 안 함), remainingFreeRuns 2. 실제 유입 수·플레이 시간은 API 에 없음(콘솔 카드). 심사: 여전히 MODERATION_UNAVAILABLE(하루 1회 집계) 샌드박스 목표치 도달 여부는 콘솔 카드(Codex). 사용자에게 다시 "쓸지" 묻지 않는다.
+  - 11-05 15:41Z (기획 세션 예약 확인): run cmvzetvks… **FINISHED**, goalProgress 1, spentRatio 0.994, creativeCount 20, failureReason null. 남은 무료 2회(시작 안 함). `get_submission_state`(archive molemash-1.7.1): 여전히 **MODERATION_UNAVAILABLE, catalogAvailable false**("This game cannot be submitted to moderation. Publish it to the sandbox instead") — 샌드박스 목표 미달 또는 하루 1회 집계 대기. 목표치·현재값은 콘솔 카드에서만(Codex). 새 캠페인·재게시·Submit 안 함.
 
 ### 🖱️ Codex 에게 (브라우저 작업) — Mole Mash 출시 전 2건
 - URL: https://developer.playgama.com → 게임 **Mole Mash**(id cmvxme9mt1hvbj80hj6q0lokb)
