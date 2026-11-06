@@ -1,5 +1,8 @@
 # Hidden Little Friends — worker board
 
+## ⏸️ 재개하지 않음 (2026-11-06)
+사용자 결정으로 이 세션·브리프는 재개하지 않는다. 후속은 `board/hidden-fresh.md`(Fresh Start). 파일은 보존.
+
 ## 🔁 Handoff
 - Last saved: 2026-11-06 · branch `claude/hidden-friends` (merged to main, live)
 - Live: https://soulfulfillable.github.io/test-mvp/hidden-friends/
