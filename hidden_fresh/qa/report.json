@@ -1,0 +1,547 @@
+{
+ "date": "2026-11-06T14:13:57.316Z",
+ "pass": 90,
+ "fail": 0,
+ "results": [
+  {
+   "size": "390x844",
+   "name": "intro: target picture shown large",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "intro: Start button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r1 playing after Start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r1 whole board on one screen (no scroll)",
+   "ok": true,
+   "detail": "60 capybaras, 0 outside"
+  },
+  {
+   "size": "390x844",
+   "name": "r1 characters big enough (>=40px)",
+   "ok": true,
+   "detail": "smallest 64px"
+  },
+  {
+   "size": "390x844",
+   "name": "r1 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r1 target count",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "size": "390x844",
+   "name": "r1 wrong tap: no credit + red X feedback",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r1 hint works (spotlight tightens, target inside)",
+   "ok": true,
+   "detail": "L1 r=157 d=64 L2 r=94 d=29 L3 r=40 d=0"
+  },
+  {
+   "size": "390x844",
+   "name": "r1 correct tap(s) counted + ring",
+   "ok": true,
+   "detail": "0 left"
+  },
+  {
+   "size": "390x844",
+   "name": "r1 round-done sheet with button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "restart: fresh board, target moved, still playing",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r2 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r2 wrong tap: no credit",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r2 hint shows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r2 correct tap counted, sheet shown",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r3 intro shown",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r3 playing after Start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r3 whole board on one screen (no scroll)",
+   "ok": true,
+   "detail": "70 capybaras, 0 outside"
+  },
+  {
+   "size": "390x844",
+   "name": "r3 characters big enough (>=40px)",
+   "ok": true,
+   "detail": "smallest 63px"
+  },
+  {
+   "size": "390x844",
+   "name": "r3 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r3 target count",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "size": "390x844",
+   "name": "r3 wrong tap: no credit + red X feedback",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "r3 hint works (spotlight tightens, target inside)",
+   "ok": true,
+   "detail": "L1 r=157 d=65 L2 r=94 d=30 L3 r=39 d=0"
+  },
+  {
+   "size": "390x844",
+   "name": "r3 correct tap(s) counted + ring",
+   "ok": true,
+   "detail": "0 left"
+  },
+  {
+   "size": "390x844",
+   "name": "r3 round-done sheet with button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "final sheet offers Play again",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "Play again -> back to round 1 intro",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "390x844",
+   "name": "target position random each load",
+   "ok": true,
+   "detail": "5/5 distinct"
+  },
+  {
+   "size": "390x844",
+   "name": "console errors 0",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "intro: target picture shown large",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "intro: Start button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r1 playing after Start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r1 whole board on one screen (no scroll)",
+   "ok": true,
+   "detail": "45 capybaras, 0 outside"
+  },
+  {
+   "size": "360x640",
+   "name": "r1 characters big enough (>=40px)",
+   "ok": true,
+   "detail": "smallest 59px"
+  },
+  {
+   "size": "360x640",
+   "name": "r1 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r1 target count",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "size": "360x640",
+   "name": "r1 wrong tap: no credit + red X feedback",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r1 hint works (spotlight tightens, target inside)",
+   "ok": true,
+   "detail": "L1 r=144 d=61 L2 r=86 d=28 L3 r=34 d=0"
+  },
+  {
+   "size": "360x640",
+   "name": "r1 correct tap(s) counted + ring",
+   "ok": true,
+   "detail": "0 left"
+  },
+  {
+   "size": "360x640",
+   "name": "r1 round-done sheet with button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "restart: fresh board, target moved, still playing",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r2 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r2 wrong tap: no credit",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r2 hint shows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r2 correct tap counted, sheet shown",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r3 intro shown",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r3 playing after Start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r3 whole board on one screen (no scroll)",
+   "ok": true,
+   "detail": "55 capybaras, 0 outside"
+  },
+  {
+   "size": "360x640",
+   "name": "r3 characters big enough (>=40px)",
+   "ok": true,
+   "detail": "smallest 56px"
+  },
+  {
+   "size": "360x640",
+   "name": "r3 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r3 target count",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "size": "360x640",
+   "name": "r3 wrong tap: no credit + red X feedback",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "r3 hint works (spotlight tightens, target inside)",
+   "ok": true,
+   "detail": "L1 r=144 d=60 L2 r=86 d=28 L3 r=35 d=0"
+  },
+  {
+   "size": "360x640",
+   "name": "r3 correct tap(s) counted + ring",
+   "ok": true,
+   "detail": "0 left"
+  },
+  {
+   "size": "360x640",
+   "name": "r3 round-done sheet with button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "final sheet offers Play again",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "Play again -> back to round 1 intro",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "360x640",
+   "name": "target position random each load",
+   "ok": true,
+   "detail": "4/5 distinct"
+  },
+  {
+   "size": "360x640",
+   "name": "console errors 0",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "intro: target picture shown large",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "intro: Start button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r1 playing after Start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r1 whole board on one screen (no scroll)",
+   "ok": true,
+   "detail": "45 capybaras, 0 outside"
+  },
+  {
+   "size": "320x568",
+   "name": "r1 characters big enough (>=40px)",
+   "ok": true,
+   "detail": "smallest 52px"
+  },
+  {
+   "size": "320x568",
+   "name": "r1 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r1 target count",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "size": "320x568",
+   "name": "r1 wrong tap: no credit + red X feedback",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r1 hint works (spotlight tightens, target inside)",
+   "ok": true,
+   "detail": "L1 r=128 d=52 L2 r=76 d=24 L3 r=33 d=0"
+  },
+  {
+   "size": "320x568",
+   "name": "r1 correct tap(s) counted + ring",
+   "ok": true,
+   "detail": "0 left"
+  },
+  {
+   "size": "320x568",
+   "name": "r1 round-done sheet with button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "restart: fresh board, target moved, still playing",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r2 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r2 wrong tap: no credit",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r2 hint shows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r2 correct tap counted, sheet shown",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r3 intro shown",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r3 playing after Start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r3 whole board on one screen (no scroll)",
+   "ok": true,
+   "detail": "50 capybaras, 0 outside"
+  },
+  {
+   "size": "320x568",
+   "name": "r3 characters big enough (>=40px)",
+   "ok": true,
+   "detail": "smallest 52px"
+  },
+  {
+   "size": "320x568",
+   "name": "r3 hint button visible & not covered",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r3 target count",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "size": "320x568",
+   "name": "r3 wrong tap: no credit + red X feedback",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "r3 hint works (spotlight tightens, target inside)",
+   "ok": true,
+   "detail": "L1 r=128 d=52 L2 r=76 d=24 L3 r=33 d=0"
+  },
+  {
+   "size": "320x568",
+   "name": "r3 correct tap(s) counted + ring",
+   "ok": true,
+   "detail": "0 left"
+  },
+  {
+   "size": "320x568",
+   "name": "r3 round-done sheet with button on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "final sheet offers Play again",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "Play again -> back to round 1 intro",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "size": "320x568",
+   "name": "target position random each load",
+   "ok": true,
+   "detail": "5/5 distinct"
+  },
+  {
+   "size": "320x568",
+   "name": "console errors 0",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}
