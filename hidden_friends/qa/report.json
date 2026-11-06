@@ -1,0 +1,367 @@
+{
+  "date": "2026-11-06T03:00:40.354Z",
+  "passed": 69,
+  "failed": 0,
+  "results": [
+    {
+      "name": "phone-390x844: starts straight in scene 1 with the task",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: scene picture sits between HUD and bottom bar (no overlay on targets)",
+      "ok": true,
+      "info": {
+        "top": 71,
+        "bar": 778,
+        "pic": {
+          "top": 73.49999999999997,
+          "left": 0,
+          "bottom": 775.5,
+          "right": 390
+        },
+        "vw": 390,
+        "vh": 844,
+        "barBottom": 844,
+        "scale": 0.975
+      }
+    },
+    {
+      "name": "phone-390x844: wrong tap shows a ripple and counts nothing",
+      "ok": true,
+      "info": {
+        "ring": 1
+      }
+    },
+    {
+      "name": "phone-390x844: hint shows a soft glow near a hidden friend, then cools down",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: progress survives a reload (2 found, 2 seated)",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: pond all 5 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: Play again resets the scene but keeps the postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: pond all 5 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: Next scene → Hot Spring",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: spring all 7 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: Next scene → Night Garden",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: night all 8 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: last scene offers the postcard collection",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: collection shows 3 of 3 postcards",
+      "ok": true,
+      "info": "3 of 3 postcards collected"
+    },
+    {
+      "name": "phone-390x844: all 30 sound files load and decode",
+      "ok": true,
+      "info": {
+        "decoded": 30
+      }
+    },
+    {
+      "name": "phone-390x844: reload of a finished scene shows its postcard again",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: collection survives reload",
+      "ok": true,
+      "info": "3 of 3 postcards collected"
+    },
+    {
+      "name": "phone-390x844: replaying a collected scene from the menu starts it fresh",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: menu → Restart this scene clears its finds",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: sound toggle is saved",
+      "ok": true
+    },
+    {
+      "name": "phone-390x844: smallest friend hitbox ≥ 44px",
+      "ok": true,
+      "info": {
+        "min": 59,
+        "max": 61
+      }
+    },
+    {
+      "name": "phone-390x844: console errors 0, page errors 0",
+      "ok": true,
+      "info": []
+    },
+    {
+      "name": "phone-390x844: no external requests",
+      "ok": true,
+      "info": []
+    },
+    {
+      "name": "phone-375x667: starts straight in scene 1 with the task",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: scene picture sits between HUD and bottom bar (no overlay on targets)",
+      "ok": true,
+      "info": {
+        "top": 71,
+        "bar": 601,
+        "pic": {
+          "top": 71,
+          "left": 40.27777777777777,
+          "bottom": 601,
+          "right": 334.72222222222223
+        },
+        "vw": 375,
+        "vh": 667,
+        "barBottom": 667,
+        "scale": 0.7361111111111112
+      }
+    },
+    {
+      "name": "phone-375x667: wrong tap shows a ripple and counts nothing",
+      "ok": true,
+      "info": {
+        "ring": 1
+      }
+    },
+    {
+      "name": "phone-375x667: hint shows a soft glow near a hidden friend, then cools down",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: progress survives a reload (2 found, 2 seated)",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: pond all 5 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: Play again resets the scene but keeps the postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: pond all 5 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: Next scene → Hot Spring",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: spring all 7 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: Next scene → Night Garden",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: night all 8 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: last scene offers the postcard collection",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: collection shows 3 of 3 postcards",
+      "ok": true,
+      "info": "3 of 3 postcards collected"
+    },
+    {
+      "name": "phone-375x667: all 30 sound files load and decode",
+      "ok": true,
+      "info": {
+        "decoded": 30
+      }
+    },
+    {
+      "name": "phone-375x667: reload of a finished scene shows its postcard again",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: collection survives reload",
+      "ok": true,
+      "info": "3 of 3 postcards collected"
+    },
+    {
+      "name": "phone-375x667: replaying a collected scene from the menu starts it fresh",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: menu → Restart this scene clears its finds",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: sound toggle is saved",
+      "ok": true
+    },
+    {
+      "name": "phone-375x667: smallest friend hitbox ≥ 44px",
+      "ok": true,
+      "info": {
+        "min": 44,
+        "max": 46
+      }
+    },
+    {
+      "name": "phone-375x667: console errors 0, page errors 0",
+      "ok": true,
+      "info": []
+    },
+    {
+      "name": "phone-375x667: no external requests",
+      "ok": true,
+      "info": []
+    },
+    {
+      "name": "desktop-1366x768: starts straight in scene 1 with the task",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: scene picture sits between HUD and bottom bar (no overlay on targets)",
+      "ok": true,
+      "info": {
+        "top": 71,
+        "bar": 702,
+        "pic": {
+          "top": 71,
+          "left": 507.72222222222223,
+          "bottom": 702,
+          "right": 858.2777777777778
+        },
+        "vw": 1366,
+        "vh": 768,
+        "barBottom": 768,
+        "scale": 0.8763888888888889
+      }
+    },
+    {
+      "name": "desktop-1366x768: wrong tap shows a ripple and counts nothing",
+      "ok": true,
+      "info": {
+        "ring": 1
+      }
+    },
+    {
+      "name": "desktop-1366x768: hint shows a soft glow near a hidden friend, then cools down",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: progress survives a reload (2 found, 2 seated)",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: pond all 5 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: Play again resets the scene but keeps the postcard",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: pond all 5 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: Next scene → Hot Spring",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: spring all 7 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: Next scene → Night Garden",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: night all 8 friends found → finale → postcard",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: last scene offers the postcard collection",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: collection shows 3 of 3 postcards",
+      "ok": true,
+      "info": "3 of 3 postcards collected"
+    },
+    {
+      "name": "desktop-1366x768: all 30 sound files load and decode",
+      "ok": true,
+      "info": {
+        "decoded": 30
+      }
+    },
+    {
+      "name": "desktop-1366x768: reload of a finished scene shows its postcard again",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: collection survives reload",
+      "ok": true,
+      "info": "3 of 3 postcards collected"
+    },
+    {
+      "name": "desktop-1366x768: replaying a collected scene from the menu starts it fresh",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: menu → Restart this scene clears its finds",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: sound toggle is saved",
+      "ok": true
+    },
+    {
+      "name": "desktop-1366x768: smallest friend hitbox ≥ 44px",
+      "ok": true,
+      "info": {
+        "min": 53,
+        "max": 55
+      }
+    },
+    {
+      "name": "desktop-1366x768: console errors 0, page errors 0",
+      "ok": true,
+      "info": []
+    },
+    {
+      "name": "desktop-1366x768: no external requests",
+      "ok": true,
+      "info": []
+    }
+  ]
+}

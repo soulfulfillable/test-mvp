@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#f6efe2">
+<title>Hidden Little Friends</title>
+<style>
+:root{
+  --ink:#3b2b28; --paper:#f6efe2; --muted:#8a7a70; --accent:#e8963a; --line:rgba(59,43,40,.14);
+  --font: ui-rounded, -apple-system, BlinkMacSystemFont, "SF Pro Rounded", system-ui, sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#e9e0cf;color:var(--ink);font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+/* iOS in-app sheet guard: app is fixed, the document keeps a scroll cushion parked mid-way (PLAYBOOK) */
+body{height:calc(100% + 240px)} html{height:100%}
+#app{position:fixed;inset:0;display:flex;justify-content:center;touch-action:pan-y}
+#frame{position:relative;width:100%;max-width:460px;height:100%;display:flex;flex-direction:column;background:var(--paper);overflow:hidden}
+@media (min-width:600px){#frame{box-shadow:0 0 0 1px var(--line)}}
+
+/* top: the one task */
+#top{flex:none;padding:calc(env(safe-area-inset-top) + 8px) 12px 6px;display:flex;align-items:center;gap:10px}
+#task{flex:1;min-width:0}
+#taskText{font-size:20px;font-weight:700;letter-spacing:-.2px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#slots{display:flex;gap:3px;margin-top:5px}
+.slot{width:30px;height:30px;border-radius:9px;background:#ebe2d2;display:grid;place-items:center;transition:background .3s}
+.slot svg{width:28px;height:28px;filter:grayscale(1) brightness(1.25) opacity(.35);transition:filter .45s}
+.slot.on{background:#fff}
+.slot.on svg{filter:none}
+.slot.pop{animation:slotPop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes slotPop{0%{transform:scale(.6)}100%{transform:scale(1)}}
+#count{flex:none;font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;min-width:62px;text-align:right}
+#count small{font-size:15px;color:var(--muted);font-weight:600}
+
+/* the scene: hero */
+#stage{flex:1;min-height:0;position:relative}
+#scene{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+
+/* bottom bar */
+#bar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:8px 14px calc(env(safe-area-inset-bottom) + 10px);gap:10px}
+.btn{appearance:none;border:0;background:none;color:var(--ink);font:inherit;padding:0;cursor:pointer}
+.icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#ebe2d2}
+.icon svg{width:24px;height:24px}
+.icon:active,.hint:active,.cta:active,.ghost:active{transform:scale(.95)}
+.hint{height:48px;padding:0 20px 0 14px;border-radius:24px;background:#fff;box-shadow:0 0 0 1.5px var(--line);display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;position:relative}
+.hint svg{width:26px;height:26px}
+.hint[disabled]{opacity:.45}
+.hint .fill{position:absolute;left:0;bottom:0;height:3px;border-radius:2px;background:var(--accent);width:0}
+
+/* sheets (menu / postcard) — only ever shown when no search is in progress, or over a paused game */
+.veil{position:absolute;inset:0;background:rgba(40,28,24,.38);opacity:0;pointer-events:none;transition:opacity .25s;z-index:5}
+.veil.show{opacity:1;pointer-events:auto}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--paper);border-radius:22px 22px 0 0;padding:18px 18px calc(env(safe-area-inset-bottom) + 18px);transform:translateY(105%);transition:transform .38s cubic-bezier(.2,.9,.25,1);z-index:6;max-height:92%;overflow:auto}
+.sheet.show{transform:none}
+.sheet h2{margin:0 0 2px;font-size:22px;font-weight:700}
+.sheet p{margin:0;color:var(--muted);font-size:15px}
+.cta{display:block;width:100%;height:50px;border-radius:14px;border:0;background:var(--ink);color:#fff;font:inherit;font-size:17px;font-weight:600;margin-top:14px;cursor:pointer}
+.ghost{display:block;width:100%;height:46px;border-radius:14px;border:0;background:transparent;color:var(--ink);font:inherit;font-size:16px;font-weight:600;margin-top:6px;cursor:pointer;box-shadow:inset 0 0 0 1.5px var(--line)}
+#postcard{margin:14px auto 0;width:min(84%,320px,calc((100vh - 300px) * 1.1));background:#fff;padding:9px 9px 12px;border-radius:6px;box-shadow:0 1px 0 var(--line),0 10px 24px rgba(59,43,40,.18);transform:rotate(-2deg) translateY(30px) scale(.9);opacity:0;transition:transform .7s cubic-bezier(.2,1.3,.35,1) .15s,opacity .4s .15s;position:relative}
+.sheet.show #postcard{transform:rotate(-2deg);opacity:1}
+#postcard svg{display:block;width:100%;height:auto;border-radius:3px}
+#postcard .cap{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;font-size:14px;font-weight:600}
+#postcard .cap span{color:var(--muted);font-weight:600;font-size:12px}
+#postcard .stamp{position:absolute;right:-12px;top:-14px;width:54px;height:54px;transform:rotate(12deg)}
+#cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.card{background:#fff;border-radius:10px;padding:5px 5px 8px;box-shadow:0 0 0 1.5px var(--line);text-align:left;position:relative}
+.card.cur{box-shadow:0 0 0 2.5px var(--accent)}
+.card svg{display:block;width:100%;height:auto;border-radius:6px}
+.card b{display:block;font-size:13px;margin-top:5px}
+.card i{font-style:normal;font-size:12px;color:var(--muted)}
+.card.locked svg{filter:grayscale(1) blur(1.5px) opacity(.5)}
+.row{display:flex;gap:8px}
+.row .ghost{flex:1}
+
+/* scene fx */
+.fr{cursor:pointer}
+.blinkEye{transform-box:fill-box;transform-origin:center;animation:blink .26s ease-in-out}
+@keyframes blink{50%{transform:scaleY(.08)}}
+.wig{transform-box:fill-box;transform-origin:50% 100%;animation:wig .7s ease-in-out}
+@keyframes wig{20%{transform:rotate(-7deg)}45%{transform:rotate(6deg)}70%{transform:rotate(-3deg)}}
+.sing{transform-box:fill-box;transform-origin:50% 100%;animation:sing .42s cubic-bezier(.3,1.7,.5,1)}
+@keyframes sing{0%{transform:scale(1,1)}35%{transform:scale(.92,1.12) translateY(-3px)}100%{transform:scale(1,1)}}
+@media (prefers-reduced-motion:reduce){.sing,.wig{animation:none}}
+.toast{position:absolute;left:50%;top:10px;transform:translate(-50%,-8px);background:var(--ink);color:#fff;font-size:14px;font-weight:600;padding:7px 13px;border-radius:12px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;white-space:nowrap;z-index:4}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div id="app"><div id="frame">
+  <div id="top">
+    <div id="task"><div id="taskText">Find 5 frogs</div><div id="slots"></div></div>
+    <div id="count" aria-live="polite">0<small> / 5</small></div>
+  </div>
+  <div id="stage">
+    <svg id="scene" viewBox="0 0 400 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Scene"></svg>
+    <div class="toast" id="toast"></div>
+  </div>
+  <div id="bar">
+    <button class="btn icon" id="menuBtn" aria-label="Scenes"><svg viewBox="0 0 24 24" fill="none" stroke="#3b2b28" stroke-width="2.2" stroke-linecap="round"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg></button>
+    <button class="btn hint" id="hintBtn" aria-label="Hint"><svg viewBox="0 0 26 26" fill="none" stroke="#3b2b28" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16.2 16.2 22 22"/><path d="M8 9.2a3.4 3.4 0 0 1 3-2.2" stroke="#e8963a"/></svg>Hint<i class="fill" id="hintFill"></i></button>
+    <button class="btn icon" id="soundBtn" aria-label="Sound"><svg viewBox="0 0 24 24" fill="none" stroke="#3b2b28" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="#3b2b28"/><path id="sndWave" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/><path id="sndOff" d="M16 9.5l5 5M21 9.5l-5 5" style="display:none"/></svg></button>
+  </div>
+  <div class="veil" id="veil"></div>
+  <div class="sheet" id="doneSheet" role="dialog" aria-label="Scene complete">
+    <h2 id="doneTitle">The pond choir is complete</h2>
+    <p id="doneSub">Postcard added to your collection</p>
+    <div id="postcard"></div>
+    <button class="cta" id="nextBtn">Next scene</button>
+    <button class="ghost" id="againBtn">Play again</button>
+  </div>
+  <div class="sheet" id="menuSheet" role="dialog" aria-label="Scenes">
+    <h2>Postcards</h2>
+    <p id="menuSub">Find every friend to collect a scene.</p>
+    <div id="cards"></div>
+    <div class="row"><button class="ghost" id="restartBtn">Restart this scene</button><button class="ghost" id="closeBtn">Close</button></div>
+  </div>
+</div></div>
+<script>
+'use strict';
+/* ============================================================
+   Hidden Little Friends — find the hidden friends, they gather and complete a tiny scene together.
+   All art is drawn here in SVG: one ink colour, one line weight, light from the top-left.
+   ============================================================ */
+const W = 400, H = 720, INK = '#3b2b28', SW = 2.4;
+const NS = 'http://www.w3.org/2000/svg';
+const $ = (id) => document.getElementById(id);
+const svgEl = $('scene');
+
+/* ---------- tiny seeded random (decor layout is fixed per scene) ---------- */
+function rng(seed){ let s = seed >>> 0; return () => { s = (s + 0x6D2B79F5) >>> 0; let t = s; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const st = (c) => `stroke="${c||INK}" stroke-width="${SW}" stroke-linejoin="round" stroke-linecap="round"`;
+const hl = (cx, cy, rx, ry, rot) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="#fff" opacity=".28" transform="rotate(${rot||-20} ${cx} ${cy})"/>`;
+
+/* ---------- eyes: the shared "tell" of every friend ---------- */
+function eye(x, y, r, mode, lid){
+  if (mode === 'sleep') return `<path d="M${x-r} ${y} Q${x} ${y+r*.9} ${x+r} ${y}" fill="none" ${st()}/>`;
+  let s = `<g class="eyeG"><circle cx="${x}" cy="${y}" r="${r}" fill="#fff" ${st()}/><circle cx="${x+r*.12}" cy="${y+r*.1}" r="${r*.56}" fill="${INK}"/><circle cx="${x-r*.12}" cy="${y-r*.22}" r="${r*.2}" fill="#fff"/>`;
+  if (mode === 'half') s += `<path d="M${x-r-1} ${y+.5} A${r+1} ${r+1} 0 0 1 ${x+r+1} ${y+.5} Z" fill="${lid}" ${st()}/>`;
+  return s + '</g>';
+}
+const dotEye = (x, y, r) => `<g class="eyeG"><circle cx="${x}" cy="${y}" r="${r}" fill="${INK}"/><circle cx="${x-r*.3}" cy="${y-r*.35}" r="${r*.32}" fill="#fff"/></g>`;
+const cheek = (x, y) => `<ellipse cx="${x}" cy="${y}" rx="4" ry="2.4" fill="#ff8f9a" opacity=".75"/>`;
+
+/* ---------- the friends (centre ≈ 0,0; about 50 units wide) ---------- */
+const ART = {
+  frog(p){
+    return `<ellipse cx="-16" cy="20" rx="8" ry="4.5" fill="${p.skin}" ${st()}/><ellipse cx="16" cy="20" rx="8" ry="4.5" fill="${p.skin}" ${st()}/>
+    <circle cx="-12" cy="-10" r="10" fill="${p.skin}" ${st()}/><circle cx="12" cy="-10" r="10" fill="${p.skin}" ${st()}/>
+    <ellipse cx="0" cy="5" rx="25" ry="17" fill="${p.skin}" ${st()}/><ellipse cx="0" cy="10" rx="14" ry="9" fill="${p.belly}"/>
+    ${hl(-10,-1,8,3.5)}
+    ${eye(-12,-11,6.2,p.eye,p.skin)}${eye(12,-11,6.2,p.eye,p.skin)}
+    <path d="M-8 4 Q0 10 8 4" fill="none" ${st()}/>${p.cheek?cheek(-15,5)+cheek(15,5):''}`;
+  },
+  capy(p){
+    return `<ellipse cx="9" cy="-15" rx="5" ry="4" fill="${p.ear}" ${st()}/>
+    <ellipse cx="-7" cy="4" rx="30" ry="17" fill="${p.skin}" ${st()}/>
+    <ellipse cx="17" cy="-2" rx="16" ry="13.5" fill="${p.skin}" ${st()}/>
+    <rect x="25" y="-11" width="15" height="17" rx="7" fill="${p.snout}" ${st()}/>
+    <ellipse cx="36.5" cy="-5" rx="1.7" ry="1.1" fill="${INK}"/>
+    ${hl(-14,-6,12,4)}
+    ${p.eye==='sleep'?eye(20,-5,3.4,'sleep'):dotEye(21,-5,2.6)}
+    ${p.cheek?cheek(21,2):''}${p.yuzu?`<circle cx="12" cy="-20" r="7" fill="#f7b733" ${st()}/><path d="M12 -27 q4 -4 8 -2 q-3 4 -8 2z" fill="#7cb85a" ${st()}/>`:''}`;
+  },
+  hedgehog(p){
+    let d = 'M-26 12', n = 15;
+    for (let i = 0; i <= n; i++){ const a = Math.PI*(1 - i/n*0.86), r = i%2 ? 31 : 22; d += ` L${(-4+Math.cos(a)*r).toFixed(1)} ${(10-Math.sin(a)*r).toFixed(1)}`; }
+    return `<path d="${d} Z" fill="${p.spikes}" ${st()}/><ellipse cx="13" cy="5" rx="13" ry="10" fill="${p.face}" ${st()}/>
+    <circle cx="26" cy="3" r="3" fill="${INK}"/>${p.eye==='sleep'?eye(15,1,3.2,'sleep'):dotEye(16,1,2.4)}${p.cheek?cheek(14,8):''}`;
+  },
+  mouse(p){
+    return `<ellipse cx="0" cy="18" rx="13" ry="11" fill="${p.fur}" ${st()}/>
+    <circle cx="-11" cy="-10" r="8" fill="${p.fur}" ${st()}/><circle cx="11" cy="-10" r="8" fill="${p.fur}" ${st()}/>
+    <circle cx="-11" cy="-10" r="4" fill="${p.inner}"/><circle cx="11" cy="-10" r="4" fill="${p.inner}"/>
+    <circle cx="0" cy="1" r="12" fill="${p.fur}" ${st()}/>${hl(-5,-5,5,2.5)}
+    ${p.eye==='sleep'?eye(-5,0,2.8,'sleep')+eye(5,0,2.8,'sleep'):dotEye(-5,0,2.2)+dotEye(5,0,2.2)}
+    <circle cx="0" cy="6" r="2" fill="${p.inner}" ${st()}/>${p.cheek?cheek(-8,6)+cheek(8,6):''}`;
+  },
+  bunny(p){
+    return `<ellipse cx="0" cy="20" rx="14" ry="11" fill="${p.fur}" ${st()}/>
+    <ellipse cx="-6" cy="-22" rx="5" ry="14" fill="${p.fur}" ${st()} transform="rotate(-8 -6 -22)"/><ellipse cx="6" cy="-22" rx="5" ry="14" fill="${p.fur}" ${st()} transform="rotate(10 6 -22)"/>
+    <ellipse cx="-6" cy="-21" rx="2.2" ry="9" fill="${p.inner}" transform="rotate(-8 -6 -21)"/><ellipse cx="6" cy="-21" rx="2.2" ry="9" fill="${p.inner}" transform="rotate(10 6 -21)"/>
+    <circle cx="0" cy="2" r="13" fill="${p.fur}" ${st()}/>${hl(-5,-4,5,2.5)}
+    ${p.eye==='sleep'?eye(-5,1,3,'sleep')+eye(5,1,3,'sleep'):dotEye(-5,1,2.3)+dotEye(5,1,2.3)}
+    <path d="M-2 6.5 h4 l-2 2z" fill="${p.inner}" ${st()}/>${p.cheek?cheek(-9,7)+cheek(9,7):''}`;
+  },
+  owl(p){
+    return `<path d="M-15 -14 L-12 -26 L-5 -17 Z M15 -14 L12 -26 L5 -17 Z" fill="${p.body}" ${st()}/>
+    <ellipse cx="0" cy="2" rx="17" ry="20" fill="${p.body}" ${st()}/><ellipse cx="0" cy="9" rx="10" ry="11" fill="${p.belly}"/>
+    <circle cx="-7" cy="-6" r="7" fill="${p.mask}"/><circle cx="7" cy="-6" r="7" fill="${p.mask}"/>
+    ${p.eye==='sleep'?eye(-7,-6,4,'sleep')+eye(7,-6,4,'sleep'):eye(-7,-6,4.6,'open')+eye(7,-6,4.6,'open')}
+    <path d="M-2.5 0 L2.5 0 L0 4.5 Z" fill="#f2a93b" ${st()}/>${p.cheek?cheek(-11,3)+cheek(11,3):''}`;
+  },
+  snail(p){
+    return `<path d="M-26 14 Q-26 6 -14 6 L18 6 Q26 6 26 -6 L28 -16 M22 -6 L21 -17" fill="none" ${st()}/>
+    <path d="M-26 14 Q-26 6 -14 6 L16 6 Q24 6 25 -4 Q28 14 14 14 Z" fill="${p.body}" ${st()}/>
+    <circle cx="28" cy="-17" r="2.4" fill="${INK}"/><circle cx="21" cy="-18" r="2.4" fill="${INK}"/>
+    <circle cx="-4" cy="-6" r="15" fill="${p.shell}" ${st()}/><path d="M-4 -6 m0 0 a3 3 0 1 1 3 3 a7 7 0 1 1 -7 -9 a11 11 0 1 1 12 11" fill="none" ${st()}/>
+    ${hl(-10,-14,6,3)}${p.eye==='sleep'?eye(21,0,2.6,'sleep'):dotEye(21,0,2.2)}${p.cheek?cheek(17,8):''}`;
+  },
+  bird(p){
+    return `<path d="M-14 4 L-25 -2 L-24 10 Z" fill="${p.body}" ${st()}/><circle cx="0" cy="2" r="14" fill="${p.body}" ${st()}/>
+    <ellipse cx="2" cy="8" rx="8" ry="6" fill="${p.belly}"/><path d="M-8 2 q6 8 12 0" fill="none" ${st()}/>${hl(-5,-5,5,2.5)}
+    <path d="M12 -2 L20 1 L12 4 Z" fill="#f2a93b" ${st()}/>${p.eye==='sleep'?eye(6,-3,2.8,'sleep'):dotEye(7,-3,2.2)}${p.cheek?cheek(6,4):''}`;
+  },
+  cat(p){
+    return `<path d="M18 14 q16 -2 12 -14" fill="none" stroke="${INK}" stroke-width="7.5" stroke-linecap="round"/><path d="M18 14 q16 -2 12 -14" fill="none" stroke="${p.fur}" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="4" cy="8" rx="22" ry="12" fill="${p.fur}" ${st()}/>
+    <path d="M-19 -6 L-17 -20 L-9 -12 Z M-1 -12 L5 -21 L5 -6 Z" fill="${p.fur}" ${st()}/>
+    <circle cx="-8" cy="-2" r="12" fill="${p.fur}" ${st()}/>${hl(-12,-7,5,2.5)}
+    ${p.eye==='sleep'?eye(-13,-1,3,'sleep')+eye(-3,-1,3,'sleep'):dotEye(-13,-1,2.4)+dotEye(-3,-1,2.4)}
+    <path d="M-9.5 4 h3 l-1.5 1.6z" fill="#ff8f9a" ${st()}/>${p.cheek?cheek(-16,4)+cheek(0,4):''}`;
+  },
+};
+/* palettes: camo (hiding, takes the colours of where it hides) / found (its own colours) */
+const LOOK = {
+  frog:    { found:{skin:'#86d15a',belly:'#f4e27a',eye:'open',cheek:1} },
+  capy:    { found:{skin:'#c08752',ear:'#99643a',snout:'#8f5d3b',eye:'open',cheek:1} },
+  hedgehog:{ found:{spikes:'#8a6248',face:'#f1d3a8',eye:'open',cheek:1} },
+  mouse:   { found:{fur:'#c9c3cf',inner:'#ffb3bd',eye:'open',cheek:1} },
+  bunny:   { found:{fur:'#fbf6ee',inner:'#ffb3bd',eye:'open',cheek:1} },
+  owl:     { found:{body:'#b5845a',belly:'#efd9b2',mask:'#f7ecd6',eye:'open',cheek:1} },
+  snail:   { found:{body:'#f0d9a0',shell:'#e58a5c',eye:'open',cheek:1} },
+  bird:    { found:{body:'#6fb3e8',belly:'#e9f4fb',eye:'open',cheek:1} },
+  cat:     { found:{fur:'#f4a95c',eye:'open',cheek:1} },
+};
+function drawFriend(f, look){ return `<g transform="scale(${f.flip?-1:1},1)">${ART[f.kind](look)}</g>`; }
+
+const CAPY_CAMO = [
+  {skin:'#b8ab9b',ear:'#a89a89',snout:'#aa9c8c',eye:'sleep'},
+  {skin:'#ab9e8f',ear:'#9c8f80',snout:'#9f9283',eye:'sleep'},
+  {skin:'#c2b6a6',ear:'#b2a596',snout:'#b4a898',eye:'sleep'},
+];
+/* ---------- shared decor ---------- */
+function pad(x, y, r, c, rot){ // lily pad with a notch
+  const ry = r*.62, a = (rot||0), cx = (r*Math.cos(.32)).toFixed(1), cy = (ry*Math.sin(.32)).toFixed(1);
+  return `<g transform="translate(${x} ${y}) rotate(${a})"><path d="M0 0 L${cx} ${-cy} A${r} ${ry} 0 1 0 ${cx} ${cy} Z" fill="${c}" ${st()}/>
+  <path d="M0 0 L${-r*.6} ${-ry*.5} M0 0 L${-r*.7} ${ry*.35} M0 0 L${r*.1} ${ry*.75}" stroke="${INK}" stroke-opacity=".22" stroke-width="1.6" fill="none"/></g>`;
+}
+function lotus(x, y, s){
+  return `<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 4 C-10 2 -14 -8 -12 -12 C-6 -10 -2 -6 0 -2 C2 -6 6 -10 12 -12 C14 -8 10 2 0 4Z" fill="#f7a8b8" ${st()}/><path d="M0 2 C-5 -4 -4 -12 0 -16 C4 -12 5 -4 0 2Z" fill="#fbc9d3" ${st()}/></g>`;
+}
+function rock(x, y, rx, ry, c, rot){
+  return `<g transform="translate(${x} ${y}) rotate(${rot||0})"><path d="M${-rx} ${ry*.35} C${-rx} ${-ry*.9} ${-rx*.35} ${-ry} 0 ${-ry} C${rx*.5} ${-ry} ${rx} ${-ry*.7} ${rx} ${ry*.2} C${rx} ${ry} ${rx*.6} ${ry} 0 ${ry} C${-rx*.7} ${ry} ${-rx} ${ry} ${-rx} ${ry*.35}Z" fill="${c}" ${st()}/>${hl(-rx*.35,-ry*.45,rx*.35,ry*.18)}</g>`;
+}
+function bush(x, y, r, c, seed){
+  const R = rng(seed); let d = '';
+  const n = 7, parts = [];
+  for (let i = 0; i < n; i++){ const a = Math.PI*(1 - i/(n-1)); parts.push(`<circle cx="${(x+Math.cos(a)*r*.75).toFixed(1)}" cy="${(y-Math.sin(a)*r*.55).toFixed(1)}" r="${(r*(0.55+R()*0.15)).toFixed(1)}"`); }
+  parts.push(`<ellipse cx="${x}" cy="${y}" rx="${r*1.05}" ry="${r*.55}"`);
+  return parts.map(q => `${q} fill="${c}" ${st()}/>`).join('') + parts.map(q => `${q} fill="${c}"/>`).join('') +
+    `<path d="M${x-r*.5} ${y-r*.2} q${r*.2} ${-r*.18} ${r*.4} 0 M${x+r*.1} ${y-r*.45} q${r*.2} ${-r*.18} ${r*.4} 0" stroke="${INK}" stroke-opacity=".35" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
+}
+function tuft(x, y, c){ return `<path d="M${x-8} ${y} q2 -12 4 -14 q1 8 2 12 q2 -12 5 -16 q0 10 1 16 q3 -8 6 -10 q-1 6 -2 12z" fill="${c}" ${st()}/>`; }
+
+/* ============================================================
+   SCENES — one consistent core (look, tap), three hiding ideas:
+   1 pond: camouflage on lily pads (easy)   2 hot spring: lookalikes among stones   3 night garden: peeking from cover
+   ============================================================ */
+const SCENES = [
+  {
+    id:'pond', title:'Pond Choir', task:'Find 5 frogs', kind:'frog', notes:'pond', seed:11,
+    doneTitle:'The pond choir is complete', tell:'blink', bg:'#8fd0c9',
+    seats:[[92,150],[146,142],[200,138],[254,142],[308,150]], seatScale:.82,
+    friends:[ // x,y,scale,flip, cover = drawn in front while hiding
+      {kind:'frog',x:205,y:332,s:1.12, camo:{skin:'#66b46a',belly:'#79c27a',eye:'half'}},
+      {kind:'frog',x:84,y:470,s:.98, camo:{skin:'#5aa865',belly:'#6db876',eye:'half'}, cover:'padFront1'},
+      {kind:'frog',x:318,y:432,s:.92, camo:{skin:'#66b46a',belly:'#79c27a',eye:'half'}},
+      {kind:'frog',x:262,y:600,s:.95, camo:{skin:'#5aa865',belly:'#6db876',eye:'half'}, cover:'reedFront'},
+      {kind:'frog',x:126,y:648,s:.86, camo:{skin:'#66b46a',belly:'#79c27a',eye:'half'}},
+    ],
+    back(){
+      const R = rng(7); let s = '';
+      s += `<rect width="400" height="720" fill="#8fd0c9"/>`;
+      for (let i = 0; i < 16; i++){ const y = 230 + i*31, x = 20 + R()*360; s += `<path d="M${x} ${y} q12 -4 24 0 M${x+40} ${y+12} q8 -3 16 0" stroke="#fff" stroke-opacity=".45" stroke-width="2" fill="none" stroke-linecap="round"/>`; }
+      // bank + log stage
+      s += `<path d="M0 0 H400 V196 C340 214 280 206 200 214 C120 220 60 206 0 214 Z" fill="#cfe6a8" ${st()}/>`;
+      s += tuft(24,206,'#a9d27d')+tuft(372,204,'#a9d27d')+tuft(330,40,'#a9d27d')+tuft(50,46,'#a9d27d');
+      s += `<g><rect x="56" y="156" width="288" height="30" rx="15" fill="#b7835a" ${st()}/><ellipse cx="344" cy="171" rx="9" ry="15" fill="#e3c08f" ${st()}/><path d="M344 165 a4 5 0 1 0 1 0" fill="none" ${st()}/>
+      <path d="M90 166 h40 M160 176 h60 M240 166 h50" stroke="${INK}" stroke-opacity=".3" stroke-width="2" stroke-linecap="round"/></g>`;
+      s += `<g opacity=".9"><path d="M200 34 l0 22" ${st()}/><path d="M188 70 q12 -14 24 0" fill="none" ${st()}/></g>`; // little conductor's music stand
+      s += `<rect x="186" y="54" width="28" height="18" rx="3" fill="#fff" ${st()}/><path d="M191 60 h18 M191 65 h12" stroke="${INK}" stroke-width="1.6"/>`;
+      // pads (decoys) avoiding the frogs' faces
+      const pads = [[210,350,52,'#6dbb6a',8],[80,486,44,'#62b064',-20],[322,446,40,'#6dbb6a',30],[268,616,42,'#62b064',150],[128,662,40,'#6dbb6a',-60],
+        [60,300,34,'#62b064',40],[330,300,38,'#6dbb6a',-140],[150,410,30,'#62b064',90],[250,480,34,'#6dbb6a',-30],[350,560,30,'#62b064',60],
+        [40,590,30,'#6dbb6a',120],[190,540,36,'#62b064',-100],[340,680,34,'#6dbb6a',10],[40,700,28,'#62b064',200],[130,260,26,'#6dbb6a',170],[270,250,30,'#62b064',-10],[210,690,26,'#62b064',70]];
+      pads.forEach(p => s += pad(p[0],p[1],p[2],p[3],p[4]));
+      s += lotus(150,404,1)+lotus(356,556,.9)+lotus(52,296,.85)+lotus(194,536,1.05)+lotus(270,246,.8);
+      // round "eye-like" decoys: water-lily buds in pairs
+      [[330,296],[248,476],[44,586]].forEach(([x,y]) => s += `<circle cx="${x-6}" cy="${y-4}" r="5" fill="#9ed49a" ${st()}/><circle cx="${x+6}" cy="${y-4}" r="5" fill="#9ed49a" ${st()}/>`);
+      return s;
+    },
+    covers:{
+      padFront1: () => pad(66,500,26,'#6dbb6a',-160),
+      reedFront: () => `<path d="M236 628 q4 -30 -2 -52 M244 630 q8 -28 6 -60 M252 630 q-2 -20 -10 -38" fill="none" stroke="${INK}" stroke-width="7" stroke-linecap="round"/><path d="M236 628 q4 -30 -2 -52 M244 630 q8 -28 6 -60 M252 630 q-2 -20 -10 -38" fill="none" stroke="#7aa55a" stroke-width="3.2" stroke-linecap="round"/>`,
+    },
+    front(){ return ''; },
+    seatMark(x, y){ return `<ellipse cx="${x}" cy="${y+12}" rx="16" ry="5" fill="none" stroke="${INK}" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 4"/>`; },
+    finale(){ musicNotes(); },
+  },
+  {
+    id:'spring', title:'Hot Spring', task:'Find 7 capybaras', kind:'capy', notes:'spring', seed:23,
+    doneTitle:'Everyone made it to the hot spring', tell:'ear', bg:'#d9cdb3',
+    seats:[[78,128],[134,140],[192,132],[250,140],[308,128],[150,104],[262,104]], seatScale:.78, yuzu:true,
+    friends:[
+      {kind:'capy',x:156,y:300,s:1.08, camo:CAPY_CAMO[0], cover:'rockTail'},
+      {kind:'capy',x:300,y:392,s:1.0, flip:1, camo:CAPY_CAMO[1], cover:'rockTail'},
+      {kind:'capy',x:86,y:468,s:1.02, camo:CAPY_CAMO[0], cover:'rockTail'},
+      {kind:'capy',x:236,y:520,s:.96, flip:1, camo:CAPY_CAMO[1], cover:'rockFront'},
+      {kind:'capy',x:322,y:618,s:.98, camo:CAPY_CAMO[2], cover:'grassFront'},
+      {kind:'capy',x:104,y:640,s:1.04, flip:1, camo:CAPY_CAMO[1], cover:'rockTail'},
+      {kind:'capy',x:222,y:694,s:.92, camo:CAPY_CAMO[0], cover:'rockFront'},
+    ],
+    back(){
+      let s = `<rect width="400" height="720" fill="#c5d99a"/>`;
+      s += `<path d="M0 0 H400 V40 C330 30 300 60 240 50 C180 40 120 64 60 48 C30 40 10 48 0 52 Z" fill="#e8dcbe" ${st()}/>`;
+      s += `<ellipse cx="200" cy="140" rx="178" ry="78" fill="#a89a89" ${st()}/><ellipse cx="200" cy="136" rx="160" ry="62" fill="#8fd3d6" ${st()}/>`;
+      s += `<path d="M70 120 q20 -6 40 0 M250 110 q20 -6 40 0 M160 160 q20 -6 40 0" stroke="#fff" stroke-opacity=".6" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+      s += `<g class="steam" opacity="0"><path d="M120 80 q-10 -16 0 -30 q10 -14 0 -28 M200 74 q-10 -16 0 -30 q10 -14 0 -28 M280 80 q-10 -16 0 -30 q10 -14 0 -28" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/></g>`;
+      // a field of loaf-shaped stones in capybara tones (lookalikes)
+      const R = rng(5), cols = CAPY_CAMO.map(c => c.skin);
+      const rocks = [[262,282,34,21],[58,318,30,19],[352,300,26,18],[208,372,30,19],[118,386,26,17],[26,410,22,16],[356,470,30,19],[166,462,32,20],
+        [306,540,32,21],[36,552,28,19],[176,580,28,18],[372,676,24,17],[278,650,30,19],[30,680,28,18],[330,712,28,15],[134,718,26,14],[270,446,24,16],
+        [62,246,26,17],[334,236,28,18],[226,250,22,15],[120,520,22,15],[384,560,20,15],[196,640,24,16],[352,370,22,15],[230,460,20,14],[22,620,20,14]];
+      rocks.forEach(r => s += rock(r[0], r[1], r[2], r[3], cols[(R()*3)|0], (R()-.5)*16));
+      // stones with an ear-like bump or a dark speck — they look like capybaras at a glance
+      [[262,262,-8],[166,443,6],[306,520,-4],[58,300,5],[278,632,-6]].forEach(([x,y,dx]) => s += `<ellipse cx="${x+dx}" cy="${y}" rx="5" ry="3.8" fill="#9c8f80" ${st()}/>`);
+      [[282,284],[140,388],[328,544]].forEach(([x,y]) => s += `<ellipse cx="${x}" cy="${y}" rx="1.8" ry="1.2" fill="${INK}"/>`);
+      s += tuft(200,300,'#a7c47b')+tuft(30,470,'#a7c47b')+tuft(380,520,'#a7c47b')+tuft(150,520,'#a7c47b')+tuft(270,704,'#a7c47b')+tuft(380,420,'#a7c47b');
+      [[46,232],[376,404],[24,600],[364,548],[196,420]].forEach(([x,y]) => s += `<circle cx="${x}" cy="${y}" r="6" fill="#f7b733" ${st()}/>`); // fallen yuzu
+      return s;
+    },
+    covers:{
+      rockTail: (f) => { const d = f.flip ? 1 : -1; return rock(f.x + d*30*f.s, f.y + 10*f.s, 22*f.s, 15*f.s, CAPY_CAMO[2].skin, d*6); },
+      rockFront: (f) => rock(f.x - 6*f.s, f.y + 16*f.s, 26*f.s, 11*f.s, CAPY_CAMO[1].skin, 0),
+      grassFront: (f) => tuft(f.x-14,f.y+20,'#a7c47b')+tuft(f.x+2,f.y+22,'#9cbd70')+tuft(f.x-30,f.y+20,'#9cbd70'),
+    },
+    front(){ return `<path d="M22 150 C40 214 360 214 378 150 C370 200 30 200 22 150Z" fill="#a89a89" ${st()}/><path d="M40 150 C70 196 330 196 360 150" fill="#8fd3d6" ${st()}/>`; },
+    seatMark(x, y){ return `<ellipse cx="${x}" cy="${y+8}" rx="18" ry="5" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="2" stroke-dasharray="4 4"/>`; },
+    finale(){ const g = svgEl.querySelector('.steam'); if (g) g.animate([{opacity:0},{opacity:1}], {duration:900, fill:'forwards'}); },
+  },
+  {
+    id:'night', title:'Night Garden', task:'Find 8 sleepy friends', kind:'mixed', notes:'night', seed:37,
+    doneTitle:'The night garden is all lit up', tell:'z', bg:'#2f3d5c', dark:true,
+    seats:[[56,150],[100,150],[144,150],[188,150],[232,150],[276,150],[320,150],[360,150]], seatScale:.66,
+    friends:[
+      {kind:'hedgehog',x:96,y:318,s:.95, camo:{spikes:'#3c5e4b',face:'#6f7e6e',eye:'sleep'}, cover:'bush1'},
+      {kind:'mouse',x:300,y:352,s:.95, camo:{fur:'#6c6a78',inner:'#7c6f7a',eye:'sleep'}, cover:'pot1'},
+      {kind:'bunny',x:198,y:438,s:.95, camo:{fur:'#7d8295',inner:'#857d8a',eye:'sleep'}, cover:'fence'},
+      {kind:'owl',x:344,y:500,s:.85, camo:{body:'#4e4148',belly:'#5d5056',mask:'#655860',eye:'sleep'}},
+      {kind:'snail',x:76,y:520,s:.85, camo:{body:'#6b7466',shell:'#7a5f5a',eye:'sleep'}},
+      {kind:'bird',x:236,y:556,s:.95, camo:{body:'#4c5d77',belly:'#5d6c85',eye:'sleep'}, cover:'nest'},
+      {kind:'cat',x:132,y:640,s:.95, flip:1, camo:{fur:'#7a6656',eye:'sleep'}, cover:'basket'},
+      {kind:'mouse',x:322,y:664,s:.8, camo:{fur:'#6c6a78',inner:'#7c6f7a',eye:'sleep'}, cover:'cup'},
+    ],
+    back(){
+      let s = `<rect width="400" height="720" fill="#2f3d5c"/>`;
+      const R = rng(3); for (let i = 0; i < 26; i++) s += `<circle cx="${(R()*400).toFixed(0)}" cy="${(R()*120).toFixed(0)}" r="${(R()*1.4+.6).toFixed(1)}" fill="#fff" opacity="${(.4+R()*.5).toFixed(2)}"/>`;
+      s += `<circle cx="340" cy="52" r="22" fill="#f4ecc8" ${st()}/><circle cx="350" cy="46" r="20" fill="#2f3d5c"/>`;
+      s += `<path d="M0 190 C80 176 140 196 200 186 C280 174 330 194 400 184 V720 H0Z" fill="#3e5a4b" ${st()}/>`;
+      // lantern string + bench (stage)
+      s += `<path d="M20 84 Q200 130 380 84" fill="none" stroke="${INK}" stroke-width="2"/>`;
+      s += `<rect x="30" y="164" width="344" height="12" rx="5" fill="#7a5a44" ${st()}/><path d="M50 176 v20 M354 176 v20" ${st()}/>`;
+      // tree with hole (owl stays visible beside it), shrubs, pots, mushrooms
+      s += `<path d="M366 720 V430 q-6 -40 20 -70 M366 470 q-30 -20 -40 -50" fill="none" stroke="${INK}" stroke-width="22" stroke-linecap="round"/><path d="M366 720 V430 q-6 -40 20 -70 M366 470 q-30 -20 -40 -50" fill="none" stroke="#5b4636" stroke-width="16" stroke-linecap="round"/>`;
+      s += bush(40,250,34,'#36594a',4) + bush(250,280,30,'#3a5f4d',9) + bush(372,262,26,'#36594a',12) + bush(30,460,28,'#3a5f4d',15) + bush(300,460,26,'#36594a',19);
+      [[180,320],[40,610],[250,640]].forEach(([x,y],i) => s += `<path d="M${x-14} ${y-24} h28 l-4 24 h-20z" fill="#7a5f5a" ${st()}/><path d="M${x-17} ${y-30} h34 v7 h-34z" fill="#866a63" ${st()}/>`); // empty pots
+      [[160,520],[54,394],[350,600],[230,350]].forEach(([x,y]) => s += `<rect x="${x-4}" y="${y-12}" width="8" height="14" rx="3" fill="#cbbfae" ${st()}/><path d="M${x-15} ${y-11} q15 -20 30 0z" fill="#7a5f5a" ${st()}/>`); // mushrooms
+      [[118,560],[290,560],[204,700]].forEach(([x,y]) => s += rock(x,y,16,11,'#55606e',0));
+      s += bush(270,720,30,'#36594a',27) + bush(20,740,30,'#3a5f4d',31) + bush(196,610,22,'#36594a',33);
+      [[30,312],[228,214],[150,236],[296,214],[260,400],[60,700],[180,672]].forEach(([x,y]) => s += tuft(x,y,'#4f7360'));
+      [[290,330],[160,604]].forEach(([x,y]) => s += `<circle cx="${x-5}" cy="${y-4}" r="6" fill="#55606e" ${st()}/><circle cx="${x+6}" cy="${y-5}" r="5" fill="#55606e" ${st()}/>`); // round pebbles that read like ears
+      s += `<path d="M330 724 q30 -30 60 0" fill="#4a3b33"/>`;
+      return s;
+    },
+    covers:{
+      bush1: () => bush(84,352,30,'#3a5f4d',21),
+      pot1: () => `<path d="M284 356 h32 l-5 30 h-22z" fill="#7a5f5a" ${st()}/><path d="M280 349 h40 v9 h-40z" fill="#866a63" ${st()}/>`,
+      fence: () => { let s = ''; for (let i = 0; i < 6; i++){ const x = 156 + i*17; s += `<path d="M${x} 474 v-52 l6 -7 l6 7 v52z" fill="#6d6458" ${st()}/>`; } return s + `<rect x="150" y="434" width="108" height="8" rx="2" fill="#6d6458" ${st()}/><rect x="150" y="458" width="108" height="8" rx="2" fill="#6d6458" ${st()}/>`; },
+      nest: () => `<path d="M212 560 q24 22 48 0 q-4 -6 -24 -6 q-20 0 -24 6z" fill="#7d5d44" ${st()}/><path d="M216 562 q20 10 40 0" fill="none" stroke="${INK}" stroke-opacity=".5" stroke-width="1.6"/>`,
+      basket: () => `<path d="M102 648 h60 l-6 24 h-48z" fill="#9c7a52" ${st()}/><path d="M106 656 h52 M110 664 h44" stroke="${INK}" stroke-opacity=".45" stroke-width="1.6"/>`,
+      cup: () => `<path d="M304 668 h36 q0 22 -18 22 q-18 0 -18 -22z" fill="#9aa7bb" ${st()}/><path d="M340 672 q10 0 8 8 q-2 6 -10 5" fill="none" ${st()}/>`,
+    },
+    front(){ return ''; },
+    seatMark(x, y, i){ return `<circle cx="${x}" cy="${y-4}" r="9" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2" stroke-dasharray="3 4"/>`; },
+    lanterns:[[56,96],[100,104],[144,110],[188,112],[232,112],[276,110],[320,104],[360,96]],
+    finale(){ fireflies(); },
+  },
+];
+
+/* ============================================================
+   STATE + SAVE
+   ============================================================ */
+const KEY = 'hlf.v1';
+let save = { scene:0, found:{}, done:{}, mute:false };
+try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') save = Object.assign(save, s); } catch(e){}
+function persist(){ try { localStorage.setItem(KEY, JSON.stringify(save)); } catch(e){} }
+
+let cur = null;           // current scene def
+let found = new Set();    // indices found in current scene
+let nodes = [];           // per friend: {camo, actor}
+let busy = false, completeShown = false, lastFind = performance.now();
+const timers = [];
+function later(fn, ms){ const t = setTimeout(fn, ms); timers.push(t); return t; }
+function clearTimers(){ timers.forEach(clearTimeout); timers.length = 0; }
+
+/* ============================================================
+   AUDIO (real files, Web Audio for low latency)
+   ============================================================ */
+let ctx = null; const buf = {};
+const SFX = ['found','miss','hint','done','tap','card'];
+function audioInit(){
+  if (ctx) { if (ctx.state === 'suspended') ctx.resume(); return; }
+  const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+  ctx = new AC();
+  const names = SFX.slice(); ['pond','spring','night'].forEach(n => { for (let i = 0; i < 8; i++) names.push(`${n}-n${i}`); });
+  names.forEach(n => fetch(`audio/${n}.mp3`).then(r => r.arrayBuffer()).then(a => ctx.decodeAudioData(a)).then(b => buf[n] = b).catch(() => {}));
+}
+function play(name, vol, when){
+  if (save.mute || !ctx || !buf[name]) return;
+  const s = ctx.createBufferSource(), g = ctx.createGain(); s.buffer = buf[name]; g.gain.value = vol == null ? .8 : vol;
+  s.connect(g).connect(ctx.destination); s.start(ctx.currentTime + (when || 0));
+}
+const note = (i, vol, when) => play(`${cur.notes}-n${i % 8}`, vol, when);
+function buzz(ms){ try { navigator.vibrate && navigator.vibrate(ms); } catch(e){} }
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function sceneSVG(def, allFound){ // static picture (postcards, menu)
+  let s = def.back();
+  def.seats.forEach((p, i) => { if (!allFound) s += def.seatMark(p[0], p[1], i); });
+  if (def.lanterns) def.lanterns.forEach((p) => s += lantern(p[0], p[1], allFound));
+  def.friends.forEach((f, i) => {
+    if (allFound){
+      const [x, y] = def.seats[i], look = Object.assign({}, LOOK[f.kind].found, def.yuzu ? {yuzu:1} : {});
+      s += `<g transform="translate(${x} ${y}) scale(${def.seatScale})">${drawFriend({kind:f.kind, flip:i%2&&def.id!=='pond'}, look)}</g>`;
+    } else {
+      s += `<g transform="translate(${f.x} ${f.y}) scale(${f.s})">${drawFriend(f, f.camo)}</g>`;
+      if (f.cover) s += def.covers[f.cover](f);
+    }
+  });
+  s += def.front();
+  if (def.dark) s += `<rect width="400" height="720" fill="#101830" opacity="${allFound ? 0 : .28}" pointer-events="none"/>`;
+  return s;
+}
+function lantern(x, y, on){
+  return `<g class="lan" data-x="${x}"><path d="M${x} ${y-10} v6" ${st()}/>${on?`<circle cx="${x}" cy="${y+6}" r="20" fill="#ffd77a" opacity=".35"/>`:''}
+  <rect x="${x-7}" y="${y-4}" width="14" height="18" rx="5" fill="${on?'#ffd77a':'#5a6378'}" ${st()}/><path d="M${x-4} ${y-4} h8" ${st()}/></g>`;
+}
+
+function buildScene(idx){
+  clearTimers(); busy = false; completeShown = false;
+  cur = SCENES[idx]; save.scene = idx; persist();
+  found = new Set(save.found[cur.id] || []);
+  svgEl.innerHTML = '';
+  svgEl.style.background = cur.bg;
+  const L = (cls) => { const g = document.createElementNS(NS, 'g'); g.setAttribute('class', cls); svgEl.appendChild(g); return g; };
+  const back = L('back'); back.innerHTML = cur.back();
+  const marks = L('marks'); cur.seats.forEach((p, i) => { const g = document.createElementNS(NS,'g'); g.innerHTML = cur.seatMark(p[0], p[1], i); g.setAttribute('data-seat', i); marks.appendChild(g); });
+  const lans = L('lans'); if (cur.lanterns) cur.lanterns.forEach((p, i) => { const g = document.createElementNS(NS,'g'); g.innerHTML = lantern(p[0], p[1], found.has(i)); g.setAttribute('data-l', i); lans.appendChild(g); });
+  const seatLayer = L('seated');
+  const front = L('front'); front.innerHTML = cur.front();
+  const hide = L('hide');
+  nodes = cur.friends.map((f, i) => {
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('transform', `translate(${f.x} ${f.y}) scale(${f.s})`);
+    g.setAttribute('class', 'fr'); g.setAttribute('data-i', i);
+    g.innerHTML = drawFriend(f, f.camo);
+    const c = document.createElementNS(NS, 'g'); if (f.cover) c.innerHTML = cur.covers[f.cover](f);
+    hide.appendChild(g); hide.appendChild(c);
+    return { camo:g, cover:c, actor:null };
+  });
+  const dark = L('dark'); if (cur.dark){ dark.innerHTML = `<rect width="400" height="720" fill="#101830" opacity="${darkness()}" pointer-events="none"/>`; }
+  L('fx'); L('actors');
+  // already-found friends sit in their seats
+  found.forEach(i => { nodes[i].camo.style.display = 'none'; seat(i, false); });
+  if (cur.finale && found.size === cur.friends.length){ /* finished earlier: show the finished scene quietly */ }
+  // HUD
+  $('taskText').textContent = cur.task;
+  const slots = $('slots'); slots.innerHTML = '';
+  cur.friends.forEach((f, i) => {
+    const d = document.createElement('div'); d.className = 'slot' + (found.has(i) ? ' on' : '');
+    d.innerHTML = `<svg viewBox="-34 -34 68 68"><g transform="scale(.95)">${drawFriend({kind:f.kind}, LOOK[f.kind].found)}</g></svg>`;
+    slots.appendChild(d);
+  });
+  updateCount();
+  lastFind = performance.now();
+  tellLoop(); choirLoop();
+  if (found.size === cur.friends.length) later(() => showDone(false), 400);
+}
+const darkness = () => cur.dark ? .3 * (1 - found.size / cur.friends.length) : 0;
+function updateCount(){ $('count').innerHTML = `${found.size}<small> / ${cur.friends.length}</small>`; }
+
+/* a found friend sits on its seat (stage layer) */
+function seat(i, animate){
+  const f = cur.friends[i], [sx, sy] = cur.seats[i], sc = cur.seatScale;
+  const look = Object.assign({}, LOOK[f.kind].found, cur.yuzu ? {yuzu:1} : {});
+  const flip = i % 2 && cur.id !== 'pond';
+  const g = document.createElementNS(NS, 'g');
+  g.setAttribute('transform', `translate(${sx} ${sy}) scale(${sc})`);
+  g.innerHTML = `<g class="body">${drawFriend({kind:f.kind, flip}, look)}</g>`;
+  g.setAttribute('data-seated', i);
+  svgEl.querySelector('.seated').appendChild(g);
+  const m = svgEl.querySelector(`[data-seat="${i}"]`); if (m) m.style.display = 'none';
+  if (cur.lanterns){ const l = svgEl.querySelector(`[data-l="${i}"]`); if (l) l.innerHTML = lantern(cur.lanterns[i][0], cur.lanterns[i][1], true); }
+  nodes[i].seated = g;
+  if (animate){ const b = g.querySelector('.body'); b.classList.add('sing'); later(() => b.classList.remove('sing'), 450); }
+}
+
+/* ============================================================
+   INPUT
+   ============================================================ */
+function toScene(cx, cy){ const p = svgEl.createSVGPoint(); p.x = cx; p.y = cy; return p.matrixTransform(svgEl.getScreenCTM().inverse()); }
+function hitRadius(f){ return Math.max(30, 28 * f.s); }
+svgEl.addEventListener('pointerdown', (e) => {
+  audioInit();
+  if (!cur || completeShown) return;
+  const p = toScene(e.clientX, e.clientY);
+  let best = -1, bd = 1e9;
+  cur.friends.forEach((f, i) => { if (found.has(i)) return; const d = Math.hypot(p.x - f.x, p.y - f.y); if (d < hitRadius(f) && d < bd){ bd = d; best = i; } });
+  if (best >= 0) find(best); else miss(p);
+});
+
+function find(i){
+  found.add(i); save.found[cur.id] = [...found]; persist(); lastFind = performance.now();
+  const f = cur.friends[i];
+  play('found', .7); note(i, .9, .05); buzz(18);
+  // 1) colour in on the spot with a ring burst
+  const fx = svgEl.querySelector('.fx'), actors = svgEl.querySelector('.actors');
+  const ring = document.createElementNS(NS, 'circle'); ring.setAttribute('cx', f.x); ring.setAttribute('cy', f.y); ring.setAttribute('r', 10);
+  ring.setAttribute('fill', 'none'); ring.setAttribute('stroke', '#fff'); ring.setAttribute('stroke-width', 4); fx.appendChild(ring);
+  ring.animate([{r:10, opacity:1}, {r:52, opacity:0}], {duration:520, easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish = () => ring.remove();
+  sparkle(f.x, f.y);
+  nodes[i].camo.style.display = 'none';
+  const a = document.createElementNS(NS, 'g');
+  const look = Object.assign({}, LOOK[f.kind].found, cur.yuzu ? {yuzu:1} : {});
+  a.innerHTML = `<g class="body">${drawFriend(f, look)}</g>`;
+  actors.appendChild(a); nodes[i].actor = a;
+  // slot + count
+  const slot = $('slots').children[i]; slot.classList.add('on', 'pop'); setTimeout(() => slot.classList.remove('pop'), 520);
+  updateCount();
+  if (cur.dark) svgEl.querySelector('.dark rect').animate([{opacity:darkness() + .3/cur.friends.length}, {opacity:darkness()}], {duration:800, fill:'forwards'});
+  // 2) pop, then hop along an arc to its seat
+  const [sx, sy] = cur.seats[i], s0 = f.s, s1 = cur.seatScale;
+  const t0 = performance.now(), pop = 380, fly = 720;
+  const flip = (i % 2 && cur.id !== 'pond') ? -1 : 1;
+  const step = (now) => {
+    const t = now - t0;
+    if (t < pop){
+      const k = t / pop, sc = s0 * (1 + .28 * Math.sin(k * Math.PI));
+      a.setAttribute('transform', `translate(${f.x} ${f.y - 10 * Math.sin(k * Math.PI)}) scale(${sc})`);
+    } else if (t < pop + fly){
+      const k = (t - pop) / fly, e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2) / 2;
+      const x = f.x + (sx - f.x) * e, y = f.y + (sy - f.y) * e - Math.sin(e * Math.PI) * 90;
+      const sc = s0 + (s1 - s0) * e;
+      a.setAttribute('transform', `translate(${x} ${y}) scale(${sc * (k > .5 && flip < 0 ? 1 : 1)})`);
+    } else {
+      a.remove(); nodes[i].actor = null; seat(i, true); note(i, .7);
+      if (found.size === cur.friends.length) complete();
+      return;
+    }
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+function sparkle(x, y){
+  const fx = svgEl.querySelector('.fx');
+  for (let k = 0; k < 7; k++){
+    const a = k / 7 * Math.PI * 2 + Math.random() * .4, d = 34 + Math.random() * 16;
+    const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 3.2);
+    c.setAttribute('fill', ['#ffd77a','#fff','#ff8f9a'][k % 3]); fx.appendChild(c);
+    c.animate([{transform:'translate(0,0)', opacity:1}, {transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`, opacity:0}], {duration:560, easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish = () => c.remove();
+  }
+}
+function miss(p){
+  play('miss', .5); buzz(6);
+  const fx = svgEl.querySelector('.fx');
+  const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', p.x); c.setAttribute('cy', p.y); c.setAttribute('r', 6);
+  c.setAttribute('fill', 'none'); c.setAttribute('stroke', cur.dark ? '#fff' : INK); c.setAttribute('stroke-opacity', '.5'); c.setAttribute('stroke-width', 2.5);
+  c.setAttribute('class', 'missRing'); fx.appendChild(c);
+  c.animate([{r:6, opacity:1}, {r:20, opacity:0}], {duration:380, easing:'ease-out'}).onfinish = () => c.remove();
+}
+
+/* ============================================================
+   TELLS (built-in, always on: a hidden friend gives itself away now and then)
+   ============================================================ */
+function tellLoop(){
+  const run = () => {
+    if (!cur || completeShown) return;
+    const left = cur.friends.map((f, i) => i).filter(i => !found.has(i));
+    if (left.length){
+      const i = left[(Math.random() * left.length) | 0];
+      tell(i);
+    }
+    later(run, 2600 + Math.random() * 1800);
+  };
+  later(run, 1200);
+}
+function tell(i){
+  const n = nodes[i], f = cur.friends[i]; if (!n || found.has(i)) return;
+  if (cur.tell === 'blink'){ n.camo.querySelectorAll('.eyeG').forEach(e => { e.classList.remove('blinkEye'); void e.getBBox(); e.classList.add('blinkEye'); }); }
+  else if (cur.tell === 'ear'){ n.camo.firstElementChild.classList.remove('wig'); void n.camo.getBBox(); n.camo.firstElementChild.classList.add('wig'); }
+  else { // z
+    const fx = svgEl.querySelector('.fx'), t = document.createElementNS(NS, 'text');
+    t.textContent = 'z'; t.setAttribute('x', f.x + 14); t.setAttribute('y', f.y - 22); t.setAttribute('fill', '#e8eefc');
+    t.setAttribute('font-size', 16); t.setAttribute('font-weight', 700); t.setAttribute('font-family', 'ui-rounded, -apple-system, system-ui');
+    t.setAttribute('pointer-events', 'none'); fx.appendChild(t);
+    t.animate([{transform:'translate(0,0)', opacity:0}, {opacity:.9, offset:.25}, {transform:'translate(10px,-26px)', opacity:0}], {duration:1700, easing:'ease-out'}).onfinish = () => t.remove();
+  }
+}
+
+/* ============================================================
+   CHOIR (signature): everyone already seated sings their note in turn — the song grows with every find
+   ============================================================ */
+function choirLoop(){
+  const run = () => {
+    if (!cur || completeShown) return;
+    const seated = [...found].sort((a, b) => a - b);
+    if (seated.length && performance.now() - lastFind > 1400){
+      seated.forEach((i, k) => {
+        note(i, .32, k * .2);
+        later(() => { const s = nodes[i] && nodes[i].seated; if (s){ const b = s.querySelector('.body'); b.classList.remove('sing'); void b.getBBox(); b.classList.add('sing'); } }, k * 200);
+      });
+    }
+    later(run, 4200);
+  };
+  later(run, 2600);
+}
+
+/* ============================================================
+   HINT — gentle, free, never required
+   ============================================================ */
+let hintReadyAt = 0;
+$('hintBtn').addEventListener('click', () => {
+  audioInit();
+  if (!cur || completeShown || performance.now() < hintReadyAt) return;
+  const left = cur.friends.map((f, i) => i).filter(i => !found.has(i)); if (!left.length) return;
+  const i = left[0], f = cur.friends[i];
+  play('hint', .6);
+  const fx = svgEl.querySelector('.fx');
+  const ox = (Math.random() - .5) * 40, oy = (Math.random() - .5) * 40;
+  const g = document.createElementNS(NS, 'circle'); g.setAttribute('cx', f.x + ox); g.setAttribute('cy', f.y + oy); g.setAttribute('r', 78);
+  g.setAttribute('fill', '#fff7d6'); g.setAttribute('opacity', 0); g.setAttribute('class', 'hintGlow'); g.setAttribute('pointer-events', 'none');
+  fx.insertBefore(g, fx.firstChild);
+  g.animate([{opacity:0, r:110}, {opacity:.42, r:78, offset:.3}, {opacity:.42, r:72, offset:.8}, {opacity:0, r:72}], {duration:2600, easing:'ease-in-out'}).onfinish = () => g.remove();
+  later(() => tell(i), 500); later(() => tell(i), 1500);
+  hintReadyAt = performance.now() + 5000;
+  const b = $('hintBtn'), fill = $('hintFill'); b.disabled = true;
+  fill.animate([{width:'0%'}, {width:'100%'}], {duration:5000});
+  setTimeout(() => { b.disabled = false; }, 5000);
+});
+
+/* ============================================================
+   COMPLETE → everyone together → postcard
+   ============================================================ */
+function complete(){
+  completeShown = true; clearTimers();
+  if (!save.done[cur.id]) save.done[cur.id] = true; persist();
+  // the whole group performs: notes up and down, then a chord
+  const n = cur.friends.length;
+  for (let r = 0; r < 2; r++) for (let i = 0; i < n; i++){
+    const k = r * n + i, idx = r ? n - 1 - i : i;
+    note(idx, .55, .25 + k * .13);
+    later(() => { const s = nodes[idx].seated; if (s){ const b = s.querySelector('.body'); b.classList.remove('sing'); void b.getBBox(); b.classList.add('sing'); } }, 250 + k * 130);
+  }
+  const chordAt = .25 + 2 * n * .13 + .1;
+  [0, 2, 4].forEach(i => note(i, .5, chordAt));
+  later(() => play('done', .7), chordAt * 1000 + 150);
+  cur.finale && cur.finale();
+  later(() => showDone(true), chordAt * 1000 + 1100);
+}
+function showDone(fresh){
+  completeShown = true;
+  $('doneTitle').textContent = cur.doneTitle;
+  const nDone = SCENES.filter(s => save.done[s.id]).length;
+  $('doneSub').textContent = `Postcard ${nDone} of ${SCENES.length} collected`;
+  $('postcard').innerHTML = `<svg viewBox="0 30 400 330" style="background:${cur.bg}">${sceneSVG(cur, true)}</svg><div class="cap">${cur.title}<span>${cur.friends.length} friends</span></div>
+    <svg class="stamp" viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" rx="4" fill="#fff" stroke="${INK}" stroke-width="2" stroke-dasharray="3 3"/><g transform="translate(30 32) scale(.62)">${drawFriend({kind:cur.friends[0].kind}, Object.assign({}, LOOK[cur.friends[0].kind].found))}</g></svg>`;
+  const last = save.scene >= SCENES.length - 1;
+  $('nextBtn').textContent = last ? 'See all postcards' : 'Next scene';
+  if (fresh) play('card', .6);
+  openSheet('doneSheet');
+}
+
+/* ============================================================
+   SHEETS
+   ============================================================ */
+let openId = null;
+function openSheet(id){ closeSheet(true); openId = id; $('veil').classList.add('show'); $(id).classList.add('show'); }
+function closeSheet(silent){ if (openId) $(openId).classList.remove('show'); $('veil').classList.remove('show'); openId = null; }
+$('nextBtn').addEventListener('click', () => {
+  audioInit(); play('tap', .5);
+  if (save.scene >= SCENES.length - 1){ openMenu(); return; }
+  closeSheet(); buildScene(save.scene + 1);
+});
+$('againBtn').addEventListener('click', () => { audioInit(); play('tap', .5); closeSheet(); restart(); });
+function restart(){ save.found[cur.id] = []; persist(); buildScene(save.scene); }
+function openMenu(){
+  const box = $('cards'); box.innerHTML = '';
+  SCENES.forEach((s, i) => {
+    const n = (save.found[s.id] || []).length, done = !!save.done[s.id];
+    const b = document.createElement('button'); b.className = 'btn card' + (i === save.scene ? ' cur' : ''); b.setAttribute('data-scene', i);
+    b.innerHTML = `<svg viewBox="0 0 400 720" style="background:${s.bg}">${sceneSVG(s, done)}</svg><b>${s.title}</b><i>${done ? 'Collected' : n ? `${n} of ${s.friends.length} found` : 'Not started'}</i>`;
+    b.addEventListener('click', () => { play('tap', .5); closeSheet(); if (i !== save.scene || completeShown){ if (done && (save.found[s.id] || []).length === s.friends.length) save.found[s.id] = []; buildScene(i); } });
+    box.appendChild(b);
+  });
+  $('menuSub').textContent = `${SCENES.filter(s => save.done[s.id]).length} of ${SCENES.length} postcards collected`;
+  openSheet('menuSheet');
+}
+$('menuBtn').addEventListener('click', () => { audioInit(); play('tap', .5); openMenu(); });
+$('closeBtn').addEventListener('click', () => { play('tap', .5); closeSheet(); if (completeShown) showDone(false); });
+$('restartBtn').addEventListener('click', () => { play('tap', .5); closeSheet(); restart(); });
+$('veil').addEventListener('click', () => { if (openId === 'menuSheet'){ closeSheet(); if (completeShown) showDone(false); } });
+function setMuteUI(){ $('sndWave').style.display = save.mute ? 'none' : ''; $('sndOff').style.display = save.mute ? '' : 'none'; $('soundBtn').setAttribute('aria-pressed', save.mute ? 'true' : 'false'); }
+$('soundBtn').addEventListener('click', () => { audioInit(); save.mute = !save.mute; persist(); setMuteUI(); play('tap', .5); });
+
+/* ---------- finales ---------- */
+function musicNotes(){
+  const fx = svgEl.querySelector('.fx');
+  for (let k = 0; k < 10; k++){
+    const [x, y] = cur.seats[k % cur.seats.length];
+    const t = document.createElementNS(NS, 'path');
+    t.setAttribute('d', `M${x} ${y-30} v-14 l9 -3 v14 M${x} ${y-30} a3.5 3 0 1 1 -1 -.1 M${x+9} ${y-33} a3.5 3 0 1 1 -1 -.1`);
+    t.setAttribute('fill', 'none'); t.setAttribute('stroke', INK); t.setAttribute('stroke-width', 2.2); t.setAttribute('stroke-linecap', 'round');
+    fx.appendChild(t);
+    t.animate([{transform:'translate(0,0)', opacity:0}, {opacity:1, offset:.2}, {transform:`translate(${(k%2?1:-1)*14}px,-60px)`, opacity:0}], {duration:1800, delay:k*170, easing:'ease-out', fill:'both'}).onfinish = () => t.remove();
+  }
+}
+function fireflies(){
+  const fx = svgEl.querySelector('.fx');
+  for (let k = 0; k < 18; k++){
+    const c = document.createElementNS(NS, 'circle'), x = 30 + Math.random() * 340, y = 220 + Math.random() * 460;
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 2.6); c.setAttribute('fill', '#ffe58a'); fx.appendChild(c);
+    c.animate([{opacity:0, transform:'translate(0,0)'}, {opacity:1, offset:.3}, {opacity:.2, offset:.6}, {opacity:1, offset:.8}, {opacity:0, transform:`translate(${(Math.random()-.5)*40}px,${-20-Math.random()*40}px)`}], {duration:2600 + Math.random()*1200, delay:Math.random()*600, fill:'both'});
+  }
+}
+
+/* ---------- iOS sheet guard: keep the document scroll parked in the middle of its cushion ---------- */
+function park(){ if (Math.abs(window.scrollY - 120) > 2) window.scrollTo(0, 120); }
+window.addEventListener('scroll', () => { clearTimeout(park.t); park.t = setTimeout(park, 80); }, {passive:true});
+window.addEventListener('load', park);
+
+/* ---------- start straight in the game ---------- */
+setMuteUI();
+buildScene(Math.min(Math.max(save.scene | 0, 0), SCENES.length - 1));
+// test hook (read-only facts for the QA robot)
+window.__hlf = { scenes:SCENES.map(s => ({id:s.id, friends:s.friends.map(f => ({x:f.x, y:f.y, r:hitRadius(f)}))})), audio:() => Object.keys(buf).length, state:() => ({scene:cur.id, found:[...found], done:Object.assign({}, save.done), complete:completeShown, sheet:openId}) };
+</script>
+</body>
+</html>

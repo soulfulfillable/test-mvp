@@ -21,3 +21,6 @@ Found animals **join a tiny scene and complete it together** — e.g. frogs form
 
 ## Done = 
 Reviewable Pages link, real-tap tests at 390px + desktop, report: what was tested, art source/license, limitations, reference-title research result.
+
+## Progress log
+- 2026-11-06 build session: prototype done and live at https://soulfulfillable.github.io/test-mvp/hidden-friends/ . Source `hidden_friends/game/index.html` (single file, SVG art drawn in code, no libraries), audio `hidden_friends/game/audio/` (CC0 uisfx, see `hidden_friends/CREDITS.md`). Wow point = the choir that grows with every find (each friend has its own note; seated friends sing in turn). Robot 69/69 (390×844, 375×667 touch; 1366×768 mouse). Reference title not identified. Details + next steps: `board/hidden-friends.md`.
