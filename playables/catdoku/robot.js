@@ -290,14 +290,14 @@ async function wrongCell(page) {
       const box = document.getElementById('stuck');
       const wrong = g.wrongCats();
       const grumpy = wrong.every(([r, c]) => (document.querySelectorAll('.cell')[r * n + c].querySelector('svg.cat use') || {}).getAttribute && document.querySelectorAll('.cell')[r * n + c].querySelector('svg.cat use').getAttribute('href') === '#s-h-mad');
-      return { stuck: g.stuck, cats: g.catCount, wrong: wrong.length, grumpy, framed: document.querySelectorAll('.cell.wrongcat').length, shown: !box.classList.contains('hidden'), text: document.getElementById('stuck-text').textContent, label: document.getElementById('undo-label').textContent, btn: !document.getElementById('undo-btn').classList.contains('hidden'), hearts: g.hearts };
+      return { stuck: g.stuck, cats: g.catCount, wrong: wrong.length, wrongCells: wrong, grumpy, framed: document.querySelectorAll('.cell.wrongcat').length, shown: !box.classList.contains('hidden'), text: document.getElementById('stuck-text').textContent, hearts: g.hearts };
     });
-    check('dead end: the wrong cats turn grumpy with a red frame, message names the row/area and the grumpy cats, one fix button, no heart lost', !!dead.stuck && dead.wrong >= 1 && dead.grumpy && dead.framed === dead.wrong && dead.shown && /no free spot left/.test(dead.text) && /grumpy/.test(dead.text) && /Pick up/.test(dead.label) && dead.btn && dead.hearts === 3, JSON.stringify(dead));
+    check('dead end: the wrong cats turn grumpy with a red frame, one line says to tap them, no heart lost', !!dead.stuck && dead.wrong >= 1 && dead.grumpy && dead.framed === dead.wrong && dead.shown && /Tap the grumpy cat/.test(dead.text) && dead.hearts === 3, JSON.stringify(dead));
     await shot(page, 'phone-390x844-stuck');
     const before = dead.cats;
-    await page.tap('#undo-btn'); await sleep(200);
+    for (const [r, c] of dead.wrongCells) { await tapCell(page, r, c, true); await sleep(150); }
     const fixed = await page.evaluate(() => ({ cats: window.__game.catCount, wrong: window.__game.wrongCats().length, stuck: window.__game.stuck, shown: !document.getElementById('stuck').classList.contains('hidden'), grumpyLeft: document.querySelectorAll('.cell.wrongcat').length, catsOnSolution: window.__game.placed.every(([r, c]) => window.__game.solution[r] === c) }));
-    check('the fix button picks up exactly the wrong cats; the right ones stay; the message goes away', fixed.cats === before - dead.wrong && fixed.wrong === 0 && !fixed.stuck && !fixed.shown && fixed.grumpyLeft === 0 && fixed.catsOnSolution, JSON.stringify(fixed));
+    check('tapping the grumpy cats picks them up; the right ones stay; the line goes away', fixed.cats === before - dead.wrong && fixed.wrong === 0 && !fixed.stuck && !fixed.shown && fixed.grumpyLeft === 0 && fixed.catsOnSolution, JSON.stringify(fixed));
     await context.close();
   }
 
