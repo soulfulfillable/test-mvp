@@ -1,0 +1,52 @@
+{
+    "advertisement": {
+        "interstitial": {
+            "preloadOnStart": "level_end",
+            "placementFallback": "level_end",
+            "placements": [
+                {
+                    "id": "level_end"
+                },
+                {
+                    "id": "round_end"
+                }
+            ]
+        },
+        "rewarded": {
+            "preloadOnStart": "hint",
+            "placementFallback": "hint",
+            "placements": [
+                {
+                    "id": "hint"
+                },
+                {
+                    "id": "continue"
+                }
+            ]
+        }
+    },
+    "leaderboards": [
+        {
+            "id": "levels",
+            "isMain": true
+        }
+    ],
+    "social": {
+        "shares": [
+            {
+                "id": "time",
+                "text": "Can you beat my time on today's Kitty Sudoku puzzle?"
+            }
+        ]
+    },
+    "saas": {
+        "publicToken": "cmw6vm5iq0v3qno0hih97vhin",
+        "leaderboards": {
+            "platforms": [
+                "playgama",
+                "qa_tool",
+                "playgama_sandbox"
+            ]
+        }
+    }
+}
