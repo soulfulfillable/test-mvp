@@ -378,7 +378,10 @@ async function playAgain(page) {
     check('first record is not a party (no old best to beat)', await page.evaluate(() => !window.__game.celeb && !document.getElementById('over-panel').classList.contains('hidden')));
     await playAgain(page); await page.waitForTimeout(300);
     await page.evaluate(() => { window.__game.setScore(41); window.__game.gameOver('time'); });   // round 2: beats 12 → the party
-    await page.waitForTimeout(250);
+    await page.waitForTimeout(120);
+    const c00 = await page.evaluate(() => window.__game.celeb);
+    check('the party starts the instant the round ends (no tap, under 0.5 s)', !!c00 && c00.fxOn && c00.cheering === 9 && c00.t < 0.5, JSON.stringify(c00));
+    await page.waitForTimeout(130);
     const c0 = await page.evaluate(() => ({ c: window.__game.celeb, panel: document.getElementById('over-panel').classList.contains('hidden') }));
     check('new best starts the celebration before the panel', !!c0.c && c0.c.kind === 'best' && c0.panel, JSON.stringify(c0));
     check('every hole has a cheering mole', !!c0.c && c0.c.cheering === 9, JSON.stringify(c0.c));
