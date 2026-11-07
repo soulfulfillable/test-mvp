@@ -155,7 +155,7 @@
   #undo-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
   .cell.stuck::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 2px dashed rgba(209,52,42,0.45); pointer-events: none; }
   .cell.why .fx { opacity: 0.38 !important; background: #e0493c; animation: none !important; }
-  .cell.dead .fx { opacity: 0.55 !important; background: #fff; animation: none !important; }
+  .cell.dead .fx { opacity: 0.66 !important; background: #fff; animation: none !important; }
   .cell.dead svg.ax { color: var(--ink); width: 48%; height: 48%; animation: deadpop 0.45s ease-out both; }
   @keyframes deadpop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
   body.calm .cell.dead svg.ax { animation: none; }
@@ -416,7 +416,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.4.2';
+  var GAME_VERSION = '1.4.3';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var hash = location.hash || '';
@@ -809,7 +809,6 @@
     else if (autoM[r][c] > 0) glyph(el, 'ax', 's-x');
     else glyph(el, '', null);
   }
-  var COLOR_NAMES = ['teal', 'blue', 'pink', 'green', 'yellow', 'light pink', 'purple', 'orange', 'tan'];
   // dead end: a row, column or color area with no cat and no free cell left (player feedback 11-07: "when there is
   // nowhere to tap, people do not know what to do") → say which, outline it, offer to undo the last cat
   function findStuck() {
@@ -843,9 +842,10 @@
     // in a line or cats touching — nothing else). So a dead end only states the visible fact: this row/column/area
     // is all crossed out and still needs a cat. Which cat to lift is the player's puzzle, as in every Queens game.
     stuckCells(st).forEach(function (p) { cellEls[p[0]][p[1]].classList.add('dead'); });
-    var where = st.type === 'row' ? 'this row' : st.type === 'column' ? 'this column' : 'the ' + COLOR_NAMES[st.i % COLOR_NAMES.length] + ' area';
-    var rule = st.type === 'row' ? 'each row needs a cat' : st.type === 'column' ? 'each column needs a cat' : 'each color needs a cat';
-    $('stuck-text').innerHTML = '<b>Every cell in ' + where + ' is crossed out</b>, but ' + rule + '. Pick up a cat and try another spot.';
+    // no color names (player 11-08: "pink" pointed at the wrong area — two pinks on the board); the faded cells ARE the pointer
+    var what = st.type === 'row' ? 'row' : st.type === 'column' ? 'column' : 'color area';
+    var rule = st.type === 'row' ? 'every row needs a cat' : st.type === 'column' ? 'every column needs a cat' : 'every color needs a cat';
+    $('stuck-text').innerHTML = '<b>The faded ' + what + ' is all crossed out</b>, but ' + rule + '. Pick up a cat and try another spot.';
     box.classList.remove('hidden');
     if (changed) { layout(); analytics('stuck', { mode: mode, level: level, type: st.type, cats: catCount }); }
   }

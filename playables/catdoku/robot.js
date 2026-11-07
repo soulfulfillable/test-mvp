@@ -299,7 +299,7 @@ async function wrongCell(page) {
       const deadHasNoCat = dead.every(([r, c]) => g.cell[r][c] !== 2) && dead.every(([r, c]) => g.conflictsWith(r, c).length > 0);
       return { stuck: g.stuck, cats: g.catCount, wrong: wrong.length, wrongCells: wrong, faces, grumpy: faces.filter(h => /mad/.test(h)).length, framed: document.querySelectorAll('.cell.wrongcat, .cell.whycat').length, shown: !box.classList.contains('hidden'), text: document.getElementById('stuck-text').textContent, hearts: g.hearts, dead: dead.length, unitOk, deadHasNoCat };
     });
-    check('dead end: the row/column/area with no room is tinted, one line says so, no heart lost', !!dead.stuck && dead.unitOk && dead.deadHasNoCat && dead.shown && /Every cell in (this row|this column|the \w+( \w+)? area) is crossed out/.test(dead.text) && /Pick up a cat/.test(dead.text) && dead.hearts === 3, JSON.stringify(dead));
+    check('dead end: the row/column/area with no room is tinted, one line says so, no heart lost', !!dead.stuck && dead.unitOk && dead.deadHasNoCat && dead.shown && /The faded (row|column|color area) is all crossed out/.test(dead.text) && !/pink|blue|teal|green|yellow|purple|orange|tan/.test(dead.text) && /Pick up a cat/.test(dead.text) && dead.hearts === 3, JSON.stringify(dead));
     check('dead end: no cat is called wrong by the hidden solution (player feedback: only a real rule break is "not allowed")', dead.wrong >= 1 && dead.grumpy === 0 && dead.framed === 0 && dead.faces.length === dead.cats, JSON.stringify({ wrong: dead.wrong, grumpy: dead.grumpy, framed: dead.framed, faces: dead.faces.length, cats: dead.cats }));
     await shot(page, 'phone-390x844-stuck');
     const before = dead.cats;
