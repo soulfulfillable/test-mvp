@@ -1,7 +1,7 @@
 # Kitty Queens: Cat Sudoku — Playgama/YouTube 판 — 개발 세션 게시판
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-07 12:20 KST · 작업 브랜치 `claude/catdoku-playables` (main 에 ff 반영됨) · 경로 `playables/catdoku/` (웹 `docs/catdoku.html` 은 그대로)
+- 마지막 저장: 2026-11-07 13:10 KST (v1.0.1 한 번 탭) · 작업 브랜치 `claude/catdoku-playables` (main 에 ff 반영됨) · 경로 `playables/catdoku/` (웹 `docs/catdoku.html` 은 그대로)
 - 승인(사용자 11-07 "착수. 이름은 너 추천대로"): `plans/catdoku-playables.md` 전부. 표기 이름 **Kitty Queens: Cat Sudoku**. 보고는 쉬운 영어.
 - 방금 끝낸 것: **①~⑧ 전부** — 게임 본체(`index.html`), 로봇 84/84(`qa/report.json`), 빌드 `dist/kitty-queens.zip`(2.97MB) + Pages 복사본 `docs/catdoku-playables/`, 커버 3종, `CREDITS.md`, **Playgama 게임 생성·폼·아카이브(빌드 체크 PASSED, Bridge 2.4.0 FOUND)·커버 3종 업로드 완료**. 런치 단계: archive ✅ bridge ✅ covers ✅ · form BLOCKED(NO_CERTIFICATION → QA 툴 인증은 Codex) · **sandbox TODO(publish_sandbox, 사용자 yes 필요)** · traffic BLOCKED(샌드박스 뒤, 사용자 결정).
 - 진행 중이던 것: 없음.
@@ -54,6 +54,7 @@
 - 아쉬운 점(숨기지 않음): ① 실기기 사파리 미확인(헤드리스 Chromium 만) ② 랭킹은 기기 로컬(오늘의 시간) + Bridge 리더보드 `levels` 는 config 선언만, 결과 화면 표시 없음 ③ 도전장 링크(웹판의 해시 공유)는 Playgama 에선 URL 을 못 바꿔 뺌 → 공유는 텍스트만 ④ BGM 2곡은 Mole Mash 와 같은 CC0 곡(우쿨렐레·래그타임) ⑤ 레벨 보상(별·꾸미기)은 없음 — 핵심 깊이에 집중, 필요하면 다음 판.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
+- 2026-11-07 "그냥 손가락 누르면 바로 고양이 들어가게 하자. 그림 고양이 괜찮" → v1.0.1: 탭 한 번 = 고양이(✕ 거치는 단계 삭제, 수동 ✕ 없음, 자동 ✕ 는 유지), 고양이 탭 = 제거. 온보딩·팁·Playgama 폼 문구 수정. 로봇 83/83(실제 탭 73). 그림 고양이는 그대로.
 - 2026-11-07 "착수. 이름은 너 추천대로" → Kitty Queens: Cat Sudoku 로 Playgama 드래프트 생성.
 - (웹 캣도쿠 10-02) "어렵다" → 레벨 1~3 은 5×5, 레벨 1 은 손가락 안내 + 실수해도 하트 안 깎임.
 

@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T01:53:11.152Z",
+  "startedAt": "2026-11-07T08:00:04.076Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -57,7 +57,7 @@
     {
       "name": "Play starts level 1 (5×5) with the finger guide on a solution cell",
       "ok": true,
-      "detail": "{\"state\":1,\"level\":1,\"N\":5,\"tut\":true,\"step\":1,\"guide\":[0,1],\"hand\":true,\"text\":\"Tap the glowing cell twice to put a cat there.\"}"
+      "detail": "{\"state\":1,\"level\":1,\"N\":5,\"tut\":true,\"step\":1,\"guide\":[0,1],\"hand\":true,\"text\":\"Tap the glowing cell to put a cat there.\"}"
     },
     {
       "name": "level_started message after start",
@@ -72,7 +72,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,clear,wrong,win,cat,heart,hint,lose,start,mute-on,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "cat,clear,mark,win,lose,heart,wrong,mute-on,start,mute-off,hint,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -80,14 +80,9 @@
       "detail": ""
     },
     {
-      "name": "first tap on the guided cell marks it and the guide says \"once more\"",
+      "name": "one tap places the cat, auto marks appear, guide moves to the next cat",
       "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "second tap places the cat, auto marks appear, guide moves to the next cat",
-      "ok": true,
-      "detail": "{\"cats\":1,\"step\":4,\"text\":\"See the marks? A cat rules out her row, column, color and the cells touching her. Tap the next glowing cell twice.\",\"auto\":10}"
+      "detail": "{\"cats\":1,\"step\":4,\"text\":\"See the marks? A cat rules out her row, column, color and the cells touching her. Tap the next glowing cell.\",\"auto\":10}"
     },
     {
       "name": "wrong cat on level 1: reason shown, no heart lost (free mistakes while learning)",
@@ -167,7 +162,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "0.61 → 0.61"
+      "detail": "0.55 → 0.55"
     },
     {
       "name": "Resume continues the level",
@@ -247,7 +242,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and share shown",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":0.9829000000001397,\"ranks\":1,\"day\":\"20261107\",\"rankVis\":true,\"share\":true}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.7020999999999767,\"ranks\":1,\"day\":\"20261107\",\"rankVis\":true,\"share\":true}"
     },
     {
       "name": "Share my time copies or shares the text",
@@ -267,7 +262,7 @@
     {
       "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.9829000000001397,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.7020999999999767,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -462,7 +457,7 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "taps": 146,
-  "passed": 84,
+  "taps": 73,
+  "passed": 83,
   "failed": 0
 }

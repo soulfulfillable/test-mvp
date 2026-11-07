@@ -64,7 +64,7 @@ async function tapCell(page, r, c, touch) {
   if (touch) await page.touchscreen.tap(p.x, p.y); else await page.mouse.click(p.x, p.y);
   report.taps++;
 }
-// place every cat of the solution with two taps each (mark, then cat); returns when the board is solved
+// place every cat of the solution with one tap each; returns when the board is solved
 async function solveBoard(page, touch, gapMs = 40) {
   const sol = await page.evaluate(() => window.__game.solution.slice());
   for (let r = 0; r < sol.length; r++) {
@@ -73,7 +73,6 @@ async function solveBoard(page, touch, gapMs = 40) {
     const already = await page.evaluate(([r, c]) => window.__game.cell[r][c] === 2, [r, sol[r]]);
     if (already) continue;
     await tapCell(page, r, sol[r], touch); await sleep(gapMs);
-    await tapCell(page, r, sol[r], touch); await sleep(gapMs);
   }
 }
 // a cell that breaks a rule against the cats already placed (same row as a placed cat, not the solution cell)
@@ -81,7 +80,7 @@ async function wrongCell(page) {
   return page.evaluate(() => {
     const g = window.__game, n = g.N;
     for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
-      if (g.cell[r][c] !== 0 && g.cell[r][c] !== 1) continue;
+      if (g.cell[r][c] === 2) continue;
       if (g.solution[r] === c) continue;
       // conflicts with a placed cat?
       for (let r2 = 0; r2 < n; r2++) for (let c2 = 0; c2 < n; c2++) if (g.cell[r2][c2] === 2 && (r2 === r || c2 === c || (Math.abs(r2 - r) <= 1 && Math.abs(c2 - c) <= 1) || g.region[r2][c2] === g.region[r][c])) return [r, c];
@@ -138,14 +137,12 @@ async function wrongCell(page) {
     await shot(page, 'phone-390x844-tutorial-1');
     // tutorial: wrong cat on level 1 costs nothing
     const g1 = l1.guide;
-    await tapCell(page, g1[0], g1[1], true); await sleep(120);
-    check('first tap on the guided cell marks it and the guide says "once more"', await page.evaluate(() => window.__game.cell[window.__game.guideCell[0]][window.__game.guideCell[1]] === 1 && window.__game.tutStep === 2));
     await tapCell(page, g1[0], g1[1], true); await sleep(250);
     const t3 = await page.evaluate(() => ({ cats: window.__game.catCount, step: window.__game.tutStep, text: document.getElementById('tut').textContent, auto: document.querySelectorAll('.cell svg.ax').length }));
-    check('second tap places the cat, auto marks appear, guide moves to the next cat', t3.cats === 1 && t3.step === 4 && t3.auto > 5 && /marks/.test(t3.text), JSON.stringify(t3));
+    check('one tap places the cat, auto marks appear, guide moves to the next cat', t3.cats === 1 && t3.step === 4 && t3.auto > 5 && /marks/.test(t3.text), JSON.stringify(t3));
     await shot(page, 'phone-390x844-tutorial-2');
     let wc = await wrongCell(page);
-    await tapCell(page, wc[0], wc[1], true); await sleep(60); await tapCell(page, wc[0], wc[1], true); await sleep(200);
+    await tapCell(page, wc[0], wc[1], true); await sleep(200);
     const tw = await page.evaluate(() => ({ hearts: window.__game.hearts, msg: document.getElementById('msg').textContent, cats: window.__game.catCount, bad: document.querySelectorAll('.cell.bad').length }));
     check('wrong cat on level 1: reason shown, no heart lost (free mistakes while learning)', tw.hearts === 3 && tw.msg.length > 5 && tw.cats === 1 && tw.bad >= 2, JSON.stringify(tw));
     await shot(page, 'phone-390x844-tutorial-wrong');
@@ -175,7 +172,7 @@ async function wrongCell(page) {
     await page.tap('#next-btn'); await sleep(300);
     check('level 11 is 7×7 with the hint button (rewarded supported)', await page.evaluate(() => window.__game.level === 11 && window.__game.N === 7 && !document.getElementById('hint-btn').classList.contains('hidden')));
     const sol11 = await page.evaluate(() => window.__game.solution.slice());
-    await tapCell(page, 0, sol11[0], true); await sleep(50); await tapCell(page, 0, sol11[0], true); await sleep(200);
+    await tapCell(page, 0, sol11[0], true); await sleep(200);
     await shot(page, 'phone-390x844-play-7x7');
     // keyboard P pause / resume, timer frozen
     await page.keyboard.press('KeyP'); await sleep(150);
@@ -208,7 +205,7 @@ async function wrongCell(page) {
     check('hint rewarded: one correct cat placed, button gone (one hint per puzzle)', hinted.cats === 2 && hinted.used && !hinted.btn, JSON.stringify(hinted));
     await shot(page, 'phone-390x844-hint');
     // three wrong cats
-    for (let i = 0; i < 3; i++) { wc = await wrongCell(page); await tapCell(page, wc[0], wc[1], true); await sleep(50); await tapCell(page, wc[0], wc[1], true); await sleep(250); if (i === 0) await shot(page, 'phone-390x844-wrong'); }
+    for (let i = 0; i < 3; i++) { wc = await wrongCell(page); await tapCell(page, wc[0], wc[1], true); await sleep(250); if (i === 0) await shot(page, 'phone-390x844-wrong'); }
     await sleep(900);
     const oh = await page.evaluate(() => ({ state: window.__game.state, hearts: window.__game.hearts, won: window.__game.won, title: document.getElementById('over-title').textContent, cont: !document.getElementById('continue-btn').classList.contains('hidden'), cats: window.__game.catCount, msgs: window.__msgs.slice(-1) }));
     check('three wrong cats → out of hearts, continue offered once, cats kept on the board', oh.state === 2 && oh.hearts === 0 && !oh.won && /hearts/i.test(oh.title) && oh.cont && oh.cats === 2 && oh.msgs[0] === 'level_failed', JSON.stringify(oh));
@@ -225,7 +222,7 @@ async function wrongCell(page) {
     const cont = await page.evaluate(() => ({ state: window.__game.state, hearts: window.__game.hearts, cats: window.__game.catCount, used: window.__game.continueUsed, frozen: window.__game.frozen }));
     check('rewarded: play continues with 3 hearts and the same board', cont.state === 1 && cont.hearts === 3 && cont.cats === 2 && cont.used && !cont.frozen, JSON.stringify(cont));
     await shot(page, 'phone-390x844-continued');
-    for (let i = 0; i < 3; i++) { wc = await wrongCell(page); await tapCell(page, wc[0], wc[1], true); await sleep(50); await tapCell(page, wc[0], wc[1], true); await sleep(200); }
+    for (let i = 0; i < 3; i++) { wc = await wrongCell(page); await tapCell(page, wc[0], wc[1], true); await sleep(200); }
     await sleep(900);
     check('no second continue in the same attempt', await page.evaluate(() => window.__game.state === 2 && document.getElementById('continue-btn').classList.contains('hidden')));
     await sleep(600);
@@ -282,12 +279,12 @@ async function wrongCell(page) {
     await page.evaluate(() => { window.__game.store.progress.tut = 1; window.__game.startLevel(2); });
     await sleep(100);
     const sol = await page.evaluate(() => window.__game.solution.slice());
-    await tapCell(page, 0, sol[0], false); await tapCell(page, 0, sol[0], false); await sleep(100);
+    await tapCell(page, 0, sol[0], false); await sleep(100);
     check('mouse click places a cat', await page.evaluate(() => window.__game.catCount === 1));
     await page.keyboard.press('ArrowDown');   // first press shows the cursor at the top-left cell
     await page.keyboard.press('ArrowDown'); await page.keyboard.press('ArrowDown');
     for (let i = 0; i < sol[2]; i++) await page.keyboard.press('ArrowRight');
-    await page.keyboard.press('Space'); await page.keyboard.press('Space'); await sleep(100);
+    await page.keyboard.press('Space'); await sleep(100);
     check('arrow keys + Space place a cat at the cursor', await page.evaluate(() => window.__game.cell[2][window.__game.solution[2]] === 2), `row 2 col ${sol[2]}`);
     await page.keyboard.press('Escape'); await sleep(100);
     check('Esc does nothing (1.5.2)', await page.evaluate(() => window.__game.state === 1 && !window.__game.userPaused));
@@ -298,7 +295,7 @@ async function wrongCell(page) {
   // ── 3. size matrix: play state (7×7 with a few cats), layout sanity; square + landscape results panel ──
   for (const [name, w, h] of SIZES) {
     const { context, page } = await newPage(browser, w, h, base + '#debug', { touch: w < 700 });
-    await page.evaluate(() => { window.__game.store.progress.tut = 1; window.__game.startLevel(11); const s = window.__game.solution; [0, 3].forEach((r) => { window.__game.tap(r, s[r]); window.__game.tap(r, s[r]); }); });
+    await page.evaluate(() => { window.__game.store.progress.tut = 1; window.__game.startLevel(11); const s = window.__game.solution; [0, 3].forEach((r) => { window.__game.tap(r, s[r]); }); });
     await sleep(250);
     const lay = await page.evaluate(() => {
       const g = window.__game, W = innerWidth, H = innerHeight;
@@ -313,7 +310,7 @@ async function wrongCell(page) {
     if (name === 'square-640x640' || name === 'land-844x390' || name === 'phone-360x640') {
       await page.evaluate(() => { window.__game.hearts = 1; });
       const wc = await wrongCell(page);
-      await page.evaluate(([r, c]) => { window.__game.tap(r, c); window.__game.tap(r, c); }, wc); await sleep(900);
+      await page.evaluate(([r, c]) => { window.__game.tap(r, c); }, wc); await sleep(900);
       const panel = await page.evaluate(() => { const r = document.getElementById('over-panel').getBoundingClientRect(); return { fits: r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth, h: Math.round(r.height), state: window.__game.state }; });
       check(`results panel fits at ${name}`, panel.fits && panel.state === 2, `panel ${panel.h}px of ${h}`);
       await shot(page, name + '-over');

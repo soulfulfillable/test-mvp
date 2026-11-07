@@ -273,7 +273,7 @@
   </div>
   <div id="foot">
     <div id="tut" class="hidden"></div>
-    <div id="tip">Tap a cell once for a mark, twice for a cat. Tap a cat to remove it.</div>
+    <div id="tip">Tap a cell to place a cat. Tap the cat to remove it.</div>
   </div>
 </div>
 
@@ -349,7 +349,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.0.0';
+  var GAME_VERSION = '1.0.1';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var PAGE = 25;
@@ -764,34 +764,31 @@
     if (state !== STATE_PLAY || frozen()) return;
     unlockAudio();
     var cur = cell[r][c];
-    if (cur === 0) {
-      cell[r][c] = 1; updateCell(r, c); play('mark', 0.95 + Math.random() * 0.1);
-      if (tutorial && tutStep === 1 && isGuide(r, c)) setTut(2);
-    } else if (cur === 1) {
-      var conf = conflictsWith(r, c);
-      if (conf.length) {
-        cell[r][c] = 0; updateCell(r, c);
-        conf.forEach(function (f) { var el = cellEls[f.r][f.c]; el.classList.remove('bad'); void el.offsetWidth; el.classList.add('bad'); });
-        var me = cellEls[r][c]; me.classList.remove('bad'); void me.offsetWidth; me.classList.add('bad');
-        boardEl.classList.remove('shake'); void boardEl.offsetWidth; boardEl.classList.add('shake');
-        play('wrong'); buzz(80);
-        if (tutorial) { flashMsg(conf[0].why); setTut(tutStep <= 2 ? 1 : 5, conf[0].why); updateHud(); return; }   // first level: mistakes are free
-        hearts--;
-        flashMsg(conf[0].why);
-        var hs = $('hearts').children; if (hs[hearts]) hs[hearts].classList.add('flash');
-        updateHud();
-        analytics('wrong_cat', { mode: mode, level: level, why: conf[0].why });
-        if (hearts <= 0) { gameOver(false); return; }
-      } else {
-        placeCat(r, c, false); play('cat', 0.95 + catCount * 0.03); buzz(15);
-        updateHud();
-        if (tutorial) { if (tutStep <= 2) setTut(3); else if (tutStep === 3 || tutStep === 4) setTut(5); }
-        if (catCount === N) { gameOver(true); return; }
-      }
-    } else if (cur === 2) {
+    if (cur === 2) {
       removeCat(r, c); play('clear'); updateHud();
       if (tutorial && tutStep >= 3 && catCount === 0) setTut(1);
+      return;
     }
+    // one tap = a cat (player feedback 11-07: no mark step in between)
+    var conf = conflictsWith(r, c);
+    if (conf.length) {
+      conf.forEach(function (f) { var el = cellEls[f.r][f.c]; el.classList.remove('bad'); void el.offsetWidth; el.classList.add('bad'); });
+      var me = cellEls[r][c]; me.classList.remove('bad'); void me.offsetWidth; me.classList.add('bad');
+      boardEl.classList.remove('shake'); void boardEl.offsetWidth; boardEl.classList.add('shake');
+      play('wrong'); buzz(80);
+      flashMsg(conf[0].why);
+      if (tutorial) { setTut(tutStep <= 2 ? 1 : 5, conf[0].why); updateHud(); return; }   // first level: mistakes are free
+      hearts--;
+      var hs = $('hearts').children; if (hs[hearts]) hs[hearts].classList.add('flash');
+      updateHud();
+      analytics('wrong_cat', { mode: mode, level: level, why: conf[0].why });
+      if (hearts <= 0) { gameOver(false); return; }
+      return;
+    }
+    placeCat(r, c, false); play('cat', 0.95 + catCount * 0.03); buzz(15);
+    updateHud();
+    if (tutorial) { if (tutStep <= 2) setTut(3); else if (tutStep === 3 || tutStep === 4) setTut(5); }
+    if (catCount === N) { gameOver(true); return; }
   }
 
   // ---------- onboarding (first level, 5×5): a hand shows where the first two cats go ----------
@@ -807,9 +804,9 @@
     t.classList.remove('hidden');
     if (step === 1 || step === 2) {
       guideCell = nextGuide();
-      t.textContent = step === 1 ? (why ? why.charAt(0) + why.slice(1).toLowerCase() + ' Let’s try this spot: tap it twice.' : 'Tap the glowing cell twice to put a cat there.') : 'Once more: tap it again to place the cat.';
+      t.textContent = why ? why.charAt(0) + why.slice(1).toLowerCase() + ' Let’s try this spot: tap it.' : 'Tap the glowing cell to put a cat there.';
     } else if (step === 3) {
-      t.textContent = 'See the marks? A cat rules out her row, column, color and the cells touching her. Tap the next glowing cell twice.';
+      t.textContent = 'See the marks? A cat rules out her row, column, color and the cells touching her. Tap the next glowing cell.';
       guideCell = nextGuide();
       tutStep = 4;
     } else if (step === 5) {
@@ -929,7 +926,7 @@
     userPaused = false; pausedTotal = 0; pausedAt = 0; practice = false;
     runStart = performance.now();
     state = STATE_PLAY;
-    $('tip').textContent = isDesktop ? 'Click a cell once for a mark, twice for a cat. Arrow keys + Space work too.' : 'Tap a cell once for a mark, twice for a cat. Tap a cat to remove it.';
+    $('tip').textContent = isDesktop ? 'Click a cell to place a cat, click the cat to remove it. Arrow keys + Space work too.' : 'Tap a cell to place a cat. Tap the cat to remove it.';
     updateHud(); renderTimer();
     layout();
     play('start');
