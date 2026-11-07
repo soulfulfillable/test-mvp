@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T12:48:25.433Z",
+  "startedAt": "2026-11-07T15:14:59.002Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -40,6 +40,11 @@
       "detail": ""
     },
     {
+      "name": "Horangi is the default cat (title pill, HUD icon)",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "title screen shows the game title (rule 3.5.1)",
       "ok": true,
       "detail": ""
@@ -67,7 +72,7 @@
     {
       "name": "Play starts level 1 (5×5) with the finger guide on a solution cell",
       "ok": true,
-      "detail": "{\"state\":1,\"level\":1,\"N\":5,\"tut\":true,\"step\":1,\"guide\":[0,1],\"hand\":true,\"text\":\"Tap the glowing cell to put a cat there.\"}"
+      "detail": "{\"state\":1,\"level\":1,\"N\":5,\"tut\":true,\"step\":1,\"guide\":[0,1],\"hand\":true,\"text\":\"Tap the glowing cell to put Horangi there.\"}"
     },
     {
       "name": "level_started message after start",
@@ -82,7 +87,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "clear,mark,cat,win,wrong,lose,heart,hint,start,mute-on,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "mark,clear,cat,wrong,win,heart,lose,hint,start,mute-on,mute-off,bgm_ukulele,bgm_ragtime"
     },
     {
       "name": "music looping",
@@ -92,7 +97,12 @@
     {
       "name": "one tap places the cat, auto marks appear, guide moves to the next cat",
       "ok": true,
-      "detail": "{\"cats\":1,\"step\":4,\"text\":\"See the marks? A cat rules out her row, column, color and the cells touching her. Tap the next glowing cell.\",\"auto\":10}"
+      "detail": "{\"cats\":1,\"step\":4,\"text\":\"See the marks? Horangi rules out the row, the column, the color and the cells next door. Tap the next glowing cell.\",\"auto\":10}"
+    },
+    {
+      "name": "the placed cat is Horangi",
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "calm mode (default): marks appear at once, no pink wave animation running",
@@ -182,7 +192,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "0.55 → 0.55"
+      "detail": "0.54 → 0.54"
     },
     {
       "name": "Resume continues the level",
@@ -262,12 +272,12 @@
     {
       "name": "daily solved by taps: time recorded, rank list and share shown",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":0.7158000000000174,\"ranks\":1,\"day\":\"20261107\",\"rankVis\":true,\"share\":true}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6120999999999913,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
     },
     {
       "name": "Share my time copies or shares the text",
       "ok": true,
-      "detail": "Kitty Queens Nov 7: I placed all 7 cats in 0:01. Same puzzle"
+      "detail": "Kitty Queens Nov 8: I found all 7 spots for Horangi in 0:01."
     },
     {
       "name": "Title button leaves the results panel",
@@ -282,7 +292,7 @@
     {
       "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.7158000000000174,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6120999999999913,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -326,6 +336,16 @@
     },
     {
       "name": "Esc does nothing (1.5.2)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Cat switch: classic orange cat on the board and the title, saved",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Cat switch back to Horangi restores the drawing and the blink",
       "ok": true,
       "detail": ""
     },
@@ -473,6 +493,7 @@
     "phone-390x844-daily-solved.png",
     "phone-390x844-levels.png",
     "phone-390x844-levels-bottom.png",
+    "iframe-1280x720-classic-cat.png",
     "iframe-1280x720-win-lively.png",
     "iframe-1280x720-play.png",
     "phone-360x640-play.png",
@@ -496,6 +517,6 @@
     "wide-21x9-910x390-play.png"
   ],
   "taps": 76,
-  "passed": 90,
+  "passed": 94,
   "failed": 0
 }

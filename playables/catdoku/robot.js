@@ -118,6 +118,7 @@ async function wrongCell(page) {
     const msgs = await page.evaluate(() => window.__msgs.slice());
     check('game_ready sent exactly once', msgs.filter((m) => m === 'game_ready').length === 1, JSON.stringify(msgs));
     check('title cat is an inline drawing with blinking eyes', await page.evaluate(() => !!document.querySelector('#title-logo .eyes')));
+    check('Horangi is the default cat (title pill, HUD icon)', await page.evaluate(() => window.__game.skin === 'horangi' && /Horangi/.test(document.getElementById('skin-pill').textContent) && document.querySelector('#progress use').getAttribute('href') === '#s-h-cat'));
     check('title screen shows the game title (rule 3.5.1)', await page.evaluate(() => /Kitty Queens/.test(document.querySelector('#title-panel h1').textContent) && document.title === 'Kitty Queens: Cat Sudoku'));
     check('no emoji anywhere in the page text (rule 4.3.2)', await page.evaluate(() => !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(document.body.innerText)));
     await shot(page, 'phone-390x844-title');
@@ -141,7 +142,8 @@ async function wrongCell(page) {
     const g1 = l1.guide;
     await tapCell(page, g1[0], g1[1], true); await sleep(250);
     const t3 = await page.evaluate(() => ({ cats: window.__game.catCount, step: window.__game.tutStep, text: document.getElementById('tut').textContent, auto: document.querySelectorAll('.cell svg.ax').length }));
-    check('one tap places the cat, auto marks appear, guide moves to the next cat', t3.cats === 1 && t3.step === 4 && t3.auto > 5 && /marks/.test(t3.text), JSON.stringify(t3));
+    check('one tap places the cat, auto marks appear, guide moves to the next cat', t3.cats === 1 && t3.step === 4 && t3.auto > 5 && /marks/.test(t3.text) && /Horangi/.test(t3.text), JSON.stringify(t3));
+    check('the placed cat is Horangi', await page.evaluate(() => document.querySelector('.cell svg.cat use').getAttribute('href') === '#s-h-cat'));
     check('calm mode (default): marks appear at once, no pink wave animation running', await page.evaluate(() => { const w = document.querySelectorAll('.cell.wave'); const fx = w[0] && getComputedStyle(w[0].querySelector('.fx')).animationName; return window.__game.calm && document.body.classList.contains('calm') && w.length === document.querySelectorAll('.cell svg.ax').length && w.length >= 10 && fx === 'none'; }));
     await shot(page, 'phone-390x844-tutorial-2');
     let wc = await wrongCell(page);
@@ -296,6 +298,11 @@ async function wrongCell(page) {
     check('arrow keys + Space place a cat at the cursor', await page.evaluate(() => window.__game.cell[2][window.__game.solution[2]] === 2), `row 2 col ${sol[2]}`);
     await page.keyboard.press('Escape'); await sleep(100);
     check('Esc does nothing (1.5.2)', await page.evaluate(() => window.__game.state === 1 && !window.__game.userPaused));
+    await page.evaluate(() => window.__game.toggleSkin()); await sleep(50);
+    check('Cat switch: classic orange cat on the board and the title, saved', await page.evaluate(() => window.__game.skin === 'classic' && window.__game.store.settings.skin === 'classic' && document.querySelector('.cell svg.cat use').getAttribute('href') === '#s-cat' && !document.querySelector('#title-logo .eyes') && /Classic/.test(document.getElementById('skin-pill').textContent)));
+    await shot(page, 'iframe-1280x720-classic-cat');
+    await page.evaluate(() => window.__game.toggleSkin()); await sleep(50);
+    check('Cat switch back to Horangi restores the drawing and the blink', await page.evaluate(() => window.__game.skin === 'horangi' && document.querySelector('.cell svg.cat use').getAttribute('href') === '#s-h-cat' && !!document.querySelector('#title-logo .eyes')));
     await page.evaluate(() => window.__game.toggleFx());
     check('Effects toggle switches to Lively and saves it', await page.evaluate(() => !window.__game.calm && window.__game.store.settings.fx === 'lively' && !document.body.classList.contains('calm')));
     const solL = await page.evaluate(() => window.__game.solution.slice());
