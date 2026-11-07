@@ -117,6 +117,7 @@ async function wrongCell(page) {
     check('bridge initialized (mock platform outside Playgama)', await page.evaluate(() => window.__game.bridgeReady && window.bridge.platform.id), await page.evaluate(() => window.bridge.platform.id));
     const msgs = await page.evaluate(() => window.__msgs.slice());
     check('game_ready sent exactly once', msgs.filter((m) => m === 'game_ready').length === 1, JSON.stringify(msgs));
+    check('title cat is an inline drawing with blinking eyes', await page.evaluate(() => !!document.querySelector('#title-logo .eyes')));
     check('title screen shows the game title (rule 3.5.1)', await page.evaluate(() => /Kitty Queens/.test(document.querySelector('#title-panel h1').textContent) && document.title === 'Kitty Queens: Cat Sudoku'));
     check('no emoji anywhere in the page text (rule 4.3.2)', await page.evaluate(() => !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(document.body.innerText)));
     await shot(page, 'phone-390x844-title');
@@ -140,13 +141,18 @@ async function wrongCell(page) {
     await tapCell(page, g1[0], g1[1], true); await sleep(250);
     const t3 = await page.evaluate(() => ({ cats: window.__game.catCount, step: window.__game.tutStep, text: document.getElementById('tut').textContent, auto: document.querySelectorAll('.cell svg.ax').length }));
     check('one tap places the cat, auto marks appear, guide moves to the next cat', t3.cats === 1 && t3.step === 4 && t3.auto > 5 && /marks/.test(t3.text), JSON.stringify(t3));
+    check('pink wave rolls over every ruled-out cell (staggered by distance)', await page.evaluate(() => { const w = document.querySelectorAll('.cell.wave'); const ds = new Set([...w].map((e) => e.style.getPropertyValue('--d'))); return w.length === document.querySelectorAll('.cell svg.ax').length && w.length >= 10 && ds.size >= 3; }));
     await shot(page, 'phone-390x844-tutorial-2');
     let wc = await wrongCell(page);
     await tapCell(page, wc[0], wc[1], true); await sleep(200);
-    const tw = await page.evaluate(() => ({ hearts: window.__game.hearts, msg: document.getElementById('msg').textContent, cats: window.__game.catCount, bad: document.querySelectorAll('.cell.bad').length }));
-    check('wrong cat on level 1: reason shown, no heart lost (free mistakes while learning)', tw.hearts === 3 && tw.msg.length > 5 && tw.cats === 1 && tw.bad >= 2, JSON.stringify(tw));
+    const tw = await page.evaluate(() => ({ hearts: window.__game.hearts, msg: document.getElementById('msg').textContent, cats: window.__game.catCount, bad: document.querySelectorAll('.cell.bad').length, nope: !!document.querySelector('.cell svg.nope') }));
+    check('wrong cat on level 1: reason shown, grumpy cat refuses, no heart lost (free mistakes while learning)', tw.hearts === 3 && tw.msg.length > 5 && tw.cats === 1 && tw.bad >= 2 && tw.nope, JSON.stringify(tw));
     await shot(page, 'phone-390x844-tutorial-wrong');
     await solveBoard(page, true, 60);
+    await sleep(350);
+    const burst = await page.evaluate(() => ({ fx: window.__game.fxCount, won: document.getElementById('board').classList.contains('won'), msg: document.getElementById('msg').textContent, canvas: !document.getElementById('fx').classList.contains('hidden') }));
+    check('win: confetti burst on the canvas, cats bounce, SOLVED! flashes', burst.fx > 80 && burst.won && /SOLVED/.test(burst.msg) && burst.canvas, JSON.stringify(burst));
+    await shot(page, 'phone-390x844-win-burst');
     await sleep(1200);
     const w1 = await page.evaluate(() => ({ state: window.__game.state, won: window.__game.won, panel: !document.getElementById('over-panel').classList.contains('hidden'), cleared: window.__game.store.progress.cleared, tut: window.__game.store.progress.tut, title: document.getElementById('over-title').textContent, msgs: window.__msgs.slice(-2) }));
     check('level 1 solved by taps → results panel, progress saved, tutorial done', w1.state === 2 && w1.won && w1.panel && w1.cleared === 1 && w1.tut === 1 && /solved/i.test(w1.title), JSON.stringify(w1));
@@ -160,7 +166,7 @@ async function wrongCell(page) {
       if (!(st.state === 1 && st.level === lv && !st.tut)) { check(`level ${lv} starts`, false, JSON.stringify(st)); break; }
       if (lv === 2) check('no tutorial and no hint button on the mock platform (rewarded unsupported → hidden)', !st.tut && !st.hint, JSON.stringify(st));
       await solveBoard(page, true, 30);
-      await sleep(1100);
+      await sleep(1500);
       const w = await page.evaluate(() => ({ state: window.__game.state, won: window.__game.won, cleared: window.__game.store.progress.cleared, hearts: window.__game.hearts }));
       check(`level ${lv} (${st.N}×${st.N}) cleared by taps`, w.state === 2 && w.won && w.cleared === lv, JSON.stringify(w));
       if (lv === 4) await shot(page, 'phone-390x844-level4-6x6');
@@ -235,7 +241,7 @@ async function wrongCell(page) {
     await page.tap('#daily-btn'); await sleep(300);
     const d0 = await page.evaluate(() => ({ state: window.__game.state, mode: window.__game.mode, N: window.__game.N, practice: window.__game.practice, label: document.getElementById('mode-main').textContent }));
     check('Today\'s puzzle starts (7×7, not practice)', d0.state === 1 && d0.mode === 'daily' && d0.N === 7 && !d0.practice, JSON.stringify(d0));
-    await solveBoard(page, true, 40); await sleep(1200);
+    await solveBoard(page, true, 40); await sleep(1500);
     const dw = await page.evaluate(() => ({ state: window.__game.state, won: window.__game.won, solved: window.__game.store.progress.daily.solved, ranks: window.__game.store.progress.daily.ranks.length, day: window.__game.store.progress.daily.day, rankVis: !document.getElementById('rank-board').classList.contains('hidden'), share: !document.getElementById('share-btn').classList.contains('hidden') }));
     check('daily solved by taps: time recorded, rank list and share shown', dw.state === 2 && dw.won && dw.solved > 0 && dw.ranks === 1 && dw.day.length === 8 && dw.rankVis && dw.share, JSON.stringify(dw));
     await page.fill('#name-input', 'Robo'); await sleep(100);

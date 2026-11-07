@@ -65,7 +65,7 @@
   #hearts svg { width: 22px; height: 22px; }
   #hearts svg.off path { fill: none; stroke: rgba(74,59,40,0.3); stroke-width: 2; }
   #hearts svg.flash { animation: hflash 0.5s; }
-  @keyframes hflash { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.5); } }
+  @keyframes hflash { 0% { transform: scale(1); } 30% { transform: scale(1.7) rotate(-14deg); } 60% { transform: scale(0.9) rotate(10deg); } 100% { transform: scale(1); } }
   #hud-row2 { display: flex; align-items: center; gap: 8px; margin-top: 6px; min-height: 36px; }
   #progress { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 800; background: var(--panel); border-radius: 10px; padding: 4px 10px; box-shadow: 0 1px 3px rgba(120,90,40,0.12); font-variant-numeric: tabular-nums; }
   #progress svg { width: 22px; height: 22px; }
@@ -101,8 +101,29 @@
   @keyframes hintpop { 0% { transform: scale(0) rotate(-30deg); } 60% { transform: scale(1.3) rotate(8deg); } 100% { transform: scale(1) rotate(0); } }
   #board.shake { animation: shake 0.35s; }
   @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
-  #board.won .cell svg.cat { animation: winbounce 0.7s ease-in-out infinite alternate; }
+  #board.won .cell svg.cat { animation: winbounce 0.55s ease-in-out var(--wd, 0ms) infinite alternate; }
+  #board.enter { animation: boardin 0.35s ease-out; }
+  @keyframes boardin { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
   @keyframes winbounce { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-9%) scale(1.12); } }
+  /* game feel (player feedback 11-07): a pink wave rolls over the cells a new cat rules out, marks spin in behind it */
+  .cell .fx { position: absolute; inset: 0; border-radius: 16%; background: #f6b2b2; opacity: 0; pointer-events: none; }
+  .cell.wave .fx { animation: wave 0.8s ease-out var(--d, 0ms) both; }
+  @keyframes wave { 0% { opacity: 0; transform: scale(0.5); } 30% { opacity: 0.92; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  .cell.wave svg.ax { animation: markin 0.45s ease-out var(--d, 0ms) both; }
+  @keyframes markin { 0% { opacity: 0; transform: scale(0.2) rotate(-90deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+  .cell svg.nope { position: absolute; width: 72%; height: 72%; animation: nope 0.6s ease-out forwards; }
+  @keyframes nope { 0% { transform: scale(0.4); opacity: 0; } 25% { transform: scale(1.1) rotate(-10deg); opacity: 1; } 55% { transform: scale(1) rotate(10deg); opacity: 1; } 100% { transform: scale(0.5) translateY(-60%); opacity: 0; } }
+  #progress.hop svg { animation: hop 0.4s ease-out; }
+  @keyframes hop { 0% { transform: translateY(0); } 40% { transform: translateY(-6px) scale(1.2); } 100% { transform: translateY(0); } }
+  #fx { position: fixed; inset: 0; z-index: 23; pointer-events: none; }
+  #fx.hidden { display: none; }
+  .btns button, .lvl, .ibtn, .pill { transition: transform 0.08s ease-out; }
+  .btns button:active, .lvl:active, .ibtn:active, .pill:active { transform: scale(0.95); }
+  #title-logo { animation: float 3.2s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  #title-logo .eyes { transform-origin: 50px 53px; animation: blink 4.5s infinite; }
+  @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.08); } }
+  @media (prefers-reduced-motion: reduce) { #title-logo, #title-logo .eyes, .cell.wave .fx, .cell.wave svg.ax, #board.won .cell svg.cat { animation: none; } }
   #hand { position: absolute; width: 15%; height: 15%; pointer-events: none; z-index: 3; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3)); animation: handtap 0.9s ease-in-out infinite; }
   @keyframes handtap { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-6%, -10%) scale(0.9); } }
   #msg {
@@ -112,6 +133,7 @@
   }
   #msg.show { animation: msgfly 1.2s ease-out forwards; }
   #msg.good { color: var(--green); }
+  #msg.big { font-size: 36px; letter-spacing: 1px; }
   @keyframes msgfly { 0% { opacity: 0; transform: translate(-50%,-30%) scale(0.7); } 15% { opacity: 1; transform: translate(-50%,-50%) scale(1.05); } 75% { opacity: 1; transform: translate(-50%,-60%) scale(1); } 100% { opacity: 0; transform: translate(-50%,-75%) scale(1); } }
 
   #foot { grid-area: foot; width: min(100%, 520px); justify-self: center; align-self: end; min-height: 44px; display: flex; flex-direction: column; justify-content: flex-end; }
@@ -229,6 +251,17 @@
     <path d="M50 68.5 Q46.5 75 41 71.5 M50 68.5 Q53.5 75 59 71.5" stroke="#4a3b28" stroke-width="3" fill="none" stroke-linecap="round"/>
     <path d="M8 58 L29 62 M10 69 L29 66 M92 58 L71 62 M90 69 L71 66" stroke="#4a3b28" stroke-width="3" stroke-linecap="round"/>
   </symbol>
+  <symbol id="s-catmad" viewBox="0 0 100 100">
+    <path d="M24 46 L16 11 L44 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M76 46 L84 11 L56 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M27 40 L23 21 L37 32 Z" fill="#f6b2b2"/><path d="M73 40 L77 21 L63 32 Z" fill="#f6b2b2"/>
+    <ellipse cx="50" cy="57" rx="37" ry="30" fill="#f0915a" stroke="#4a3b28" stroke-width="5"/>
+    <path d="M29 44 L44 50 M71 44 L56 50" stroke="#4a3b28" stroke-width="3.5" stroke-linecap="round"/>
+    <ellipse cx="37" cy="55" rx="4.6" ry="5.4" fill="#4a3b28"/><ellipse cx="63" cy="55" rx="4.6" ry="5.4" fill="#4a3b28"/>
+    <path d="M45.5 63 L54.5 63 L50 68.5 Z" fill="#e26a8a"/>
+    <path d="M41 75 Q50 68 59 75" stroke="#4a3b28" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M8 58 L29 62 M10 69 L29 66 M92 58 L71 62 M90 69 L71 66" stroke="#4a3b28" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
   <symbol id="s-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></symbol>
   <symbol id="s-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.3-9.4C1.4 8.1 3.6 4.5 7.2 4.5c2 0 3.6 1.2 4.8 2.6 1.2-1.4 2.8-2.6 4.8-2.6 3.6 0 5.8 3.6 4.5 7.1C19.5 16.4 12 21 12 21z" fill="#d1342a"/></symbol>
   <symbol id="s-hand" viewBox="0 0 64 64">
@@ -282,7 +315,16 @@
     <button id="bgm-pill" class="pill">Music: Ukulele</button>
     <button id="title-mute-btn" class="ibtn" aria-label="Sound on/off"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18 6.5a7.8 7.8 0 0 1 0 11"/></svg></button>
   </div>
-  <svg class="logo"><use href="#s-cat"/></svg>
+  <svg class="logo" id="title-logo" viewBox="0 0 100 100">
+    <path d="M24 46 L16 11 L44 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M76 46 L84 11 L56 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M27 40 L23 21 L37 32 Z" fill="#f6b2b2"/><path d="M73 40 L77 21 L63 32 Z" fill="#f6b2b2"/>
+    <ellipse cx="50" cy="57" rx="37" ry="30" fill="#f0915a" stroke="#4a3b28" stroke-width="5"/>
+    <g class="eyes"><ellipse cx="37" cy="53" rx="5.2" ry="6.6" fill="#4a3b28"/><ellipse cx="63" cy="53" rx="5.2" ry="6.6" fill="#4a3b28"/><circle cx="39" cy="50.5" r="2" fill="#fff"/><circle cx="65" cy="50.5" r="2" fill="#fff"/></g>
+    <path d="M45.5 63 L54.5 63 L50 68.5 Z" fill="#e26a8a"/>
+    <path d="M50 68.5 Q46.5 75 41 71.5 M50 68.5 Q53.5 75 59 71.5" stroke="#4a3b28" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M8 58 L29 62 M10 69 L29 66 M92 58 L71 62 M90 69 L71 66" stroke="#4a3b28" stroke-width="3" stroke-linecap="round"/>
+  </svg>
   <h1>Kitty Queens<small>Cat Sudoku</small></h1>
   <div id="title-rules">
     <div class="chip"><svg><use href="#s-color"/></svg><span>1 cat per color</span></div>
@@ -312,6 +354,7 @@
   </div>
 </div>
 
+<canvas id="fx" class="hidden"></canvas>
 <div id="cover-badge" class="hidden"><svg><use href="#s-cat"/></svg><h1>Kitty Queens<small>Cat Sudoku</small></h1></div>
 <div id="backdrop" class="hidden"></div>
 <div id="over-panel" class="panel hidden" role="dialog">
@@ -349,7 +392,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.0.1';
+  var GAME_VERSION = '1.1.0';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var PAGE = 25;
@@ -690,13 +733,14 @@
         var d = document.createElement('div');
         d.className = 'cell'; d.dataset.r = r; d.dataset.c = c;
         d.style.background = PALETTE[region[r][c] % PALETTE.length];
+        d.insertAdjacentHTML('beforeend', '<i class="fx"></i>');
         boardEl.appendChild(d); cellEls[r].push(d);
       }
     }
     boardEl.insertAdjacentHTML('beforeend', '<svg id="hand" class="hidden"><use href="#s-hand"/></svg>');
   }
   function glyph(el, cls, sym) {
-    var cur = el.firstElementChild;
+    var cur = el.querySelector('svg[data-k]');
     if (!sym) { if (cur) el.removeChild(cur); return; }
     if (cur && cur.getAttribute('data-k') === cls) return;
     if (cur) el.removeChild(cur);
@@ -717,9 +761,9 @@
     var hintOk = state === STATE_PLAY && !hintUsed && rewardedSupported() && !tutorial;
     $('hint-btn').classList.toggle('hidden', !hintOk);
   }
-  function flashMsg(text, good) {
+  function flashMsg(text, good, big) {
     var m = $('msg');
-    m.textContent = text; m.className = good ? 'good' : '';
+    m.textContent = text; m.className = (good ? 'good' : '') + (big ? ' big' : '');
     void m.offsetWidth; m.classList.add('show');
   }
 
@@ -753,6 +797,13 @@
     updateCell(r, c);
     var el = cellEls[r][c];
     el.classList.remove('pop', 'hinted'); void el.offsetWidth; el.classList.add(hinted ? 'hinted' : 'pop');
+    // the wave: a pink ring rolls outward from the cat over every cell she rules out
+    list.forEach(function (p) {
+      var w = cellEls[p[0]][p[1]], dist = Math.max(Math.abs(p[0] - r), Math.abs(p[1] - c));
+      w.style.setProperty('--d', (dist * 45) + 'ms');
+      w.classList.remove('wave'); void w.offsetWidth; w.classList.add('wave');
+    });
+    var pr = $('progress'); pr.classList.remove('hop'); void pr.offsetWidth; pr.classList.add('hop');
   }
   function removeCat(r, c) {
     cell[r][c] = 0; catCount--;
@@ -775,6 +826,7 @@
       conf.forEach(function (f) { var el = cellEls[f.r][f.c]; el.classList.remove('bad'); void el.offsetWidth; el.classList.add('bad'); });
       var me = cellEls[r][c]; me.classList.remove('bad'); void me.offsetWidth; me.classList.add('bad');
       boardEl.classList.remove('shake'); void boardEl.offsetWidth; boardEl.classList.add('shake');
+      showNope(r, c);
       play('wrong'); buzz(80);
       flashMsg(conf[0].why);
       if (tutorial) { setTut(tutStep <= 2 ? 1 : 5, conf[0].why); updateHud(); return; }   // first level: mistakes are free
@@ -789,6 +841,63 @@
     updateHud();
     if (tutorial) { if (tutStep <= 2) setTut(3); else if (tutStep === 3 || tutStep === 4) setTut(5); }
     if (catCount === N) { gameOver(true); return; }
+  }
+
+  function showNope(r, c) {
+    // the cat refuses the spot: a grumpy cat pops up and hops away
+    var el = cellEls[r][c], old = el.querySelector('svg.nope');
+    if (old) el.removeChild(old);
+    el.insertAdjacentHTML('beforeend', '<svg class="nope"><use href="#s-catmad"/></svg>');
+    setTimeout(function () { var n = el.querySelector('svg.nope'); if (n) el.removeChild(n); }, 650);
+  }
+
+  // ---------- celebration: confetti + stars on a full-screen canvas (no library, no external files) ----------
+  var REDUCE_MOTION = safe(function () { return window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; }, false);
+  var fxCanvas = $('fx'), fxCtx = null, parts = [], fxRaf = 0, fxLast = 0;
+  function fxResize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    fxCanvas.width = Math.round(window.innerWidth * dpr); fxCanvas.height = Math.round(window.innerHeight * dpr);
+    fxCanvas.style.width = window.innerWidth + 'px'; fxCanvas.style.height = window.innerHeight + 'px';
+    fxCtx = fxCanvas.getContext('2d'); fxCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function burst(x, y, n, angle, spread, speed) {
+    var colors = PALETTE.concat(['#fff', '#ffd98a', '#f6b2b2']);
+    for (var i = 0; i < n; i++) {
+      var a = angle + (Math.random() - 0.5) * spread, v = speed * (0.55 + Math.random() * 0.7), shape = Math.random();
+      parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 12,
+        w: 6 + Math.random() * 7, h: 4 + Math.random() * 6, color: colors[Math.floor(Math.random() * colors.length)],
+        shape: shape < 0.6 ? 'rect' : (shape < 0.85 ? 'dot' : 'star'), life: 1.5 + Math.random() * 0.9, t: 0 });
+    }
+    if (!fxRaf) { fxResize(); fxCanvas.classList.remove('hidden'); fxLast = performance.now(); fxRaf = requestAnimationFrame(fxLoop); }
+  }
+  function star(ctx, r) { ctx.beginPath(); for (var i = 0; i < 10; i++) { var rr = i % 2 ? r * 0.45 : r, a = i * Math.PI / 5 - Math.PI / 2; ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); } ctx.closePath(); ctx.fill(); }
+  function fxLoop(now) {
+    var dt = Math.min(0.05, (now - fxLast) / 1000); fxLast = now;
+    var ctx = fxCtx; ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    for (var i = parts.length - 1; i >= 0; i--) {
+      var p = parts[i]; p.t += dt;
+      if (p.t > p.life) { parts.splice(i, 1); continue; }
+      p.vy += 1300 * dt; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
+      var k = p.t / p.life; ctx.globalAlpha = k > 0.7 ? 1 - (k - 0.7) / 0.3 : 1;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.color;
+      if (p.shape === 'rect') ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.t * 9)) + 1);
+      else if (p.shape === 'dot') { ctx.beginPath(); ctx.arc(0, 0, p.h * 0.6, 0, 6.28); ctx.fill(); }
+      else star(ctx, p.w * 0.9);
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+    if (parts.length) fxRaf = requestAnimationFrame(fxLoop); else { fxRaf = 0; fxCanvas.classList.add('hidden'); }
+  }
+  function celebrate() {
+    if (REDUCE_MOTION) return;
+    var b = boardEl.getBoundingClientRect(), cx = b.left + b.width / 2, cy = b.top + b.height / 2;
+    burst(cx, cy, 110, -Math.PI / 2, 2.4, 620);
+    setTimeout(function () { burst(b.left + 8, b.top + b.height * 0.55, 45, -Math.PI / 3, 0.9, 700); burst(b.right - 8, b.top + b.height * 0.55, 45, -2 * Math.PI / 3, 0.9, 700); }, 220);
+    setTimeout(function () { burst(cx, b.top + 10, 50, Math.PI / 2, 1.2, 260); }, 520);
+  }
+  function countUp(el, total) {
+    var t0 = performance.now();
+    (function step() { var k = Math.min(1, (performance.now() - t0) / 750); el.textContent = fmtTime(total * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); })();
   }
 
   // ---------- onboarding (first level, 5×5): a hand shows where the first two cats go ----------
@@ -922,6 +1031,7 @@
     hidePanels();
     $('title-panel').classList.add('hidden'); $('levels-panel').classList.add('hidden');
     buildBoard(); resetBoard();
+    boardEl.classList.remove('enter'); void boardEl.offsetWidth; boardEl.classList.add('enter');
     continueUsed = false; continueOffered = false; hintUsed = false; rewardPending = null; rewardEarned = null;
     userPaused = false; pausedTotal = 0; pausedAt = 0; practice = false;
     runStart = performance.now();
@@ -968,7 +1078,10 @@
     won = didWin; state = STATE_OVER; overAt = performance.now();
     updateHud();
     if (didWin) {
+      for (var rr = 0; rr < N; rr++) cellEls[rr][solution[rr]].style.setProperty('--wd', (solution[rr] * 70) + 'ms');   // the cats bounce in a wave across the board
       boardEl.classList.add('won'); play('win'); buzz([60, 60, 60]);
+      flashMsg(mode === 'daily' && !practice ? 'PURR-FECT!' : 'SOLVED!', true, true);
+      celebrate();
       store.progress.played++;
       if (mode === 'level') {
         if (level > store.progress.cleared) store.progress.cleared = level;
@@ -984,7 +1097,7 @@
       }
       saveStore(['progress']);
       tutorial = false; setTut(0);
-      setTimeout(showOverPanel, 900);
+      setTimeout(showOverPanel, 1400);
     } else {
       if (mode === 'daily' && !practice) { var dd = dailyRecord(); dd.accum = lastTotal; saveStore(['progress']); }
       play('lose');
@@ -1003,7 +1116,7 @@
     $('ad-note').textContent = ''; $('share-note').textContent = ''; $('next-note').textContent = '';
     if (won) {
       $('over-title').textContent = daily ? (practice ? 'Solved (practice)' : 'Solved!') : 'Level ' + level + ' solved!';
-      $('over-score').textContent = fmtTime(lastTotal);
+      countUp($('over-score'), lastTotal);
       if (daily) {
         if (practice) sub.textContent = 'Today’s time stays ' + fmtTime(dailyRecord().solved) + '.';
         else { sub.textContent = 'All 7 cats are home. Purr-fect!'; sub.className = 'sub win'; }
@@ -1260,7 +1373,7 @@
     if (hidden && state === STATE_PLAY) pauseGame(true);
     if (!hidden && snd.unlocked && audibleNow() && snd.ctx && snd.ctx.state === 'suspended') safe(function () { snd.ctx.resume(); });
   });
-  window.addEventListener('resize', layout);
+  window.addEventListener('resize', function () { layout(); if (fxRaf) fxResize(); });
 
   // timer tick
   setInterval(function () {
@@ -1327,7 +1440,7 @@
       get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; }, get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; },
       get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get tutorial() { return tutorial; }, get tutStep() { return tutStep; },
       get guideCell() { return guideCell; }, get hintUsed() { return hintUsed; }, get continueUsed() { return continueUsed; }, get rewardEarned() { return rewardEarned; },
-      get isDesktop() { return isDesktop; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
+      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
       tap: tap, startLevel: startLevel, startDaily: startDaily, showLevels: showLevels, quitToTitle: quitToTitle, pauseGame: pauseGame, resumeGame: resumeGame,
       requestHint: requestHint, requestContinue: requestContinue, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,
       saveStore: saveStore, genLevel: genLevel, genDaily: genDaily, countSolutions: countSolutions, sizeForLevel: sizeForLevel, layout: layout,

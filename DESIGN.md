@@ -16,6 +16,7 @@
 (2024 애플 디자인 상 Crouton, 2022 (Not Boring) Habits 공통점: 나머지는 조용하고 네이티브, 핵심 동작 하나에만 소리·햅틱·애니메이션)
 
 ## 3. 규칙
+- **먼저 `/frontend-design` 스킬을 부른다**(리포 `.claude/skills/frontend-design/`, Anthropic 공개 스킬). 게임은 여기에 더해 `PLAYBOOK.md` 5장 '게임 손맛 최소선'을 적용한다 — 잔잔하기만 한 게임은 사용자가 아쉬워한다(2026-11-07).
 ### 글꼴
 - **아이폰 시스템 글꼴(San Francisco)만.** Flutter: `CupertinoSystemText`(20pt 미만)·`CupertinoSystemDisplay`(20pt 이상), 또는 iOS 에서 기본 Typography 유지.
   Google Fonts·Inter·Roboto 금지. 예외: 브랜드로 **숫자 전용 글꼴 1개**(예: 큰 속도·dB 숫자)만 의도적으로 허용 — 기획서에 이유를 적을 것.

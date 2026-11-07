@@ -1,7 +1,7 @@
 # Kitty Queens: Cat Sudoku — Playgama/YouTube 판 — 개발 세션 게시판
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-07 13:10 KST (v1.0.1 한 번 탭) · 작업 브랜치 `claude/catdoku-playables` (main 에 ff 반영됨) · 경로 `playables/catdoku/` (웹 `docs/catdoku.html` 은 그대로)
+- 마지막 저장: 2026-11-07 14:40 KST (v1.1.0 손맛 효과) · 작업 브랜치 `claude/catdoku-playables` (main 에 ff 반영됨) · 경로 `playables/catdoku/` (웹 `docs/catdoku.html` 은 그대로)
 - 승인(사용자 11-07 "착수. 이름은 너 추천대로"): `plans/catdoku-playables.md` 전부. 표기 이름 **Kitty Queens: Cat Sudoku**. 보고는 쉬운 영어.
 - 방금 끝낸 것: **①~⑧ 전부** — 게임 본체(`index.html`), 로봇 84/84(`qa/report.json`), 빌드 `dist/kitty-queens.zip`(2.97MB) + Pages 복사본 `docs/catdoku-playables/`, 커버 3종, `CREDITS.md`, **Playgama 게임 생성·폼·아카이브(빌드 체크 PASSED, Bridge 2.4.0 FOUND)·커버 3종 업로드 완료**. 런치 단계: archive ✅ bridge ✅ covers ✅ · form BLOCKED(NO_CERTIFICATION → QA 툴 인증은 Codex) · **sandbox TODO(publish_sandbox, 사용자 yes 필요)** · traffic BLOCKED(샌드박스 뒤, 사용자 결정).
 - 진행 중이던 것: 없음.
@@ -54,6 +54,9 @@
 - 아쉬운 점(숨기지 않음): ① 실기기 사파리 미확인(헤드리스 Chromium 만) ② 랭킹은 기기 로컬(오늘의 시간) + Bridge 리더보드 `levels` 는 config 선언만, 결과 화면 표시 없음 ③ 도전장 링크(웹판의 해시 공유)는 Playgama 에선 URL 을 못 바꿔 뺌 → 공유는 텍스트만 ④ BGM 2곡은 Mole Mash 와 같은 CC0 곡(우쿨렐레·래그타임) ⑤ 레벨 보상(별·꾸미기)은 없음 — 핵심 깊이에 집중, 필요하면 다음 판.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
+- 2026-11-07 "고양이 올라가면 그 이제 못올릴 네방향 그리고 인근 그부분에 뭐 그런 연한 분홍색 이펙트 같은거 살짝 올라왔다가 내려가면 어떠냐 그래서 뭔뜻인지좀더 알게? 뭔가 너무 일차원적이고 그리고 막 끝나거나 할때 막 다른 게임은 막 별 이펙트 막 챠라락 그런가막 정신없게 나오는데 그냥 잔잔하기만하고 디자인도그냥.. 그런데. 스도쿠니까 이런느낌으로해야되나.. 그 막 깃허브나 그런데보면 사람들이 막 뭐 올려놓는거많던데 그런거중에 깔아서 스킬추가할만한거 없을까? 이런 디자인적인게 지금까지 공통된 아쉬움인데.."
+  → **v1.1.0 손맛**: ①고양이를 놓으면 못 놓는 칸(행·열·색·인접) 위로 **연분홍 물결이 고양이에서 바깥으로 거리 순서대로 번졌다 사라짐**(45ms 간격) + ✕ 가 돌면서 나타남(`qa/wave-strip.png`) ②틀린 칸엔 **화난 고양이가 튀어나왔다 도망감**(`qa/phone-390x844-tutorial-wrong.png`) ③완료 시 **색종이·별 폭죽 3연발 + 고양이들이 열 순서로 파도 바운스 + "SOLVED!/PURR-FECT!" 큰 글씨 + 시간 카운트업**(`qa/phone-390x844-win-burst.png`) ④타이틀 고양이 눈 깜빡임·둥실, 버튼 눌림 스케일, 판 등장 애니, 진행 고양이 깡충. 전부 코드(캔버스·CSS)로, 외부 파일 없음, reduced-motion 존중. 로봇 86/86.
+  → **스킬 설치**: Anthropic 공개 저장소 `anthropics/skills` 의 `frontend-design` 스킬(Apache-2.0)을 `.claude/skills/frontend-design/` 에 넣음 — 새 화면 만들기 전에 `/frontend-design` 호출. 게임 손맛 체크리스트는 `PLAYBOOK.md` 5장.
 - 2026-11-07 "그냥 손가락 누르면 바로 고양이 들어가게 하자. 그림 고양이 괜찮" → v1.0.1: 탭 한 번 = 고양이(✕ 거치는 단계 삭제, 수동 ✕ 없음, 자동 ✕ 는 유지), 고양이 탭 = 제거. 온보딩·팁·Playgama 폼 문구 수정. 로봇 83/83(실제 탭 73). 그림 고양이는 그대로.
 - 2026-11-07 "착수. 이름은 너 추천대로" → Kitty Queens: Cat Sudoku 로 Playgama 드래프트 생성.
 - (웹 캣도쿠 10-02) "어렵다" → 레벨 1~3 은 5×5, 레벨 1 은 손가락 안내 + 실수해도 하트 안 깎임.

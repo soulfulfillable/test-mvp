@@ -102,6 +102,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-11-07 | (Kitty Queens Playables 개발 세션) **게임 손맛 기준 상향** — 사용자: 놓을 때 못 놓는 칸에 연분홍 효과가 지나가게, 끝날 때 다른 게임처럼 폭죽, 지금은 "너무 일차원적·잔잔하기만·디자인도 그냥"이 여러 앱의 공통 아쉬움. → v1.1.0 에 물결·화난 고양이·폭죽·카운트업·눈 깜빡임 적용(코드만, 외부 파일 없음). **모든 게임에 PLAYBOOK 5장 '손맛 최소선' 적용**, 리포에 Anthropic `frontend-design` 스킬 설치(`.claude/skills/`). 같은 날 "손가락 누르면 바로 고양이" → 한 번 탭(v1.0.1), 그림 고양이는 OK | 사용자 원문은 `board/catdoku-playables.md` 피드백 기록 |
 | 2026-11-07 | (Kitty Queens Playables 개발 세션) **Playgama 드래프트 생성·업로드 완료, 샌드박스는 미게시** — id `cmw5rj3x202syno0hy56lnw64`, category **sudoku**(Playgama 설명에 'CatDoku' 가 예시로 있어 4.2.2 차별점을 폼에 명시), 아카이브 1.0.0 PASSED, 커버 3종. 게임은 웹 캣도쿠 데일리 생성기 + Flutter 판 레벨 생성기(500레벨, 같은 판)를 한 파일에. 그림 고양이 SVG(앱 아이콘 결), CC0 음원, Bridge storage, 전면(`level_end`/`round_end`)·보상형(`hint`·`continue`). 로봇 84/84. **publish_sandbox 는 사용자 yes 뒤** | 플랜 승인 범위 그대로. 미리보기 https://soulfulfillable.github.io/test-mvp/catdoku-playables/ |
 | 2026-11-07 | **캣도쿠 Playgama/YouTube 판 착수**, 표기 이름 **Kitty Queens: Cat Sudoku**. 개발 세션 `board/catdoku-playables.md` | 사용자 "착수. 이름은 너 추천대로" |
 | 2026-11-07 | 캣도쿠 → YouTube Playables 런칭 **계획 작성**(`plans/catdoku-playables.md`): Playgama 판(Mole Mash 틀 재사용) + Google 직접 경로 병행, 이모지 말→그림·음원·Bridge storage·레벨 모드·광고·온보딩. 착수는 사용자 A/B 대기 | 사용자 "캣도쿠로 유튜브에 런칭하는 걸로 한번 짜볼까" |
