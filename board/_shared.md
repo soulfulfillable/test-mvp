@@ -4,6 +4,7 @@
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
+| catdoku-playables (Kitty Queens 세션) | **Mole Mash `playables/molemash/index.html` v1.8.0 수정** — 사용자 직접 요청(11-07): ①광고 보고 이어하기 뒤 3·2·1 이 안 돌고 일시정지→재개해야 풀리는 버그 → 플랫폼 pause/hidden 플래그가 안 풀린 채 남으면 400ms 마다 실제 상태(`document.visibilityState`, `bridge.platform.isPaused`)를 다시 읽어 푸는 watchdog + `pause_state`/`freeze_fixed` 분석 이벤트 ②라운드 중 기록을 넘는 순간 'NEW BEST!' 외침+HUD 표시. Mole Mash 세션은 이어받기 전에 이 커밋(main)을 먼저 받을 것. 아카이브 업로드만 하고 **publish_sandbox 는 사용자 yes 뒤** | 2026-11-07 | 진행 중 |
 | tides | **물때를 Glance Solunar 에 합치기** (`solunar_app/` 에 물때 섹션 추가 — 계획 `plans/solunar-tides-merge.md`). 솔루나 세션은 이 작업 끝날 때까지 `solunar_app/` 를 고치기 전에 여기 확인 | 2026-10-20 | **보류** — 8개 앱 일괄 반려로 포트폴리오 통합 결정 대기. 사용자는 이 합치기에 동의함(통합안 재료로 써 달라) |
 
 ## 🧑‍💻 역할 분담 — 로그인된 브라우저 작업은 Codex (2026-11-01, 사용자 지시)

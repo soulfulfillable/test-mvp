@@ -253,7 +253,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.7.1';
+  var GAME_VERSION = '1.8.0';
   var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
   var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
   var CLOCK_TIME = 5;            // the clock mole adds five seconds
@@ -427,7 +427,7 @@
   var score = 0, lives = 3, playT = 0, introT = 0, spawnTimer = 0;
   var shake = 0, overAt = 0, lastScore = 0, heartFlash = 0, hitStop = 0, flashA = 0;
   var timeLeft = 0, lastTick = -1, tickAcc = 0, tickTock = false, overReason = 'time';
-  var isNewBest = false, prevBestScore = 0;
+  var isNewBest = false, prevBestScore = 0, bestShown = false;   // bestShown: the live NEW BEST shout fired this round
   var RANK_MAX = 12;
   var ranks = [], myRankRow = null;
   var LB_ID = 'moles', GAME_URL = 'https://playgama.ai/play/cmnhxm72r5k4zv';
@@ -711,7 +711,7 @@
     score = 0; lives = 3; playT = 0; introT = 2.0; spawnTimer = 0.6;
     shake = 0; heartFlash = 0; hitStop = 0; flashA = 0;
     timeLeft = TIME_LIMIT; lastTick = -1;
-    isNewBest = false;
+    isNewBest = false; bestShown = false;
     continueUsed = false; continueOffered = false; rewardPending = null;
     tutorial = store.progress.played === 0; tutHits = 0;
     roundIndex++;
@@ -783,7 +783,7 @@
         analytics('clock_hit', { time_left: Math.round(timeLeft) });
       } else if (mo.kind === 'gold') {
         mo.phase = 'whacked'; mo.t = 0;
-        score += 3; whacked++; hitCombo();
+        score += 3; whacked++; hitCombo(); checkLiveBest();
         if (lives < 3) { lives++; floats.push({ x: hx, y: hy - moleH - 26, text: '+', icon: 'heart', color: '#ff5f6e', t: 0, size: 20 }); play('heart'); }
         floats.push({ x: hx, y: hy - moleH, text: '+3', color: '#e8a800', t: 0, size: 34 });
         spawnBurst(hx, hy - moleH * 0.5, ['#ffd94d', '#ffef9e', '#f4b820', '#fff'], 22, 300);
@@ -794,7 +794,7 @@
         mo.phase = 'whacked'; mo.t = 0;
         hitCombo();
         var pts = comboMult();
-        score += pts; whacked++;
+        score += pts; whacked++; checkLiveBest();
         if (tutorial) tutHits++;
         var words = ['BONK!', 'WHAM!', 'SMASH!', 'CRUSH!', 'MEGA!'];
         var ci = Math.min(words.length - 1, combo - 1);
@@ -832,6 +832,16 @@
     ctx.strokeText(label, W / 2, cy0 + 150 * UI); ctx.fillText(label, W / 2, cy0 + 150 * UI);
   }
   var comboPulse = 0, bestCombo = 0;
+  function checkLiveBest() {
+    // the moment the score passes the old record, say so on the board (player request 11-07), once per round
+    var old = store.progress.best;   // the saved record; it only changes at round end
+    if (bestShown || old <= 0 || score <= old) return;
+    bestShown = true;
+    floats.push({ x: W / 2, y: grid.y + 40 * UI, text: 'NEW BEST!', color: '#ffc94d', t: 0, size: 40 });
+    floats.push({ x: W / 2, y: grid.y + 76 * UI, text: 'past ' + old + ', keep going', color: '#fff6ea', t: 0, size: 16 });
+    play('best'); buzz([30, 40, 30]);
+    analytics('new_best_live', { score: score, old_best: old });
+  }
   function comboMult() { return combo >= 10 ? 3 : (combo >= 5 ? 2 : 1); }   // what a mole is worth right now
   function hitCombo() {
     combo = (playT - lastHitAt <= 0.9) ? combo + 1 : 1;
@@ -1205,6 +1215,20 @@
 
   // the game is frozen (no logic, no input) while paused by the player, the platform, an ad or a hidden page
   function frozen() { return userPaused || adOpen || snd.reasons.paused || snd.reasons.hidden; }
+  // Freeze watchdog (player report 11-07: after "watch an ad and continue" the 3-2-1 never ran until pause → resume).
+  // A platform pause or a page-hidden flag that was never lifted keeps the game frozen; every 400 ms, while no ad is
+  // open and no reward is pending, re-read the live state (document visibility, bridge.platform.isPaused) and clear
+  // a flag the events forgot to clear. The audio mute from the platform (reasons.platform) is never touched.
+  var pauseEventAt = -1e9, wdAt = 0;
+  function freezeWatchdog(now) {
+    if (now - wdAt < 400) return; wdAt = now;
+    if (state !== STATE_PLAY || adOpen || rewardPending || rewardEarned) return;
+    if (snd.reasons.hidden && document.visibilityState === 'visible') { setReason('hidden', false); last = now; analytics('freeze_fixed', { reason: 'hidden', count_in: countIn > 0 ? 1 : 0 }); }
+    if (snd.reasons.paused && now - pauseEventAt > 1200) {
+      var live = bridgeReady ? safe(function () { return B.platform.isPaused; }, undefined) : undefined;
+      if (live !== true) { setReason('paused', false); last = now; analytics('freeze_fixed', { reason: 'paused', live: String(live), count_in: countIn > 0 ? 1 : 0 }); }
+    }
+  }
 
   // ---------- input ----------
   var pointerCooldown = 0;
@@ -1610,19 +1634,19 @@
     if (hud.mode === 'top') {
       var cx = hud.x + hud.w / 2, y = hud.y;
       ctx.fillStyle = '#3d2812'; ctx.font = fontBig(48 * UI); ctx.fillText(String(score), cx, y + 46 * UI);
-      ctx.font = fontPx(13); ctx.fillStyle = 'rgba(61,40,18,0.65)'; ctx.fillText('BEST ' + best(), cx, y + 64 * UI);
+      ctx.font = fontPx(13); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.fillText(bestShown ? 'NEW BEST!' : 'BEST ' + best(), cx, y + 64 * UI);
       drawTimerBar(cx, y + 74 * UI, Math.min(hud.w * 0.56, 230));
       drawHearts(cx, y + 112 * UI);
     } else if (hud.mode === 'compact') {
       var cx2 = hud.x + hud.w / 2, y2 = hud.y;
       ctx.fillStyle = '#3d2812'; ctx.font = fontBig(36 * UI); ctx.fillText(String(score), cx2, y2 + 34 * UI);
-      ctx.font = fontPx(12); ctx.fillStyle = 'rgba(61,40,18,0.65)'; ctx.textAlign = 'left'; ctx.fillText('BEST ' + best(), cx2 + 40 * UI, y2 + 34 * UI);
+      ctx.font = fontPx(12); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.textAlign = 'left'; ctx.fillText(bestShown ? 'NEW BEST!' : 'BEST ' + best(), cx2 + 40 * UI, y2 + 34 * UI);
       drawHearts(cx2 - hud.w * 0.22, y2 + 58 * UI);
       drawTimerBar(cx2 + hud.w * 0.2, y2 + 50 * UI, Math.min(hud.w * 0.32, 200));
     } else {
       var cx3 = hud.x + hud.w / 2, y3 = hud.y + hud.h / 2 - 60 * UI;
       ctx.fillStyle = '#3d2812'; ctx.font = fontBig(44 * UI); ctx.fillText(String(score), cx3, y3 + 40 * UI);
-      ctx.font = fontPx(13); ctx.fillStyle = 'rgba(61,40,18,0.65)'; ctx.fillText('BEST ' + best(), cx3, y3 + 58 * UI);
+      ctx.font = fontPx(13); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.fillText(bestShown ? 'NEW BEST!' : 'BEST ' + best(), cx3, y3 + 58 * UI);
       drawTimerBar(cx3, y3 + 70 * UI, Math.min(hud.w - 28, 200));
       drawHearts(cx3, y3 + 108 * UI);
     }
@@ -1782,6 +1806,7 @@
     var dt = Math.min(rawDt / 1000, 0.05);
     last = now;
     perfFrame(Math.min(rawDt, 1000));
+    freezeWatchdog(now);
     update(dt);
     draw();
     requestAnimationFrame(loop);
@@ -1802,6 +1827,8 @@
         safe(function () {
           B.platform.on(B.EVENT_NAME.AUDIO_STATE_CHANGED, function (enabled) { setReason('platform', !enabled); });
           B.platform.on(B.EVENT_NAME.PAUSE_STATE_CHANGED, function (paused) {
+            pauseEventAt = performance.now();
+            analytics('pause_state', { paused: paused ? 1 : 0, state: state, count_in: countIn > 0 ? 1 : 0, ad_open: adOpen ? 1 : 0 });
             setReason('paused', !!paused);
             if (paused && state === STATE_PLAY) pauseGame(true);
             if (!paused) last = performance.now();
@@ -1857,7 +1884,7 @@
       get timeLeft() { return timeLeft; }, set timeLeft(v) { timeLeft = v; }, get countIn() { return countIn; }, set countIn(v) { countIn = v; },
       get moles() { return moles; }, get holes() { return holes; }, get hud() { return hud; }, get grid() { return grid; },
       get store() { return store; }, get bridgeReady() { return bridgeReady; }, get audible() { return snd.audible; },
-      get reasons() { return snd.reasons; }, get frozen() { return frozen(); }, get userPaused() { return userPaused; },
+      get reasons() { return snd.reasons; }, get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get bestShown() { return bestShown; }, setReason: setReason, get prevBestScore() { return prevBestScore; },
       get continueUsed() { return continueUsed; }, get tutorial() { return tutorial; }, get isDesktop() { return isDesktop; },
       get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; }, get bgmKey() { return snd.bgmKey; }, get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; },
       holeCenter: function (i) { var h = holes[i]; return { x: h.x, y: h.y - moleH * 0.4 }; },

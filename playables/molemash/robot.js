@@ -230,6 +230,23 @@ async function playAgain(page) {
     const granted = await page.evaluate(() => ({ state: window.__game.state, lives: window.__game.lives, timeLeft: window.__game.timeLeft, used: window.__game.continueUsed, ranks: window.__game.store.progress.ranks.length }));
     check('rewarded: round continues with hearts back and +10 s', granted.state === 1 && granted.lives === 3 && granted.timeLeft > 9 && granted.used, JSON.stringify(granted));
     check('SECOND WIND count-in holds the moles for a moment', await page.evaluate(() => window.__game.countIn > 2 && window.__game.moles.length === 0));
+    // a platform pause flag left behind by the ad (no un-pause event) must not freeze the count-in forever (player report 11-07)
+    await page.evaluate(() => { window.__game.setReason('paused', true); });
+    const frozenNow = await page.evaluate(() => window.__game.frozen);
+    await page.waitForTimeout(2200);
+    const thawed = await page.evaluate(() => ({ frozen: window.__game.frozen, paused: window.__game.reasons.paused, state: window.__game.state, countIn: window.__game.countIn }));
+    check('stale platform pause during the count-in is cleared by the watchdog within ~2 s (3-2-1 runs on its own)', frozenNow && !thawed.frozen && !thawed.paused && thawed.state === 1, JSON.stringify({ frozenNow, thawed }));
+    // live NEW BEST: the HUD and a shout the moment the score passes the saved record
+    await page.evaluate(() => { window.__game.store.progress.best = Math.max(1, window.__game.score); window.__game.countIn = 0; });
+    for (let i = 0; i < 4; i++) {
+      await page.evaluate(() => { window.__game.spawnMole('mole'); });
+      await page.waitForTimeout(300);
+      const hcBest = await page.evaluate(() => { const m = window.__game.moles.filter((x) => x.phase !== 'whacked'); return m.length ? window.__game.holeCenter(m[m.length - 1].hole) : null; });
+      if (hcBest) { await page.mouse.click(hcBest.x, hcBest.y); await page.waitForTimeout(120); }
+      if (await page.evaluate(() => window.__game.bestShown)) break;
+    }
+    check('passing the saved best mid-round fires the NEW BEST! shout once', await page.evaluate(() => window.__game.bestShown && window.__game.score > window.__game.store.progress.best), await page.evaluate(() => JSON.stringify({ score: window.__game.score, best: window.__game.store.progress.best })));
+    await shot(page, 'phone-390x844-new-best-live');
     await page.waitForTimeout(400);
     await shot(page, 'phone-390x844-second-wind');
     // a platform pause blip right after the ad must not raise the pause panel
