@@ -1,7 +1,7 @@
 # Kitty Queens: Cat Sudoku — Playgama/YouTube 판 — 개발 세션 게시판
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-07 18:30 KST (v1.3.1 막힘 안내 + Undo) · 작업 브랜치 `claude/catdoku-playables` (main 에 ff 반영됨) · 경로 `playables/catdoku/` (웹 `docs/catdoku.html` 은 그대로)
+- 마지막 저장: 2026-11-08 01:30 KST (v1.3.2 막히면 틀린 고양이 표시 + 한 번에 걷어내기) · 작업 브랜치 `claude/catdoku-playables` (main 에 ff 반영됨) · 경로 `playables/catdoku/` (웹 `docs/catdoku.html` 은 그대로)
 - 승인(사용자 11-07 "착수. 이름은 너 추천대로"): `plans/catdoku-playables.md` 전부. 표기 이름 **Kitty Queens: Cat Sudoku**. 보고는 쉬운 영어.
 - 방금 끝낸 것: **①~⑧ 전부** — 게임 본체(`index.html`), 로봇 84/84(`qa/report.json`), 빌드 `dist/kitty-queens.zip`(2.97MB) + Pages 복사본 `docs/catdoku-playables/`, 커버 3종, `CREDITS.md`, **Playgama 게임 생성·폼·아카이브(빌드 체크 PASSED, Bridge 2.4.0 FOUND)·커버 3종 업로드 완료**. 런치 단계: archive ✅ bridge ✅ covers ✅ · form BLOCKED(NO_CERTIFICATION → QA 툴 인증은 Codex) · **sandbox TODO(publish_sandbox, 사용자 yes 필요)** · traffic BLOCKED(샌드박스 뒤, 사용자 결정).
 - 진행 중이던 것: 없음.
@@ -54,6 +54,7 @@
 - 아쉬운 점(숨기지 않음): ① 실기기 사파리 미확인(헤드리스 Chromium 만) ② 랭킹은 기기 로컬(오늘의 시간) + Bridge 리더보드 `levels` 는 config 선언만, 결과 화면 표시 없음 ③ 도전장 링크(웹판의 해시 공유)는 Playgama 에선 URL 을 못 바꿔 뺌 → 공유는 텍스트만 ④ BGM 2곡은 Mole Mash 와 같은 CC0 곡(우쿨렐레·래그타임) ⑤ 레벨 보상(별·꾸미기)은 없음 — 핵심 깊이에 집중, 필요하면 다음 판.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
+- 2026-11-07 (막힘 화면 캡처와 함께) "이거 뜨면 바로 질리기부터 해 어쩌라는건지" → **v1.3.2**: 막혔을 때 **틀린 자리의 고양이를 화난 얼굴 + 빨간 테두리로 바로 표시**(정답 자리와 비교), 문구 "Row 5 has no free spot left. The 2 grumpy cats are in the wrong spots. Tap them to pick them up, or:" + 버튼 **"Pick up the 2 grumpy cats"** 한 번으로 틀린 고양이만 걷어냄(맞는 고양이는 남김). 막힌 줄 점선은 연하게. 로봇 96/96.
 - 2026-11-07 (Mole Mash 건) "두더지에서 신기록갱신되면 알려주는뭔가 있음 좋겠고 그리고 끝나서 광고보고다시보기할때 자동으로 삼이일하면서 시작그거 아직도안돼ㅠ 일시정지 눌렀다가 다시하기해야지돼" → Mole Mash v1.8.0 (이 세션이 대신 수정, `board/_shared.md` 에 기록): ①freeze watchdog(플랫폼 pause/hidden 이 안 풀린 채 남으면 실제 상태를 다시 읽어 해제) ②라운드 중 기록 돌파 시 'NEW BEST! past N, keep going' + HUD 'NEW BEST!' + 효과음. 원인 추정: 광고가 닫힌 뒤 Bridge 의 PAUSE_STATE_CHANGED(false) 가 안 오거나 순서가 꼬여 `reasons.paused` 가 남음 → 일시정지/재개 때 `level_resumed` 메시지로 플랫폼이 다시 풀어 준 것으로 보임. 텔레메트리(session facts)는 이벤트 순서를 안 주어 확정 못 함 → `pause_state`·`freeze_fixed` 이벤트로 다음에 확인.
 - 2026-11-07 "누를때 없을때 어쩌라는건지 몰라함" → **v1.3.1 막힘 안내**: 고양이를 규칙엔 안 걸리지만 틀린 자리에 놓아 어느 행·열·색 구역에 빈칸이 하나도 안 남으면, 그 줄/구역에 빨간 점선 테두리 + 판 아래에 "Row 3 has no free spot left. One of your cats is in the wrong place. Tap a cat to pick it up, or undo the last one." + **Undo last cat** 버튼(마지막에 놓은 고양이부터 되돌림). 하트는 안 깎임. 로봇 97/97(레벨 8에서 막힘 상황을 실제로 만들어 검사). (해석: "누를 데가 없을 때" — 다른 뜻이면 다시 확인.)
 - 2026-11-07 사진 16장 + "고양이 이름은 호랑이. 추천대로" → **v1.3.0 호랑이 기본**: 사진에서 읽은 특징(연한 복숭아빛 주황 털, 진한 주황 줄무늬 — 이마 M·뺨 줄, 연두색 눈, 분홍 코, 코 주변 밝은 털, 흰 수염, 통통한 볼)을 같은 그림체(굵은 외곽선 벡터)로 옮겨 `s-h-cat`(얼굴)·`s-h-sleep`(조는 얼굴)·`s-h-mad`(화난 얼굴) 세 벌 + 타이틀 눈 깜빡임 버전. 타이틀 "Starring Horangi" 버튼·일시정지 "Cat: Horangi" 로 주황이(Classic)와 전환, 설정 저장. 문구에 이름("Horangi rules out the row…", "Horangi found a spot", "Every Horangi is home"). 참고 얼굴 1장만 `art/ref/`(사람·집 없음, 빌드 제외). Playgama 설명·story 에 "my own orange tabby Horangi" 추가. 로봇 94/94. 커버 3종 호랑이로 교체. 아카이브 v1.3.0 `cmw6jst5l0limno0hpipma62q` PASSED → v1.3.1 `cmw6ldfxr0lgmmt0hv8vxqpv0`(막힘 안내) 이 최신.

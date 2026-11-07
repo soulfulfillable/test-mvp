@@ -288,16 +288,16 @@ async function wrongCell(page) {
         g.tap(r, c);
       }
       const box = document.getElementById('stuck');
-      return { stuck: g.stuck, cats: g.catCount, shown: !box.classList.contains('hidden'), text: document.getElementById('stuck-text').textContent, outlined: document.querySelectorAll('.cell.stuck').length, undo: !document.getElementById('undo-btn').classList.contains('hidden'), hearts: g.hearts };
+      const wrong = g.wrongCats();
+      const grumpy = wrong.every(([r, c]) => (document.querySelectorAll('.cell')[r * n + c].querySelector('svg.cat use') || {}).getAttribute && document.querySelectorAll('.cell')[r * n + c].querySelector('svg.cat use').getAttribute('href') === '#s-h-mad');
+      return { stuck: g.stuck, cats: g.catCount, wrong: wrong.length, grumpy, framed: document.querySelectorAll('.cell.wrongcat').length, shown: !box.classList.contains('hidden'), text: document.getElementById('stuck-text').textContent, label: document.getElementById('undo-label').textContent, btn: !document.getElementById('undo-btn').classList.contains('hidden'), hearts: g.hearts };
     });
-    check('dead end detected: message names the row/column/area, cells outlined, Undo offered, no heart lost', !!dead.stuck && dead.shown && /no free spot left/.test(dead.text) && dead.outlined >= 3 && dead.undo && dead.hearts === 3, JSON.stringify(dead));
+    check('dead end: the wrong cats turn grumpy with a red frame, message names the row/area and the grumpy cats, one fix button, no heart lost', !!dead.stuck && dead.wrong >= 1 && dead.grumpy && dead.framed === dead.wrong && dead.shown && /no free spot left/.test(dead.text) && /grumpy/.test(dead.text) && /Pick up/.test(dead.label) && dead.btn && dead.hearts === 3, JSON.stringify(dead));
     await shot(page, 'phone-390x844-stuck');
     const before = dead.cats;
-    await page.tap('#undo-btn'); await sleep(150);
-    const undone = await page.evaluate(() => ({ cats: window.__game.catCount, placed: window.__game.placed.length }));
-    check('Undo last cat removes the most recent cat', undone.cats === before - 1 && undone.placed === before - 1, JSON.stringify(undone));
-    const cleared = await page.evaluate(() => { const g = window.__game; while (g.placed.length) g.undoLast(); return { stuck: g.stuck, shown: !document.getElementById('stuck').classList.contains('hidden'), outlined: document.querySelectorAll('.cell.stuck').length }; });
-    check('once the cats are picked up the dead-end message goes away', !cleared.stuck && !cleared.shown && cleared.outlined === 0, JSON.stringify(cleared));
+    await page.tap('#undo-btn'); await sleep(200);
+    const fixed = await page.evaluate(() => ({ cats: window.__game.catCount, wrong: window.__game.wrongCats().length, stuck: window.__game.stuck, shown: !document.getElementById('stuck').classList.contains('hidden'), grumpyLeft: document.querySelectorAll('.cell.wrongcat').length, catsOnSolution: window.__game.placed.every(([r, c]) => window.__game.solution[r] === c) }));
+    check('the fix button picks up exactly the wrong cats; the right ones stay; the message goes away', fixed.cats === before - dead.wrong && fixed.wrong === 0 && !fixed.stuck && !fixed.shown && fixed.grumpyLeft === 0 && fixed.catsOnSolution, JSON.stringify(fixed));
     await context.close();
   }
 
