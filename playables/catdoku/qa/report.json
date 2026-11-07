@@ -1,0 +1,468 @@
+{
+  "startedAt": "2026-11-07T01:53:11.152Z",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "checks": [
+    {
+      "name": "daily board has exactly one solution",
+      "ok": true,
+      "detail": "{\"unique\":true,\"n\":7,\"count\":1}"
+    },
+    {
+      "name": "levels 1..60 each have exactly one solution",
+      "ok": true,
+      "detail": "sizes {\"5\":3,\"6\":7,\"7\":15,\"8\":25,\"9\":10}"
+    },
+    {
+      "name": "level sizes grow 5→6→7→8→9",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "loading screen hidden before game_ready",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "bridge initialized (mock platform outside Playgama)",
+      "ok": true,
+      "detail": "mock"
+    },
+    {
+      "name": "game_ready sent exactly once",
+      "ok": true,
+      "detail": "[\"game_ready\"]"
+    },
+    {
+      "name": "title screen shows the game title (rule 3.5.1)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "no emoji anywhere in the page text (rule 4.3.2)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "music button switches the track and saves it",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "two music tracks wrap around",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Play starts level 1 (5×5) with the finger guide on a solution cell",
+      "ok": true,
+      "detail": "{\"state\":1,\"level\":1,\"N\":5,\"tut\":true,\"step\":1,\"guide\":[0,1],\"hand\":true,\"text\":\"Tap the glowing cell twice to put a cat there.\"}"
+    },
+    {
+      "name": "level_started message after start",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "AudioContext running after first tap",
+      "ok": true,
+      "detail": "running"
+    },
+    {
+      "name": "sound files decoded (effects + music)",
+      "ok": true,
+      "detail": "mark,clear,wrong,win,cat,heart,hint,lose,start,mute-on,mute-off,bgm_ragtime,bgm_ukulele"
+    },
+    {
+      "name": "music looping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "first tap on the guided cell marks it and the guide says \"once more\"",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "second tap places the cat, auto marks appear, guide moves to the next cat",
+      "ok": true,
+      "detail": "{\"cats\":1,\"step\":4,\"text\":\"See the marks? A cat rules out her row, column, color and the cells touching her. Tap the next glowing cell twice.\",\"auto\":10}"
+    },
+    {
+      "name": "wrong cat on level 1: reason shown, no heart lost (free mistakes while learning)",
+      "ok": true,
+      "detail": "{\"hearts\":3,\"msg\":\"CATS CAN'T TOUCH!\",\"cats\":1,\"bad\":2}"
+    },
+    {
+      "name": "level 1 solved by taps → results panel, progress saved, tutorial done",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"panel\":true,\"cleared\":1,\"tut\":1,\"title\":\"Level 1 solved!\",\"msgs\":[\"level_started\",\"level_completed\"]}"
+    },
+    {
+      "name": "level_completed message on win",
+      "ok": true,
+      "detail": "level_started,level_completed"
+    },
+    {
+      "name": "no tutorial and no hint button on the mock platform (rewarded unsupported → hidden)",
+      "ok": true,
+      "detail": "{\"state\":1,\"level\":2,\"N\":5,\"tut\":false,\"hint\":false}"
+    },
+    {
+      "name": "level 2 (5×5) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":2,\"hearts\":3}"
+    },
+    {
+      "name": "level 3 (5×5) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":3,\"hearts\":3}"
+    },
+    {
+      "name": "level 4 (6×6) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":4,\"hearts\":3}"
+    },
+    {
+      "name": "level 5 (6×6) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":5,\"hearts\":3}"
+    },
+    {
+      "name": "level 6 (6×6) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":6,\"hearts\":3}"
+    },
+    {
+      "name": "level 7 (6×6) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":7,\"hearts\":3}"
+    },
+    {
+      "name": "level 8 (6×6) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":8,\"hearts\":3}"
+    },
+    {
+      "name": "level 9 (6×6) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":9,\"hearts\":3}"
+    },
+    {
+      "name": "level 10 (6×6) cleared by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":10,\"hearts\":3}"
+    },
+    {
+      "name": "level 11 is 7×7 with the hint button (rewarded supported)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "P pauses and shows the pause panel",
+      "ok": true,
+      "detail": "{\"p\":true,\"vis\":true,\"frozen\":true}"
+    },
+    {
+      "name": "timer frozen while paused",
+      "ok": true,
+      "detail": "0.61 → 0.61"
+    },
+    {
+      "name": "Resume continues the level",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "hidden page: silent and frozen",
+      "ok": true,
+      "detail": "{\"hidden\":true,\"audible\":false,\"ctx\":\"suspended\",\"frozen\":true}"
+    },
+    {
+      "name": "back from hidden: sound allowed again, waits in pause panel",
+      "ok": true,
+      "detail": "{\"hidden\":false,\"audible\":true,\"paused\":true}"
+    },
+    {
+      "name": "interstitial opened: frozen and silent",
+      "ok": true,
+      "detail": "{\"frozen\":true,\"audible\":false}"
+    },
+    {
+      "name": "interstitial closed: running again",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "hint ad closed early: no cat placed, hint still available",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "hint rewarded: one correct cat placed, button gone (one hint per puzzle)",
+      "ok": true,
+      "detail": "{\"cats\":2,\"used\":true,\"btn\":false,\"ok\":true}"
+    },
+    {
+      "name": "three wrong cats → out of hearts, continue offered once, cats kept on the board",
+      "ok": true,
+      "detail": "{\"state\":2,\"hearts\":0,\"won\":false,\"title\":\"Out of hearts\",\"cont\":true,\"cats\":2,\"msgs\":[\"level_failed\"]}"
+    },
+    {
+      "name": "continue ad closed early: no reward, panel stays",
+      "ok": true,
+      "detail": "{\"state\":2,\"used\":false,\"note\":\"The ad was closed early, so no reward this time. You can try again.\"}"
+    },
+    {
+      "name": "reward earned but the game waits until the ad closes",
+      "ok": true,
+      "detail": "{\"state\":2,\"earned\":\"continue\",\"frozen\":true}"
+    },
+    {
+      "name": "rewarded: play continues with 3 hearts and the same board",
+      "ok": true,
+      "detail": "{\"state\":1,\"hearts\":3,\"cats\":2,\"used\":true,\"frozen\":false}"
+    },
+    {
+      "name": "no second continue in the same attempt",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Try again restarts level 11 with a clean board",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "title shows progress: Play · Level 11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Today's puzzle starts (7×7, not practice)",
+      "ok": true,
+      "detail": "{\"state\":1,\"mode\":\"daily\",\"N\":7,\"practice\":false,\"label\":\"Today’s puzzle\"}"
+    },
+    {
+      "name": "daily solved by taps: time recorded, rank list and share shown",
+      "ok": true,
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.9829000000001397,\"ranks\":1,\"day\":\"20261107\",\"rankVis\":true,\"share\":true}"
+    },
+    {
+      "name": "Share my time copies or shares the text",
+      "ok": true,
+      "detail": "Kitty Queens Nov 7: I placed all 7 cats in 0:01. Same puzzle"
+    },
+    {
+      "name": "Title button leaves the results panel",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mute button silences and shows the off icon",
+      "ok": true,
+      "detail": "{\"user\":true,\"attr\":\"1\",\"audible\":false}"
+    },
+    {
+      "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
+      "ok": true,
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.9829000000001397,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+    },
+    {
+      "name": "second daily run is practice (first time is the record)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "levels grid: 10 done, 11 is next, the rest locked",
+      "ok": true,
+      "detail": "{\"state\":3,\"done\":10,\"next\":\"11\",\"locked\":14}"
+    },
+    {
+      "name": "level pages turn",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "a cleared level can be replayed from the grid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop detected",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Space starts the next level",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mouse click places a cat",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "arrow keys + Space place a cat at the cursor",
+      "ok": true,
+      "detail": "row 2 col 3"
+    },
+    {
+      "name": "Esc does nothing (1.5.2)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "layout phone-360x640 (portrait): board 340px, cells 45px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "results panel fits at phone-360x640",
+      "ok": true,
+      "detail": "panel 454px of 640"
+    },
+    {
+      "name": "layout phone-390x844 (portrait): board 370px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout phone-430x932 (portrait): board 410px, cells 55px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout land-844x390 (landscape): board 374px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "results panel fits at land-844x390",
+      "ok": true,
+      "detail": "panel 366px of 390"
+    },
+    {
+      "name": "levels grid fits at land-844x390",
+      "ok": true,
+      "detail": "{\"fits\":true,\"cell\":65}"
+    },
+    {
+      "name": "layout land-915x412 (landscape): board 396px, cells 53px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout tablet-768x1024 (portrait): board 748px, cells 103px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.97\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout tablet-1024x768 (landscape): board 690px, cells 95px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.90\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout square-640x640 (portrait): board 444px, cells 59px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.69\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "results panel fits at square-640x640",
+      "ok": true,
+      "detail": "panel 454px of 640"
+    },
+    {
+      "name": "levels grid fits at square-640x640",
+      "ok": true,
+      "detail": "{\"fits\":true,\"cell\":82}"
+    },
+    {
+      "name": "layout iframe-800x450 (landscape): board 434px, cells 58px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout iframe-1280x720 (landscape): board 704px, cells 97px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.98\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout desk-1366x768 (landscape): board 752px, cells 103px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.98\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout desk-1920x1080 (landscape): board 1064px, cells 148px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.99\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout tall-9x21-390x910 (portrait): board 370px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout wide-21x9-910x390 (landscape): board 374px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "console errors: 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "page errors: 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "external requests: 0 (everything ships in the archive)",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "screenshots": [
+    "phone-390x844-title.png",
+    "phone-390x844-tutorial-1.png",
+    "phone-390x844-tutorial-2.png",
+    "phone-390x844-tutorial-wrong.png",
+    "phone-390x844-level1-solved.png",
+    "phone-390x844-level4-6x6.png",
+    "phone-390x844-level10-solved.png",
+    "phone-390x844-play-7x7.png",
+    "phone-390x844-paused.png",
+    "phone-390x844-hint.png",
+    "phone-390x844-wrong.png",
+    "phone-390x844-out-of-hearts.png",
+    "phone-390x844-continued.png",
+    "phone-390x844-daily-solved.png",
+    "phone-390x844-levels.png",
+    "iframe-1280x720-play.png",
+    "phone-360x640-play.png",
+    "phone-360x640-over.png",
+    "phone-390x844-play.png",
+    "phone-430x932-play.png",
+    "land-844x390-play.png",
+    "land-844x390-over.png",
+    "land-844x390-levels.png",
+    "land-915x412-play.png",
+    "tablet-768x1024-play.png",
+    "tablet-1024x768-play.png",
+    "square-640x640-play.png",
+    "square-640x640-over.png",
+    "square-640x640-levels.png",
+    "iframe-800x450-play.png",
+    "iframe-1280x720-play.png",
+    "desk-1366x768-play.png",
+    "desk-1920x1080-play.png",
+    "tall-9x21-390x910-play.png",
+    "wide-21x9-910x390-play.png"
+  ],
+  "taps": 146,
+  "passed": 84,
+  "failed": 0
+}

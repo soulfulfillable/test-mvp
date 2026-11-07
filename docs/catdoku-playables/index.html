@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Playgama Bridge SDK must be the first script in <head>, loaded normally (SDK required step 2).
+     Local copy of npm @playgama/bridge (see CREDITS.md) so the archive ships everything it needs (rule 1.2.5). -->
+<script src="playgama-bridge.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Kitty Queens: Cat Sudoku</title>
+<style>
+  :root {
+    --bg: #f6efe4; --ink: #4a3b28; --sub: #6b5a41; --muted: #8a7a5f; --panel: #fff;
+    --accent: #f0915a; --red: #d1342a; --green: #2e9e5b; --gold: #ffd98a;
+    --board: 300px; --n: 7;
+    --sat: env(safe-area-inset-top, 0px); --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px); --sar: env(safe-area-inset-right, 0px);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; background: var(--bg); }
+  body {
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink); touch-action: none;
+  }
+  button { font-family: inherit; color: inherit; -webkit-tap-highlight-color: transparent; touch-action: manipulation; cursor: pointer; }
+  svg { display: block; }
+  .hidden { display: none !important; }
+  #defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  /* ── loading screen (first thing on screen, hidden right before game_ready) ── */
+  #loading { position: fixed; inset: 0; z-index: 40; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: var(--bg); }
+  #loading svg { width: 96px; height: 96px; }
+  #loading .ttl { font-size: 22px; font-weight: 800; letter-spacing: 0.3px; }
+  #loading .bar { width: 150px; height: 6px; border-radius: 3px; background: rgba(74,59,40,0.14); overflow: hidden; }
+  #loading .bar i { display: block; height: 100%; width: 30%; border-radius: 3px; background: var(--accent); animation: load 1s ease-in-out infinite alternate; }
+  @keyframes load { from { transform: translateX(-40%); } to { transform: translateX(380%); } }
+
+  /* ── play screen: grid that turns sideways in landscape ── */
+  #app {
+    position: fixed; inset: 0; display: grid;
+    grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "hud" "board" "foot";
+    padding: calc(var(--sat) + 8px) calc(var(--sar) + 10px) calc(var(--sab) + 8px) calc(var(--sal) + 10px);
+    gap: 6px;
+  }
+  #app.land {
+    grid-template-rows: auto 1fr; grid-template-columns: minmax(190px, 300px) minmax(0, 1fr);
+    grid-template-areas: "hud board" "foot board"; column-gap: 14px;
+  }
+  #hud { grid-area: hud; width: min(100%, 520px); min-width: 0; justify-self: center; }
+    #app.land #hud { width: 100%; align-self: start; }
+  #hud-top { display: flex; align-items: center; gap: 8px; min-height: 40px; }
+  .ibtn { width: 40px; height: 40px; border-radius: 12px; border: none; background: rgba(74,59,40,0.08); display: flex; align-items: center; justify-content: center; flex: none; }
+  .ibtn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .ibtn:active { background: rgba(74,59,40,0.18); }
+  #mute-btn .on, #mute-btn .off { display: none; }
+  #mute-btn[data-muted="0"] .on { display: block; }
+  #mute-btn[data-muted="1"] .off { display: block; }
+  #mode-label { flex: 1; min-width: 0; font-size: 15px; font-weight: 800; white-space: nowrap; overflow: hidden; display: flex; flex-direction: column; line-height: 1.15; }
+  #mode-label span, #mode-label small { overflow: hidden; text-overflow: ellipsis; }
+  #mode-label small { font-size: 12px; font-weight: 600; color: var(--muted); }
+  #timer { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; background: var(--panel); border-radius: 10px; padding: 4px 10px; box-shadow: 0 1px 3px rgba(120,90,40,0.15); flex: none; }
+  #timer.practice { color: var(--muted); }
+  #hearts { display: flex; gap: 2px; flex: none; }
+  #hearts svg { width: 22px; height: 22px; }
+  #hearts svg.off path { fill: none; stroke: rgba(74,59,40,0.3); stroke-width: 2; }
+  #hearts svg.flash { animation: hflash 0.5s; }
+  @keyframes hflash { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.5); } }
+  #hud-row2 { display: flex; align-items: center; gap: 8px; margin-top: 6px; min-height: 36px; }
+  #progress { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 800; background: var(--panel); border-radius: 10px; padding: 4px 10px; box-shadow: 0 1px 3px rgba(120,90,40,0.12); font-variant-numeric: tabular-nums; }
+  #progress svg { width: 22px; height: 22px; }
+  #hud-spacer-top { flex: 1; }
+  .adbtn { display: flex; align-items: center; gap: 6px; border: none; border-radius: 10px; background: var(--green); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 10px; min-height: 36px; }
+  .adbtn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .adbtn small { display: block; font-size: 10px; font-weight: 600; opacity: 0.9; }
+  #rules { display: flex; gap: 6px; margin-top: 6px; }
+  .chip { flex: 1; display: flex; align-items: center; gap: 6px; background: var(--panel); border-radius: 10px; padding: 5px 7px; font-size: 11px; font-weight: 700; color: var(--sub); line-height: 1.2; box-shadow: 0 1px 3px rgba(120,90,40,0.12); }
+  .chip svg { width: 26px; height: 26px; flex: none; }
+  #app.land #rules { flex-direction: column; }
+
+  #board-wrap { grid-area: board; position: relative; display: flex; align-items: flex-end; justify-content: center; min-height: 0; min-width: 0; }
+  #app.land #board-wrap { align-items: center; }
+  #board {
+    display: grid; grid-template-columns: repeat(var(--n), 1fr); grid-template-rows: repeat(var(--n), 1fr); gap: 3px;
+    width: var(--board); height: var(--board); padding: 5px;
+    background: var(--panel); border-radius: 14px; box-shadow: 0 3px 14px rgba(120,90,40,0.18);
+    position: relative;
+  }
+  .cell { border-radius: 16%; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; min-width: 0; min-height: 0; overflow: hidden; }
+  .cell svg { width: 66%; height: 66%; pointer-events: none; }
+  .cell svg.xm { width: 46%; height: 46%; color: var(--ink); }
+  .cell svg.ax { width: 40%; height: 40%; color: rgba(255,255,255,0.62); }
+  .cell.pop svg.cat { animation: pop 0.28s ease-out; }
+  @keyframes pop { 0% { transform: scale(0.3); } 65% { transform: scale(1.2); } 100% { transform: scale(1); } }
+  .cell.bad::after { content: ''; position: absolute; inset: 0; border-radius: 16%; background: rgba(209,52,42,0.6); animation: badflash 0.75s ease-out forwards; pointer-events: none; }
+  @keyframes badflash { 0% { opacity: 1; } 100% { opacity: 0; } }
+  .cell.cursor::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 3px solid var(--ink); pointer-events: none; }
+  .cell.guide::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 3px solid #fff; box-shadow: 0 0 0 3px var(--ink); animation: guidepulse 1s ease-in-out infinite alternate; pointer-events: none; }
+  @keyframes guidepulse { from { opacity: 0.45; } to { opacity: 1; } }
+  .cell.hinted svg.cat { animation: hintpop 0.9s ease-out; }
+  @keyframes hintpop { 0% { transform: scale(0) rotate(-30deg); } 60% { transform: scale(1.3) rotate(8deg); } 100% { transform: scale(1) rotate(0); } }
+  #board.shake { animation: shake 0.35s; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
+  #board.won .cell svg.cat { animation: winbounce 0.7s ease-in-out infinite alternate; }
+  @keyframes winbounce { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-9%) scale(1.12); } }
+  #hand { position: absolute; width: 15%; height: 15%; pointer-events: none; z-index: 3; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3)); animation: handtap 0.9s ease-in-out infinite; }
+  @keyframes handtap { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-6%, -10%) scale(0.9); } }
+  #msg {
+    position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%);
+    font-size: 21px; font-weight: 900; color: var(--red); white-space: nowrap; pointer-events: none; opacity: 0; z-index: 4;
+    text-shadow: 0 1px 0 #fff, 0 2px 10px rgba(255,255,255,0.9);
+  }
+  #msg.show { animation: msgfly 1.2s ease-out forwards; }
+  #msg.good { color: var(--green); }
+  @keyframes msgfly { 0% { opacity: 0; transform: translate(-50%,-30%) scale(0.7); } 15% { opacity: 1; transform: translate(-50%,-50%) scale(1.05); } 75% { opacity: 1; transform: translate(-50%,-60%) scale(1); } 100% { opacity: 0; transform: translate(-50%,-75%) scale(1); } }
+
+  #foot { grid-area: foot; width: min(100%, 520px); justify-self: center; align-self: end; min-height: 44px; display: flex; flex-direction: column; justify-content: flex-end; }
+  #app.land #foot { width: 100%; }
+  #tip { font-size: 13px; font-weight: 600; color: var(--muted); text-align: center; line-height: 1.35; }
+  #tut { background: var(--ink); color: #fff; border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
+  #tut.hidden { display: none; }
+  #app.land #tip { text-align: left; }
+
+  /* ── panels ── */
+  .panel {
+    position: fixed; z-index: 25; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: min(360px, calc(100vw - 24px)); max-height: calc(100% - 24px); overflow-y: auto;
+    background: var(--panel); color: var(--ink); border-radius: 18px; padding: 18px 16px 14px; text-align: center;
+    box-shadow: 0 10px 44px rgba(74,59,40,0.3); animation: panelin 0.26s ease-out;
+  }
+  @keyframes panelin { from { opacity: 0; transform: translate(-50%, -50%) scale(0.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+  .panel h2 { font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .panel h2 svg { width: 30px; height: 30px; }
+  .big { font-size: 40px; font-weight: 800; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .sub { font-size: 15px; color: var(--sub); margin-top: 4px; min-height: 18px; }
+  .sub.win { color: var(--green); font-weight: 700; } .sub.lose { color: var(--red); font-weight: 700; }
+  .btns { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .btns button { border: none; border-radius: 13px; font-size: 16px; font-weight: 700; min-height: 48px; padding: 10px 12px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btns button svg { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .btn-main { background: var(--ink); color: var(--gold); }
+  .btn-ad { background: var(--green); color: #fff; text-align: left; }
+  .btn-ad small { display: block; font-size: 12px; font-weight: 600; opacity: 0.9; }
+  .btn-ghost { background: rgba(74,59,40,0.08); color: var(--ink); }
+  .note { font-size: 13px; font-weight: 600; color: var(--red); min-height: 16px; margin-top: 8px; }
+  #share-note { color: var(--green); }
+  #backdrop { position: fixed; inset: 0; z-index: 24; background: rgba(74,59,40,0.35); }
+
+  /* title */
+  #title-panel { position: fixed; inset: 0; z-index: 30; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: calc(var(--sat) + 16px) 20px calc(var(--sab) + 16px); overflow-y: auto; }
+  #title-panel .logo { width: min(34vmin, 150px); height: min(34vmin, 150px); }
+  #title-panel h1 { font-size: clamp(28px, 7vmin, 40px); font-weight: 800; letter-spacing: 0.3px; margin-top: 6px; line-height: 1.05; }
+  #title-panel h1 small { display: block; font-size: 0.5em; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+  #title-rules { display: flex; gap: 8px; margin-top: 14px; width: min(92vw, 420px); }
+  #title-rules .chip { padding: 8px 8px; font-size: 12px; }
+  #title-btns { width: min(92vw, 360px); margin-top: 16px; }
+  #title-btns button { display: flex; align-items: center; justify-content: space-between; text-align: left; }
+  #title-btns button .l { display: flex; flex-direction: column; line-height: 1.2; }
+  #title-btns button small { font-size: 12px; font-weight: 600; opacity: 0.8; }
+  #title-best { margin-top: 10px; font-size: 13px; color: var(--muted); min-height: 16px; }
+  #title-corner { position: absolute; right: calc(var(--sar) + 10px); top: calc(var(--sat) + 10px); display: flex; gap: 6px; }
+  .pill { height: 34px; padding: 0 12px; border-radius: 17px; border: 1.5px solid rgba(74,59,40,0.25); background: rgba(255,255,255,0.8); color: var(--ink); font-size: 12px; font-weight: 600; }
+  #title-studio { margin-top: 14px; font-size: 11px; color: var(--muted); }
+  #title-panel.short { justify-content: flex-start; }
+  #title-panel.short .logo { width: 80px; height: 80px; }
+
+  /* level select */
+  #levels-panel { position: fixed; inset: 0; z-index: 30; background: var(--bg); display: flex; flex-direction: column; align-items: center; padding: calc(var(--sat) + 10px) calc(var(--sar) + 12px) calc(var(--sab) + 12px) calc(var(--sal) + 12px); }
+  #levels-head { width: min(100%, 440px); display: flex; align-items: center; gap: 8px; }
+  #levels-head h2 { flex: 1; font-size: 20px; font-weight: 800; text-align: center; }
+  #levels-head small { display: block; font-size: 12px; font-weight: 600; color: var(--muted); }
+  #levels-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: min(100%, 440px, calc(100vh - 170px)); margin-top: 12px; flex: 1; align-content: start; }
+  .lvl { aspect-ratio: 1; border: none; border-radius: 14px; background: var(--panel); box-shadow: 0 1px 3px rgba(120,90,40,0.14); font-size: 17px; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; position: relative; }
+  .lvl small { font-size: 10px; font-weight: 600; color: var(--muted); }
+  .lvl.done { background: var(--ink); color: var(--gold); } .lvl.done small { color: rgba(255,217,138,0.8); }
+  .lvl.done svg { position: absolute; right: 5px; top: 5px; width: 18px; height: 18px; }
+  .lvl.next { outline: 3px solid var(--accent); outline-offset: -3px; }
+  .lvl.locked { opacity: 0.4; } .lvl.locked svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; }
+  #levels-nav { width: min(100%, 440px); display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--muted); }
+  body.land #levels-grid { grid-template-columns: repeat(10, 1fr); width: min(100%, 720px); }
+
+  /* daily rank list */
+  #rank-title { margin-top: 12px; font-size: 13px; color: var(--muted); text-align: left; padding-left: 4px; display: flex; align-items: center; gap: 6px; }
+  #rank-title svg { width: 16px; height: 16px; }
+  #rank-board { margin: 6px 0 8px; max-height: min(150px, 24vh); overflow-y: auto; background: rgba(74,59,40,0.05); border-radius: 10px; font-size: 14px; }
+  .rank-row { display: flex; gap: 10px; align-items: center; padding: 6px 12px; border-bottom: 1px solid rgba(74,59,40,0.07); color: var(--sub); }
+  .rank-row:last-child { border-bottom: none; }
+  .rank-row.me { background: rgba(240,145,90,0.2); color: var(--ink); font-weight: 700; }
+  .rank-pos { width: 26px; height: 26px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; background: rgba(74,59,40,0.1); flex: none; font-variant-numeric: tabular-nums; }
+  .rank-pos.m1 { background: var(--gold); } .rank-pos.m2 { background: #e2e2e2; } .rank-pos.m3 { background: #e5bf96; }
+  .rank-name { flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rank-s { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .rank-empty { padding: 14px; font-size: 13px; color: var(--muted); }
+  #name-row { display: flex; gap: 8px; align-items: center; justify-content: center; font-size: 13px; color: var(--sub); margin-top: 4px; }
+  #name-input { width: 110px; background: rgba(74,59,40,0.06); border: 1px solid rgba(74,59,40,0.2); border-radius: 8px; color: var(--ink); font-size: 14px; padding: 6px 8px; text-align: center; -webkit-user-select: text; user-select: text; font-family: inherit; }
+  #next-note { font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .pause-keys { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  #over-cat { width: 72px; height: 72px; margin: 2px auto 0; }
+  #app.cover { grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: 1fr !important; grid-template-areas: "board" !important; }
+  #app.cover #hud, #app.cover #foot { display: none; }
+  #app.cover #board-wrap { align-items: center; }
+  #cover-badge { position: fixed; z-index: 35; left: 50%; top: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.94); border-radius: 28px; padding: 28px 44px 30px; text-align: center; box-shadow: 0 12px 50px rgba(74,59,40,0.35); }
+  #cover-badge svg { width: 150px; height: 150px; margin: 0 auto; }
+  #cover-badge h1 { font-size: 60px; font-weight: 800; line-height: 1.05; margin-top: 4px; white-space: nowrap; }
+  #cover-badge h1 small { display: block; font-size: 24px; font-weight: 700; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; }
+</style>
+</head>
+<body>
+<svg id="defs" aria-hidden="true">
+  <!-- hand-drawn vector set for this game: cat, cross mark, heart, hand, badges (rule 4.3.2: no emoji) -->
+  <symbol id="s-cat" viewBox="0 0 100 100">
+    <path d="M24 46 L16 11 L44 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M76 46 L84 11 L56 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M27 40 L23 21 L37 32 Z" fill="#f6b2b2"/>
+    <path d="M73 40 L77 21 L63 32 Z" fill="#f6b2b2"/>
+    <ellipse cx="50" cy="57" rx="37" ry="30" fill="#f0915a" stroke="#4a3b28" stroke-width="5"/>
+    <ellipse cx="37" cy="53" rx="5.2" ry="6.6" fill="#4a3b28"/><ellipse cx="63" cy="53" rx="5.2" ry="6.6" fill="#4a3b28"/>
+    <circle cx="39" cy="50.5" r="2" fill="#fff"/><circle cx="65" cy="50.5" r="2" fill="#fff"/>
+    <path d="M45.5 63 L54.5 63 L50 68.5 Z" fill="#e26a8a"/>
+    <path d="M50 68.5 Q46.5 75 41 71.5 M50 68.5 Q53.5 75 59 71.5" stroke="#4a3b28" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M8 58 L29 62 M10 69 L29 66 M92 58 L71 62 M90 69 L71 66" stroke="#4a3b28" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="s-catsleep" viewBox="0 0 100 100">
+    <path d="M24 46 L16 11 L44 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M76 46 L84 11 L56 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M27 40 L23 21 L37 32 Z" fill="#f6b2b2"/><path d="M73 40 L77 21 L63 32 Z" fill="#f6b2b2"/>
+    <ellipse cx="50" cy="57" rx="37" ry="30" fill="#f0915a" stroke="#4a3b28" stroke-width="5"/>
+    <path d="M30 53 Q37 47 44 53 M56 53 Q63 47 70 53" stroke="#4a3b28" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M45.5 63 L54.5 63 L50 68.5 Z" fill="#e26a8a"/>
+    <path d="M50 68.5 Q46.5 75 41 71.5 M50 68.5 Q53.5 75 59 71.5" stroke="#4a3b28" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M8 58 L29 62 M10 69 L29 66 M92 58 L71 62 M90 69 L71 66" stroke="#4a3b28" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="s-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></symbol>
+  <symbol id="s-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.3-9.4C1.4 8.1 3.6 4.5 7.2 4.5c2 0 3.6 1.2 4.8 2.6 1.2-1.4 2.8-2.6 4.8-2.6 3.6 0 5.8 3.6 4.5 7.1C19.5 16.4 12 21 12 21z" fill="#d1342a"/></symbol>
+  <symbol id="s-hand" viewBox="0 0 64 64">
+    <path d="M27 5a4.5 4.5 0 0 1 9 0v23h6.5a4 4 0 0 1 4 4v1.5h4.5a4 4 0 0 1 4 4V44c0 9.5-7.5 16-17.5 16h-6c-5.5 0-9.5-2.5-12.5-7L9 41.5a4.2 4.2 0 0 1 6.2-5.6L27 44.5z" fill="#fff" stroke="#4a3b28" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M36 28v9M42.5 33.5V37M51 37.5v3" stroke="#4a3b28" stroke-width="2.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="s-row" viewBox="0 0 40 40"><rect x="3" y="12" width="34" height="16" rx="3" fill="#63aee6" stroke="#4a3b28" stroke-width="2.4"/><rect x="12" y="3" width="16" height="34" rx="3" fill="rgba(99,174,230,0.55)" stroke="#4a3b28" stroke-width="2.4"/><circle cx="20" cy="20" r="5" fill="#f0915a" stroke="#4a3b28" stroke-width="2"/></symbol>
+  <symbol id="s-color" viewBox="0 0 40 40"><path d="M4 8h18v12h14v16H4z" fill="#8fd977" stroke="#4a3b28" stroke-width="2.4" stroke-linejoin="round"/><path d="M22 4h14v16H22z" fill="#c4608c" stroke="#4a3b28" stroke-width="2.4" stroke-linejoin="round"/><circle cx="13" cy="24" r="5" fill="#f0915a" stroke="#4a3b28" stroke-width="2"/></symbol>
+  <symbol id="s-touch" viewBox="0 0 40 40"><circle cx="13" cy="14" r="7" fill="#f0915a" stroke="#4a3b28" stroke-width="2.4"/><circle cx="27" cy="26" r="7" fill="#f0915a" stroke="#4a3b28" stroke-width="2.4"/><path d="M8 32L32 8" stroke="#d1342a" stroke-width="3.4" stroke-linecap="round"/></symbol>
+  <symbol id="s-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div id="loading"><svg><use href="#s-cat"/></svg><div class="ttl">Kitty Queens</div><div class="bar"><i></i></div></div>
+
+<div id="app">
+  <div id="hud">
+    <div id="hud-top">
+      <button id="back-btn" class="ibtn" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div id="hud-spacer-top"></div>
+      <div id="timer">0:00</div>
+      <div id="hearts"></div>
+      <button id="pause-btn" class="ibtn" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg></button>
+      <button id="mute-btn" class="ibtn" data-muted="0" aria-label="Sound on/off">
+        <svg class="on" viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18 6.5a7.8 7.8 0 0 1 0 11"/></svg>
+        <svg class="off" viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+      </button>
+    </div>
+    <div id="hud-row2">
+      <div id="mode-label"><span id="mode-main">Level 1</span><small id="mode-sub">5×5</small></div>
+      <div id="progress"><svg><use href="#s-cat"/></svg><span id="progress-text">0/7</span></div>
+      <button id="hint-btn" class="adbtn hidden"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span>Hint<small>watch an ad</small></span></button>
+    </div>
+    <div id="rules">
+      <div class="chip"><svg><use href="#s-color"/></svg><span>1 cat per color</span></div>
+      <div class="chip"><svg><use href="#s-row"/></svg><span>1 per row &amp; column</span></div>
+      <div class="chip"><svg><use href="#s-touch"/></svg><span>Cats never touch</span></div>
+    </div>
+  </div>
+  <div id="board-wrap">
+    <div id="board"></div>
+    <div id="msg"></div>
+  </div>
+  <div id="foot">
+    <div id="tut" class="hidden"></div>
+    <div id="tip">Tap a cell once for a mark, twice for a cat. Tap a cat to remove it.</div>
+  </div>
+</div>
+
+<div id="title-panel">
+  <div id="title-corner">
+    <button id="bgm-pill" class="pill">Music: Ukulele</button>
+    <button id="title-mute-btn" class="ibtn" aria-label="Sound on/off"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18 6.5a7.8 7.8 0 0 1 0 11"/></svg></button>
+  </div>
+  <svg class="logo"><use href="#s-cat"/></svg>
+  <h1>Kitty Queens<small>Cat Sudoku</small></h1>
+  <div id="title-rules">
+    <div class="chip"><svg><use href="#s-color"/></svg><span>1 cat per color</span></div>
+    <div class="chip"><svg><use href="#s-row"/></svg><span>1 per row &amp; column</span></div>
+    <div class="chip"><svg><use href="#s-touch"/></svg><span>Cats never touch</span></div>
+  </div>
+  <div id="title-btns" class="btns">
+    <button id="play-btn" class="btn-main"><span class="l"><span id="play-main">Play · Level 1</span><small id="play-sub">5×5 — start small</small></span><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+    <button id="daily-btn" class="btn-ghost"><span class="l"><span id="daily-main">Today's puzzle</span><small id="daily-sub">7×7 · same board for everyone</small></span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button>
+    <button id="levels-btn" class="btn-ghost"><span class="l"><span>All levels</span><small id="levels-sub">1 of 500 cleared</small></span><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></button>
+  </div>
+  <div id="title-best"></div>
+  <div id="title-studio">Treasurefield Studio</div>
+</div>
+
+<div id="levels-panel" class="hidden">
+  <div id="levels-head">
+    <button id="levels-back" class="ibtn" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <h2>Levels<small id="levels-count"></small></h2>
+    <div style="width:40px"></div>
+  </div>
+  <div id="levels-grid"></div>
+  <div id="levels-nav">
+    <button id="lv-prev" class="pill">Previous</button>
+    <span id="lv-page"></span>
+    <button id="lv-next" class="pill">Next</button>
+  </div>
+</div>
+
+<div id="cover-badge" class="hidden"><svg><use href="#s-cat"/></svg><h1>Kitty Queens<small>Cat Sudoku</small></h1></div>
+<div id="backdrop" class="hidden"></div>
+<div id="over-panel" class="panel hidden" role="dialog">
+  <h2 id="over-title"></h2>
+  <svg id="over-cat"><use href="#s-cat"/></svg>
+  <div id="over-score" class="big"></div>
+  <div id="over-sub" class="sub"></div>
+  <div id="rank-title" class="hidden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h10v4a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M9 17h6"/></svg><span id="rank-title-text"></span></div>
+  <div id="rank-board" class="hidden"></div>
+  <div id="name-row" class="hidden"><label for="name-input">Your name</label><input id="name-input" maxlength="8" placeholder="You" autocomplete="off"></div>
+  <div class="btns">
+    <button id="continue-btn" class="btn-ad hidden"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span><b>Continue</b> with 3 hearts back<small>watch one ad, keep your cats on the board</small></span></button>
+    <button id="next-btn" class="btn-main hidden">Next level</button>
+    <button id="retry-btn" class="btn-main hidden">Try again</button>
+    <button id="share-btn" class="btn-ghost hidden"><svg viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>Share my time</button>
+    <button id="over-levels-btn" class="btn-ghost">Levels</button>
+    <button id="over-home-btn" class="btn-ghost">Title</button>
+  </div>
+  <div id="share-note" class="note"></div>
+  <div id="ad-note" class="note"></div>
+  <div id="next-note"></div>
+</div>
+<div id="pause-panel" class="panel hidden" role="dialog">
+  <h2><svg viewBox="0 0 24 24" fill="none" stroke="#f0915a" stroke-width="2.6" stroke-linecap="round"><path d="M8 5v14M16 5v14"/></svg><span>Paused</span></h2>
+  <div class="btns">
+    <button id="resume-btn" class="btn-main"><svg viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></svg>Resume</button>
+    <button id="pause-mute-btn" class="btn-ghost">Sound: on</button>
+    <button id="pause-bgm-btn" class="btn-ghost">Music: Ukulele</button>
+    <button id="quit-btn" class="btn-ghost">Quit to title</button>
+  </div>
+  <div class="pause-keys" id="pause-keys"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var GAME_VERSION = '1.0.0';
+  var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
+  var MAX_LEVEL = 500;
+  var PAGE = 25;
+  var hash = location.hash || '';
+  var DEBUG = hash.indexOf('debug') >= 0;
+  var COVER = hash.indexOf('cover') >= 0;
+  var PALETTE = ['#3ec3af', '#63aee6', '#c4608c', '#8fd977', '#e6b93f', '#f2a0bf', '#a48ae0', '#f0915a', '#b9a58c'];
+
+  // ---------- Bridge SDK adapter ----------
+  var B = window.bridge || null;
+  var bridgeReady = false;
+  function safe(fn, dflt) { try { return fn(); } catch (e) { return dflt; } }
+  var $ = function (id) { return document.getElementById(id); };
+
+  // ---------- persistent state (Bridge storage only; rule 3.2.1) ----------
+  var store = {
+    progress: { v: 1, level: 1, cleared: 0, name: '', tut: 0, played: 0, daily: { day: '', accum: 0, solved: 0, ranks: [] } },
+    settings: { v: 1, muted: false, bgm: 'ukulele' }
+  };
+  function parseVal(v, dflt) {
+    if (v === null || v === undefined) return dflt;
+    if (typeof v === 'string') { try { v = JSON.parse(v); } catch (e) { return dflt; } }
+    if (!v || typeof v !== 'object') return dflt;
+    var out = {};
+    for (var k in dflt) out[k] = (k in v) ? v[k] : dflt[k];
+    return out;
+  }
+  function loadStore() {
+    if (!bridgeReady) return Promise.resolve();
+    return B.storage.get(['progress', 'settings']).then(function (data) {
+      var p = parseVal(data[0], store.progress);
+      p.level = Math.min(MAX_LEVEL, Math.max(1, parseInt(p.level, 10) || 1));
+      p.cleared = Math.min(MAX_LEVEL, Math.max(0, parseInt(p.cleared, 10) || 0));
+      if (p.level > p.cleared + 1) p.level = p.cleared + 1;
+      p.name = String(p.name || '').slice(0, 8);
+      p.tut = p.tut ? 1 : 0;
+      p.played = Math.max(0, parseInt(p.played, 10) || 0);
+      var d = parseVal(p.daily, store.progress.daily);
+      d.day = String(d.day || '');
+      d.accum = Math.max(0, parseFloat(d.accum) || 0);
+      d.solved = Math.max(0, parseFloat(d.solved) || 0);
+      d.ranks = Array.isArray(d.ranks) ? d.ranks.filter(function (r) { return r && typeof r.s === 'number' && isFinite(r.s) && r.s > 0; })
+        .map(function (r) { return { n: String(r.n || 'You').slice(0, 8), s: Math.max(1, Math.round(r.s)), t: r.t || 0 }; })
+        .sort(function (a, b) { return a.s - b.s; }).slice(0, RANK_MAX) : [];
+      p.daily = d;
+      store.progress = p;
+      var s = parseVal(data[1], store.settings);
+      s.muted = !!s.muted;
+      s.bgm = BGM_STYLES.some(function (x) { return x.id === s.bgm; }) ? s.bgm : 'ukulele';
+      store.settings = s;
+    }).catch(function () { /* unreadable data: new player */ });
+  }
+  var saveT = null;
+  function saveStore(keys) {
+    if (!bridgeReady) return;
+    var vals = keys.map(function (k) { return JSON.stringify(store[k]); });
+    safe(function () { B.storage.set(keys, vals).catch(function () {}); });
+  }
+  function saveStoreSoon(keys) { clearTimeout(saveT); saveT = setTimeout(function () { saveStore(keys); }, 700); }
+
+  // ---------- date (KST, same day boundary as the web Catdoku so both share the daily board) ----------
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function kstNow() { return new Date(Date.now() + 9 * 3600 * 1000); }
+  function dayKey() { var t = kstNow(); return '' + t.getUTCFullYear() + pad2(t.getUTCMonth() + 1) + pad2(t.getUTCDate()); }
+  function dayLabel(key) { var m = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return m[parseInt(key.slice(4, 6), 10) - 1] + ' ' + parseInt(key.slice(6, 8), 10); }
+  function untilNextPuzzle() {
+    var t = kstNow();
+    var left = 86400 - (t.getUTCHours() * 3600 + t.getUTCMinutes() * 60 + t.getUTCSeconds());
+    var h = Math.floor(left / 3600), m = Math.floor((left % 3600) / 60), s = left % 60;
+    return pad2(h) + ':' + pad2(m) + ':' + pad2(s);
+  }
+  function fmtTime(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + pad2(s % 60); }
+
+  // ---------- puzzle generators ----------
+  // Daily: the same generator as the web Catdoku (FNV seed + mulberry32, retry until unique) → identical board everywhere.
+  function seedFrom(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function mulberry32(a) {
+    return function () { a |= 0; a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  function shuffle(arr, rand) { for (var i = arr.length - 1; i > 0; i--) { var j = Math.floor(rand() * (i + 1)); var t = arr[i]; arr[i] = arr[j]; arr[j] = t; } return arr; }
+  var DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+  function randomSolution(n, rand) {
+    var cols = [], used = [];
+    function bt(r) {
+      if (r === n) return true;
+      var cand = [];
+      for (var c = 0; c < n; c++) { if (used[c]) continue; if (r > 0 && Math.abs(c - cols[r - 1]) < 2) continue; cand.push(c); }
+      shuffle(cand, rand);
+      for (var i = 0; i < cand.length; i++) { cols[r] = cand[i]; used[cand[i]] = true; if (bt(r + 1)) return true; used[cand[i]] = false; }
+      return false;
+    }
+    return bt(0) ? cols.slice(0, n) : null;
+  }
+  function growRegions(n, rand, sol) {
+    var reg = [];
+    for (var r = 0; r < n; r++) { reg.push([]); for (var c = 0; c < n; c++) reg[r].push(-1); }
+    for (var k = 0; k < n; k++) reg[k][sol[k]] = k;
+    var left = n * n - n;
+    while (left > 0) {
+      var cand = [];
+      for (var r2 = 0; r2 < n; r2++) for (var c2 = 0; c2 < n; c2++) {
+        var g = reg[r2][c2]; if (g < 0) continue;
+        for (var d = 0; d < 4; d++) { var a = r2 + DIRS[d][0], b = c2 + DIRS[d][1]; if (a < 0 || b < 0 || a >= n || b >= n || reg[a][b] >= 0) continue; cand.push([a, b, g]); }
+      }
+      var p = cand[Math.floor(rand() * cand.length)];
+      reg[p[0]][p[1]] = p[2]; left--;
+    }
+    return reg;
+  }
+  function countSolutions(n, reg, cap) {
+    var count = 0, colU = [], regU = [];
+    function bt(r, prevC) {
+      if (count >= cap) return;
+      if (r === n) { count++; return; }
+      for (var c = 0; c < n; c++) {
+        if (colU[c] || regU[reg[r][c]]) continue;
+        if (r > 0 && Math.abs(c - prevC) < 2) continue;
+        colU[c] = true; regU[reg[r][c]] = true; bt(r + 1, c); colU[c] = false; regU[reg[r][c]] = false;
+      }
+    }
+    bt(0, -9);
+    return count;
+  }
+  function genDaily(day) {
+    var n = 7, rand = mulberry32(seedFrom('catdoku-' + day)), sol = null, reg = null;
+    for (var attempt = 0; attempt < 500; attempt++) {
+      sol = randomSolution(n, rand); if (!sol) continue;
+      reg = growRegions(n, rand, sol);
+      if (countSolutions(n, reg, 2) === 1) return { n: n, solution: sol, region: reg, unique: true };
+    }
+    return { n: n, solution: sol, region: reg, unique: false };
+  }
+  // Levels: the Kitty Queens app generator (xorshift32 + region fix-up) so level N is the same board as in the app.
+  function Rng(seed) { seed = seed >>> 0; this.x = seed === 0 ? 0x9E3779B9 : seed; for (var i = 0; i < 8; i++) this.next(); }
+  Rng.prototype.next = function () { var x = this.x; x = (x ^ (x << 13)) >>> 0; x = (x ^ (x >>> 17)) >>> 0; x = (x ^ (x << 5)) >>> 0; this.x = x; return x; };
+  Rng.prototype.nextDouble = function () { return this.next() / 4294967296; };
+  Rng.prototype.nextInt = function (n) { return Math.floor(this.nextDouble() * n); };
+  Rng.prototype.shuffle = function (a) { for (var i = a.length - 1; i > 0; i--) { var j = this.nextInt(i + 1); var t = a[i]; a[i] = a[j]; a[j] = t; } };
+  Rng.seedOf = function (s) { var h = 7; for (var i = 0; i < s.length; i++) h = ((h * 31) + s.charCodeAt(i)) >>> 0; return h; };
+  function sizeForLevel(level) { if (level <= 3) return 5; if (level <= 10) return 6; if (level <= 25) return 7; if (level <= 50) return 8; return 9; }
+  function findOtherSolution(n, reg, sol) {
+    var colU = [], regU = [], cols = [], res = null;
+    function bt(r, prev) {
+      if (res) return;
+      if (r === n) { for (var i = 0; i < n; i++) if (cols[i] !== sol[i]) { res = cols.slice(); return; } return; }
+      for (var c = 0; c < n; c++) {
+        var g = reg[r][c];
+        if (colU[c] || regU[g]) continue;
+        if (r > 0 && Math.abs(c - prev) < 2) continue;
+        colU[c] = regU[g] = true; cols[r] = c; bt(r + 1, c); colU[c] = regU[g] = false;
+      }
+    }
+    bt(0, -9);
+    return res;
+  }
+  function connected(n, reg, g) {
+    var cells = [];
+    for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (reg[r][c] === g) cells.push(r * n + c);
+    if (!cells.length) return false;
+    var seen = {}; seen[cells[0]] = 1; var stack = [cells[0]], count = 1;
+    while (stack.length) {
+      var p = stack.pop(), r2 = Math.floor(p / n), c2 = p % n;
+      for (var d = 0; d < 4; d++) { var a = r2 + DIRS[d][0], b = c2 + DIRS[d][1]; if (a < 0 || b < 0 || a >= n || b >= n || reg[a][b] !== g) continue; if (!seen[a * n + b]) { seen[a * n + b] = 1; count++; stack.push(a * n + b); } }
+    }
+    return count === cells.length;
+  }
+  function breakAlt(n, reg, sol, alt, rng) {
+    var rows = []; for (var r = 0; r < n; r++) if (alt[r] !== sol[r]) rows.push(r);
+    rng.shuffle(rows);
+    for (var i = 0; i < rows.length; i++) {
+      var rr = rows[i], c = alt[rr], g = reg[rr][c], nb = [];
+      for (var d = 0; d < 4; d++) { var a = rr + DIRS[d][0], b = c + DIRS[d][1]; if (a < 0 || b < 0 || a >= n || b >= n) continue; var h = reg[a][b]; if (h !== g && nb.indexOf(h) < 0) nb.push(h); }
+      rng.shuffle(nb);
+      for (var j = 0; j < nb.length; j++) { reg[rr][c] = nb[j]; if (connected(n, reg, g)) return true; reg[rr][c] = g; }
+    }
+    return false;
+  }
+  function rngRand(rng) { return function () { return rng.nextDouble(); }; }
+  function genLevel(level) {
+    var n = sizeForLevel(level), rng = new Rng(Rng.seedOf('catdoku-level-' + level));
+    for (var attempt = 0; attempt < 200; attempt++) {
+      var sol = randomSolutionRng(n, rng);
+      var reg = growRegionsRng(n, rng, sol);
+      for (var step = 0; step < 400; step++) {
+        var alt = findOtherSolution(n, reg, sol);
+        if (!alt) return { n: n, solution: sol, region: reg, unique: true };
+        if (!breakAlt(n, reg, sol, alt, rng)) break;
+      }
+    }
+    // never reached for levels 1..500 (checked by the robot); a last board is still playable
+    return { n: n, solution: sol, region: reg, unique: false };
+  }
+  function randomSolutionRng(n, rng) {
+    var cols = [], used = [];
+    function bt(r) {
+      if (r === n) return true;
+      var cand = [];
+      for (var c = 0; c < n; c++) { if (used[c]) continue; if (r > 0 && Math.abs(c - cols[r - 1]) < 2) continue; cand.push(c); }
+      rng.shuffle(cand);
+      for (var i = 0; i < cand.length; i++) { cols[r] = cand[i]; used[cand[i]] = true; if (bt(r + 1)) return true; used[cand[i]] = false; }
+      return false;
+    }
+    bt(0);
+    return cols.slice(0, n);
+  }
+  function growRegionsRng(n, rng, sol) {
+    var reg = [];
+    for (var r = 0; r < n; r++) { reg.push([]); for (var c = 0; c < n; c++) reg[r].push(-1); }
+    for (var k = 0; k < n; k++) reg[k][sol[k]] = k;
+    var left = n * n - n;
+    while (left > 0) {
+      var cand = [];
+      for (var r2 = 0; r2 < n; r2++) for (var c2 = 0; c2 < n; c2++) {
+        var g = reg[r2][c2]; if (g < 0) continue;
+        for (var d = 0; d < 4; d++) { var a = r2 + DIRS[d][0], b = c2 + DIRS[d][1]; if (a < 0 || b < 0 || a >= n || b >= n || reg[a][b] >= 0) continue; cand.push([a, b, g]); }
+      }
+      var p = cand[rng.nextInt(cand.length)];
+      reg[p[0]][p[1]] = p[2]; left--;
+    }
+    return reg;
+  }
+
+  // ---------- sound: files only (ogg + mp3), one volume controller ----------
+  var AUDIO_EXT = safe(function () { return document.createElement('audio').canPlayType('audio/ogg; codecs=vorbis') ? '.ogg' : '.mp3'; }, '.mp3');
+  var SFX = {};
+  ['mark', 'cat', 'clear', 'wrong', 'win', 'lose', 'heart', 'hint', 'start', 'mute-on', 'mute-off'].forEach(function (k) { SFX[k] = 'audio/' + k + AUDIO_EXT; });
+  var BGM_STYLES = [{ id: 'ukulele', name: 'Ukulele', file: 'bgm-ukulele' }, { id: 'ragtime', name: 'Ragtime', file: 'bgm-ragtime' }];
+  BGM_STYLES.forEach(function (st) { SFX['bgm_' + st.id] = 'audio/' + st.file + AUDIO_EXT; });
+  function bgmKey() { return 'bgm_' + (store.settings.bgm || 'ukulele'); }
+  var GAIN = { mark: 0.45, cat: 0.9, clear: 0.35, wrong: 0.8, win: 0.85, lose: 0.7, heart: 0.8, hint: 0.9, start: 0.5, 'mute-on': 0.5, 'mute-off': 0.5, bgm: 0.32 };
+  var snd = { ctx: null, master: null, bufs: {}, raw: {}, fetching: {}, bgm: null, bgmKey: null, bgmGain: null, unlocked: false, reasons: { user: false, platform: false, paused: false, ad: false, hidden: false }, audible: true };
+  function audibleNow() { var r = snd.reasons; return !(r.user || r.platform || r.paused || r.ad || r.hidden); }
+  function applyAudio() {
+    snd.audible = audibleNow();
+    if (!snd.ctx) return;
+    try {
+      var t = snd.ctx.currentTime;
+      snd.master.gain.cancelScheduledValues(t);
+      snd.master.gain.setTargetAtTime(snd.audible ? 1 : 0, t, 0.02);
+      if (snd.audible) { if (snd.unlocked && snd.ctx.state === 'suspended') snd.ctx.resume(); }
+      else { setTimeout(function () { if (!audibleNow() && snd.ctx && snd.ctx.state === 'running') snd.ctx.suspend(); }, 120); }
+    } catch (e) {}
+  }
+  function setReason(name, on) { if (snd.reasons[name] === on) return; snd.reasons[name] = on; applyAudio(); }
+  function fetchAudio() { Object.keys(SFX).forEach(function (k) { if (k.indexOf('bgm_') === 0 && k !== bgmKey()) return; fetchOne(k); }); }
+  function fetchOne(k) {
+    if (snd.fetching[k] || snd.raw[k] || snd.bufs[k]) return;
+    snd.fetching[k] = true;
+    fetch(SFX[k]).then(function (r) { return r.ok ? r.arrayBuffer() : null; })
+      .then(function (ab) { if (ab) { snd.raw[k] = ab; decodeOne(k); } else delete snd.fetching[k]; })
+      .catch(function () { delete snd.fetching[k]; });
+  }
+  function decodeOne(k) {
+    if (!snd.ctx || !snd.raw[k] || snd.bufs[k]) return;
+    var ab = snd.raw[k];
+    try {
+      var p = snd.ctx.decodeAudioData(ab.slice(0), function (buf) { snd.bufs[k] = buf; delete snd.raw[k]; if (k === bgmKey()) startBgm(); }, function () {});
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) {}
+  }
+  function unlockAudio() {
+    if (!snd.ctx) {
+      try {
+        var Ctor = window.AudioContext || window.webkitAudioContext; if (!Ctor) return;
+        snd.ctx = new Ctor();
+        snd.master = snd.ctx.createGain(); snd.master.gain.value = audibleNow() ? 1 : 0; snd.master.connect(snd.ctx.destination);
+        snd.bgmGain = snd.ctx.createGain(); snd.bgmGain.gain.value = GAIN.bgm; snd.bgmGain.connect(snd.master);
+      } catch (e) { return; }
+    }
+    snd.unlocked = true;
+    if (snd.ctx.state === 'suspended' && audibleNow()) { try { snd.ctx.resume(); } catch (e) {} }
+    Object.keys(snd.raw).forEach(decodeOne);
+    startBgm();
+  }
+  function startBgm() {
+    var k = bgmKey();
+    if (snd.bgm && snd.bgmKey !== k) stopBgm();
+    if (snd.bgm || !snd.ctx || !snd.bufs[k]) return;
+    try { var src = snd.ctx.createBufferSource(); src.buffer = snd.bufs[k]; src.loop = true; src.connect(snd.bgmGain); src.start(); snd.bgm = src; snd.bgmKey = k; } catch (e) {}
+  }
+  function stopBgm() { if (!snd.bgm) return; try { snd.bgm.stop(); } catch (e) {} snd.bgm = null; snd.bgmKey = null; }
+  function cycleBgm() {
+    var i = 0; for (var k = 0; k < BGM_STYLES.length; k++) if (BGM_STYLES[k].id === store.settings.bgm) i = k;
+    store.settings.bgm = BGM_STYLES[(i + 1) % BGM_STYLES.length].id;
+    saveStore(['settings']); renderBgm(); stopBgm();
+    if (snd.bufs[bgmKey()]) startBgm(); else fetchOne(bgmKey());
+    analytics('settings_changed', { setting: 'bgm', value: store.settings.bgm });
+  }
+  function bgmName() { for (var k = 0; k < BGM_STYLES.length; k++) if (BGM_STYLES[k].id === store.settings.bgm) return BGM_STYLES[k].name; return BGM_STYLES[0].name; }
+  function renderBgm() { $('bgm-pill').textContent = 'Music: ' + bgmName(); $('pause-bgm-btn').textContent = 'Music: ' + bgmName(); }
+  function play(k, rate, vol) {
+    if (!snd.ctx || !snd.bufs[k] || !snd.audible) return;
+    try { var src = snd.ctx.createBufferSource(); src.buffer = snd.bufs[k]; if (rate) src.playbackRate.value = rate; var g = snd.ctx.createGain(); g.gain.value = vol || GAIN[k] || 0.7; src.connect(g); g.connect(snd.master); src.start(); } catch (e) {}
+  }
+  function buzz(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} }
+  function renderMute() {
+    var m = store.settings.muted;
+    $('mute-btn').setAttribute('data-muted', m ? '1' : '0');
+    $('mute-btn').setAttribute('aria-label', m ? 'Sound off. Turn on' : 'Sound on. Turn off');
+    $('title-mute-btn').innerHTML = $('mute-btn').querySelector(m ? '.off' : '.on').outerHTML.replace(/class="(on|off)"/, '');
+    $('pause-mute-btn').textContent = m ? 'Sound: off' : 'Sound: on';
+  }
+  function toggleMute() {
+    unlockAudio();
+    store.settings.muted = !store.settings.muted;
+    setReason('user', store.settings.muted);
+    renderMute(); saveStore(['settings']);
+    if (!store.settings.muted) play('mute-on');
+  }
+
+  // ---------- game state ----------
+  var STATE_TITLE = 0, STATE_PLAY = 1, STATE_OVER = 2, STATE_LEVELS = 3;
+  var state = STATE_TITLE;
+  var mode = 'level';          // 'level' | 'daily'
+  var level = 1, N = 7, solution = null, region = null, puzzleDay = '';
+  var cell = [], autoM = [], catMarks = {};
+  var hearts = 3, catCount = 0;
+  var runStart = 0, accumBase = 0, pausedAt = 0, pausedTotal = 0;
+  var practice = false, lastTotal = 0, won = false, overAt = 0;
+  var userPaused = false, adOpen = false, resumeGuardUntil = 0;
+  var continueUsed = false, continueOffered = false, hintUsed = false;
+  var rewardPending = null, rewardEarned = null, rewardT = null, adSeenClosed = false, adSeq = 0, adFailStreak = 0;
+  var tutorial = false, tutStep = 0;
+  var isDesktop = false;
+  var cursor = null;   // keyboard cursor [r, c]
+  var RANK_MAX = 10, myRankRow = null;
+  var boardEl = $('board'), cellEls = [];
+
+  function frozen() { return userPaused || adOpen || snd.reasons.paused || snd.reasons.hidden; }
+
+  // ---------- board DOM ----------
+  function buildBoard() {
+    document.documentElement.style.setProperty('--n', N);
+    boardEl.textContent = ''; cellEls = [];
+    for (var r = 0; r < N; r++) {
+      cellEls.push([]);
+      for (var c = 0; c < N; c++) {
+        var d = document.createElement('div');
+        d.className = 'cell'; d.dataset.r = r; d.dataset.c = c;
+        d.style.background = PALETTE[region[r][c] % PALETTE.length];
+        boardEl.appendChild(d); cellEls[r].push(d);
+      }
+    }
+    boardEl.insertAdjacentHTML('beforeend', '<svg id="hand" class="hidden"><use href="#s-hand"/></svg>');
+  }
+  function glyph(el, cls, sym) {
+    var cur = el.firstElementChild;
+    if (!sym) { if (cur) el.removeChild(cur); return; }
+    if (cur && cur.getAttribute('data-k') === cls) return;
+    if (cur) el.removeChild(cur);
+    el.insertAdjacentHTML('afterbegin', '<svg class="' + cls + '" data-k="' + cls + '"><use href="#' + sym + '"/></svg>');
+  }
+  function updateCell(r, c) {
+    var el = cellEls[r][c];
+    if (cell[r][c] === 2) glyph(el, 'cat', 's-cat');
+    else if (cell[r][c] === 1) glyph(el, 'xm', 's-x');
+    else if (autoM[r][c] > 0) glyph(el, 'ax', 's-x');
+    else glyph(el, '', null);
+  }
+  function updateHud() {
+    var h = $('hearts'), html = '';
+    for (var i = 0; i < 3; i++) html += '<svg class="' + (i < hearts ? '' : 'off') + '"><use href="#s-heart"/></svg>';
+    h.innerHTML = html;
+    $('progress-text').textContent = catCount + '/' + N;
+    var hintOk = state === STATE_PLAY && !hintUsed && rewardedSupported() && !tutorial;
+    $('hint-btn').classList.toggle('hidden', !hintOk);
+  }
+  function flashMsg(text, good) {
+    var m = $('msg');
+    m.textContent = text; m.className = good ? 'good' : '';
+    void m.offsetWidth; m.classList.add('show');
+  }
+
+  // ---------- rules ----------
+  function conflictsWith(r, c) {
+    var out = [];
+    for (var r2 = 0; r2 < N; r2++) for (var c2 = 0; c2 < N; c2++) {
+      if (cell[r2][c2] !== 2) continue;
+      var why = '';
+      if (Math.abs(r2 - r) <= 1 && Math.abs(c2 - c) <= 1) why = "CATS CAN'T TOUCH!";
+      else if (r2 === r) why = 'ONE PER ROW!';
+      else if (c2 === c) why = 'ONE PER COLUMN!';
+      else if (region[r2][c2] === region[r][c]) why = 'ONE PER COLOR!';
+      if (why) out.push({ r: r2, c: c2, why: why });
+    }
+    return out;
+  }
+  function autoCellsFor(r, c) {
+    var seen = {}, out = [];
+    function add(r2, c2) { if (r2 < 0 || r2 >= N || c2 < 0 || c2 >= N) return; if (r2 === r && c2 === c) return; var k = r2 + ',' + c2; if (seen[k]) return; seen[k] = 1; out.push([r2, c2]); }
+    for (var i = 0; i < N; i++) { add(r, i); add(i, c); }
+    for (var dr = -1; dr <= 1; dr++) for (var dc = -1; dc <= 1; dc++) add(r + dr, c + dc);
+    for (var r2 = 0; r2 < N; r2++) for (var c2 = 0; c2 < N; c2++) if (region[r2][c2] === region[r][c]) add(r2, c2);
+    return out;
+  }
+  function placeCat(r, c, hinted) {
+    cell[r][c] = 2; catCount++;
+    var list = autoCellsFor(r, c);
+    catMarks[r + ',' + c] = list;
+    list.forEach(function (p) { autoM[p[0]][p[1]]++; updateCell(p[0], p[1]); });
+    updateCell(r, c);
+    var el = cellEls[r][c];
+    el.classList.remove('pop', 'hinted'); void el.offsetWidth; el.classList.add(hinted ? 'hinted' : 'pop');
+  }
+  function removeCat(r, c) {
+    cell[r][c] = 0; catCount--;
+    var list = catMarks[r + ',' + c] || []; delete catMarks[r + ',' + c];
+    list.forEach(function (p) { autoM[p[0]][p[1]]--; updateCell(p[0], p[1]); });
+    updateCell(r, c);
+  }
+  function tap(r, c) {
+    if (state !== STATE_PLAY || frozen()) return;
+    unlockAudio();
+    var cur = cell[r][c];
+    if (cur === 0) {
+      cell[r][c] = 1; updateCell(r, c); play('mark', 0.95 + Math.random() * 0.1);
+      if (tutorial && tutStep === 1 && isGuide(r, c)) setTut(2);
+    } else if (cur === 1) {
+      var conf = conflictsWith(r, c);
+      if (conf.length) {
+        cell[r][c] = 0; updateCell(r, c);
+        conf.forEach(function (f) { var el = cellEls[f.r][f.c]; el.classList.remove('bad'); void el.offsetWidth; el.classList.add('bad'); });
+        var me = cellEls[r][c]; me.classList.remove('bad'); void me.offsetWidth; me.classList.add('bad');
+        boardEl.classList.remove('shake'); void boardEl.offsetWidth; boardEl.classList.add('shake');
+        play('wrong'); buzz(80);
+        if (tutorial) { flashMsg(conf[0].why); setTut(tutStep <= 2 ? 1 : 5, conf[0].why); updateHud(); return; }   // first level: mistakes are free
+        hearts--;
+        flashMsg(conf[0].why);
+        var hs = $('hearts').children; if (hs[hearts]) hs[hearts].classList.add('flash');
+        updateHud();
+        analytics('wrong_cat', { mode: mode, level: level, why: conf[0].why });
+        if (hearts <= 0) { gameOver(false); return; }
+      } else {
+        placeCat(r, c, false); play('cat', 0.95 + catCount * 0.03); buzz(15);
+        updateHud();
+        if (tutorial) { if (tutStep <= 2) setTut(3); else if (tutStep === 3 || tutStep === 4) setTut(5); }
+        if (catCount === N) { gameOver(true); return; }
+      }
+    } else if (cur === 2) {
+      removeCat(r, c); play('clear'); updateHud();
+      if (tutorial && tutStep >= 3 && catCount === 0) setTut(1);
+    }
+  }
+
+  // ---------- onboarding (first level, 5×5): a hand shows where the first two cats go ----------
+  var guideCell = null;
+  function isGuide(r, c) { return guideCell && guideCell[0] === r && guideCell[1] === c; }
+  function nextGuide() { for (var r = 0; r < N; r++) if (cell[r][solution[r]] !== 2) return [r, solution[r]]; return null; }
+  function setTut(step, why) {
+    tutStep = step;
+    var t = $('tut'), hand = $('hand');
+    document.querySelectorAll('.cell.guide').forEach(function (e) { e.classList.remove('guide'); });
+    guideCell = null;
+    if (!tutorial) { t.classList.add('hidden'); hand.classList.add('hidden'); return; }
+    t.classList.remove('hidden');
+    if (step === 1 || step === 2) {
+      guideCell = nextGuide();
+      t.textContent = step === 1 ? (why ? why.charAt(0) + why.slice(1).toLowerCase() + ' Let’s try this spot: tap it twice.' : 'Tap the glowing cell twice to put a cat there.') : 'Once more: tap it again to place the cat.';
+    } else if (step === 3) {
+      t.textContent = 'See the marks? A cat rules out her row, column, color and the cells touching her. Tap the next glowing cell twice.';
+      guideCell = nextGuide();
+      tutStep = 4;
+    } else if (step === 5) {
+      t.textContent = why ? 'Oops: ' + why.charAt(0) + why.slice(1).toLowerCase() + ' No heart lost on this first level. Find the right spots.' : 'Now you: find the last ' + (N - catCount) + ' spots. Only one cat per row, column and color, and cats never touch.';
+    }
+    if (guideCell) { cellEls[guideCell[0]][guideCell[1]].classList.add('guide'); hand.classList.remove('hidden'); placeHand(); }
+    else hand.classList.add('hidden');
+    layout();
+  }
+  function placeHand() {
+    if (!guideCell) return;
+    var hand = $('hand'), size = boardEl.clientWidth, cellPx = (size - 10 - 3 * (N - 1)) / N, hw = size * 0.15;
+    var cx = 5 + guideCell[1] * (cellPx + 3) + cellPx / 2, cy = 5 + guideCell[0] * (cellPx + 3) + cellPx / 2;
+    hand.style.left = (cx - hw * 0.48) + 'px';
+    hand.style.top = (cy - hw * 0.04) + 'px';
+  }
+
+  // ---------- layout: board fills what the HUD and foot leave; HUD moves to the side in landscape ----------
+  var SA = { top: 0, right: 0, bottom: 0, left: 0 };
+  function readSafeArea() {
+    var sa = safe(function () { return B.device.safeArea; }, null);
+    if (sa && typeof sa.top === 'number') SA = { top: sa.top || 0, right: sa.right || 0, bottom: sa.bottom || 0, left: sa.left || 0 };
+  }
+  function layout() {
+    var W = window.innerWidth, H = window.innerHeight;
+    var app = $('app'), land = W > H * 1.3 && W >= 560;
+    app.classList.toggle('land', land); document.body.classList.toggle('land', land);
+    var hudH = $('hud').offsetHeight, footH = $('foot').offsetHeight;
+    if (COVER) { hudH = 0; footH = 0; land = false; app.classList.remove('land'); }
+    var size;
+    if (!land) size = Math.min(W - 20 - SA.left - SA.right, H - hudH - footH - 16 - 12 - SA.top - SA.bottom);
+    else size = Math.min(H - 16 - SA.top - SA.bottom, W - Math.min(300, Math.max(190, W * 0.34)) - 14 - 20 - SA.left - SA.right);
+    size = Math.max(140, Math.floor(size));
+    document.documentElement.style.setProperty('--board', size + 'px');
+    $('title-panel').classList.toggle('short', H < 560);
+    placeHand();
+  }
+
+  // ---------- timer ----------
+  function elapsedNow() {
+    if (state !== STATE_PLAY) return accumBase;
+    var now = userPaused || frozen() ? (pausedAt || performance.now()) : performance.now();
+    return accumBase + (now - runStart - pausedTotal) / 1000;
+  }
+  function renderTimer() { $('timer').textContent = fmtTime(elapsedNow()); }
+
+  // ---------- daily ranks (this device; the day's list lives in progress.daily) ----------
+  function dailyRecord() {
+    var d = store.progress.daily;
+    if (d.day !== puzzleDay) { d.day = puzzleDay; d.accum = 0; d.solved = 0; d.ranks = []; }
+    return d;
+  }
+  function renderRanks() {
+    var board = $('rank-board'), d = dailyRecord();
+    board.textContent = '';
+    if (!d.ranks.length) { board.insertAdjacentHTML('beforeend', '<div class="rank-empty">No times yet today.</div>'); return; }
+    d.ranks.forEach(function (r, i) {
+      var row = document.createElement('div'); row.className = 'rank-row' + (r === myRankRow ? ' me' : '');
+      var pos = document.createElement('span'); pos.className = 'rank-pos' + (i < 3 ? ' m' + (i + 1) : ''); pos.textContent = i + 1;
+      var name = document.createElement('span'); name.className = 'rank-name'; name.textContent = r.n;
+      var s = document.createElement('span'); s.className = 'rank-s'; s.textContent = fmtTime(r.s);
+      row.append(pos, name, s); board.appendChild(row);
+    });
+  }
+  function recordRank(sec) {
+    var d = dailyRecord();
+    var entry = { n: store.progress.name || 'You', s: Math.max(1, Math.round(sec)), t: Date.now() };
+    d.ranks.push(entry); d.ranks.sort(function (a, b) { return a.s - b.s; }); d.ranks = d.ranks.slice(0, RANK_MAX);
+    myRankRow = d.ranks.indexOf(entry) >= 0 ? entry : null;
+  }
+
+  // ---------- start / reset ----------
+  function resetBoard() {
+    cell = []; autoM = []; catMarks = {};
+    for (var r = 0; r < N; r++) { cell.push([]); autoM.push([]); for (var c = 0; c < N; c++) { cell[r].push(0); autoM[r].push(0); updateCell(r, c); } }
+    hearts = 3; catCount = 0; cursor = null;
+    boardEl.classList.remove('won');
+    document.querySelectorAll('.cell.cursor').forEach(function (e) { e.classList.remove('cursor'); });
+  }
+  function startLevel(n) {
+    level = Math.min(MAX_LEVEL, Math.max(1, n));
+    mode = 'level';
+    var p = genLevel(level);
+    N = p.n; solution = p.solution; region = p.region;
+    tutorial = level === 1 && !store.progress.tut;
+    beginRun();
+    $('mode-main').textContent = 'Level ' + level;
+    $('mode-sub').textContent = N + '×' + N;
+    $('timer').className = '';
+    accumBase = 0;
+    if (tutorial) setTut(1); else setTut(0);
+    sendMsg('level_started', { level: String(level) });
+    analytics('level_start', { level: level, size: N, tutorial: tutorial ? 1 : 0 });
+  }
+  function startDaily() {
+    mode = 'daily';
+    puzzleDay = dayKey();
+    var p = genDaily(puzzleDay);
+    N = p.n; solution = p.solution; region = p.region;
+    tutorial = false;
+    beginRun();
+    var d = dailyRecord();
+    practice = d.solved > 0;
+    accumBase = practice ? 0 : d.accum;
+    $('mode-main').textContent = 'Today’s puzzle';
+    $('mode-sub').textContent = dayLabel(puzzleDay) + (practice ? ' · practice' : ' · 7×7');
+    $('timer').className = practice ? 'practice' : '';
+    setTut(0);
+    sendMsg('level_started', { world: 'daily', level: puzzleDay });
+    analytics('daily_start', { day: puzzleDay, practice: practice ? 1 : 0 });
+  }
+  function beginRun() {
+    hidePanels();
+    $('title-panel').classList.add('hidden'); $('levels-panel').classList.add('hidden');
+    buildBoard(); resetBoard();
+    continueUsed = false; continueOffered = false; hintUsed = false; rewardPending = null; rewardEarned = null;
+    userPaused = false; pausedTotal = 0; pausedAt = 0; practice = false;
+    runStart = performance.now();
+    state = STATE_PLAY;
+    $('tip').textContent = isDesktop ? 'Click a cell once for a mark, twice for a cat. Arrow keys + Space work too.' : 'Tap a cell once for a mark, twice for a cat. Tap a cat to remove it.';
+    updateHud(); renderTimer();
+    layout();
+    play('start');
+  }
+  function hidePanels() {
+    ['over-panel', 'pause-panel', 'backdrop'].forEach(function (id) { $(id).classList.add('hidden'); });
+  }
+  function panelOpen(id) { return !$(id).classList.contains('hidden'); }
+  function showPanel(id) { $('backdrop').classList.remove('hidden'); $(id).classList.remove('hidden'); }
+
+  // ---------- pause ----------
+  function pauseGame(byPlatform) {
+    if (state !== STATE_PLAY || userPaused || adOpen) return;
+    if (byPlatform && performance.now() < resumeGuardUntil) return;
+    userPaused = true; pausedAt = performance.now();
+    $('pause-keys').textContent = isDesktop ? 'Keys: arrows move · Space/Enter tap · P pause · M sound' : '';
+    showPanel('pause-panel');
+    sendMsg('level_paused', { level: mode === 'daily' ? puzzleDay : String(level) });
+  }
+  function resumeGame() {
+    if (!userPaused) return;
+    userPaused = false;
+    if (pausedAt) pausedTotal += performance.now() - pausedAt;
+    pausedAt = 0;
+    hidePanels();
+    sendMsg('level_resumed', { level: mode === 'daily' ? puzzleDay : String(level) });
+  }
+  function quitToTitle() {
+    if (mode === 'daily' && state === STATE_PLAY && !practice) { var d = dailyRecord(); d.accum = elapsedNow(); saveStore(['progress']); }
+    userPaused = false; hidePanels(); setTut(0); tutorial = false;
+    state = STATE_TITLE;
+    fillTitle();
+    $('title-panel').classList.remove('hidden');
+  }
+
+  // ---------- game over ----------
+  function gameOver(didWin) {
+    lastTotal = elapsedNow();
+    won = didWin; state = STATE_OVER; overAt = performance.now();
+    updateHud();
+    if (didWin) {
+      boardEl.classList.add('won'); play('win'); buzz([60, 60, 60]);
+      store.progress.played++;
+      if (mode === 'level') {
+        if (level > store.progress.cleared) store.progress.cleared = level;
+        store.progress.level = Math.min(MAX_LEVEL, Math.max(store.progress.level, level + 1));
+        if (tutorial) { store.progress.tut = 1; analytics('tutorial_completed', { level: 1 }); }
+        sendMsg('level_completed', { level: String(level) });
+        analytics('level_complete', { level: level, size: N, seconds: Math.round(lastTotal) });
+      } else {
+        var d = dailyRecord();
+        if (!practice) { d.solved = lastTotal; d.accum = 0; recordRank(lastTotal); }
+        sendMsg('level_completed', { world: 'daily', level: puzzleDay });
+        analytics('daily_complete', { day: puzzleDay, seconds: Math.round(lastTotal), practice: practice ? 1 : 0 });
+      }
+      saveStore(['progress']);
+      tutorial = false; setTut(0);
+      setTimeout(showOverPanel, 900);
+    } else {
+      if (mode === 'daily' && !practice) { var dd = dailyRecord(); dd.accum = lastTotal; saveStore(['progress']); }
+      play('lose');
+      sendMsg('level_failed', mode === 'daily' ? { world: 'daily', level: puzzleDay } : { level: String(level) });
+      analytics('out_of_hearts', { mode: mode, level: level, cats: catCount });
+      setTimeout(showOverPanel, 600);
+    }
+  }
+  function showOverPanel() {
+    if (state !== STATE_OVER) return;
+    var sub = $('over-sub'); sub.className = 'sub';
+    var daily = mode === 'daily';
+    ['continue-btn', 'next-btn', 'retry-btn', 'share-btn', 'rank-title', 'rank-board', 'name-row'].forEach(function (id) { $(id).classList.add('hidden'); });
+    $('over-levels-btn').classList.toggle('hidden', daily);
+    $('over-cat').innerHTML = '<use href="#' + (won ? 's-cat' : 's-catsleep') + '"/>';
+    $('ad-note').textContent = ''; $('share-note').textContent = ''; $('next-note').textContent = '';
+    if (won) {
+      $('over-title').textContent = daily ? (practice ? 'Solved (practice)' : 'Solved!') : 'Level ' + level + ' solved!';
+      $('over-score').textContent = fmtTime(lastTotal);
+      if (daily) {
+        if (practice) sub.textContent = 'Today’s time stays ' + fmtTime(dailyRecord().solved) + '.';
+        else { sub.textContent = 'All 7 cats are home. Purr-fect!'; sub.className = 'sub win'; }
+        $('rank-title').classList.remove('hidden'); $('rank-board').classList.remove('hidden'); $('name-row').classList.remove('hidden');
+        $('rank-title-text').textContent = 'Today’s times (' + dayLabel(puzzleDay) + ') on this device';
+        renderRanks();
+        $('share-btn').classList.remove('hidden');
+        $('retry-btn').textContent = 'Play again (practice)'; $('retry-btn').classList.remove('hidden');
+        $('next-note').textContent = 'New puzzle at midnight (KST) · ' + untilNextPuzzle() + ' left';
+      } else {
+        sub.textContent = level >= MAX_LEVEL ? 'That was the last level. You are the Kitty Queen.' : (sizeForLevel(level + 1) > N ? 'Next: the board grows to ' + sizeForLevel(level + 1) + '×' + sizeForLevel(level + 1) + '.' : 'Next: level ' + (level + 1) + ' · ' + sizeForLevel(level + 1) + '×' + sizeForLevel(level + 1));
+        $('next-btn').textContent = level >= MAX_LEVEL ? 'Play level ' + level + ' again' : 'Next level';
+        $('next-btn').classList.remove('hidden');
+      }
+    } else {
+      $('over-title').textContent = 'Out of hearts';
+      $('over-score').textContent = fmtTime(lastTotal);
+      sub.textContent = daily ? (practice ? 'Practice run, no harm done.' : 'The clock keeps running today. Try again!') : 'Three wrong cats. Your marks are still on the board.';
+      sub.className = 'sub lose';
+      if (!continueUsed && rewardedSupported()) { $('continue-btn').classList.remove('hidden'); continueOffered = true; }
+      $('retry-btn').textContent = 'Try again'; $('retry-btn').classList.remove('hidden');
+    }
+    $('name-input').value = store.progress.name;
+    showPanel('over-panel');
+  }
+
+  // ---------- rewarded ads: hint (one per puzzle) and continue (once per attempt); reward only on 'rewarded' ----------
+  function rewardedSupported() {
+    if (DEBUG && window.__forceRewarded) return true;
+    return bridgeReady && safe(function () { return !!B.advertisement.isRewardedSupported; }, false);
+  }
+  function requestHint() {
+    if (state !== STATE_PLAY || hintUsed || rewardPending || frozen()) return;
+    if (!nextHintCell()) return;
+    rewardPending = 'hint';
+    analytics('ad_opt_in', { offer: 'hint' });
+    if (DEBUG && window.__forceRewarded) return;
+    var ok = safe(function () { B.advertisement.showRewarded('hint'); return true; }, false);
+    if (!ok) { rewardPending = null; flashMsg('No ad available right now'); analytics('ad_failed', { offer: 'hint', stage: 'request' }); }
+  }
+  function requestContinue() {
+    if (state !== STATE_OVER || continueUsed || rewardPending) return;
+    rewardPending = 'continue';
+    $('ad-note').textContent = 'Loading the ad…';
+    analytics('ad_opt_in', { offer: 'continue' });
+    if (DEBUG && window.__forceRewarded) return;
+    var ok = safe(function () { B.advertisement.showRewarded('continue'); return true; }, false);
+    if (!ok) { rewardPending = null; noteAd('Ad not available right now.'); analytics('ad_failed', { offer: 'continue', stage: 'request' }); }
+  }
+  function onRewardedState(st) {
+    analytics('ad_state', { kind: 'rewarded', state: String(st), seq: ++adSeq, offer: String(rewardPending || 'none') });
+    if (st === 'opened' || st === 'loading') adSeenClosed = false;
+    adStateChanged(st);
+    if (!rewardPending) return;
+    var offer = rewardPending;
+    if (st === 'rewarded') {
+      rewardEarned = offer; analytics('ad_rewarded', { offer: offer }); clearTimeout(rewardT);
+      if (adSeenClosed || !adOpen) applyReward(); else rewardT = setTimeout(function () { if (rewardEarned) applyReward(); }, 2500);
+    } else if (st === 'closed') {
+      adSeenClosed = true;
+      if (rewardEarned) { applyReward(); return; }
+      clearTimeout(rewardT);
+      rewardT = setTimeout(function () { if (rewardPending && !rewardEarned) rewardFailed(offer, 'closed'); }, 1500);
+    } else if (st === 'failed') { clearTimeout(rewardT); rewardFailed(offer, 'failed'); }
+  }
+  function rewardFailed(offer, stage) {
+    rewardPending = null; rewardEarned = null;
+    analytics('ad_failed', { offer: offer, stage: stage, streak: adFailStreak + 1 });
+    if (stage === 'failed') adFailStreak++; else adFailStreak = 0;
+    var msg = stage !== 'failed' ? 'The ad was closed early, so no reward this time. You can try again.' : (adFailStreak === 1 ? 'No ad could be loaded right now. Tap once more to retry.' : 'The ad provider has no ad to show right now (rule: no ad, no reward).');
+    if (offer === 'hint') { flashMsg(stage !== 'failed' ? 'Ad closed early: no hint' : 'No ad right now'); if (adFailStreak >= 2) { hintUsed = true; updateHud(); } }
+    else { noteAd(msg); if (adFailStreak >= 2) $('continue-btn').classList.add('hidden'); }
+  }
+  function applyReward() {
+    var offer = rewardEarned; rewardEarned = null; rewardPending = null; clearTimeout(rewardT);
+    if (!offer) return;
+    analytics('reward_applied', { offer: offer, state: state });
+    adOpen = false; setReason('ad', false);
+    resumeGuardUntil = performance.now() + 4000;
+    if (offer === 'hint') grantHint(); else grantContinue();
+  }
+  function nextHintCell() { for (var r = 0; r < N; r++) if (cell[r][solution[r]] !== 2) return [r, solution[r]]; return null; }
+  function grantHint() {
+    if (state !== STATE_PLAY) return;
+    var p = nextHintCell(); if (!p) return;
+    hintUsed = true;
+    if (cell[p[0]][p[1]] === 1) cell[p[0]][p[1]] = 0;
+    placeCat(p[0], p[1], true); play('hint'); buzz(20);
+    flashMsg('A kitty found her spot', true);
+    updateHud();
+    analytics('hint_used', { mode: mode, level: level, cats: catCount });
+    if (catCount === N) gameOver(true);
+  }
+  function grantContinue() {
+    continueUsed = true;
+    hidePanels(); userPaused = false;
+    hearts = 3; state = STATE_PLAY;
+    runStart = performance.now(); pausedTotal = 0; pausedAt = 0; accumBase = lastTotal;
+    boardEl.classList.remove('won');
+    play('heart'); flashMsg('3 hearts back!', true);
+    updateHud();
+    analytics('continue_used', { mode: mode, level: level });
+  }
+  function noteAd(msg) { var el = $('ad-note'); el.textContent = msg; clearTimeout(noteAd._t); noteAd._t = setTimeout(function () { el.textContent = ''; }, 6000); }
+
+  // ---------- interstitial / platform helpers ----------
+  function showInterstitial(placement) { if (!bridgeReady) return; safe(function () { if (B.advertisement.isInterstitialSupported) B.advertisement.showInterstitial(placement); }); }
+  function adStateChanged(st) {
+    adOpen = st === 'opened' || (st === 'rewarded' && !adSeenClosed);
+    if (adOpen && !pausedAt && state === STATE_PLAY) pausedAt = performance.now();
+    if (!adOpen && pausedAt && !userPaused) { pausedTotal += performance.now() - pausedAt; pausedAt = 0; }
+    setReason('ad', adOpen);
+  }
+  function sendMsg(name, data) { if (DEBUG) (window.__msgs = window.__msgs || []).push(name); if (bridgeReady) safe(function () { B.platform.sendMessage(name, data); }); }
+  function analytics(name, data) { if (bridgeReady) safe(function () { B.analytics.send(name, data || {}); }); }
+  function lbType() { return bridgeReady ? safe(function () { return B.leaderboards.type; }, 'not_available') : 'not_available'; }
+  function submitLevels() { if (lbType() === 'not_available') return; safe(function () { B.leaderboards.setScore('levels', store.progress.cleared).catch(function () {}); }); }
+
+  // ---------- share (daily time) ----------
+  function shareTime() {
+    var text = 'Kitty Queens ' + dayLabel(puzzleDay) + ': I placed all 7 cats in ' + fmtTime(lastTotal) + '. Same puzzle for everyone today. Can you beat my time?';
+    var done = function () { shareNote('Shared!'); };
+    var copy = function () {
+      var p = safe(function () { return B.clipboard && B.clipboard.isSupported ? B.clipboard.write(text) : null; }, null);
+      if (!p && navigator.clipboard && navigator.clipboard.writeText) p = navigator.clipboard.writeText(text);
+      if (p && p.then) p.then(function () { shareNote('Copied. Paste it to a friend.'); }).catch(function () { shareNote(text); });
+      else shareNote(text);
+    };
+    if (bridgeReady && safe(function () { return B.social.isShareSupported; }, false)) { safe(function () { B.social.share('time').then(done).catch(copy); }); return; }
+    if (navigator.share) { navigator.share({ text: text }).then(done).catch(function (e) { if (!e || e.name !== 'AbortError') copy(); }); return; }
+    copy();
+  }
+  function shareNote(msg) { var el = $('share-note'); el.textContent = msg; clearTimeout(shareNote._t); shareNote._t = setTimeout(function () { el.textContent = ''; }, 4000); }
+
+  // ---------- title & levels ----------
+  function fillTitle() {
+    var p = store.progress, next = Math.min(MAX_LEVEL, p.cleared + 1), n = sizeForLevel(next);
+    $('play-main').textContent = p.cleared >= MAX_LEVEL ? 'Play · Level ' + MAX_LEVEL : 'Play · Level ' + next;
+    $('play-sub').textContent = n + '×' + n + (p.cleared === 0 ? ' — start small' : ' · ' + p.cleared + ' cleared');
+    $('levels-sub').textContent = p.cleared + ' of ' + MAX_LEVEL + ' cleared';
+    var d = store.progress.daily, today = dayKey();
+    var sub = '7×7 · ' + dayLabel(today) + ' · same board for everyone';
+    if (d.day === today && d.solved > 0) sub = 'Solved today in ' + fmtTime(d.solved) + ' · practice runs';
+    else if (d.day === today && d.accum > 0) sub = 'Clock so far today: ' + fmtTime(d.accum);
+    $('daily-sub').textContent = sub;
+    $('title-best').textContent = 'New daily puzzle in ' + untilNextPuzzle();
+    renderBgm(); renderMute();
+  }
+  var lvPage = 0;
+  function showLevels() {
+    state = STATE_LEVELS;
+    hidePanels(); setTut(0);
+    $('title-panel').classList.add('hidden');
+    lvPage = Math.floor(Math.min(MAX_LEVEL - 1, store.progress.cleared) / PAGE);
+    renderLevels();
+    $('levels-panel').classList.remove('hidden');
+  }
+  function renderLevels() {
+    var grid = $('levels-grid'), p = store.progress; grid.textContent = '';
+    $('levels-count').textContent = p.cleared + ' of ' + MAX_LEVEL + ' cleared';
+    for (var i = lvPage * PAGE + 1; i <= Math.min(MAX_LEVEL, (lvPage + 1) * PAGE); i++) {
+      var b = document.createElement('button'), n = sizeForLevel(i);
+      var done = i <= p.cleared, nxt = i === p.cleared + 1, locked = i > p.cleared + 1;
+      b.className = 'lvl' + (done ? ' done' : '') + (nxt ? ' next' : '') + (locked ? ' locked' : '');
+      b.innerHTML = (locked ? '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>' : i) + '<small>' + n + '×' + n + '</small>' + (done ? '<svg><use href="#s-cat"/></svg>' : '');
+      b.dataset.level = i;
+      if (!locked) b.addEventListener('click', function (e) { unlockAudio(); startLevel(parseInt(e.currentTarget.dataset.level, 10)); });
+      b.setAttribute('aria-label', 'Level ' + i + (locked ? ' (locked)' : ''));
+      grid.appendChild(b);
+    }
+    $('lv-page').textContent = (lvPage * PAGE + 1) + '–' + Math.min(MAX_LEVEL, (lvPage + 1) * PAGE);
+    $('lv-prev').disabled = lvPage === 0; $('lv-next').disabled = (lvPage + 1) * PAGE >= MAX_LEVEL;
+    $('lv-prev').style.visibility = lvPage === 0 ? 'hidden' : ''; $('lv-next').style.visibility = (lvPage + 1) * PAGE >= MAX_LEVEL ? 'hidden' : '';
+  }
+
+  // ---------- input ----------
+  var lastTouchAt = -1e9;
+  boardEl.addEventListener('touchstart', function (e) {
+    lastTouchAt = performance.now();
+    var t = e.changedTouches[0]; var el = document.elementFromPoint(t.clientX, t.clientY);
+    if (el && el.classList && el.classList.contains('cell')) tap(parseInt(el.dataset.r, 10), parseInt(el.dataset.c, 10));
+  }, { passive: true });
+  boardEl.addEventListener('mousedown', function (e) {
+    if (e.button) return;
+    if (performance.now() - lastTouchAt < 800) return;
+    var el = e.target.closest ? e.target.closest('.cell') : null;
+    if (el) tap(parseInt(el.dataset.r, 10), parseInt(el.dataset.c, 10));
+  });
+  document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.target && (e.target.tagName === 'INPUT')) return;
+    var code = e.code || '';
+    if (code === 'KeyM') { e.preventDefault(); toggleMute(); return; }
+    if (code === 'KeyP') { e.preventDefault(); if (state === STATE_PLAY) { if (userPaused) resumeGame(); else pauseGame(false); } return; }
+    if (code === 'Space' || code === 'Enter' || code === 'NumpadEnter') {
+      if (e.target && e.target.tagName === 'BUTTON') return;
+      e.preventDefault(); unlockAudio();
+      if (state === STATE_TITLE) { startLevel(Math.min(MAX_LEVEL, store.progress.cleared + 1)); return; }
+      if (state === STATE_OVER) { if (performance.now() - overAt >= 600 && !rewardPending && !rewardEarned) { if (won && mode === 'level') nextLevel(); else retry(); } return; }
+      if (userPaused) { resumeGame(); return; }
+      if (state === STATE_PLAY && cursor) tap(cursor[0], cursor[1]);
+      return;
+    }
+    if (state !== STATE_PLAY || frozen()) return;
+    var d = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] }[code];
+    if (d) {
+      e.preventDefault();
+      if (!cursor) cursor = [0, 0]; else cursor = [(cursor[0] + d[0] + N) % N, (cursor[1] + d[1] + N) % N];
+      document.querySelectorAll('.cell.cursor').forEach(function (el) { el.classList.remove('cursor'); });
+      cellEls[cursor[0]][cursor[1]].classList.add('cursor');
+    }
+  });
+  function retry() {
+    if (mode === 'daily') { showInterstitial('round_end'); startDaily(); }
+    else { showInterstitial('level_end'); startLevel(level); }
+  }
+  function nextLevel() {
+    showInterstitial('level_end');
+    startLevel(level >= MAX_LEVEL ? level : level + 1);
+  }
+  $('play-btn').addEventListener('click', function () { unlockAudio(); startLevel(Math.min(MAX_LEVEL, store.progress.cleared + 1)); });
+  $('daily-btn').addEventListener('click', function () { unlockAudio(); startDaily(); });
+  $('levels-btn').addEventListener('click', function () { unlockAudio(); showLevels(); });
+  $('levels-back').addEventListener('click', function () { quitToTitle(); });
+  $('lv-prev').addEventListener('click', function () { if (lvPage > 0) { lvPage--; renderLevels(); } });
+  $('lv-next').addEventListener('click', function () { if ((lvPage + 1) * PAGE < MAX_LEVEL) { lvPage++; renderLevels(); } });
+  $('back-btn').addEventListener('click', function () { unlockAudio(); if (state === STATE_PLAY) pauseGame(false); else if (state === STATE_OVER) quitToTitle(); });
+  $('pause-btn').addEventListener('click', function () { unlockAudio(); if (state === STATE_PLAY) pauseGame(false); });
+  $('resume-btn').addEventListener('click', function () { unlockAudio(); resumeGame(); });
+  $('quit-btn').addEventListener('click', function () { quitToTitle(); });
+  $('mute-btn').addEventListener('click', toggleMute);
+  $('title-mute-btn').addEventListener('click', toggleMute);
+  $('pause-mute-btn').addEventListener('click', toggleMute);
+  $('bgm-pill').addEventListener('click', function () { unlockAudio(); cycleBgm(); });
+  $('pause-bgm-btn').addEventListener('click', function () { unlockAudio(); cycleBgm(); });
+  $('hint-btn').addEventListener('click', function () { unlockAudio(); requestHint(); });
+  $('continue-btn').addEventListener('click', function () { unlockAudio(); requestContinue(); });
+  $('next-btn').addEventListener('click', function () { unlockAudio(); if (performance.now() - overAt < 500) return; nextLevel(); });
+  $('retry-btn').addEventListener('click', function () { unlockAudio(); if (performance.now() - overAt < 500 || rewardPending || rewardEarned) return; retry(); });
+  $('share-btn').addEventListener('click', function () { unlockAudio(); shareTime(); });
+  $('over-levels-btn').addEventListener('click', function () { unlockAudio(); if (won && mode === 'level') showInterstitial('level_end'); showLevels(); });
+  $('over-home-btn').addEventListener('click', function () { unlockAudio(); quitToTitle(); });
+  $('name-input').addEventListener('input', function () {
+    var v = $('name-input').value.slice(0, 8);
+    store.progress.name = v;
+    if (myRankRow) { myRankRow.n = v || 'You'; renderRanks(); }
+    saveStoreSoon(['progress']);
+  });
+
+  // page hidden: silence + freeze; back: the player resumes from the pause panel
+  document.addEventListener('visibilitychange', function () {
+    var hidden = document.visibilityState === 'hidden';
+    setReason('hidden', hidden);
+    if (hidden && state === STATE_PLAY) pauseGame(true);
+    if (!hidden && snd.unlocked && audibleNow() && snd.ctx && snd.ctx.state === 'suspended') safe(function () { snd.ctx.resume(); });
+  });
+  window.addEventListener('resize', layout);
+
+  // timer tick
+  setInterval(function () {
+    if (state === STATE_PLAY) renderTimer();
+    else if (state === STATE_TITLE) $('title-best').textContent = 'New daily puzzle in ' + untilNextPuzzle();
+    else if (state === STATE_OVER && mode === 'daily' && won && panelOpen('over-panel')) $('next-note').textContent = 'New puzzle at midnight (KST) · ' + untilNextPuzzle() + ' left';
+  }, 250);
+
+  // ---------- boot: Bridge first, then saved state, then the first playable frame, then game_ready ----------
+  function boot() {
+    var init = B ? B.initialize().then(function () { bridgeReady = true; }).catch(function () { bridgeReady = false; }) : Promise.resolve();
+    init.then(function () {
+      if (bridgeReady) {
+        safe(function () { return B.platform.language; }, 'en');   // English only (rule 3.4): the fallback is the game language
+        isDesktop = safe(function () { return B.device.type === 'desktop'; }, false);
+        readSafeArea();
+        setReason('platform', safe(function () { return B.platform.isAudioEnabled === false; }, false));
+        setReason('paused', safe(function () { return B.platform.isPaused === true; }, false));
+        adStateChanged(safe(function () { return B.advertisement.interstitialState; }, '') === 'opened' || safe(function () { return B.advertisement.rewardedState; }, '') === 'opened' ? 'opened' : 'closed');
+        safe(function () {
+          B.platform.on(B.EVENT_NAME.AUDIO_STATE_CHANGED, function (enabled) { setReason('platform', !enabled); });
+          B.platform.on(B.EVENT_NAME.PAUSE_STATE_CHANGED, function (paused) { setReason('paused', !!paused); if (paused && state === STATE_PLAY) pauseGame(true); });
+          B.advertisement.on(B.EVENT_NAME.INTERSTITIAL_STATE_CHANGED, adStateChanged);
+          B.advertisement.on(B.EVENT_NAME.REWARDED_STATE_CHANGED, onRewardedState);
+          if (B.device && B.device.on) { B.device.on(B.EVENT_NAME.SCREEN_SIZE_CHANGED, layout); B.device.on(B.EVENT_NAME.ORIENTATION_STATE_CHANGED, layout); }
+        });
+      }
+      var touch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      if (!isDesktop) isDesktop = !touch && !!(window.matchMedia && matchMedia('(pointer:fine)').matches);
+      if (touch) isDesktop = false;
+      return loadStore();
+    }).then(function () {
+      setReason('user', !!store.settings.muted);
+      renderMute(); renderBgm();
+      // a first board behind the title so the layout is measured before the first tap
+      var p = genLevel(Math.min(MAX_LEVEL, store.progress.cleared + 1)); N = p.n; solution = p.solution; region = p.region;
+      buildBoard(); resetBoard(); updateHud(); layout();
+      fillTitle();
+      if (COVER) setupCover();
+      $('loading').classList.add('hidden');
+      sendMsg('game_ready');
+      fetchAudio();
+      if (DEBUG) installDebug();
+    });
+  }
+  function setupCover() {
+    // still frame for covers: the title over a half-solved daily board
+    puzzleDay = dayKey(); var p = genDaily(puzzleDay); N = p.n; solution = p.solution; region = p.region;
+    buildBoard(); resetBoard(); state = STATE_PLAY;
+    [0, 2, 4, 6].forEach(function (r) { placeCat(r, solution[r], false); });
+    state = STATE_TITLE; updateHud();
+    $('title-panel').classList.add('hidden'); $('mode-main').textContent = 'Today’s puzzle'; $('mode-sub').textContent = '7×7';
+    $('timer').textContent = '1:08'; $('tip').textContent = '';
+    $('cover-badge').classList.remove('hidden');
+    $('app').classList.add('cover');
+    layout();
+  }
+  function installDebug() {
+    window.__game = {
+      get state() { return state; }, get mode() { return mode; }, get level() { return level; }, get N() { return N; },
+      get solution() { return solution; }, get region() { return region; }, get cell() { return cell; },
+      get hearts() { return hearts; }, get catCount() { return catCount; }, get won() { return won; }, get lastTotal() { return lastTotal; },
+      get store() { return store; }, get bridgeReady() { return bridgeReady; }, get audible() { return snd.audible; }, get reasons() { return snd.reasons; },
+      get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; }, get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; },
+      get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get tutorial() { return tutorial; }, get tutStep() { return tutStep; },
+      get guideCell() { return guideCell; }, get hintUsed() { return hintUsed; }, get continueUsed() { return continueUsed; }, get rewardEarned() { return rewardEarned; },
+      get isDesktop() { return isDesktop; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
+      tap: tap, startLevel: startLevel, startDaily: startDaily, showLevels: showLevels, quitToTitle: quitToTitle, pauseGame: pauseGame, resumeGame: resumeGame,
+      requestHint: requestHint, requestContinue: requestContinue, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,
+      saveStore: saveStore, genLevel: genLevel, genDaily: genDaily, countSolutions: countSolutions, sizeForLevel: sizeForLevel, layout: layout,
+      cellRect: function (r, c) { var b = cellEls[r][c].getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + b.height / 2, w: b.width }; },
+      boardRect: function () { var b = boardEl.getBoundingClientRect(); return { left: b.left, top: b.top, right: b.right, bottom: b.bottom, w: b.width }; },
+      hudRect: function () { var b = $('hud').getBoundingClientRect(); return { left: b.left, top: b.top, right: b.right, bottom: b.bottom }; },
+      footRect: function () { var b = $('foot').getBoundingClientRect(); return { left: b.left, top: b.top, right: b.right, bottom: b.bottom }; },
+      set hearts(v) { hearts = v; updateHud(); }, version: GAME_VERSION
+    };
+  }
+  boot();
+})();
+</script>
+</body>
+</html>
