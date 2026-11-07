@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T17:43:04.449Z",
+  "startedAt": "2026-11-07T19:04:07.259Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -72,7 +72,12 @@
     {
       "name": "Play starts level 1 (5×5) with the finger guide on a solution cell",
       "ok": true,
-      "detail": "{\"state\":1,\"level\":1,\"N\":5,\"tut\":true,\"step\":1,\"guide\":[0,1],\"hand\":true,\"text\":\"Tap the glowing cell to put Horangi there.\"}"
+      "detail": "{\"state\":1,\"level\":1,\"N\":5,\"tut\":true,\"step\":1,\"guide\":[0,1],\"hand\":true,\"footText\":\"Undo Notes Hint Clear\"}"
+    },
+    {
+      "name": "no helper text: the foot holds only the four tool buttons",
+      "ok": true,
+      "detail": "Undo Notes Hint Clear"
     },
     {
       "name": "level_started message after start",
@@ -87,7 +92,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,clear,wrong,cat,win,heart,lose,mute-on,start,hint,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "cat,mute-on,mark,clear,win,hint,start,mute-off,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -95,9 +100,9 @@
       "detail": ""
     },
     {
-      "name": "one tap places the cat, auto marks appear, guide moves to the next cat",
+      "name": "one tap places the cat; Auto-X is off by default so the board stays clean; the hand moves to the next cat",
       "ok": true,
-      "detail": "{\"cats\":1,\"step\":4,\"text\":\"See the marks? Horangi rules out the row, the column, the color and the cells next door. Tap the next glowing cell.\",\"auto\":10}"
+      "detail": "{\"cats\":1,\"step\":1,\"guide\":[1,3],\"hand\":true,\"auto\":0,\"autox\":false}"
     },
     {
       "name": "the placed cat is Horangi",
@@ -105,22 +110,17 @@
       "detail": ""
     },
     {
-      "name": "calm mode (default): marks appear at once, no pink wave animation running",
+      "name": "rule break: the cat is placed, the two clashing cats get a red frame, no text, no lives, game goes on",
       "ok": true,
-      "detail": ""
+      "detail": "{\"cats\":2,\"conflicts\":2,\"red\":2,\"clash\":3,\"msg\":\"\",\"footText\":\"Undo Notes Hint Clear\",\"state\":1}"
     },
     {
-      "name": "wrong cat on level 1: reason shown, grumpy cat refuses, no heart lost (free mistakes while learning)",
+      "name": "Undo takes the clashing cat back and the red goes away",
       "ok": true,
-      "detail": "{\"hearts\":3,\"msg\":\"CATS CAN'T TOUCH!\",\"cats\":1,\"bad\":2,\"nope\":true}"
+      "detail": "{\"cats\":1,\"conflicts\":0,\"red\":0,\"hist\":1}"
     },
     {
-      "name": "\"why not\" stays on the board: rule scope tinted, blocking cat ringed, tapped cell dashed, one line under the board",
-      "ok": true,
-      "detail": "{\"on\":true,\"tinted\":6,\"ring\":1,\"tap\":1,\"text\":\"Too close. The ringed cat already owns every cell around it, corners included.\",\"shown\":true}"
-    },
-    {
-      "name": "the \"why not\" overlay clears on the next tap",
+      "name": "after the second cat the hand is gone (onboarding is two pointers, no words)",
       "ok": true,
       "detail": ""
     },
@@ -140,57 +140,107 @@
       "detail": "level_started,level_completed"
     },
     {
-      "name": "no tutorial and no hint button on the mock platform (rewarded unsupported → hidden)",
+      "name": "no tutorial; on the mock platform (no rewarded ads) the hint is free: button on, no \"ad\" tag",
       "ok": true,
-      "detail": "{\"state\":1,\"level\":2,\"N\":5,\"tut\":false,\"hint\":false}"
+      "detail": "{\"state\":1,\"level\":2,\"N\":5,\"tut\":false,\"hintAd\":false,\"hintOn\":true}"
+    },
+    {
+      "name": "free hint (no ads here) places one correct cat and is then used up for this puzzle",
+      "ok": true,
+      "detail": "{\"cats\":1,\"used\":true,\"off\":true,\"ok\":true}"
     },
     {
       "name": "level 2 (5×5) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":2,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":2}"
     },
     {
       "name": "level 3 (5×5) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":3,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":3}"
     },
     {
       "name": "level 4 (6×6) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":4,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":4}"
     },
     {
       "name": "level 5 (6×6) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":5,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":5}"
     },
     {
       "name": "level 6 (6×6) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":6,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":6}"
     },
     {
       "name": "level 7 (6×6) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":7,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":7}"
     },
     {
       "name": "level 8 (6×6) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":8,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":8}"
     },
     {
       "name": "level 9 (6×6) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":9,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":9}"
     },
     {
       "name": "level 10 (6×6) cleared by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"cleared\":10,\"hearts\":3}"
+      "detail": "{\"state\":2,\"won\":true,\"cleared\":10}"
     },
     {
-      "name": "level 11 is 7×7 with the hint button (rewarded supported)",
+      "name": "level 11 is 7×7 and the hint button carries the \"ad\" tag (rewarded supported)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Notes on: a tap puts an X mark (no cat), the button shows the on state",
+      "ok": true,
+      "detail": "{\"notes\":true,\"on\":true,\"v\":1,\"glyph\":true,\"cats\":1}"
+    },
+    {
+      "name": "Notes: tapping the X again clears it",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Notes off again",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "two cats in one row: both framed red, the rest of the row tinted (plus the color area when they share one), play goes on",
+      "ok": true,
+      "detail": "{\"cats\":2,\"red\":2,\"clash\":6,\"state\":1,\"msg\":\"SOLVED!\"}"
+    },
+    {
+      "name": "more clashes: still playing (no lives, nothing refused)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Clear: board empty, red gone, Clear disabled, Undo available",
+      "ok": true,
+      "detail": "{\"cats\":0,\"red\":0,\"hist\":7,\"clearOff\":true}"
+    },
+    {
+      "name": "Undo after Clear restores all four cats",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Auto-X on: the ruled-out cells of the placed cat get faint marks, setting saved, pause button says On",
+      "ok": true,
+      "detail": "{\"on\":true,\"saved\":true,\"marks\":14,\"label\":\"Auto-X: On\"}"
+    },
+    {
+      "name": "Auto-X off: marks vanish",
       "ok": true,
       "detail": ""
     },
@@ -202,7 +252,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "0.54 → 0.54"
+      "detail": "2.46 → 2.46"
     },
     {
       "name": "Resume continues the level",
@@ -230,44 +280,24 @@
       "detail": ""
     },
     {
+      "name": "setup: a clashing cat is on the board before the hint",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "hint ad closed early: no cat placed, hint still available",
       "ok": true,
       "detail": ""
     },
     {
-      "name": "hint rewarded: one correct cat placed, button gone (one hint per puzzle)",
-      "ok": true,
-      "detail": "{\"cats\":2,\"used\":true,\"btn\":false,\"ok\":true}"
-    },
-    {
-      "name": "three wrong cats → out of hearts, continue offered once, cats kept on the board",
-      "ok": true,
-      "detail": "{\"state\":2,\"hearts\":0,\"won\":false,\"title\":\"Out of hearts\",\"cont\":true,\"cats\":2,\"msgs\":[\"level_failed\"]}"
-    },
-    {
-      "name": "continue ad closed early: no reward, panel stays",
-      "ok": true,
-      "detail": "{\"state\":2,\"used\":false,\"note\":\"The ad was closed early, so no reward this time. You can try again.\"}"
-    },
-    {
       "name": "reward earned but the game waits until the ad closes",
       "ok": true,
-      "detail": "{\"state\":2,\"earned\":\"continue\",\"frozen\":true}"
+      "detail": "{\"earned\":\"hint\",\"frozen\":true,\"cats\":2}"
     },
     {
-      "name": "rewarded: play continues with 3 hearts and the same board",
+      "name": "hint rewarded: the clashing cat is picked up, the right cat appears, button used up, game running",
       "ok": true,
-      "detail": "{\"state\":1,\"hearts\":3,\"cats\":2,\"used\":true,\"frozen\":false}"
-    },
-    {
-      "name": "no second continue in the same attempt",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "Try again restarts level 11 with a clean board",
-      "ok": true,
-      "detail": ""
+      "detail": "{\"cats\":2,\"used\":true,\"off\":true,\"conflicts\":0,\"onSolution\":true,\"frozen\":false}"
     },
     {
       "name": "title shows progress: Play · Level 11",
@@ -282,7 +312,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and share shown",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":0.694399999999965,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6224000000000233,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
     },
     {
       "name": "Share my time copies or shares the text",
@@ -300,9 +330,9 @@
       "detail": "{\"user\":true,\"attr\":\"1\",\"audible\":false}"
     },
     {
-      "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
+      "name": "reload restores levels, name, daily time, tutorial flag, mute, Auto-X (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.694399999999965,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6224000000000233,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\",\"autox\":false}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -325,19 +355,9 @@
       "detail": ""
     },
     {
-      "name": "dead end: the row/column/area with no room is tinted, one line says so, no heart lost",
+      "name": "cats off the hidden solution that break no rule are never called wrong: no red, no grumpy face, no text (player feedback 11-08)",
       "ok": true,
-      "detail": "{\"stuck\":{\"type\":\"color\",\"i\":1},\"cats\":2,\"wrong\":2,\"wrongCells\":[[0,0],[1,2]],\"faces\":[\"#s-h-cat\",\"#s-h-cat\"],\"grumpy\":0,\"framed\":0,\"shown\":true,\"text\":\"The faded color area is all crossed out, but every color needs a cat. Pick up a cat and try another spot.\",\"hearts\":3,\"dead\":3,\"unitOk\":true,\"deadHasNoCat\":true}"
-    },
-    {
-      "name": "dead end: no cat is called wrong by the hidden solution (player feedback: only a real rule break is \"not allowed\")",
-      "ok": true,
-      "detail": "{\"wrong\":2,\"grumpy\":0,\"framed\":0,\"faces\":2,\"cats\":2}"
-    },
-    {
-      "name": "picking up the off-solution cats clears the dead end: line and tint go away, the right cats stay",
-      "ok": true,
-      "detail": "{\"cats\":0,\"wrong\":0,\"stuck\":null,\"shown\":false,\"deadLeft\":0,\"catsOnSolution\":true}"
+      "detail": "{\"placedWrong\":3,\"cats\":3,\"conflicts\":0,\"red\":0,\"faces\":[\"#s-h-cat\",\"#s-h-cat\",\"#s-h-cat\"],\"footText\":\"Undo Notes Hint Clear\",\"msg\":\"\",\"state\":1}"
     },
     {
       "name": "desktop detected",
@@ -365,6 +385,21 @@
       "detail": ""
     },
     {
+      "name": "Z undoes the last cat",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "X toggles Notes: Space at the cursor now leaves an X mark",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Notes off: Space replaces the X with a cat",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "Cat switch: classic orange cat on the board and the title, saved",
       "ok": true,
       "detail": ""
@@ -380,7 +415,7 @@
       "detail": ""
     },
     {
-      "name": "lively: pink wave animation runs over the ruled-out cells",
+      "name": "lively + Auto-X: pink wave animation runs over the ruled-out cells",
       "ok": true,
       "detail": ""
     },
@@ -397,7 +432,7 @@
     {
       "name": "results panel fits at phone-360x640",
       "ok": true,
-      "detail": "panel 454px of 640"
+      "detail": "panel 433px of 640"
     },
     {
       "name": "layout phone-390x844 (portrait): board 370px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
@@ -417,7 +452,7 @@
     {
       "name": "results panel fits at land-844x390",
       "ok": true,
-      "detail": "panel 366px of 390"
+      "detail": "panel 365px of 390"
     },
     {
       "name": "levels list fits and scrolls at land-844x390",
@@ -440,14 +475,14 @@
       "detail": "{\"fill\":\"0.90\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
-      "name": "layout square-640x640 (portrait): board 444px, cells 59px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout square-640x640 (portrait): board 436px, cells 58px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.69\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.68\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
       "name": "results panel fits at square-640x640",
       "ok": true,
-      "detail": "panel 454px of 640"
+      "detail": "panel 434px of 640"
     },
     {
       "name": "levels list fits and scrolls at square-640x640",
@@ -504,22 +539,21 @@
     "phone-390x844-title.png",
     "phone-390x844-tutorial-1.png",
     "phone-390x844-tutorial-2.png",
-    "phone-390x844-why.png",
-    "phone-390x844-tutorial-wrong.png",
+    "phone-390x844-conflict.png",
     "phone-390x844-win-calm.png",
     "phone-390x844-level1-solved.png",
     "phone-390x844-level4-6x6.png",
     "phone-390x844-level10-solved.png",
+    "phone-390x844-notes.png",
+    "phone-390x844-row-clash.png",
+    "phone-390x844-autox.png",
     "phone-390x844-play-7x7.png",
     "phone-390x844-paused.png",
     "phone-390x844-hint.png",
-    "phone-390x844-wrong.png",
-    "phone-390x844-out-of-hearts.png",
-    "phone-390x844-continued.png",
     "phone-390x844-daily-solved.png",
     "phone-390x844-levels.png",
     "phone-390x844-levels-bottom.png",
-    "phone-390x844-stuck.png",
+    "phone-390x844-legal-wrong.png",
     "iframe-1280x720-classic-cat.png",
     "iframe-1280x720-win-lively.png",
     "iframe-1280x720-play.png",
@@ -543,7 +577,7 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "taps": 78,
-  "passed": 99,
+  "taps": 76,
+  "passed": 106,
   "failed": 0
 }
