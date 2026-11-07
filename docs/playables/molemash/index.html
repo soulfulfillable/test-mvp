@@ -264,7 +264,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.9.0';
+  var GAME_VERSION = '1.9.1';
   var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
   var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
   var CLOCK_TIME = 5;            // the clock mole adds five seconds
@@ -439,7 +439,8 @@
   var shake = 0, overAt = 0, lastScore = 0, heartFlash = 0, hitStop = 0, flashA = 0;
   var timeLeft = 0, lastTick = -1, tickAcc = 0, tickTock = false, overReason = 'time';
   var isNewBest = false, prevBestScore = 0, bestShown = false;
-  var celeb = null, fxParts = [], worldTopShown = false;   // the big celebration (new best / world #1)   // bestShown: the live NEW BEST shout fired this round
+  var celeb = null, fxParts = [], worldTopShown = false;   // the big celebration (new best / world #1)
+  var worldTop = null;   // { score, mine } from the last world-board read: lets WORLD #1! fire at once, the server only confirms   // bestShown: the live NEW BEST shout fired this round
   var RANK_MAX = 12;
   var ranks = [], myRankRow = null;
   var LB_ID = 'moles', GAME_URL = 'https://playgama.ai/play/cmnhxm72r5k4zv';
@@ -457,6 +458,8 @@
       B.leaderboards.getEntries(LB_ID).then(function (entries) {
         board.textContent = '';
         var myId = safe(function () { return B.player.id; }, null);
+        var top = (entries || [])[0];
+        if (top && typeof top.score === 'number') worldTop = { score: top.score, mine: !!(myId && top.id === myId) };
         (entries || []).slice(0, 10).forEach(function (e) {
           var row = document.createElement('div'); row.className = 'rank-row' + (myId && e.id === myId ? ' me' : '');
           var pos = document.createElement('span'); pos.className = 'rank-pos ' + (e.rank <= 3 ? 'm' + e.rank : 'mx'); pos.textContent = String(e.rank);
@@ -955,7 +958,8 @@
     overAt = performance.now();
     jolt(6);
     lastScore = score;
-    sndOver();
+    var beatsWorld = lbType() === 'in_game' && worldTop && score > 0 && (worldTop.mine ? score >= worldTop.score : score > worldTop.score);
+    if (!(score > store.progress.best && store.progress.best > 0) && !beatsWorld) sndOver();   // a big round opens with the fanfare instead
     prevBestScore = store.progress.best;
     if (score > store.progress.best) { store.progress.best = score; isNewBest = true; }
     if (!continueUsed && !continueOffered) store.progress.played++;
@@ -968,9 +972,9 @@
     analytics(reason === 'time' ? 'progression_completed' : 'progression_failed', { step_id: 'round', outcome: reason, continued: continueUsed ? 1 : 0 });
     if (tutorial && tutHits >= 3) analytics('tutorial_completed', { step_id: 'round' });
     // the round itself is the natural pause: the ad comes before the results, except after the session's first round
-    var big = isNewBest && prevBestScore > 0 && lastScore > 0 && !COVER;   // beat a real record: the big celebration first, the panel after
+    var big = (isNewBest && prevBestScore > 0 && lastScore > 0 && !COVER) || (beatsWorld && !COVER);   // a real record or the top of the world: celebrate first, panel after
     if (roundIndex > 1 && !continueUsed && !big) showInterstitial('round_end');
-    if (big) startCelebration('best', roundIndex > 1 && !continueUsed); else showOverPanel();
+    if (big) { if (beatsWorld) worldTopShown = true; startCelebration(beatsWorld ? 'top1' : 'best', roundIndex > 1 && !continueUsed); } else showOverPanel();
   }
 
   // ---------- celebration: new personal best, or #1 on the world board ----------
@@ -1082,7 +1086,7 @@
   function drawCeleb() {
     var c = celeb; if (!c || c.lite || c.panel) return;
     var cx = grid.x + grid.w / 2, cy = grid.y + grid.h * 0.45;
-    var bt = Math.max(0, c.t - 0.12), sc = bt < 0.4 ? (0.5 + 0.5 * (1 + 2.2 * Math.sin((bt / 0.4) * Math.PI) * (1 - bt / 0.4))) * (bt / 0.4) : 1 + 0.025 * Math.sin(c.t * 7);
+    var bt = Math.max(0.001, c.t), sc = bt < 0.4 ? (0.5 + 0.5 * (1 + 2.2 * Math.sin((bt / 0.4) * Math.PI) * (1 - bt / 0.4))) * (bt / 0.4) : 1 + 0.025 * Math.sin(c.t * 7);
     if (bt <= 0) return;
     ctx.save(); ctx.translate(cx, cy); ctx.scale(sc, sc); ctx.translate(-cx, -cy);
     var cardW = Math.min(W - 24, 330 * UI), cardH = 196 * UI, top = cy - cardH / 2;
