@@ -6,7 +6,7 @@
 - 방금 끝낸 것: **①~⑧ 전부** — 게임 본체(`index.html`), 로봇 84/84(`qa/report.json`), 빌드 `dist/kitty-queens.zip`(2.97MB) + Pages 복사본 `docs/catdoku-playables/`, 커버 3종, `CREDITS.md`, **Playgama 게임 생성·폼·아카이브(빌드 체크 PASSED, Bridge 2.4.0 FOUND)·커버 3종 업로드 완료**. 런치 단계: archive ✅ bridge ✅ covers ✅ · form BLOCKED(NO_CERTIFICATION → QA 툴 인증은 Codex) · **sandbox TODO(publish_sandbox, 사용자 yes 필요)** · traffic BLOCKED(샌드박스 뒤, 사용자 결정).
 - 진행 중이던 것: 없음.
 - 다음 할 일: ⑨ 사용자 yes 가 오면 `publish_sandbox`(앱 id `cmw5rj3x202syno0hy56lnw64`, 아카이브 **v1.2.0 `cmw6ei9ei0gaimt0hiszrp11c`**) → `get_sandbox_share` 로 링크 받아 게시판·handoff 에 기록 → `playgama-bridge-config.json` 의 `social.shares[0].url` 에 샌드박스 주소 넣고 재빌드·재업로드(v1.0.1) → 사용자 폰 체감 피드백(첫 판 온보딩·그림 고양이) 받아 반영 → 샌드박스 목표(콘솔 카드: Puzzle/sudoku 카테고리 목표치, Codex 가 읽어 적음) → QA 툴 인증(Codex) → Submit(사용자 클릭). 트래픽 부스트는 사용자 결정 뒤에만.
-- 사용자 대기: **샌드박스 게시 yes/no** · 질문 2개(아래 보고).
+- 사용자 대기: **샌드박스 게시 yes/no** · **사용자 고양이 사진 + 이름**(11-07 제안: "우리 고양이 모양으로 할 수 있나?" → 사진을 보고 같은 결(굵은 외곽선 벡터)로 털색·무늬·눈색을 옮겨 그린다. 사진 자체는 게임에 안 넣음. 사진이 오면 `playables/catdoku/art/ref/` 에 보관(배포 제외), 심볼 `s-cat` 교체 + 주황 고양이는 두 번째 스킨으로).
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/catdoku-playables.md 와 plans/catdoku-playables.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구 있는지 먼저 확인.`
 - 🌐 미리보기(Pages): https://soulfulfillable.github.io/test-mvp/catdoku-playables/ · 로봇 스크린샷 `playables/catdoku/qa/` · 🔧 QA 툴: https://developer.playgama.com/qa-tool/cmw5tfzkp03evmt0hxrtvuond
 
@@ -54,6 +54,7 @@
 - 아쉬운 점(숨기지 않음): ① 실기기 사파리 미확인(헤드리스 Chromium 만) ② 랭킹은 기기 로컬(오늘의 시간) + Bridge 리더보드 `levels` 는 config 선언만, 결과 화면 표시 없음 ③ 도전장 링크(웹판의 해시 공유)는 Playgama 에선 URL 을 못 바꿔 뺌 → 공유는 텍스트만 ④ BGM 2곡은 Mole Mash 와 같은 CC0 곡(우쿨렐레·래그타임) ⑤ 레벨 보상(별·꾸미기)은 없음 — 핵심 깊이에 집중, 필요하면 다음 판.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
+- 2026-11-07 "고양이 모양을 우리 고양이 사진 주면 활용해서 할 수 있나? 해도 되나? / 애니메이션은 옵션으로 메뉴에 넣고 켜고 끄게?" → 애니메이션 옵션은 v1.2.0 에 이미 있음(타이틀·일시정지 `Effects: Calm/Lively`). 고양이: 가능·허용(본인 고양이 = 저작권 문제 없음, Playgama 4.2.1 OK). 사진을 그대로 쓰면 작은 칸에서 안 읽히고 벡터 결과 어긋나므로 **사진을 보고 같은 결로 그린다**. 사진·이름 대기.
 - 2026-11-07 "효과 때문에 눈이 계속 아프다. 그냥 빼고 막 빨리빨리 눌리고 되는 뭐 그런 게 나으려나?" → **v1.2.0 Calm 기본**: 분홍 물결·폭죽·판 흔들림·고양이 무한 바운스·타이틀 둥실·판 등장 애니 전부 꺼짐(기본). 남긴 것 = 탭 즉시 반응(고양이 팝 0.16초), 틀린 칸 화난 고양이(0.45초)+이유 글자+연한 빨강, 완료 시 고양이 한 번 깡충+SOLVED 글자(작게), 결과 창 0.7초 뒤. 타이틀·일시정지에 **Effects: Calm / Lively** 스위치(Bridge storage 저장) — 원하는 사람만 켬. 로봇 90/90.
 - 2026-11-07 "효과 눈쫌 아파 그리고 전체보이게할때 밑으로 스크롤해서 쭉 냐릴수있게해주라" → **v1.1.1**: ①효과 전부 연하게 — 분홍 물결 불투명도 0.92→0.55·색 #fbd3d3·1초로 느리게, ✕ 회전 제거, 폭죽 250조각→약 120조각·흰색 제거·낙하 느리게·투명 0.9, 고양이 바운스 -9%→-6%, SOLVED 36→29px, 하트 흔들림·타이틀 둥실 줄임 ②"All levels" 는 페이지 넘기기(Previous/Next) 삭제 → **500판을 한 줄 목록으로 쭉 스크롤**(크기별 소제목 5×5/6×6/…, 열면 다음 레벨이 보이는 위치로 자동 스크롤, 브라우저 스크롤 아님 — 게임 안 영역만 스크롤이라 Playgama 1.6.3 OK). 로봇 86/86.
 - 2026-11-07 "고양이 올라가면 그 이제 못올릴 네방향 그리고 인근 그부분에 뭐 그런 연한 분홍색 이펙트 같은거 살짝 올라왔다가 내려가면 어떠냐 그래서 뭔뜻인지좀더 알게? 뭔가 너무 일차원적이고 그리고 막 끝나거나 할때 막 다른 게임은 막 별 이펙트 막 챠라락 그런가막 정신없게 나오는데 그냥 잔잔하기만하고 디자인도그냥.. 그런데. 스도쿠니까 이런느낌으로해야되나.. 그 막 깃허브나 그런데보면 사람들이 막 뭐 올려놓는거많던데 그런거중에 깔아서 스킬추가할만한거 없을까? 이런 디자인적인게 지금까지 공통된 아쉬움인데.."
