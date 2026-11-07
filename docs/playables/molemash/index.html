@@ -86,6 +86,14 @@
     box-shadow: 0 8px 40px rgba(0,0,0,0.45);
   }
   .panel.hidden { display: none; }
+  /* big night: a new personal best or the top of the world board */
+  #fx { position: fixed; inset: 0; z-index: 30; pointer-events: none; display: none; }
+  #fx.on { display: block; }
+  .panel.party { animation: panelin 0.28s ease-out, partyglow 1.1s ease-in-out infinite alternate; border: 2px solid #ffc94d; }
+  @keyframes partyglow { from { box-shadow: 0 0 18px rgba(255,201,77,0.45), 0 8px 40px rgba(0,0,0,0.45); } to { box-shadow: 0 0 46px rgba(255,201,77,0.95), 0 8px 40px rgba(0,0,0,0.45); } }
+  .panel.party .ttl-row { font-size: 34px; color: #ffc94d; text-shadow: 0 2px 0 #8a5a34; }
+  .panel.party .ttl-row svg { width: 34px; height: 34px; }
+  .panel.party #over-score { font-size: 50px; color: #fff6ea; text-shadow: 0 0 18px rgba(255,201,77,0.8); }
   .panel { animation: panelin 0.28s ease-out; }
   @keyframes panelin { from { opacity: 0; transform: translate(-50%, -50%) scale(0.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
   .ttl-row { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 26px; font-weight: 400; font-family: "Lilita One", "Fredoka", sans-serif; letter-spacing: 0.5px; }
@@ -169,6 +177,7 @@
 <div id="loading"><div class="ttl">MOLE MASH</div><div class="bar"><i></i></div></div>
 <div id="sa-probe"></div>
 <canvas id="game"></canvas>
+<canvas id="fx"></canvas>
 
 <button id="pause-btn" class="corner hidden" aria-label="Pause">
   <svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>
@@ -183,6 +192,8 @@
   <div class="ttl-row" id="over-title">
     <svg id="over-icon-time" viewBox="0 0 24 24" fill="none" stroke="#ffc94d" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6"/></svg>
     <svg id="over-icon-heart" viewBox="0 0 24 24" fill="#ff5f6e" stroke="none"><path d="M12 21s-7.5-4.6-9.3-9.4C1.4 8.1 3.6 4.5 7.2 4.5c2 0 3.4 1.1 4.3 2.3l-1.5 3.4 3 2.2-1.4 3.6 2.2-2.2L12 11.3l1.6-3.1C14.4 5.9 15.9 4.5 17.8 4.5c3.6 0 5.8 3.6 4.5 7.1C20.5 16.4 12 21 12 21z"/></svg>
+    <svg id="over-icon-trophy" viewBox="0 0 24 24" fill="#ffc94d" stroke="none" style="display:none"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.3A5 5 0 0 1 13 14.9V17h3v3H8v-3h3v-2.1A5 5 0 0 1 8.3 12H8a4 4 0 0 1-4-4V5h3V3zm10 4v3a2 2 0 0 0 2-2V7h-2zM7 7H5v1a2 2 0 0 0 2 2V7z"/></svg>
+    <svg id="over-icon-crown" viewBox="0 0 24 24" fill="#ffc94d" stroke="none" style="display:none"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5L3 8zm2.6 9h12.8l.9-5.6-2.6 2.3L12 8.6l-4.7 5.1-2.6-2.3.9 5.6z"/></svg>
     <span id="over-title-text">TIME'S UP!</span>
   </div>
   <div id="over-score"></div>
@@ -253,7 +264,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.8.0';
+  var GAME_VERSION = '1.9.0';
   var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
   var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
   var CLOCK_TIME = 5;            // the clock mole adds five seconds
@@ -427,7 +438,8 @@
   var score = 0, lives = 3, playT = 0, introT = 0, spawnTimer = 0;
   var shake = 0, overAt = 0, lastScore = 0, heartFlash = 0, hitStop = 0, flashA = 0;
   var timeLeft = 0, lastTick = -1, tickAcc = 0, tickTock = false, overReason = 'time';
-  var isNewBest = false, prevBestScore = 0, bestShown = false;   // bestShown: the live NEW BEST shout fired this round
+  var isNewBest = false, prevBestScore = 0, bestShown = false;
+  var celeb = null, fxParts = [], worldTopShown = false;   // the big celebration (new best / world #1)   // bestShown: the live NEW BEST shout fired this round
   var RANK_MAX = 12;
   var ranks = [], myRankRow = null;
   var LB_ID = 'moles', GAME_URL = 'https://playgama.ai/play/cmnhxm72r5k4zv';
@@ -452,6 +464,10 @@
           name.textContent = (myId && e.id === myId) ? 'You' + (store.progress.name ? ' (' + store.progress.name + ')' : '') : String(e.name || 'Player ' + e.rank).slice(0, 18);
           var sc = document.createElement('span'); sc.className = 'rank-s'; sc.textContent = e.score + ' moles';
           row.append(pos, name, sc); board.appendChild(row);
+          if (myId && e.id === myId && e.rank === 1 && state === STATE_OVER && !worldTopShown && lastScore > 0) {
+            worldTopShown = true;
+            if (celeb && !celeb.panel) { celeb.kind = 'top1'; } else startCelebration('top1', false, true);
+          }
         });
         if (!board.childNodes.length) { var empty = document.createElement('div'); empty.className = 'rank-empty'; empty.textContent = 'Be the first on the board.'; board.appendChild(empty); }
         title.classList.remove('hidden'); board.classList.remove('hidden');
@@ -503,7 +519,7 @@
   // every sound ships twice: OGG Vorbis (Chrome, Firefox, Edge) and MP3 (Safari, which cannot decode Vorbis)
   var AUDIO_EXT = safe(function () { return document.createElement('audio').canPlayType('audio/ogg; codecs=vorbis') ? '.ogg' : '.mp3'; }, '.mp3');
   var SFX = {};
-  ['bonk', 'bonk2', 'gold', 'skunk', 'miss', 'tick', 'heart', 'best', 'over', 'whiff', 'start'].forEach(function (k) { SFX[k] = 'audio/' + k + AUDIO_EXT; });
+  ['bonk', 'bonk2', 'gold', 'skunk', 'miss', 'tick', 'heart', 'best', 'over', 'whiff', 'start', 'fanfare'].forEach(function (k) { SFX[k] = 'audio/' + k + AUDIO_EXT; });
   // hit-sound styles the player can switch (title screen and pause menu); 'classic' is the Kenney thump
   var SFX_STYLES = [
     { id: 'classic', name: 'Classic thump' }, { id: 'cute', name: 'Cute blip' }, { id: 'pop', name: 'Rubber pop' },
@@ -519,7 +535,7 @@
   ];
   BGM_STYLES.forEach(function (st) { SFX['bgm_' + st.id] = 'audio/' + st.file + AUDIO_EXT; });
   function bgmKey() { return 'bgm_' + (store.settings.bgm || 'chiptune'); }
-  var GAIN = { hit_cute: 0.9, hit2_cute: 0.8, hit_pop: 0.9, hit2_pop: 0.8, hit_arcade: 0.9, hit2_arcade: 0.8, hit_chime: 0.9, hit2_chime: 0.8, bonk: 1.0, bonk2: 0.8, gold: 1.0, skunk: 0.8, miss: 0.55, tick: 0.5, heart: 0.8, best: 0.8, over: 0.8, whiff: 0.35, start: 0.6, muteOn: 0.5, muteOff: 0.5, bgm: 0.42 };
+  var GAIN = { hit_cute: 0.9, hit2_cute: 0.8, hit_pop: 0.9, hit2_pop: 0.8, hit_arcade: 0.9, hit2_arcade: 0.8, hit_chime: 0.9, hit2_chime: 0.8, bonk: 1.0, bonk2: 0.8, gold: 1.0, skunk: 0.8, miss: 0.55, tick: 0.5, heart: 0.8, best: 0.8, over: 0.8, whiff: 0.35, start: 0.6, fanfare: 0.95, muteOn: 0.5, muteOff: 0.5, bgm: 0.42 };
   var snd = {
     ctx: null, master: null, bufs: {}, raw: {}, fetching: {}, bgm: null, bgmKey: null, bgmGain: null, unlocked: false,
     reasons: { user: false, platform: false, paused: false, ad: false, hidden: false },
@@ -712,6 +728,7 @@
     shake = 0; heartFlash = 0; hitStop = 0; flashA = 0;
     timeLeft = TIME_LIMIT; lastTick = -1;
     isNewBest = false; bestShown = false;
+    endCelebration(); worldTopShown = false;
     continueUsed = false; continueOffered = false; rewardPending = null;
     tutorial = store.progress.played === 0; tutHits = 0;
     roundIndex++;
@@ -927,6 +944,7 @@
     hidePanels();
     state = STATE_TITLE;
     showPills(true);
+    endCelebration();
     moles = []; floats = []; mallets = []; puffs = []; particles = [];
     document.getElementById('pause-btn').classList.add('hidden');
   }
@@ -950,8 +968,144 @@
     analytics(reason === 'time' ? 'progression_completed' : 'progression_failed', { step_id: 'round', outcome: reason, continued: continueUsed ? 1 : 0 });
     if (tutorial && tutHits >= 3) analytics('tutorial_completed', { step_id: 'round' });
     // the round itself is the natural pause: the ad comes before the results, except after the session's first round
-    if (roundIndex > 1 && !continueUsed) showInterstitial('round_end');
-    showOverPanel();
+    var big = isNewBest && prevBestScore > 0 && lastScore > 0 && !COVER;   // beat a real record: the big celebration first, the panel after
+    if (roundIndex > 1 && !continueUsed && !big) showInterstitial('round_end');
+    if (big) startCelebration('best', roundIndex > 1 && !continueUsed); else showOverPanel();
+  }
+
+  // ---------- celebration: new personal best, or #1 on the world board ----------
+  // moles pop up in every hole with party hats, the score counts up and pops, fireworks and confetti fall over
+  // everything (an overlay canvas above the panel), a fanfare plays, then the results panel arrives dressed up.
+  var CONFETTI = ['#ffc94d', '#ff5f6e', '#5bc0eb', '#9bde7e', '#ff9f1c', '#fff6ea', '#c77dff'];
+  var fxCanvas = document.getElementById('fx'), fxCtx = fxCanvas.getContext('2d');
+  function fxOn(on) {
+    fxCanvas.classList.toggle('on', on);
+    if (on) { fxCanvas.width = Math.round(window.innerWidth * DPR); fxCanvas.height = Math.round(window.innerHeight * DPR); }
+  }
+  function fxFirework(x, y) {
+    var col = CONFETTI[Math.floor(Math.random() * CONFETTI.length)], col2 = CONFETTI[Math.floor(Math.random() * CONFETTI.length)];
+    for (var i = 0; i < 46; i++) {
+      var a = Math.random() * Math.PI * 2, v = (140 + Math.random() * 260) * UI;
+      fxParts.push({ kind: 'spark', x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: (2 + Math.random() * 2.5) * UI, color: i % 2 ? col : col2, t: 0, life: 0.9 + Math.random() * 0.6 });
+    }
+    play('gold', 0.8 + Math.random() * 0.3, 0.5);
+  }
+  function fxConfetti(n) {
+    for (var i = 0; i < n; i++) {
+      fxParts.push({ kind: 'confetti', x: Math.random() * W, y: -10 - Math.random() * 60, vx: (Math.random() - 0.5) * 50, vy: (90 + Math.random() * 150) * UI,
+        w: (6 + Math.random() * 7) * UI, h: (3 + Math.random() * 5) * UI, rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 9,
+        color: CONFETTI[Math.floor(Math.random() * CONFETTI.length)], t: 0, life: 5 + Math.random() * 3, sway: Math.random() * 6.28 });
+    }
+  }
+  function startCelebration(kind, adAfter, lite) {
+    // lite: the panel is already on screen (world #1 arrived from the leaderboard) → fireworks, title and fanfare only
+    celeb = { kind: kind, t: lite ? 2.6 : 0, from: Math.max(0, prevBestScore), to: lastScore, shown: -1, popped: lite, nextFw: lite ? 2.7 : 0.15, fw: lite ? 3 : 0, panel: !!lite, ad: !!adAfter, lite: !!lite };
+    fxParts = []; fxOn(true);
+    if (!lite) {
+      hidePanels();
+      overAt = performance.now() + 2600;   // taps and Enter cannot skip into the next round before the panel is up
+      moles = [];
+      for (var i = 0; i < holes.length; i++) moles.push({ hole: i, kind: 'mole', phase: 'cheer', p: 0, t: -i * 0.07, stayT: 9e9, face: 1, hat: i % CONFETTI.length });
+    } else { showOverTitle(); }
+    play('fanfare'); buzz([40, 60, 40, 60, 160]);
+    analytics('celebration', { kind: kind, score: lastScore, old_best: prevBestScore, lite: lite ? 1 : 0 });
+  }
+  function endCelebration() { celeb = null; fxParts = []; fxOn(false); }
+  function updateCeleb(dt) {
+    var c = celeb; c.t += dt;
+    for (var m = 0; m < moles.length; m++) {
+      var mo = moles[m]; if (mo.phase !== 'cheer') continue;
+      mo.t += dt;
+      var up = Math.min(1, Math.max(0, mo.t) / 0.3);
+      mo.p = up < 1 ? up * up * (3 - 2 * up) : 1 + 0.09 * Math.abs(Math.sin((mo.t - 0.3) * 7 + mo.hole));
+    }
+    if (c.t >= c.nextFw && c.fw < 9) { fxFirework((0.15 + Math.random() * 0.7) * W, (0.1 + Math.random() * 0.35) * H); c.fw++; c.nextFw += 0.42 + Math.random() * 0.3; }
+    if (c.t < 3.6) fxConfetti(Math.min(6, Math.ceil(dt * 80)));
+    var k = Math.min(1, Math.max(0, (c.t - 0.3) / 1.2)), e = 1 - Math.pow(1 - k, 3);
+    var val = Math.round(c.from + (c.to - c.from) * e);
+    if (val !== c.shown) { if (c.shown >= 0 && k < 1) play('tick', 1 + k * 0.9, 0.3); c.shown = val; }
+    if (k >= 1 && !c.popped) {
+      c.popped = true;
+      var gx = grid.x + grid.w / 2, gy = grid.y + grid.h * 0.45;
+      rings.push({ x: gx, y: gy, t: 0, big: true }); spawnBurst(gx, gy, CONFETTI, 70, 460 * UI);
+      play('best'); buzz([30, 50, 30, 50, 60]);
+      fxFirework(gx, gy - 40 * UI);
+    }
+    if (c.t >= 2.6 && !c.panel) {
+      c.panel = true; overAt = performance.now();
+      if (c.ad) showInterstitial('round_end');
+      showOverPanel();
+    }
+    for (var i = fxParts.length - 1; i >= 0; i--) {
+      var q = fxParts[i]; q.t += dt;
+      if (q.kind === 'spark') { q.vy += 380 * UI * dt; q.vx *= 0.985; q.vy *= 0.985; }
+      else { q.vy = Math.min(q.vy + 40 * dt, 260 * UI); q.x += Math.sin(q.t * 3 + q.sway) * 45 * dt; q.rot += q.vr * dt; }
+      q.x += q.vx * dt; q.y += q.vy * dt;
+      if (q.t > q.life || q.y > H + 30) fxParts.splice(i, 1);
+    }
+    if (c.t > 4 && !fxParts.length) fxOn(false);   // the overlay goes away, the party title and cheering moles stay
+  }
+  function drawFx() {
+    if (!fxCanvas.classList.contains('on')) return;
+    if (fxCanvas.width !== Math.round(window.innerWidth * DPR)) fxOn(true);
+    var g = fxCtx; g.setTransform(DPR, 0, 0, DPR, 0, 0); g.clearRect(0, 0, W + 2, H + 2);
+    for (var i = 0; i < fxParts.length; i++) {
+      var q = fxParts[i];
+      g.save();
+      if (q.kind === 'spark') {
+        g.globalAlpha = Math.max(0, 1 - q.t / q.life); g.fillStyle = q.color;
+        g.beginPath(); g.arc(q.x, q.y, q.r, 0, Math.PI * 2); g.fill();
+        g.globalAlpha *= 0.35; g.beginPath(); g.arc(q.x - q.vx * 0.03, q.y - q.vy * 0.03, q.r * 0.8, 0, Math.PI * 2); g.fill();
+      } else {
+        g.globalAlpha = q.t > q.life - 0.8 ? Math.max(0, (q.life - q.t) / 0.8) : 1;
+        g.translate(q.x, q.y); g.rotate(q.rot); g.scale(1, 0.55 + 0.45 * Math.cos(q.t * 5 + q.sway));
+        g.fillStyle = q.color; g.fillRect(-q.w / 2, -q.h / 2, q.w, q.h);
+      }
+      g.restore();
+    }
+  }
+  function drawTrophy(x, y, r) {
+    // cup, handles, stem and base — gold with a darker rim
+    ctx.save(); ctx.fillStyle = '#ffc94d'; ctx.strokeStyle = '#b47d12'; ctx.lineWidth = Math.max(1.5, r * 0.08);
+    ctx.beginPath(); ctx.moveTo(x - r * 0.7, y - r); ctx.lineTo(x + r * 0.7, y - r); ctx.quadraticCurveTo(x + r * 0.7, y + r * 0.3, x, y + r * 0.4); ctx.quadraticCurveTo(x - r * 0.7, y + r * 0.3, x - r * 0.7, y - r); ctx.closePath(); ctx.fill(); ctx.stroke();
+    [-1, 1].forEach(function (sg) { ctx.beginPath(); ctx.arc(x + sg * r * 0.85, y - r * 0.55, r * 0.32, sg > 0 ? -Math.PI / 2 : Math.PI / 2, sg > 0 ? Math.PI / 2 : -Math.PI / 2 + Math.PI * 2, sg < 0); ctx.stroke(); });
+    ctx.fillRect(x - r * 0.12, y + r * 0.38, r * 0.24, r * 0.35);
+    ctx.beginPath(); roundRect(x - r * 0.5, y + r * 0.72, r, r * 0.26, r * 0.1); ctx.fill(); ctx.stroke();
+    ctx.restore();
+  }
+  function drawCrown(x, y, r) {
+    ctx.save(); ctx.fillStyle = '#ffc94d'; ctx.strokeStyle = '#b47d12'; ctx.lineWidth = Math.max(1.5, r * 0.08);
+    ctx.beginPath(); ctx.moveTo(x - r, y + r * 0.6); ctx.lineTo(x - r * 1.05, y - r * 0.5); ctx.lineTo(x - r * 0.45, y); ctx.lineTo(x, y - r * 0.9); ctx.lineTo(x + r * 0.45, y); ctx.lineTo(x + r * 1.05, y - r * 0.5); ctx.lineTo(x + r, y + r * 0.6); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#ff5f6e'; [-0.55, 0, 0.55].forEach(function (k) { ctx.beginPath(); ctx.arc(x + k * r, y + r * 0.25, r * 0.13, 0, Math.PI * 2); ctx.fill(); });
+    ctx.restore();
+  }
+  function drawCeleb() {
+    var c = celeb; if (!c || c.lite || c.panel) return;
+    var cx = grid.x + grid.w / 2, cy = grid.y + grid.h * 0.45;
+    var bt = Math.max(0, c.t - 0.12), sc = bt < 0.4 ? (0.5 + 0.5 * (1 + 2.2 * Math.sin((bt / 0.4) * Math.PI) * (1 - bt / 0.4))) * (bt / 0.4) : 1 + 0.025 * Math.sin(c.t * 7);
+    if (bt <= 0) return;
+    ctx.save(); ctx.translate(cx, cy); ctx.scale(sc, sc); ctx.translate(-cx, -cy);
+    var cardW = Math.min(W - 24, 330 * UI), cardH = 196 * UI, top = cy - cardH / 2;
+    ctx.fillStyle = 'rgba(46,28,16,0.9)'; roundRect(cx - cardW / 2, top, cardW, cardH, 18 * UI); ctx.fill();
+    ctx.strokeStyle = '#ffc94d'; ctx.lineWidth = 3; ctx.stroke();
+    if (c.kind === 'top1') drawCrown(cx, top + 36 * UI, 20 * UI); else drawTrophy(cx, top + 34 * UI, 18 * UI);
+    ctx.textAlign = 'center'; ctx.fillStyle = '#ffc94d'; ctx.font = fontBig(40 * UI);
+    ctx.fillText(c.kind === 'top1' ? 'WORLD #1!' : 'NEW BEST!', cx, top + 96 * UI);
+    var k = Math.min(1, Math.max(0, (c.t - 0.3) / 1.2)), pop = c.popped ? 1 + 0.25 * Math.max(0, 1 - (c.t - 1.5) / 0.25) : 1;
+    ctx.fillStyle = '#fff6ea'; ctx.font = fontBig(62 * UI * pop);
+    ctx.fillText(String(Math.max(0, c.shown)), cx, top + 160 * UI);
+    ctx.fillStyle = 'rgba(255,246,234,0.85)'; ctx.font = fontPx(14, 'bold');
+    ctx.fillText(c.popped ? 'moles · old best ' + c.from : 'moles', cx, top + 184 * UI);
+    ctx.restore();
+  }
+  function showOverTitle() {
+    var party = celeb ? celeb.kind : null;
+    document.getElementById('over-panel').classList.toggle('party', !!party);
+    document.getElementById('over-title-text').textContent = party === 'top1' ? 'WORLD #1!' : party === 'best' ? 'NEW BEST!' : (overReason === 'time' ? "TIME'S UP!" : 'OUT OF HEARTS!');
+    document.getElementById('over-icon-time').style.display = !party && overReason === 'time' ? '' : 'none';
+    document.getElementById('over-icon-heart').style.display = !party && overReason !== 'time' ? '' : 'none';
+    document.getElementById('over-icon-trophy').style.display = party === 'best' ? '' : 'none';
+    document.getElementById('over-icon-crown').style.display = party === 'top1' ? '' : 'none';
   }
 
   function feedBox(n) {
@@ -1062,9 +1216,7 @@
 
   function showOverPanel() {
     adFailStreak = 0;
-    document.getElementById('over-title-text').textContent = overReason === 'time' ? "TIME'S UP!" : 'OUT OF HEARTS!';
-    document.getElementById('over-icon-time').style.display = overReason === 'time' ? '' : 'none';
-    document.getElementById('over-icon-heart').style.display = overReason === 'time' ? 'none' : '';
+    showOverTitle();
     document.getElementById('over-score').textContent = lastScore + ' moles';
     ranks = store.progress.ranks.slice();
     renderRanks();
@@ -1076,7 +1228,7 @@
     line.className = '';
     if (isNewBest && lastScore > 0) {
       line.className = 'best';
-      line.textContent = 'NEW BEST!' + (prevBestScore > 0 ? ' +' + (lastScore - prevBestScore) + ' over your old record' : '');
+      line.textContent = (celeb ? '' : 'NEW BEST!') + (prevBestScore > 0 ? (celeb ? '+' : ' +') + (lastScore - prevBestScore) + ' over your old record (' + prevBestScore + ')' : '');
       tgt.textContent = 'Next target: ' + (lastScore + 3) + ' moles' + (bestCombo >= 3 ? ' · best combo x' + bestCombo : '');
       play('best');
     } else if (pos > 0) {
@@ -1303,6 +1455,7 @@
   // ---------- update ----------
   function update(dt) {
     if (frozen()) return;
+    if (celeb) updateCeleb(dt);
     if (shake > 0) shake = Math.max(0, shake - dt * 26);
     if (heartFlash > 0) heartFlash = Math.max(0, heartFlash - dt * 2.5);
     if (comboPulse > 0) comboPulse = Math.max(0, comboPulse - dt * 6);
@@ -1423,7 +1576,35 @@
       ctx.fillText(String(idx + 1), h.x, h.y + h.ry + 20);
     }
   }
+  function drawCheerMole(mo) {
+    var h = holes[mo.hole], p = Math.max(0, mo.p), mw = moleW, mh = moleH;
+    if (p <= 0) return;
+    var topY = h.y - p * mh, bw = mw, bh = mh;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(h.x - mw * 1.6, h.y - mh * 1.9, mw * 3.2, mh * 1.9); ctx.clip();
+    ctx.fillStyle = '#8a5a34'; roundRect(h.x - bw / 2, topY, bw, bh + 20, bw * 0.42); ctx.fill();
+    ctx.strokeStyle = '#6b4223'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#c99e75'; ctx.beginPath(); ctx.ellipse(h.x, topY + bh * 0.62, bw * 0.3, bh * 0.3, 0, 0, Math.PI * 2); ctx.fill();
+    // arms up, waving
+    var wv = Math.sin(performance.now() / 110 + mo.hole) * 0.25;
+    ctx.strokeStyle = '#8a5a34'; ctx.lineWidth = Math.max(4, bw * 0.13); ctx.lineCap = 'round';
+    [-1, 1].forEach(function (sg) { ctx.beginPath(); ctx.moveTo(h.x + sg * bw * 0.42, topY + bh * 0.5); ctx.lineTo(h.x + sg * (bw * 0.7 + wv * bw * 0.3 * sg), topY - bh * 0.1 - wv * bh * 0.2); ctx.stroke(); });
+    // happy eyes (arcs), open mouth, blush
+    var eyeY = topY + bh * 0.3;
+    ctx.strokeStyle = '#1c1c1c'; ctx.lineWidth = 2.5;
+    [-1, 1].forEach(function (s) { ctx.beginPath(); ctx.arc(h.x + s * bw * 0.18, eyeY + 2, bw * 0.07, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke(); });
+    ctx.fillStyle = '#e07a9a'; ctx.beginPath(); ctx.ellipse(h.x, eyeY + bh * 0.14, bw * 0.1, bw * 0.075, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#4a1f1f'; ctx.beginPath(); ctx.ellipse(h.x, eyeY + bh * 0.3, bw * 0.11, bh * 0.08, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(255,120,140,0.35)'; [-1, 1].forEach(function (s) { ctx.beginPath(); ctx.arc(h.x + s * bw * 0.3, eyeY + bh * 0.12, bw * 0.07, 0, Math.PI * 2); ctx.fill(); });
+    // party hat with a pompom
+    var hatC = CONFETTI[mo.hat % CONFETTI.length], hatH = bh * 0.42, hatW = bw * 0.46;
+    ctx.fillStyle = hatC; ctx.beginPath(); ctx.moveTo(h.x - hatW / 2, topY + 4); ctx.lineTo(h.x + hatW / 2, topY + 4); ctx.lineTo(h.x + bw * 0.08, topY - hatH); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#fff6ea'; ctx.beginPath(); ctx.arc(h.x + bw * 0.08, topY - hatH, bw * 0.07, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.7)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(h.x - hatW * 0.3, topY + 2); ctx.lineTo(h.x + bw * 0.08 - hatW * 0.1, topY - hatH * 0.45); ctx.stroke();
+    ctx.restore();
+  }
   function drawMole(mo) {
+    if (mo.phase === 'cheer') { drawCheerMole(mo); return; }
     var h = holes[mo.hole], p = mo.p, squash = 0;
     if (mo.phase === 'whacked') { squash = Math.min(1, mo.t / 0.08); p = Math.max(0, mo.p - mo.t * 2.2); }
     if (p <= 0) return;
@@ -1740,6 +1921,8 @@
       ctx.restore();
     }
     if (flashA > 0) { ctx.fillStyle = 'rgba(' + flashColor + ',' + flashA.toFixed(3) + ')'; ctx.fillRect(-20, -20, W + 40, H + 40); }
+    if (celeb && state === STATE_OVER) drawCeleb();
+    drawFx();
     if (state === STATE_PLAY) {
       drawHud();
       drawCombo();
@@ -1893,7 +2076,9 @@
       requestContinue: requestContinue, resize: resize, perfFlush: perfFlush,
       nextRound: nextRound, requestOpenBox: requestOpenBox, feedBox: feedBox, equipHammer: equipHammer, saveStore: saveStore,
       get hammers() { return HAMMERS.map(function (h) { return h.id; }); }, get whacked() { return whacked; }, get combo() { return combo; },
-      get rewardEarned() { return rewardEarned; }, get lbType() { return lbType(); }, cycleSfx: cycleSfx, get bestCombo() { return bestCombo; }, comboMult: comboMult, showOverPanel: showOverPanel
+      get rewardEarned() { return rewardEarned; }, get lbType() { return lbType(); }, cycleSfx: cycleSfx, get bestCombo() { return bestCombo; }, comboMult: comboMult, showOverPanel: showOverPanel,
+      setScore: function (n) { score = n; whacked = n; }, celebrate: function (kind) { startCelebration(kind, false); },
+      get celeb() { return celeb ? { kind: celeb.kind, t: celeb.t, panel: !!celeb.panel, fx: fxParts.length, fxOn: fxCanvas.classList.contains('on'), cheering: moles.filter(function (m) { return m.phase === 'cheer'; }).length } : null; }
     };
   }
 
