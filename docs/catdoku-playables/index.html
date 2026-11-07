@@ -148,13 +148,17 @@
   #tip { font-size: 13px; font-weight: 600; color: var(--muted); text-align: center; line-height: 1.35; }
   #tut { background: var(--ink); color: #fff; border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
   #tut.hidden { display: none; }
-  #stuck { background: #fff; border: 2px solid var(--red); color: var(--red); border-radius: 12px; padding: 9px 12px; font-size: 15px; font-weight: 800; line-height: 1.35; text-align: center; }
+  #stuck { background: #fff6e3; border: 2px solid #e9a63a; color: var(--ink); border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
   #stuck.hidden { display: none; }
-  #stuck b { color: var(--red); }
+  #stuck b { color: #b35f0c; }
   #undo-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; border: none; border-radius: 10px; background: var(--ink); color: var(--gold); font-size: 14px; font-weight: 700; padding: 8px 14px; min-height: 40px; }
   #undo-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
   .cell.stuck::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 2px dashed rgba(209,52,42,0.45); pointer-events: none; }
-  .cell.why .fx, .cell.dead .fx { opacity: 0.38 !important; background: #e0493c; animation: none !important; }
+  .cell.why .fx { opacity: 0.38 !important; background: #e0493c; animation: none !important; }
+  .cell.dead .fx { opacity: 0.55 !important; background: #fff; animation: none !important; }
+  .cell.dead svg.ax { color: var(--ink); width: 48%; height: 48%; animation: deadpop 0.45s ease-out both; }
+  @keyframes deadpop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+  body.calm .cell.dead svg.ax { animation: none; }
   .cell.whycat::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 4px solid var(--red); pointer-events: none; }
   .cell.whytap::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 3px dashed var(--red); pointer-events: none; }
   #why { background: #fff; border: 2px solid var(--red); color: var(--ink); border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
@@ -412,7 +416,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.4.1';
+  var GAME_VERSION = '1.4.2';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var hash = location.hash || '';
@@ -840,7 +844,8 @@
     // is all crossed out and still needs a cat. Which cat to lift is the player's puzzle, as in every Queens game.
     stuckCells(st).forEach(function (p) { cellEls[p[0]][p[1]].classList.add('dead'); });
     var where = st.type === 'row' ? 'this row' : st.type === 'column' ? 'this column' : 'the ' + COLOR_NAMES[st.i % COLOR_NAMES.length] + ' area';
-    $('stuck-text').innerHTML = '<b>No room left in ' + where + '</b> for a cat. Tap a cat to pick it up and try another spot.';
+    var rule = st.type === 'row' ? 'each row needs a cat' : st.type === 'column' ? 'each column needs a cat' : 'each color needs a cat';
+    $('stuck-text').innerHTML = '<b>Every cell in ' + where + ' is crossed out</b>, but ' + rule + '. Pick up a cat and try another spot.';
     box.classList.remove('hidden');
     if (changed) { layout(); analytics('stuck', { mode: mode, level: level, type: st.type, cats: catCount }); }
   }

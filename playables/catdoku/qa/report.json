@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T17:24:24.336Z",
+  "startedAt": "2026-11-07T17:37:10.124Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -87,7 +87,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,clear,cat,wrong,heart,win,lose,mute-on,hint,start,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "mark,clear,cat,wrong,win,heart,lose,hint,mute-off,mute-on,start,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -202,7 +202,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "0.56 → 0.56"
+      "detail": "0.53 → 0.53"
     },
     {
       "name": "Resume continues the level",
@@ -282,7 +282,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and share shown",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6438999999999941,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6277999999999884,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
     },
     {
       "name": "Share my time copies or shares the text",
@@ -302,7 +302,7 @@
     {
       "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6438999999999941,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6277999999999884,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -327,7 +327,7 @@
     {
       "name": "dead end: the row/column/area with no room is tinted, one line says so, no heart lost",
       "ok": true,
-      "detail": "{\"stuck\":{\"type\":\"color\",\"i\":1},\"cats\":2,\"wrong\":2,\"wrongCells\":[[0,0],[1,2]],\"faces\":[\"#s-h-cat\",\"#s-h-cat\"],\"grumpy\":0,\"framed\":0,\"shown\":true,\"text\":\"No room left in the blue area for a cat. Tap a cat to pick it up and try another spot.\",\"hearts\":3,\"dead\":3,\"unitOk\":true,\"deadHasNoCat\":true}"
+      "detail": "{\"stuck\":{\"type\":\"color\",\"i\":1},\"cats\":2,\"wrong\":2,\"wrongCells\":[[0,0],[1,2]],\"faces\":[\"#s-h-cat\",\"#s-h-cat\"],\"grumpy\":0,\"framed\":0,\"shown\":true,\"text\":\"Every cell in the blue area is crossed out, but each color needs a cat. Pick up a cat and try another spot.\",\"hearts\":3,\"dead\":3,\"unitOk\":true,\"deadHasNoCat\":true}"
     },
     {
       "name": "dead end: no cat is called wrong by the hidden solution (player feedback: only a real rule break is \"not allowed\")",
