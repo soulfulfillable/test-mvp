@@ -49,3 +49,4 @@
 - 2026-11-08 (같은 세션) v1.4.2: 막다른 길 안내를 빨간 오류에서 호박색 팁으로(그 줄 바램+✕ 진하게, "Every cell in this column is crossed out, but each column needs a cat"). 로봇 99/99. 아카이브 `cmw6otgq10oa0mt0hv1ill8kl`.
 - 2026-11-08 (같은 세션) v1.4.3: 막다른 길 문구에서 색 이름 삭제("The faded color area is all crossed out"), 바램 66%. 로봇 99/99. 아카이브 `cmw6p1m5a0pxdno0h6t6llzd1`.
 - 2026-11-08 (같은 세션) **v2.0.0**: 기획 세션 전달 피드백("시중 스도쿠처럼")으로 덜어 냄 — 하트·이어하기·자동 ✕(기본 OFF)·안내문 전부 삭제, 충돌은 빨간 하이라이트만, 하단 Undo·Notes·Hint·Clear, 첫 판은 손가락 2번. 로봇 106/106. Playgama 폼 갱신. 아카이브 `cmw6rxwfg0qxmmt0haby8jdhx`. 샌드박스 게시는 사용자 폰 확인 → yes 뒤.
+- 2026-11-08 (같은 세션) **v1.5.0 = v1.3.0 복원**: v2.0.0 빗금도 "뭔 말인지 모르겠어, 다 없애라, 원래가 나았다" → 호랑이 첫 판(탭=고양이·자동 ✕·빨간 플래시+한마디+하트)으로 되돌림, 새 것 없음. 로봇 94/94, 아카이브 `cmw6tp4o50s4ymt0hrn2agxp6`, Playgama 폼 복원. 샌드박스 게시는 사용자 폰 확인 → yes 뒤.

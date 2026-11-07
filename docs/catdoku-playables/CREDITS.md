@@ -13,7 +13,10 @@ Re-encoded to mono OGG/MP3, loudness matched.
 
 | In game (`audio/`) | Source file in the package | Used for |
 |---|---|---|
+| `wrong.*` | `library/audio/sfx/hurt.ogg` | a cat placed against a rule (heart lost) |
 | `win.*` | `library/audio/sfx/level_up.ogg` | puzzle solved |
+| `lose.*` | `library/audio/sfx/boss.ogg` | out of hearts |
+| `heart.*` | `library/audio/sfx/revive.ogg` | continue (hearts back) |
 | `hint.*` | `library/audio/sfx/coin.ogg` | hint cat appears |
 | `clear.*` | `library/audio/sfx/dash.ogg` | cat removed |
 
@@ -47,6 +50,6 @@ license in the package. Refresh it with `npm pack @playgama/bridge` before each 
 
 ## Everything else
 
-Code, art (inline SVG: the cat, the marks, the hand, the rule badges) and text: © 2026 Soulfulfill /
+Code, art (inline SVG: the cat, the marks, the hand, the rule badges, the hearts) and text: © 2026 Soulfulfill /
 Treasurefield Studio. Fonts: system fonts only, nothing bundled. The daily puzzle generator is shared with the web
 Catdoku and the level generator with the Kitty Queens app, both ours.

@@ -61,10 +61,18 @@
   #mode-label small { font-size: 12px; font-weight: 600; color: var(--muted); }
   #timer { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; background: var(--panel); border-radius: 10px; padding: 4px 10px; box-shadow: 0 1px 3px rgba(120,90,40,0.15); flex: none; }
   #timer.practice { color: var(--muted); }
+  #hearts { display: flex; gap: 2px; flex: none; }
+  #hearts svg { width: 22px; height: 22px; }
+  #hearts svg.off path { fill: none; stroke: rgba(74,59,40,0.3); stroke-width: 2; }
+  #hearts svg.flash { animation: hflash 0.5s; }
+  @keyframes hflash { 0% { transform: scale(1); } 30% { transform: scale(1.4) rotate(-8deg); } 60% { transform: scale(0.95) rotate(5deg); } 100% { transform: scale(1); } }
   #hud-row2 { display: flex; align-items: center; gap: 8px; margin-top: 6px; min-height: 36px; }
   #progress { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 800; background: var(--panel); border-radius: 10px; padding: 4px 10px; box-shadow: 0 1px 3px rgba(120,90,40,0.12); font-variant-numeric: tabular-nums; }
   #progress svg { width: 22px; height: 22px; }
   #hud-spacer-top { flex: 1; }
+  .adbtn { display: flex; align-items: center; gap: 6px; border: none; border-radius: 10px; background: var(--green); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 10px; min-height: 36px; }
+  .adbtn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .adbtn small { display: block; font-size: 10px; font-weight: 600; opacity: 0.9; }
   #rules { display: flex; gap: 6px; margin-top: 6px; }
   .chip { flex: 1; display: flex; align-items: center; gap: 6px; background: var(--panel); border-radius: 10px; padding: 5px 7px; font-size: 11px; font-weight: 700; color: var(--sub); line-height: 1.2; box-shadow: 0 1px 3px rgba(120,90,40,0.12); }
   .chip svg { width: 26px; height: 26px; flex: none; }
@@ -80,20 +88,19 @@
   }
   .cell { border-radius: 16%; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; min-width: 0; min-height: 0; overflow: hidden; }
   .cell svg { width: 66%; height: 66%; pointer-events: none; }
-  .cell svg.xm { width: 42%; height: 42%; color: rgba(74,59,40,0.75); }
+  .cell svg.xm { width: 46%; height: 46%; color: var(--ink); }
   .cell svg.ax { width: 40%; height: 40%; color: rgba(255,255,255,0.62); }
   .cell.pop svg.cat { animation: pop 0.16s ease-out; }
   @keyframes pop { 0% { transform: scale(0.5); } 70% { transform: scale(1.12); } 100% { transform: scale(1); } }
-  /* rule break (the only "not allowed" in the game, player feedback 11-08): the cats that clash get a red frame and
-     their shared row / column / color is tinted, exactly like the Queens-type puzzles people already know. No text. */
-  .cell.clash .fx { opacity: 1 !important; background: repeating-linear-gradient(-45deg, rgba(209,52,42,0.5) 0 3px, transparent 3px 10px); animation: none !important; }
-  .cell.conflict::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 3px solid var(--red); pointer-events: none; z-index: 2; }
-  .cell.conflict .fx { opacity: 0.28 !important; background: #e0493c; animation: none !important; }
+  .cell.bad::after { content: ''; position: absolute; inset: 0; border-radius: 16%; background: rgba(209,52,42,0.5); animation: badflash 0.75s ease-out forwards; pointer-events: none; }
+  @keyframes badflash { 0% { opacity: 1; } 100% { opacity: 0; } }
   .cell.cursor::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 3px solid var(--ink); pointer-events: none; }
   .cell.guide::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 3px solid #fff; box-shadow: 0 0 0 3px var(--ink); animation: guidepulse 1s ease-in-out infinite alternate; pointer-events: none; }
   @keyframes guidepulse { from { opacity: 0.45; } to { opacity: 1; } }
   .cell.hinted svg.cat { animation: hintpop 0.9s ease-out; }
   @keyframes hintpop { 0% { transform: scale(0) rotate(-30deg); } 60% { transform: scale(1.3) rotate(8deg); } 100% { transform: scale(1) rotate(0); } }
+  #board.shake { animation: shake 0.35s; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
   #board.won .cell svg.cat { animation: winbounce 0.75s ease-in-out var(--wd, 0ms) infinite alternate; }
   #board.enter { animation: boardin 0.35s ease-out; }
   @keyframes boardin { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
@@ -104,21 +111,25 @@
   @keyframes wave { 0% { opacity: 0; transform: scale(0.7); } 35% { opacity: 0.55; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
   .cell.wave svg.ax { animation: markin 0.5s ease-out var(--d, 0ms) both; }
   @keyframes markin { 0% { opacity: 0; transform: scale(0.4); } 100% { opacity: 1; transform: scale(1); } }
+  .cell svg.nope { position: absolute; width: 72%; height: 72%; animation: nope 0.6s ease-out forwards; }
+  @keyframes nope { 0% { transform: scale(0.4); opacity: 0; } 25% { transform: scale(1.1) rotate(-10deg); opacity: 1; } 55% { transform: scale(1) rotate(10deg); opacity: 1; } 100% { transform: scale(0.5) translateY(-60%); opacity: 0; } }
   #progress.hop svg { animation: hop 0.4s ease-out; }
   @keyframes hop { 0% { transform: translateY(0); } 40% { transform: translateY(-6px) scale(1.2); } 100% { transform: translateY(0); } }
   #fx { position: fixed; inset: 0; z-index: 23; pointer-events: none; }
   #fx.hidden { display: none; }
-  .btns button, .lvl, .ibtn, .pill, .tool { transition: transform 0.08s ease-out; }
-  .btns button:active, .lvl:active, .ibtn:active, .pill:active, .tool:active { transform: scale(0.95); }
+  .btns button, .lvl, .ibtn, .pill { transition: transform 0.08s ease-out; }
+  .btns button:active, .lvl:active, .ibtn:active, .pill:active { transform: scale(0.95); }
   #title-logo { animation: float 3.2s ease-in-out infinite; }
   @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
   #title-logo .eyes { transform-origin: 50px 53px; animation: blink 4.5s infinite; }
   @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.08); } }
   /* calm mode (default, player feedback 11-07 "효과 눈 아파"): nothing flashes or keeps moving; taps answer instantly */
-  body.calm .cell.wave .fx, body.calm .cell.wave svg.ax, body.calm #board.enter, body.calm #title-logo, body.calm #progress.hop svg { animation: none; }
+  body.calm .cell.wave .fx, body.calm .cell.wave svg.ax, body.calm #board.shake, body.calm #board.enter, body.calm #title-logo, body.calm #progress.hop svg { animation: none; }
   body.calm #board.won .cell svg.cat { animation: winhop 0.45s ease-out var(--wd, 0ms) 1 both; }
   @keyframes winhop { 0% { transform: translateY(0); } 45% { transform: translateY(-9%); } 100% { transform: translateY(0); } }
+  body.calm .cell.bad::after { background: rgba(209,52,42,0.32); animation-duration: 0.45s; }
   body.calm #msg.big { font-size: 24px; }
+  body.calm .cell svg.nope { animation-duration: 0.45s; }
   @media (prefers-reduced-motion: reduce) { #title-logo, #title-logo .eyes, .cell.wave .fx, .cell.wave svg.ax, #board.won .cell svg.cat { animation: none; } }
   #hand { position: absolute; width: 15%; height: 15%; pointer-events: none; z-index: 3; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3)); animation: handtap 0.9s ease-in-out infinite; }
   @keyframes handtap { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-6%, -10%) scale(0.9); } }
@@ -134,14 +145,10 @@
 
   #foot { grid-area: foot; width: min(100%, 520px); justify-self: center; align-self: end; min-height: 44px; display: flex; flex-direction: column; justify-content: flex-end; }
   #app.land #foot { width: 100%; }
-  /* the standard puzzle bar: Undo · Notes · Hint · Clear (no helper text anywhere; the rule chips are the whole manual) */
-  #bar { display: flex; gap: 8px; }
-  .tool { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: none; border-radius: 12px; background: var(--panel); color: var(--ink); box-shadow: 0 1px 3px rgba(120,90,40,0.12); font-size: 11px; font-weight: 700; min-height: 52px; padding: 6px 4px; }
-  .tool svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-  .tool:disabled { opacity: 0.35; }
-  .tool.on { background: var(--ink); color: var(--gold); }
-  .tool small { font-size: 9px; font-weight: 600; opacity: 0.75; line-height: 1; }
-  #app.land #bar { flex-direction: row; }
+  #tip { font-size: 13px; font-weight: 600; color: var(--muted); text-align: center; line-height: 1.35; }
+  #tut { background: var(--ink); color: #fff; border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
+  #tut.hidden { display: none; }
+  #app.land #tip { text-align: left; }
 
   /* ── panels ── */
   .panel {
@@ -232,7 +239,7 @@
 </head>
 <body>
 <svg id="defs" aria-hidden="true">
-  <!-- hand-drawn vector set for this game: cat, cross mark, hand, badges (rule 4.3.2: no emoji) -->
+  <!-- hand-drawn vector set for this game: cat, cross mark, heart, hand, badges (rule 4.3.2: no emoji) -->
   <symbol id="s-cat" viewBox="0 0 100 100">
     <path d="M24 46 L16 11 L44 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
     <path d="M76 46 L84 11 L56 32 Z" fill="#f0915a" stroke="#4a3b28" stroke-width="5" stroke-linejoin="round"/>
@@ -271,7 +278,8 @@
     <path d="M8 58 L29 62 M10 69 L29 66 M92 58 L71 62 M90 69 L71 66" stroke="#4a3b28" stroke-width="3" stroke-linecap="round"/>
   </symbol>
   <symbol id="s-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></symbol>
-    <symbol id="s-hand" viewBox="0 0 64 64">
+  <symbol id="s-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.3-9.4C1.4 8.1 3.6 4.5 7.2 4.5c2 0 3.6 1.2 4.8 2.6 1.2-1.4 2.8-2.6 4.8-2.6 3.6 0 5.8 3.6 4.5 7.1C19.5 16.4 12 21 12 21z" fill="#d1342a"/></symbol>
+  <symbol id="s-hand" viewBox="0 0 64 64">
     <path d="M27 5a4.5 4.5 0 0 1 9 0v23h6.5a4 4 0 0 1 4 4v1.5h4.5a4 4 0 0 1 4 4V44c0 9.5-7.5 16-17.5 16h-6c-5.5 0-9.5-2.5-12.5-7L9 41.5a4.2 4.2 0 0 1 6.2-5.6L27 44.5z" fill="#fff" stroke="#4a3b28" stroke-width="3" stroke-linejoin="round"/>
     <path d="M36 28v9M42.5 33.5V37M51 37.5v3" stroke="#4a3b28" stroke-width="2.4" stroke-linecap="round"/>
   </symbol>
@@ -289,6 +297,7 @@
       <button id="back-btn" class="ibtn" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
       <div id="hud-spacer-top"></div>
       <div id="timer">0:00</div>
+      <div id="hearts"></div>
       <button id="pause-btn" class="ibtn" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg></button>
       <button id="mute-btn" class="ibtn" data-muted="0" aria-label="Sound on/off">
         <svg class="on" viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18 6.5a7.8 7.8 0 0 1 0 11"/></svg>
@@ -298,6 +307,7 @@
     <div id="hud-row2">
       <div id="mode-label"><span id="mode-main">Level 1</span><small id="mode-sub">5×5</small></div>
       <div id="progress"><svg><use href="#s-h-cat" data-cat="face"/></svg><span id="progress-text">0/7</span></div>
+      <button id="hint-btn" class="adbtn hidden"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span>Hint<small>watch an ad</small></span></button>
     </div>
     <div id="rules">
       <div class="chip"><svg><use href="#s-color"/></svg><span>1 cat per color</span></div>
@@ -310,12 +320,8 @@
     <div id="msg"></div>
   </div>
   <div id="foot">
-    <div id="bar">
-      <button id="undo-btn" class="tool" aria-label="Undo"><svg viewBox="0 0 24 24"><path d="M9 14l-4-4 4-4"/><path d="M5 10h9a5 5 0 0 1 0 10h-3"/></svg><span>Undo</span></button>
-      <button id="notes-btn" class="tool" aria-label="Notes: mark cells with an X"><svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg><span>Notes</span></button>
-      <button id="hint-btn" class="tool" aria-label="Hint"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.6 1 1.3 1 2.5h6c0-1.2.3-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg><span>Hint</span><small id="hint-sub" class="hidden">ad</small></button>
-      <button id="clear-btn" class="tool" aria-label="Clear the board"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span>Clear</span></button>
-    </div>
+    <div id="tut" class="hidden"></div>
+    <div id="tip">Tap a cell to place a cat. Tap the cat to remove it.</div>
   </div>
 </div>
 
@@ -364,6 +370,7 @@
   <div id="rank-board" class="hidden"></div>
   <div id="name-row" class="hidden"><label for="name-input">Your name</label><input id="name-input" maxlength="8" placeholder="You" autocomplete="off"></div>
   <div class="btns">
+    <button id="continue-btn" class="btn-ad hidden"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span><b>Continue</b> with 3 hearts back<small>watch one ad, keep your cats on the board</small></span></button>
     <button id="next-btn" class="btn-main hidden">Next level</button>
     <button id="retry-btn" class="btn-main hidden">Try again</button>
     <button id="share-btn" class="btn-ghost hidden"><svg viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>Share my time</button>
@@ -382,7 +389,6 @@
     <button id="pause-bgm-btn" class="btn-ghost">Music: Ukulele</button>
     <button id="pause-fx-btn" class="btn-ghost">Effects: Calm</button>
     <button id="pause-skin-btn" class="btn-ghost">Cat: Horangi</button>
-    <button id="pause-autox-btn" class="btn-ghost">Auto-X: Off</button>
     <button id="quit-btn" class="btn-ghost">Quit to title</button>
   </div>
   <div class="pause-keys" id="pause-keys"></div>
@@ -392,7 +398,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '2.0.0';
+  var GAME_VERSION = '1.5.0';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var hash = location.hash || '';
@@ -409,7 +415,7 @@
   // ---------- persistent state (Bridge storage only; rule 3.2.1) ----------
   var store = {
     progress: { v: 1, level: 1, cleared: 0, name: '', tut: 0, played: 0, daily: { day: '', accum: 0, solved: 0, ranks: [] } },
-    settings: { v: 1, muted: false, bgm: 'ukulele', fx: 'calm', skin: 'horangi', autox: false }
+    settings: { v: 1, muted: false, bgm: 'ukulele', fx: 'calm', skin: 'horangi' }
   };
   function parseVal(v, dflt) {
     if (v === null || v === undefined) return dflt;
@@ -443,7 +449,6 @@
       s.bgm = BGM_STYLES.some(function (x) { return x.id === s.bgm; }) ? s.bgm : 'ukulele';
       s.fx = s.fx === 'lively' ? 'lively' : 'calm';
       s.skin = s.skin === 'classic' ? 'classic' : 'horangi';
-      s.autox = !!s.autox;
       store.settings = s;
     }).catch(function () { /* unreadable data: new player */ });
   }
@@ -620,11 +625,11 @@
   // ---------- sound: files only (ogg + mp3), one volume controller ----------
   var AUDIO_EXT = safe(function () { return document.createElement('audio').canPlayType('audio/ogg; codecs=vorbis') ? '.ogg' : '.mp3'; }, '.mp3');
   var SFX = {};
-  ['mark', 'cat', 'clear', 'win', 'hint', 'start', 'mute-on', 'mute-off'].forEach(function (k) { SFX[k] = 'audio/' + k + AUDIO_EXT; });
+  ['mark', 'cat', 'clear', 'wrong', 'win', 'lose', 'heart', 'hint', 'start', 'mute-on', 'mute-off'].forEach(function (k) { SFX[k] = 'audio/' + k + AUDIO_EXT; });
   var BGM_STYLES = [{ id: 'ukulele', name: 'Ukulele', file: 'bgm-ukulele' }, { id: 'ragtime', name: 'Ragtime', file: 'bgm-ragtime' }];
   BGM_STYLES.forEach(function (st) { SFX['bgm_' + st.id] = 'audio/' + st.file + AUDIO_EXT; });
   function bgmKey() { return 'bgm_' + (store.settings.bgm || 'ukulele'); }
-  var GAIN = { mark: 0.45, cat: 0.9, clear: 0.35, win: 0.85, hint: 0.9, start: 0.5, 'mute-on': 0.5, 'mute-off': 0.5, bgm: 0.32 };
+  var GAIN = { mark: 0.45, cat: 0.9, clear: 0.35, wrong: 0.8, win: 0.85, lose: 0.7, heart: 0.8, hint: 0.9, start: 0.5, 'mute-on': 0.5, 'mute-off': 0.5, bgm: 0.32 };
   var snd = { ctx: null, master: null, bufs: {}, raw: {}, fetching: {}, bgm: null, bgmKey: null, bgmGain: null, unlocked: false, reasons: { user: false, platform: false, paused: false, ad: false, hidden: false }, audible: true };
   function audibleNow() { var r = snd.reasons; return !(r.user || r.platform || r.paused || r.ad || r.hidden); }
   function applyAudio() {
@@ -741,12 +746,12 @@
   var state = STATE_TITLE;
   var mode = 'level';          // 'level' | 'daily'
   var level = 1, N = 7, solution = null, region = null, puzzleDay = '';
-  var cell = [], autoM = [], catMarks = {}, placed = [];
-  var catCount = 0, history = [], notes = false, conflicts = 0;
+  var cell = [], autoM = [], catMarks = {};
+  var hearts = 3, catCount = 0;
   var runStart = 0, accumBase = 0, pausedAt = 0, pausedTotal = 0;
   var practice = false, lastTotal = 0, won = false, overAt = 0;
   var userPaused = false, adOpen = false, resumeGuardUntil = 0;
-  var hintUsed = false;
+  var continueUsed = false, continueOffered = false, hintUsed = false;
   var rewardPending = null, rewardEarned = null, rewardT = null, adSeenClosed = false, adSeq = 0, adFailStreak = 0;
   var tutorial = false, tutStep = 0;
   var isDesktop = false;
@@ -783,49 +788,17 @@
     var el = cellEls[r][c];
     if (cell[r][c] === 2) glyph(el, 'cat', skin().face);
     else if (cell[r][c] === 1) glyph(el, 'xm', 's-x');
-    else if (autoX() && autoM[r][c] > 0) glyph(el, 'ax', 's-x');
+    else if (autoM[r][c] > 0) glyph(el, 'ax', 's-x');
     else glyph(el, '', null);
   }
-  function autoX() { return !!store.settings.autox; }
-  function renderAutoX() { $('pause-autox-btn').textContent = 'Auto-X: ' + (autoX() ? 'On' : 'Off'); }
-  function toggleAutoX() {
-    store.settings.autox = !autoX(); saveStore(['settings']); renderAutoX();
-    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) updateCell(r, c);
-    analytics('autox', { on: autoX() ? 1 : 0 });
-  }
-  // the one and only "not allowed": two cats in a row / column / color, or two cats touching. Both cats get a red
-  // frame and the shared line or area is tinted — the way every Queens-type puzzle shows it. Nothing is said.
-  function renderConflicts() {
-    document.querySelectorAll('.cell.conflict, .cell.clash').forEach(function (e) { e.classList.remove('conflict', 'clash'); });
-    var bad = {}, clash = {}, i, j, a, b, r, c;
-    for (i = 0; i < placed.length; i++) for (j = i + 1; j < placed.length; j++) {
-      a = placed[i]; b = placed[j];
-      var touch = Math.abs(a[0] - b[0]) <= 1 && Math.abs(a[1] - b[1]) <= 1;
-      var row = a[0] === b[0], col = a[1] === b[1], reg = region[a[0]][a[1]] === region[b[0]][b[1]];
-      if (!(touch || row || col || reg)) continue;
-      bad[a[0] + ',' + a[1]] = 1; bad[b[0] + ',' + b[1]] = 1;
-      if (row) for (c = 0; c < N; c++) clash[a[0] + ',' + c] = 1;
-      if (col) for (r = 0; r < N; r++) clash[r + ',' + a[1]] = 1;
-      if (reg) for (r = 0; r < N; r++) for (c = 0; c < N; c++) if (region[r][c] === region[a[0]][a[1]]) clash[r + ',' + c] = 1;
-    }
-    Object.keys(clash).forEach(function (k) { var p = k.split(','); if (!bad[k]) cellEls[+p[0]][+p[1]].classList.add('clash'); });
-    Object.keys(bad).forEach(function (k) { var p = k.split(','); cellEls[+p[0]][+p[1]].classList.add('conflict'); });
-    conflicts = Object.keys(bad).length;
-  }
-  function solved() { if (catCount !== N || conflicts) return false; for (var r = 0; r < N; r++) if (cell[r][solution[r]] !== 2) return false; return true; }
-
   function updateHud() {
-    renderConflicts();
+    var h = $('hearts'), html = '';
+    for (var i = 0; i < 3; i++) html += '<svg class="' + (i < hearts ? '' : 'off') + '"><use href="#s-heart"/></svg>';
+    h.innerHTML = html;
     $('progress-text').textContent = catCount + '/' + N;
-    var playing = state === STATE_PLAY;
-    $('undo-btn').disabled = !playing || !history.length;
-    $('clear-btn').disabled = !playing || (!placed.length && !hasMarks());
-    $('notes-btn').classList.toggle('on', notes);
-    var ad = rewardedSupported();
-    $('hint-btn').disabled = !playing || hintUsed || !nextHintCell();
-    $('hint-sub').classList.toggle('hidden', !ad);
+    var hintOk = state === STATE_PLAY && !hintUsed && rewardedSupported() && !tutorial;
+    $('hint-btn').classList.toggle('hidden', !hintOk);
   }
-  function hasMarks() { for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) if (cell[r][c] === 1) return true; return false; }
   function flashMsg(text, good, big) {
     var m = $('msg');
     m.textContent = text; m.className = (good ? 'good' : '') + (big ? ' big' : '');
@@ -855,76 +828,65 @@
     return out;
   }
   function placeCat(r, c, hinted) {
-    cell[r][c] = 2; catCount++; placed.push([r, c]);
+    cell[r][c] = 2; catCount++;
     var list = autoCellsFor(r, c);
     catMarks[r + ',' + c] = list;
     list.forEach(function (p) { autoM[p[0]][p[1]]++; updateCell(p[0], p[1]); });
     updateCell(r, c);
     var el = cellEls[r][c];
     el.classList.remove('pop', 'hinted'); void el.offsetWidth; el.classList.add(hinted ? 'hinted' : 'pop');
-    if (autoX()) {
-      // Auto-X (off by default): a pink wave rolls outward from the cat over every cell she rules out
-      list.forEach(function (p) {
-        var w = cellEls[p[0]][p[1]], dist = Math.max(Math.abs(p[0] - r), Math.abs(p[1] - c));
-        w.style.setProperty('--d', (dist * 45) + 'ms');
-        w.classList.remove('wave'); void w.offsetWidth; w.classList.add('wave');
-      });
-    }
+    // the wave: a pink ring rolls outward from the cat over every cell she rules out
+    list.forEach(function (p) {
+      var w = cellEls[p[0]][p[1]], dist = Math.max(Math.abs(p[0] - r), Math.abs(p[1] - c));
+      w.style.setProperty('--d', (dist * 45) + 'ms');
+      w.classList.remove('wave'); void w.offsetWidth; w.classList.add('wave');
+    });
     var pr = $('progress'); pr.classList.remove('hop'); void pr.offsetWidth; pr.classList.add('hop');
   }
   function removeCat(r, c) {
     cell[r][c] = 0; catCount--;
-    placed = placed.filter(function (p) { return !(p[0] === r && p[1] === c); });
     var list = catMarks[r + ',' + c] || []; delete catMarks[r + ',' + c];
     list.forEach(function (p) { autoM[p[0]][p[1]]--; updateCell(p[0], p[1]); });
     updateCell(r, c);
-  }
-  // undo: a snapshot of the grid before every change (Undo is the standard way back; nothing is refused)
-  function snapshot() { history.push(cell.map(function (row) { return row.slice(); })); if (history.length > 300) history.shift(); }
-  function restore(grid) {
-    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) { if (cell[r][c] === 2) removeCat(r, c); }
-    for (r = 0; r < N; r++) for (c = 0; c < N; c++) { cell[r][c] = grid[r][c] === 1 ? 1 : 0; }
-    for (r = 0; r < N; r++) for (c = 0; c < N; c++) if (grid[r][c] === 2) placeCat(r, c, false);
-    for (r = 0; r < N; r++) for (c = 0; c < N; c++) updateCell(r, c);
-  }
-  function undo() {
-    if (state !== STATE_PLAY || frozen() || !history.length) return;
-    unlockAudio();
-    restore(history.pop()); play('clear'); buzz(10);
-    updateHud(); analytics('undo', { mode: mode, level: level });
-  }
-  function clearBoard() {
-    if (state !== STATE_PLAY || frozen() || (!placed.length && !hasMarks())) return;
-    unlockAudio(); snapshot();
-    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) { if (cell[r][c] === 2) removeCat(r, c); else if (cell[r][c] === 1) { cell[r][c] = 0; updateCell(r, c); } }
-    play('clear'); buzz(10);
-    if (tutorial) setTut(1);
-    updateHud(); analytics('clear', { mode: mode, level: level });
-  }
-  function toggleNotes() {
-    if (state !== STATE_PLAY) return;
-    unlockAudio(); notes = !notes; play('mark'); updateHud();
-    analytics('notes', { on: notes ? 1 : 0 });
   }
   function tap(r, c) {
     if (state !== STATE_PLAY || frozen()) return;
     unlockAudio();
     var cur = cell[r][c];
-    snapshot();
-    if (cur === 2) { removeCat(r, c); play('clear'); buzz(8); }
-    else if (notes) {
-      // Notes: X marks the player keeps for herself
-      cell[r][c] = cur === 1 ? 0 : 1; updateCell(r, c); play('mark', cur === 1 ? 0.8 : 1.1); buzz(6);
-    } else {
-      // one tap = a cat (player feedback 11-07). A cat may land anywhere; a rule break shows in red (renderConflicts).
-      if (cur === 1) cell[r][c] = 0;
-      var conf = conflictsWith(r, c);
-      placeCat(r, c, false); play('cat', 0.95 + catCount * 0.03); buzz(15);
-      if (conf.length) analytics('conflict', { mode: mode, level: level, why: conf[0].why });
+    if (cur === 2) {
+      removeCat(r, c); play('clear'); updateHud();
+      if (tutorial && tutStep >= 3 && catCount === 0) setTut(1);
+      return;
     }
-    if (tutorial) setTut(catCount >= 2 ? 0 : 1);
+    // one tap = a cat (player feedback 11-07: no mark step in between)
+    var conf = conflictsWith(r, c);
+    if (conf.length) {
+      conf.forEach(function (f) { var el = cellEls[f.r][f.c]; el.classList.remove('bad'); void el.offsetWidth; el.classList.add('bad'); });
+      var me = cellEls[r][c]; me.classList.remove('bad'); void me.offsetWidth; me.classList.add('bad');
+      boardEl.classList.remove('shake'); void boardEl.offsetWidth; boardEl.classList.add('shake');
+      showNope(r, c);
+      play('wrong'); buzz(80);
+      flashMsg(conf[0].why);
+      if (tutorial) { setTut(tutStep <= 2 ? 1 : 5, conf[0].why); updateHud(); return; }   // first level: mistakes are free
+      hearts--;
+      var hs = $('hearts').children; if (hs[hearts]) hs[hearts].classList.add('flash');
+      updateHud();
+      analytics('wrong_cat', { mode: mode, level: level, why: conf[0].why });
+      if (hearts <= 0) { gameOver(false); return; }
+      return;
+    }
+    placeCat(r, c, false); play('cat', 0.95 + catCount * 0.03); buzz(15);
     updateHud();
-    if (solved()) { gameOver(true); return; }
+    if (tutorial) { if (tutStep <= 2) setTut(3); else if (tutStep === 3 || tutStep === 4) setTut(5); }
+    if (catCount === N) { gameOver(true); return; }
+  }
+
+  function showNope(r, c) {
+    // the cat refuses the spot: a grumpy cat pops up and hops away
+    var el = cellEls[r][c], old = el.querySelector('svg.nope');
+    if (old) el.removeChild(old);
+    el.insertAdjacentHTML('beforeend', '<svg class="nope"><use href="#' + skin().mad + '"/></svg>');
+    setTimeout(function () { var n = el.querySelector('svg.nope'); if (n) el.removeChild(n); }, 650);
   }
 
   // ---------- celebration: confetti + stars on a full-screen canvas (no library, no external files) ----------
@@ -977,19 +939,30 @@
     (function step() { var k = Math.min(1, (performance.now() - t0) / 750); el.textContent = fmtTime(total * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); })();
   }
 
-  // ---------- onboarding (first level, 5×5): a hand points at the first two cats, nothing is written ----------
+  // ---------- onboarding (first level, 5×5): a hand shows where the first two cats go ----------
   var guideCell = null;
   function isGuide(r, c) { return guideCell && guideCell[0] === r && guideCell[1] === c; }
   function nextGuide() { for (var r = 0; r < N; r++) if (cell[r][solution[r]] !== 2) return [r, solution[r]]; return null; }
-  function setTut(step) {
+  function setTut(step, why) {
     tutStep = step;
-    var hand = $('hand');
+    var t = $('tut'), hand = $('hand');
     document.querySelectorAll('.cell.guide').forEach(function (e) { e.classList.remove('guide'); });
     guideCell = null;
-    if (!tutorial || !step) { hand.classList.add('hidden'); return; }
-    guideCell = nextGuide();
+    if (!tutorial) { t.classList.add('hidden'); hand.classList.add('hidden'); return; }
+    t.classList.remove('hidden');
+    if (step === 1 || step === 2) {
+      guideCell = nextGuide();
+      t.textContent = why ? why.charAt(0) + why.slice(1).toLowerCase() + ' Let’s try this spot: tap it.' : 'Tap the glowing cell to put ' + catName() + ' there.';
+    } else if (step === 3) {
+      t.textContent = 'See the marks? ' + catName() + ' rules out the row, the column, the color and the cells next door. Tap the next glowing cell.';
+      guideCell = nextGuide();
+      tutStep = 4;
+    } else if (step === 5) {
+      t.textContent = why ? 'Oops: ' + why.charAt(0) + why.slice(1).toLowerCase() + ' No heart lost on this first level. Find the right spots.' : 'Now you: find the last ' + (N - catCount) + ' spots. Only one cat per row, column and color, and cats never touch.';
+    }
     if (guideCell) { cellEls[guideCell[0]][guideCell[1]].classList.add('guide'); hand.classList.remove('hidden'); placeHand(); }
     else hand.classList.add('hidden');
+    layout();
   }
   function placeHand() {
     if (!guideCell) return;
@@ -1057,8 +1030,7 @@
   function resetBoard() {
     cell = []; autoM = []; catMarks = {};
     for (var r = 0; r < N; r++) { cell.push([]); autoM.push([]); for (var c = 0; c < N; c++) { cell[r].push(0); autoM[r].push(0); updateCell(r, c); } }
-    catCount = 0; cursor = null; placed = []; history = []; notes = false; conflicts = 0;
-    document.querySelectorAll('.cell.conflict, .cell.clash').forEach(function (e) { e.classList.remove('conflict', 'clash'); });
+    hearts = 3; catCount = 0; cursor = null;
     boardEl.classList.remove('won');
     document.querySelectorAll('.cell.cursor').forEach(function (e) { e.classList.remove('cursor'); });
   }
@@ -1099,10 +1071,11 @@
     $('title-panel').classList.add('hidden'); $('levels-panel').classList.add('hidden');
     buildBoard(); resetBoard();
     boardEl.classList.remove('enter'); void boardEl.offsetWidth; boardEl.classList.add('enter');
-    hintUsed = false; rewardPending = null; rewardEarned = null;
+    continueUsed = false; continueOffered = false; hintUsed = false; rewardPending = null; rewardEarned = null;
     userPaused = false; pausedTotal = 0; pausedAt = 0; practice = false;
     runStart = performance.now();
     state = STATE_PLAY;
+    $('tip').textContent = isDesktop ? 'Click a cell to place a cat, click the cat to remove it. Arrow keys + Space work too.' : 'Tap a cell to place a cat. Tap the cat to remove it.';
     updateHud(); renderTimer();
     layout();
     play('start');
@@ -1118,7 +1091,7 @@
     if (state !== STATE_PLAY || userPaused || adOpen) return;
     if (byPlatform && performance.now() < resumeGuardUntil) return;
     userPaused = true; pausedAt = performance.now();
-    $('pause-keys').textContent = isDesktop ? 'Keys: arrows move · Space/Enter tap · Z undo · X notes · P pause · M sound' : '';
+    $('pause-keys').textContent = isDesktop ? 'Keys: arrows move · Space/Enter tap · P pause · M sound' : '';
     showPanel('pause-panel');
     sendMsg('level_paused', { level: mode === 'daily' ? puzzleDay : String(level) });
   }
@@ -1133,7 +1106,7 @@
   function quitToTitle() {
     if (mode === 'daily' && state === STATE_PLAY && !practice) { var d = dailyRecord(); d.accum = elapsedNow(); saveStore(['progress']); }
     userPaused = false; hidePanels(); setTut(0); tutorial = false;
-    state = STATE_TITLE; updateHud();
+    state = STATE_TITLE;
     fillTitle();
     $('title-panel').classList.remove('hidden');
   }
@@ -1141,37 +1114,46 @@
   // ---------- game over ----------
   function gameOver(didWin) {
     lastTotal = elapsedNow();
-    won = true; state = STATE_OVER; overAt = performance.now();
+    won = didWin; state = STATE_OVER; overAt = performance.now();
     updateHud();
-    for (var rr = 0; rr < N; rr++) cellEls[rr][solution[rr]].style.setProperty('--wd', (solution[rr] * 70) + 'ms');   // the cats bounce in a wave across the board
-    boardEl.classList.add('won'); play('win'); buzz([60, 60, 60]);
-    flashMsg(mode === 'daily' && !practice ? 'PURR-FECT!' : 'SOLVED!', true, true);
-    celebrate();
-    store.progress.played++;
-    if (mode === 'level') {
-      if (level > store.progress.cleared) store.progress.cleared = level;
-      store.progress.level = Math.min(MAX_LEVEL, Math.max(store.progress.level, level + 1));
-      if (tutorial) { store.progress.tut = 1; analytics('tutorial_completed', { level: 1 }); }
-      sendMsg('level_completed', { level: String(level) });
-      analytics('level_complete', { level: level, size: N, seconds: Math.round(lastTotal), undos: history.length });
+    if (didWin) {
+      for (var rr = 0; rr < N; rr++) cellEls[rr][solution[rr]].style.setProperty('--wd', (solution[rr] * 70) + 'ms');   // the cats bounce in a wave across the board
+      boardEl.classList.add('won'); play('win'); buzz([60, 60, 60]);
+      flashMsg(mode === 'daily' && !practice ? 'PURR-FECT!' : 'SOLVED!', true, true);
+      celebrate();
+      store.progress.played++;
+      if (mode === 'level') {
+        if (level > store.progress.cleared) store.progress.cleared = level;
+        store.progress.level = Math.min(MAX_LEVEL, Math.max(store.progress.level, level + 1));
+        if (tutorial) { store.progress.tut = 1; analytics('tutorial_completed', { level: 1 }); }
+        sendMsg('level_completed', { level: String(level) });
+        analytics('level_complete', { level: level, size: N, seconds: Math.round(lastTotal) });
+      } else {
+        var d = dailyRecord();
+        if (!practice) { d.solved = lastTotal; d.accum = 0; recordRank(lastTotal); }
+        sendMsg('level_completed', { world: 'daily', level: puzzleDay });
+        analytics('daily_complete', { day: puzzleDay, seconds: Math.round(lastTotal), practice: practice ? 1 : 0 });
+      }
+      saveStore(['progress']);
+      tutorial = false; setTut(0);
+      setTimeout(showOverPanel, calm() ? 700 : 1400);
     } else {
-      var d = dailyRecord();
-      if (!practice) { d.solved = lastTotal; d.accum = 0; recordRank(lastTotal); }
-      sendMsg('level_completed', { world: 'daily', level: puzzleDay });
-      analytics('daily_complete', { day: puzzleDay, seconds: Math.round(lastTotal), practice: practice ? 1 : 0 });
+      if (mode === 'daily' && !practice) { var dd = dailyRecord(); dd.accum = lastTotal; saveStore(['progress']); }
+      play('lose');
+      sendMsg('level_failed', mode === 'daily' ? { world: 'daily', level: puzzleDay } : { level: String(level) });
+      analytics('out_of_hearts', { mode: mode, level: level, cats: catCount });
+      setTimeout(showOverPanel, 600);
     }
-    saveStore(['progress']);
-    tutorial = false; setTut(0);
-    setTimeout(showOverPanel, calm() ? 700 : 1400);
   }
   function showOverPanel() {
     if (state !== STATE_OVER) return;
     var sub = $('over-sub'); sub.className = 'sub';
     var daily = mode === 'daily';
-    ['next-btn', 'retry-btn', 'share-btn', 'rank-title', 'rank-board', 'name-row'].forEach(function (id) { $(id).classList.add('hidden'); });
+    ['continue-btn', 'next-btn', 'retry-btn', 'share-btn', 'rank-title', 'rank-board', 'name-row'].forEach(function (id) { $(id).classList.add('hidden'); });
     $('over-levels-btn').classList.toggle('hidden', daily);
-    $('over-cat').innerHTML = '<use href="#' + skin().face + '" data-cat="face"/>';
+    $('over-cat').innerHTML = '<use href="#' + (won ? skin().face : skin().sleep) + '" data-cat="' + (won ? 'face' : 'sleep') + '"/>';
     $('ad-note').textContent = ''; $('share-note').textContent = ''; $('next-note').textContent = '';
+    if (won) {
       $('over-title').textContent = daily ? (practice ? 'Solved (practice)' : 'Solved!') : 'Level ' + level + ' solved!';
       countUp($('over-score'), lastTotal);
       if (daily) {
@@ -1188,11 +1170,19 @@
         $('next-btn').textContent = level >= MAX_LEVEL ? 'Play level ' + level + ' again' : 'Next level';
         $('next-btn').classList.remove('hidden');
       }
+    } else {
+      $('over-title').textContent = 'Out of hearts';
+      $('over-score').textContent = fmtTime(lastTotal);
+      sub.textContent = daily ? (practice ? 'Practice run, no harm done.' : 'The clock keeps running today. Try again!') : 'Three wrong cats. Your marks are still on the board.';
+      sub.className = 'sub lose';
+      if (!continueUsed && rewardedSupported()) { $('continue-btn').classList.remove('hidden'); continueOffered = true; }
+      $('retry-btn').textContent = 'Try again'; $('retry-btn').classList.remove('hidden');
+    }
     $('name-input').value = store.progress.name;
     showPanel('over-panel');
   }
 
-  // ---------- hint: one per puzzle. A rewarded ad where the platform has them (reward only on 'rewarded'), free elsewhere ----------
+  // ---------- rewarded ads: hint (one per puzzle) and continue (once per attempt); reward only on 'rewarded' ----------
   function rewardedSupported() {
     if (DEBUG && window.__forceRewarded) return true;
     return bridgeReady && safe(function () { return !!B.advertisement.isRewardedSupported; }, false);
@@ -1200,13 +1190,20 @@
   function requestHint() {
     if (state !== STATE_PLAY || hintUsed || rewardPending || frozen()) return;
     if (!nextHintCell()) return;
-    unlockAudio();
-    if (!rewardedSupported()) { grantHint(); return; }
     rewardPending = 'hint';
     analytics('ad_opt_in', { offer: 'hint' });
     if (DEBUG && window.__forceRewarded) return;
     var ok = safe(function () { B.advertisement.showRewarded('hint'); return true; }, false);
     if (!ok) { rewardPending = null; flashMsg('No ad available right now'); analytics('ad_failed', { offer: 'hint', stage: 'request' }); }
+  }
+  function requestContinue() {
+    if (state !== STATE_OVER || continueUsed || rewardPending) return;
+    rewardPending = 'continue';
+    $('ad-note').textContent = 'Loading the ad…';
+    analytics('ad_opt_in', { offer: 'continue' });
+    if (DEBUG && window.__forceRewarded) return;
+    var ok = safe(function () { B.advertisement.showRewarded('continue'); return true; }, false);
+    if (!ok) { rewardPending = null; noteAd('Ad not available right now.'); analytics('ad_failed', { offer: 'continue', stage: 'request' }); }
   }
   function onRewardedState(st) {
     analytics('ad_state', { kind: 'rewarded', state: String(st), seq: ++adSeq, offer: String(rewardPending || 'none') });
@@ -1228,8 +1225,9 @@
     rewardPending = null; rewardEarned = null;
     analytics('ad_failed', { offer: offer, stage: stage, streak: adFailStreak + 1 });
     if (stage === 'failed') adFailStreak++; else adFailStreak = 0;
-    flashMsg(stage !== 'failed' ? 'Ad closed early: no hint' : 'No ad right now');
-    if (adFailStreak >= 2) { hintUsed = true; updateHud(); }
+    var msg = stage !== 'failed' ? 'The ad was closed early, so no reward this time. You can try again.' : (adFailStreak === 1 ? 'No ad could be loaded right now. Tap once more to retry.' : 'The ad provider has no ad to show right now (rule: no ad, no reward).');
+    if (offer === 'hint') { flashMsg(stage !== 'failed' ? 'Ad closed early: no hint' : 'No ad right now'); if (adFailStreak >= 2) { hintUsed = true; updateHud(); } }
+    else { noteAd(msg); if (adFailStreak >= 2) $('continue-btn').classList.add('hidden'); }
   }
   function applyReward() {
     var offer = rewardEarned; rewardEarned = null; rewardPending = null; clearTimeout(rewardT);
@@ -1237,22 +1235,31 @@
     analytics('reward_applied', { offer: offer, state: state });
     adOpen = false; setReason('ad', false);
     resumeGuardUntil = performance.now() + 4000;
-    grantHint();
+    if (offer === 'hint') grantHint(); else grantContinue();
   }
-  // the hint fixes the board: cats that clash with the hinted cat are picked up, then the right cat appears
-  function nextHintCell() { if (!solution) return null; for (var r = 0; r < N; r++) if (cell[r][solution[r]] !== 2) return [r, solution[r]]; return null; }
+  function nextHintCell() { for (var r = 0; r < N; r++) if (cell[r][solution[r]] !== 2) return [r, solution[r]]; return null; }
   function grantHint() {
     if (state !== STATE_PLAY) return;
     var p = nextHintCell(); if (!p) return;
-    hintUsed = true; snapshot();
-    conflictsWith(p[0], p[1]).forEach(function (f) { removeCat(f.r, f.c); });
+    hintUsed = true;
     if (cell[p[0]][p[1]] === 1) cell[p[0]][p[1]] = 0;
     placeCat(p[0], p[1], true); play('hint'); buzz(20);
-    if (tutorial) setTut(catCount >= 2 ? 0 : 1);
+    flashMsg(catName() + ' found a spot', true);
     updateHud();
-    analytics('hint_used', { mode: mode, level: level, cats: catCount, ad: rewardedSupported() ? 1 : 0 });
-    if (solved()) gameOver(true);
+    analytics('hint_used', { mode: mode, level: level, cats: catCount });
+    if (catCount === N) gameOver(true);
   }
+  function grantContinue() {
+    continueUsed = true;
+    hidePanels(); userPaused = false;
+    hearts = 3; state = STATE_PLAY;
+    runStart = performance.now(); pausedTotal = 0; pausedAt = 0; accumBase = lastTotal;
+    boardEl.classList.remove('won');
+    play('heart'); flashMsg('3 hearts back!', true);
+    updateHud();
+    analytics('continue_used', { mode: mode, level: level });
+  }
+  function noteAd(msg) { var el = $('ad-note'); el.textContent = msg; clearTimeout(noteAd._t); noteAd._t = setTimeout(function () { el.textContent = ''; }, 6000); }
 
   // ---------- interstitial / platform helpers ----------
   function showInterstitial(placement) { if (!bridgeReady) return; safe(function () { if (B.advertisement.isInterstitialSupported) B.advertisement.showInterstitial(placement); }); }
@@ -1295,7 +1302,7 @@
     else if (d.day === today && d.accum > 0) sub = 'Clock so far today: ' + fmtTime(d.accum);
     $('daily-sub').textContent = sub;
     $('title-best').textContent = 'New daily puzzle in ' + untilNextPuzzle();
-    renderBgm(); renderMute(); renderFx(); renderAutoX();
+    renderBgm(); renderMute(); renderFx();
   }
   function showLevels() {
     state = STATE_LEVELS;
@@ -1342,8 +1349,6 @@
     var code = e.code || '';
     if (code === 'KeyM') { e.preventDefault(); toggleMute(); return; }
     if (code === 'KeyP') { e.preventDefault(); if (state === STATE_PLAY) { if (userPaused) resumeGame(); else pauseGame(false); } return; }
-    if (code === 'KeyZ' || code === 'Backspace') { if (state === STATE_PLAY && !userPaused) { e.preventDefault(); undo(); } return; }
-    if (code === 'KeyX') { if (state === STATE_PLAY && !userPaused) { e.preventDefault(); toggleNotes(); } return; }
     if (code === 'Space' || code === 'Enter' || code === 'NumpadEnter') {
       if (e.target && e.target.tagName === 'BUTTON') return;
       e.preventDefault(); unlockAudio();
@@ -1388,10 +1393,7 @@
   $('pause-fx-btn').addEventListener('click', function () { unlockAudio(); toggleFx(); });
   $('pause-bgm-btn').addEventListener('click', function () { unlockAudio(); cycleBgm(); });
   $('hint-btn').addEventListener('click', function () { unlockAudio(); requestHint(); });
-  $('undo-btn').addEventListener('click', undo);
-  $('clear-btn').addEventListener('click', clearBoard);
-  $('notes-btn').addEventListener('click', toggleNotes);
-  $('pause-autox-btn').addEventListener('click', function () { unlockAudio(); toggleAutoX(); });
+  $('continue-btn').addEventListener('click', function () { unlockAudio(); requestContinue(); });
   $('next-btn').addEventListener('click', function () { unlockAudio(); if (performance.now() - overAt < 500) return; nextLevel(); });
   $('retry-btn').addEventListener('click', function () { unlockAudio(); if (performance.now() - overAt < 500 || rewardPending || rewardEarned) return; retry(); });
   $('share-btn').addEventListener('click', function () { unlockAudio(); shareTime(); });
@@ -1445,7 +1447,7 @@
       return loadStore();
     }).then(function () {
       setReason('user', !!store.settings.muted);
-      renderMute(); renderBgm(); renderFx(); renderAutoX(); applySkin();
+      renderMute(); renderBgm(); renderFx(); applySkin();
       // a first board behind the title so the layout is measured before the first tap
       var p = genLevel(Math.min(MAX_LEVEL, store.progress.cleared + 1)); N = p.n; solution = p.solution; region = p.region;
       buildBoard(); resetBoard(); updateHud(); layout();
@@ -1464,7 +1466,7 @@
     [0, 2, 4, 6].forEach(function (r) { placeCat(r, solution[r], false); });
     state = STATE_TITLE; updateHud();
     $('title-panel').classList.add('hidden'); $('mode-main').textContent = 'Today’s puzzle'; $('mode-sub').textContent = '7×7';
-    $('timer').textContent = '1:08';
+    $('timer').textContent = '1:08'; $('tip').textContent = '';
     $('cover-badge').classList.remove('hidden');
     $('app').classList.add('cover');
     layout();
@@ -1473,20 +1475,20 @@
     window.__game = {
       get state() { return state; }, get mode() { return mode; }, get level() { return level; }, get N() { return N; },
       get solution() { return solution; }, get region() { return region; }, get cell() { return cell; },
-      get catCount() { return catCount; }, get conflicts() { return conflicts; }, get history() { return history.length; }, get notes() { return notes; }, get autox() { return autoX(); }, get won() { return won; }, get lastTotal() { return lastTotal; },
+      get hearts() { return hearts; }, get catCount() { return catCount; }, get won() { return won; }, get lastTotal() { return lastTotal; },
       get store() { return store; }, get bridgeReady() { return bridgeReady; }, get audible() { return snd.audible; }, get reasons() { return snd.reasons; },
       get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; }, get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; },
       get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get tutorial() { return tutorial; }, get tutStep() { return tutStep; },
-      get guideCell() { return guideCell; }, get hintUsed() { return hintUsed; }, get rewardEarned() { return rewardEarned; },
-      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get calm() { return calm(); }, toggleFx: toggleFx, toggleSkin: toggleSkin, get skin() { return store.settings.skin; }, get placed() { return placed.slice(); }, conflictsWith: conflictsWith, undo: undo, clearBoard: clearBoard, toggleNotes: toggleNotes, toggleAutoX: toggleAutoX, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
+      get guideCell() { return guideCell; }, get hintUsed() { return hintUsed; }, get continueUsed() { return continueUsed; }, get rewardEarned() { return rewardEarned; },
+      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get calm() { return calm(); }, toggleFx: toggleFx, toggleSkin: toggleSkin, get skin() { return store.settings.skin; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
       tap: tap, startLevel: startLevel, startDaily: startDaily, showLevels: showLevels, quitToTitle: quitToTitle, pauseGame: pauseGame, resumeGame: resumeGame,
-      requestHint: requestHint, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,
+      requestHint: requestHint, requestContinue: requestContinue, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,
       saveStore: saveStore, genLevel: genLevel, genDaily: genDaily, countSolutions: countSolutions, sizeForLevel: sizeForLevel, layout: layout,
       cellRect: function (r, c) { var b = cellEls[r][c].getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + b.height / 2, w: b.width }; },
       boardRect: function () { var b = boardEl.getBoundingClientRect(); return { left: b.left, top: b.top, right: b.right, bottom: b.bottom, w: b.width }; },
       hudRect: function () { var b = $('hud').getBoundingClientRect(); return { left: b.left, top: b.top, right: b.right, bottom: b.bottom }; },
       footRect: function () { var b = $('foot').getBoundingClientRect(); return { left: b.left, top: b.top, right: b.right, bottom: b.bottom }; },
-      version: GAME_VERSION
+      set hearts(v) { hearts = v; updateHud(); }, version: GAME_VERSION
     };
   }
   boot();

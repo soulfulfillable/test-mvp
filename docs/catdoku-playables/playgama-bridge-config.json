@@ -18,6 +18,9 @@
             "placements": [
                 {
                     "id": "hint"
+                },
+                {
+                    "id": "continue"
                 }
             ]
         }
