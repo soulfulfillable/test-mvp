@@ -5,7 +5,7 @@
 - 승인(사용자 11-07 "착수. 이름은 너 추천대로"): `plans/catdoku-playables.md` 전부. 표기 이름 **Kitty Queens: Cat Sudoku**. 보고는 쉬운 영어.
 - 방금 끝낸 것: **①~⑧ 전부** — 게임 본체(`index.html`), 로봇 84/84(`qa/report.json`), 빌드 `dist/kitty-queens.zip`(2.97MB) + Pages 복사본 `docs/catdoku-playables/`, 커버 3종, `CREDITS.md`, **Playgama 게임 생성·폼·아카이브(빌드 체크 PASSED, Bridge 2.4.0 FOUND)·커버 3종 업로드 완료**. 런치 단계: archive ✅ bridge ✅ covers ✅ · form BLOCKED(NO_CERTIFICATION → QA 툴 인증은 Codex) · **sandbox TODO(publish_sandbox, 사용자 yes 필요)** · traffic BLOCKED(샌드박스 뒤, 사용자 결정).
 - 진행 중이던 것: 없음.
-- 다음 할 일: ⑨ 사용자 yes 가 오면 `publish_sandbox`(앱 id `cmw5rj3x202syno0hy56lnw64`, 아카이브 **v1.0.1 `cmw6d167e0f89mt0hlgwkbimg`**) → `get_sandbox_share` 로 링크 받아 게시판·handoff 에 기록 → `playgama-bridge-config.json` 의 `social.shares[0].url` 에 샌드박스 주소 넣고 재빌드·재업로드(v1.0.1) → 사용자 폰 체감 피드백(첫 판 온보딩·그림 고양이) 받아 반영 → 샌드박스 목표(콘솔 카드: Puzzle/sudoku 카테고리 목표치, Codex 가 읽어 적음) → QA 툴 인증(Codex) → Submit(사용자 클릭). 트래픽 부스트는 사용자 결정 뒤에만.
+- 다음 할 일: ⑨ 사용자 yes 가 오면 `publish_sandbox`(앱 id `cmw5rj3x202syno0hy56lnw64`, 아카이브 **v1.1.0 `cmw6dun2o0gksno0hfpm40tak`**) → `get_sandbox_share` 로 링크 받아 게시판·handoff 에 기록 → `playgama-bridge-config.json` 의 `social.shares[0].url` 에 샌드박스 주소 넣고 재빌드·재업로드(v1.0.1) → 사용자 폰 체감 피드백(첫 판 온보딩·그림 고양이) 받아 반영 → 샌드박스 목표(콘솔 카드: Puzzle/sudoku 카테고리 목표치, Codex 가 읽어 적음) → QA 툴 인증(Codex) → Submit(사용자 클릭). 트래픽 부스트는 사용자 결정 뒤에만.
 - 사용자 대기: **샌드박스 게시 yes/no** · 질문 2개(아래 보고).
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/catdoku-playables.md 와 plans/catdoku-playables.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구 있는지 먼저 확인.`
 - 🌐 미리보기(Pages): https://soulfulfillable.github.io/test-mvp/catdoku-playables/ · 로봇 스크린샷 `playables/catdoku/qa/` · 🔧 QA 툴: https://developer.playgama.com/qa-tool/cmw5tfzkp03evmt0hxrtvuond
