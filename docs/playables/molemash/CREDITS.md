@@ -87,3 +87,10 @@ audible, re-cut from the original with `playables/molemash/tools` notes in the b
 | `fonts/Fredoka.ttf` | Fredoka, variable weight 300–700 (interface text) | Milena Brandão and the Fredoka Project Authors | github.com/google/fonts `ofl/fredoka/Fredoka[wdth,wght].ttf` (OFL.txt alongside) |
 
 The OFL permits bundling and redistribution with software; the font files are unmodified apart from the file name.
+
+## Fanfare (v1.9.0) — `audio/fanfare.*`, CC0 1.0
+
+Mixed from three CC0 sources: Kenney "Music Jingles" `jingles_SAX07` (https://www.kenney.nl/assets/music-jingles, CC0; obtained from
+the public GitHub repository JosephGaiser/pachinko `addons/kenney music jingles/Sax jingles/jingles_sax_7.ogg`, which
+redistributes the pack unchanged), plus UI SFX by Romain Simon `cinematic/achievement` (+0.25 s) and `arcade/level-up`
+(+0.9 s) from `uisfx@0.4.0` (audio CC0). Loudness-normalized to −14 LUFS. Plays on a new personal best or world #1.

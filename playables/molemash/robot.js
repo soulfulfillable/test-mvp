@@ -80,6 +80,8 @@ async function playUntilOver(page, maxMs) {
 
 
 // Play again; when a gift box is ready the box screen comes first — keep it for later and go on
+// the results panel can arrive up to ~2.6 s late when the run beat a record (the celebration plays first)
+async function waitPanel(page) { await page.waitForFunction(() => window.__game.state === 2 && !document.getElementById('over-panel').classList.contains('hidden'), null, { timeout: 5000 }).catch(() => {}); }
 async function playAgain(page) {
   await page.click('#retry-btn');
   await page.waitForTimeout(200);
@@ -254,7 +256,7 @@ async function playAgain(page) {
     check('platform pause during the count-in shows no pause panel', await page.evaluate(() => !window.__game.userPaused && document.getElementById('pause-panel').classList.contains('hidden')));
     await page.evaluate(() => { window.__game.countIn = 0; });
     await page.evaluate(() => { window.__game.timeLeft = 0.2; });
-    await page.waitForTimeout(600);
+    await page.waitForTimeout(600); await waitPanel(page);
     const o3 = await page.evaluate(() => ({ state: window.__game.state, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
     check('no second continue in the same attempt', o3.state === 2 && !o3.btn, JSON.stringify(o3));
     // ad states in the other order (closed before rewarded): the reward must still land, and nothing restarts
@@ -262,7 +264,7 @@ async function playAgain(page) {
     await playAgain(page);
     await page.waitForTimeout(2400);
     await page.evaluate(() => { window.__game.timeLeft = 0.2; });
-    await page.waitForTimeout(900);
+    await page.waitForTimeout(900); await waitPanel(page);
     const sc0 = await page.evaluate(() => ({ state: window.__game.state, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
     if (sc0.btn) {
       const scoreBefore = await page.evaluate(() => window.__game.score);
@@ -367,6 +369,34 @@ async function playAgain(page) {
     await context.close();
   }
 
+  // ── 1b. the big celebration: beat a real record → cheering moles, count-up, fireworks, party panel ──
+  {
+    const { context, page } = await newPage(browser, 390, 844, base + '#debug', { touch: true });
+    await page.tap('#game'); await page.waitForTimeout(300);
+    await page.evaluate(() => { window.__game.setScore(12); window.__game.gameOver('time'); });   // round 1: a first record, no party
+    await page.waitForTimeout(300);
+    check('first record is not a party (no old best to beat)', await page.evaluate(() => !window.__game.celeb && !document.getElementById('over-panel').classList.contains('hidden')));
+    await playAgain(page); await page.waitForTimeout(300);
+    await page.evaluate(() => { window.__game.setScore(41); window.__game.gameOver('time'); });   // round 2: beats 12 → the party
+    await page.waitForTimeout(250);
+    const c0 = await page.evaluate(() => ({ c: window.__game.celeb, panel: document.getElementById('over-panel').classList.contains('hidden') }));
+    check('new best starts the celebration before the panel', !!c0.c && c0.c.kind === 'best' && c0.panel, JSON.stringify(c0));
+    check('every hole has a cheering mole', !!c0.c && c0.c.cheering === 9, JSON.stringify(c0.c));
+    await page.waitForTimeout(1000);
+    const c1 = await page.evaluate(() => window.__game.celeb);
+    check('fireworks and confetti on the overlay', !!c1 && c1.fxOn && c1.fx > 50, JSON.stringify(c1));
+    await shot(page, 'phone-390x844-newbest');
+    await page.tap('#game'); await page.waitForTimeout(100);
+    check('a tap during the celebration does not start the next round', await page.evaluate(() => window.__game.state === 2 && !!window.__game.celeb));
+    await page.waitForTimeout(1700);
+    const c2 = await page.evaluate(() => ({ c: window.__game.celeb, panel: !document.getElementById('over-panel').classList.contains('hidden'), party: document.getElementById('over-panel').classList.contains('party'), title: document.getElementById('over-title-text').textContent, line: document.getElementById('rank-line').textContent, best: window.__game.store.progress.best }));
+    check('party panel arrives with NEW BEST! and the trophy', c2.panel && c2.party && c2.title === 'NEW BEST!' && /over your old record/.test(c2.line) && c2.best === 41, JSON.stringify(c2));
+    await shot(page, 'phone-390x844-newbest-panel');
+    await playAgain(page); await page.waitForTimeout(300);
+    check('Play again clears the party', await page.evaluate(() => window.__game.state === 1 && !window.__game.celeb && !document.getElementById('fx').classList.contains('on')));
+    await context.close();
+  }
+
   // ── 2. desktop: keyboard only ──
   {
     const { context, page } = await newPage(browser, 1280, 720, base + '#debug');
@@ -415,6 +445,14 @@ async function playAgain(page) {
       const panel = await page.evaluate(() => { const r = document.getElementById('over-panel').getBoundingClientRect(); return { fits: r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth, h: Math.round(r.height) }; });
       check(`game-over panel fits at ${name}`, panel.fits, `panel ${panel.h}px of ${h}`);
       await shot(page, name + '-over');
+      await page.evaluate(() => window.__game.celebrate('best'));
+      await page.waitForTimeout(1100);
+      const cel = await page.evaluate(() => { const c = window.__game.celeb; const r = document.getElementById('fx').getBoundingClientRect(); return { c, fxFits: r.width === innerWidth && r.height === innerHeight, panelHidden: document.getElementById('over-panel').classList.contains('hidden') }; });
+      check(`celebration runs at ${name}`, !!cel.c && cel.c.cheering === 9 && cel.fxFits && cel.panelHidden, JSON.stringify(cel));
+      await shot(page, name + '-newbest');
+      await page.waitForTimeout(1700);
+      const pp = await page.evaluate(() => { const r = document.getElementById('over-panel').getBoundingClientRect(); return { party: document.getElementById('over-panel').classList.contains('party'), fits: r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth }; });
+      check(`party panel fits at ${name}`, pp.party && pp.fits, JSON.stringify(pp));
     }
     await context.close();
   }
