@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T12:36:45.579Z",
+  "startedAt": "2026-11-07T12:48:25.433Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -50,6 +50,11 @@
       "detail": ""
     },
     {
+      "name": "effects default to Calm and the pill says so",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "music button switches the track and saves it",
       "ok": true,
       "detail": ""
@@ -77,7 +82,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,clear,cat,wrong,heart,win,lose,start,hint,mute-on,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "clear,mark,cat,win,wrong,lose,heart,hint,start,mute-on,mute-off,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -90,7 +95,7 @@
       "detail": "{\"cats\":1,\"step\":4,\"text\":\"See the marks? A cat rules out her row, column, color and the cells touching her. Tap the next glowing cell.\",\"auto\":10}"
     },
     {
-      "name": "pink wave rolls over every ruled-out cell (staggered by distance)",
+      "name": "calm mode (default): marks appear at once, no pink wave animation running",
       "ok": true,
       "detail": ""
     },
@@ -100,9 +105,9 @@
       "detail": "{\"hearts\":3,\"msg\":\"CATS CAN'T TOUCH!\",\"cats\":1,\"bad\":2,\"nope\":true}"
     },
     {
-      "name": "win: confetti burst on the canvas, cats bounce, SOLVED! flashes",
+      "name": "win in calm mode: SOLVED! text and one small cat hop, no confetti canvas",
       "ok": true,
-      "detail": "{\"fx\":99,\"won\":true,\"msg\":\"SOLVED!\",\"canvas\":true}"
+      "detail": "{\"fx\":0,\"won\":true,\"msg\":\"SOLVED!\",\"canvas\":false}"
     },
     {
       "name": "level 1 solved by taps → results panel, progress saved, tutorial done",
@@ -177,7 +182,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "0.58 → 0.58"
+      "detail": "0.55 → 0.55"
     },
     {
       "name": "Resume continues the level",
@@ -257,7 +262,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and share shown",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":0.7262999999999301,\"ranks\":1,\"day\":\"20261107\",\"rankVis\":true,\"share\":true}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.7158000000000174,\"ranks\":1,\"day\":\"20261107\",\"rankVis\":true,\"share\":true}"
     },
     {
       "name": "Share my time copies or shares the text",
@@ -277,7 +282,7 @@
     {
       "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.7262999999999301,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.7158000000000174,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -325,9 +330,24 @@
       "detail": ""
     },
     {
-      "name": "layout phone-360x640 (portrait): board 336px, cells 44px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "Effects toggle switches to Lively and saves it",
       "ok": true,
-      "detail": "{\"fill\":\"0.93\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+      "detail": ""
+    },
+    {
+      "name": "lively: pink wave animation runs over the ruled-out cells",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "lively: win fires the confetti burst",
+      "ok": true,
+      "detail": "{\"fx\":99,\"canvas\":true,\"won\":true}"
+    },
+    {
+      "name": "layout phone-360x640 (portrait): board 340px, cells 45px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
       "name": "results panel fits at phone-360x640",
@@ -335,19 +355,19 @@
       "detail": "panel 454px of 640"
     },
     {
-      "name": "layout phone-390x844 (portrait): board 365px, cells 48px, no overlap, on screen, fills ≥ 55% of the short side",
-      "ok": true,
-      "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
-    },
-    {
-      "name": "layout phone-430x932 (portrait): board 404px, cells 54px, no overlap, on screen, fills ≥ 55% of the short side",
-      "ok": true,
-      "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
-    },
-    {
-      "name": "layout land-844x390 (landscape): board 369px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout phone-390x844 (portrait): board 370px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout phone-430x932 (portrait): board 410px, cells 55px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout land-844x390 (landscape): board 374px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
       "name": "results panel fits at land-844x390",
@@ -360,22 +380,22 @@
       "detail": "{\"fits\":true,\"scrolls\":true,\"cell\":64}"
     },
     {
-      "name": "layout land-915x412 (landscape): board 391px, cells 52px, no overlap, on screen, fills ≥ 55% of the short side",
-      "ok": true,
-      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
-    },
-    {
-      "name": "layout tablet-768x1024 (portrait): board 739px, cells 102px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout land-915x412 (landscape): board 396px, cells 53px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
-      "name": "layout tablet-1024x768 (landscape): board 679px, cells 93px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout tablet-768x1024 (portrait): board 748px, cells 103px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.88\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.97\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
-      "name": "layout square-640x640 (portrait): board 438px, cells 59px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout tablet-1024x768 (landscape): board 690px, cells 95px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.90\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout square-640x640 (portrait): board 444px, cells 59px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.69\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
@@ -390,34 +410,34 @@
       "detail": "{\"fits\":true,\"scrolls\":true,\"cell\":81}"
     },
     {
-      "name": "layout iframe-800x450 (landscape): board 429px, cells 57px, no overlap, on screen, fills ≥ 55% of the short side",
-      "ok": true,
-      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
-    },
-    {
-      "name": "layout iframe-1280x720 (landscape): board 693px, cells 95px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout iframe-800x450 (landscape): board 434px, cells 58px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
-      "name": "layout desk-1366x768 (landscape): board 740px, cells 102px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout iframe-1280x720 (landscape): board 704px, cells 97px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.98\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
-      "name": "layout desk-1920x1080 (landscape): board 1047px, cells 146px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout desk-1366x768 (landscape): board 752px, cells 103px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.97\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.98\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
-      "name": "layout tall-9x21-390x910 (portrait): board 366px, cells 48px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout desk-1920x1080 (landscape): board 1064px, cells 148px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.99\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
-      "name": "layout wide-21x9-910x390 (landscape): board 369px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout tall-9x21-390x910 (portrait): board 370px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout wide-21x9-910x390 (landscape): board 374px, cells 49px, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"inside\":true}"
     },
     {
       "name": "console errors: 0",
@@ -440,7 +460,7 @@
     "phone-390x844-tutorial-1.png",
     "phone-390x844-tutorial-2.png",
     "phone-390x844-tutorial-wrong.png",
-    "phone-390x844-win-burst.png",
+    "phone-390x844-win-calm.png",
     "phone-390x844-level1-solved.png",
     "phone-390x844-level4-6x6.png",
     "phone-390x844-level10-solved.png",
@@ -453,6 +473,7 @@
     "phone-390x844-daily-solved.png",
     "phone-390x844-levels.png",
     "phone-390x844-levels-bottom.png",
+    "iframe-1280x720-win-lively.png",
     "iframe-1280x720-play.png",
     "phone-360x640-play.png",
     "phone-360x640-over.png",
@@ -474,7 +495,7 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "taps": 73,
-  "passed": 86,
+  "taps": 76,
+  "passed": 90,
   "failed": 0
 }

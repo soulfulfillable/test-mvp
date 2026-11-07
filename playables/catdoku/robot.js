@@ -122,6 +122,7 @@ async function wrongCell(page) {
     check('no emoji anywhere in the page text (rule 4.3.2)', await page.evaluate(() => !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(document.body.innerText)));
     await shot(page, 'phone-390x844-title');
     await page.tap('#bgm-pill'); await sleep(100);
+    check('effects default to Calm and the pill says so', await page.evaluate(() => window.__game.store.settings.fx === 'calm' && /Calm/.test(document.getElementById('fx-pill').textContent)));
     check('music button switches the track and saves it', await page.evaluate(() => window.__game.store.settings.bgm === 'ragtime' && /Ragtime/.test(document.getElementById('bgm-pill').textContent)));
     await page.tap('#bgm-pill'); await sleep(100);
     check('two music tracks wrap around', await page.evaluate(() => window.__game.store.settings.bgm === 'ukulele'));
@@ -141,7 +142,7 @@ async function wrongCell(page) {
     await tapCell(page, g1[0], g1[1], true); await sleep(250);
     const t3 = await page.evaluate(() => ({ cats: window.__game.catCount, step: window.__game.tutStep, text: document.getElementById('tut').textContent, auto: document.querySelectorAll('.cell svg.ax').length }));
     check('one tap places the cat, auto marks appear, guide moves to the next cat', t3.cats === 1 && t3.step === 4 && t3.auto > 5 && /marks/.test(t3.text), JSON.stringify(t3));
-    check('pink wave rolls over every ruled-out cell (staggered by distance)', await page.evaluate(() => { const w = document.querySelectorAll('.cell.wave'); const ds = new Set([...w].map((e) => e.style.getPropertyValue('--d'))); return w.length === document.querySelectorAll('.cell svg.ax').length && w.length >= 10 && ds.size >= 3; }));
+    check('calm mode (default): marks appear at once, no pink wave animation running', await page.evaluate(() => { const w = document.querySelectorAll('.cell.wave'); const fx = w[0] && getComputedStyle(w[0].querySelector('.fx')).animationName; return window.__game.calm && document.body.classList.contains('calm') && w.length === document.querySelectorAll('.cell svg.ax').length && w.length >= 10 && fx === 'none'; }));
     await shot(page, 'phone-390x844-tutorial-2');
     let wc = await wrongCell(page);
     await tapCell(page, wc[0], wc[1], true); await sleep(200);
@@ -151,9 +152,9 @@ async function wrongCell(page) {
     await solveBoard(page, true, 60);
     await sleep(350);
     const burst = await page.evaluate(() => ({ fx: window.__game.fxCount, won: document.getElementById('board').classList.contains('won'), msg: document.getElementById('msg').textContent, canvas: !document.getElementById('fx').classList.contains('hidden') }));
-    check('win: confetti burst on the canvas, cats bounce, SOLVED! flashes', burst.fx > 40 && burst.won && /SOLVED/.test(burst.msg) && burst.canvas, JSON.stringify(burst));
-    await shot(page, 'phone-390x844-win-burst');
-    await sleep(1200);
+    check('win in calm mode: SOLVED! text and one small cat hop, no confetti canvas', burst.fx === 0 && burst.won && /SOLVED/.test(burst.msg) && !burst.canvas, JSON.stringify(burst));
+    await shot(page, 'phone-390x844-win-calm');
+    await sleep(600);
     const w1 = await page.evaluate(() => ({ state: window.__game.state, won: window.__game.won, panel: !document.getElementById('over-panel').classList.contains('hidden'), cleared: window.__game.store.progress.cleared, tut: window.__game.store.progress.tut, title: document.getElementById('over-title').textContent, msgs: window.__msgs.slice(-2) }));
     check('level 1 solved by taps → results panel, progress saved, tutorial done', w1.state === 2 && w1.won && w1.panel && w1.cleared === 1 && w1.tut === 1 && /solved/i.test(w1.title), JSON.stringify(w1));
     check('level_completed message on win', w1.msgs.includes('level_completed'), w1.msgs.join(','));
@@ -295,6 +296,17 @@ async function wrongCell(page) {
     check('arrow keys + Space place a cat at the cursor', await page.evaluate(() => window.__game.cell[2][window.__game.solution[2]] === 2), `row 2 col ${sol[2]}`);
     await page.keyboard.press('Escape'); await sleep(100);
     check('Esc does nothing (1.5.2)', await page.evaluate(() => window.__game.state === 1 && !window.__game.userPaused));
+    await page.evaluate(() => window.__game.toggleFx());
+    check('Effects toggle switches to Lively and saves it', await page.evaluate(() => !window.__game.calm && window.__game.store.settings.fx === 'lively' && !document.body.classList.contains('calm')));
+    const solL = await page.evaluate(() => window.__game.solution.slice());
+    await tapCell(page, 1, solL[1], false); await sleep(60);
+    check('lively: pink wave animation runs over the ruled-out cells', await page.evaluate(() => { const w = document.querySelector('.cell.wave .fx'); return w && getComputedStyle(w).animationName === 'wave'; }));
+    await solveBoard(page, false, 30); await sleep(350);
+    const lively = await page.evaluate(() => ({ fx: window.__game.fxCount, canvas: !document.getElementById('fx').classList.contains('hidden'), won: document.getElementById('board').classList.contains('won') }));
+    check('lively: win fires the confetti burst', lively.fx > 40 && lively.canvas && lively.won, JSON.stringify(lively));
+    await shot(page, 'iframe-1280x720-win-lively');
+    await sleep(1300);
+    await page.evaluate(() => window.__game.toggleFx());
     await shot(page, 'iframe-1280x720-play');
     await context.close();
   }

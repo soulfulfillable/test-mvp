@@ -90,8 +90,8 @@
   .cell svg { width: 66%; height: 66%; pointer-events: none; }
   .cell svg.xm { width: 46%; height: 46%; color: var(--ink); }
   .cell svg.ax { width: 40%; height: 40%; color: rgba(255,255,255,0.62); }
-  .cell.pop svg.cat { animation: pop 0.28s ease-out; }
-  @keyframes pop { 0% { transform: scale(0.3); } 65% { transform: scale(1.2); } 100% { transform: scale(1); } }
+  .cell.pop svg.cat { animation: pop 0.16s ease-out; }
+  @keyframes pop { 0% { transform: scale(0.5); } 70% { transform: scale(1.12); } 100% { transform: scale(1); } }
   .cell.bad::after { content: ''; position: absolute; inset: 0; border-radius: 16%; background: rgba(209,52,42,0.5); animation: badflash 0.75s ease-out forwards; pointer-events: none; }
   @keyframes badflash { 0% { opacity: 1; } 100% { opacity: 0; } }
   .cell.cursor::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 3px solid var(--ink); pointer-events: none; }
@@ -123,6 +123,13 @@
   @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
   #title-logo .eyes { transform-origin: 50px 53px; animation: blink 4.5s infinite; }
   @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.08); } }
+  /* calm mode (default, player feedback 11-07 "효과 눈 아파"): nothing flashes or keeps moving; taps answer instantly */
+  body.calm .cell.wave .fx, body.calm .cell.wave svg.ax, body.calm #board.shake, body.calm #board.enter, body.calm #title-logo, body.calm #progress.hop svg { animation: none; }
+  body.calm #board.won .cell svg.cat { animation: winhop 0.45s ease-out var(--wd, 0ms) 1 both; }
+  @keyframes winhop { 0% { transform: translateY(0); } 45% { transform: translateY(-9%); } 100% { transform: translateY(0); } }
+  body.calm .cell.bad::after { background: rgba(209,52,42,0.32); animation-duration: 0.45s; }
+  body.calm #msg.big { font-size: 24px; }
+  body.calm .cell svg.nope { animation-duration: 0.45s; }
   @media (prefers-reduced-motion: reduce) { #title-logo, #title-logo .eyes, .cell.wave .fx, .cell.wave svg.ax, #board.won .cell svg.cat { animation: none; } }
   #hand { position: absolute; width: 15%; height: 15%; pointer-events: none; z-index: 3; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3)); animation: handtap 0.9s ease-in-out infinite; }
   @keyframes handtap { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-6%, -10%) scale(0.9); } }
@@ -316,6 +323,7 @@
 
 <div id="title-panel">
   <div id="title-corner">
+    <button id="fx-pill" class="pill">Effects: Calm</button>
     <button id="bgm-pill" class="pill">Music: Ukulele</button>
     <button id="title-mute-btn" class="ibtn" aria-label="Sound on/off"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18 6.5a7.8 7.8 0 0 1 0 11"/></svg></button>
   </div>
@@ -383,6 +391,7 @@
     <button id="resume-btn" class="btn-main"><svg viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></svg>Resume</button>
     <button id="pause-mute-btn" class="btn-ghost">Sound: on</button>
     <button id="pause-bgm-btn" class="btn-ghost">Music: Ukulele</button>
+    <button id="pause-fx-btn" class="btn-ghost">Effects: Calm</button>
     <button id="quit-btn" class="btn-ghost">Quit to title</button>
   </div>
   <div class="pause-keys" id="pause-keys"></div>
@@ -392,7 +401,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.1.1';
+  var GAME_VERSION = '1.2.0';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var hash = location.hash || '';
@@ -409,7 +418,7 @@
   // ---------- persistent state (Bridge storage only; rule 3.2.1) ----------
   var store = {
     progress: { v: 1, level: 1, cleared: 0, name: '', tut: 0, played: 0, daily: { day: '', accum: 0, solved: 0, ranks: [] } },
-    settings: { v: 1, muted: false, bgm: 'ukulele' }
+    settings: { v: 1, muted: false, bgm: 'ukulele', fx: 'calm' }
   };
   function parseVal(v, dflt) {
     if (v === null || v === undefined) return dflt;
@@ -441,6 +450,7 @@
       var s = parseVal(data[1], store.settings);
       s.muted = !!s.muted;
       s.bgm = BGM_STYLES.some(function (x) { return x.id === s.bgm; }) ? s.bgm : 'ukulele';
+      s.fx = s.fx === 'lively' ? 'lively' : 'calm';
       store.settings = s;
     }).catch(function () { /* unreadable data: new player */ });
   }
@@ -682,6 +692,17 @@
   }
   function bgmName() { for (var k = 0; k < BGM_STYLES.length; k++) if (BGM_STYLES[k].id === store.settings.bgm) return BGM_STYLES[k].name; return BGM_STYLES[0].name; }
   function renderBgm() { $('bgm-pill').textContent = 'Music: ' + bgmName(); $('pause-bgm-btn').textContent = 'Music: ' + bgmName(); }
+  function calm() { return store.settings.fx !== 'lively'; }
+  function renderFx() {
+    document.body.classList.toggle('calm', calm());
+    var t = 'Effects: ' + (calm() ? 'Calm' : 'Lively');
+    $('fx-pill').textContent = t; $('pause-fx-btn').textContent = t;
+  }
+  function toggleFx() {
+    store.settings.fx = calm() ? 'lively' : 'calm';
+    saveStore(['settings']); renderFx();
+    analytics('settings_changed', { setting: 'fx', value: store.settings.fx });
+  }
   function play(k, rate, vol) {
     if (!snd.ctx || !snd.bufs[k] || !snd.audible) return;
     try { var src = snd.ctx.createBufferSource(); src.buffer = snd.bufs[k]; if (rate) src.playbackRate.value = rate; var g = snd.ctx.createGain(); g.gain.value = vol || GAIN[k] || 0.7; src.connect(g); g.connect(snd.master); src.start(); } catch (e) {}
@@ -888,13 +909,14 @@
     if (parts.length) fxRaf = requestAnimationFrame(fxLoop); else { fxRaf = 0; fxCanvas.classList.add('hidden'); }
   }
   function celebrate() {
-    if (REDUCE_MOTION) return;
+    if (REDUCE_MOTION || calm()) return;
     var b = boardEl.getBoundingClientRect(), cx = b.left + b.width / 2, cy = b.top + b.height / 2;
     burst(cx, cy, 55, -Math.PI / 2, 2.2, 540);
     setTimeout(function () { burst(b.left + 8, b.top + b.height * 0.55, 22, -Math.PI / 3, 0.8, 600); burst(b.right - 8, b.top + b.height * 0.55, 22, -2 * Math.PI / 3, 0.8, 600); }, 260);
     setTimeout(function () { burst(cx, b.top + 10, 24, Math.PI / 2, 1.1, 220); }, 560);
   }
   function countUp(el, total) {
+    if (calm()) { el.textContent = fmtTime(total); return; }
     var t0 = performance.now();
     (function step() { var k = Math.min(1, (performance.now() - t0) / 750); el.textContent = fmtTime(total * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); })();
   }
@@ -1096,7 +1118,7 @@
       }
       saveStore(['progress']);
       tutorial = false; setTut(0);
-      setTimeout(showOverPanel, 1400);
+      setTimeout(showOverPanel, calm() ? 700 : 1400);
     } else {
       if (mode === 'daily' && !practice) { var dd = dailyRecord(); dd.accum = lastTotal; saveStore(['progress']); }
       play('lose');
@@ -1262,7 +1284,7 @@
     else if (d.day === today && d.accum > 0) sub = 'Clock so far today: ' + fmtTime(d.accum);
     $('daily-sub').textContent = sub;
     $('title-best').textContent = 'New daily puzzle in ' + untilNextPuzzle();
-    renderBgm(); renderMute();
+    renderBgm(); renderMute(); renderFx();
   }
   function showLevels() {
     state = STATE_LEVELS;
@@ -1347,6 +1369,8 @@
   $('title-mute-btn').addEventListener('click', toggleMute);
   $('pause-mute-btn').addEventListener('click', toggleMute);
   $('bgm-pill').addEventListener('click', function () { unlockAudio(); cycleBgm(); });
+  $('fx-pill').addEventListener('click', function () { unlockAudio(); toggleFx(); });
+  $('pause-fx-btn').addEventListener('click', function () { unlockAudio(); toggleFx(); });
   $('pause-bgm-btn').addEventListener('click', function () { unlockAudio(); cycleBgm(); });
   $('hint-btn').addEventListener('click', function () { unlockAudio(); requestHint(); });
   $('continue-btn').addEventListener('click', function () { unlockAudio(); requestContinue(); });
@@ -1403,7 +1427,7 @@
       return loadStore();
     }).then(function () {
       setReason('user', !!store.settings.muted);
-      renderMute(); renderBgm();
+      renderMute(); renderBgm(); renderFx();
       // a first board behind the title so the layout is measured before the first tap
       var p = genLevel(Math.min(MAX_LEVEL, store.progress.cleared + 1)); N = p.n; solution = p.solution; region = p.region;
       buildBoard(); resetBoard(); updateHud(); layout();
@@ -1436,7 +1460,7 @@
       get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; }, get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; },
       get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get tutorial() { return tutorial; }, get tutStep() { return tutStep; },
       get guideCell() { return guideCell; }, get hintUsed() { return hintUsed; }, get continueUsed() { return continueUsed; }, get rewardEarned() { return rewardEarned; },
-      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
+      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get calm() { return calm(); }, toggleFx: toggleFx, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
       tap: tap, startLevel: startLevel, startDaily: startDaily, showLevels: showLevels, quitToTitle: quitToTitle, pauseGame: pauseGame, resumeGame: resumeGame,
       requestHint: requestHint, requestContinue: requestContinue, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,
       saveStore: saveStore, genLevel: genLevel, genDaily: genDaily, countSolutions: countSolutions, sizeForLevel: sizeForLevel, layout: layout,
