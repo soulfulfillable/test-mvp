@@ -151,7 +151,7 @@ async function wrongCell(page) {
     await solveBoard(page, true, 60);
     await sleep(350);
     const burst = await page.evaluate(() => ({ fx: window.__game.fxCount, won: document.getElementById('board').classList.contains('won'), msg: document.getElementById('msg').textContent, canvas: !document.getElementById('fx').classList.contains('hidden') }));
-    check('win: confetti burst on the canvas, cats bounce, SOLVED! flashes', burst.fx > 80 && burst.won && /SOLVED/.test(burst.msg) && burst.canvas, JSON.stringify(burst));
+    check('win: confetti burst on the canvas, cats bounce, SOLVED! flashes', burst.fx > 40 && burst.won && /SOLVED/.test(burst.msg) && burst.canvas, JSON.stringify(burst));
     await shot(page, 'phone-390x844-win-burst');
     await sleep(1200);
     const w1 = await page.evaluate(() => ({ state: window.__game.state, won: window.__game.won, panel: !document.getElementById('over-panel').classList.contains('hidden'), cleared: window.__game.store.progress.cleared, tut: window.__game.store.progress.tut, title: document.getElementById('over-title').textContent, msgs: window.__msgs.slice(-2) }));
@@ -265,12 +265,13 @@ async function wrongCell(page) {
     await page.evaluate(() => window.__game.quitToTitle());
     // levels screen
     await page.tap('#levels-btn'); await sleep(200);
-    const lv = await page.evaluate(() => ({ state: window.__game.state, done: document.querySelectorAll('.lvl.done').length, next: document.querySelector('.lvl.next') && document.querySelector('.lvl.next').dataset.level, locked: document.querySelectorAll('.lvl.locked').length }));
-    check('levels grid: 10 done, 11 is next, the rest locked', lv.state === 3 && lv.done === 10 && lv.next === '11' && lv.locked === 14, JSON.stringify(lv));
+    const lv = await page.evaluate(() => { const g = document.getElementById('levels-grid'), n = document.querySelector('.lvl.next'), gr = g.getBoundingClientRect(), nr = n.getBoundingClientRect(); return { state: window.__game.state, done: document.querySelectorAll('.lvl.done').length, next: n.dataset.level, locked: document.querySelectorAll('.lvl.locked').length, total: document.querySelectorAll('.lvl').length, scrolls: g.scrollHeight > g.clientHeight + 100, nextVisible: nr.top >= gr.top && nr.bottom <= gr.bottom, heads: document.querySelectorAll('.lvl-head').length }; });
+    check('levels: all 500 in one scrolling list, 10 done, 11 next and in view, rest locked, size headers', lv.state === 3 && lv.total === 500 && lv.done === 10 && lv.next === '11' && lv.locked === 489 && lv.scrolls && lv.nextVisible && lv.heads === 5, JSON.stringify(lv));
     await shot(page, 'phone-390x844-levels');
-    await page.tap('#lv-next'); await sleep(100);
-    check('level pages turn', await page.evaluate(() => /26/.test(document.getElementById('lv-page').textContent)));
-    await page.tap('#lv-prev'); await sleep(100);
+    await page.evaluate(() => { const g = document.getElementById('levels-grid'); g.scrollTop = g.scrollHeight; }); await sleep(150);
+    check('scrolling to the bottom shows level 500', await page.evaluate(() => { const g = document.getElementById('levels-grid').getBoundingClientRect(), r = document.querySelector('.lvl[data-level="500"]').getBoundingClientRect(); return r.top >= g.top - 1 && r.bottom <= g.bottom + 1 && document.getElementById('levels-panel').getBoundingClientRect().bottom <= innerHeight; }));
+    await shot(page, 'phone-390x844-levels-bottom');
+    await page.evaluate(() => { document.getElementById('levels-grid').scrollTop = 0; }); await sleep(150);
     await page.tap('.lvl[data-level="3"]'); await sleep(300);
     check('a cleared level can be replayed from the grid', await page.evaluate(() => window.__game.state === 1 && window.__game.level === 3 && window.__game.N === 5));
     await context.close();
@@ -323,8 +324,8 @@ async function wrongCell(page) {
     }
     if (name === 'land-844x390' || name === 'square-640x640') {
       await page.evaluate(() => window.__game.showLevels()); await sleep(100);
-      const grid = await page.evaluate(() => { const r = document.getElementById('levels-nav').getBoundingClientRect(); const c = document.querySelector('.lvl').getBoundingClientRect(); return { fits: r.bottom <= innerHeight, cell: Math.round(c.width) }; });
-      check(`levels grid fits at ${name}`, grid.fits && grid.cell >= 36, JSON.stringify(grid));
+      const grid = await page.evaluate(() => { const g = document.getElementById('levels-grid'), r = g.getBoundingClientRect(); const c = document.querySelector('.lvl').getBoundingClientRect(); return { fits: r.bottom <= innerHeight && r.top >= 0, scrolls: g.scrollHeight > g.clientHeight, cell: Math.round(c.width) }; });
+      check(`levels list fits and scrolls at ${name}`, grid.fits && grid.scrolls && grid.cell >= 36, JSON.stringify(grid));
       await shot(page, name + '-levels');
     }
     await context.close();

@@ -68,8 +68,9 @@
   ② 틀리면 **캐릭터가 반응**(화난 고양이가 튀어나왔다 도망감) + 빨간 플래시 + 이유 글자 + 진동
   ③ 끝나면 **폭죽(색종이·별) 2~3연발 + 캐릭터 파도 바운스 + 큰 글씨 + 점수 카운트업**, 패널은 1초쯤 뒤에
   ④ 타이틀 캐릭터 숨쉬기/눈 깜빡임, 버튼 눌림 스케일(0.95), 판 등장 애니, HUD 카운터 깡충
-  ⑤ 전부 코드(CSS 키프레임 + 캔버스 파티클 60줄)로 — 라이브러리·외부 파일 없이 되고 Playgama 1.2.5 도 지킨다. `prefers-reduced-motion` 이면 끈다
-  ⑥ 로봇이 효과를 검사(물결 클래스 수·파티클 수)하고 **프레임 스트립**(90ms 간격 6장, ffmpeg hstack)으로 눈으로 확인. 틀: `playables/catdoku/index.html` 의 `wave`/`showNope`/`celebrate`
+  ⑤ **세기는 약하게 시작** — 첫 판(물결 0.9 불투명·폭죽 250조각)은 "눈 아프다"는 피드백을 받았다. 물결은 0.5 이하·1초, 폭죽은 100~120조각·흰색 없이, 큰 글씨 30px 안팎이 적당했다
+  ⑥ 전부 코드(CSS 키프레임 + 캔버스 파티클 60줄)로 — 라이브러리·외부 파일 없이 되고 Playgama 1.2.5 도 지킨다. `prefers-reduced-motion` 이면 끈다
+  ⑦ 로봇이 효과를 검사(물결 클래스 수·파티클 수)하고 **프레임 스트립**(90ms 간격 6장, ffmpeg hstack)으로 눈으로 확인. 틀: `playables/catdoku/index.html` 의 `wave`/`showNope`/`celebrate`
 - **디자인 스킬**: 리포에 `.claude/skills/frontend-design/`(Anthropic `anthropics/skills`, Apache-2.0) 설치됨 — 새 화면을 그리기 전에 Skill 도구로 `frontend-design` 을 불러 "기본값 티" 점검(크림+테라코타, 카드 더미, 올캡 라벨, 섹션마다 페이드인 등). 갱신은 `.claude/skills/frontend-design/SOURCE.md`.
 
 ## 6. 시행착오 기록 (최신이 위, 개발 세션이 추가)

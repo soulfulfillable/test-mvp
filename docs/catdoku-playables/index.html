@@ -65,7 +65,7 @@
   #hearts svg { width: 22px; height: 22px; }
   #hearts svg.off path { fill: none; stroke: rgba(74,59,40,0.3); stroke-width: 2; }
   #hearts svg.flash { animation: hflash 0.5s; }
-  @keyframes hflash { 0% { transform: scale(1); } 30% { transform: scale(1.7) rotate(-14deg); } 60% { transform: scale(0.9) rotate(10deg); } 100% { transform: scale(1); } }
+  @keyframes hflash { 0% { transform: scale(1); } 30% { transform: scale(1.4) rotate(-8deg); } 60% { transform: scale(0.95) rotate(5deg); } 100% { transform: scale(1); } }
   #hud-row2 { display: flex; align-items: center; gap: 8px; margin-top: 6px; min-height: 36px; }
   #progress { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 800; background: var(--panel); border-radius: 10px; padding: 4px 10px; box-shadow: 0 1px 3px rgba(120,90,40,0.12); font-variant-numeric: tabular-nums; }
   #progress svg { width: 22px; height: 22px; }
@@ -92,7 +92,7 @@
   .cell svg.ax { width: 40%; height: 40%; color: rgba(255,255,255,0.62); }
   .cell.pop svg.cat { animation: pop 0.28s ease-out; }
   @keyframes pop { 0% { transform: scale(0.3); } 65% { transform: scale(1.2); } 100% { transform: scale(1); } }
-  .cell.bad::after { content: ''; position: absolute; inset: 0; border-radius: 16%; background: rgba(209,52,42,0.6); animation: badflash 0.75s ease-out forwards; pointer-events: none; }
+  .cell.bad::after { content: ''; position: absolute; inset: 0; border-radius: 16%; background: rgba(209,52,42,0.5); animation: badflash 0.75s ease-out forwards; pointer-events: none; }
   @keyframes badflash { 0% { opacity: 1; } 100% { opacity: 0; } }
   .cell.cursor::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 3px solid var(--ink); pointer-events: none; }
   .cell.guide::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 3px solid #fff; box-shadow: 0 0 0 3px var(--ink); animation: guidepulse 1s ease-in-out infinite alternate; pointer-events: none; }
@@ -101,16 +101,16 @@
   @keyframes hintpop { 0% { transform: scale(0) rotate(-30deg); } 60% { transform: scale(1.3) rotate(8deg); } 100% { transform: scale(1) rotate(0); } }
   #board.shake { animation: shake 0.35s; }
   @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
-  #board.won .cell svg.cat { animation: winbounce 0.55s ease-in-out var(--wd, 0ms) infinite alternate; }
+  #board.won .cell svg.cat { animation: winbounce 0.75s ease-in-out var(--wd, 0ms) infinite alternate; }
   #board.enter { animation: boardin 0.35s ease-out; }
   @keyframes boardin { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
-  @keyframes winbounce { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-9%) scale(1.12); } }
+  @keyframes winbounce { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-6%) scale(1.07); } }
   /* game feel (player feedback 11-07): a pink wave rolls over the cells a new cat rules out, marks spin in behind it */
-  .cell .fx { position: absolute; inset: 0; border-radius: 16%; background: #f6b2b2; opacity: 0; pointer-events: none; }
-  .cell.wave .fx { animation: wave 0.8s ease-out var(--d, 0ms) both; }
-  @keyframes wave { 0% { opacity: 0; transform: scale(0.5); } 30% { opacity: 0.92; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
-  .cell.wave svg.ax { animation: markin 0.45s ease-out var(--d, 0ms) both; }
-  @keyframes markin { 0% { opacity: 0; transform: scale(0.2) rotate(-90deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+  .cell .fx { position: absolute; inset: 0; border-radius: 16%; background: #fbd3d3; opacity: 0; pointer-events: none; }
+  .cell.wave .fx { animation: wave 1s ease-out var(--d, 0ms) both; }
+  @keyframes wave { 0% { opacity: 0; transform: scale(0.7); } 35% { opacity: 0.55; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  .cell.wave svg.ax { animation: markin 0.5s ease-out var(--d, 0ms) both; }
+  @keyframes markin { 0% { opacity: 0; transform: scale(0.4); } 100% { opacity: 1; transform: scale(1); } }
   .cell svg.nope { position: absolute; width: 72%; height: 72%; animation: nope 0.6s ease-out forwards; }
   @keyframes nope { 0% { transform: scale(0.4); opacity: 0; } 25% { transform: scale(1.1) rotate(-10deg); opacity: 1; } 55% { transform: scale(1) rotate(10deg); opacity: 1; } 100% { transform: scale(0.5) translateY(-60%); opacity: 0; } }
   #progress.hop svg { animation: hop 0.4s ease-out; }
@@ -120,7 +120,7 @@
   .btns button, .lvl, .ibtn, .pill { transition: transform 0.08s ease-out; }
   .btns button:active, .lvl:active, .ibtn:active, .pill:active { transform: scale(0.95); }
   #title-logo { animation: float 3.2s ease-in-out infinite; }
-  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
   #title-logo .eyes { transform-origin: 50px 53px; animation: blink 4.5s infinite; }
   @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.08); } }
   @media (prefers-reduced-motion: reduce) { #title-logo, #title-logo .eyes, .cell.wave .fx, .cell.wave svg.ax, #board.won .cell svg.cat { animation: none; } }
@@ -133,7 +133,7 @@
   }
   #msg.show { animation: msgfly 1.2s ease-out forwards; }
   #msg.good { color: var(--green); }
-  #msg.big { font-size: 36px; letter-spacing: 1px; }
+  #msg.big { font-size: 29px; letter-spacing: 0.5px; }
   @keyframes msgfly { 0% { opacity: 0; transform: translate(-50%,-30%) scale(0.7); } 15% { opacity: 1; transform: translate(-50%,-50%) scale(1.05); } 75% { opacity: 1; transform: translate(-50%,-60%) scale(1); } 100% { opacity: 0; transform: translate(-50%,-75%) scale(1); } }
 
   #foot { grid-area: foot; width: min(100%, 520px); justify-self: center; align-self: end; min-height: 44px; display: flex; flex-direction: column; justify-content: flex-end; }
@@ -190,7 +190,11 @@
   #levels-head { width: min(100%, 440px); display: flex; align-items: center; gap: 8px; }
   #levels-head h2 { flex: 1; font-size: 20px; font-weight: 800; text-align: center; }
   #levels-head small { display: block; font-size: 12px; font-weight: 600; color: var(--muted); }
-  #levels-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: min(100%, 440px, calc(100vh - 170px)); margin-top: 12px; flex: 1; align-content: start; }
+  #levels-grid { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: min(100%, 440px); margin-top: 10px; flex: 1; min-height: 0; align-content: start; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; -webkit-overflow-scrolling: touch; padding: 2px 2px 28px; scrollbar-width: none; }
+  #levels-grid::-webkit-scrollbar { display: none; }
+  .lvl-head { grid-column: 1 / -1; font-size: 12px; font-weight: 700; color: var(--muted); padding: 10px 2px 0; }
+  .lvl-head:first-child { padding-top: 0; }
+  #levels-hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
   .lvl { aspect-ratio: 1; border: none; border-radius: 14px; background: var(--panel); box-shadow: 0 1px 3px rgba(120,90,40,0.14); font-size: 17px; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; position: relative; }
   .lvl small { font-size: 10px; font-weight: 600; color: var(--muted); }
   .lvl.done { background: var(--ink); color: var(--gold); } .lvl.done small { color: rgba(255,217,138,0.8); }
@@ -347,11 +351,7 @@
     <div style="width:40px"></div>
   </div>
   <div id="levels-grid"></div>
-  <div id="levels-nav">
-    <button id="lv-prev" class="pill">Previous</button>
-    <span id="lv-page"></span>
-    <button id="lv-next" class="pill">Next</button>
-  </div>
+  <div id="levels-hint">Scroll for more</div>
 </div>
 
 <canvas id="fx" class="hidden"></canvas>
@@ -392,10 +392,9 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.1.0';
+  var GAME_VERSION = '1.1.1';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
-  var PAGE = 25;
   var hash = location.hash || '';
   var DEBUG = hash.indexOf('debug') >= 0;
   var COVER = hash.indexOf('cover') >= 0;
@@ -861,7 +860,7 @@
     fxCtx = fxCanvas.getContext('2d'); fxCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   function burst(x, y, n, angle, spread, speed) {
-    var colors = PALETTE.concat(['#fff', '#ffd98a', '#f6b2b2']);
+    var colors = PALETTE.concat(['#ffd98a', '#f6b2b2']);
     for (var i = 0; i < n; i++) {
       var a = angle + (Math.random() - 0.5) * spread, v = speed * (0.55 + Math.random() * 0.7), shape = Math.random();
       parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 12,
@@ -877,8 +876,8 @@
     for (var i = parts.length - 1; i >= 0; i--) {
       var p = parts[i]; p.t += dt;
       if (p.t > p.life) { parts.splice(i, 1); continue; }
-      p.vy += 1300 * dt; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
-      var k = p.t / p.life; ctx.globalAlpha = k > 0.7 ? 1 - (k - 0.7) / 0.3 : 1;
+      p.vy += 1100 * dt; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
+      var k = p.t / p.life; ctx.globalAlpha = 0.9 * (k > 0.6 ? 1 - (k - 0.6) / 0.4 : 1);
       ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.color;
       if (p.shape === 'rect') ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.t * 9)) + 1);
       else if (p.shape === 'dot') { ctx.beginPath(); ctx.arc(0, 0, p.h * 0.6, 0, 6.28); ctx.fill(); }
@@ -891,9 +890,9 @@
   function celebrate() {
     if (REDUCE_MOTION) return;
     var b = boardEl.getBoundingClientRect(), cx = b.left + b.width / 2, cy = b.top + b.height / 2;
-    burst(cx, cy, 110, -Math.PI / 2, 2.4, 620);
-    setTimeout(function () { burst(b.left + 8, b.top + b.height * 0.55, 45, -Math.PI / 3, 0.9, 700); burst(b.right - 8, b.top + b.height * 0.55, 45, -2 * Math.PI / 3, 0.9, 700); }, 220);
-    setTimeout(function () { burst(cx, b.top + 10, 50, Math.PI / 2, 1.2, 260); }, 520);
+    burst(cx, cy, 55, -Math.PI / 2, 2.2, 540);
+    setTimeout(function () { burst(b.left + 8, b.top + b.height * 0.55, 22, -Math.PI / 3, 0.8, 600); burst(b.right - 8, b.top + b.height * 0.55, 22, -2 * Math.PI / 3, 0.8, 600); }, 260);
+    setTimeout(function () { burst(cx, b.top + 10, 24, Math.PI / 2, 1.1, 220); }, 560);
   }
   function countUp(el, total) {
     var t0 = performance.now();
@@ -1265,20 +1264,22 @@
     $('title-best').textContent = 'New daily puzzle in ' + untilNextPuzzle();
     renderBgm(); renderMute();
   }
-  var lvPage = 0;
   function showLevels() {
     state = STATE_LEVELS;
     hidePanels(); setTut(0);
     $('title-panel').classList.add('hidden');
-    lvPage = Math.floor(Math.min(MAX_LEVEL - 1, store.progress.cleared) / PAGE);
     renderLevels();
     $('levels-panel').classList.remove('hidden');
+    // open with the next level in view (all 500 are in one scrolling list, player feedback 11-07)
+    var grid = $('levels-grid'), nxt = grid.querySelector('.lvl.next');
+    if (nxt) grid.scrollTop = Math.max(0, nxt.offsetTop - grid.clientHeight * 0.3);
   }
   function renderLevels() {
-    var grid = $('levels-grid'), p = store.progress; grid.textContent = '';
+    var grid = $('levels-grid'), p = store.progress, lastN = 0; grid.textContent = '';
     $('levels-count').textContent = p.cleared + ' of ' + MAX_LEVEL + ' cleared';
-    for (var i = lvPage * PAGE + 1; i <= Math.min(MAX_LEVEL, (lvPage + 1) * PAGE); i++) {
+    for (var i = 1; i <= MAX_LEVEL; i++) {
       var b = document.createElement('button'), n = sizeForLevel(i);
+      if (n !== lastN) { lastN = n; var hd = document.createElement('div'); hd.className = 'lvl-head'; hd.textContent = n + '×' + n + ' boards · levels ' + i + '–' + (n === 9 ? MAX_LEVEL : [3, 10, 25, 50][[5, 6, 7, 8].indexOf(n)]); grid.appendChild(hd); }
       var done = i <= p.cleared, nxt = i === p.cleared + 1, locked = i > p.cleared + 1;
       b.className = 'lvl' + (done ? ' done' : '') + (nxt ? ' next' : '') + (locked ? ' locked' : '');
       b.innerHTML = (locked ? '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>' : i) + '<small>' + n + '×' + n + '</small>' + (done ? '<svg><use href="#s-cat"/></svg>' : '');
@@ -1287,9 +1288,6 @@
       b.setAttribute('aria-label', 'Level ' + i + (locked ? ' (locked)' : ''));
       grid.appendChild(b);
     }
-    $('lv-page').textContent = (lvPage * PAGE + 1) + '–' + Math.min(MAX_LEVEL, (lvPage + 1) * PAGE);
-    $('lv-prev').disabled = lvPage === 0; $('lv-next').disabled = (lvPage + 1) * PAGE >= MAX_LEVEL;
-    $('lv-prev').style.visibility = lvPage === 0 ? 'hidden' : ''; $('lv-next').style.visibility = (lvPage + 1) * PAGE >= MAX_LEVEL ? 'hidden' : '';
   }
 
   // ---------- input ----------
@@ -1341,8 +1339,6 @@
   $('daily-btn').addEventListener('click', function () { unlockAudio(); startDaily(); });
   $('levels-btn').addEventListener('click', function () { unlockAudio(); showLevels(); });
   $('levels-back').addEventListener('click', function () { quitToTitle(); });
-  $('lv-prev').addEventListener('click', function () { if (lvPage > 0) { lvPage--; renderLevels(); } });
-  $('lv-next').addEventListener('click', function () { if ((lvPage + 1) * PAGE < MAX_LEVEL) { lvPage++; renderLevels(); } });
   $('back-btn').addEventListener('click', function () { unlockAudio(); if (state === STATE_PLAY) pauseGame(false); else if (state === STATE_OVER) quitToTitle(); });
   $('pause-btn').addEventListener('click', function () { unlockAudio(); if (state === STATE_PLAY) pauseGame(false); });
   $('resume-btn').addEventListener('click', function () { unlockAudio(); resumeGame(); });
