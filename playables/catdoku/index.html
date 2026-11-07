@@ -154,6 +154,12 @@
   #undo-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; border: none; border-radius: 10px; background: var(--ink); color: var(--gold); font-size: 14px; font-weight: 700; padding: 8px 14px; min-height: 40px; }
   #undo-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
   .cell.stuck::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 2px dashed rgba(209,52,42,0.45); pointer-events: none; }
+  .cell.why .fx { opacity: 0.38 !important; background: #e0493c; animation: none !important; }
+  .cell.whycat::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 4px solid var(--red); pointer-events: none; }
+  .cell.whytap::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 3px dashed var(--red); pointer-events: none; }
+  #why { background: #fff; border: 2px solid var(--red); color: var(--ink); border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
+  #why.hidden { display: none; }
+  #why b { color: var(--red); }
   .cell.wrongcat::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 3px solid var(--red); pointer-events: none; }
   .cell.wrongcat svg.cat { animation: wobble 1.1s ease-in-out infinite; }
   @keyframes wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-7deg); } 75% { transform: rotate(7deg); } }
@@ -331,6 +337,7 @@
   </div>
   <div id="foot">
     <div id="tut" class="hidden"></div>
+    <div id="why" class="hidden"></div>
     <div id="stuck" class="hidden"><span id="stuck-text"></span></div>
     <div id="tip">Tap a cell to place a cat. Tap the cat to remove it.</div>
   </div>
@@ -409,7 +416,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.3.3';
+  var GAME_VERSION = '1.4.0';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var hash = location.hash || '';
@@ -907,6 +914,7 @@
   function tap(r, c) {
     if (state !== STATE_PLAY || frozen()) return;
     unlockAudio();
+    clearWhy();
     var cur = cell[r][c];
     if (cur === 2) {
       removeCat(r, c); play('clear'); updateHud();
@@ -920,6 +928,7 @@
       var me = cellEls[r][c]; me.classList.remove('bad'); void me.offsetWidth; me.classList.add('bad');
       boardEl.classList.remove('shake'); void boardEl.offsetWidth; boardEl.classList.add('shake');
       showNope(r, c);
+      explain(r, c, conf[0]);
       play('wrong'); buzz(80);
       flashMsg(conf[0].why);
       if (tutorial) { setTut(tutStep <= 2 ? 1 : 5, conf[0].why); updateHud(); return; }   // first level: mistakes are free
@@ -936,6 +945,38 @@
     if (catCount === N) { gameOver(true); return; }
   }
 
+  // "Why not?" shown on the board (player feedback 11-07: the refusal text alone was not understood):
+  // the blocking cat gets a ring, every cell that rule covers is tinted, the tapped cell gets a dashed ring,
+  // and one plain line sits under the board until the next tap.
+  var whyOn = false, whyT = null;
+  function clearWhy() {
+    if (!whyOn) return; whyOn = false; clearTimeout(whyT);
+    document.querySelectorAll('.cell.why, .cell.whycat, .cell.whytap').forEach(function (e) { e.classList.remove('why', 'whycat', 'whytap'); });
+    $('why').classList.add('hidden'); layout();
+  }
+  function explain(r, c, f) {
+    clearWhy(); whyOn = true;
+    var cells = [], text = '';
+    if (/TOUCH/.test(f.why)) {
+      for (var dr = -1; dr <= 1; dr++) for (var dc = -1; dc <= 1; dc++) { var a = f.r + dr, b = f.c + dc; if (a >= 0 && b >= 0 && a < N && b < N) cells.push([a, b]); }
+      text = '<b>Too close.</b> The ringed cat already owns every cell around it, corners included.';
+    } else if (/ROW/.test(f.why)) {
+      for (var i = 0; i < N; i++) cells.push([f.r, i]);
+      text = '<b>This row already has a cat</b> (the ringed one). One cat per row.';
+    } else if (/COLUMN/.test(f.why)) {
+      for (var j = 0; j < N; j++) cells.push([j, f.c]);
+      text = '<b>This column already has a cat</b> (the ringed one). One cat per column.';
+    } else {
+      for (var r2 = 0; r2 < N; r2++) for (var c2 = 0; c2 < N; c2++) if (region[r2][c2] === region[f.r][f.c]) cells.push([r2, c2]);
+      text = '<b>This color already has a cat</b> (the ringed one). One cat per color.';
+    }
+    cells.forEach(function (p) { cellEls[p[0]][p[1]].classList.add('why'); });
+    cellEls[f.r][f.c].classList.add('whycat');
+    cellEls[r][c].classList.add('whytap');
+    $('why').innerHTML = text; $('why').classList.remove('hidden');
+    layout();
+    whyT = setTimeout(clearWhy, 6000);
+  }
   function showNope(r, c) {
     // the cat refuses the spot: a grumpy cat pops up and hops away
     var el = cellEls[r][c], old = el.querySelector('svg.nope');
@@ -1013,7 +1054,7 @@
       guideCell = nextGuide();
       tutStep = 4;
     } else if (step === 5) {
-      t.textContent = why ? 'Oops: ' + why.charAt(0) + why.slice(1).toLowerCase() + ' No heart lost on this first level. Find the right spots.' : 'Now you: find the last ' + (N - catCount) + ' spots. Only one cat per row, column and color, and cats never touch.';
+      t.textContent = why ? 'No heart lost on this first level. The red cells below show why that spot is blocked.' : 'Now you: find the last ' + (N - catCount) + ' spots. Only one cat per row, column and color, and cats never touch.';
     }
     if (guideCell) { cellEls[guideCell[0]][guideCell[1]].classList.add('guide'); hand.classList.remove('hidden'); placeHand(); }
     else hand.classList.add('hidden');
@@ -1085,7 +1126,7 @@
   function resetBoard() {
     cell = []; autoM = []; catMarks = {};
     for (var r = 0; r < N; r++) { cell.push([]); autoM.push([]); for (var c = 0; c < N; c++) { cell[r].push(0); autoM[r].push(0); updateCell(r, c); } }
-    hearts = 3; catCount = 0; cursor = null; placed = []; stuck = null; wrongSet = {}; $('stuck').classList.add('hidden');
+    hearts = 3; catCount = 0; cursor = null; placed = []; stuck = null; wrongSet = {}; $('stuck').classList.add('hidden'); whyOn = true; clearWhy();
     boardEl.classList.remove('won');
     document.querySelectorAll('.cell.cursor').forEach(function (e) { e.classList.remove('cursor'); });
   }
@@ -1535,7 +1576,7 @@
       get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; }, get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; },
       get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get tutorial() { return tutorial; }, get tutStep() { return tutStep; },
       get guideCell() { return guideCell; }, get hintUsed() { return hintUsed; }, get continueUsed() { return continueUsed; }, get rewardEarned() { return rewardEarned; },
-      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get calm() { return calm(); }, toggleFx: toggleFx, toggleSkin: toggleSkin, get skin() { return store.settings.skin; }, get stuck() { return stuck; }, get placed() { return placed.slice(); }, wrongCats: wrongCats, conflictsWith: conflictsWith, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
+      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get calm() { return calm(); }, toggleFx: toggleFx, toggleSkin: toggleSkin, get skin() { return store.settings.skin; }, get stuck() { return stuck; }, get placed() { return placed.slice(); }, wrongCats: wrongCats, conflictsWith: conflictsWith, get whyOn() { return whyOn; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
       tap: tap, startLevel: startLevel, startDaily: startDaily, showLevels: showLevels, quitToTitle: quitToTitle, pauseGame: pauseGame, resumeGame: resumeGame,
       requestHint: requestHint, requestContinue: requestContinue, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,
       saveStore: saveStore, genLevel: genLevel, genDaily: genDaily, countSolutions: countSolutions, sizeForLevel: sizeForLevel, layout: layout,

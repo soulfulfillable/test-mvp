@@ -150,8 +150,12 @@ async function wrongCell(page) {
     await tapCell(page, wc[0], wc[1], true); await sleep(200);
     const tw = await page.evaluate(() => ({ hearts: window.__game.hearts, msg: document.getElementById('msg').textContent, cats: window.__game.catCount, bad: document.querySelectorAll('.cell.bad').length, nope: !!document.querySelector('.cell svg.nope') }));
     check('wrong cat on level 1: reason shown, grumpy cat refuses, no heart lost (free mistakes while learning)', tw.hearts === 3 && tw.msg.length > 5 && tw.cats === 1 && tw.bad >= 2 && tw.nope, JSON.stringify(tw));
+    const why = await page.evaluate(() => ({ on: window.__game.whyOn, tinted: document.querySelectorAll('.cell.why').length, ring: document.querySelectorAll('.cell.whycat').length, tap: document.querySelectorAll('.cell.whytap').length, text: document.getElementById('why').textContent, shown: !document.getElementById('why').classList.contains('hidden') }));
+    check('"why not" stays on the board: rule scope tinted, blocking cat ringed, tapped cell dashed, one line under the board', why.on && why.tinted >= 5 && why.ring === 1 && why.tap === 1 && why.shown && why.text.length > 20, JSON.stringify(why));
+    await shot(page, 'phone-390x844-why');
     await shot(page, 'phone-390x844-tutorial-wrong');
     await solveBoard(page, true, 60);
+    check('the "why not" overlay clears on the next tap', await page.evaluate(() => !window.__game.whyOn && document.querySelectorAll('.cell.why').length === 0 && document.getElementById('why').classList.contains('hidden')));
     await sleep(350);
     const burst = await page.evaluate(() => ({ fx: window.__game.fxCount, won: document.getElementById('board').classList.contains('won'), msg: document.getElementById('msg').textContent, canvas: !document.getElementById('fx').classList.contains('hidden') }));
     check('win in calm mode: SOLVED! text and one small cat hop, no confetti canvas', burst.fx === 0 && burst.won && /SOLVED/.test(burst.msg) && !burst.canvas, JSON.stringify(burst));

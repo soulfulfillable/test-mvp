@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T16:17:35.469Z",
+  "startedAt": "2026-11-07T16:42:09.085Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -87,7 +87,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,cat,wrong,clear,win,lose,heart,start,hint,mute-on,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "mark,clear,cat,lose,wrong,win,heart,start,hint,mute-on,mute-off,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -113,6 +113,16 @@
       "name": "wrong cat on level 1: reason shown, grumpy cat refuses, no heart lost (free mistakes while learning)",
       "ok": true,
       "detail": "{\"hearts\":3,\"msg\":\"CATS CAN'T TOUCH!\",\"cats\":1,\"bad\":2,\"nope\":true}"
+    },
+    {
+      "name": "\"why not\" stays on the board: rule scope tinted, blocking cat ringed, tapped cell dashed, one line under the board",
+      "ok": true,
+      "detail": "{\"on\":true,\"tinted\":6,\"ring\":1,\"tap\":1,\"text\":\"Too close. The ringed cat already owns every cell around it, corners included.\",\"shown\":true}"
+    },
+    {
+      "name": "the \"why not\" overlay clears on the next tap",
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "win in calm mode: SOLVED! text and one small cat hop, no confetti canvas",
@@ -192,7 +202,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "0.55 → 0.55"
+      "detail": "0.54 → 0.54"
     },
     {
       "name": "Resume continues the level",
@@ -272,7 +282,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and share shown",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6423000000000466,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6965999999999767,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
     },
     {
       "name": "Share my time copies or shares the text",
@@ -292,7 +302,7 @@
     {
       "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6423000000000466,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6965999999999767,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -489,6 +499,7 @@
     "phone-390x844-title.png",
     "phone-390x844-tutorial-1.png",
     "phone-390x844-tutorial-2.png",
+    "phone-390x844-why.png",
     "phone-390x844-tutorial-wrong.png",
     "phone-390x844-win-calm.png",
     "phone-390x844-level1-solved.png",
@@ -528,6 +539,6 @@
     "wide-21x9-910x390-play.png"
   ],
   "taps": 78,
-  "passed": 96,
+  "passed": 98,
   "failed": 0
 }
