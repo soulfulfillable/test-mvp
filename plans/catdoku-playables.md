@@ -40,3 +40,7 @@
 ## 결정 대기
 - A. 위 순서로 캣도쿠 Playgama/유튜브 판 착수(새 작업 세션) / B. 보류.
 - 표기 이름: Kitty Queens: Cat Sudoku(추천) / Catdoku.
+
+## 진행 기록
+- 2026-11-07 (개발 세션): 1·2·3단계(샌드박스 게시 전까지) 완료. `playables/catdoku/` — 게임 본체·로봇 84/84·zip 2.97MB·커버 3종·CREDITS. Playgama 드래프트 id `cmw5rj3x202syno0hy56lnw64`(category sudoku), 아카이브 `kitty-queens-1.0.0` PASSED, 커버 등록. 미리보기 https://soulfulfillable.github.io/test-mvp/catdoku-playables/ . 남은 것: 사용자 yes → publish_sandbox → 공유 링크 → QA 툴 인증(Codex) → 샌드박스 목표 → Submit(사용자). 상세·점검표는 `board/catdoku-playables.md`.
+- '와 포인트': 고양이를 놓는 순간 판 위의 ✕ 가 번지듯 깔리고(자동 힌트), 틀리면 그 자리에서 이유를 외친다 — 로봇 스크린샷 `qa/phone-390x844-tutorial-2.png`, `qa/phone-390x844-wrong.png`.

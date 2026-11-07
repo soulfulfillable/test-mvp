@@ -102,6 +102,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-11-07 | (Kitty Queens Playables 개발 세션) **Playgama 드래프트 생성·업로드 완료, 샌드박스는 미게시** — id `cmw5rj3x202syno0hy56lnw64`, category **sudoku**(Playgama 설명에 'CatDoku' 가 예시로 있어 4.2.2 차별점을 폼에 명시), 아카이브 1.0.0 PASSED, 커버 3종. 게임은 웹 캣도쿠 데일리 생성기 + Flutter 판 레벨 생성기(500레벨, 같은 판)를 한 파일에. 그림 고양이 SVG(앱 아이콘 결), CC0 음원, Bridge storage, 전면(`level_end`/`round_end`)·보상형(`hint`·`continue`). 로봇 84/84. **publish_sandbox 는 사용자 yes 뒤** | 플랜 승인 범위 그대로. 미리보기 https://soulfulfillable.github.io/test-mvp/catdoku-playables/ |
 | 2026-11-07 | **캣도쿠 Playgama/YouTube 판 착수**, 표기 이름 **Kitty Queens: Cat Sudoku**. 개발 세션 `board/catdoku-playables.md` | 사용자 "착수. 이름은 너 추천대로" |
 | 2026-11-07 | 캣도쿠 → YouTube Playables 런칭 **계획 작성**(`plans/catdoku-playables.md`): Playgama 판(Mole Mash 틀 재사용) + Google 직접 경로 병행, 이모지 말→그림·음원·Bridge storage·레벨 모드·광고·온보딩. 착수는 사용자 A/B 대기 | 사용자 "캣도쿠로 유튜브에 런칭하는 걸로 한번 짜볼까" |
 | 2026-11-06 | **Hidden Friends Fresh 시제품 "Odd Capy Out" 배포** (https://soulfulfillable.github.io/test-mvp/hidden-fresh/) — 같은 카피바라 45~70마리 무리 속 위트 있는 변형 찾기 3판: ①혼자 뒤돌아 엉덩이를 보이는 1마리 ②안경+콧수염 변장 1마리 ③물구나무 2마리. 찾으면 각자 짧은 동작(돌아보며 볼 빨개짐 / 변장이 날아감·식은땀 / 뒤뚱뒤뚱 넘어져 어지러운 별). 힌트=누를수록 좁아지는 스포트라이트. 로봇 90/90(390·360·320 실제 터치) | 브리프 그대로 3판. 원작 제목 미확인·미플레이 |
