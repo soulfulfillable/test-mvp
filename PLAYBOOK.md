@@ -74,6 +74,7 @@
 - **디자인 스킬**: 리포에 `.claude/skills/frontend-design/`(Anthropic `anthropics/skills`, Apache-2.0) 설치됨 — 새 화면을 그리기 전에 Skill 도구로 `frontend-design` 을 불러 "기본값 티" 점검(크림+테라코타, 카드 더미, 올캡 라벨, 섹션마다 페이드인 등). 갱신은 `.claude/skills/frontend-design/SOURCE.md`.
 
 ## 6. 시행착오 기록 (최신이 위, 개발 세션이 추가)
+- **2026-11-08 Kitty Queens — 숨은 정답으로 '틀렸다'고 알려 주면 플레이어는 버그로 본다.** 막다른 길(어느 줄에 자리가 없음)에서 정답과 다른 고양이를 화난 얼굴로 찍어 줬더니 "규칙은 하나도 안 어겼는데 왜 안 된다는 거냐, 버그"가 왔다. 플레이어 머릿속의 '안 됨'은 **화면에 보이는 규칙 위반**(줄에 둘·붙음)뿐이다. 합법인 수는 절대 틀렸다고 표시하지 말고, 막다른 길은 보이는 사실만(그 줄을 빨갛게 + "No room left in this row for a cat") 알려 준다. 어느 수를 무를지는 퍼즐의 일부다. `playables/catdoku/index.html` 의 `renderStuck`.
 
 | 날짜 | 앱 | 무슨 일이 있었나 | 다음엔 이렇게 |
 |---|---|---|---|

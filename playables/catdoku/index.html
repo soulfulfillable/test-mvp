@@ -154,16 +154,12 @@
   #undo-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; border: none; border-radius: 10px; background: var(--ink); color: var(--gold); font-size: 14px; font-weight: 700; padding: 8px 14px; min-height: 40px; }
   #undo-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
   .cell.stuck::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 2px dashed rgba(209,52,42,0.45); pointer-events: none; }
-  .cell.why .fx { opacity: 0.38 !important; background: #e0493c; animation: none !important; }
+  .cell.why .fx, .cell.dead .fx { opacity: 0.38 !important; background: #e0493c; animation: none !important; }
   .cell.whycat::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 4px solid var(--red); pointer-events: none; }
   .cell.whytap::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 3px dashed var(--red); pointer-events: none; }
   #why { background: #fff; border: 2px solid var(--red); color: var(--ink); border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
   #why.hidden { display: none; }
   #why b { color: var(--red); }
-  .cell.wrongcat::before { content: ''; position: absolute; inset: 1px; border-radius: 14%; border: 3px solid var(--red); pointer-events: none; }
-  .cell.wrongcat svg.cat { animation: wobble 1.1s ease-in-out infinite; }
-  @keyframes wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-7deg); } 75% { transform: rotate(7deg); } }
-  body.calm .cell.wrongcat svg.cat { animation: none; }
   #app.land #tip { text-align: left; }
 
   /* ── panels ── */
@@ -416,7 +412,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.4.0';
+  var GAME_VERSION = '1.4.1';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var hash = location.hash || '';
@@ -764,7 +760,7 @@
   var state = STATE_TITLE;
   var mode = 'level';          // 'level' | 'daily'
   var level = 1, N = 7, solution = null, region = null, puzzleDay = '';
-  var cell = [], autoM = [], catMarks = {}, placed = [], stuck = null, wrongSet = {};
+  var cell = [], autoM = [], catMarks = {}, placed = [], stuck = null;
   var hearts = 3, catCount = 0;
   var runStart = 0, accumBase = 0, pausedAt = 0, pausedTotal = 0;
   var practice = false, lastTotal = 0, won = false, overAt = 0;
@@ -804,7 +800,7 @@
   }
   function updateCell(r, c) {
     var el = cellEls[r][c];
-    if (cell[r][c] === 2) glyph(el, 'cat', wrongSet[r + ',' + c] ? skin().mad : skin().face);
+    if (cell[r][c] === 2) glyph(el, 'cat', skin().face);
     else if (cell[r][c] === 1) glyph(el, 'xm', 's-x');
     else if (autoM[r][c] > 0) glyph(el, 'ax', 's-x');
     else glyph(el, '', null);
@@ -830,25 +826,23 @@
     }
     return out;
   }
+  // kept for the robot only (it needs to know which of its own cats are off the solution); the game never shows this
   function wrongCats() { return placed.filter(function (p) { return solution[p[0]] !== p[1]; }); }
   function renderStuck() {
     var st = state === STATE_PLAY ? findStuck() : null;
     var changed = JSON.stringify(st) !== JSON.stringify(stuck);
     stuck = st;
-    document.querySelectorAll('.cell.stuck, .cell.wrongcat').forEach(function (e) { e.classList.remove('stuck', 'wrongcat'); });
-    // when stuck, the cats that are not on their true spot turn grumpy and get a red frame (player feedback 11-07:
-    // "when this shows up I just give up, what am I supposed to do?") — so the fix is visible, not a riddle
-    var wrong = st ? wrongCats() : [], newSet = {};
-    wrong.forEach(function (p) { newSet[p[0] + ',' + p[1]] = 1; });
-    var oldSet = wrongSet; wrongSet = newSet;
-    Object.keys(oldSet).concat(Object.keys(newSet)).forEach(function (k) { if (!!oldSet[k] !== !!newSet[k]) { var rc = k.split(','); updateCell(+rc[0], +rc[1]); } });
+    document.querySelectorAll('.cell.dead').forEach(function (e) { e.classList.remove('dead'); });
     var box = $('stuck');
     if (!st) { box.classList.add('hidden'); if (changed) layout(); return; }
-    wrong.forEach(function (p) { cellEls[p[0]][p[1]].classList.add('wrongcat'); });
-    // one short line (player feedback 11-07: "just tell them to tap the cat to undo")
-    $('stuck-text').textContent = wrong.length === 1 ? 'Tap the grumpy cat to pick it up.' : 'Tap the grumpy cats to pick them up.';
+    // Player feedback 11-08: a cat that breaks no rule must never be called wrong ("not allowed" is for a second cat
+    // in a line or cats touching — nothing else). So a dead end only states the visible fact: this row/column/area
+    // is all crossed out and still needs a cat. Which cat to lift is the player's puzzle, as in every Queens game.
+    stuckCells(st).forEach(function (p) { cellEls[p[0]][p[1]].classList.add('dead'); });
+    var where = st.type === 'row' ? 'this row' : st.type === 'column' ? 'this column' : 'the ' + COLOR_NAMES[st.i % COLOR_NAMES.length] + ' area';
+    $('stuck-text').innerHTML = '<b>No room left in ' + where + '</b> for a cat. Tap a cat to pick it up and try another spot.';
     box.classList.remove('hidden');
-    if (changed) { layout(); if (st && changed) analytics('stuck', { mode: mode, level: level, type: st.type, cats: catCount, wrong: wrong.length }); }
+    if (changed) { layout(); analytics('stuck', { mode: mode, level: level, type: st.type, cats: catCount }); }
   }
 
   function updateHud() {
@@ -1126,7 +1120,7 @@
   function resetBoard() {
     cell = []; autoM = []; catMarks = {};
     for (var r = 0; r < N; r++) { cell.push([]); autoM.push([]); for (var c = 0; c < N; c++) { cell[r].push(0); autoM[r].push(0); updateCell(r, c); } }
-    hearts = 3; catCount = 0; cursor = null; placed = []; stuck = null; wrongSet = {}; $('stuck').classList.add('hidden'); whyOn = true; clearWhy();
+    hearts = 3; catCount = 0; cursor = null; placed = []; stuck = null; $('stuck').classList.add('hidden'); whyOn = true; clearWhy();
     boardEl.classList.remove('won');
     document.querySelectorAll('.cell.cursor').forEach(function (e) { e.classList.remove('cursor'); });
   }

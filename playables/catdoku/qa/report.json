@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T16:42:09.085Z",
+  "startedAt": "2026-11-07T17:24:24.336Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -87,7 +87,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,clear,cat,lose,wrong,win,heart,start,hint,mute-on,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "mark,clear,cat,wrong,heart,win,lose,mute-on,hint,start,mute-off,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -202,7 +202,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "0.54 → 0.54"
+      "detail": "0.56 → 0.56"
     },
     {
       "name": "Resume continues the level",
@@ -282,7 +282,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and share shown",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6965999999999767,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6438999999999941,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
     },
     {
       "name": "Share my time copies or shares the text",
@@ -302,7 +302,7 @@
     {
       "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6965999999999767,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6438999999999941,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -325,14 +325,19 @@
       "detail": ""
     },
     {
-      "name": "dead end: the wrong cats turn grumpy with a red frame, one line says to tap them, no heart lost",
+      "name": "dead end: the row/column/area with no room is tinted, one line says so, no heart lost",
       "ok": true,
-      "detail": "{\"stuck\":{\"type\":\"color\",\"i\":1},\"cats\":2,\"wrong\":2,\"wrongCells\":[[0,0],[1,2]],\"grumpy\":true,\"framed\":2,\"shown\":true,\"text\":\"Tap the grumpy cats to pick them up.\",\"hearts\":3}"
+      "detail": "{\"stuck\":{\"type\":\"color\",\"i\":1},\"cats\":2,\"wrong\":2,\"wrongCells\":[[0,0],[1,2]],\"faces\":[\"#s-h-cat\",\"#s-h-cat\"],\"grumpy\":0,\"framed\":0,\"shown\":true,\"text\":\"No room left in the blue area for a cat. Tap a cat to pick it up and try another spot.\",\"hearts\":3,\"dead\":3,\"unitOk\":true,\"deadHasNoCat\":true}"
     },
     {
-      "name": "tapping the grumpy cats picks them up; the right ones stay; the line goes away",
+      "name": "dead end: no cat is called wrong by the hidden solution (player feedback: only a real rule break is \"not allowed\")",
       "ok": true,
-      "detail": "{\"cats\":0,\"wrong\":0,\"stuck\":null,\"shown\":false,\"grumpyLeft\":0,\"catsOnSolution\":true}"
+      "detail": "{\"wrong\":2,\"grumpy\":0,\"framed\":0,\"faces\":2,\"cats\":2}"
+    },
+    {
+      "name": "picking up the off-solution cats clears the dead end: line and tint go away, the right cats stay",
+      "ok": true,
+      "detail": "{\"cats\":0,\"wrong\":0,\"stuck\":null,\"shown\":false,\"deadLeft\":0,\"catsOnSolution\":true}"
     },
     {
       "name": "desktop detected",
@@ -539,6 +544,6 @@
     "wide-21x9-910x390-play.png"
   ],
   "taps": 78,
-  "passed": 98,
+  "passed": 99,
   "failed": 0
 }
