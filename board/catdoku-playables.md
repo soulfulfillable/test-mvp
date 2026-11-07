@@ -9,3 +9,8 @@
 - 사용자 대기: 샌드박스 게시 yes(⑨ 시점 — **publish_sandbox·start_sandbox_traffic·Submit 은 사용자 yes 뒤에만**).
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/catdoku-playables.md 와 plans/catdoku-playables.md 를 읽고 "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구 있는지 먼저 확인.`
 - 🌐 미리보기(Pages, main 반영 후): https://soulfulfillable.github.io/test-mvp/catdoku-playables/ · 로봇 스크린샷 `playables/catdoku/qa/`
+## Playgama 진행 메모 (2026-11-07, 세션이 끊겨도 잃지 않게 바로 기록)
+- 게임 생성: **id `cmw5rj3x202syno0hy56lnw64`**, title "Kitty Queens: Cat Sudoku", engine js, category **sudoku**. 폼(설명·how to play·story·EN·iOS/Android/Desktop·가로+세로·leaderboards·social·link=웹 catdoku) 저장 완료.
+- 아카이브 `kitty-queens-1.0.0` (id `cmw5tfzkp03evmt0hxrtvuond`, 2,967,791 B) 업로드·confirm → 빌드 체크 **PASSED**, bridgeSdk FOUND 2.4.0.
+- 커버: square(mediaId cmw5tiqme03f8mt0h9100qth5) confirm 완료 · portrait(cmw5tisp603l0no0ha7vgac7q)·landscape(cmw5tiuqz03fdmt0h71h5d3do) PUT 200 — confirm 호출 중(세션 재시작으로 끊기면 confirm_cover_upload 다시, 안전하게 반복 가능).
+- 하지 않은 것: publish_sandbox · start_sandbox_traffic · Submit (사용자 yes 뒤).
