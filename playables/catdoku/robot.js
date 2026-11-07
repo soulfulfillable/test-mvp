@@ -277,6 +277,27 @@ async function wrongCell(page) {
     await page.evaluate(() => { document.getElementById('levels-grid').scrollTop = 0; }); await sleep(150);
     await page.tap('.lvl[data-level="3"]'); await sleep(300);
     check('a cleared level can be replayed from the grid', await page.evaluate(() => window.__game.state === 1 && window.__game.level === 3 && window.__game.N === 5));
+    // dead end: legal-but-wrong cats until some row/column/area has no free cell → the game says so and offers Undo
+    await page.evaluate(() => { window.__game.store.progress.tut = 1; window.__game.startLevel(8); });
+    await sleep(200);
+    const dead = await page.evaluate(() => {
+      const g = window.__game, n = g.N;
+      for (let r = 0; r < n && !g.stuck; r++) for (let c = 0; c < n && !g.stuck; c++) {
+        if (g.cell[r][c] !== 0 || g.solution[r] === c) continue;
+        if (g.conflictsWith(r, c).length) continue;
+        g.tap(r, c);
+      }
+      const box = document.getElementById('stuck');
+      return { stuck: g.stuck, cats: g.catCount, shown: !box.classList.contains('hidden'), text: document.getElementById('stuck-text').textContent, outlined: document.querySelectorAll('.cell.stuck').length, undo: !document.getElementById('undo-btn').classList.contains('hidden'), hearts: g.hearts };
+    });
+    check('dead end detected: message names the row/column/area, cells outlined, Undo offered, no heart lost', !!dead.stuck && dead.shown && /no free spot left/.test(dead.text) && dead.outlined >= 3 && dead.undo && dead.hearts === 3, JSON.stringify(dead));
+    await shot(page, 'phone-390x844-stuck');
+    const before = dead.cats;
+    await page.tap('#undo-btn'); await sleep(150);
+    const undone = await page.evaluate(() => ({ cats: window.__game.catCount, placed: window.__game.placed.length }));
+    check('Undo last cat removes the most recent cat', undone.cats === before - 1 && undone.placed === before - 1, JSON.stringify(undone));
+    const cleared = await page.evaluate(() => { const g = window.__game; while (g.placed.length) g.undoLast(); return { stuck: g.stuck, shown: !document.getElementById('stuck').classList.contains('hidden'), outlined: document.querySelectorAll('.cell.stuck').length }; });
+    check('once the cats are picked up the dead-end message goes away', !cleared.stuck && !cleared.shown && cleared.outlined === 0, JSON.stringify(cleared));
     await context.close();
   }
 

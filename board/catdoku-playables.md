@@ -1,7 +1,7 @@
 # Kitty Queens: Cat Sudoku — Playgama/YouTube 판 — 개발 세션 게시판
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-07 17:40 KST (v1.3.0 호랑이 기본 고양이) · 작업 브랜치 `claude/catdoku-playables` (main 에 ff 반영됨) · 경로 `playables/catdoku/` (웹 `docs/catdoku.html` 은 그대로)
+- 마지막 저장: 2026-11-07 18:30 KST (v1.3.1 막힘 안내 + Undo) · 작업 브랜치 `claude/catdoku-playables` (main 에 ff 반영됨) · 경로 `playables/catdoku/` (웹 `docs/catdoku.html` 은 그대로)
 - 승인(사용자 11-07 "착수. 이름은 너 추천대로"): `plans/catdoku-playables.md` 전부. 표기 이름 **Kitty Queens: Cat Sudoku**. 보고는 쉬운 영어.
 - 방금 끝낸 것: **①~⑧ 전부** — 게임 본체(`index.html`), 로봇 84/84(`qa/report.json`), 빌드 `dist/kitty-queens.zip`(2.97MB) + Pages 복사본 `docs/catdoku-playables/`, 커버 3종, `CREDITS.md`, **Playgama 게임 생성·폼·아카이브(빌드 체크 PASSED, Bridge 2.4.0 FOUND)·커버 3종 업로드 완료**. 런치 단계: archive ✅ bridge ✅ covers ✅ · form BLOCKED(NO_CERTIFICATION → QA 툴 인증은 Codex) · **sandbox TODO(publish_sandbox, 사용자 yes 필요)** · traffic BLOCKED(샌드박스 뒤, 사용자 결정).
 - 진행 중이던 것: 없음.
@@ -54,6 +54,7 @@
 - 아쉬운 점(숨기지 않음): ① 실기기 사파리 미확인(헤드리스 Chromium 만) ② 랭킹은 기기 로컬(오늘의 시간) + Bridge 리더보드 `levels` 는 config 선언만, 결과 화면 표시 없음 ③ 도전장 링크(웹판의 해시 공유)는 Playgama 에선 URL 을 못 바꿔 뺌 → 공유는 텍스트만 ④ BGM 2곡은 Mole Mash 와 같은 CC0 곡(우쿨렐레·래그타임) ⑤ 레벨 보상(별·꾸미기)은 없음 — 핵심 깊이에 집중, 필요하면 다음 판.
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
+- 2026-11-07 "누를때 없을때 어쩌라는건지 몰라함" → **v1.3.1 막힘 안내**: 고양이를 규칙엔 안 걸리지만 틀린 자리에 놓아 어느 행·열·색 구역에 빈칸이 하나도 안 남으면, 그 줄/구역에 빨간 점선 테두리 + 판 아래에 "Row 3 has no free spot left. One of your cats is in the wrong place. Tap a cat to pick it up, or undo the last one." + **Undo last cat** 버튼(마지막에 놓은 고양이부터 되돌림). 하트는 안 깎임. 로봇 97/97(레벨 8에서 막힘 상황을 실제로 만들어 검사). (해석: "누를 데가 없을 때" — 다른 뜻이면 다시 확인.)
 - 2026-11-07 사진 16장 + "고양이 이름은 호랑이. 추천대로" → **v1.3.0 호랑이 기본**: 사진에서 읽은 특징(연한 복숭아빛 주황 털, 진한 주황 줄무늬 — 이마 M·뺨 줄, 연두색 눈, 분홍 코, 코 주변 밝은 털, 흰 수염, 통통한 볼)을 같은 그림체(굵은 외곽선 벡터)로 옮겨 `s-h-cat`(얼굴)·`s-h-sleep`(조는 얼굴)·`s-h-mad`(화난 얼굴) 세 벌 + 타이틀 눈 깜빡임 버전. 타이틀 "Starring Horangi" 버튼·일시정지 "Cat: Horangi" 로 주황이(Classic)와 전환, 설정 저장. 문구에 이름("Horangi rules out the row…", "Horangi found a spot", "Every Horangi is home"). 참고 얼굴 1장만 `art/ref/`(사람·집 없음, 빌드 제외). Playgama 설명·story 에 "my own orange tabby Horangi" 추가. 로봇 94/94. 커버 3종 호랑이로 교체. 아카이브 **v1.3.0 `cmw6jst5l0limno0hpipma62q`**(publish_sandbox 때는 이 id).
 - 2026-11-07 "고양이 모양을 우리 고양이 사진 주면 활용해서 할 수 있나? 해도 되나? / 애니메이션은 옵션으로 메뉴에 넣고 켜고 끄게?" → 애니메이션 옵션은 v1.2.0 에 이미 있음(타이틀·일시정지 `Effects: Calm/Lively`). 고양이: 가능·허용(본인 고양이 = 저작권 문제 없음, Playgama 4.2.1 OK). 사진을 그대로 쓰면 작은 칸에서 안 읽히고 벡터 결과 어긋나므로 **사진을 보고 같은 결로 그린다**. 사진·이름 대기.
 - 2026-11-07 "효과 때문에 눈이 계속 아프다. 그냥 빼고 막 빨리빨리 눌리고 되는 뭐 그런 게 나으려나?" → **v1.2.0 Calm 기본**: 분홍 물결·폭죽·판 흔들림·고양이 무한 바운스·타이틀 둥실·판 등장 애니 전부 꺼짐(기본). 남긴 것 = 탭 즉시 반응(고양이 팝 0.16초), 틀린 칸 화난 고양이(0.45초)+이유 글자+연한 빨강, 완료 시 고양이 한 번 깡충+SOLVED 글자(작게), 결과 창 0.7초 뒤. 타이틀·일시정지에 **Effects: Calm / Lively** 스위치(Bridge storage 저장) — 원하는 사람만 켬. 로봇 90/90.

@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T15:14:59.002Z",
+  "startedAt": "2026-11-07T15:59:41.562Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -87,7 +87,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,clear,cat,wrong,win,heart,lose,hint,start,mute-on,mute-off,bgm_ukulele,bgm_ragtime"
+      "detail": "mark,clear,cat,wrong,win,heart,lose,start,mute-on,hint,mute-off,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -272,7 +272,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and share shown",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6120999999999913,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":0.6986999999999535,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true}"
     },
     {
       "name": "Share my time copies or shares the text",
@@ -292,7 +292,7 @@
     {
       "name": "reload restores levels, name, daily time, tutorial flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6120999999999913,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
+      "detail": "{\"cleared\":10,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":0.6986999999999535,\"tut\":1,\"sub\":\"Solved today in 0:01 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -313,6 +313,21 @@
       "name": "a cleared level can be replayed from the grid",
       "ok": true,
       "detail": ""
+    },
+    {
+      "name": "dead end detected: message names the row/column/area, cells outlined, Undo offered, no heart lost",
+      "ok": true,
+      "detail": "{\"stuck\":{\"type\":\"color\",\"i\":1},\"cats\":2,\"shown\":true,\"text\":\"The blue area has no free spot left. One of your cats is in the wrong place. Tap a cat to pick it up, or undo the last one.\",\"outlined\":3,\"undo\":true,\"hearts\":3}"
+    },
+    {
+      "name": "Undo last cat removes the most recent cat",
+      "ok": true,
+      "detail": "{\"cats\":1,\"placed\":1}"
+    },
+    {
+      "name": "once the cats are picked up the dead-end message goes away",
+      "ok": true,
+      "detail": "{\"stuck\":null,\"shown\":false,\"outlined\":0}"
     },
     {
       "name": "desktop detected",
@@ -493,6 +508,7 @@
     "phone-390x844-daily-solved.png",
     "phone-390x844-levels.png",
     "phone-390x844-levels-bottom.png",
+    "phone-390x844-stuck.png",
     "iframe-1280x720-classic-cat.png",
     "iframe-1280x720-win-lively.png",
     "iframe-1280x720-play.png",
@@ -517,6 +533,6 @@
     "wide-21x9-910x390-play.png"
   ],
   "taps": 76,
-  "passed": 94,
+  "passed": 97,
   "failed": 0
 }

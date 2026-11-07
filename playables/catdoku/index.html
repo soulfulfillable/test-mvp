@@ -148,6 +148,12 @@
   #tip { font-size: 13px; font-weight: 600; color: var(--muted); text-align: center; line-height: 1.35; }
   #tut { background: var(--ink); color: #fff; border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
   #tut.hidden { display: none; }
+  #stuck { background: #fff; border: 2px solid var(--red); color: var(--ink); border-radius: 12px; padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
+  #stuck.hidden { display: none; }
+  #stuck b { color: var(--red); }
+  #undo-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; border: none; border-radius: 10px; background: var(--ink); color: var(--gold); font-size: 14px; font-weight: 700; padding: 8px 14px; min-height: 40px; }
+  #undo-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .cell.stuck::before { content: ''; position: absolute; inset: 2px; border-radius: 14%; border: 3px dashed var(--red); pointer-events: none; }
   #app.land #tip { text-align: left; }
 
   /* ── panels ── */
@@ -321,6 +327,7 @@
   </div>
   <div id="foot">
     <div id="tut" class="hidden"></div>
+    <div id="stuck" class="hidden"><span id="stuck-text"></span><br><button id="undo-btn"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>Undo last cat</button></div>
     <div id="tip">Tap a cell to place a cat. Tap the cat to remove it.</div>
   </div>
 </div>
@@ -398,7 +405,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.3.0';
+  var GAME_VERSION = '1.3.1';
   var GAME_TITLE = 'Kitty Queens: Cat Sudoku';
   var MAX_LEVEL = 500;
   var hash = location.hash || '';
@@ -746,7 +753,7 @@
   var state = STATE_TITLE;
   var mode = 'level';          // 'level' | 'daily'
   var level = 1, N = 7, solution = null, region = null, puzzleDay = '';
-  var cell = [], autoM = [], catMarks = {};
+  var cell = [], autoM = [], catMarks = {}, placed = [], stuck = null;
   var hearts = 3, catCount = 0;
   var runStart = 0, accumBase = 0, pausedAt = 0, pausedTotal = 0;
   var practice = false, lastTotal = 0, won = false, overAt = 0;
@@ -791,7 +798,48 @@
     else if (autoM[r][c] > 0) glyph(el, 'ax', 's-x');
     else glyph(el, '', null);
   }
+  var COLOR_NAMES = ['teal', 'blue', 'pink', 'green', 'yellow', 'light pink', 'purple', 'orange', 'tan'];
+  // dead end: a row, column or color area with no cat and no free cell left (player feedback 11-07: "when there is
+  // nowhere to tap, people do not know what to do") → say which, outline it, offer to undo the last cat
+  function findStuck() {
+    if (!cell.length) return null;
+    var free = function (r, c) { return cell[r][c] !== 2 && autoM[r][c] === 0; };
+    var r, c, n, has;
+    for (r = 0; r < N; r++) { has = false; n = 0; for (c = 0; c < N; c++) { if (cell[r][c] === 2) has = true; else if (free(r, c)) n++; } if (!has && n === 0) return { type: 'row', i: r }; }
+    for (c = 0; c < N; c++) { has = false; n = 0; for (r = 0; r < N; r++) { if (cell[r][c] === 2) has = true; else if (free(r, c)) n++; } if (!has && n === 0) return { type: 'column', i: c }; }
+    var regHas = [], regFree = [];
+    for (r = 0; r < N; r++) for (c = 0; c < N; c++) { var g = region[r][c]; if (cell[r][c] === 2) regHas[g] = true; else if (free(r, c)) regFree[g] = (regFree[g] || 0) + 1; }
+    for (var g2 = 0; g2 < N; g2++) if (!regHas[g2] && !regFree[g2]) return { type: 'color', i: g2 };
+    return null;
+  }
+  function stuckCells(st) {
+    var out = [];
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      if ((st.type === 'row' && r === st.i) || (st.type === 'column' && c === st.i) || (st.type === 'color' && region[r][c] === st.i)) out.push([r, c]);
+    }
+    return out;
+  }
+  function renderStuck() {
+    var st = state === STATE_PLAY ? findStuck() : null;
+    var changed = JSON.stringify(st) !== JSON.stringify(stuck);
+    stuck = st;
+    document.querySelectorAll('.cell.stuck').forEach(function (e) { e.classList.remove('stuck'); });
+    var box = $('stuck');
+    if (!st) { box.classList.add('hidden'); if (changed) layout(); return; }
+    stuckCells(st).forEach(function (p) { cellEls[p[0]][p[1]].classList.add('stuck'); });
+    var where = st.type === 'row' ? 'Row ' + (st.i + 1) : st.type === 'column' ? 'Column ' + (st.i + 1) : 'The ' + COLOR_NAMES[st.i % COLOR_NAMES.length] + ' area';
+    $('stuck-text').innerHTML = '<b>' + where + ' has no free spot left.</b> One of your cats is in the wrong place. Tap a cat to pick it up, or undo the last one.';
+    $('undo-btn').classList.toggle('hidden', placed.length === 0);
+    box.classList.remove('hidden');
+    if (changed) { layout(); if (st && changed) analytics('stuck', { mode: mode, level: level, type: st.type, cats: catCount }); }
+  }
+  function undoLast() {
+    if (state !== STATE_PLAY || frozen() || !placed.length) return;
+    var p = placed[placed.length - 1];
+    removeCat(p[0], p[1]); play('clear'); updateHud();
+  }
   function updateHud() {
+    renderStuck();
     var h = $('hearts'), html = '';
     for (var i = 0; i < 3; i++) html += '<svg class="' + (i < hearts ? '' : 'off') + '"><use href="#s-heart"/></svg>';
     h.innerHTML = html;
@@ -828,7 +876,7 @@
     return out;
   }
   function placeCat(r, c, hinted) {
-    cell[r][c] = 2; catCount++;
+    cell[r][c] = 2; catCount++; placed.push([r, c]);
     var list = autoCellsFor(r, c);
     catMarks[r + ',' + c] = list;
     list.forEach(function (p) { autoM[p[0]][p[1]]++; updateCell(p[0], p[1]); });
@@ -845,6 +893,7 @@
   }
   function removeCat(r, c) {
     cell[r][c] = 0; catCount--;
+    placed = placed.filter(function (p) { return !(p[0] === r && p[1] === c); });
     var list = catMarks[r + ',' + c] || []; delete catMarks[r + ',' + c];
     list.forEach(function (p) { autoM[p[0]][p[1]]--; updateCell(p[0], p[1]); });
     updateCell(r, c);
@@ -1030,7 +1079,7 @@
   function resetBoard() {
     cell = []; autoM = []; catMarks = {};
     for (var r = 0; r < N; r++) { cell.push([]); autoM.push([]); for (var c = 0; c < N; c++) { cell[r].push(0); autoM[r].push(0); updateCell(r, c); } }
-    hearts = 3; catCount = 0; cursor = null;
+    hearts = 3; catCount = 0; cursor = null; placed = []; stuck = null; $('stuck').classList.add('hidden');
     boardEl.classList.remove('won');
     document.querySelectorAll('.cell.cursor').forEach(function (e) { e.classList.remove('cursor'); });
   }
@@ -1393,6 +1442,7 @@
   $('pause-fx-btn').addEventListener('click', function () { unlockAudio(); toggleFx(); });
   $('pause-bgm-btn').addEventListener('click', function () { unlockAudio(); cycleBgm(); });
   $('hint-btn').addEventListener('click', function () { unlockAudio(); requestHint(); });
+  $('undo-btn').addEventListener('click', function () { unlockAudio(); undoLast(); });
   $('continue-btn').addEventListener('click', function () { unlockAudio(); requestContinue(); });
   $('next-btn').addEventListener('click', function () { unlockAudio(); if (performance.now() - overAt < 500) return; nextLevel(); });
   $('retry-btn').addEventListener('click', function () { unlockAudio(); if (performance.now() - overAt < 500 || rewardPending || rewardEarned) return; retry(); });
@@ -1480,7 +1530,7 @@
       get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; }, get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; },
       get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get tutorial() { return tutorial; }, get tutStep() { return tutStep; },
       get guideCell() { return guideCell; }, get hintUsed() { return hintUsed; }, get continueUsed() { return continueUsed; }, get rewardEarned() { return rewardEarned; },
-      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get calm() { return calm(); }, toggleFx: toggleFx, toggleSkin: toggleSkin, get skin() { return store.settings.skin; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
+      get isDesktop() { return isDesktop; }, get fxCount() { return parts.length; }, get calm() { return calm(); }, toggleFx: toggleFx, toggleSkin: toggleSkin, get skin() { return store.settings.skin; }, get stuck() { return stuck; }, get placed() { return placed.slice(); }, undoLast: undoLast, conflictsWith: conflictsWith, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); },
       tap: tap, startLevel: startLevel, startDaily: startDaily, showLevels: showLevels, quitToTitle: quitToTitle, pauseGame: pauseGame, resumeGame: resumeGame,
       requestHint: requestHint, requestContinue: requestContinue, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,
       saveStore: saveStore, genLevel: genLevel, genDaily: genDaily, countSolutions: countSolutions, sizeForLevel: sizeForLevel, layout: layout,
