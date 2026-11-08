@@ -5,7 +5,7 @@
 - 마지막 저장: 2026-11-08 10:20 KST · 작업 브랜치 `claude/sudoku-playables`(main 에 ff 반영) · 경로 `playables/sudoku/`, 웹 `docs/sudoku-playables/`
 - 승인: 사용자 "A"(11-08). 기획서 `plans/sudoku-playables.md`. 보고는 쉬운 영어.
 - 방금 끝낸 것: **v1.0.0 전부** — 생성기(`sudoku-core.js`: 4×4/6×6/9×9, 유일해 + 싱글 기반 난이도 채점, 레벨 300, 데일리 6×6 KST 시드), 표준 UI(숫자패드+남은 개수·Notes·Undo·Erase·행/열/박스·같은 숫자 하이라이트·틀린 입력 빨강·실수 3회·타이머·일시정지), 데일리 랭킹 + 도전장 링크(`#c=초&n=이름&d=날짜`, 친구 기록이 HUD 칩·결과 목록에 표시), 호랑이 마스코트(맞으면 깡충·틀리면 투덜·일시정지 낮잠·완료 춤), Bridge 배관(storage·오디오·전면/보상형 광고)·반응형(세로/가로/1:1)·로봇 104/104(실제 탭 550회)·zip·Pages 복사. Playgama 드래프트 + 폼 + 아카이브 1.0.0 + 커버 3종 업로드.
-- 진행 중이던 것: 없음(아카이브 빌드 체크 결과만 아래 "Playgama" 줄에서 확인).
+- 진행 중이던 것: 없음. 아카이브 빌드 체크 PASSED(bridgeSdk FOUND 2.4.0).
 - **다음 할 일**: ① 사용자 답("설명 없이 바로 됐나요?") 받기 → 피드백은 **지목된 것만** 고치기(PLAYBOOK 11-08 교훈: 묻지 않은 개선 금지) ② 사용자 yes 면 `publish_sandbox`(id `cmw6vm5iq0v3qno0hih97vhin`) → 공유 링크 → config 에 share url → 재업로드 ③ QA 툴은 Codex(아래 양식) ④ 예상 피드백 대비: 데일리 크기(6×6 vs 9×9) A/B, 이름(Kitty Sudoku 확정 여부)은 기획 파트너.
 - 사용자 대기 중인 것: 첫 판 느낌 1문항, 샌드박스 게시 yes/no.
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/sudoku-playables.md "🔁 이어받기" 와 plans/sudoku-playables.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구 있는지 먼저 확인.`
@@ -16,7 +16,7 @@
 - 결정(이 세션): 데일리 = **6×6 Medium**(차별점 ① 짧은 판에 맞춤; 9×9 는 레벨 76+). 레벨 사다리 1–5 4×4 → 6–75 6×6(Easy/Medium/Hard) → 76–300 9×9(Easy/Medium/Hard).
 
 ## Playgama
-- 드래프트 **Kitty Sudoku** id `cmw6vm5iq0v3qno0hih97vhin` (engine js, 2026-11-08 생성). `saas.publicToken` 에 이 id. 폼 저장됨(category sudoku, EN, iOS/Android/Desktop, 세로+가로, leaderboards·social, description/howToPlay/story). 아카이브 `cmw6ydlab0vjhmt0h90dtx61v` confirm 완료 — **빌드 체크 결과: (아래 줄 갱신)**. 커버 3종 확정. **publish_sandbox 는 사용자 yes 뒤.**
+- 드래프트 **Kitty Sudoku** id `cmw6vm5iq0v3qno0hih97vhin` (engine js, 2026-11-08 생성). `saas.publicToken` 에 이 id. 폼 저장됨(category sudoku, EN, iOS/Android/Desktop, 세로+가로, leaderboards·social, description/howToPlay/story). 아카이브 `cmw6ydlab0vjhmt0h90dtx61v` confirm 완료 — **빌드 체크 PASSED, bridgeSdk FOUND 2.4.0 (javascript), unpack DONE**. 런치 단계: archive·bridge·covers DONE, form 은 NO_CERTIFICATION(QA 툴 인증 — Codex), **current = sandbox(사용자 yes 대기)**. 커버 3종 확정. **publish_sandbox 는 사용자 yes 뒤.**
 - 이름 조사(11-08 WebSearch): "Kitty Sudoku" 등록 상표 없음. 가까운 것: 미국 등록 상표 **CAT' SUDOKU**(Reg. 6881895, Andrzej Citak, 28·35류, 2022), 앱 **Kittydoku**(TSP Technology, Android), **Catdoku**(iOS). 일본은 Nikoli 가 'Sudoku' 상표 보유(미국은 일반 명칭 취급). → 'Kitty Sudoku' 는 가칭으로 진행, 확정 전 기획 파트너 판단.
 
 ### Playgama 체크리스트 점검표 (get_game_checklist 2026-11-08, 번호별)
