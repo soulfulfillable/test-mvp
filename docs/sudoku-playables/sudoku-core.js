@@ -154,15 +154,10 @@
     return fallback;   // never reached for levels 1..300 and dailies 2026–2027 (robot verifies); still a valid unique puzzle
   }
 
-  // ---------- levels: 4×4 → 6×6 → 9×9, easy → medium → hard ----------
+  // ---------- levels: the ladder is 9×9 only (player 11-08: the first board must look like the sudoku everyone knows) ----------
   var MAX_LEVEL = 300;
   function levelSpec(level) {
-    if (level <= 3) return { n: 4, difficulty: 'easy' };
-    if (level <= 5) return { n: 4, difficulty: 'medium' };
-    if (level <= 25) return { n: 6, difficulty: 'easy' };
-    if (level <= 50) return { n: 6, difficulty: 'medium' };
-    if (level <= 75) return { n: 6, difficulty: 'hard' };
-    if (level <= 125) return { n: 9, difficulty: 'easy' };
+    if (level <= 100) return { n: 9, difficulty: 'easy' };
     if (level <= 200) return { n: 9, difficulty: 'medium' };
     return { n: 9, difficulty: 'hard' };
   }
@@ -171,8 +166,22 @@
     p.level = level;
     return p;
   }
+  // small boards: 4×4 and 6×6, outside the ladder, any order (All levels → "Small boards")
+  var MAX_SMALL = 25;
+  function smallSpec(i) {
+    if (i <= 3) return { n: 4, difficulty: 'easy' };
+    if (i <= 5) return { n: 4, difficulty: 'medium' };
+    if (i <= 15) return { n: 6, difficulty: 'easy' };
+    if (i <= 20) return { n: 6, difficulty: 'medium' };
+    return { n: 6, difficulty: 'hard' };
+  }
+  function genSmall(i) {
+    var s = smallSpec(i), p = generate(s.n, s.difficulty, Rng.seedOf('kitty-sudoku-small-' + i));
+    p.small = i;
+    return p;
+  }
   // daily: 6×6 medium, same board for everyone on the same KST day
   function genDaily(dayKey) { var p = generate(6, 'medium', Rng.seedOf('kitty-sudoku-daily-' + dayKey)); p.day = dayKey; return p; }
 
-  return { Rng: Rng, boxDims: boxDims, boxOf: boxOf, peers: peers, unitsOf: unitsOf, fullSolution: fullSolution, countSolutions: countSolutions, grade: grade, generate: generate, levelSpec: levelSpec, genLevel: genLevel, genDaily: genDaily, MAX_LEVEL: MAX_LEVEL, TARGETS: TARGETS };
+  return { Rng: Rng, boxDims: boxDims, boxOf: boxOf, peers: peers, unitsOf: unitsOf, fullSolution: fullSolution, countSolutions: countSolutions, grade: grade, generate: generate, levelSpec: levelSpec, genLevel: genLevel, smallSpec: smallSpec, genSmall: genSmall, genDaily: genDaily, MAX_LEVEL: MAX_LEVEL, MAX_SMALL: MAX_SMALL, TARGETS: TARGETS };
 });

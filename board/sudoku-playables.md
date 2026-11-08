@@ -1,19 +1,19 @@
 # Kitty Sudoku (숫자 스도쿠, Playables) — 개발 세션 게시판
-마지막 갱신: 2026-11-08 10:20 (KST)
+마지막 갱신: 2026-11-08 11:40 (KST)
 
 ## 🔁 이어받기
-- 마지막 저장: 2026-11-08 10:20 KST · 작업 브랜치 `claude/sudoku-playables`(main 에 ff 반영) · 경로 `playables/sudoku/`, 웹 `docs/sudoku-playables/`
+- 마지막 저장: 2026-11-08 11:40 KST · 작업 브랜치 `claude/sudoku-playables`(main 에 ff 반영) · 경로 `playables/sudoku/`, 웹 `docs/sudoku-playables/`
 - 승인: 사용자 "A"(11-08). 기획서 `plans/sudoku-playables.md`. 보고는 쉬운 영어.
-- 방금 끝낸 것: **v1.0.0 전부** — 생성기(`sudoku-core.js`: 4×4/6×6/9×9, 유일해 + 싱글 기반 난이도 채점, 레벨 300, 데일리 6×6 KST 시드), 표준 UI(숫자패드+남은 개수·Notes·Undo·Erase·행/열/박스·같은 숫자 하이라이트·틀린 입력 빨강·실수 3회·타이머·일시정지), 데일리 랭킹 + 도전장 링크(`#c=초&n=이름&d=날짜`, 친구 기록이 HUD 칩·결과 목록에 표시), 호랑이 마스코트(맞으면 깡충·틀리면 투덜·일시정지 낮잠·완료 춤), Bridge 배관(storage·오디오·전면/보상형 광고)·반응형(세로/가로/1:1)·로봇 104/104(실제 탭 550회)·zip·Pages 복사. Playgama 드래프트 + 폼 + 아카이브 1.0.0 + 커버 3종 업로드.
+- 방금 끝낸 것: **v1.1.0 — 첫 판부터 9×9 Easy**(사용자 "이게 왜 전통스도쿠지" → A 선택). 레벨 사다리 300 = 9×9 만(Easy 1–100·Medium 101–200·Hard 201–300), 4×4·6×6 는 All levels 맨 위 "Small boards" 25판(잠금 없음, 아무 순서). 로봇 107/107(실제 탭 547). Pages 반영. **Playgama 아카이브는 아직 1.0.0(4×4 시작)** — 샌드박스 yes 전에 1.1.0 재업로드 필요. 그 전 v1.0.0: — 생성기(`sudoku-core.js`: 4×4/6×6/9×9, 유일해 + 싱글 기반 난이도 채점, 레벨 300, 데일리 6×6 KST 시드), 표준 UI(숫자패드+남은 개수·Notes·Undo·Erase·행/열/박스·같은 숫자 하이라이트·틀린 입력 빨강·실수 3회·타이머·일시정지), 데일리 랭킹 + 도전장 링크(`#c=초&n=이름&d=날짜`, 친구 기록이 HUD 칩·결과 목록에 표시), 호랑이 마스코트(맞으면 깡충·틀리면 투덜·일시정지 낮잠·완료 춤), Bridge 배관(storage·오디오·전면/보상형 광고)·반응형(세로/가로/1:1)·로봇 104/104(실제 탭 550회)·zip·Pages 복사. Playgama 드래프트 + 폼 + 아카이브 1.0.0 + 커버 3종 업로드.
 - 진행 중이던 것: 없음. 아카이브 빌드 체크 PASSED(bridgeSdk FOUND 2.4.0).
-- **다음 할 일**: ① 사용자 답("설명 없이 바로 됐나요?") 받기 → 피드백은 **지목된 것만** 고치기(PLAYBOOK 11-08 교훈: 묻지 않은 개선 금지) ② 사용자 yes 면 `publish_sandbox`(id `cmw6vm5iq0v3qno0hih97vhin`) → 공유 링크 → config 에 share url → 재업로드 ③ QA 툴은 Codex(아래 양식) ④ 예상 피드백 대비: 데일리 크기(6×6 vs 9×9) A/B, 이름(Kitty Sudoku 확정 여부)은 기획 파트너.
-- 사용자 대기 중인 것: "이게 왜 전통스도쿠지" 의 뜻(A 첫 판 4×4 가 낯설다 / B 다른 것), 샌드박스 게시 yes/no.
+- **다음 할 일**: ⓪ 샌드박스 yes 가 오면 **먼저 zip 1.1.0 재업로드**(`./build.sh` → start_archive_upload `kitty-sudoku-1.1.0` → PUT → confirm → PASSED 확인) ① 사용자 답(Notes 설명 뒤 반응, 데일리 6×6 유지/9×9) 받기 → 피드백은 **지목된 것만** 고치기(PLAYBOOK 11-08 교훈: 묻지 않은 개선 금지) ② 사용자 yes 면 `publish_sandbox`(id `cmw6vm5iq0v3qno0hih97vhin`) → 공유 링크 → config 에 share url → 재업로드 ③ QA 툴은 Codex(아래 양식) ④ 예상 피드백 대비: 데일리 크기(6×6 vs 9×9) A/B, 이름(Kitty Sudoku 확정 여부)은 기획 파트너.
+- 사용자 대기 중인 것: Notes 설명 뒤 반응(필요 없으면 뺄지), 데일리 6×6 유지 여부, 샌드박스 게시 yes/no.
 - 이어받기 문장: `soulfulfillable/test-mvp 의 board/sudoku-playables.md "🔁 이어받기" 와 plans/sudoku-playables.md 를 읽고, "다음 할 일"부터 이어서 해줘. CLAUDE.md·DESIGN.md·PLAYBOOK.md 규칙대로. Playgama MCP 도구 있는지 먼저 확인.`
 
 ## 지금 상태 (3줄 이내)
 - 미리보기 https://soulfulfillable.github.io/test-mvp/sudoku-playables/ (Bridge mock: 저장 됨·광고 없음). 게임 v1.0.0, 로봇 104/104, 콘솔 0, 외부 요청 0, zip 2.97MB(32파일).
 - Playgama 드래프트 **Kitty Sudoku** `cmw6vm5iq0v3qno0hih97vhin` — 폼 저장, 아카이브 `kitty-sudoku-1.0.0`(`cmw6ydlab0vjhmt0h90dtx61v`) 업로드·confirm, 커버 3종 확정(square `cmw6zlmt00w5umt0hso9i3fft`, portrait `cmw74ff1110wjno0hupfk5jt2`, landscape `cmw74pcjj112rno0hgngjty39`). **샌드박스 미게시(사용자 yes 대기).**
-- 결정(이 세션): 데일리 = **6×6 Medium**(차별점 ① 짧은 판에 맞춤; 9×9 는 레벨 76+). 레벨 사다리 1–5 4×4 → 6–75 6×6(Easy/Medium/Hard) → 76–300 9×9(Easy/Medium/Hard).
+- 결정: 레벨 사다리 = 9×9 만(v1.1.0, 사용자 A). 작은 판 4×4·6×6 = Small boards 25판. 데일리 = **6×6 Medium**(아직 유지 — 사용자가 9×9 원하면 `genDaily` 한 줄).
 
 ## Playgama
 - 드래프트 **Kitty Sudoku** id `cmw6vm5iq0v3qno0hih97vhin` (engine js, 2026-11-08 생성). `saas.publicToken` 에 이 id. 폼 저장됨(category sudoku, EN, iOS/Android/Desktop, 세로+가로, leaderboards·social, description/howToPlay/story). 아카이브 `cmw6ydlab0vjhmt0h90dtx61v` confirm 완료 — **빌드 체크 PASSED, bridgeSdk FOUND 2.4.0 (javascript), unpack DONE**. 런치 단계: archive·bridge·covers DONE, form 은 NO_CERTIFICATION(QA 툴 인증 — Codex), **current = sandbox(사용자 yes 대기)**. 커버 3종 확정. **publish_sandbox 는 사용자 yes 뒤.**
@@ -53,10 +53,13 @@
 - 아쉬운 점(숨기지 않음): ① 실기기 사파리 미확인 ② 판 중간 상태(진행 중인 숫자) 저장 없음 — 나가면 그 판은 처음부터(레벨 진행은 저장) ③ 랭킹은 기기 로컬 + 도전장 링크뿐, Bridge 리더보드 `levels` 는 config 선언·setScore 만 ④ 도전장 링크는 Pages 판에서만(Playgama 는 URL 을 못 바꿈) ⑤ BGM 2곡은 Mole Mash·Kitty Queens 와 같은 CC0 곡 ⑥ 데일리 6×6 은 내 결정(사용자가 9×9 를 원하면 한 줄 수정).
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
-- 11-08 (v1.0.0 첫 플레이 뒤) **"뭐지 모르겠어 이게 왜 전통스도쿠지.."** → 뜻이 애매(첫 판 4×4 가 아는 스도쿠 모양이 아니라서? 다른 것?) → 바꾸지 않고 A/B 로 되물음: A 첫 판부터 9×9(아는 모양) / B 다른 것. 답 오기 전엔 손대지 않음(PLAYBOOK 11-08: 넓게 해석해 크게 바꾸지 말 것).
+- 11-08 **"응 그렇게 해 근데 노트 는 뭐하는거야?"** → A 반영(v1.1.0: 첫 판 9×9, 작은 판은 Small boards 로). Notes 는 시중 스도쿠 공통 기능(연필 메모 = 후보 숫자 작게 적기)이라 그대로 두고 한 줄로 설명만. 사용자가 모르는 기능이면 빼자고 할 수 있음 → 답 기다림.
+- 11-08 (v1.0.0 첫 플레이 뒤) **"뭐지 모르겠어 이게 왜 전통스도쿠지.."** → 첫 판 4×4 가 아는 스도쿠 모양이 아니어서. A/B 로 되물음(A 첫 판부터 9×9 / B 다른 것) → A.
 - 11-08 (기획 세션 전달) "캣도쿠 규칙이 바로 안 읽힘 → 진짜 숫자 스도쿠" → A 착수. 묻지 않은 개선은 얹지 말 것(PLAYBOOK 11-08 교훈). → 규칙·UI 는 Sudoku.com 류 표준 그대로, 설명 화면 0.
 
 ## 사용자 성향 — 원하는 것 / 불편해하는 것 (이 앱에서 알게 된 것)
+- **첫 화면에서 '아는 모양'이어야 한다** — 4×4 스도쿠는 사용자에게 스도쿠로 안 보였다("이게 왜 전통스도쿠지"). 작은 판은 옵션으로.
+- Notes(연필 메모) 같은 표준 기능도 사용자는 모를 수 있다 → 물으면 한 줄로 답하고, 빼라고 하면 뺀다.
 - (Kitty Queens 에서) 게임이 말을 많이 하면 "이상하다". 이 앱은 글이 한 줄(첫 판 팁)뿐이고 틀리면 빨간 숫자 + Mistakes 카운터만.
 - 폰으로 봄 → Pages 링크 하나로 바로.
 

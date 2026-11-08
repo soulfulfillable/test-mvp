@@ -26,3 +26,4 @@ Kitty Queens 삭제(그대로 보존, 샌드박스 게시 보류), 애플 제출
 
 ## 진행 기록
 - 2026-11-08 (개발 세션) **v1.0.0 완성** — `playables/sudoku/`: `sudoku-core.js`(생성기·풀이기·채점, 레벨 300: 1–5 4×4, 6–25 6×6 Easy, 26–50 Medium, 51–75 Hard, 76–125 9×9 Easy, 126–200 Medium, 201–300 Hard; 데일리 6×6 Medium KST 시드) + `index.html`(표준 UI, 호랑이 마스코트, 데일리 랭킹·도전장 링크, Bridge 배관) + `robot.js`(104 검사, 실제 탭 550회) + `build.sh`(zip + `docs/sudoku-playables/`). 미리보기 https://soulfulfillable.github.io/test-mvp/sudoku-playables/ . Playgama 드래프트 `cmw6vm5iq0v3qno0hih97vhin` 폼·아카이브·커버 완료, 샌드박스 미게시. 결정: 데일리 6×6(짧은 판 가설에 맞춤). 와 포인트: 첫 4×4 를 설명 없이 바로 푸는 것 + 완료 때 숫자가 대각선 물결로 들썩이고 호랑이가 춤.
+- 2026-11-08 (개발 세션) **v1.1.0** — 사용자 첫 반응 "뭐지 모르겠어 이게 왜 전통스도쿠지.." → 첫 판 4×4 가 스도쿠로 안 읽힘 → A/B 되물어 A: **첫 판부터 9×9 Easy**. 사다리 300 = 9×9 만, 4×4·6×6 는 All levels 의 "Small boards" 25판(아무 순서). 로봇 107/107. 사용자 질문 "노트는 뭐하는거야?" → 표준 연필 메모라 유지하고 설명만. Playgama 아카이브 1.1.0 은 샌드박스 yes 전에 재업로드.

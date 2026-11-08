@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T21:06:57.774Z",
+  "startedAt": "2026-11-08T02:06:42.070Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -7,12 +7,17 @@
     {
       "name": "levels 1..300: unique solution, difficulty matches the label (node, same code as the game)",
       "ok": true,
-      "detail": "1808ms {\"4-easy\":{\"easy\":3},\"4-medium\":{\"easy\":2},\"6-easy\":{\"easy\":20},\"6-medium\":{\"easy\":11,\"medium\":14},\"6-hard\":{\"medium\":20,\"hard\":4,\"easy\":1},\"9-easy\":{\"easy\":50},\"9-medium\":{\"medium\":75},\"9-hard\":{\"hard\":41,\"medium\":59}}"
+      "detail": "1462ms {\"9-easy\":{\"easy\":100},\"9-medium\":{\"medium\":100},\"9-hard\":{\"hard\":41,\"medium\":59}}"
     },
     {
-      "name": "level ladder 4×4 easy → 6×6 easy/medium/hard → 9×9 easy/medium/hard",
+      "name": "level ladder is 9×9 only: easy 1–100, medium 101–200, hard 201–300",
       "ok": true,
-      "detail": "1:4e 4:4m 6:6e 26:6m 51:6h 76:9e 126:9m 201:9h 300:9h"
+      "detail": "1:9e 100:9e 101:9m 200:9m 201:9h 300:9h"
+    },
+    {
+      "name": "small boards 1..25 (4×4 ×5, 6×6 ×20): unique solution",
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "dailies Nov 2026 → Dec 2027 (400 days): 6×6, unique solution",
@@ -60,9 +65,9 @@
       "detail": ""
     },
     {
-      "name": "Play starts level 1 (4×4 Easy), one-line tip under the board, nothing else to read",
+      "name": "Play starts level 1 (9×9 Easy, the board everyone knows), one-line tip under the board, nothing else to read",
       "ok": true,
-      "detail": "{\"state\":1,\"level\":1,\"N\":4,\"mistakes\":0,\"won\":false,\"sel\":-1,\"undo\":0,\"notesMode\":false,\"cleared\":0} tip=Tap a cell, then tap a number."
+      "detail": "{\"state\":1,\"level\":1,\"N\":9,\"mistakes\":0,\"won\":false,\"sel\":-1,\"undo\":0,\"notesMode\":false,\"cleared\":0} tip=Tap a cell, then tap a number."
     },
     {
       "name": "level_started message after start",
@@ -77,7 +82,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,cat,clear,win,wrong,lose,heart,hint,mute-on,start,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "mark,clear,wrong,lose,win,heart,cat,start,mute-on,hint,mute-off,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -87,12 +92,12 @@
     {
       "name": "tap a cell: it is selected and its row, column and box light up",
       "ok": true,
-      "detail": "{\"sel\":2,\"selCls\":1,\"peers\":7,\"expectPeers\":7}"
+      "detail": "{\"sel\":1,\"selCls\":1,\"peers\":20,\"expectPeers\":20}"
     },
     {
       "name": "tap a given number: every cell with the same number is highlighted",
       "ok": true,
-      "detail": "{\"i\":0,\"v\":1,\"count\":2}"
+      "detail": "{\"i\":0,\"v\":3,\"count\":5}"
     },
     {
       "name": "wrong number: stays on the board in red, Mistakes 1/3, Horangi grumbles, no text lecture",
@@ -112,7 +117,7 @@
     {
       "name": "two pencil marks in the cell, no value",
       "ok": true,
-      "detail": "{\"notes\":6,\"on\":2,\"v\":0}"
+      "detail": "{\"notes\":130,\"on\":2,\"v\":0}"
     },
     {
       "name": "tapping a mark again removes it",
@@ -122,7 +127,7 @@
     {
       "name": "right number: blue, Horangi hops, the tip line is gone, the same pencil mark in a peer cell is cleared",
       "ok": true,
-      "detail": "{\"v\":2,\"pn\":0,\"cat\":\"#s-cat-happy\",\"tip\":\"\",\"undo\":5}"
+      "detail": "{\"v\":7,\"pn\":0,\"cat\":\"#s-cat-happy\",\"tip\":\"\",\"undo\":5}"
     },
     {
       "name": "Undo restores the number and the cleared pencil mark",
@@ -142,12 +147,12 @@
     {
       "name": "number pad shows how many of each number are left",
       "ok": true,
-      "detail": "true,true,true,true"
+      "detail": "true,true,true,true,true,true,true,true,true"
     },
     {
       "name": "level 1 solved by taps: SOLVED!, numbers wave, Horangi dances, every pad number done",
       "ok": true,
-      "detail": "{\"won\":true,\"msg\":\"SOLVED!\",\"cat\":true,\"done\":4}"
+      "detail": "{\"won\":true,\"msg\":\"SOLVED!\",\"cat\":true,\"done\":9}"
     },
     {
       "name": "results panel, progress saved, first-level flag set",
@@ -165,44 +170,49 @@
       "detail": ""
     },
     {
-      "name": "level 2 (4×4) solved by taps",
+      "name": "level 2 (9×9 easy) solved by taps",
       "ok": true,
-      "detail": "{\"state\":2,\"level\":2,\"N\":4,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":8,\"notesMode\":false,\"cleared\":2}"
+      "detail": "{\"state\":2,\"level\":2,\"N\":9,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":42,\"notesMode\":false,\"cleared\":2}"
     },
     {
-      "name": "level 3 (4×4) solved by taps",
+      "name": "level 3 (9×9 easy) solved by taps",
+      "ok": true,
+      "detail": "{\"state\":2,\"level\":3,\"N\":9,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":41,\"notesMode\":false,\"cleared\":3}"
+    },
+    {
+      "name": "small board 1 (4×4 easy) solved by taps, marked done",
       "ok": true,
       "detail": "{\"state\":2,\"level\":3,\"N\":4,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":8,\"notesMode\":false,\"cleared\":3}"
     },
     {
-      "name": "level 6 (6×6 easy) solved by taps",
+      "name": "after a small board: \"Next small board\" button",
       "ok": true,
-      "detail": "{\"state\":2,\"level\":6,\"N\":6,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":16,\"notesMode\":false,\"cleared\":6}"
+      "detail": ""
     },
     {
-      "name": "level 7 (6×6 easy) solved by taps",
+      "name": "small board 2 (4×4 easy) solved by taps, marked done",
       "ok": true,
-      "detail": "{\"state\":2,\"level\":7,\"N\":6,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":16,\"notesMode\":false,\"cleared\":7}"
+      "detail": "{\"state\":2,\"level\":3,\"N\":4,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":8,\"notesMode\":false,\"cleared\":3}"
     },
     {
-      "name": "level 8 (6×6 easy) solved by taps",
+      "name": "small board 3 (4×4 easy) solved by taps, marked done",
       "ok": true,
-      "detail": "{\"state\":2,\"level\":8,\"N\":6,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":16,\"notesMode\":false,\"cleared\":8}"
+      "detail": "{\"state\":2,\"level\":3,\"N\":4,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":8,\"notesMode\":false,\"cleared\":3}"
     },
     {
-      "name": "level 76 (9×9 easy) solved by taps",
+      "name": "small board 6 (6×6 easy) solved by taps, marked done",
       "ok": true,
-      "detail": "{\"state\":2,\"level\":76,\"N\":9,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":42,\"notesMode\":false,\"cleared\":76}"
+      "detail": "{\"state\":2,\"level\":3,\"N\":6,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":16,\"notesMode\":false,\"cleared\":3}"
     },
     {
-      "name": "level 77 (9×9 easy) solved by taps",
+      "name": "small board 7 (6×6 easy) solved by taps, marked done",
       "ok": true,
-      "detail": "{\"state\":2,\"level\":77,\"N\":9,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":42,\"notesMode\":false,\"cleared\":77}"
+      "detail": "{\"state\":2,\"level\":3,\"N\":6,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":16,\"notesMode\":false,\"cleared\":3}"
     },
     {
-      "name": "level 78 (9×9 easy) solved by taps",
+      "name": "small board 8 (6×6 easy) solved by taps, marked done",
       "ok": true,
-      "detail": "{\"state\":2,\"level\":78,\"N\":9,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":42,\"notesMode\":false,\"cleared\":78}"
+      "detail": "{\"state\":2,\"level\":3,\"N\":6,\"mistakes\":0,\"won\":true,\"sel\":-1,\"undo\":16,\"notesMode\":false,\"cleared\":3}"
     },
     {
       "name": "level 80 is 9×9 with the hint button (rewarded supported)",
@@ -285,9 +295,9 @@
       "detail": ""
     },
     {
-      "name": "title shows progress: Play · Level 9 (levels 1–8 cleared in order count; 76–78 are replays)",
+      "name": "title shows progress: Play · Level 4 (levels 1–3 cleared; level 80 was left unfinished)",
       "ok": true,
-      "detail": "Play · Level 79 / 78 of 300 cleared"
+      "detail": "Play · Level 4 / 3 of 300 cleared · small boards 4×4, 6×6"
     },
     {
       "name": "Today's puzzle starts (6×6, not practice, no friend chip without a link)",
@@ -297,7 +307,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and \"Challenge a friend\" shown (web build)",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":1.788399999999907,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true,\"label\":\"Challenge a friend\"}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":1.5068999999999069,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true,\"label\":\"Challenge a friend\"}"
     },
     {
       "name": "share text carries a challenge link with the time, name and day",
@@ -322,7 +332,7 @@
     {
       "name": "reload restores levels, name, daily time, first-level flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":78,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":1.788399999999907,\"tut\":1,\"sub\":\"Solved today in 0:02 · practice runs\"}"
+      "detail": "{\"cleared\":3,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":1.5068999999999069,\"tut\":1,\"sub\":\"Solved today in 0:02 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -330,9 +340,9 @@
       "detail": ""
     },
     {
-      "name": "levels: all 300 in one scrolling list, next level in view, size/difficulty headers",
+      "name": "levels: 25 small boards (6 done, none locked) + 300 levels in one scrolling list, next level in view, headers",
       "ok": true,
-      "detail": "{\"state\":3,\"done\":78,\"next\":\"79\",\"locked\":221,\"total\":300,\"scrolls\":true,\"nextVisible\":true,\"heads\":8}"
+      "detail": "{\"state\":3,\"done\":3,\"next\":\"4\",\"locked\":296,\"total\":300,\"small\":25,\"smallDone\":6,\"smallLocked\":0,\"scrolls\":true,\"nextVisible\":true,\"heads\":4}"
     },
     {
       "name": "scrolling to the bottom shows level 300",
@@ -341,6 +351,11 @@
     },
     {
       "name": "a cleared level can be replayed from the grid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "any small board opens from the grid (no lock)",
       "ok": true,
       "detail": ""
     },
@@ -410,12 +425,12 @@
       "detail": ""
     },
     {
-      "name": "6×6 solved with the mouse",
+      "name": "6×6 small board solved with the mouse",
       "ok": true,
       "detail": ""
     },
     {
-      "name": "layout phone-360x640 (portrait): board 340px, cells 37px, pad keys 33×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout phone-360x640 (portrait): board 339px, cells 37px, pad keys 33×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
@@ -425,19 +440,19 @@
       "detail": "panel 453px of 640"
     },
     {
-      "name": "layout phone-390x844 (portrait): board 355px, cells 39px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout phone-390x844 (portrait): board 370px, cells 41px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.91\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout phone-430x932 (portrait): board 394px, cells 43px, pad keys 41×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout phone-430x932 (portrait): board 409px, cells 45px, pad keys 41×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout land-844x390 (landscape): board 359px, cells 39px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout land-844x390 (landscape): board 374px, cells 41px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "results panel fits at land-844x390",
@@ -460,14 +475,14 @@
       "detail": "{\"fill\":\"0.93\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout tablet-1024x768 (landscape): board 622px, cells 69px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout tablet-1024x768 (landscape): board 646px, cells 71px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.81\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.84\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout square-640x640 (portrait): board 388px, cells 43px, pad keys 40×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout square-640x640 (portrait): board 404px, cells 44px, pad keys 40×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.61\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.63\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "results panel fits at square-640x640",
@@ -495,19 +510,19 @@
       "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout desk-1920x1080 (landscape): board 1021px, cells 113px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout desk-1920x1080 (landscape): board 1055px, cells 117px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.98\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout tall-9x21-390x910 (portrait): board 369px, cells 41px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout tall-9x21-390x910 (portrait): board 370px, cells 41px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout wide-21x9-910x390 (landscape): board 374px, cells 41px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
-    },
-    {
-      "name": "layout wide-21x9-910x390 (landscape): board 359px, cells 39px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
-      "ok": true,
-      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "console errors: 0",
@@ -533,9 +548,10 @@
     "phone-390x844-notes.png",
     "phone-390x844-level1-solved.png",
     "phone-390x844-level1-panel.png",
-    "phone-390x844-6x6.png",
     "phone-390x844-9x9.png",
     "phone-390x844-9x9-solved.png",
+    "phone-390x844-small-4x4.png",
+    "phone-390x844-small-6x6.png",
     "phone-390x844-paused.png",
     "phone-390x844-hint.png",
     "phone-390x844-out-of-mistakes.png",
@@ -567,7 +583,7 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "taps": 550,
-  "passed": 104,
+  "taps": 547,
+  "passed": 107,
   "failed": 0
 }
