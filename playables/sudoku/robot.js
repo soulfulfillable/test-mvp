@@ -96,8 +96,11 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
       const k = p.n + '-' + p.difficulty; grades[k] = grades[k] || {}; grades[k][p.grade] = (grades[k][p.grade] || 0) + 1;
     }
     check('levels 1..300: unique solution, difficulty matches the label (node, same code as the game)', bad.length === 0, bad.length ? bad.slice(0, 5).join(',') : (Date.now() - t0) + 'ms ' + JSON.stringify(grades));
-    const s = [1, 4, 6, 26, 51, 76, 126, 201, 300].map((l) => { const p = Core.levelSpec(l); return l + ':' + p.n + p.difficulty[0]; });
-    check('level ladder 4×4 easy → 6×6 easy/medium/hard → 9×9 easy/medium/hard', Core.levelSpec(1).n === 4 && Core.levelSpec(6).n === 6 && Core.levelSpec(76).n === 9 && Core.levelSpec(201).difficulty === 'hard', s.join(' '));
+    const s = [1, 100, 101, 200, 201, 300].map((l) => { const p = Core.levelSpec(l); return l + ':' + p.n + p.difficulty[0]; });
+    check('level ladder is 9×9 only: easy 1–100, medium 101–200, hard 201–300', [1, 50, 150, 300].every((l) => Core.levelSpec(l).n === 9) && Core.levelSpec(100).difficulty === 'easy' && Core.levelSpec(101).difficulty === 'medium' && Core.levelSpec(201).difficulty === 'hard', s.join(' '));
+    const sbad = [];
+    for (let i = 1; i <= Core.MAX_SMALL; i++) { const p = Core.genSmall(i); if (Core.countSolutions(p.givens, p.n, 2) !== 1) sbad.push(i); }
+    check('small boards 1..25 (4×4 ×5, 6×6 ×20): unique solution', sbad.length === 0 && Core.smallSpec(1).n === 4 && Core.smallSpec(6).n === 6 && Core.smallSpec(25).difficulty === 'hard', sbad.join(','));
     const dbad = [];
     const d = new Date(Date.UTC(2026, 10, 1));
     for (let k = 0; k < 400; k++, d.setUTCDate(d.getUTCDate() + 1)) {
@@ -115,8 +118,8 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
   // ── 1. page generator = node generator ──
   {
     const { context, page } = await newPage(browser, 390, 844, base + '#debug', { touch: true });
-    const inPage = await page.evaluate(() => [1, 6, 76, 300].map((l) => window.__game.core.genLevel(l).givens.join('')).concat([window.__game.core.genDaily('20261108').givens.join('')]));
-    const inNode = [1, 6, 76, 300].map((l) => Core.genLevel(l).givens.join('')).concat([Core.genDaily('20261108').givens.join('')]);
+    const inPage = await page.evaluate(() => [1, 150, 300].map((l) => window.__game.core.genLevel(l).givens.join('')).concat([window.__game.core.genDaily('20261108').givens.join(''), window.__game.core.genSmall(7).givens.join('')]));
+    const inNode = [1, 150, 300].map((l) => Core.genLevel(l).givens.join('')).concat([Core.genDaily('20261108').givens.join(''), Core.genSmall(7).givens.join('')]);
     check('same seed = same board in the page and in node', JSON.stringify(inPage) === JSON.stringify(inNode));
     await context.close();
   }
@@ -139,7 +142,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     await page.tap('#play-btn'); await sleep(400);
     let st = await state(page);
     const tip = await page.evaluate(() => document.getElementById('tip').textContent);
-    check('Play starts level 1 (4×4 Easy), one-line tip under the board, nothing else to read', st.state === 1 && st.level === 1 && st.N === 4 && /Tap a cell/.test(tip), JSON.stringify(st) + ' tip=' + tip);
+    check('Play starts level 1 (9×9 Easy, the board everyone knows), one-line tip under the board, nothing else to read', st.state === 1 && st.level === 1 && st.N === 9 && /Tap a cell/.test(tip), JSON.stringify(st) + ' tip=' + tip);
     check('level_started message after start', await page.evaluate(() => window.__msgs.includes('level_started')));
     await sleep(1200);
     const audio = await page.evaluate(() => ({ ctx: window.__game.ctxState, bufs: window.__game.bufs, bgm: window.__game.bgmPlaying, audible: window.__game.audible }));
@@ -199,36 +202,39 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     await solveBoard(page, true, 60);
     await sleep(300);
     const won = await page.evaluate(() => ({ won: document.getElementById('board').classList.contains('won'), msg: document.getElementById('msg').textContent, cat: document.getElementById('cat').classList.contains('dance'), done: document.querySelectorAll('.num.done').length }));
-    check('level 1 solved by taps: SOLVED!, numbers wave, Horangi dances, every pad number done', won.won && /SOLVED/.test(won.msg) && won.cat && won.done === 4, JSON.stringify(won));
+    check('level 1 solved by taps: SOLVED!, numbers wave, Horangi dances, every pad number done', won.won && /SOLVED/.test(won.msg) && won.cat && won.done === 9, JSON.stringify(won));
     await shot(page, 'phone-390x844-level1-solved');
     await sleep(900);
     const w = await page.evaluate(() => ({ state: window.__game.state, won: window.__game.won, panel: !document.getElementById('over-panel').classList.contains('hidden'), cleared: window.__game.store.progress.cleared, tut: window.__game.store.progress.tut, title: document.getElementById('over-title').textContent, msgs: window.__msgs.slice(-2) }));
     check('results panel, progress saved, first-level flag set', w.state === 2 && w.won && w.panel && w.cleared === 1 && w.tut === 1 && /solved/i.test(w.title), JSON.stringify(w));
     check('level_completed message on win', w.msgs.includes('level_completed'), w.msgs.join(','));
     await shot(page, 'phone-390x844-level1-panel');
-    // levels 2, 3 (4×4) via Next level
+    // levels 2, 3 (9×9) via Next level
     for (let lv = 2; lv <= 3; lv++) {
       await sleep(600);
       await page.tap('#next-btn'); await sleep(300);
       st = await state(page);
-      if (!(st.state === 1 && st.level === lv && st.N === 4)) { check(`level ${lv} starts`, false, JSON.stringify(st)); break; }
-      if (lv === 2) check('no tip after the first level, hint button hidden on the mock platform (rewarded unsupported)', await page.evaluate(() => document.getElementById('tip').textContent === '' && document.getElementById('hint-btn').classList.contains('hidden')));
+      if (!(st.state === 1 && st.level === lv && st.N === 9)) { check(`level ${lv} starts`, false, JSON.stringify(st)); break; }
+      if (lv === 2) { check('no tip after the first level, hint button hidden on the mock platform (rewarded unsupported)', await page.evaluate(() => document.getElementById('tip').textContent === '' && document.getElementById('hint-btn').classList.contains('hidden'))); await tapCell(page, await openCell(page), true); await shot(page, 'phone-390x844-9x9'); }
+      await solveBoard(page, true, 15); await sleep(1200);
+      st = await state(page);
+      check(`level ${lv} (9×9 ${await page.evaluate(() => window.__game.difficulty)}) solved by taps`, st.state === 2 && st.won && st.cleared === lv, JSON.stringify(st));
+      if (lv === 3) await shot(page, 'phone-390x844-9x9-solved');
+    }
+    // small boards: 4×4 ×3 and 6×6 ×3 by taps (outside the ladder)
+    for (const sm of [1, 2, 3, 6, 7, 8]) {
+      await page.evaluate((sm) => window.__game.startSmall(sm), sm); await sleep(200);
+      st = await state(page);
+      const expectN = sm < 6 ? 4 : 6;
+      const smState = await page.evaluate(() => ({ mode: window.__game.mode, small: window.__game.small, label: document.getElementById('mode-main').textContent }));
+      if (!(st.state === 1 && st.N === expectN && smState.mode === 'small' && /Small board/.test(smState.label))) { check(`small board ${sm} starts as ${expectN}×${expectN}`, false, JSON.stringify(st) + JSON.stringify(smState)); continue; }
+      if (sm === 1) { await tapCell(page, await openCell(page), true); await shot(page, 'phone-390x844-small-4x4'); }
+      if (sm === 6) { await tapCell(page, await openCell(page), true); await shot(page, 'phone-390x844-small-6x6'); }
       await solveBoard(page, true, 25); await sleep(1200);
       st = await state(page);
-      check(`level ${lv} (4×4) solved by taps`, st.state === 2 && st.won && st.cleared === lv, JSON.stringify(st));
-    }
-    // 6×6 ×3 and 9×9 ×3 by taps
-    for (const lv of [6, 7, 8, 76, 77, 78]) {
-      await page.evaluate((lv) => window.__game.startLevel(lv), lv); await sleep(200);
-      st = await state(page);
-      const expectN = lv < 76 ? 6 : 9;
-      if (!(st.state === 1 && st.N === expectN)) { check(`level ${lv} starts as ${expectN}×${expectN}`, false, JSON.stringify(st)); continue; }
-      if (lv === 6) { await tapCell(page, await openCell(page), true); await shot(page, 'phone-390x844-6x6'); }
-      if (lv === 76) { await tapCell(page, await openCell(page), true); await shot(page, 'phone-390x844-9x9'); }
-      await solveBoard(page, true, lv >= 76 ? 15 : 25); await sleep(1200);
-      st = await state(page);
-      check(`level ${lv} (${expectN}×${expectN} ${await page.evaluate(() => window.__game.difficulty)}) solved by taps`, st.state === 2 && st.won && st.mistakes === 0, JSON.stringify(st));
-      if (lv === 78) await shot(page, 'phone-390x844-9x9-solved');
+      const done = await page.evaluate((sm) => !!window.__game.store.progress.small[sm], sm);
+      check(`small board ${sm} (${expectN}×${expectN} ${await page.evaluate(() => window.__game.difficulty)}) solved by taps, marked done`, st.state === 2 && st.won && st.mistakes === 0 && done, JSON.stringify(st));
+      if (sm === 1) { await sleep(600); check('after a small board: "Next small board" button', await page.evaluate(() => /Next small board/.test(document.getElementById('next-btn').textContent))); }
     }
     // level 80 (9×9): hint (rewarded) + three mistakes → continue once
     await sleep(600);
@@ -290,7 +296,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     await page.tap('#retry-btn'); await sleep(300);
     check('Try again restarts level 80 with a clean board', await page.evaluate(() => window.__game.state === 1 && window.__game.level === 80 && window.__game.mistakes === 0 && window.__game.undoLen === 0));
     await page.evaluate(() => window.__game.quitToTitle()); await sleep(100);
-    check('title shows progress: Play · Level 9 (levels 1–8 cleared in order count; 76–78 are replays)', await page.evaluate(() => /Level/.test(document.getElementById('play-main').textContent) && /of 300/.test(document.getElementById('levels-sub').textContent)), await page.evaluate(() => document.getElementById('play-main').textContent + ' / ' + document.getElementById('levels-sub').textContent));
+    check('title shows progress: Play · Level 4 (levels 1–3 cleared; level 80 was left unfinished)', await page.evaluate(() => /Level 4/.test(document.getElementById('play-main').textContent) && /of 300/.test(document.getElementById('levels-sub').textContent)), await page.evaluate(() => document.getElementById('play-main').textContent + ' / ' + document.getElementById('levels-sub').textContent));
     // daily
     await page.tap('#daily-btn'); await sleep(300);
     const d0 = await page.evaluate(() => ({ state: window.__game.state, mode: window.__game.mode, N: window.__game.N, practice: window.__game.practice, label: document.getElementById('mode-main').textContent, chip: document.getElementById('ch-chip').classList.contains('hidden') }));
@@ -317,20 +323,23 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     await page.reload({ waitUntil: 'load' });
     await page.waitForFunction(() => window.__game && window.__game.state !== undefined);
     const re = await page.evaluate(() => ({ cleared: window.__game.store.progress.cleared, name: window.__game.store.progress.name, muted: window.__game.store.settings.muted, attr: document.getElementById('mute-btn').getAttribute('data-muted'), audible: window.__game.audible, solved: window.__game.store.progress.daily.solved, tut: window.__game.store.progress.tut, sub: document.getElementById('daily-sub').textContent }));
-    check('reload restores levels, name, daily time, first-level flag, mute (Bridge storage)', re.cleared >= 8 && re.name === 'Robo' && re.muted === true && re.attr === '1' && !re.audible && re.solved > 0 && re.tut === 1 && /Solved today/.test(re.sub), JSON.stringify(re));
+    check('reload restores levels, name, daily time, first-level flag, mute (Bridge storage)', re.cleared >= 3 && re.name === 'Robo' && re.muted === true && re.attr === '1' && !re.audible && re.solved > 0 && re.tut === 1 && /Solved today/.test(re.sub), JSON.stringify(re));
     await page.tap('#daily-btn'); await sleep(300);
     check('second daily run is practice (first time is the record)', await page.evaluate(() => window.__game.practice && /practice/.test(document.getElementById('mode-sub').textContent)));
     await page.evaluate(() => window.__game.quitToTitle());
     // levels screen
     await page.tap('#levels-btn'); await sleep(200);
-    const lv = await page.evaluate(() => { const g = document.getElementById('levels-grid'), n = document.querySelector('.lvl.next'), gr = g.getBoundingClientRect(), nr = n.getBoundingClientRect(); return { state: window.__game.state, done: document.querySelectorAll('.lvl.done').length, next: n.dataset.level, locked: document.querySelectorAll('.lvl.locked').length, total: document.querySelectorAll('.lvl').length, scrolls: g.scrollHeight > g.clientHeight + 100, nextVisible: nr.top >= gr.top && nr.bottom <= gr.bottom, heads: document.querySelectorAll('.lvl-head').length }; });
-    check('levels: all 300 in one scrolling list, next level in view, size/difficulty headers', lv.state === 3 && lv.total === 300 && lv.done >= 8 && lv.scrolls && lv.nextVisible && lv.heads === 8 && lv.done + 1 + lv.locked === 300, JSON.stringify(lv));
+    const lv = await page.evaluate(() => { const g = document.getElementById('levels-grid'), n = document.querySelector('.lvl.next'), gr = g.getBoundingClientRect(), nr = n.getBoundingClientRect(); return { state: window.__game.state, done: document.querySelectorAll('.lvl.done:not(.small)').length, next: n.dataset.level, locked: document.querySelectorAll('.lvl.locked').length, total: document.querySelectorAll('.lvl:not(.small)').length, small: document.querySelectorAll('.lvl.small').length, smallDone: document.querySelectorAll('.lvl.small.done').length, smallLocked: document.querySelectorAll('.lvl.small.locked').length, scrolls: g.scrollHeight > g.clientHeight + 100, nextVisible: nr.top >= gr.top && nr.bottom <= gr.bottom, heads: document.querySelectorAll('.lvl-head').length }; });
+    check('levels: 25 small boards (6 done, none locked) + 300 levels in one scrolling list, next level in view, headers', lv.state === 3 && lv.total === 300 && lv.small === 25 && lv.smallDone === 6 && lv.smallLocked === 0 && lv.scrolls && lv.nextVisible && lv.heads === 4 && lv.done + 1 + lv.locked === 300, JSON.stringify(lv));
     await shot(page, 'phone-390x844-levels');
     await page.evaluate(() => { const g = document.getElementById('levels-grid'); g.scrollTop = g.scrollHeight; }); await sleep(150);
     check('scrolling to the bottom shows level 300', await page.evaluate(() => { const g = document.getElementById('levels-grid').getBoundingClientRect(), r = document.querySelector('.lvl[data-level="300"]').getBoundingClientRect(); return r.top >= g.top - 1 && r.bottom <= g.bottom + 1 && document.getElementById('levels-panel').getBoundingClientRect().bottom <= innerHeight; }));
     await page.evaluate(() => { document.getElementById('levels-grid').scrollTop = 0; }); await sleep(150);
     await page.tap('.lvl[data-level="2"]'); await sleep(300);
-    check('a cleared level can be replayed from the grid', await page.evaluate(() => window.__game.state === 1 && window.__game.level === 2 && window.__game.N === 4));
+    check('a cleared level can be replayed from the grid', await page.evaluate(() => window.__game.state === 1 && window.__game.level === 2 && window.__game.N === 9));
+    await page.evaluate(() => window.__game.showLevels()); await sleep(150);
+    await page.tap('.lvl[data-small="10"]'); await sleep(300);
+    check('any small board opens from the grid (no lock)', await page.evaluate(() => window.__game.state === 1 && window.__game.mode === 'small' && window.__game.small === 10 && window.__game.N === 6));
     await context.close();
   }
 
@@ -359,7 +368,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     check('desktop detected', await page.evaluate(() => window.__game.isDesktop));
     await page.keyboard.press('Space'); await sleep(300);
     check('Space starts the next level', await page.evaluate(() => window.__game.state === 1));
-    await page.evaluate(() => { window.__game.store.progress.tut = 1; window.__game.startLevel(7); });
+    await page.evaluate(() => { window.__game.store.progress.tut = 1; window.__game.startSmall(7); });
     await sleep(100);
     const i = await openCell(page);
     const v = await page.evaluate((i) => window.__game.solution[i], i);
@@ -372,14 +381,14 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     await page.keyboard.press('KeyZ'); await sleep(50);
     check('Z undoes', await page.evaluate((i) => window.__game.cells[i] === 0, i));
     await page.keyboard.press('ArrowRight'); await sleep(50);
-    check('arrow keys move the selection', await page.evaluate((i) => window.__game.sel === (Math.floor(i / 6) * 6 + (i % 6 + 1) % 6), i));
+    check('arrow keys move the selection', await page.evaluate((i) => { const n = window.__game.N; return window.__game.sel === (Math.floor(i / n) * n + (i % n + 1) % n); }, i));
     await page.keyboard.press('KeyN'); await sleep(50);
     check('N toggles Notes', await page.evaluate(() => window.__game.notesMode));
     await page.keyboard.press('KeyN');
     await page.keyboard.press('Escape'); await sleep(100);
     check('Esc does nothing (1.5.2)', await page.evaluate(() => window.__game.state === 1 && !window.__game.userPaused));
     await solveBoard(page, false, 15); await sleep(300);
-    check('6×6 solved with the mouse', await page.evaluate(() => window.__game.state === 2 && window.__game.won));
+    check('6×6 small board solved with the mouse', await page.evaluate(() => window.__game.state === 2 && window.__game.won));
     await shot(page, 'iframe-1280x720-solved');
     await sleep(900);
     await page.evaluate(() => window.__game.startLevel(130)); await sleep(100);

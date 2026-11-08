@@ -260,7 +260,7 @@
   <div id="hud">
     <div id="hud-top">
       <button id="back-btn" class="ibtn" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <div id="mode-label"><span id="mode-main">Level 1</span><small id="mode-sub">4×4 · Easy</small></div>
+      <div id="mode-label"><span id="mode-main">Level 1</span><small id="mode-sub">9×9 · Easy</small></div>
       <div id="timer">0:00</div>
       <button id="pause-btn" class="ibtn" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg></button>
       <button id="mute-btn" class="ibtn" data-muted="0" aria-label="Sound on/off">
@@ -297,9 +297,9 @@
     <button id="title-mute-btn" class="ibtn" aria-label="Sound on/off"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18 6.5a7.8 7.8 0 0 1 0 11"/></svg></button>
   </div>
   <svg class="logo" id="title-logo" viewBox="0 0 100 100"><use href="#s-cat"/></svg>
-  <h1>Kitty Sudoku<small>Classic number puzzle · 4×4, 6×6, 9×9</small></h1>
+  <h1>Kitty Sudoku<small>Classic number puzzle</small></h1>
   <div id="title-btns" class="btns">
-    <button id="play-btn" class="btn-main"><span class="l"><span id="play-main">Play · Level 1</span><small id="play-sub">4×4 · Easy — start small</small></span><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+    <button id="play-btn" class="btn-main"><span class="l"><span id="play-main">Play · Level 1</span><small id="play-sub">9×9 · Easy — easy start</small></span><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
     <button id="daily-btn" class="btn-ghost"><span class="l"><span id="daily-main">Today's puzzle</span><small id="daily-sub">6×6 · same board for everyone</small></span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button>
     <button id="levels-btn" class="btn-ghost"><span class="l"><span>All levels</span><small id="levels-sub">0 of 300 cleared</small></span><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></button>
   </div>
@@ -354,10 +354,10 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.0.0';
+  var GAME_VERSION = '1.1.0';
   var GAME_TITLE = 'Kitty Sudoku';
   var S = window.SudokuCore;
-  var MAX_LEVEL = S.MAX_LEVEL;
+  var MAX_LEVEL = S.MAX_LEVEL, MAX_SMALL = S.MAX_SMALL;
   var hash = location.hash || '';
   var DEBUG = hash.indexOf('debug') >= 0;
   var COVER = hash.indexOf('cover') >= 0;
@@ -371,7 +371,7 @@
 
   // ---------- persistent state (Bridge storage only; rule 3.2.1) ----------
   var store = {
-    progress: { v: 1, level: 1, cleared: 0, name: '', tut: 0, played: 0, daily: { day: '', accum: 0, solved: 0, ranks: [] } },
+    progress: { v: 1, level: 1, cleared: 0, name: '', tut: 0, played: 0, small: {}, daily: { day: '', accum: 0, solved: 0, ranks: [] } },
     settings: { v: 1, muted: false, bgm: 'ukulele' }
   };
   function parseVal(v, dflt) {
@@ -397,6 +397,7 @@
       p.name = String(p.name || '').slice(0, 8);
       p.tut = p.tut ? 1 : 0;
       p.played = Math.max(0, parseInt(p.played, 10) || 0);
+      var sm = {}; if (p.small && typeof p.small === 'object') for (var sk in p.small) { var si = parseInt(sk, 10); if (si >= 1 && si <= MAX_SMALL && p.small[sk]) sm[si] = 1; } p.small = sm;
       var d = parseVal(p.daily, store.progress.daily);
       d.day = String(d.day || '');
       d.accum = Math.max(0, parseFloat(d.accum) || 0);
@@ -523,8 +524,8 @@
   // ---------- game state ----------
   var STATE_TITLE = 0, STATE_PLAY = 1, STATE_OVER = 2, STATE_LEVELS = 3;
   var state = STATE_TITLE;
-  var mode = 'level';          // 'level' | 'daily'
-  var level = 1, N = 4, puzzle = null, solution = null, given = null, puzzleDay = '', difficulty = 'easy';
+  var mode = 'level';          // 'level' | 'daily' | 'small'
+  var level = 1, small = 1, N = 9, puzzle = null, solution = null, given = null, puzzleDay = '', difficulty = 'easy';
   var cells = [], notes = [], undoStack = [], sel = -1, notesMode = false;
   var mistakes = 0, MAX_MISTAKES = 3, filledRight = 0;
   var runStart = 0, accumBase = 0, pausedAt = 0, pausedTotal = 0;
@@ -793,6 +794,18 @@
     sendMsg('level_started', { level: String(level) });
     analytics('level_start', { level: level, size: N, difficulty: difficulty });
   }
+  function startSmall(i) {
+    small = Math.min(MAX_SMALL, Math.max(1, i));
+    mode = 'small';
+    loadPuzzle(S.genSmall(small));
+    beginRun();
+    $('mode-main').textContent = 'Small board ' + small;
+    $('mode-sub').textContent = N + '×' + N + ' · ' + diffName(difficulty);
+    $('timer').className = '';
+    accumBase = 0;
+    sendMsg('level_started', { world: 'small', level: String(small) });
+    analytics('small_start', { small: small, size: N, difficulty: difficulty });
+  }
   function startDaily() {
     mode = 'daily';
     puzzleDay = dayKey();
@@ -817,7 +830,7 @@
     runStart = performance.now();
     state = STATE_PLAY;
     // the only words of instruction in the game: one line under the first board, gone after the first number
-    var firstTime = mode === 'level' && level === 1 && !store.progress.tut;
+    var firstTime = !store.progress.tut && !store.progress.played;
     $('tip').textContent = firstTime ? (isDesktop ? 'Click a cell, then a number. Keyboard works too.' : 'Tap a cell, then tap a number.') : '';
     renderChallengeChip();
     catReact('idle');
@@ -839,7 +852,7 @@
     $('pause-keys').textContent = isDesktop ? 'Keys: 1–' + N + ' enter · arrows move · Backspace erase · N notes · Z undo · P pause · M sound' : '';
     catReact('sleep');
     showPanel('pause-panel');
-    sendMsg('level_paused', { level: mode === 'daily' ? puzzleDay : String(level) });
+    sendMsg('level_paused', { level: levelId() });
   }
   function resumeGame() {
     if (!userPaused) return;
@@ -848,8 +861,9 @@
     pausedAt = 0;
     hidePanels();
     catReact('idle');
-    sendMsg('level_resumed', { level: mode === 'daily' ? puzzleDay : String(level) });
+    sendMsg('level_resumed', { level: levelId() });
   }
+  function levelId() { return mode === 'daily' ? puzzleDay : mode === 'small' ? 'small-' + small : String(level); }
   function quitToTitle() {
     if (mode === 'daily' && state === STATE_PLAY && !practice) { var d = dailyRecord(); d.accum = elapsedNow(); saveStore(['progress']); }
     userPaused = false; hidePanels();
@@ -869,13 +883,17 @@
       flashMsg(mode === 'daily' && !practice ? 'PURR-FECT!' : 'SOLVED!', true, true);
       catReact('win');
       store.progress.played++;
+      if (!store.progress.tut) { store.progress.tut = 1; analytics('tutorial_completed', { mode: mode }); }
       if (mode === 'level') {
         if (level > store.progress.cleared) store.progress.cleared = level;
         store.progress.level = Math.min(MAX_LEVEL, Math.max(store.progress.level, level + 1));
-        if (level === 1 && !store.progress.tut) { store.progress.tut = 1; analytics('tutorial_completed', { level: 1 }); }
         sendMsg('level_completed', { level: String(level) });
         analytics('level_complete', { level: level, size: N, difficulty: difficulty, seconds: Math.round(lastTotal), mistakes: mistakes });
         submitLevels();
+      } else if (mode === 'small') {
+        store.progress.small[small] = 1;
+        sendMsg('level_completed', { world: 'small', level: String(small) });
+        analytics('small_complete', { small: small, size: N, difficulty: difficulty, seconds: Math.round(lastTotal), mistakes: mistakes });
       } else {
         var d = dailyRecord();
         if (!practice) { d.solved = lastTotal; d.accum = 0; recordRank(lastTotal); }
@@ -887,7 +905,7 @@
     } else {
       if (mode === 'daily' && !practice) { var dd = dailyRecord(); dd.accum = lastTotal; saveStore(['progress']); }
       play('lose'); catReact('sleep');
-      sendMsg('level_failed', mode === 'daily' ? { world: 'daily', level: puzzleDay } : { level: String(level) });
+      sendMsg('level_failed', mode === 'daily' ? { world: 'daily', level: puzzleDay } : mode === 'small' ? { world: 'small', level: String(small) } : { level: String(level) });
       analytics('out_of_mistakes', { mode: mode, level: level, filled: filledCount() });
       setTimeout(showOverPanel, 600);
     }
@@ -902,7 +920,7 @@
     $('over-cat').innerHTML = '<use href="#' + (won ? 's-cat-happy' : 's-cat-sleep') + '"/>';
     $('ad-note').textContent = ''; $('share-note').textContent = ''; $('next-note').textContent = '';
     if (won) {
-      $('over-title').textContent = daily ? (practice ? 'Solved (practice)' : 'Solved!') : 'Level ' + level + ' solved!';
+      $('over-title').textContent = daily ? (practice ? 'Solved (practice)' : 'Solved!') : mode === 'small' ? 'Small board ' + small + ' solved!' : 'Level ' + level + ' solved!';
       $('over-score').textContent = fmtTime(lastTotal);
       if (daily) {
         if (practice) sub.textContent = 'Today’s time stays ' + fmtTime(dailyRecord().solved) + '.';
@@ -915,6 +933,11 @@
         $('share-btn').classList.remove('hidden');
         $('retry-btn').textContent = 'Play again (practice)'; $('retry-btn').classList.remove('hidden');
         $('next-note').textContent = 'New puzzle at midnight (KST) · ' + untilNextPuzzle() + ' left';
+      } else if (mode === 'small') {
+        var ns = S.smallSpec(Math.min(MAX_SMALL, small + 1));
+        sub.textContent = small >= MAX_SMALL ? 'That was the last small board.' : 'Next: small board ' + (small + 1) + ' · ' + ns.n + '×' + ns.n + ' · ' + diffName(ns.difficulty);
+        $('next-btn').textContent = small >= MAX_SMALL ? 'Play it again' : 'Next small board';
+        $('next-btn').classList.remove('hidden');
       } else {
         var nx = S.levelSpec(Math.min(MAX_LEVEL, level + 1));
         sub.textContent = level >= MAX_LEVEL ? 'That was the last level. Horangi bows to you.' : (nx.n > N ? 'Next: the board grows to ' + nx.n + '×' + nx.n + '.' : 'Next: level ' + (level + 1) + ' · ' + nx.n + '×' + nx.n + ' · ' + diffName(nx.difficulty));
@@ -1062,8 +1085,8 @@
   function fillTitle() {
     var p = store.progress, next = Math.min(MAX_LEVEL, p.cleared + 1), sp = S.levelSpec(next);
     $('play-main').textContent = 'Play · Level ' + next;
-    $('play-sub').textContent = sp.n + '×' + sp.n + ' · ' + diffName(sp.difficulty) + (p.cleared === 0 ? ' — start small' : ' · ' + p.cleared + ' cleared');
-    $('levels-sub').textContent = p.cleared + ' of ' + MAX_LEVEL + ' cleared';
+    $('play-sub').textContent = sp.n + '×' + sp.n + ' · ' + diffName(sp.difficulty) + (p.cleared === 0 ? ' — easy start' : ' · ' + p.cleared + ' cleared');
+    $('levels-sub').textContent = p.cleared + ' of ' + MAX_LEVEL + ' cleared · small boards 4×4, 6×6';
     var d = store.progress.daily, today = dayKey();
     var sub = '6×6 · ' + dayLabel(today) + ' · same board for everyone';
     if (d.day === today && d.solved > 0) sub = 'Solved today in ' + fmtTime(d.solved) + ' · practice runs';
@@ -1080,16 +1103,27 @@
     renderLevels();
     $('levels-panel').classList.remove('hidden');
     var grid = $('levels-grid'), nxt = grid.querySelector('.lvl.next');
-    if (nxt) grid.scrollTop = Math.max(0, nxt.offsetTop - grid.clientHeight * 0.3);
+    if (nxt && store.progress.cleared > 0) grid.scrollTop = Math.max(0, nxt.offsetTop - grid.clientHeight * 0.3); else grid.scrollTop = 0;
   }
   function renderLevels() {
     var grid = $('levels-grid'), p = store.progress, lastKey = ''; grid.textContent = '';
     $('levels-count').textContent = p.cleared + ' of ' + MAX_LEVEL + ' cleared';
+    var smallDone = Object.keys(p.small).length;
+    var sh = document.createElement('div'); sh.className = 'lvl-head'; sh.textContent = 'Small boards · 4×4 and 6×6 · any order · ' + smallDone + ' of ' + MAX_SMALL; grid.appendChild(sh);
+    for (var k = 1; k <= MAX_SMALL; k++) {
+      var sb = document.createElement('button'), ss = S.smallSpec(k), sdone = !!p.small[k];
+      sb.className = 'lvl small' + (sdone ? ' done' : '');
+      sb.innerHTML = k + '<small>' + ss.n + '×' + ss.n + '</small>' + (sdone ? '<svg viewBox="0 0 24 24"><use href="#s-check"/></svg>' : '');
+      sb.dataset.small = k;
+      sb.addEventListener('click', function (e) { unlockAudio(); startSmall(parseInt(e.currentTarget.dataset.small, 10)); });
+      sb.setAttribute('aria-label', 'Small board ' + k + ', ' + ss.n + ' by ' + ss.n);
+      grid.appendChild(sb);
+    }
     for (var i = 1; i <= MAX_LEVEL; i++) {
       var b = document.createElement('button'), sp = S.levelSpec(i), key = sp.n + sp.difficulty;
       if (key !== lastKey) {
         lastKey = key; var end = i; while (end < MAX_LEVEL) { var s2 = S.levelSpec(end + 1); if (s2.n + s2.difficulty !== key) break; end++; }
-        var hd = document.createElement('div'); hd.className = 'lvl-head'; hd.textContent = sp.n + '×' + sp.n + ' · ' + diffName(sp.difficulty) + ' · levels ' + i + '–' + end; grid.appendChild(hd);
+        var hd = document.createElement('div'); hd.className = 'lvl-head'; hd.textContent = (i === 1 ? 'Levels · ' : '') + sp.n + '×' + sp.n + ' · ' + diffName(sp.difficulty) + ' · levels ' + i + '–' + end; grid.appendChild(hd);
       }
       var done = i <= p.cleared, nxt = i === p.cleared + 1, locked = i > p.cleared + 1;
       b.className = 'lvl' + (done ? ' done' : '') + (nxt ? ' next' : '') + (locked ? ' locked' : '');
@@ -1155,11 +1189,13 @@
   function firstOpenCell() { for (var i = 0; i < N * N; i++) if (!given[i] && !cells[i]) return i; return 0; }
   function retry() {
     if (mode === 'daily') { showInterstitial('round_end'); startDaily(); }
+    else if (mode === 'small') { showInterstitial('level_end'); startSmall(small); }
     else { showInterstitial('level_end'); startLevel(level); }
   }
   function nextLevel() {
     showInterstitial('level_end');
-    startLevel(level >= MAX_LEVEL ? level : level + 1);
+    if (mode === 'small') startSmall(small >= MAX_SMALL ? small : small + 1);
+    else startLevel(level >= MAX_LEVEL ? level : level + 1);
   }
   $('play-btn').addEventListener('click', function () { unlockAudio(); startLevel(Math.min(MAX_LEVEL, store.progress.cleared + 1)); });
   $('daily-btn').addEventListener('click', function () { unlockAudio(); startDaily(); });
@@ -1182,7 +1218,7 @@
   $('next-btn').addEventListener('click', function () { unlockAudio(); if (performance.now() - overAt < 500) return; nextLevel(); });
   $('retry-btn').addEventListener('click', function () { unlockAudio(); if (performance.now() - overAt < 500 || rewardPending || rewardEarned) return; retry(); });
   $('share-btn').addEventListener('click', function () { unlockAudio(); shareTime(); });
-  $('over-levels-btn').addEventListener('click', function () { unlockAudio(); if (won && mode === 'level') showInterstitial('level_end'); showLevels(); });
+  $('over-levels-btn').addEventListener('click', function () { unlockAudio(); if (won && mode !== 'daily') showInterstitial('level_end'); showLevels(); });
   $('over-home-btn').addEventListener('click', function () { unlockAudio(); quitToTitle(); });
   $('name-input').addEventListener('input', function () {
     var v = $('name-input').value.slice(0, 8);
@@ -1270,6 +1306,7 @@
       get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get hintUsed() { return hintUsed; }, get continueUsed() { return continueUsed; }, get rewardEarned() { return rewardEarned; },
       get isDesktop() { return isDesktop; }, get isWeb() { return isWeb; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); }, get difficulty() { return difficulty; },
       get challenge() { return { time: chTime, name: chName, day: chDay, today: chIsToday() }; }, get counts() { return counts(); }, get shareText() { return shareText(); },
+      get small() { return small; }, startSmall: startSmall,
       select: select, enter: enter, erase: erase, undo: undo, toggleNotes: toggleNotes, startLevel: startLevel, startDaily: startDaily, showLevels: showLevels, quitToTitle: quitToTitle, pauseGame: pauseGame, resumeGame: resumeGame,
       requestHint: requestHint, requestContinue: requestContinue, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,
       saveStore: saveStore, layout: layout, core: S,
