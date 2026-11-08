@@ -96,7 +96,7 @@
   .cell.bl { border-left: 2px solid var(--ink); } .cell.bt { border-top: 2px solid var(--ink); }
   .cell .v { font-size: calc(var(--cell) * 0.56); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1; color: var(--ink); }
   .cell.user .v { color: var(--accent); font-weight: 500; }
-  .cell.wrong .v { color: var(--red); }
+  .cell.wrong.user .v { color: var(--red); }
   .cell.peer { background: var(--peer); }
   .cell.same { background: var(--accent-soft); }
   .cell.same .v { font-weight: 600; }
@@ -328,7 +328,7 @@
   <div id="rank-board" class="hidden"></div>
   <div id="name-row" class="hidden"><label for="name-input">Your name</label><input id="name-input" maxlength="8" placeholder="You" autocomplete="off"></div>
   <div class="btns">
-    <button id="continue-btn" class="btn-ad hidden"><svg viewBox="0 0 24 24"><use href="#s-ad"/></svg><span><b>Continue</b> this puzzle<small>watch one ad · mistakes reset to 0, your numbers stay</small></span></button>
+    <button id="continue-btn" class="btn-ad hidden"><svg viewBox="0 0 24 24"><use href="#s-ad"/></svg><span><b>Continue</b> this puzzle<small>watch one ad · mistakes back to 0, your numbers stay</small></span></button>
     <button id="next-btn" class="btn-main hidden">Next level</button>
     <button id="retry-btn" class="btn-main hidden">Try again</button>
     <button id="share-btn" class="btn-ghost hidden"><svg viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span id="share-label">Share my time</span></button>
@@ -354,7 +354,7 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.1.0';
+  var GAME_VERSION = '1.2.0';
   var GAME_TITLE = 'Kitty Sudoku';
   var S = window.SudokuCore;
   var MAX_LEVEL = S.MAX_LEVEL, MAX_SMALL = S.MAX_SMALL;
@@ -570,10 +570,19 @@
     el.querySelector('.v').textContent = v ? v : '';
     el.classList.toggle('given', !!given[i]);
     el.classList.toggle('user', !given[i] && v > 0);
-    el.classList.toggle('wrong', v > 0 && v !== solution[i]);
+    el.classList.toggle('wrong', v > 0 && clashes(i).length > 0);
     var ns = el.querySelectorAll('.notes i');
     for (var k = 0; k < ns.length; k++) ns[k].classList.toggle('on', !v && !!(notes[i] & (1 << (k + 1))));
   }
+  // a number is wrong only when the player can see why: the same number already sits in its row, column or box
+  function clashes(i) {
+    var v = cells[i], out = [];
+    if (!v) return out;
+    var P = S.peers(N)[i];
+    for (var k = 0; k < P.length; k++) if (cells[P[k]] === v) out.push(P[k]);
+    return out;
+  }
+  function refreshWrong() { for (var i = 0; i < N * N; i++) cellEls[i].classList.toggle('wrong', cells[i] > 0 && clashes(i).length > 0); }
   function updateHighlights() {
     var sv = sel >= 0 ? cells[sel] : 0, P = sel >= 0 ? S.peers(N)[sel] : null, peerSet = {};
     if (P) for (var k = 0; k < P.length; k++) peerSet[P[k]] = 1;
@@ -586,7 +595,7 @@
   }
   function counts() {
     var out = []; for (var v = 0; v <= N; v++) out.push(0);
-    for (var i = 0; i < N * N; i++) if (cells[i] && cells[i] === solution[i]) out[cells[i]]++;
+    for (var i = 0; i < N * N; i++) if (cells[i] && !clashes(i).length) out[cells[i]]++;
     return out;
   }
   function updatePad() {
@@ -646,16 +655,18 @@
     for (var k = 0; k < P.length; k++) { var p = P[k]; if (!cells[p] && (notes[p] & (1 << v))) { entry.extra.push({ i: p, notes: notes[p] }); notes[p] &= ~(1 << v); updateCell(p); } }
     pushUndo(entry);
     cells[i] = v; notes[i] = 0;
-    updateCell(i);
+    updateCell(i); refreshWrong();
     var el = cellEls[i]; el.classList.remove('pop', 'bad'); void el.offsetWidth; el.classList.add('pop');
     if (!firstEntryDone) { firstEntryDone = true; $('tip').textContent = ''; layout(); }
-    if (v !== solution[i]) {
+    var cl = clashes(i);
+    if (cl.length) {
       el.classList.add('bad');
+      cl.forEach(function (q) { var e2 = cellEls[q]; e2.classList.remove('bad'); void e2.offsetWidth; e2.classList.add('bad'); });
       mistakes++;
       var m = $('mistakes'); m.classList.remove('bump'); void m.offsetWidth; m.classList.add('bump');
       catReact('bad'); play('wrong'); buzz(60);
       updateHud(); updateHighlights(); updatePad();
-      analytics('mistake', { mode: mode, level: level, count: mistakes });
+      analytics('mistake', { mode: mode, level: level, count: mistakes, clash: cl.length });
       if (mistakes >= MAX_MISTAKES) { gameOver(false); return; }
       return;
     }
@@ -670,7 +681,7 @@
     unlockAudio();
     pushUndo({ i: i, val: cells[i], notes: notes[i], extra: [] });
     cells[i] = 0; notes[i] = 0;
-    updateCell(i); updateHud(); updateHighlights(); updatePad(); play('clear');
+    updateCell(i); refreshWrong(); updateHud(); updateHighlights(); updatePad(); play('clear');
   }
   function undo() {
     if (state !== STATE_PLAY || frozen() || !undoStack.length) return;
@@ -678,6 +689,7 @@
     var e = undoStack.pop();
     cells[e.i] = e.val; notes[e.i] = e.notes; updateCell(e.i);
     e.extra.forEach(function (x) { notes[x.i] = x.notes; updateCell(x.i); });
+    refreshWrong();
     sel = e.i;
     updateHud(); updateHighlights(); updatePad(); play('clear', 1.2);
   }
@@ -947,7 +959,7 @@
     } else {
       $('over-title').textContent = 'Out of mistakes';
       $('over-score').textContent = fmtTime(lastTotal);
-      sub.textContent = daily ? (practice ? 'Practice run, no harm done.' : 'The clock keeps running today. Try again!') : 'Three wrong numbers. Your numbers are still on the board.';
+      sub.textContent = daily ? (practice ? 'Practice run, no harm done.' : 'The clock keeps running today. Try again!') : 'Three numbers clashed with their row, column or box. Your numbers are still on the board.';
       sub.className = 'sub lose';
       if (!continueUsed && rewardedSupported()) { $('continue-btn').classList.remove('hidden'); }
       $('retry-btn').textContent = 'Try again'; $('retry-btn').classList.remove('hidden');
@@ -1023,7 +1035,7 @@
     hintUsed = true;
     pushUndo({ i: i, val: cells[i], notes: notes[i], extra: [] });
     cells[i] = solution[i]; notes[i] = 0; sel = i;
-    updateCell(i);
+    updateCell(i); refreshWrong();
     var el = cellEls[i]; el.classList.remove('hinted'); void el.offsetWidth; el.classList.add('hinted');
     play('hint'); buzz(20); catReact('good');
     flashMsg('Horangi filled one in', true);
@@ -1034,8 +1046,10 @@
   function grantContinue() {
     continueUsed = true;
     hidePanels(); userPaused = false;
-    // wrong numbers come off the board, the right ones stay, mistakes start over
-    for (var i = 0; i < N * N; i++) if (!given[i] && cells[i] && cells[i] !== solution[i]) { cells[i] = 0; updateCell(i); }
+    // clashing numbers come off the board, everything else stays, mistakes start over
+    var bad = []; for (var i = 0; i < N * N; i++) if (!given[i] && cells[i] && clashes(i).length) bad.push(i);
+    bad.forEach(function (i) { cells[i] = 0; updateCell(i); });
+    refreshWrong();
     mistakes = 0; state = STATE_PLAY;
     runStart = performance.now(); pausedTotal = 0; pausedAt = 0; accumBase = lastTotal;
     boardEl.classList.remove('won');
@@ -1305,7 +1319,7 @@
       get ctxState() { return snd.ctx ? snd.ctx.state : 'none'; }, get bufs() { return Object.keys(snd.bufs); }, get bgmPlaying() { return !!snd.bgm; },
       get frozen() { return frozen(); }, get userPaused() { return userPaused; }, get hintUsed() { return hintUsed; }, get continueUsed() { return continueUsed; }, get rewardEarned() { return rewardEarned; },
       get isDesktop() { return isDesktop; }, get isWeb() { return isWeb; }, get puzzleDay() { return puzzleDay; }, get practice() { return practice; }, get elapsed() { return elapsedNow(); }, get difficulty() { return difficulty; },
-      get challenge() { return { time: chTime, name: chName, day: chDay, today: chIsToday() }; }, get counts() { return counts(); }, get shareText() { return shareText(); },
+      get challenge() { return { time: chTime, name: chName, day: chDay, today: chIsToday() }; }, clashes: clashes, get counts() { return counts(); }, get shareText() { return shareText(); },
       get small() { return small; }, startSmall: startSmall,
       select: select, enter: enter, erase: erase, undo: undo, toggleNotes: toggleNotes, startLevel: startLevel, startDaily: startDaily, showLevels: showLevels, quitToTitle: quitToTitle, pauseGame: pauseGame, resumeGame: resumeGame,
       requestHint: requestHint, requestContinue: requestContinue, onRewardedState: onRewardedState, adStateChanged: adStateChanged, gameOver: gameOver,

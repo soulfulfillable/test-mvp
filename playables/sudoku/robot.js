@@ -81,7 +81,10 @@ async function solveBoard(page, touch, gapMs = 25) {
   }
 }
 async function openCell(page) { return page.evaluate(() => { const g = window.__game; for (let i = 0; i < g.N * g.N; i++) if (!g.given[i] && !g.cells[i]) return i; return -1; }); }
-async function wrongValue(page, i) { return page.evaluate((i) => { const g = window.__game; for (let v = 1; v <= g.N; v++) if (v !== g.solution[i]) return v; }, i); }
+// a value that visibly clashes with a number already in the cell's row, column or box
+async function wrongValue(page, i) { return page.evaluate((i) => { const g = window.__game, P = g.core.peers(g.N)[i]; for (const p of P) if (g.cells[p]) return g.cells[p]; return 1; }, i); }
+// a value that breaks no visible rule but is not the answer (must NOT count as a mistake)
+async function legalWrong(page) { return page.evaluate(() => { const g = window.__game, n = g.N, P = g.core.peers(n); for (let i = 0; i < n * n; i++) { if (g.given[i] || g.cells[i]) continue; for (let v = 1; v <= n; v++) { if (v === g.solution[i]) continue; if (P[i].every((p) => g.cells[p] !== v)) return [i, v]; } } return null; }); }
 async function state(page) { return page.evaluate(() => { const g = window.__game; return { state: g.state, level: g.level, N: g.N, mistakes: g.mistakes, won: g.won, sel: g.sel, undo: g.undoLen, notesMode: g.notesMode, cleared: g.store.progress.cleared }; }); }
 
 (async () => {
@@ -165,11 +168,19 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     const wv = await wrongValue(page, i);
     await tapNum(page, wv, true); await sleep(150);
     const w1 = await page.evaluate((i) => ({ v: window.__game.cells[i], wrong: document.querySelectorAll('.cell.wrong').length, red: getComputedStyle(document.querySelectorAll('.cell')[i].querySelector('.v')).color, mistakes: window.__game.mistakes, cat: document.querySelector('#cat use').getAttribute('href'), tip: document.getElementById('tip').textContent, msg: document.getElementById('msg').textContent }), i);
-    check('wrong number: stays on the board in red, Mistakes 1/3, Horangi grumbles, no text lecture', w1.v === wv && w1.wrong === 1 && w1.mistakes === 1 && /209, 52, 42/.test(w1.red) && w1.cat === '#s-cat-mad' && w1.tip === '' && w1.msg === '', JSON.stringify(w1));
+    check('clashing number: stays in red with the number it clashes with, Mistakes 1/3, Horangi grumbles, no text lecture', w1.v === wv && w1.wrong >= 2 && w1.mistakes === 1 && /209, 52, 42/.test(w1.red) && w1.cat === '#s-cat-mad' && w1.tip === '' && w1.msg === '', JSON.stringify(w1));
     await shot(page, 'phone-390x844-wrong');
     // undo
     await page.tap('#undo-btn'); await sleep(80);
-    check('Undo takes the wrong number back (the mistake stays counted, as in every sudoku app)', await page.evaluate((i) => window.__game.cells[i] === 0 && window.__game.mistakes === 1 && document.querySelectorAll('.cell.wrong').length === 0, i));
+    check('Undo takes the clashing number back (the mistake stays counted, as in every sudoku app)', await page.evaluate((i) => window.__game.cells[i] === 0 && window.__game.mistakes === 1 && document.querySelectorAll('.cell.wrong').length === 0, i));
+    // a number that breaks no visible rule is never called wrong, even when it is not the answer (player 11-08: "that is not a mistake")
+    const lw = await legalWrong(page);
+    if (lw) {
+      await tapCell(page, lw[0], true); await tapNum(page, lw[1], true); await sleep(120);
+      const lwr = await page.evaluate((i) => ({ v: window.__game.cells[i], wrong: document.querySelectorAll('.cell.wrong').length, mistakes: window.__game.mistakes, cat: document.querySelector('#cat use').getAttribute('href') }), lw[0]);
+      check('a legal but not-the-answer number: no red, no mistake counted', lwr.v === lw[1] && lwr.wrong === 0 && lwr.mistakes === 1 && lwr.cat === '#s-cat-happy', JSON.stringify(lwr));
+      await page.tap('#undo-btn'); await sleep(60);
+    } else check('a legal but not-the-answer number exists to test', false);
     // notes: pencil marks + auto-clear in peers
     await page.tap('#notes-btn'); await sleep(50);
     check('Notes ON: badge and number pad show note mode', await page.evaluate(() => window.__game.notesMode && document.getElementById('notes-badge').textContent === 'ON' && document.getElementById('app').classList.contains('notes')));
@@ -275,7 +286,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     for (let k = 0; k < 3; k++) { const c = await openCell(page); await tapCell(page, c, true); await tapNum(page, await wrongValue(page, c), true); await sleep(200); }
     await sleep(800);
     const oh = await page.evaluate(() => ({ state: window.__game.state, mistakes: window.__game.mistakes, won: window.__game.won, title: document.getElementById('over-title').textContent, cont: !document.getElementById('continue-btn').classList.contains('hidden'), wrong: document.querySelectorAll('.cell.wrong').length, msgs: window.__msgs.slice(-1) }));
-    check('three wrong numbers → Out of mistakes, continue offered, numbers kept on the board', oh.state === 2 && oh.mistakes === 3 && !oh.won && /mistakes/i.test(oh.title) && oh.cont && oh.wrong === 3 && oh.msgs[0] === 'level_failed', JSON.stringify(oh));
+    check('three clashing numbers → Out of mistakes, continue offered, numbers kept on the board', oh.state === 2 && oh.mistakes === 3 && !oh.won && /mistakes/i.test(oh.title) && oh.cont && oh.wrong >= 3 && oh.msgs[0] === 'level_failed', JSON.stringify(oh));
     await shot(page, 'phone-390x844-out-of-mistakes');
     await page.tap('#continue-btn');
     await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('closed'); }); await sleep(1800);
@@ -287,7 +298,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     check('reward earned but the game waits until the ad closes', underAd.state === 2 && underAd.earned === 'continue' && underAd.frozen, JSON.stringify(underAd));
     await page.evaluate(() => window.__game.onRewardedState('closed')); await sleep(200);
     const cont = await page.evaluate(() => ({ state: window.__game.state, mistakes: window.__game.mistakes, wrong: document.querySelectorAll('.cell.wrong').length, used: window.__game.continueUsed, frozen: window.__game.frozen, right: window.__game.cells.filter((v, i) => v && v === window.__game.solution[i]).length }));
-    check('rewarded: play continues, mistakes back to 0, wrong numbers removed, right ones kept', cont.state === 1 && cont.mistakes === 0 && cont.wrong === 0 && cont.used && !cont.frozen && cont.right > 20, JSON.stringify(cont));
+    check('rewarded: play continues, mistakes back to 0, clashing numbers removed, the rest kept', cont.state === 1 && cont.mistakes === 0 && cont.wrong === 0 && cont.used && !cont.frozen && cont.right > 20, JSON.stringify(cont));
     await shot(page, 'phone-390x844-continued');
     for (let k = 0; k < 3; k++) { const c = await openCell(page); await tapCell(page, c, true); await tapNum(page, await wrongValue(page, c), true); await sleep(150); }
     await sleep(800);

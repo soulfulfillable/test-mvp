@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-08T02:06:42.070Z",
+  "startedAt": "2026-11-08T11:36:30.488Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -7,7 +7,7 @@
     {
       "name": "levels 1..300: unique solution, difficulty matches the label (node, same code as the game)",
       "ok": true,
-      "detail": "1462ms {\"9-easy\":{\"easy\":100},\"9-medium\":{\"medium\":100},\"9-hard\":{\"hard\":41,\"medium\":59}}"
+      "detail": "1749ms {\"9-easy\":{\"easy\":100},\"9-medium\":{\"medium\":100},\"9-hard\":{\"hard\":41,\"medium\":59}}"
     },
     {
       "name": "level ladder is 9×9 only: easy 1–100, medium 101–200, hard 201–300",
@@ -82,7 +82,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,clear,wrong,lose,win,heart,cat,start,mute-on,hint,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "mark,cat,clear,wrong,win,heart,start,lose,mute-on,hint,mute-off,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -100,14 +100,19 @@
       "detail": "{\"i\":0,\"v\":3,\"count\":5}"
     },
     {
-      "name": "wrong number: stays on the board in red, Mistakes 1/3, Horangi grumbles, no text lecture",
+      "name": "clashing number: stays in red with the number it clashes with, Mistakes 1/3, Horangi grumbles, no text lecture",
       "ok": true,
-      "detail": "{\"v\":1,\"wrong\":1,\"red\":\"rgb(209, 52, 42)\",\"mistakes\":1,\"cat\":\"#s-cat-mad\",\"tip\":\"\",\"msg\":\"\"}"
+      "detail": "{\"v\":3,\"wrong\":3,\"red\":\"rgb(209, 52, 42)\",\"mistakes\":1,\"cat\":\"#s-cat-mad\",\"tip\":\"\",\"msg\":\"\"}"
     },
     {
-      "name": "Undo takes the wrong number back (the mistake stays counted, as in every sudoku app)",
+      "name": "Undo takes the clashing number back (the mistake stays counted, as in every sudoku app)",
       "ok": true,
       "detail": ""
+    },
+    {
+      "name": "a legal but not-the-answer number: no red, no mistake counted",
+      "ok": true,
+      "detail": "{\"v\":7,\"wrong\":0,\"mistakes\":1,\"cat\":\"#s-cat-happy\"}"
     },
     {
       "name": "Notes ON: badge and number pad show note mode",
@@ -117,7 +122,7 @@
     {
       "name": "two pencil marks in the cell, no value",
       "ok": true,
-      "detail": "{\"notes\":130,\"on\":2,\"v\":0}"
+      "detail": "{\"notes\":136,\"on\":2,\"v\":0}"
     },
     {
       "name": "tapping a mark again removes it",
@@ -265,9 +270,9 @@
       "detail": "{\"v\":true,\"used\":true,\"btn\":false}"
     },
     {
-      "name": "three wrong numbers → Out of mistakes, continue offered, numbers kept on the board",
+      "name": "three clashing numbers → Out of mistakes, continue offered, numbers kept on the board",
       "ok": true,
-      "detail": "{\"state\":2,\"mistakes\":3,\"won\":false,\"title\":\"Out of mistakes\",\"cont\":true,\"wrong\":3,\"msgs\":[\"level_failed\"]}"
+      "detail": "{\"state\":2,\"mistakes\":3,\"won\":false,\"title\":\"Out of mistakes\",\"cont\":true,\"wrong\":5,\"msgs\":[\"level_failed\"]}"
     },
     {
       "name": "continue ad closed early: no reward, panel stays",
@@ -280,9 +285,9 @@
       "detail": "{\"state\":2,\"earned\":\"continue\",\"frozen\":true}"
     },
     {
-      "name": "rewarded: play continues, mistakes back to 0, wrong numbers removed, right ones kept",
+      "name": "rewarded: play continues, mistakes back to 0, clashing numbers removed, the rest kept",
       "ok": true,
-      "detail": "{\"state\":1,\"mistakes\":0,\"wrong\":0,\"used\":true,\"frozen\":false,\"right\":40}"
+      "detail": "{\"state\":1,\"mistakes\":0,\"wrong\":0,\"used\":true,\"frozen\":false,\"right\":39}"
     },
     {
       "name": "no second continue in the same attempt",
@@ -307,7 +312,7 @@
     {
       "name": "daily solved by taps: time recorded, rank list and \"Challenge a friend\" shown (web build)",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":1.5068999999999069,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true,\"label\":\"Challenge a friend\"}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":1.7982999999999885,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true,\"label\":\"Challenge a friend\"}"
     },
     {
       "name": "share text carries a challenge link with the time, name and day",
@@ -332,7 +337,7 @@
     {
       "name": "reload restores levels, name, daily time, first-level flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":3,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":1.5068999999999069,\"tut\":1,\"sub\":\"Solved today in 0:02 · practice runs\"}"
+      "detail": "{\"cleared\":3,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":1.7982999999999885,\"tut\":1,\"sub\":\"Solved today in 0:02 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -430,14 +435,14 @@
       "detail": ""
     },
     {
-      "name": "layout phone-360x640 (portrait): board 339px, cells 37px, pad keys 33×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout phone-360x640 (portrait): board 340px, cells 37px, pad keys 33×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "results panel fits at phone-360x640",
       "ok": true,
-      "detail": "panel 453px of 640"
+      "detail": "panel 472px of 640"
     },
     {
       "name": "layout phone-390x844 (portrait): board 370px, cells 41px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
@@ -445,19 +450,19 @@
       "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout phone-430x932 (portrait): board 409px, cells 45px, pad keys 41×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout phone-430x932 (portrait): board 394px, cells 43px, pad keys 41×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout land-844x390 (landscape): board 374px, cells 41px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout land-844x390 (landscape): board 359px, cells 39px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "results panel fits at land-844x390",
       "ok": true,
-      "detail": "panel 366px of 390"
+      "detail": "panel 364px of 390"
     },
     {
       "name": "levels list fits and scrolls at land-844x390",
@@ -465,9 +470,9 @@
       "detail": "{\"fits\":true,\"scrolls\":true,\"cell\":64}"
     },
     {
-      "name": "layout land-915x412 (landscape): board 396px, cells 44px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout land-915x412 (landscape): board 380px, cells 42px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "layout tablet-768x1024 (portrait): board 718px, cells 79px, pad keys 79×54, no overlap, on screen, fills ≥ 55% of the short side",
@@ -475,9 +480,9 @@
       "detail": "{\"fill\":\"0.93\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout tablet-1024x768 (landscape): board 646px, cells 71px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout tablet-1024x768 (landscape): board 622px, cells 69px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.84\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.81\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "layout square-640x640 (portrait): board 404px, cells 44px, pad keys 40×54, no overlap, on screen, fills ≥ 55% of the short side",
@@ -487,7 +492,7 @@
     {
       "name": "results panel fits at square-640x640",
       "ok": true,
-      "detail": "panel 453px of 640"
+      "detail": "panel 472px of 640"
     },
     {
       "name": "levels list fits and scrolls at square-640x640",
@@ -495,9 +500,9 @@
       "detail": "{\"fits\":true,\"scrolls\":true,\"cell\":81}"
     },
     {
-      "name": "layout iframe-800x450 (landscape): board 407px, cells 45px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout iframe-800x450 (landscape): board 423px, cells 47px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.90\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "layout iframe-1280x720 (landscape): board 676px, cells 75px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
@@ -510,19 +515,19 @@
       "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout desk-1920x1080 (landscape): board 1055px, cells 117px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
-      "ok": true,
-      "detail": "{\"fill\":\"0.98\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
-    },
-    {
-      "name": "layout tall-9x21-390x910 (portrait): board 369px, cells 41px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout desk-1920x1080 (landscape): board 1021px, cells 113px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout wide-21x9-910x390 (landscape): board 374px, cells 41px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout tall-9x21-390x910 (portrait): board 370px, cells 41px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+    },
+    {
+      "name": "layout wide-21x9-910x390 (landscape): board 359px, cells 39px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "ok": true,
+      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "console errors: 0",
@@ -583,7 +588,7 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "taps": 547,
-  "passed": 107,
+  "taps": 549,
+  "passed": 108,
   "failed": 0
 }
