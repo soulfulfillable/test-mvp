@@ -23,3 +23,6 @@
 
 ## 안 하는 것
 Kitty Queens 삭제(그대로 보존, 샌드박스 게시 보류), 애플 제출, Playgama 샌드박스 게시(사용자 yes 뒤), 캠페인.
+
+## 진행 기록
+- 2026-11-08 (개발 세션) **v1.0.0 완성** — `playables/sudoku/`: `sudoku-core.js`(생성기·풀이기·채점, 레벨 300: 1–5 4×4, 6–25 6×6 Easy, 26–50 Medium, 51–75 Hard, 76–125 9×9 Easy, 126–200 Medium, 201–300 Hard; 데일리 6×6 Medium KST 시드) + `index.html`(표준 UI, 호랑이 마스코트, 데일리 랭킹·도전장 링크, Bridge 배관) + `robot.js`(104 검사, 실제 탭 550회) + `build.sh`(zip + `docs/sudoku-playables/`). 미리보기 https://soulfulfillable.github.io/test-mvp/sudoku-playables/ . Playgama 드래프트 `cmw6vm5iq0v3qno0hih97vhin` 폼·아카이브·커버 완료, 샌드박스 미게시. 결정: 데일리 6×6(짧은 판 가설에 맞춤). 와 포인트: 첫 4×4 를 설명 없이 바로 푸는 것 + 완료 때 숫자가 대각선 물결로 들썩이고 호랑이가 춤.
