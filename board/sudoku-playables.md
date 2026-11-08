@@ -43,7 +43,7 @@
 | 4.4 | 사용자 데이터 | ✅ | 이름 8자 로컬 저장뿐 |
 
 ### 🖱️ Codex 에게 (브라우저 작업) — QA 툴 인증 (샌드박스 yes 와 무관하게 가능)
-- URL: Playgama 콘솔 → Kitty Sudoku(id `cmw6vm5iq0v3qno0hih97vhin`) → QA tool (링크는 `get_archive_qa_tool_link` 또는 콘솔에서)
+- URL: https://developer.playgama.com/qa-tool/cmw6ydlab0vjhmt0h90dtx61v
 - 로그인 계정: Playgama 개발자 계정(Soulfulfill)
 - 할 것: QA 툴 체크를 끝까지(모바일/데스크톱, 광고 상태, 저장 리로드). 결과 원문을 이 게시판 "QA 툴(날짜)" 줄로. 실패 항목 수정은 Claude 세션.
 - 하지 않을 것: Submit for review, publish, 트래픽 캠페인, 결제.
