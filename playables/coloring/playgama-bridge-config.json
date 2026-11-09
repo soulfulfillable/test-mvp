@@ -1,0 +1,19 @@
+{
+    "advertisement": {
+        "interstitial": {
+            "preloadOnStart": "picture_done",
+            "placementFallback": "picture_done",
+            "placements": [
+                { "id": "picture_done" }
+            ]
+        },
+        "rewarded": {
+            "preloadOnStart": "fill_color",
+            "placementFallback": "fill_color",
+            "placements": [
+                { "id": "fill_color" },
+                { "id": "unlock" }
+            ]
+        }
+    }
+}
