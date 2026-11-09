@@ -517,6 +517,10 @@
           for (var k = 0; k < cands.length; k++) if (visibleAt(i, cands[k][0], cands[k][1])) { found = cands[k]; return true; }
           return false;
         });
+        if (!found) {   // a very small piece: any visible point inside it will do (zoom makes it tappable)
+          var fine = []; for (var gy2 = 1; gy2 <= 20; gy2++) for (var gx2 = 1; gx2 <= 20; gx2++) fine.push([bb.x + bb.width * gx2 / 21, bb.y + bb.height * gy2 / 21]);
+          for (var k3 = 0; k3 < fine.length && !found; k3++) { var fx = fine[k3][0], fy = fine[k3][1]; if (inFill(i, fx, fy)) { var hid = false; for (var j3 = i + 1; j3 < els.length && !hid; j3++) { var b3 = bbs[j3]; if (fx < b3.x || fx > b3.x + b3.width || fy < b3.y || fy > b3.y + b3.height) continue; if (inFill(j3, fx, fy)) hid = true; } if (!hid) found = fine[k3]; } }
+        }
         if (found) { x = found[0]; y = found[1]; fs = Math.min(fs, 12); }
         else console.error('coloring: label hidden for ' + pic.id + ' region ' + i);
       }
@@ -1142,6 +1146,7 @@
       layout();
       renderHome();
       if (COVER) setupCover();
+      if (hash.indexOf('sample') >= 0 && CP.SAMPLES && CP.SAMPLES.length) openPic(CP.SAMPLES[0]);   // preview of a new picture style
       $('loading').classList.add('hidden');
       sendMsg('game_ready');
       fetchAudio();

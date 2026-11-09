@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-09T21:32:11.152Z",
+  "startedAt": "2026-11-09T22:27:02.433Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -87,12 +87,12 @@
     {
       "name": "finish burst: pieces pop in a wave, shine sweep, sparkles, glow, palette confetti, big word — panel not yet",
       "ok": true,
-      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"So pretty!\",\"glow\":true,\"shine\":true,\"panel\":false}"
+      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Beautiful!\",\"glow\":true,\"shine\":true,\"panel\":false}"
     },
     {
       "name": "picture 01 colored to 100% by 40 real taps (0 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
       "ok": true,
-      "detail": "{\"confetti\":90,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 7698ms misses []"
+      "detail": "{\"confetti\":91,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 6886ms misses []"
     },
     {
       "name": "Next picture button counts down (auto-advance armed)",
@@ -257,7 +257,7 @@
     {
       "name": "audio files decoded or fetched (ogg/mp3 shipped in the archive)",
       "ok": true,
-      "detail": "pick,dab,swoosh,finish,color-done,mute-off"
+      "detail": "pick,finish,dab,swoosh,color-done"
     },
     {
       "name": "desktop: click opens picture 01 in landscape layout",
@@ -516,7 +516,7 @@
   ],
   "taps": 182,
   "debugTaps": 1,
-  "finishedAt": "2026-11-09T21:33:19.292Z",
+  "finishedAt": "2026-11-09T22:28:11.885Z",
   "passed": 95,
   "failed": 0
 }

@@ -637,6 +637,167 @@
     }
   ];
 
+
+  // ── low-poly ("poly art") generator ─────────────────────────
+  // Regions are polygons in z-order. Points: a jittered grid + points along every region edge.
+  // Delaunay triangles take the region of the topmost polygon under their centroid, then a fake light
+  // (dome normal or vertical gradient) picks one of the region's shades. Slivers merge into a neighbor,
+  // and same-shade neighbors merge into convex quads, so pieces stay tappable and look faceted.
+  function delaunay(P) {
+    var big = 1e5, n = P.length;
+    var pts = P.concat([[-big, -big], [big, -big], [0, big]]);
+    function circ(a, b, c) {
+      var ax = pts[a][0], ay = pts[a][1], bx = pts[b][0], by = pts[b][1], cx = pts[c][0], cy = pts[c][1];
+      var d = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
+      var ux = ((ax * ax + ay * ay) * (by - cy) + (bx * bx + by * by) * (cy - ay) + (cx * cx + cy * cy) * (ay - by)) / d;
+      var uy = ((ax * ax + ay * ay) * (cx - bx) + (bx * bx + by * by) * (ax - cx) + (cx * cx + cy * cy) * (bx - ax)) / d;
+      return { x: ux, y: uy, r2: (ax - ux) * (ax - ux) + (ay - uy) * (ay - uy) };
+    }
+    var tris = [{ v: [n, n + 1, n + 2], c: circ(n, n + 1, n + 2) }];
+    for (var i = 0; i < n; i++) {
+      var px = pts[i][0], py = pts[i][1], bad = [], keep = [];
+      tris.forEach(function (t) { var dx = px - t.c.x, dy = py - t.c.y; (dx * dx + dy * dy < t.c.r2 ? bad : keep).push(t); });
+      var edges = {};
+      bad.forEach(function (t) { for (var k = 0; k < 3; k++) { var a = t.v[k], b = t.v[(k + 1) % 3], key = a < b ? a + ',' + b : b + ',' + a; edges[key] = edges[key] ? null : [a, b]; } });
+      Object.keys(edges).forEach(function (key) { var e = edges[key]; if (e) keep.push({ v: [e[0], e[1], i], c: circ(e[0], e[1], i) }); });
+      tris = keep;
+    }
+    return tris.filter(function (t) { return t.v[0] < n && t.v[1] < n && t.v[2] < n; }).map(function (t) { return t.v; });
+  }
+  function inPoly(x, y, poly) {
+    var c = false;
+    for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      var xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+      if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) c = !c;
+    }
+    return c;
+  }
+  function circlePoly(cx, cy, r, n) { var out = []; for (var k = 0; k < n; k++) { var a = k * 2 * Math.PI / n; out.push([f1(cx + r * Math.cos(a)), f1(cy + r * Math.sin(a))]); } return out; }
+  function polyArt(spec) {
+    var W = spec.w, H = spec.h, s = spec.step, r = rng(spec.seed), PT = [];
+    var edgePts = [];
+    function addEdge(poly, sp) {
+      for (var i = 0; i < poly.length; i++) {
+        var a = poly[i], b = poly[(i + 1) % poly.length], L = Math.hypot(b[0] - a[0], b[1] - a[1]), m = Math.max(1, Math.round(L / sp));
+        for (var k = 0; k < m; k++) { var t = k / m; edgePts.push([f1(a[0] + (b[0] - a[0]) * t), f1(a[1] + (b[1] - a[1]) * t)]); }
+      }
+    }
+    addEdge([[0, 0], [W, 0], [W, H], [0, H]], s);
+    spec.regions.forEach(function (rg) { if (rg.poly.length && !rg.base) addEdge(rg.poly, rg.edge || s * 0.75); });
+    // de-duplicate edge points closer than 3px
+    edgePts.forEach(function (p) { for (var q = 0; q < PT.length; q++) if (Math.hypot(PT[q][0] - p[0], PT[q][1] - p[1]) < 3) return; PT.push(p); });
+    var nEdge = PT.length;
+    var D = spec.dense, sd = D ? D.step : s;
+    function inDense(x, y) { return D && x > D.x0 && x < D.x1 && y > D.y0 && y < D.y1; }
+    function grid(st, keep) {
+      for (var y = st * 0.5; y < H; y += st * 0.87) for (var x = st * 0.5 + ((Math.round(y / (st * 0.87)) % 2) ? st / 2 : 0); x < W; x += st) {
+        var px = f1(Math.min(W - 2, Math.max(2, x + (r() - 0.5) * st * 0.5))), py = f1(Math.min(H - 2, Math.max(2, y + (r() - 0.5) * st * 0.5)));
+        if (!keep(px, py)) continue;
+        var ok = true;
+        for (var q = 0; q < PT.length; q++) if (Math.hypot(PT[q][0] - px, PT[q][1] - py) < st * 0.5) { ok = false; break; }
+        if (ok) PT.push([px, py]);
+      }
+    }
+    grid(s, function (x, y) { return !inDense(x, y); });
+    if (D) grid(sd, inDense);
+    var tris = delaunay(PT);
+    var L = spec.light || [-0.55, -0.65, 0.52], ll = Math.hypot(L[0], L[1], L[2]); L = [L[0] / ll, L[1] / ll, L[2] / ll];
+    function regionAt(x, y) { for (var k = spec.regions.length - 1; k >= 0; k--) { var rg = spec.regions[k]; if (rg.base || inPoly(x, y, rg.poly)) return k; } return 0; }
+    function area(v) { var a = PT[v[0]], b = PT[v[1]], c = PT[v[2]]; return Math.abs((b[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (b[1] - a[1])) / 2; }
+    var pieces = tris.map(function (v) {
+      var cx = (PT[v[0]][0] + PT[v[1]][0] + PT[v[2]][0]) / 3, cy = (PT[v[0]][1] + PT[v[1]][1] + PT[v[2]][1]) / 3, k = regionAt(cx, cy), rg = spec.regions[k];
+      var lit;
+      if (rg.mode === 'y') lit = 1 - (cy - (rg.y0 || 0)) / ((rg.y1 || H) - (rg.y0 || 0));
+      else {
+        var bb = rg.bb, nx = (cx - bb.cx) / bb.rx, ny = (cy - bb.cy) / bb.ry, d = Math.min(0.95, nx * nx + ny * ny), nz = Math.sqrt(1 - d);
+        lit = (nx * L[0] + ny * L[1] + nz * L[2]) * 0.5 + 0.5;
+      }
+      lit += (r() - 0.5) * (rg.noise == null ? 0.16 : rg.noise);
+      var sh = rg.shades, idx = Math.max(0, Math.min(sh.length - 1, Math.floor((1 - lit) * sh.length)));
+      var e = [Math.hypot(PT[v[1]][0] - PT[v[0]][0], PT[v[1]][1] - PT[v[0]][1]), Math.hypot(PT[v[2]][0] - PT[v[1]][0], PT[v[2]][1] - PT[v[1]][1]), Math.hypot(PT[v[0]][0] - PT[v[2]][0], PT[v[0]][1] - PT[v[2]][1])];
+      return { v: v.slice(), reg: k, c: sh[idx], thin: 2 * area(v) / Math.max(e[0], e[1], e[2]), alive: true };
+    });
+    spec.regions.forEach(function (rg) { if (rg.bb) return; var xs = rg.poly.map(function (p) { return p[0]; }), ys = rg.poly.map(function (p) { return p[1]; }); });
+    // adjacency by shared edge
+    function edgeMap() { var m = {}; pieces.forEach(function (pc, i) { if (!pc.alive) return; var v = pc.v; for (var k = 0; k < v.length; k++) { var a = v[k], b = v[(k + 1) % v.length], key = a < b ? a + ',' + b : b + ',' + a; (m[key] = m[key] || []).push(i); } }); return m; }
+    function merge(i, j, a, b) { // pieces i and j share edge a-b; i absorbs j
+      var A = pieces[i].v, B = pieces[j].v;
+      var ia = A.indexOf(a), ib = A.indexOf(b); if ((ia + 1) % A.length !== ib) { var t = a; a = b; b = t; ia = A.indexOf(a); ib = A.indexOf(b); }
+      var jb = B.indexOf(b), seq = []; for (var k = 1; k < B.length - 1; k++) seq.push(B[(jb + k) % B.length]);
+      // walk B from b (exclusive) round to a (exclusive)
+      var out = A.slice(0, ia + 1).concat(seq).concat(A.slice(ia + 1));
+      pieces[i].v = out; pieces[j].alive = false;
+    }
+    function convex(v) { var sign = 0; for (var k = 0; k < v.length; k++) { var a = PT[v[k]], b = PT[v[(k + 1) % v.length]], c = PT[v[(k + 2) % v.length]]; var cr = (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]); if (Math.abs(cr) < 1e-6) continue; if (sign === 0) sign = cr > 0 ? 1 : -1; else if ((cr > 0 ? 1 : -1) !== sign) return false; } return true; }
+    function tryMerge(i, pred) {
+      var m = edgeMap(), v = pieces[i].v, best = null;
+      for (var k = 0; k < v.length; k++) {
+        var a = v[k], b = v[(k + 1) % v.length], key = a < b ? a + ',' + b : b + ',' + a, nb = (m[key] || []).filter(function (x) { return x !== i; })[0];
+        if (nb == null || !pred(pieces[nb])) continue;
+        var L2 = Math.hypot(PT[a][0] - PT[b][0], PT[a][1] - PT[b][1]);
+        if (!best || L2 > best.L) best = { nb: nb, a: a, b: b, L: L2 };
+      }
+      if (!best) return false;
+      var pc = pieces[i]; merge(best.nb, i, best.a, best.b); if (pc.c !== pieces[best.nb].c && pieces[best.nb].reg === pc.reg) { /* keep neighbor's shade */ }
+      return true;
+    }
+    // 1. slivers (thinner than 5px) melt into the same-region neighbor across their longest edge
+    pieces.forEach(function (pc, i) { if (pc.alive && pc.v.length === 3 && pc.thin < 5) tryMerge(i, function (o) { return o.reg === pc.reg; }); });
+    // 2. pair up same-shade neighbors into convex quads (fewer, chunkier facets)
+    var order = pieces.map(function (_, i) { return i; }).sort(function () { return r() - 0.5; });
+    order.forEach(function (i) {
+      var pc = pieces[i]; if (!pc.alive || pc.v.length !== 3 || r() > (spec.mergeRate || 0.55)) return;
+      var m = edgeMap(), v = pc.v, cands = [];
+      for (var k = 0; k < 3; k++) { var a = v[k], b = v[(k + 1) % 3], key = a < b ? a + ',' + b : b + ',' + a, nb = (m[key] || []).filter(function (x) { return x !== i; })[0]; if (nb != null && pieces[nb].alive && pieces[nb].v.length === 3 && pieces[nb].reg === pc.reg && pieces[nb].c === pc.c) cands.push({ nb: nb, a: a, b: b }); }
+      for (var q = 0; q < cands.length; q++) { var save = pieces[cands[q].nb].v.slice(); merge(cands[q].nb, i, cands[q].a, cands[q].b); if (convex(pieces[cands[q].nb].v)) break; pieces[cands[q].nb].v = save; pc.alive = true; }
+    });
+    function inr(v) { var a = 0, per = 0; for (var k = 0; k < v.length; k++) { var p0 = PT[v[k]], p1 = PT[v[(k + 1) % v.length]]; a += p0[0] * p1[1] - p1[0] * p0[1]; per += Math.hypot(p1[0] - p0[0], p1[1] - p0[1]); } return Math.abs(a) / per; }
+    for (var pass = 0; pass < 2; pass++) pieces.forEach(function (pc, i) { if (pc.alive && inr(pc.v) < (spec.minIn || 3.2)) tryMerge(i, function (o) { return o.alive && o.reg === pc.reg; }); });
+    var rgOut = [];
+    spec.regions.forEach(function (_, k) { pieces.forEach(function (pc) { if (pc.alive && pc.reg === k) rgOut.push(P_(pc)); }); });
+    function P_(pc) { return P('M' + pc.v.map(function (q) { return PT[q].join(','); }).join(' L') + ' Z', pc.c); }
+    return rgOut;
+  }
+
+  // ── sample: Autumn Fox, low-poly ────────────────────────────
+  function bbOf(poly) { var xs = poly.map(function (p) { return p[0]; }), ys = poly.map(function (p) { return p[1]; }); var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys); return { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, rx: Math.max(10, (x1 - x0) / 2), ry: Math.max(10, (y1 - y0) / 2) }; }
+  function mirrorX(poly, cx) { return poly.map(function (p) { return [2 * cx - p[0], p[1]]; }).reverse(); }
+  var foxPal = ['#2F4B7C', '#3E6096', '#557BB0',   // 1-3 twilight sky, light → dark? (lit = top)
+    '#FFF1C1', '#FFE08A',                           // 4-5 moon
+    '#3F5E3A', '#2F4A2D', '#22361F',                // 6-8 dark meadow
+    '#FF9A4D', '#F0742B', '#C9541A',                // 9-11 fox orange
+    '#FFF8EE', '#E6D8C6',                           // 12-13 white fur
+    '#4A3428', '#22160F'];                          // 14-15 dark (socks, ears, nose, eyes)
+  var ORANGE = [9, 10, 11], WHITE = [12, 13], DARK = [14, 15];
+  var earL = [[118, 158], [104, 66], [162, 122]], earInL = [[124, 142], [112, 88], [151, 124]];
+  var cheekL = [[112, 182], [146, 174], [170, 206], [180, 252], [146, 226]];
+  var eyeL = [[132, 170], [148, 159], [166, 167], [150, 180]];
+  var foxRegions = [
+    { base: true, poly: [], shades: [3, 2, 1], mode: 'y', y0: 0, y1: 360, noise: 0.45 },
+    { poly: circlePoly(296, 78, 34, 12), shades: [4, 5], noise: 0.5, edge: 18 },
+    { poly: [[0, 340], [70, 322], [150, 334], [230, 318], [300, 328], [360, 312], [360, 440], [0, 440]], shades: [6, 7, 8], mode: 'y', y0: 318, y1: 440, noise: 0.5, edge: 40 },
+    { poly: [[226, 372], [290, 384], [334, 352], [350, 300], [340, 250], [316, 214], [288, 204], [268, 222], [290, 250], [302, 292], [286, 326], [246, 340]], shades: ORANGE, edge: 22 },
+    { poly: [[316, 214], [288, 204], [268, 222], [280, 240], [300, 232], [324, 232]], shades: WHITE, edge: 9 },
+    { poly: [[128, 388], [242, 388], [252, 330], [236, 268], [206, 236], [154, 236], [124, 268], [108, 330]], shades: ORANGE, edge: 22 },
+    { poly: [[150, 248], [210, 248], [222, 292], [202, 342], [180, 356], [158, 342], [138, 292]], shades: WHITE, edge: 18 },
+    { poly: [[143, 330], [167, 330], [170, 388], [140, 388]], shades: DARK, edge: 14 },
+    { poly: [[193, 330], [217, 330], [220, 388], [190, 388]], shades: DARK, edge: 14 },
+    { poly: earL, shades: ORANGE, edge: 18 }, { poly: mirrorX(earL, 180), shades: ORANGE, edge: 18 },
+    { poly: earInL, shades: DARK, edge: 14 }, { poly: mirrorX(earInL, 180), shades: DARK, edge: 14 },
+    { poly: [[108, 150], [128, 118], [180, 106], [232, 118], [252, 150], [248, 186], [216, 226], [180, 254], [144, 226], [112, 186]], shades: ORANGE, edge: 20 },
+    { poly: cheekL, shades: WHITE, edge: 15 }, { poly: mirrorX(cheekL, 180), shades: WHITE, edge: 15 },
+    { poly: eyeL, shades: DARK, edge: 9, noise: 0 }, { poly: mirrorX(eyeL, 180), shades: DARK, edge: 9, noise: 0 },
+    { poly: [[166, 226], [194, 226], [180, 246]], shades: DARK, edge: 10, noise: 0 }
+  ];
+  foxRegions.forEach(function (rg) { if (!rg.base) rg.bb = bbOf(rg.poly); });
+  // body parts of one animal share one light: use the head/body/tail as one dome where it reads better
+  var polyFox = {
+    id: 'poly-fox', name: 'Autumn Fox', w: 360, h: 440, pal: foxPal,
+    rg: polyArt({ w: 360, h: 440, step: 62, seed: 4242, regions: foxRegions, mergeRate: 0.6, dense: { x0: 96, y0: 56, x1: 356, y1: 396, step: 34 } }),
+    deco: [{ d: 'M153,166 a2.6,2.6 0 1 0 0.1,0', s: '#FFFFFF', w: 3.4 }, { d: 'M213,166 a2.6,2.6 0 1 0 0.1,0', s: '#FFFFFF', w: 3.4 }, { d: 'M180,246 q-7,9 -15,5 M180,246 q7,9 15,5', s: '#22160F', w: 2.4 }],
+    sample: true
+  };
+
   // level order: fewest pieces first (the player grows into the big ones)
   var ORDER = PICS.slice().sort(function (a, b) { return a.rg.length - b.rg.length || (a.id < b.id ? -1 : 1); });
 
@@ -683,5 +844,5 @@
     return { id: 'd:' + key, name: label, day: key, w: 360, h: 440, pal: pal, rg: rg, deco: [], daily: true };
   }
 
-  return { PICS: PICS, ORDER: ORDER, genDaily: genDaily, DAILY_PALS: DAILY_PALS, version: 1 };
+  return { PICS: PICS, ORDER: ORDER, genDaily: genDaily, DAILY_PALS: DAILY_PALS, SAMPLES: [polyFox], polyArt: polyArt, version: 1 };
 });
