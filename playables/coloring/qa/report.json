@@ -1,13 +1,23 @@
 {
-  "startedAt": "2026-11-09T22:27:02.433Z",
+  "startedAt": "2026-11-09T23:31:13.927Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
   "checks": [
     {
-      "name": "20 pictures, ordered by piece count, 40 → 170+",
+      "name": "20 poly-art pictures, ordered by piece count, ~130 → 500",
       "ok": true,
-      "detail": "40 46 51 52 53 56 62 64 66 68 69 76 90 91 91 102 135 152 152 173"
+      "detail": "130 136 213 226 249 259 269 285 288 306 317 332 338 351 361 371 377 393 419 510"
+    },
+    {
+      "name": "every picture is tiled exactly: no holes, no overlapping pieces (total piece area = canvas)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "coloring-data.js is up to date with coloring-pics.js (build.sh regenerates it)",
+      "ok": true,
+      "detail": "432104 bytes"
     },
     {
       "name": "every piece points at a palette color",
@@ -62,7 +72,7 @@
     {
       "name": "gallery list scrolls with a finger",
       "ok": true,
-      "detail": "612px"
+      "detail": "607px"
     },
     {
       "name": "tapping a locked picture keeps you in the gallery (with a note)",
@@ -70,9 +80,9 @@
       "detail": ""
     },
     {
-      "name": "first card opens picture 01 (kitten) in number mode",
+      "name": "first card opens picture 01 (ladybug) in number mode",
       "ok": true,
-      "detail": "{\"home\":false,\"id\":\"kitten\",\"mode\":\"num\",\"filled\":0,\"total\":40,\"sel\":0,\"done\":[],\"panel\":false,\"ads\":[],\"z\":1}"
+      "detail": "{\"home\":false,\"id\":\"ladybug\",\"mode\":\"num\",\"filled\":0,\"total\":130,\"sel\":0,\"done\":[],\"panel\":false,\"ads\":[],\"z\":1}"
     },
     {
       "name": "every number label is placed on a visible point of its piece (no hidden-label console error)",
@@ -87,12 +97,12 @@
     {
       "name": "finish burst: pieces pop in a wave, shine sweep, sparkles, glow, palette confetti, big word — panel not yet",
       "ok": true,
-      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Beautiful!\",\"glow\":true,\"shine\":true,\"panel\":false}"
+      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Lovely!\",\"glow\":true,\"shine\":true,\"panel\":false}"
     },
     {
-      "name": "picture 01 colored to 100% by 40 real taps (0 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
+      "name": "picture 01 colored to 100% by 129 real taps (1 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
       "ok": true,
-      "detail": "{\"confetti\":91,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 6886ms misses []"
+      "detail": "{\"confetti\":90,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":130} in 9074ms misses []"
     },
     {
       "name": "Next picture button counts down (auto-advance armed)",
@@ -102,7 +112,7 @@
     {
       "name": "after 5 s: interstitial asked once (Bridge decides whether it shows) and picture 02 opened by itself",
       "ok": true,
-      "detail": "[\"picture_done\"] balloon"
+      "detail": "[\"picture_done\"] sail"
     },
     {
       "name": "Free mode: labels hidden, no counts",
@@ -110,9 +120,9 @@
       "detail": ""
     },
     {
-      "name": "picture 02 colored in Free mode with one color by 45 real taps: done, free fills saved with the chosen color",
+      "name": "picture 02 colored in Free mode with one color by 134 real taps: done, free fills saved with the chosen color",
       "ok": true,
-      "detail": "{\"n\":46,\"allC3\":true,\"mode\":\"free\",\"panel\":true} misses []"
+      "detail": "{\"n\":136,\"allC3\":true,\"mode\":\"free\",\"panel\":true} misses []"
     },
     {
       "name": "tap on the picture: panel gone, auto-advance cancelled",
@@ -122,7 +132,7 @@
     {
       "name": "5 s later still on picture 02 (nothing moved on by itself)",
       "ok": true,
-      "detail": "balloon"
+      "detail": "sail"
     },
     {
       "name": "gallery after two pictures (Back from a finished picture): interstitial asked again, 2 Done, 03 unlocked, 04 locked, \"2 of 20 finished\"",
@@ -155,14 +165,14 @@
       "detail": "{\"filled\":0,\"pending\":null,\"used\":false,\"vis\":true,\"audible\":true}"
     },
     {
-      "name": "rewarded: all 7 pieces of the chosen color filled, boost marked used, button gone (one per picture)",
+      "name": "rewarded: all 29 pieces of the chosen color filled, boost marked used, button gone (one per picture)",
       "ok": true,
-      "detail": "{\"left\":2,\"filled\":7,\"used\":true,\"vis\":false,\"sel\":1}"
+      "detail": "{\"left\":40,\"filled\":29,\"used\":true,\"vis\":false,\"sel\":1}"
     },
     {
-      "name": "picture 03 finished after the boost by 44 real taps",
+      "name": "picture 03 finished after the boost by 180 real taps",
       "ok": true,
-      "detail": "{\"filled\":51,\"total\":51,\"misses\":[]}"
+      "detail": "{\"filled\":213,\"total\":213,\"misses\":[]}"
     },
     {
       "name": "first locked picture is 05 and it shows \"Unlock now · watch ad\"",
@@ -197,7 +207,7 @@
     {
       "name": "tap while zoomed colors exactly the tapped piece",
       "ok": true,
-      "detail": "piece 9"
+      "detail": "piece 7"
     },
     {
       "name": "one finger drags the zoomed picture (no coloring)",
@@ -232,7 +242,7 @@
     {
       "name": "reload restores 3 finished pictures, 5 daily pieces, the ad unlock, the used boost and mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"done\":3,\"daily\":5,\"unlocked\":[\"cactus\"],\"boost\":[\"sunset\"],\"muted\":true,\"attr\":\"1\",\"audible\":false,\"dailyBtn\":\"Resume\",\"doneChips\":3,\"free\":[\"balloon\"]}"
+      "detail": "{\"done\":3,\"daily\":5,\"unlocked\":[\"cactus\"],\"boost\":[\"kitten\"],\"muted\":true,\"attr\":\"1\",\"audible\":false,\"dailyBtn\":\"Resume\",\"doneChips\":3,\"free\":[\"sail\"]}"
     },
     {
       "name": "Continue row shows the unfinished picture",
@@ -257,7 +267,7 @@
     {
       "name": "audio files decoded or fetched (ogg/mp3 shipped in the archive)",
       "ok": true,
-      "detail": "pick,finish,dab,swoosh,color-done"
+      "detail": "dab,pick,color-done"
     },
     {
       "name": "desktop: click opens picture 01 in landscape layout",
@@ -440,17 +450,17 @@
       "detail": "{\"fill\":\"0.83\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":7.4}"
     },
     {
-      "name": "cover cover-800x800 rendered (half-colored mandala + title badge)",
+      "name": "cover cover-800x800 rendered (half-colored sunflower + title badge)",
       "ok": true,
       "detail": ""
     },
     {
-      "name": "cover cover-1080x1920 rendered (half-colored mandala + title badge)",
+      "name": "cover cover-1080x1920 rendered (half-colored sunflower + title badge)",
       "ok": true,
       "detail": ""
     },
     {
-      "name": "cover cover-1920x1080 rendered (half-colored mandala + title badge)",
+      "name": "cover cover-1920x1080 rendered (half-colored sunflower + title badge)",
       "ok": true,
       "detail": ""
     },
@@ -514,9 +524,9 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "taps": 182,
-  "debugTaps": 1,
-  "finishedAt": "2026-11-09T22:28:11.885Z",
-  "passed": 95,
+  "taps": 498,
+  "debugTaps": 7,
+  "finishedAt": "2026-11-09T23:32:33.754Z",
+  "passed": 97,
   "failed": 0
 }

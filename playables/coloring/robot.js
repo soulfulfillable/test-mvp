@@ -82,7 +82,7 @@ const swatchMisses = [];
 async function tapPiece(page, i, touch, expectFill = true) {
   const info = await page.evaluate((i) => {
     const g = window.__game, p = g.labelPoint(i), z = document.getElementById('zoom-ctrl').getBoundingClientRect();
-    const underZoom = p.x >= z.left - 2 && p.x <= z.right + 2 && p.y >= z.top - 2 && p.y <= z.bottom + 2;
+    const underZoom = p.x >= z.left - 14 && p.x <= z.right + 14 && p.y >= z.top - 14 && p.y <= z.bottom + 14;   // browsers pull taps this close onto the button (touch adjustment)
     return { x: p.x, y: p.y, underZoom, inside: p.x > 0 && p.y > 0 && p.x < innerWidth && p.y < innerHeight, pic: g.cur.pic.id, mode: g.cur.mode, selBefore: g.cur.sel, c: g.cur.pic.rg[i].c };
   }, i);
   if (info.underZoom || !info.inside) { await page.evaluate((i) => window.__game.tap(i), i); report.debugTaps++; return 'debug'; }
@@ -125,7 +125,9 @@ async function swipe(page, x, y0, y1, steps = 10) {
   // ── 0. pictures module in node ──
   {
     const ids = Pics.ORDER.map((p) => p.id), counts = Pics.ORDER.map((p) => p.rg.length);
-    check('20 pictures, ordered by piece count, 40 → 170+', ids.length === 20 && counts.every((c, i) => i === 0 || c >= counts[i - 1]) && counts[0] <= 45 && counts[counts.length - 1] >= 170, counts.join(' '));
+    check('20 poly-art pictures, ordered by piece count, ~130 → 500', ids.length === 20 && counts.every((c, i) => i === 0 || c >= counts[i - 1]) && counts[0] <= 150 && counts[counts.length - 1] >= 450, counts.join(' '));
+    { let over = []; Pics.PICS.forEach((p) => { let A = 0; p.rg.forEach((r) => { const pts = r.d.slice(1, -2).split(' L').map((q) => q.split(',').map(Number)); let a = 0; for (let k = 0; k < pts.length; k++) { const q = pts[k], w = pts[(k + 1) % pts.length]; a += q[0] * w[1] - w[0] * q[1]; } A += Math.abs(a) / 2; }); if (Math.abs(A / (p.w * p.h) - 1) > 0.0005) over.push(p.id + ':' + (A / (p.w * p.h)).toFixed(4)); }); check('every picture is tiled exactly: no holes, no overlapping pieces (total piece area = canvas)', over.length === 0, over.join(' ')); }
+    { const fresh = JSON.stringify(Pics.PICS); global.self = { ColoringData: null }; const built = fs.readFileSync(path.join(ROOT, 'coloring-data.js'), 'utf8'); check('coloring-data.js is up to date with coloring-pics.js (build.sh regenerates it)', built.indexOf(JSON.stringify({ PICS: Pics.PICS })) >= 0, built.length + ' bytes'); }
     let bad = 0; Pics.PICS.forEach((p) => p.rg.forEach((r) => { if (!(r.c >= 1 && r.c <= p.pal.length)) bad++; }));
     check('every piece points at a palette color', bad === 0, bad);
     const d = new Date(Date.UTC(2026, 10, 1)); let mn = 1e9, mx = 0, det = true, dbad = 0; const variants = new Set();
@@ -411,7 +413,7 @@ async function swipe(page, x, y0, y1, steps = 10) {
     const { context, page } = await newPage(browser, w, h, base + '#debug&cover');
     await sleep(300);
     await page.screenshot({ path: path.join(coverDir, name + '.png') });
-    check(`cover ${name} rendered (half-colored mandala + title badge)`, await page.evaluate(() => !document.getElementById('cover-badge').classList.contains('hidden') && window.__game.cur && window.__game.cur.filled.size > 60));
+    check(`cover ${name} rendered (half-colored sunflower + title badge)`, await page.evaluate(() => !document.getElementById('cover-badge').classList.contains('hidden') && window.__game.cur && window.__game.cur.filled.size > 200));
     await context.close();
   }
 

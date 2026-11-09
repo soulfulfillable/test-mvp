@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Cozy Coloring</title>
+<script src="coloring-data.js"></script>
 <script src="coloring-pics.js"></script>
 <style>
   :root {
@@ -198,9 +199,9 @@
   #play.cover #play-head, #play.cover #foot, #play.cover #zoom-ctrl, #play.cover .lbl { display: none; }
   #play.cover #art-vp { border: none; }
   #play.cover { grid-template-rows: 1fr; grid-template-columns: 1fr; grid-template-areas: "art"; }
-  #cover-badge { position: fixed; z-index: 35; left: 50%; bottom: 8%; transform: translateX(-50%); background: var(--plum); color: var(--cream); border-radius: 32px; padding: 26px 48px 28px; text-align: center; box-shadow: 0 20px 60px rgba(43,35,64,0.45); }
-  #cover-badge .k { font-size: 20px; font-weight: 700; color: rgba(255,244,227,0.75); margin-top: 8px; }
-  #cover-badge h1 { font-size: 64px; font-weight: 900; letter-spacing: -2px; line-height: 1; white-space: nowrap; }
+  #cover-badge { position: fixed; z-index: 35; left: 50%; bottom: 7%; transform: translateX(-50%); background: var(--plum); color: var(--cream); border-radius: 4vmin; padding: 3vmin 6vmin 3.4vmin; text-align: center; box-shadow: 0 20px 60px rgba(43,35,64,0.45); }
+  #cover-badge .k { font-size: 3vmin; font-weight: 700; color: rgba(255,244,227,0.75); margin-top: 1vmin; }
+  #cover-badge h1 { font-size: 9vmin; font-weight: 900; letter-spacing: -0.2vmin; line-height: 1; white-space: nowrap; }
   .pressable { transition: transform 0.08s ease-out; }
   .pressable:active { transform: scale(0.95); }
 </style>
@@ -273,7 +274,7 @@
 <script>
 (function () {
   'use strict';
-  var GAME_VERSION = '1.2.0';
+  var GAME_VERSION = '1.3.0';
   var GAME_TITLE = 'Cozy Coloring';
   var NS = 'http://www.w3.org/2000/svg';
   var CP = window.ColoringPics, PICS = CP.ORDER;
@@ -557,7 +558,7 @@
   }
   function firstLocked() { for (var k = 0; k < PICS.length; k++) if (isLocked(PICS[k])) return PICS[k]; return null; }
   function frameColor(pic) { return pic.pal[3] || '#FFB703'; }
-  function diffOf(pic) { var n = pic.rg.length; return n >= 120 ? 'Big' : n >= 70 ? 'Medium' : 'Small'; }
+  function diffOf(pic) { var n = pic.rg.length; return n >= 330 ? 'Big' : n >= 220 ? 'Medium' : 'Small'; }
   function lastOf(id) { return store.progress.last[id] || 0; }
 
   // ---------- home / gallery ----------
@@ -1154,8 +1155,8 @@
     });
   }
   function setupCover() {
-    var pic = PICS.filter(function (p) { return p.id === 'mandala'; })[0];
-    var fills = new Map(); pic.rg.forEach(function (rg, i) { if (i < pic.rg.length * 0.62 || rg.c === 6) fills.set(i, rg.c - 1); });
+    var pic = PICS.filter(function (p) { return p.id === 'sunflower'; })[0];
+    var fills = new Map(); pic.rg.forEach(function (rg, i) { var x = parseFloat(rg.d.slice(1)); if (x < 262) fills.set(i, rg.c - 1); });   // colored up to a ragged line: in progress
     store.progress.fills[pic.id] = Array.from(fills.keys()); store.progress.unlocked[pic.id] = 1;
     openPic(pic, 'num'); playEl.classList.add('cover'); layout();
     $('cover-badge').classList.remove('hidden');
