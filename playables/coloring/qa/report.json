@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-09T21:24:17.444Z",
+  "startedAt": "2026-11-09T21:32:11.152Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -62,7 +62,7 @@
     {
       "name": "gallery list scrolls with a finger",
       "ok": true,
-      "detail": "609px"
+      "detail": "612px"
     },
     {
       "name": "tapping a locked picture keeps you in the gallery (with a note)",
@@ -87,12 +87,12 @@
     {
       "name": "finish burst: pieces pop in a wave, shine sweep, sparkles, glow, palette confetti, big word — panel not yet",
       "ok": true,
-      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Beautiful!\",\"glow\":true,\"shine\":true,\"panel\":false}"
+      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"So pretty!\",\"glow\":true,\"shine\":true,\"panel\":false}"
     },
     {
       "name": "picture 01 colored to 100% by 40 real taps (0 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
       "ok": true,
-      "detail": "{\"confetti\":92,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 6888ms misses []"
+      "detail": "{\"confetti\":90,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 7698ms misses []"
     },
     {
       "name": "Next picture button counts down (auto-advance armed)",
@@ -202,7 +202,7 @@
     {
       "name": "one finger drags the zoomed picture (no coloring)",
       "ok": true,
-      "detail": "{\"tx0\":-492,\"tx\":-588}"
+      "detail": "{\"tx0\":-488,\"tx\":-584}"
     },
     {
       "name": "1× button resets the zoom",
@@ -257,7 +257,7 @@
     {
       "name": "audio files decoded or fetched (ogg/mp3 shipped in the archive)",
       "ok": true,
-      "detail": "dab,pick,finish"
+      "detail": "pick,dab,swoosh,finish,color-done,mute-off"
     },
     {
       "name": "desktop: click opens picture 01 in landscape layout",
@@ -285,159 +285,159 @@
       "detail": ""
     },
     {
-      "name": "gallery phone-360x640: header on screen, cards ≥ 130px (162px), list scrolls inside, no page scroll",
+      "name": "gallery phone-360x640: header on screen, cards ≥ 130px (158px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":162,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":158,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout phone-360x640 (portrait): picture 340×415px, swatch 50px, smallest number 9.4px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout phone-360x640 (portrait): picture 336×415px, swatch 54px, smallest number 9.3px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.94\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":9.4}"
+      "detail": "{\"fill\":\"0.93\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":9.3}"
     },
     {
       "name": "done panel fits at phone-360x640",
       "ok": true,
-      "detail": "panel 147px of 640"
+      "detail": "panel 155px of 640"
     },
     {
-      "name": "gallery phone-390x844: header on screen, cards ≥ 130px (177px), list scrolls inside, no page scroll",
+      "name": "gallery phone-390x844: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":177,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout phone-390x844 (portrait): picture 369×452px, swatch 50px, smallest number 10.3px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout phone-390x844 (portrait): picture 366×452px, swatch 54px, smallest number 10.2px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.95\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":10.3}"
+      "detail": "{\"fill\":\"0.94\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":10.2}"
     },
     {
-      "name": "gallery phone-430x932: header on screen, cards ≥ 130px (197px), list scrolls inside, no page scroll",
+      "name": "gallery phone-430x932: header on screen, cards ≥ 130px (193px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":197,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":193,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout phone-430x932 (portrait): picture 410×501px, swatch 50px, smallest number 11.4px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout phone-430x932 (portrait): picture 406×501px, swatch 54px, smallest number 11.3px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.95\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":11.4}"
+      "detail": "{\"fill\":\"0.94\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":11.3}"
     },
     {
-      "name": "gallery land-844x390: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery land-844x390: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout land-844x390 (landscape): picture 266×326px, swatch 50px, smallest number 7.4px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout land-844x390 (landscape): picture 265×324px, swatch 54px, smallest number 7.4px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.84\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":7.4}"
+      "detail": "{\"fill\":\"0.83\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":7.4}"
     },
     {
       "name": "done panel fits at land-844x390",
       "ok": true,
-      "detail": "panel 147px of 390"
+      "detail": "panel 155px of 390"
     },
     {
-      "name": "gallery land-915x412: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery land-915x412: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout land-915x412 (landscape): picture 284×348px, swatch 50px, smallest number 7.9px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout land-915x412 (landscape): picture 283×346px, swatch 54px, smallest number 7.9px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
       "detail": "{\"fill\":\"0.84\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":7.9}"
     },
     {
-      "name": "gallery tablet-768x1024: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery tablet-768x1024: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout tablet-768x1024 (portrait): picture 688×842px, swatch 50px, smallest number 19.1px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout tablet-768x1024 (portrait): picture 675×826px, swatch 54px, smallest number 18.8px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.90\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":19.1}"
+      "detail": "{\"fill\":\"0.88\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":18.8}"
     },
     {
-      "name": "gallery tablet-1024x768: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery tablet-1024x768: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout tablet-1024x768 (landscape): picture 576×704px, swatch 50px, smallest number 16px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout tablet-1024x768 (landscape): picture 574×702px, swatch 54px, smallest number 15.9px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.92\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":16}"
+      "detail": "{\"fill\":\"0.91\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":15.9}"
     },
     {
-      "name": "gallery square-640x640: header on screen, cards ≥ 130px (150px), list scrolls inside, no page scroll",
+      "name": "gallery square-640x640: header on screen, cards ≥ 130px (195px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":150,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":195,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout square-640x640 (portrait): picture 374×458px, swatch 50px, smallest number 10.4px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout square-640x640 (portrait): picture 361×442px, swatch 54px, smallest number 10px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.72\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":10.4}"
+      "detail": "{\"fill\":\"0.69\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":10}"
     },
     {
       "name": "done panel fits at square-640x640",
       "ok": true,
-      "detail": "panel 147px of 640"
+      "detail": "panel 155px of 640"
     },
     {
-      "name": "gallery iframe-800x450: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery iframe-800x450: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout iframe-800x450 (landscape): picture 315×386px, swatch 50px, smallest number 8.8px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout iframe-800x450 (landscape): picture 314×384px, swatch 54px, smallest number 8.7px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.86\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":8.8}"
+      "detail": "{\"fill\":\"0.85\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":8.7}"
     },
     {
-      "name": "gallery iframe-1280x720: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery iframe-1280x720: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout iframe-1280x720 (landscape): picture 536×656px, swatch 50px, smallest number 14.9px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout iframe-1280x720 (landscape): picture 535×654px, swatch 54px, smallest number 14.9px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
       "detail": "{\"fill\":\"0.91\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":14.9}"
     },
     {
-      "name": "gallery desk-1366x768: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery desk-1366x768: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout desk-1366x768 (landscape): picture 576×704px, swatch 50px, smallest number 16px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout desk-1366x768 (landscape): picture 574×702px, swatch 54px, smallest number 15.9px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.92\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":16}"
+      "detail": "{\"fill\":\"0.91\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":15.9}"
     },
     {
-      "name": "gallery desk-1920x1080: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery desk-1920x1080: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout desk-1920x1080 (landscape): picture 831×1016px, swatch 50px, smallest number 23.1px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout desk-1920x1080 (landscape): picture 829×1014px, swatch 54px, smallest number 23px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.94\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":23.1}"
+      "detail": "{\"fill\":\"0.94\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":23}"
     },
     {
-      "name": "gallery tall-9x21-390x910: header on screen, cards ≥ 130px (177px), list scrolls inside, no page scroll",
+      "name": "gallery tall-9x21-390x910: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":177,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout tall-9x21-390x910 (portrait): picture 369×452px, swatch 50px, smallest number 10.3px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout tall-9x21-390x910 (portrait): picture 366×452px, swatch 54px, smallest number 10.2px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.95\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":10.3}"
+      "detail": "{\"fill\":\"0.94\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":10.2}"
     },
     {
-      "name": "gallery wide-21x9-910x390: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
+      "name": "gallery wide-21x9-910x390: header on screen, cards ≥ 130px (173px), list scrolls inside, no page scroll",
       "ok": true,
-      "detail": "{\"headInside\":true,\"cardW\":180,\"scrolls\":true,\"scroll\":true}"
+      "detail": "{\"headInside\":true,\"cardW\":173,\"scrolls\":true,\"scroll\":true}"
     },
     {
-      "name": "layout wide-21x9-910x390 (landscape): picture 266×326px, swatch 50px, smallest number 7.4px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
+      "name": "layout wide-21x9-910x390 (landscape): picture 265×324px, swatch 54px, smallest number 7.4px, no overlap, on screen, fills ≥ 55% of the screen, no page scroll",
       "ok": true,
-      "detail": "{\"fill\":\"0.84\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":7.4}"
+      "detail": "{\"fill\":\"0.83\",\"headOverArt\":false,\"footOverArt\":false,\"inside\":true,\"lblPx\":7.4}"
     },
     {
       "name": "cover cover-800x800 rendered (half-colored mandala + title badge)",
@@ -516,7 +516,7 @@
   ],
   "taps": 182,
   "debugTaps": 1,
-  "finishedAt": "2026-11-09T21:25:22.809Z",
+  "finishedAt": "2026-11-09T21:33:19.292Z",
   "passed": 95,
   "failed": 0
 }
