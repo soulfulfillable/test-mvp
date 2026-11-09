@@ -102,6 +102,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-11-09 | **Playables 제작 순서 확정**: Kitty Sudoku(제작 중) → Cozy Coloring Playables 판 → ①데일리 솔리테어 → ②Tricky 두뇌 퍼즐(레벨 5개 시제품으로 유머·그림 검증 뒤 확대). 한 번에 하나씩, 앞 것 보고 받은 뒤 다음 착수. 단어·짝 맞추기는 보류 | 사용자 "응 추천대로"(`plans/playables-next-candidates.md`) |
 | 2026-11-08 | **Cozy Coloring Playables 판 = 스도쿠 보고 뒤 착수(B)**. 다음 후보 조사 `plans/playables-next-candidates.md`: ①데일리 솔리테어(추천 1) ②Tricky 두뇌 퍼즐(상승세 최강, 콘텐츠 사람 제작) ③단어 ④짝 맞추기. 사용자 선택 대기 | 사용자 "추천대로 하자. 시장 조사해 보고 다음 단계 추천해 줄게, 더 있을까" |
 | 2026-11-08 | (Kitty Sudoku 개발 세션) **v1.1.0: 첫 판부터 9×9** — 사용자 "이게 왜 전통스도쿠지" → 4×4 는 스도쿠로 안 읽힘. 사다리 300 은 9×9 만, 4×4·6×6 는 "Small boards" 옵션. **차별점 ①(짧은 판 기본)은 철회** — 짧은 판은 옵션으로만. 데일리 6×6 은 사용자 답 뒤 결정 | 사용자 A 선택. 교훈: 첫 화면은 "아는 모양"이어야 한다 |
 | 2026-11-08 | (Kitty Sudoku Playables 개발 세션) **v1.0.0 완성 + Playgama 드래프트·폼·아카이브·커버 업로드, 샌드박스 미게시** — id `cmw6vm5iq0v3qno0hih97vhin`, category sudoku. 레벨 300(4×4→6×6→9×9, Easy→Hard, 전부 유일해·풀이기 채점), 데일리 **6×6 Medium**(짧은 판 가설에 맞춰 내가 정함; 9×9 는 레벨 76+), 도전장 링크는 Pages 판에서만. 표준 UI 그대로, 설명 글은 첫 판 한 줄. 로봇 104/104. 이름 조사: 미국 등록 상표 CAT' SUDOKU 와 가까워 "Kitty Sudoku" 는 가칭 유지 | 기획서 승인 범위 그대로. 미리보기 https://soulfulfillable.github.io/test-mvp/sudoku-playables/ |
