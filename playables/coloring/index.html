@@ -168,6 +168,25 @@
   #btn-again { background: rgba(255,255,255,0.14); color: #fff; }
   #done-panel button:active { transform: scale(0.96); }
   #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 19; }
+  /* ── the finish: every piece pops in a wave, a shine sweeps over, sparkles, a glow, a big word, then the next picture slides in ── */
+  #play.won .region { animation: piecepop 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.25) var(--wd, 0ms) 1 both; transform-box: fill-box; transform-origin: center; }
+  @keyframes piecepop { 0% { transform: scale(1); } 45% { transform: scale(1.16); } 100% { transform: scale(1); } }
+  .shine, .sparkle { pointer-events: none; }
+  .sparkle { opacity: 0; transform-box: fill-box; transform-origin: center; animation: twinkle 0.9s ease-out both; }
+  @keyframes twinkle { 0% { opacity: 0; transform: scale(0) rotate(0); } 35% { opacity: 1; transform: scale(1.4) rotate(35deg); } 100% { opacity: 0; transform: scale(0.3) rotate(90deg); } }
+  #art-vp.glow { animation: glowpulse 1.3s ease-out 2; }
+  @keyframes glowpulse { 0% { box-shadow: 0 0 0 0 rgba(255,201,77,0); transform: scale(1); } 30% { box-shadow: 0 0 0 6px rgba(255,201,77,0.75), 0 0 80px 18px rgba(255,201,77,0.5); transform: scale(1.04); } 100% { box-shadow: 0 0 0 0 rgba(255,201,77,0); transform: scale(1); } }
+  #cheer { position: absolute; left: 50%; top: 30%; transform: translate(-50%, -50%) scale(0.5); opacity: 0; font-size: clamp(38px, 12vmin, 68px); font-weight: 900; letter-spacing: -1.5px; color: var(--accent); text-shadow: 0 2px 0 #fff, 0 0 26px rgba(255,255,255,0.95), 0 8px 26px rgba(28,26,22,0.3); pointer-events: none; z-index: 7; white-space: nowrap; }
+  #cheer.show { animation: cheerpop 1.7s cubic-bezier(0.2, 0.9, 0.3, 1.3) both; }
+  @keyframes cheerpop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4) rotate(-8deg); } 16% { opacity: 1; transform: translate(-50%, -50%) scale(1.18) rotate(3deg); } 28% { transform: translate(-50%, -50%) scale(1) rotate(0); } 78% { opacity: 1; transform: translate(-50%, -58%) scale(1.02); } 100% { opacity: 0; transform: translate(-50%, -74%) scale(0.96); } }
+  #btn-next { position: relative; overflow: hidden; }
+  #btn-next .bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: rgba(255,255,255,0.9); }
+  #btn-next .bar.run { width: 0; transition: width 5s linear; }
+  #art-vp.slide-out { animation: slideout 0.32s ease-in forwards; }
+  #art-vp.slide-in { animation: slidein 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.12) both; }
+  @keyframes slideout { to { transform: translateX(-115%) rotate(-4deg); opacity: 0; } }
+  @keyframes slidein { from { transform: translateX(115%) rotate(4deg); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { #play.won .region, .sparkle, #art-vp.glow, #cheer.show, #art-vp.slide-out, #art-vp.slide-in, #done-panel { animation: none; } }
 
   /* ── cover still ── */
   #play.cover #play-head, #play.cover #foot, #play.cover #zoom-ctrl, #play.cover .lbl { display: none; }
@@ -231,6 +250,7 @@
         </div>
       </div>
       <div id="msg"></div>
+      <div id="cheer"></div>
     </div>
     <div id="foot">
       <div id="mode-row">
@@ -247,7 +267,7 @@
 <script>
 (function () {
   'use strict';
-  var GAME_VERSION = '1.0.0';
+  var GAME_VERSION = '1.1.0';
   var GAME_TITLE = 'Cozy Coloring';
   var NS = 'http://www.w3.org/2000/svg';
   var CP = window.ColoringPics, PICS = CP.ORDER;
@@ -613,6 +633,7 @@
     mode = mode || modeOf(pic);
     var filled = isDone(pic) ? doneFills(pic) : getFills(pic, mode);
     if (isDone(pic) && modeOf(pic) !== mode) filled = getFills(pic, mode);
+    clearCeleb(); playEl.classList.remove('won'); vpEl.classList.remove('glow');
     cur = { pic: pic, mode: mode, filled: filled, sel: -1, counts: [] };
     if (mode === 'num') pic.pal.forEach(function (_, ci) { cur.counts[ci] = pic.rg.filter(function (rg, i) { return rg.c === ci + 1 && !filled.has(i); }).length; });
     $('pic-name').textContent = pic.daily ? pic.name + ' · ' + dayLabel(pic.day) : pic.name;
@@ -779,7 +800,7 @@
   function fillRegion(i, e, quiet) {
     var pic = cur.pic, rg = pic.rg[i], ci = cur.mode === 'free' ? cur.sel : rg.c - 1, hex = pic.pal[ci];
     var el = cur.view.els[i], lbl = cur.view.labels[i], wasFull = cur.filled.size === pic.rg.length;
-    cur.filled.set(i, ci);
+    cur.filled.set(i, ci); lastFill = i;
     if (cur.mode === 'free') { var o = {}; cur.filled.forEach(function (c, idx) { o[idx] = c; }); store.progress.free[pic.id] = o; }
     else { store.progress.fills[pic.id] = Array.from(cur.filled.keys()); cur.counts[ci]--; }
     store.progress.last[pic.id] = Date.now();
@@ -894,23 +915,82 @@
   }
   function adStateChanged(st) { adOpen = st === 'opened' || (st === 'rewarded' && !adSeenClosed); setReason('ad', adOpen); }
 
-  // ---------- completion ----------
+  // ---------- completion: the signature moment ----------
+  var lastFill = -1, celebT = [], autoNextT = null, autoNextTick = null;
+  function later(fn, ms) { celebT.push(setTimeout(fn, ms)); }
+  function stopAutoNext() { clearTimeout(autoNextT); autoNextT = null; clearInterval(autoNextTick); autoNextTick = null; }
+  function clearCeleb() { celebT.forEach(clearTimeout); celebT.length = 0; stopAutoNext(); var c = $('cheer'); c.className = ''; c.textContent = ''; }
+  function reducedMotion() { return safe(function () { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }, false); }
   function showComplete() {
-    var pic = cur.pic;
-    var fresh = !store.progress.done[pic.id];
+    var pic = cur.pic, fresh = !store.progress.done[pic.id];
     store.progress.done[pic.id] = Date.now(); store.progress.played++;
     saveStore(['progress']);
-    play('finish'); buzz([30, 40, 30]);
-    if (!reducedMotion()) confettiBurst();
-    showDonePanel(true);
     sendMsg('gameplay_stopped');
     analytics('picture_done', { id: pic.id, mode: cur.mode, fresh: fresh, pieces: pic.rg.length });
+    clearCeleb();
+    play('finish'); buzz([30, 40, 30, 40, 90]);
+    if (reducedMotion()) { showDonePanel(true); return; }
+    celebrate(pic);
+    later(function () { play('color-done', 1.25, 0.5); }, 380);
+    later(function () { play('color-done', 1.5, 0.5); }, 560);
+    later(function () { showCheer(); }, 420);
+    later(function () { showDonePanel(true); }, 1500);
+  }
+  function celebrate(pic) {
+    var view = cur.view, svg = view.svg;
+    // 1. every piece pops, in a wave spreading from the last tap
+    var o = view.pts[lastFill] || { x: pic.w / 2, y: pic.h / 2 };
+    pic.rg.forEach(function (rg, i) { var bb = view.els[i].getBBox(); var d = Math.hypot(bb.x + bb.width / 2 - o.x, bb.y + bb.height / 2 - o.y); view.els[i].style.setProperty('--wd', Math.round(d * 2.4) + 'ms'); });
+    playEl.classList.remove('won'); void playEl.offsetWidth; playEl.classList.add('won');
+    // 2. a band of light sweeps across the picture
+    var grad = document.createElementNS(NS, 'linearGradient'); grad.setAttribute('id', 'shine-g'); grad.setAttribute('x1', '0'); grad.setAttribute('x2', '1'); grad.setAttribute('y1', '0'); grad.setAttribute('y2', '0');
+    [[0, 0], [0.5, 0.8], [1, 0]].forEach(function (st) { var e = document.createElementNS(NS, 'stop'); e.setAttribute('offset', st[0]); e.setAttribute('stop-color', '#fff'); e.setAttribute('stop-opacity', st[1]); grad.appendChild(e); });
+    view.defs.appendChild(grad);
+    var shine = document.createElementNS(NS, 'rect'); shine.setAttribute('class', 'shine'); shine.setAttribute('x', 0); shine.setAttribute('y', -pic.h * 0.3); shine.setAttribute('width', pic.w * 0.42); shine.setAttribute('height', pic.h * 1.6); shine.setAttribute('fill', 'url(#shine-g)');
+    svg.appendChild(shine);
+    var t0 = performance.now() + 260, dur = 850;
+    (function sweep(now) {
+      var k = Math.min(1, Math.max(0, (now - t0) / dur));
+      shine.setAttribute('transform', 'translate(' + (-pic.w * 0.7 + pic.w * 1.9 * k) + ',0) skewX(-18)');
+      if (k < 1 && shine.parentNode) requestAnimationFrame(sweep); else { shine.remove(); grad.remove(); }
+    })(performance.now());
+    // 3. sparkles over the picture
+    var sparks = [];
+    for (var k = 0; k < 18; k++) {
+      var sp = document.createElementNS(NS, 'use'); sp.setAttribute('href', '#s-spark'); sp.setAttribute('class', 'sparkle');
+      var sz = 16 + Math.random() * 22; sp.setAttribute('width', sz); sp.setAttribute('height', sz);
+      sp.setAttribute('x', 10 + Math.random() * (pic.w - 20 - sz)); sp.setAttribute('y', 10 + Math.random() * (pic.h - 20 - sz));
+      sp.setAttribute('fill', k % 3 === 0 ? '#ffc94d' : '#ffffff'); sp.style.animationDelay = (300 + k * 75) + 'ms';
+      svg.appendChild(sp); sparks.push(sp);
+    }
+    later(function () { sparks.forEach(function (e) { e.remove(); }); }, 2800);
+    // 4. the frame glows and breathes
+    vpEl.classList.remove('glow'); void vpEl.offsetWidth; vpEl.classList.add('glow');
+    later(function () { vpEl.classList.remove('glow'); }, 2700);
+    // 5. confetti in the picture's own colors: two cannons from the bottom corners, then a soft rain
+    confettiCannons(pic.pal);
+    later(function () { confettiRain(pic.pal); }, 550);
+  }
+  function showCheer() {
+    var words = ['Beautiful!', 'Gorgeous!', 'Lovely!', 'Masterpiece!', 'So pretty!'];
+    var c = $('cheer'); c.textContent = words[(Math.random() * words.length) | 0]; c.className = 'show';
   }
   function nextPic() {
     var k = PICS.indexOf(cur.pic);
     if (k < 0) return null;
     for (var j = k + 1; j < PICS.length; j++) if (!isDone(PICS[j])) return isLocked(PICS[j]) ? null : PICS[j];
     return null;
+  }
+  // the finished picture slides out to the left, the next one slides in from the right
+  function slideTo(nx) {
+    if (reducedMotion()) { openPic(nx); return; }
+    vpEl.classList.remove('slide-in'); vpEl.classList.add('slide-out');
+    setTimeout(function () {
+      vpEl.classList.remove('slide-out');
+      openPic(nx);
+      vpEl.classList.add('slide-in');
+      setTimeout(function () { vpEl.classList.remove('slide-in'); }, 520);
+    }, 320);
   }
   function showDonePanel(fresh) {
     hideDonePanel();
@@ -920,46 +1000,78 @@
     var row = document.createElement('div'); row.className = 'row2';
     var again = document.createElement('button'); again.id = 'btn-again'; again.textContent = 'Color again'; row.appendChild(again);
     var nx = nextPic();
-    if (nx) { var nb = document.createElement('button'); nb.id = 'btn-next'; nb.textContent = 'Next picture'; row.appendChild(nb); onTap(nb, function () { showInterstitial('picture_done'); openPic(nx); }); }
+    if (nx) {
+      var nb = document.createElement('button'); nb.id = 'btn-next';
+      var lbl = document.createElement('span'); lbl.textContent = 'Next picture'; nb.appendChild(lbl);
+      var bar = document.createElement('i'); bar.className = 'bar'; nb.appendChild(bar);
+      row.appendChild(nb);
+      var goNext = function () { clearCeleb(); hideDonePanel(); showInterstitial('picture_done'); slideTo(nx); };
+      onTap(nb, goNext);
+      if (fresh && !reducedMotion()) {   // a fresh finish moves on by itself after 5 s; tapping the picture stays
+        var left = 5; lbl.textContent = 'Next picture · ' + left;
+        requestAnimationFrame(function () { bar.classList.add('run'); });
+        autoNextTick = setInterval(function () { left--; lbl.textContent = left > 0 ? 'Next picture · ' + left : 'Next picture'; if (left <= 0) clearInterval(autoNextTick); }, 1000);
+        autoNextT = setTimeout(goNext, 5100);
+      }
+    }
     var gb = document.createElement('button'); gb.id = 'btn-gallery'; gb.textContent = 'Gallery'; row.appendChild(gb);
     donePanel.appendChild(row);
     document.body.appendChild(donePanel);
-    onTap(gb, function () { showInterstitial('picture_done'); goHome(); });
+    onTap(gb, function () { clearCeleb(); showInterstitial('picture_done'); goHome(); });
     onTap(again, function () {
       var pic = cur.pic, md = cur.mode;
       if (md === 'free') delete store.progress.free[pic.id]; else delete store.progress.fills[pic.id];
       delete store.progress.done[pic.id]; saveStore(['progress']);
-      hideDonePanel(); openPic(pic, md);
+      clearCeleb(); hideDonePanel(); openPic(pic, md);
     });
   }
-  function hideDonePanel() { if (donePanel) { donePanel.remove(); donePanel = null; } }
+  function hideDonePanel() { stopAutoNext(); if (donePanel) { donePanel.remove(); donePanel = null; } }
   function goHome() {
-    hideDonePanel();
+    clearCeleb(); hideDonePanel();
     if (cur) { saveStore(['progress']); sendMsg('gameplay_stopped'); }
     cur = null; rewardTarget = null;
     playEl.classList.add('hidden'); homeEl.classList.remove('hidden');
     renderHome();
   }
 
-  // ---------- confetti (one burst, canvas) ----------
+  // ---------- confetti (canvas): cannons + rain in the picture's colors ----------
   var cvs = $('confetti'), ctx = cvs.getContext('2d'), parts = [], confOn = false, confLast = 0;
-  function reducedMotion() { return safe(function () { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }, false); }
-  function confettiBurst() {
+  function confColors(pal) { return (pal || []).slice(3).concat(['#ffc94d', '#ffffff']); }
+  function startConf() { if (!confOn) { confOn = true; confLast = 0; requestAnimationFrame(confStep); } }
+  function confettiCannons(pal) {
     cvs.width = window.innerWidth; cvs.height = window.innerHeight;
-    var colors = ['#ffc94d', '#f58fb0', '#7fc46a', '#74b8e8', '#f0715c', '#9b7ede'];
-    for (var i = 0; i < 110; i++) parts.push({ x: Math.random() * cvs.width, y: -20 - Math.random() * cvs.height * 0.5, vy: 130 + Math.random() * 180, vx: (Math.random() - 0.5) * 60, s: 5 + Math.random() * 6, r: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 6, c: colors[(Math.random() * colors.length) | 0] });
-    if (!confOn) { confOn = true; requestAnimationFrame(confStep); }
+    var colors = confColors(pal), W = cvs.width, H = cvs.height;
+    function cannon(x, y, dir, n) {
+      for (var i = 0; i < n; i++) {
+        var a = dir + (Math.random() - 0.5) * 0.9, sp = 540 + Math.random() * 560, r = Math.random();
+        parts.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, s: 6 + Math.random() * 7, r: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 14, c: colors[(Math.random() * colors.length) | 0], shape: r < 0.25 ? 'dot' : r < 0.42 ? 'streamer' : 'rect', drag: 0.986, g: 950, life: 0 });
+      }
+    }
+    cannon(0, H * 0.72, -Math.PI / 2 + 0.6, 120); cannon(W, H * 0.72, -Math.PI / 2 - 0.6, 120);
+    startConf();
+  }
+  function confettiRain(pal) {
+    var colors = confColors(pal), W = cvs.width, H = cvs.height;
+    for (var i = 0; i < 90; i++) parts.push({ x: Math.random() * W, y: -20 - Math.random() * H * 0.4, vx: (Math.random() - 0.5) * 80, vy: 120 + Math.random() * 160, s: 5 + Math.random() * 6, r: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 6, c: colors[(Math.random() * colors.length) | 0], shape: 'rect', drag: 1, g: 60, life: 0 });
+    startConf();
   }
   function confStep(now) {
     var dt = confLast ? Math.min((now - confLast) / 1000, 0.05) : 0.016; confLast = now;
     ctx.clearRect(0, 0, cvs.width, cvs.height);
-    parts = parts.filter(function (p) { return p.y < cvs.height + 30; });
-    parts.forEach(function (p) { p.y += p.vy * dt; p.x += p.vx * dt; p.r += p.vr * dt; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * 0.6); ctx.restore(); });
+    parts = parts.filter(function (p) { return p.y < cvs.height + 40 && p.life < 5; });
+    parts.forEach(function (p) {
+      p.life += dt; p.vx *= p.drag; p.vy = p.vy * p.drag + p.g * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
+      if (p.shape === 'dot') { ctx.beginPath(); ctx.arc(0, 0, p.s / 2, 0, Math.PI * 2); ctx.fill(); }
+      else if (p.shape === 'streamer') ctx.fillRect(-p.s * 0.2, -p.s * 1.2, p.s * 0.4, p.s * 2.4);
+      else ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * 0.6);
+      ctx.restore();
+    });
     if (parts.length) requestAnimationFrame(confStep); else { confOn = false; confLast = 0; ctx.clearRect(0, 0, cvs.width, cvs.height); }
   }
 
   // ---------- controls ----------
-  onTap($('btn-back'), goHome);
+  onTap($('btn-back'), function () { if (cur && isDone(cur.pic)) showInterstitial('picture_done'); goHome(); });
   onTap($('mode-num'), function () { setMode('num'); });
   onTap($('mode-free'), function () { setMode('free'); });
   onTap($('zoom-in'), function () { play('pick'); zoomAt(1.6, Z.w / 2, Z.h / 2); });
@@ -1042,7 +1154,7 @@
       labelPoint: function (i) { var p = cur.view.pts[i]; var sp = cur.view.svg.createSVGPoint(); sp.x = p.x; sp.y = p.y; var m = cur.view.svg.getScreenCTM(); var q = sp.matrixTransform(m); return { x: q.x, y: q.y }; },
       swatchRect: function (ci) { var b = paletteEl.children[ci].getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + b.height / 2, w: b.width, h: b.height, left: b.left, right: b.right, top: b.top, bottom: b.bottom }; },
       rect: function (id) { var b = $(id).getBoundingClientRect(); return { left: b.left, top: b.top, right: b.right, bottom: b.bottom, w: b.width, h: b.height }; },
-      __openPic: openPic, get confetti() { return parts.length; }, get ads() { return (window.__ads || []).slice(); }, version: GAME_VERSION
+      __openPic: openPic, get confetti() { return parts.length; }, get won() { return playEl.classList.contains('won'); }, get sparkles() { return document.querySelectorAll('#art-tf .sparkle').length; }, get cheer() { return $('cheer').className === 'show' ? $('cheer').textContent : ''; }, get autoNext() { return !!autoNextT; }, get ads() { return (window.__ads || []).slice(); }, version: GAME_VERSION
     };
   }
   boot();

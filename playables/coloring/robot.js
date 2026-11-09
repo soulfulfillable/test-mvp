@@ -192,16 +192,21 @@ async function swipe(page, x, y0, y1, steps = 10) {
     // color it all by real taps
     const t0 = Date.now();
     const r1 = await colorByNumber(page, true);
-    await sleep(900);
+    await sleep(1000);
+    const burst = await page.evaluate(() => ({ won: window.__game.won, sparkles: window.__game.sparkles, confetti: window.__game.confetti, cheer: window.__game.cheer, glow: document.getElementById('art-vp').classList.contains('glow'), shine: !!document.querySelector('#art-tf .shine'), panel: window.__game.donePanel }));
+    check('finish burst: pieces pop in a wave, shine sweep, sparkles, glow, palette confetti, big word — panel not yet', burst.won && burst.sparkles >= 12 && burst.confetti >= 150 && burst.cheer.length > 0 && burst.glow && burst.shine && !burst.panel, JSON.stringify(burst));
+    await shot(page, 'phone-390x844-finish-burst');
+    await sleep(1400);
     st = await state(page);
     const fin = await page.evaluate(() => ({ confetti: window.__game.confetti, panel: !!document.getElementById('done-panel'), title: document.querySelector('#done-panel h2') && document.querySelector('#done-panel h2').textContent, next: !!document.getElementById('btn-next'), pct: document.getElementById('pct').textContent, saved: (window.__game.store.progress.fills[window.__game.cur.pic.id] || []).length }));
     check(`picture 01 colored to 100% by ${r1.real} real taps (${r1.dbg} under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved`, st.filled === st.total && st.done.includes(first) && fin.panel && /Beautiful/.test(fin.title) && fin.next && fin.pct === '100%' && fin.saved === st.total, JSON.stringify(fin) + ' in ' + (Date.now() - t0) + 'ms misses ' + JSON.stringify(misses));
     await shot(page, 'phone-390x844-first-done');
-    // Next picture → interstitial placement + picture 02 (now unlocked)
-    await tapEl(page, '#btn-next', true); await sleep(300);
+    // the panel counts down and moves on by itself → interstitial placement + picture 02 (now unlocked) slides in
+    check('Next picture button counts down (auto-advance armed)', await page.evaluate(() => window.__game.autoNext && /Next picture · [1-5]/.test(document.getElementById('btn-next').textContent)), await page.evaluate(() => document.getElementById('btn-next').textContent));
+    await sleep(5800);
     st = await state(page);
     const second = Pics.ORDER[1].id;
-    check('Next picture: interstitial asked once (Bridge decides whether it shows) and picture 02 opens', st.ads.length === 1 && st.ads[0] === 'picture_done' && st.id === second && st.filled === 0, JSON.stringify(st.ads) + ' ' + st.id);
+    check('after 5 s: interstitial asked once (Bridge decides whether it shows) and picture 02 opened by itself', st.ads.length === 1 && st.ads[0] === 'picture_done' && st.id === second && st.filled === 0 && !st.panel, JSON.stringify(st.ads) + ' ' + st.id);
     // free mode: pick one color, tap every piece
     await tapEl(page, '#mode-free', true); await sleep(200);
     st = await state(page);
@@ -210,15 +215,21 @@ async function swipe(page, x, y0, y1, steps = 10) {
     const n2 = await page.evaluate(() => window.__game.cur.pic.rg.length);
     let real2 = 0;
     for (let i = 0; i < n2; i++) if ((await tapPiece(page, i, true)) === 'real') real2++;
-    await sleep(900);
+    await sleep(2300);
     st = await state(page);
     const fr = await page.evaluate(() => { const g = window.__game, o = g.store.progress.free[g.cur.pic.id] || {}; return { n: Object.keys(o).length, allC3: Object.keys(o).every((k) => o[k] === 3), mode: g.store.progress.mode[g.cur.pic.id], panel: g.donePanel }; });
     check(`picture 02 colored in Free mode with one color by ${real2} real taps: done, free fills saved with the chosen color`, st.filled === n2 && st.done.includes(second) && fr.n === n2 && fr.allC3 && fr.mode === 'free' && fr.panel, JSON.stringify(fr) + ' misses ' + JSON.stringify(misses));
     await shot(page, 'phone-390x844-free-done');
-    // Gallery button → second interstitial, two Done chips, 03 unlocked, 04 locked
-    await tapEl(page, '#btn-gallery', true); await sleep(300);
+    // tapping the picture during the countdown hides the panel and cancels the auto-advance
+    await tapPiece(page, 0, true, false); await sleep(200);
+    check('tap on the picture: panel gone, auto-advance cancelled', await page.evaluate(() => !window.__game.donePanel && !window.__game.autoNext));
+    await sleep(5500);
+    st = await state(page);
+    check('5 s later still on picture 02 (nothing moved on by itself)', st.id === second && st.ads.length === 1, st.id);
+    // Back from a finished picture → second interstitial, two Done chips, 03 unlocked, 04 locked
+    await tapEl(page, '#btn-back', true); await sleep(300);
     const home2 = await page.evaluate(() => { const cards = [...document.querySelectorAll('#grid .card')]; return { home: window.__game.home, ads: window.__game.ads.length, done: cards.filter((c) => c.classList.contains('done')).length, l3: cards[2].classList.contains('locked'), l4: cards[3].classList.contains('locked'), count: document.querySelector('#filter .count').textContent, cont: document.getElementById('cont-row').classList.contains('hidden') }; });
-    check('gallery after two pictures: interstitial asked again, 2 Done, 03 unlocked, 04 locked, "2 of 20 finished"', home2.home && home2.ads === 2 && home2.done === 2 && !home2.l3 && home2.l4 && /2 of 20/.test(home2.count), JSON.stringify(home2));
+    check('gallery after two pictures (Back from a finished picture): interstitial asked again, 2 Done, 03 unlocked, 04 locked, "2 of 20 finished"', home2.home && home2.ads === 2 && home2.done === 2 && !home2.l3 && home2.l4 && /2 of 20/.test(home2.count), JSON.stringify(home2));
     await shot(page, 'phone-390x844-gallery');
     // Finished filter shows the two
     await tapEl(page, '#filter button:nth-child(2)', true); await sleep(150);
@@ -247,7 +258,7 @@ async function swipe(page, x, y0, y1, steps = 10) {
     check(`rewarded: all ${selCount} pieces of the chosen color filled, boost marked used, button gone (one per picture)`, bg.filled === selCount && bg.used && !bg.vis, JSON.stringify(bg));
     await shot(page, 'phone-390x844-boost');
     // finish picture 03 by taps (the remaining colors)
-    const r3 = await colorByNumber(page, true); await sleep(900);
+    const r3 = await colorByNumber(page, true); await sleep(2300);
     st = await state(page);
     check(`picture 03 finished after the boost by ${r3.real} real taps`, st.filled === st.total && st.done.includes(third), JSON.stringify({ filled: st.filled, total: st.total, misses: misses }));
 
@@ -385,7 +396,7 @@ async function swipe(page, x, y0, y1, steps = 10) {
     await shot(page, name + '-play');
     if (name === 'square-640x640' || name === 'land-844x390' || name === 'phone-360x640') {
       await page.evaluate(() => { const g = window.__game, pic = g.cur.pic; pic.rg.forEach((rg, i) => { if (!g.cur.filled.has(i)) { g.select(rg.c - 1); g.tap(i); } }); });
-      await sleep(900);
+      await sleep(2400);
       const panel = await page.evaluate(() => { const r = document.getElementById('done-panel').getBoundingClientRect(); return { fits: r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth, h: Math.round(r.height) }; });
       check(`done panel fits at ${name}`, panel.fits, `panel ${panel.h}px of ${h}`);
       await shot(page, name + '-done');

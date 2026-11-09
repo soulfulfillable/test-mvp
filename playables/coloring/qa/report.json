@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-09T17:33:40.378Z",
+  "startedAt": "2026-11-09T21:24:17.444Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -62,7 +62,7 @@
     {
       "name": "gallery list scrolls with a finger",
       "ok": true,
-      "detail": "597px"
+      "detail": "609px"
     },
     {
       "name": "tapping a locked picture keeps you in the gallery (with a note)",
@@ -85,12 +85,22 @@
       "detail": "{\"filled\":false,\"shake\":true,\"sel\":0}"
     },
     {
-      "name": "picture 01 colored to 100% by 40 real taps (0 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
+      "name": "finish burst: pieces pop in a wave, shine sweep, sparkles, glow, palette confetti, big word — panel not yet",
       "ok": true,
-      "detail": "{\"confetti\":110,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 5556ms misses []"
+      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Beautiful!\",\"glow\":true,\"shine\":true,\"panel\":false}"
     },
     {
-      "name": "Next picture: interstitial asked once (Bridge decides whether it shows) and picture 02 opens",
+      "name": "picture 01 colored to 100% by 40 real taps (0 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
+      "ok": true,
+      "detail": "{\"confetti\":92,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 6888ms misses []"
+    },
+    {
+      "name": "Next picture button counts down (auto-advance armed)",
+      "ok": true,
+      "detail": "Next picture · 5"
+    },
+    {
+      "name": "after 5 s: interstitial asked once (Bridge decides whether it shows) and picture 02 opened by itself",
       "ok": true,
       "detail": "[\"picture_done\"] balloon"
     },
@@ -105,7 +115,17 @@
       "detail": "{\"n\":46,\"allC3\":true,\"mode\":\"free\",\"panel\":true} misses []"
     },
     {
-      "name": "gallery after two pictures: interstitial asked again, 2 Done, 03 unlocked, 04 locked, \"2 of 20 finished\"",
+      "name": "tap on the picture: panel gone, auto-advance cancelled",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "5 s later still on picture 02 (nothing moved on by itself)",
+      "ok": true,
+      "detail": "balloon"
+    },
+    {
+      "name": "gallery after two pictures (Back from a finished picture): interstitial asked again, 2 Done, 03 unlocked, 04 locked, \"2 of 20 finished\"",
       "ok": true,
       "detail": "{\"home\":true,\"ads\":2,\"done\":2,\"l3\":false,\"l4\":true,\"count\":\"2 of 20 finished\",\"cont\":true}"
     },
@@ -237,7 +257,7 @@
     {
       "name": "audio files decoded or fetched (ogg/mp3 shipped in the archive)",
       "ok": true,
-      "detail": "pick,dab,finish,color-done"
+      "detail": "dab,pick,finish"
     },
     {
       "name": "desktop: click opens picture 01 in landscape layout",
@@ -312,7 +332,7 @@
     {
       "name": "done panel fits at land-844x390",
       "ok": true,
-      "detail": "panel 135px of 390"
+      "detail": "panel 147px of 390"
     },
     {
       "name": "gallery land-915x412: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
@@ -357,7 +377,7 @@
     {
       "name": "done panel fits at square-640x640",
       "ok": true,
-      "detail": "panel 135px of 640"
+      "detail": "panel 147px of 640"
     },
     {
       "name": "gallery iframe-800x450: header on screen, cards ≥ 130px (180px), list scrolls inside, no page scroll",
@@ -463,6 +483,7 @@
   "screenshots": [
     "phone-390x844-gallery-first.png",
     "phone-390x844-first-picture.png",
+    "phone-390x844-finish-burst.png",
     "phone-390x844-first-done.png",
     "phone-390x844-free-done.png",
     "phone-390x844-gallery.png",
@@ -495,7 +516,7 @@
   ],
   "taps": 182,
   "debugTaps": 1,
-  "finishedAt": "2026-11-09T17:34:29.030Z",
-  "passed": 91,
+  "finishedAt": "2026-11-09T21:25:22.809Z",
+  "passed": 95,
   "failed": 0
 }
