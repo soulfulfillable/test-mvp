@@ -102,6 +102,7 @@
 
 | 날짜 | 결정 | 이유 |
 |---|---|---|
+| 2026-11-09 | **Cozy Coloring Playables v1.0.0 완성 → 사용자 보고**(그림 20장 = 기존 6 + 생성기 모티프 14, 조각 40→173 레벨, 데일리 만다라, CC0 소리, 전면/보상형 광고 자리, 로봇 91/91). Playgama 드래프트 `cmw9jhdfj067nog0hwx8ztp9j` 아카이브 PASSED·커버 3종, **샌드박스 게시는 사용자 yes 뒤**. 개발 세션 결정: 잠금 = 바로 앞 그림 완성, 데일리 항상 열림, 이름 "Cozy Coloring" 가칭 유지(등록 상표 없음, 비슷한 앱 제목 다수 → 기획 파트너 확정). `board/coloring-playables.md` | 기획서 11-09 범위대로; 사용자 피드백 대기 |
 | 2026-11-09 | **Cozy Coloring Playables 판 착수**(큐 순서대로 — Kitty Sudoku v1.2.0 샌드박스 라이브 확인 11-08 16:58Z). 생성기 그림만, 레벨 순서·갤러리·데일리, CC0 소리, 광고 자리. `plans/coloring-playables.md` | 11-08 B 결정의 조건(스도쿠 보고 뒤) 충족 |
 | 2026-11-09 | **Playables 제작 순서 확정**: Kitty Sudoku(제작 중) → Cozy Coloring Playables 판 → ①데일리 솔리테어 → ②Tricky 두뇌 퍼즐(레벨 5개 시제품으로 유머·그림 검증 뒤 확대). 한 번에 하나씩, 앞 것 보고 받은 뒤 다음 착수. 단어·짝 맞추기는 보류 | 사용자 "응 추천대로"(`plans/playables-next-candidates.md`) |
 | 2026-11-08 | **Cozy Coloring Playables 판 = 스도쿠 보고 뒤 착수(B)**. 다음 후보 조사 `plans/playables-next-candidates.md`: ①데일리 솔리테어(추천 1) ②Tricky 두뇌 퍼즐(상승세 최강, 콘텐츠 사람 제작) ③단어 ④짝 맞추기. 사용자 선택 대기 | 사용자 "추천대로 하자. 시장 조사해 보고 다음 단계 추천해 줄게, 더 있을까" |

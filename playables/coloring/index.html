@@ -170,7 +170,8 @@
   #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 19; }
 
   /* ── cover still ── */
-  #play.cover #play-head, #play.cover #foot, #play.cover #zoom-ctrl { display: none; }
+  #play.cover #play-head, #play.cover #foot, #play.cover #zoom-ctrl, #play.cover .lbl { display: none; }
+  #play.cover #art-vp { border: none; }
   #play.cover { grid-template-rows: 1fr; grid-template-columns: 1fr; grid-template-areas: "art"; }
   #cover-badge { position: fixed; z-index: 35; left: 50%; bottom: 8%; transform: translateX(-50%); background: rgba(253,252,249,0.96); border: 1px solid var(--line); padding: 24px 44px 26px; text-align: center; }
   #cover-badge .k { font-size: 16px; font-weight: 800; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; }

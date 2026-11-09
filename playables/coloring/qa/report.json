@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-09T17:13:47.709Z",
+  "startedAt": "2026-11-09T17:33:40.378Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -62,7 +62,7 @@
     {
       "name": "gallery list scrolls with a finger",
       "ok": true,
-      "detail": "611px"
+      "detail": "597px"
     },
     {
       "name": "tapping a locked picture keeps you in the gallery (with a note)",
@@ -87,7 +87,7 @@
     {
       "name": "picture 01 colored to 100% by 40 real taps (0 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
       "ok": true,
-      "detail": "{\"confetti\":110,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 5308ms misses []"
+      "detail": "{\"confetti\":110,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":40} in 5556ms misses []"
     },
     {
       "name": "Next picture: interstitial asked once (Bridge decides whether it shows) and picture 02 opens",
@@ -237,7 +237,7 @@
     {
       "name": "audio files decoded or fetched (ogg/mp3 shipped in the archive)",
       "ok": true,
-      "detail": "pick,dab,swoosh,finish"
+      "detail": "pick,dab,finish,color-done"
     },
     {
       "name": "desktop: click opens picture 01 in landscape layout",
@@ -495,7 +495,7 @@
   ],
   "taps": 182,
   "debugTaps": 1,
-  "finishedAt": "2026-11-09T17:14:35.296Z",
+  "finishedAt": "2026-11-09T17:34:29.030Z",
   "passed": 91,
   "failed": 0
 }

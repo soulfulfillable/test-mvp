@@ -19,3 +19,6 @@
 로봇: 그림 3장 끝까지 칠하기(숫자 모드·자유 모드), 보상형 경로, 저장 리로드, 핀치 줌, 14개 크기, 콘솔 0. Playgama 체크리스트 번호별 점검표. **publish_sandbox 는 사용자 yes 뒤.**
 ## 보고
 미리보기 링크 + 스크린샷 2장(첫 그림, 갤러리) + 질문 1개("편안하게 칠해지나요?").
+
+## 진행 기록
+- **2026-11-09 v1.0.0 (개발 세션)** — 기획서 범위 전부 구현. `playables/coloring/`: `index.html`(게임), `coloring-pics.js`(그림 20장 + 데일리 생성기, 로봇이 node 에서도 읽음), `robot.js`(91/91, 실제 탭 182회, 14개 크기, 커버 3종), `build.sh`(zip 1.81MB + `docs/coloring-playables/`), `CREDITS.md`(CC0 음원 출처). 새 모티프 14장: Sleepy Kitten 40 · Desert Noon 53 · Autumn Fox 56 · Bluebird Morning 62 · Moonlit Owl 64 · Mountain Dawn 66 · Whale Song 69 · Honeycomb 76 · Koi Pond 91 · Diamond Quilt 92 · Rose Window 102 · Kaleidoscope 135 · Sunflower Field 152 · Lotus Mandala 173 (+ 기존 6장). 데일리 = 날짜 시드 만다라(배경 3종 × 링 3~5개 × 팔레트 6종, 59~183조각, 400일 라벨 전수 검증). 광고: 전면 `picture_done`, 보상형 `fill_color`(그림당 1회)·`unlock`. Playgama 드래프트 `cmw9jhdfj067nog0hwx8ztp9j`, 아카이브 PASSED, 커버 3종. **샌드박스 게시는 사용자 yes 뒤.** 와 포인트(기획서엔 없었음 → 내가 정함): 숫자 모드에서 색을 고르면 그 색 조각들이 은은히 숨 쉬고, 탭하면 손가락 자리에서 물감이 퍼진다 + 완성 순간 갤러리의 액자가 채워진다.
