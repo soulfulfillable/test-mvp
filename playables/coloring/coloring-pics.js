@@ -546,7 +546,7 @@
       id: 'quilt', name: 'Diamond Quilt', w: 360, h: 440,
       pal: ['#F3E9DA', '#C84B5A', '#E9A0A8', '#F2C14E', '#4C7FB5', '#A5C8E6', '#3B6B4F', '#9FCB8A', '#F28C5A', '#6B4B3A', '#FFFFFF', '#2B2B2B', '#D9CBB8'],
       rg: (function () {
-        var out = [R(0, 0, 360, 440, 13, { lx: 10, ly: 10 })];
+        var out = [];   // the rhombus tiling covers the whole canvas, no base sheet needed
         var pattern = [2, 4, 5, 7, 9, 3];
         var tiles = diamondGrid(0, 0, 360, 440, 60, 88, function (i, j) { return pattern[(i + j) % pattern.length]; });
         var inner = [];
@@ -663,9 +663,9 @@
     else rg = rg.concat(mosaic(0, 0, 360, 440, 3, 4, [1, 2, 3], seed + 7, { tri: true, jitter: 0, skip: coveredBy(cx, cy, R0, 60, 55) }));
     rg.push(C(cx, cy, R0, pick([13, 12, 3]), { lx: cx, ly: cy - R0 + 14 }));
     var rr = R0, ring = 0, cols = [4, 5, 6, 7, 8, 9, 10, 11];
-    while (rr > 44 && ring < 6) {
+    while (rr > 44 && ring < 5) {
       var kind = (r() * 4) | 0, band = 18 + ((r() * 3) | 0) * 6;
-      var n = pick([8, 12, 16, 24]);
+      var n = pick([8, 12, 16, 20]);
       var c1 = pick(cols), c2 = pick(cols); if (c2 === c1) c2 = cols[(cols.indexOf(c1) + 3) % cols.length];
       if (kind === 0) { rg = rg.concat(wedges(cx, cy, rr - band, rr, n, -90, [c1, c2], 0.6)); }
       else if (kind === 1) { var ry = band / 2 + 4, rx = Math.max(6, Math.min(16, Math.PI * (rr - ry) / n * 0.8)); rg = rg.concat(ringPetals(cx, cy, n, rr - ry - 2, rx, ry, c1, -90)); if (r() < 0.5) rg = rg.concat(ringDots(cx, cy, n, rr - ry - 2, Math.max(3, rx * 0.35), c2, -90 + 180 / n)); }

@@ -118,7 +118,7 @@
   #msg { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); background: rgba(28,26,22,0.88); color: #fff; font-size: 13px; font-weight: 700; padding: 8px 14px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.25s; z-index: 6; }
   #msg.show { opacity: 1; }
 
-  .region { stroke: #ccd3da; stroke-width: 1.2; fill: #fff; }
+  .region { stroke: #ccd3da; stroke-width: 1.2; fill: #fff; pointer-events: fill; } /* hit-test the fill only: a neighbor's hairline must not steal the tap */
   .region.filled { stroke: none; }
   .region.hl { animation: hlp 1.3s ease-in-out infinite; }
   @keyframes hlp { 0%, 100% { fill: #fff; } 50% { fill: var(--tint); } }
@@ -291,15 +291,16 @@
       pruneDailies();
     }).catch(function () { /* unreadable data: new player */ });
   }
-  var saveT = null;
+  var saveT = null, dirty = {};
   function saveStore(keys) {
-    clearTimeout(saveT); saveT = null;
+    keys = keys.slice(); Object.keys(dirty).forEach(function (k) { if (keys.indexOf(k) < 0) keys.push(k); });   // flush anything still waiting
+    clearTimeout(saveT); saveT = null; dirty = {};
     if (!bridgeReady) return;
     var vals = keys.map(function (k) { return JSON.stringify(store[k]); });
     safe(function () { B.storage.set(keys, vals).catch(function () {}); });
   }
   // coloring progress changes on every tap; write it in batches, about a second after the last tap
-  function saveStoreSoon(keys) { clearTimeout(saveT); saveT = setTimeout(function () { saveStore(keys); }, 1200); }
+  function saveStoreSoon(keys) { keys.forEach(function (k) { dirty[k] = 1; }); clearTimeout(saveT); saveT = setTimeout(function () { saveStore(Object.keys(dirty)); }, 1200); }
 
   // ---------- date (KST day boundary, like our other daily puzzles) ----------
   function pad2(n) { return (n < 10 ? '0' : '') + n; }
@@ -464,9 +465,11 @@
         return els[idx].isPointInFill(p);
       } catch (e) { return true; }
     }
+    // a label point must sit inside its piece with a little margin (a point right on an edge is a coin toss for the finger)
+    function inFillRobust(i, x, y) { return inFill(i, x, y) && inFill(i, x - 1.5, y) && inFill(i, x + 1.5, y) && inFill(i, x, y - 1.5) && inFill(i, x, y + 1.5); }
     function visibleAt(i, x, y) {
       if (x < 4 || y < 4 || x > pic.w - 4 || y > pic.h - 4) return false;
-      if (!inFill(i, x, y)) return false;
+      if (!inFillRobust(i, x, y)) return false;
       for (var j = i + 1; j < els.length; j++) {
         var b = bbs[j];
         if (x < b.x || x > b.x + b.width || y < b.y || y > b.y + b.height) continue;
@@ -478,7 +481,7 @@
       var lbl = view.labels[i], bb = bbs[i];
       var fs = Math.max(10, Math.min(19, Math.sqrt(bb.width * bb.height) * 0.2));
       var x = rg.lx != null ? rg.lx : bb.x + bb.width / 2, y = rg.ly != null ? rg.ly : bb.y + bb.height / 2;
-      if (rg.lx == null && !visibleAt(i, x, y)) {
+      if (!visibleAt(i, x, y)) {
         var found = null, cx0 = x, cy0 = y;
         [7, 14, 28].some(function (N) {   // coarse to fine grid over the bounding box, nearest to the center first
           var cands = [];
@@ -618,13 +621,13 @@
     hideDonePanel();
     artTf.innerHTML = '';
     var view = buildSVG(pic, filled, true); cur.view = view; artTf.appendChild(view.svg);
-    layout();
-    placeLabels(pic, view);
-    view.svg.addEventListener('pointerdown', onArtDown); view.svg.addEventListener('pointerup', onArtUp);
     buildPalette();
     if (mode === 'num') { var first = cur.counts.findIndex(function (n) { return n > 0; }); selectColor(first >= 0 ? first : 0); }
     else selectColor(0);
     updateProgress(); renderBoost();
+    layout();                      // after the palette and buttons exist: the picture takes what they leave
+    placeLabels(pic, view);
+    view.svg.addEventListener('pointerdown', onArtDown); view.svg.addEventListener('pointerup', onArtUp);
     if (filled.size === pic.rg.length) showDonePanel(false);
     sendMsg('gameplay_started');
     analytics('picture_open', { id: pic.id, mode: mode, filled: filled.size, total: pic.rg.length });
@@ -697,7 +700,7 @@
   }
   window.addEventListener('pointerup', ptrEnd); window.addEventListener('pointercancel', ptrEnd);
   vpEl.addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
-  vpEl.addEventListener('wheel', function (e) { e.preventDefault(); var r = vpEl.getBoundingClientRect(); zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+  vpEl.addEventListener('wheel', function (e) { e.preventDefault(); var r = vpEl.getBoundingClientRect(); var f = Math.exp(-Math.max(-400, Math.min(400, e.deltaY)) * 0.0015); zoomAt(f, e.clientX - r.left, e.clientY - r.top); }, { passive: false });
 
   // ---------- palette ----------
   function buildPalette() {
@@ -706,7 +709,7 @@
       var b = document.createElement('button'); b.className = 'sw'; b.style.background = hex; b.style.color = isLight(hex) ? '#3d4351' : '#fff';
       var t = document.createElement('span'); t.className = 't'; t.textContent = cur.mode === 'num' ? ci + 1 : ''; b.appendChild(t);
       var cnt = document.createElement('span'); cnt.className = 'cnt'; b.appendChild(cnt);
-      b.addEventListener('pointerdown', function (e) { e.preventDefault(); unlockAudio(); selectColor(ci); play('pick'); });
+      b.addEventListener('pointerdown', function (e) { e.preventDefault(); unlockAudio(); pickColor(ci); play('pick'); });
       paletteEl.appendChild(b);
     });
     refreshPalette();
@@ -724,6 +727,9 @@
       else { t.textContent = ci + 1; cnt.style.display = ''; cnt.textContent = left; }
     });
   }
+  // a color the player picks cancels a pending automatic move to the next color
+  var autoT = null;
+  function pickColor(ci) { clearTimeout(autoT); autoT = null; selectColor(ci); }
   function selectColor(ci) {
     if (!cur) return;
     cur.sel = ci;
@@ -741,24 +747,26 @@
 
   // ---------- tapping pieces ----------
   var downPt = null;
-  function onArtDown(e) { if (donePanel) hideDonePanel(); downPt = { x: e.clientX, y: e.clientY, t: Date.now() }; }
+  function trace(m) { if (DEBUG) (window.__trace = window.__trace || []).push(m); }
+  function onArtDown(e) { if (donePanel) hideDonePanel(); downPt = { x: e.clientX, y: e.clientY, t: Date.now() }; trace('down'); }
   function onArtUp(e) {
-    if (!downPt) return;
+    if (!downPt) { trace('up:nodown'); return; }
     var dx = e.clientX - downPt.x, dy = e.clientY - downPt.y, quick = Date.now() - downPt.t < 600;
     downPt = null;
-    if (pinch || ptrs.size > 1 || Date.now() - lastPinchT < 350) return;
-    if (!quick || dx * dx + dy * dy > 144) return;
+    if (pinch || ptrs.size > 1 || Date.now() - lastPinchT < 350) { trace('up:pinch ' + ptrs.size); return; }
+    if (!quick || dx * dx + dy * dy > 144) { trace('up:moved'); return; }
     var t = e.target.closest ? e.target.closest('[data-i]') : null;
-    if (!t) return;
+    if (!t) { trace('up:notarget'); return; }
+    trace('up:' + t.getAttribute('data-i'));
     unlockAudio();
     tapRegion(parseInt(t.getAttribute('data-i'), 10), e);
   }
   function tapRegion(i, e) {
     if (!cur) return;
     if (cur.mode === 'free') { if (cur.filled.get(i) === cur.sel) return; fillRegion(i, e); return; }
-    if (cur.filled.has(i)) return;
+    if (cur.filled.has(i)) { trace('tap:already'); return; }
     var rg = cur.pic.rg[i];
-    if (rg.c !== cur.sel + 1) { // another number: the number flashes big as the hint, nothing is colored
+    if (rg.c !== cur.sel + 1) { trace('tap:wrong c' + rg.c + ' sel' + cur.sel); // another number: the number flashes big as the hint, nothing is colored
       var lbl = cur.view.labels[i], el = cur.view.els[i];
       lbl.classList.remove('flash'); void lbl.getBoundingClientRect(); lbl.classList.add('flash');
       el.classList.remove('shake'); void el.getBoundingClientRect(); el.classList.add('shake');
@@ -800,7 +808,7 @@
       if (cur.filled.size === pic.rg.length) setTimeout(showComplete, 420);
       else if (ci === cur.sel) { // this color is finished: move on to the next one
         var n = pic.pal.length;
-        for (var k2 = 1; k2 <= n; k2++) { var ci2 = (cur.sel + k2) % n; if (cur.counts[ci2] > 0) { play('color-done'); setTimeout(function () { if (cur && cur.pic === pic) selectColor(ci2); }, 240); break; } }
+        for (var k2 = 1; k2 <= n; k2++) { var ci2 = (cur.sel + k2) % n; if (cur.counts[ci2] > 0) { play('color-done'); clearTimeout(autoT); autoT = setTimeout(function () { autoT = null; if (cur && cur.pic === pic && cur.sel === ci && cur.mode === 'num') selectColor(ci2); }, 240); break; } }
       }
     } else refreshPalette();
   }
@@ -967,7 +975,7 @@
     if (key.toLowerCase() === 'm') { toggleMute(); return; }
     if (!cur) return;
     unlockAudio();
-    if (/^[0-9]$/.test(key)) { var ci = key === '0' ? 9 : parseInt(key, 10) - 1; if (ci < cur.pic.pal.length) { selectColor(ci); play('pick'); } }
+    if (/^[0-9]$/.test(key)) { var ci = key === '0' ? 9 : parseInt(key, 10) - 1; if (ci < cur.pic.pal.length) { pickColor(ci); play('pick'); } }
     else if (key === '+' || key === '=') zoomAt(1.4, Z.w / 2, Z.h / 2);
     else if (key === '-' || key === '_') zoomAt(1 / 1.4, Z.w / 2, Z.h / 2);
   });
@@ -1014,7 +1022,7 @@
   function setupCover() {
     var pic = PICS.filter(function (p) { return p.id === 'mandala'; })[0];
     var fills = new Map(); pic.rg.forEach(function (rg, i) { if (i < pic.rg.length * 0.62 || rg.c === 6) fills.set(i, rg.c - 1); });
-    store.progress.fills[pic.id] = Array.from(fills.keys());
+    store.progress.fills[pic.id] = Array.from(fills.keys()); store.progress.unlocked[pic.id] = 1;
     openPic(pic, 'num'); playEl.classList.add('cover'); layout();
     $('cover-badge').classList.remove('hidden');
   }
@@ -1025,7 +1033,7 @@
       get Z() { return Z; }, get rewardPending() { return rewardPending; }, get home() { return !homeEl.classList.contains('hidden'); }, get donePanel() { return !!donePanel; },
       open: function (id) { openPic(id === 'daily' ? dailyPic(dayKey()) : PICS.filter(function (p) { return p.id === id; })[0]); },
       openDaily: function () { openPic(dailyPic(dayKey())); }, dailyPic: dailyPic, dayKey: dayKey, genDaily: CP.genDaily,
-      select: selectColor, setMode: setMode, tap: function (i) { tapRegion(i, null); }, goHome: goHome, zoomAt: zoomAt, resetZoom: resetZoom,
+      select: pickColor, setMode: setMode, tap: function (i) { tapRegion(i, null); }, goHome: goHome, zoomAt: zoomAt, resetZoom: resetZoom,
       isLocked: function (id) { return isLocked(PICS.filter(function (p) { return p.id === id; })[0]); }, firstLocked: function () { var f = firstLocked(); return f ? f.id : null; },
       requestBoost: requestBoost, requestUnlock: function (id) { requestUnlock(PICS.filter(function (p) { return p.id === id; })[0]); }, onRewardedState: onRewardedState, adStateChanged: adStateChanged,
       saveStore: saveStore, layout: layout, toggleMute: toggleMute, renderHome: renderHome,
@@ -1033,7 +1041,7 @@
       labelPoint: function (i) { var p = cur.view.pts[i]; var sp = cur.view.svg.createSVGPoint(); sp.x = p.x; sp.y = p.y; var m = cur.view.svg.getScreenCTM(); var q = sp.matrixTransform(m); return { x: q.x, y: q.y }; },
       swatchRect: function (ci) { var b = paletteEl.children[ci].getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + b.height / 2, w: b.width, h: b.height, left: b.left, right: b.right, top: b.top, bottom: b.bottom }; },
       rect: function (id) { var b = $(id).getBoundingClientRect(); return { left: b.left, top: b.top, right: b.right, bottom: b.bottom, w: b.width, h: b.height }; },
-      __openPic: openPic, version: GAME_VERSION
+      __openPic: openPic, get confetti() { return parts.length; }, get ads() { return (window.__ads || []).slice(); }, version: GAME_VERSION
     };
   }
   boot();
