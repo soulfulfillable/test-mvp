@@ -46,7 +46,7 @@
 - URL: https://www.threads.com/ (계정 @treasurefieldstudio)
 - 로그인 계정: 사용자의 Threads(개인) — 비밀번호는 적지 않음
 - 할 것: 새 글 작성 → 아래 문구 그대로 붙여 넣기 → 게시 → **게시된 글의 링크**를 이 게시판 "다음 할 일" 줄과 사용자에게 전달.
-  `Kitty Sudoku: a classic 9x9 sudoku with my cat Horangi cheering you on. Play free: https://playgama.ai/play/latyisv2uxomkx`
+  `Kitty Sudoku: a classic 9x9 sudoku with a cat cheering you on. Play free: https://playgama.ai/play/latyisv2uxomkx`
 - 확인할 결과: 공개 글 URL 1개(이 링크로 Claude 세션이 `start_sandbox_traffic(postUrls)` 실행).
 
 ### 🖱️ Codex 에게 (브라우저 작업) — QA 툴 인증 (샌드박스 yes 와 무관하게 가능)
@@ -60,6 +60,7 @@
 - 아쉬운 점(숨기지 않음): ① 실기기 사파리 미확인 ② 판 중간 상태(진행 중인 숫자) 저장 없음 — 나가면 그 판은 처음부터(레벨 진행은 저장) ③ 랭킹은 기기 로컬 + 도전장 링크뿐, Bridge 리더보드 `levels` 는 config 선언·setScore 만 ④ 도전장 링크는 Pages 판에서만(Playgama 는 URL 을 못 바꿈) ⑤ BGM 2곡은 Mole Mash·Kitty Queens 와 같은 CC0 곡 ⑥ 데일리 6×6 은 내 결정(사용자가 9×9 를 원하면 한 줄 수정).
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
+- 11-10 **"아니근데 실명 호랑이 저거 쓰기싫어 ㅠ"** → 고양이 실명 'Horangi' 를 **Kitty Sudoku 에서 전부 제거**(게임 문구 2곳·CREDITS·Playgama 설명/story·Threads 문구). 그림은 그대로, 이름 없이 'the cat'. v1.2.1. ⚠️ **Kitty Queens Playables 는 이름을 크게 씀**("Starring Horangi" 필, 튜토리얼 문구, 폼) — 그 세션/기획 파트너가 사용자에게 확인 뒤 처리(이 세션은 그 폴더를 안 건드림).
 - 11-10 **"해보자"**(트래픽 부스트 yes) → 부스트는 공개 게시글 링크가 있어야 시작됨 → 사용자에게 Threads 글 올리고 링크 달라고 요청. 게시 문구는 Playgama `get_sandbox_share` 것(해시태그는 빼도 됨).
 - 11-10 **"안보여 더 가보자"** → (새 판이 안 보인다는 뜻이면 캐시 — 새로고침 안내) 다음 단계 = Playgama 런치 스텝 `traffic`(무료 부스트, yes 필요). 제출(moderation)은 샌드박스 목표 뒤에만 열림.
 - 11-08 (샌드박스 플레이 캡처: 맨 아랫줄에 1 을 넣었는데 빨강 + Mistakes 1/3) **"이게 mistake 은 아니지 않나? 그리고 try again 은 첨부터 하는거고 광고보고나서는 하던거 하트 채워진채로 이어할수잇는 차이인건가?"** → 맞는 지적. v1.1 까지는 정답과 다르면 틀렸다고 했음(Sudoku.com 방식) → **v1.2.0: 눈에 보이는 충돌(같은 줄·열·박스에 같은 숫자)일 때만 빨강 + Mistakes.** 충돌한 두 칸 모두 빨간 배경. 정답과 달라도 규칙을 안 어기면 아무 표시 없음(종이 스도쿠처럼 나중에 막혀서 알게 됨). 이어하기는 충돌 숫자만 지움. Try again = 처음부터, Continue(광고) = 판 유지 + Mistakes 0 — 맞다고 답함. 로봇 108/108.
@@ -82,5 +83,6 @@
 - Playgama MCP 서버가 이번 세션엔 **거의 매 호출마다 끊김** → 호출 1~2개씩 + 받은 id 즉시 게시판 커밋 + ToolSearch 로 다시 로드. PUT(curl)은 끊김과 무관.
 
 ## 다른 세션·기획 파트너에게 묻고 싶은 것
+- **(Kitty Queens 세션·기획 파트너) 사용자 11-10: "실명 호랑이 저거 쓰기싫어"** — Kitty Sudoku 에선 뺐다. Kitty Queens Playables/앱은 'Horangi' 를 타이틀 필·튜토리얼·폼에 쓰고 있으니 사용자 확인 뒤 같은 처리 필요. PRODUCT 11-07 결정("기본 고양이 = 호랑이")은 그림만 유지하고 이름은 안 쓰는 쪽으로 바뀐 듯.
 - 이름 확정: "Kitty Sudoku"(가칭) vs 다른 이름 — CAT' SUDOKU 등록 상표(미국)와 가까운지 판단.
 - 데일리 크기: 6×6(지금) vs 9×9 — 사용자 반응 보고 결정.
