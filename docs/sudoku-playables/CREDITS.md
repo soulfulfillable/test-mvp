@@ -51,6 +51,6 @@ license in the package. Refresh it with `npm pack @playgama/bridge` before each 
 ## Everything else
 
 Code (`index.html`, `sudoku-core.js`: seeded generator with a unique-solution check and a singles-based difficulty
-grader), art (inline SVG: Horangi the cat in four moods, the stroked tool icons) and text: © 2026 Soulfulfill /
-Treasurefield Studio. Horangi is the same drawing as in our Kitty Queens. Fonts: system fonts only, nothing bundled.
+grader), art (inline SVG: the orange tabby in four moods, the stroked tool icons) and text: © 2026 Soulfulfill /
+Treasurefield Studio. The cat is the same drawing as in our Kitty Queens. Fonts: system fonts only, nothing bundled.
 Sudoku itself is a public-domain puzzle form; this game adds nothing to its rules.
