@@ -11,6 +11,7 @@ import { glowTexture, blobTexture } from './textures.js';
 const $ = (id) => document.getElementById(id);
 const STEP = 1 / 120;
 const params = new URLSearchParams(location.search);
+const FIXED_DT = params.get('dt') ? 1 / Math.max(10, +params.get('dt')) : 0;
 
 // ---------- renderer / scene ----------
 const app = $('app');
@@ -239,6 +240,7 @@ const fpsWin = [];
 function frame(now) {
   requestAnimationFrame(frame);
   let dt = (now - last) / 1000; last = now; if (dt > 0.1) dt = 0.1;
+  if (FIXED_DT) dt = FIXED_DT; // test switch (?dt=60): every frame advances exactly 1/60 s, so a slow headless run is deterministic
   const cpu0 = performance.now();
   G.frames.push(dt); if (G.frames.length > 600) G.frames.shift();
 
