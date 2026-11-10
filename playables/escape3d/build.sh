@@ -8,7 +8,7 @@ OUT=../../docs/escape-3d
 rm -rf "$OUT"; mkdir -p "$OUT/assets" "$OUT/audio"
 node_modules/esbuild/bin/esbuild src/main.js --bundle --format=esm --minify --target=es2020 --outfile="$OUT/game.js" --log-level=warning
 cp index.html "$OUT/index.html"
-cp assets/hero.glb "$OUT/assets/hero.glb"
+cp assets/hero.glb assets/dog.glb assets/cat.glb "$OUT/assets/"
 cp audio/*.ogg audio/*.mp3 "$OUT/audio/"
 cp CREDITS.md "$OUT/CREDITS.md"
 du -sh "$OUT" | sed 's#\s.*##' | xargs echo "total:"

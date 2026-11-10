@@ -29,6 +29,18 @@ body.ready #loading{display:none}
 #btn-sound svg{width:18px;height:18px;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
 #btn-sound .x{display:none}#btn-sound.off .x{display:block}#btn-sound.off .w{display:none}
 
+/* character picker */
+#btn-hero{position:absolute;right:calc(var(--sideR) + 46px);top:var(--top);width:36px;height:36px;border-radius:18px;border:0;padding:0;background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);pointer-events:auto;cursor:pointer;overflow:hidden}
+#btn-hero img{width:36px;height:36px;display:block;transform:scale(1.25)}
+#pick{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:flex-end;pointer-events:auto;padding:calc(var(--top) + 44px) var(--sideR) 0 16px;background:rgba(20,18,16,.18)}
+#pick.hidden{display:none}
+#pick .sheet{background:rgba(255,255,255,.97);color:var(--ink);border-radius:18px;padding:14px 12px 12px;box-shadow:0 14px 40px rgba(40,30,10,.25);animation:pop .25s cubic-bezier(.2,1.4,.4,1);transform-origin:top right}
+#pick h3{margin:0 4px 10px;font-size:15px;font-weight:600}
+#pick-list{display:flex;gap:8px}
+.pick{width:84px;border:0;background:#f2efea;border-radius:14px;padding:4px 4px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font:600 13px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;color:var(--ink)}
+.pick img{width:76px;height:76px;display:block}
+.pick.on{background:#fff4df;box-shadow:inset 0 0 0 2px var(--gold)}
+.pick:active{transform:scale(.96)}
 /* touch controls */
 #stick-zone{position:absolute;left:0;bottom:0;width:55%;height:55%;pointer-events:auto;touch-action:none;display:none}
 #stick{position:absolute;width:124px;height:124px;margin:-62px 0 0 -62px;border-radius:50%;border:2px solid var(--line);background:rgba(28,26,24,.18);transition:opacity .15s;opacity:.75}
@@ -72,10 +84,12 @@ body.done #stick-zone,body.done #jump{display:none}
     <div id="loading">Loading…</div>
     <div id="flash"></div>
     <div id="bar"><span id="time">0:00.0</span><span id="dots"><i></i><i></i><i class="exit"></i></span></div>
+    <button id="btn-hero" aria-label="Choose character"><img alt=""></button>
     <button id="btn-sound" aria-label="Sound"><svg viewBox="0 0 20 20"><path d="M3.5 7.5h3l4-3.2v11.4l-4-3.2h-3z"/><g class="w"><path d="M13 7a4.2 4.2 0 0 1 0 6"/><path d="M15.2 4.8a7.3 7.3 0 0 1 0 10.4"/></g><g class="x"><path d="M13 7.5l5 5M18 7.5l-5 5"/></g></svg></button>
     <div id="stick-zone"><div id="stick" style="left:110px;top:calc(100% - 120px)"><div id="knob"></div></div></div>
     <div id="jump" aria-label="Jump"><svg viewBox="0 0 34 34"><path d="M8 21l9-9 9 9"/></svg></div>
     <div id="keys"><b>WASD</b> move · <b>Space</b> jump</div>
+    <div id="pick" class="hidden"><div class="sheet" onclick="event.stopPropagation()"><h3>Who's escaping?</h3><div id="pick-list"></div></div></div>
     <div id="panel" class="hidden"><div class="card"><h2>You escaped</h2><div id="p-time">0:00.0</div><p id="p-sub"></p><button id="btn-again">Run again</button></div></div>
   </div>
 </div>
