@@ -219,8 +219,9 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     check('picker: 3 portraits, all on screen', tiles.length === 3 && tiles.every((t) => t.inside && t.img), JSON.stringify(tiles));
     await page.tap('.pick[data-hero="cat"]'); await sleep(300);
     check('picker: tapping Kitty swaps the hero and closes the sheet', (await page.evaluate(() => __game.hero)) === 'cat' && (await page.evaluate(() => document.getElementById('pick').classList.contains('hidden'))));
-    const z0 = (await st(page)).pos.z; await page.keyboard.down('KeyW'); await sleep(700); await page.keyboard.up('KeyW');
-    check('picker: the new hero runs', (await st(page)).pos.z < z0 - 1);
+    const z0 = (await st(page)).pos.z; await page.keyboard.down('KeyW');
+    const ran = await until(page, (z) => __game.pos.z < z - 1, z0, 5000); await page.keyboard.up('KeyW');
+    check('picker: the new hero runs', ran, `z ${z0.toFixed(2)} → ${(await st(page)).pos.z.toFixed(2)}`);
     await page.reload(); await page.waitForFunction(() => document.body.classList.contains('ready'), null, { timeout: 90000 });
     check('picker: choice survives reload', (await page.evaluate(() => __game.hero)) === 'cat');
     await context.close();

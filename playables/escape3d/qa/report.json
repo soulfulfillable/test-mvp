@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-10T13:00:54.065Z",
+  "startedAt": "2026-11-10T13:25:54.258Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -137,7 +137,7 @@
     {
       "name": "desk-1920x1080: exit on screen when play starts",
       "ok": true,
-      "detail": "960,259"
+      "detail": "960,268"
     },
     {
       "name": "desk-1920x1080: HUD inside viewport, no overlap",
@@ -172,12 +172,12 @@
     {
       "name": "touch: joystick up moves the hero forward",
       "ok": true,
-      "detail": "z 1.60 → -3.29, anim run"
+      "detail": "z 1.60 → -3.26, anim run"
     },
     {
       "name": "touch: jump button lifts the hero",
       "ok": true,
-      "detail": "peak y 1.81"
+      "detail": "peak y 1.75"
     },
     {
       "name": "touch: run + jump with two thumbs",
@@ -187,12 +187,12 @@
     {
       "name": "desktop: W moves forward",
       "ok": true,
-      "detail": "z 1.60 → -0.40"
+      "detail": "z 1.60 → -0.50"
     },
     {
       "name": "desktop: Space jumps",
       "ok": true,
-      "detail": "peak y 1.81"
+      "detail": "peak y 1.80"
     },
     {
       "name": "spikes: touching them counts a hit",
@@ -207,7 +207,7 @@
     {
       "name": "phone-390x844: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 191 s"
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 213 s"
     },
     {
       "name": "phone-390x844: all 3 checkpoints lit on the way",
@@ -232,7 +232,7 @@
     {
       "name": "phone-360x640: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 148 s"
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 153 s"
     },
     {
       "name": "phone-360x640: all 3 checkpoints lit on the way",
@@ -282,7 +282,7 @@
     {
       "name": "picker: the new hero runs",
       "ok": true,
-      "detail": ""
+      "detail": "z 1.60 → 0.45"
     },
     {
       "name": "picker: choice survives reload",
@@ -297,7 +297,7 @@
     {
       "name": "frame: measured (headless software renderer)",
       "ok": true,
-      "detail": "avg 28.6 ms/frame (35 fps in SwiftShader), last frame CPU+submit 6.2 ms, draw calls 146, triangles 18954"
+      "detail": "avg 28.0 ms/frame (36 fps in SwiftShader), last frame CPU+submit 1.7 ms, draw calls 146, triangles 18666"
     },
     {
       "name": "frame: draw calls ≤ 150",
@@ -370,14 +370,14 @@
       ]
     },
     "frame": {
-      "avgMs": 28.57142857142857,
+      "avgMs": 28.031818181818153,
       "calls": 146,
-      "tris": 18954,
-      "cpu": 6.2000000001862645,
+      "tris": 18666,
+      "cpu": 1.7000000001862645,
       "pr": 1
     }
   },
-  "finishedAt": "2026-11-10T13:12:28.256Z",
+  "finishedAt": "2026-11-10T13:38:04.251Z",
   "pass": 63,
   "fail": 0
 }
