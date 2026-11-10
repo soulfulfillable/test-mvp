@@ -1,11 +1,8 @@
 // Escape 3D — trial build: one 3D obstacle course. three.js, own kinematic controller, CC0 hero + sounds.
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { buildCourse, GOLD } from './course.js';
 import { createPlayer, RIGS, R as PR, H as PH } from './player.js';
-import { dressDog, dressCat } from './pets.js';
-import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
+import { MAKERS } from './blocky.js';
 import { createInput } from './input.js';
 import { createAudio } from './audio.js';
 import { glowTexture, blobTexture } from './textures.js';
@@ -26,16 +23,16 @@ renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadow
 app.prepend(renderer.domElement);
 
 const scene = new THREE.Scene();
-const SKY_TOP = new THREE.Color('#7e95a8'), SKY_BOT = new THREE.Color('#c9c3b8');
-scene.fog = new THREE.Fog('#b9b4ab', 28, 95);
+const SKY_TOP = new THREE.Color('#3f8fff'), SKY_BOT = new THREE.Color('#cfe8ff');
+scene.fog = new THREE.Fog('#cfe8ff', 45, 160);
 { // sky dome: vertical gradient, unaffected by fog
   const geo = new THREE.SphereGeometry(200, 24, 12); const col = [];
   const p = geo.attributes.position; for (let i = 0; i < p.count; i++) { const t = Math.max(0, Math.min(1, p.getY(i) / 120 + 0.25)); const c = SKY_BOT.clone().lerp(SKY_TOP, t); col.push(c.r, c.g, c.b); }
   geo.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
   scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.BackSide, fog: false, depthWrite: false })));
 }
-scene.add(new THREE.HemisphereLight('#e4ecf2', '#6e655b', 1.35));
-const sun = new THREE.DirectionalLight('#fff1dc', 2.3);
+scene.add(new THREE.HemisphereLight('#dcecff', '#8a9a7a', 1.5));
+const sun = new THREE.DirectionalLight('#ffffff', 2.4);
 sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
 Object.assign(sun.shadow.camera, { left: -11, right: 11, top: 11, bottom: -11, near: 1, far: 40 });
 sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.03;
@@ -95,17 +92,12 @@ addEventListener('keydown', (e) => { if (G.state === 'finish' && G.finishT > 1.2
 
 // ---------- load heroes (pup = default, kitty, kid) ----------
 let P;
-const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
-const GL = {};
 let heroName = 'dog';
 try { const h = localStorage.getItem('escape3d.hero'); if (RIGS[h]) heroName = h; } catch (e) { /* */ }
 if (RIGS[params.get('hero')]) heroName = params.get('hero');
-Promise.all(Object.entries(RIGS).map(([name, rig]) => loader.loadAsync('./assets/' + rig.file).then((g) => {
-  if (name === 'dog') dressDog(g); else if (name === 'cat') dressCat(g);
-  GL[name] = g;
-}))).then(() => {
+queueMicrotask(() => { // after the whole module has run (camera state etc. are declared below)
   P = createPlayer(scene);
-  P.setRig(heroName, GL[heroName]);
+  P.setRig(heroName);
   P.reset(C.checkpoints[0].pos);
   G.state = params.has('nointro') ? 'play' : 'intro';
   if (G.state === 'play') G.introDone = true;
@@ -114,15 +106,14 @@ Promise.all(Object.entries(RIGS).map(([name, rig]) => loader.loadAsync('./assets
   document.title = 'Escape 3D';
   document.body.classList.add('ready');
   requestAnimationFrame(frame);
-}).catch((err) => { console.error('hero failed to load', err); $('loading').textContent = 'Could not load. Pull to refresh.'; });
+});
 
 // character picker: portraits rendered once from the real models
 function portrait(name) {
   const r = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
   r.setSize(160, 160); r.outputColorSpace = THREE.SRGBColorSpace; r.toneMapping = THREE.ACESFilmicToneMapping;
   const sc = new THREE.Scene(); sc.add(new THREE.HemisphereLight('#ffffff', '#8a8178', 1.8)); const dl = new THREE.DirectionalLight('#fff3e0', 2.2); dl.position.set(2, 4, 5); sc.add(dl);
-  const m = cloneSkinned(GL[name].scene); m.position.set(0, 0, 0); m.scale.setScalar(1); m.updateMatrixWorld(true);
-  const mix = new THREE.AnimationMixer(m); const clipN = RIGS[name].clips.idle; const clip = GL[name].animations.find((a) => a.name === clipN || a.name.endsWith('|' + clipN)); if (clip) { mix.clipAction(clip).play(); mix.update(0.3); }
+  const m = MAKERS[name]().root; m.updateMatrixWorld(true);
   m.rotation.y = 0.55; sc.add(m); m.updateMatrixWorld(true);
   const bb = new THREE.Box3().setFromObject(m), c = bb.getCenter(new THREE.Vector3()), sz = bb.getSize(new THREE.Vector3());
   const cam = new THREE.PerspectiveCamera(30, 1, 0.01, 100); const d = Math.max(sz.x, sz.y, sz.z) * 2.1;
@@ -132,11 +123,10 @@ function portrait(name) {
 }
 function buildPicker() {
   const list = $('pick-list'); list.innerHTML = '';
-  const labels = { dog: 'Pup', cat: 'Kitty', kid: 'Runner' };
   for (const name of Object.keys(RIGS)) {
     const b = document.createElement('button'); b.className = 'pick' + (name === heroName ? ' on' : ''); b.dataset.hero = name;
     const img = new Image(); img.src = portrait(name); img.alt = ''; b.append(img);
-    const sp = document.createElement('span'); sp.textContent = labels[name]; b.append(sp);
+    const sp = document.createElement('span'); sp.textContent = RIGS[name].label; b.append(sp);
     b.addEventListener('click', (e) => { e.stopPropagation(); chooseHero(name); });
     list.append(b);
   }
@@ -144,7 +134,7 @@ function buildPicker() {
 }
 function chooseHero(name) {
   heroName = name; try { localStorage.setItem('escape3d.hero', name); } catch (e) { /* */ }
-  const keep = P.pos.clone(), f = P.facing; P.setRig(name, GL[name]); P.pos.copy(keep); P.facing = f; P.squash = 0.25;
+  const keep = P.pos.clone(), f = P.facing; P.setRig(name); P.pos.copy(keep); P.facing = f; P.squash = 0.25;
   puff(P.pos.clone().add(new THREE.Vector3(0, 0.4, 0)), 12, GOLD, { speed: 2, add: true, alpha: 0.9, life: 0.5, size: 0.3, up: 1.4 });
   audio.play('checkpoint', { vol: 0.5, rate: 1.3 });
   for (const b of document.querySelectorAll('.pick')) b.classList.toggle('on', b.dataset.hero === name);

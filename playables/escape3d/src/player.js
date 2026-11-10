@@ -6,46 +6,26 @@ export const R = 0.3;        // capsule radius
 export const H = 1.05;       // capsule height
 const SPEED = 6.0, ACC_G = 55, ACC_A = 22, GRAV = 28, JUMP_V = 10.2, COYOTE = 0.1, BUFFER = 0.14, MAX_FALL = 30;
 
-// A rig = one dressed model + how its clips map to our moves. All rigs share the same collider (fair play).
-export const RIGS = {
-  dog: { file: 'dog.glb', height: 0.95, clips: { idle: 'Idle', walk: 'Walk', sprint: 'Run', jump: 'Jump_Start', fall: 'Jump_Loop' }, runRate: 1.0 },
-  cat: { file: 'cat.glb', height: 0.85, clips: { idle: 'Idle', walk: 'Walk', sprint: 'Run', jump: 'Jump_Start', fall: 'Jump_Loop' }, runRate: 1.0 },
-  kid: { file: 'hero.glb', height: 1.15, clips: { idle: 'idle', walk: 'walk', sprint: 'sprint', jump: 'jump', fall: 'fall', cheer: 'emote-yes' }, runRate: 1.15 },
-};
+import { MAKERS } from './blocky.js';
+export const RIGS = { dog: { label: 'Pup' }, cat: { label: 'Kitty' }, kid: { label: 'Runner' } };
 
 export function createPlayer(scene) {
   const root = new THREE.Group(); scene.add(root);
   const pivot = new THREE.Group(); root.add(pivot);
-  let mixer = null, act = {}, cur = null, rig = null, model = null, cheerT = -1;
-  function play(name, fade = 0.12) {
-    const a = act[name]; if (!a || cur === a) return;
-    a.reset(); a.enabled = true; a.setEffectiveWeight(1); a.play();
-    if (cur) cur.crossFadeTo(a, fade, false);
-    cur = a; P.anim = name;
-  }
-
+  let body = null, cheerT = -1, t = 0;
+  const pose = { mode: 'idle', speed: 0, t: 0 };
+  function play(name) { pose.mode = name; P.anim = name; }
   const P = {
     root, pivot, anim: '', rigName: '',
     pos: new THREE.Vector3(), vel: new THREE.Vector3(), grounded: null, groundTime: 0, airTime: 0,
     jumpBuf: 0, coyote: 0, facing: Math.PI, squash: 0, lastFallSpeed: 0, landed: false, jumped: false, frozen: false,
   };
   // swap the body (keeps position/velocity)
-  P.setRig = (name, gltf) => {
-    if (model) pivot.remove(model);
-    rig = RIGS[name]; P.rigName = name; model = gltf.scene;
-    model.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = false; o.frustumCulled = false; if (o.material && !o.material.vertexColors) { o.material.metalness = 0; o.material.roughness = Math.max(0.8, o.material.roughness || 0); } } });
-    model.position.set(0, 0, 0); model.scale.setScalar(1); model.updateMatrixWorld(true);
-    const bb = new THREE.Box3().setFromObject(model); const h = bb.max.y - bb.min.y;
-    const scale = rig.height / h; model.scale.setScalar(scale); model.position.y = -bb.min.y * scale; model.rotation.y = rig.yaw || 0;
-    pivot.add(model);
-    mixer = new THREE.AnimationMixer(model); act = {}; cur = null; cheerT = -1;
-    for (const [k, clipName] of Object.entries(rig.clips)) {
-      const clip = gltf.animations.find((a) => a.name === clipName || a.name.endsWith('|' + clipName)); if (clip) act[k] = mixer.clipAction(clip);
-    }
-    if (act.jump) { act.jump.setLoop(THREE.LoopOnce, 1); act.jump.clampWhenFinished = true; }
-    play('idle', 0);
+  P.setRig = (name) => {
+    if (body) pivot.remove(body.root);
+    body = MAKERS[name](); P.rigName = name; P.body = body; pivot.add(body.root); cheerT = -1; play('idle');
   };
-  P.reset = (p) => { if (mixer) mixer.stopAllAction(); cur = null; cheerT = -1; P.pos.copy(p); P.vel.set(0, 0, 0); P.grounded = null; P.facing = Math.PI; P.squash = 0; P.jumpBuf = 0; P.frozen = false; pivot.position.y = 0; play('idle', 0); };
+  P.reset = (p) => { cheerT = -1; P.pos.copy(p); P.vel.set(0, 0, 0); P.grounded = null; P.facing = Math.PI; P.squash = 0; P.jumpBuf = 0; P.frozen = false; pivot.position.y = 0; play('idle'); };
 
   const _c = new THREE.Vector3();
   function pushOut(solids) {
@@ -127,20 +107,18 @@ export function createPlayer(scene) {
     P.squash += (0 - P.squash) * Math.min(1, dt * 12);
     P.pivot.scale.set(1 + P.squash * 0.6, 1 - P.squash, 1 + P.squash * 0.6);
     if (!P.frozen && cheerT < 0) {
-      if (!P.grounded) {
-        if (P.vel.y > 0.5 && P.airTime < 0.5) play('jump', 0.05); else if (P.airTime > 0.12) play('fall', 0.2);
-      } else if (hs > 3.2) { play('sprint', 0.12); if (act.sprint) act.sprint.timeScale = hs / SPEED * rig.runRate; }
-      else if (hs > 0.5) { play('walk', 0.12); if (act.walk) act.walk.timeScale = 0.8 + hs / 3; }
-      else play('idle', 0.2);
+      if (!P.grounded) play(P.vel.y > 0.5 && P.airTime < 0.6 ? 'jump' : P.airTime > 0.12 ? 'fall' : P.anim);
+      else play(hs > 3.2 ? 'run' : hs > 0.5 ? 'walk' : 'idle');
     }
-    // victory: the clip if the rig has one, otherwise happy hops with a little spin
+    // victory: happy hops with arms/tail going
     if (cheerT >= 0) {
-      cheerT += dt;
-      if (!act.cheer) { const k = (cheerT * 2.6) % 1; pivot.position.y = Math.sin(k * Math.PI) * 0.32; pivot.rotation.y = P.facing + Math.sin(cheerT * 5) * 0.35; }
+      cheerT += dt; play('cheer');
+      const k = (cheerT * 2.4) % 1; pivot.position.y = Math.sin(k * Math.PI) * 0.35; pivot.rotation.y = P.facing + Math.sin(cheerT * 5) * 0.3;
     }
-    if (mixer) mixer.update(dt);
+    t += dt; pose.t = t; pose.speed = hs;
+    if (body) body.animate(pose, dt);
   };
-  P.cheer = () => { mixer.stopAllAction(); cur = null; cheerT = 0; if (act.cheer) play('cheer', 0); else play('idle', 0); P.anim = 'cheer'; };
+  P.cheer = () => { cheerT = 0; play('cheer'); };
   P.SPEED = SPEED;
   return P;
 }

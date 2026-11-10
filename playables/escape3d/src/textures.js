@@ -125,3 +125,14 @@ export function worldBox(w, h, d, tileU = 2, tileV = 2) {
   }
   return geo;
 }
+
+// plastic tile: white with a soft darker rim, so coloured parts show their size (one tile = 2 m) — tinted by material colour
+export function plasticTexture() {
+  const S = 128, [c, g] = canvas(S);
+  g.fillStyle = '#ffffff'; g.fillRect(0, 0, S, S);
+  const gr = g.createLinearGradient(0, 0, 0, S); gr.addColorStop(0, 'rgba(255,255,255,0)'); gr.addColorStop(1, 'rgba(0,0,0,.05)');
+  g.fillStyle = gr; g.fillRect(0, 0, S, S);
+  g.strokeStyle = 'rgba(0,0,0,.16)'; g.lineWidth = 3; g.strokeRect(1.5, 1.5, S - 3, S - 3);
+  g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 2; g.strokeRect(5, 5, S - 10, S - 10);
+  return tex(c);
+}

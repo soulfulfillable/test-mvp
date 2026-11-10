@@ -2,35 +2,36 @@
 // Everything solid is an axis-aligned box collider; spikes are hazard boxes; moving platforms are boxes whose
 // position is a pure function of time (so the controller can carry the hero exactly and a robot can predict them).
 import * as THREE from 'three';
-import { floorTexture, wallTexture, spikePlateTexture, steelTexture, glowTexture, shaftTexture, worldBox } from './textures.js';
+import { plasticTexture, glowTexture, shaftTexture, worldBox } from './textures.js';
 
-export const GOLD = new THREE.Color('#ffc261');
-const HALF_W = 3; // corridor half width (walkable)
+export const GOLD = new THREE.Color('#ffc93c');
+const HALF_W = 3; // course half width (walkable)
 const WALL_T = 1;
 const PIT_Y = -12;
 
 export function buildCourse(scene) {
   const C = { solids: [], hazards: [], movers: [], traps: [], checkpoints: [], walls: [], exit: null, update: null };
-  const tex = { floor: floorTexture(), wall: wallTexture(), plate: spikePlateTexture(), steel: steelTexture() };
+  const plastic = plasticTexture();
+  const P = (color, extra = {}) => new THREE.MeshStandardMaterial({ map: plastic, color, roughness: 0.5, metalness: 0, ...extra });
+  // obby palette: bright plastic parts floating in the sky, neon red = kill, gold = goal / checkpoint
   const M = {
-    floor: new THREE.MeshStandardMaterial({ map: tex.floor, roughness: 0.92, metalness: 0 }),
-    wall: new THREE.MeshStandardMaterial({ map: tex.wall, roughness: 0.95, metalness: 0 }),
-    pillar: new THREE.MeshStandardMaterial({ map: tex.wall, color: '#d8d2ca', roughness: 0.95, metalness: 0 }),
-    plate: new THREE.MeshStandardMaterial({ map: tex.plate, roughness: 0.6, metalness: 0.3 }),
-    spike: new THREE.MeshStandardMaterial({ color: '#d4d6d9', roughness: 0.32, metalness: 0.75, flatShading: true }),
-    steel: new THREE.MeshStandardMaterial({ map: tex.steel, roughness: 0.55, metalness: 0.35 }),
-    gold: new THREE.MeshStandardMaterial({ color: '#7a5a22', emissive: GOLD, emissiveIntensity: 1.1, roughness: 0.4 }),
-    goldDim: new THREE.MeshStandardMaterial({ color: '#5d5750', emissive: GOLD, emissiveIntensity: 0.12, roughness: 0.6 }),
-    dark: new THREE.MeshStandardMaterial({ color: '#57514a', roughness: 1 }),
-    trim: new THREE.MeshStandardMaterial({ color: '#6e6963', roughness: 0.9 }),
+    start: P('#e9edf2'), hall: P('#5dc761'), landing: P('#ffd23f'), plaza: P('#e9edf2'),
+    rail: P('#3f9b45'), railY: P('#e0b21c'), railW: P('#c9ced6'),
+    pillar: P('#4aa8ff'), wall: P('#2d3f6b'),
+    kill: new THREE.MeshStandardMaterial({ color: '#ff3030', emissive: '#ff1a1a', emissiveIntensity: 0.9, roughness: 0.35 }),
+    steel: P('#ff8a1f'),
+    gold: new THREE.MeshStandardMaterial({ color: '#c99a1a', emissive: GOLD, emissiveIntensity: 0.9, roughness: 0.4 }),
+    goldDim: new THREE.MeshStandardMaterial({ color: '#b9bec6', emissive: GOLD, emissiveIntensity: 0.08, roughness: 0.6 }),
+    trim: P('#c9ced6'),
   };
+  M.floor = M.hall;
 
   // ---------- helpers ----------
   function solid(x0, x1, y0, y1, z0, z1, mat, opts = {}) {
     const min = new THREE.Vector3(Math.min(x0, x1), Math.min(y0, y1), Math.min(z0, z1));
     const max = new THREE.Vector3(Math.max(x0, x1), Math.max(y0, y1), Math.max(z0, z1));
     const size = max.clone().sub(min), mid = min.clone().add(max).multiplyScalar(0.5);
-    const mesh = new THREE.Mesh(worldBox(size.x, size.y, size.z, opts.tileU || 2, opts.tileV || (mat === M.wall ? 1 : 2)), mat);
+    const mesh = new THREE.Mesh(worldBox(size.x, size.y, size.z, opts.tileU || 2, opts.tileV || 2), mat);
     mesh.position.copy(mid); mesh.castShadow = opts.cast !== false; mesh.receiveShadow = true;
     scene.add(mesh);
     if (opts.collide !== false) {
@@ -40,78 +41,86 @@ export function buildCourse(scene) {
     }
     return mesh;
   }
-  const floor = (z0, z1, top = 0, depth = 1.2) => solid(-HALF_W, HALF_W, top - depth, top, z0, z1, M.floor, { cast: false });
-  const column = (x0, x1, z0, z1, top) => solid(x0, x1, PIT_Y, top, z0, z1, M.pillar, { tileV: 2 });
+  const floor = (z0, z1, mat, railMat, top = 0, depth = 1.2) => {
+    solid(-HALF_W, HALF_W, top - depth, top, z0, z1, mat, { cast: false });
+    // low bumper rails on both sides (an obby edge you can still hop over)
+    for (const s of [-1, 1]) solid(s * HALF_W, s * (HALF_W - 0.3), top, top + 0.45, z0, z1, railMat, { tileV: 0.45, tileU: 2 });
+  };
+  const column = (x0, x1, z0, z1, top) => solid(x0, x1, top - 2.2, top, z0, z1, M.pillar, { tileV: 2 });
 
-  // spike strip: a plate on the floor and an instanced grid of pyramids
-  const spikeGeo = new THREE.ConeGeometry(0.15, 0.5, 4, 1); spikeGeo.translate(0, 0.25, 0); spikeGeo.rotateY(Math.PI / 4);
+  // kill brick: a glowing red slab (touch = back to checkpoint). The popping trap is a red wall that shoots up.
   function spikes(x0, x1, z0, z1, y = 0, trap = null) {
     const w = Math.abs(x1 - x0), d = Math.abs(z1 - z0), cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
-    const plate = new THREE.Mesh(worldBox(w, 0.06, d, 1, 1), M.plate);
-    plate.position.set(cx, y + 0.03, cz); plate.receiveShadow = true; scene.add(plate);
-    const nx = Math.max(1, Math.round(w / 0.42)), nz = Math.max(1, Math.round(d / 0.42));
-    const inst = new THREE.InstancedMesh(spikeGeo, M.spike, nx * nz);
-    const m = new THREE.Matrix4(); let k = 0;
-    for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) {
-      const s = 0.85 + ((i * 7 + j * 13) % 5) * 0.06;
-      m.makeScale(1, s, 1).setPosition(-w / 2 + (i + 0.5) * (w / nx), 0, -d / 2 + (j + 0.5) * (d / nz));
-      inst.setMatrixAt(k++, m);
+    const h = trap ? 0.9 : 0.2;
+    const g = new THREE.Group(); g.position.set(cx, y, cz); scene.add(g);
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), M.kill); m.position.y = h / 2; m.castShadow = true; g.add(m);
+    if (trap) { // a dark slot in the floor shows where it will come up
+      const slot = new THREE.Mesh(new THREE.PlaneGeometry(w, d), new THREE.MeshBasicMaterial({ color: '#3a1010' }));
+      slot.rotation.x = -Math.PI / 2; slot.position.set(cx, y + 0.004, cz); scene.add(slot);
     }
-    inst.castShadow = true; inst.receiveShadow = false;
-    const g = new THREE.Group(); g.position.set(cx, y + 0.04, cz); g.add(inst); scene.add(g);
-    const hz = { min: new THREE.Vector3(cx - w / 2, y, cz - d / 2), max: new THREE.Vector3(cx + w / 2, y + 0.42, cz + d / 2), active: true, group: g };
+    const hz = { min: new THREE.Vector3(cx - w / 2, y, cz - d / 2), max: new THREE.Vector3(cx + w / 2, y + 0.42, cz + d / 2), active: true, group: g, mesh: m };
     C.hazards.push(hz);
-    if (trap) { trap.hz = hz; trap.group = g; trap.baseY = y + 0.04; C.traps.push(trap); }
+    if (trap) { trap.hz = hz; trap.group = g; trap.baseY = y; trap.h = 0; C.traps.push(trap); }
     return hz;
   }
 
   // ---------- course ----------
-  // side walls run the whole length (from deep in the pit up to 3.6 m) — they keep you on the course
   const Z_START = 9, Z_END = -64;
-  for (const s of [-1, 1]) {
-    solid(s * HALF_W, s * (HALF_W + WALL_T), PIT_Y, 3.6, Z_START, Z_END, M.wall, { wall: true, tileU: 2, tileV: 1 });
-    // pilasters + a cap line every 4 m (rhythm = sense of speed)
-    for (let z = 2; z > Z_END + 2; z -= 4) solid(s * (HALF_W - 0.18), s * HALF_W, PIT_Y, 3.6, z - 0.35, z + 0.35, M.trim, { collide: false, cast: false });
-    solid(s * (HALF_W - 0.1), s * (HALF_W + WALL_T), 3.6, 3.85, Z_START, Z_END, M.trim, { collide: false, cast: false });
-  }
-  solid(-HALF_W - WALL_T, HALF_W + WALL_T, PIT_Y, 3.6, Z_START, Z_START + 1, M.wall, { wall: true }); // back wall
-  // pit bottom, far down, dark
-  solid(-HALF_W, HALF_W, PIT_Y - 1, PIT_Y, Z_START, Z_END, M.dark, { collide: false, cast: false });
+  solid(-HALF_W, HALF_W, 0, 1.2, Z_START, Z_START - 0.4, M.railW, { wall: true }); // low back wall at the spawn
 
-  // A — start room
-  floor(Z_START, -6);
+  // A — spawn
+  floor(Z_START, -6, M.start, M.railW);
   C.checkpoints.push(checkpoint(0, 0, 1.6, true));
 
-  // B — spike hall: go round the strips, time the popping trap
-  floor(-6, -22.5);
+  // B — kill-brick run: go round the bricks, time the red wall
+  floor(-6, -22.5, M.hall, M.rail);
   spikes(-3, 0.9, -8.6, -9.8);           // gap on the right
   spikes(-0.9, 3, -12.0, -13.2);         // gap on the left
-  spikes(-3, 3, -15.6, -17.0, 0, { period: 2.6, phase: 0 }); // popping trap, full width (time it or jump it)
+  spikes(-2.7, 2.7, -15.6, -17.0, 0, { period: 2.6, phase: 0 }); // red wall that shoots up (time it or jump it)
   spikes(-1.4, 1.4, -19.6, -20.6);       // centre block — pass either side
   C.checkpoints.push(checkpoint(1, 0, -21.6));
 
-  // C — the pit, three moving platforms
+  // C — the gap, three moving platforms
   mover(new THREE.Vector3(0, 0, -24.8), new THREE.Vector3(1, 0, 0), 1.7, 3.6, 0);
   mover(new THREE.Vector3(0, 0, -29.6), new THREE.Vector3(0, 0, 1), 1.45, 3.2, 0.25);
   mover(new THREE.Vector3(0, 0, -34.6), new THREE.Vector3(1, 0, 0), 1.7, 3.6, 0.5);
-  floor(-37.0, -40.2);
+  floor(-37.0, -40.2, M.landing, M.railY);
   C.checkpoints.push(checkpoint(2, 0, -38.6));
 
-  // D — jump up three columns rising from the pit
+  // D — hop up three floating blocks
   column(-2.2, -0.2, -41.2, -43.0, 0.5);
   column(0.1, 2.1, -44.0, -45.8, 1.0);
   column(-1.6, 0.4, -46.8, -48.6, 1.45);
 
-  // E — exit plaza and the door
-  solid(-HALF_W, HALF_W, PIT_Y, 1.9, -49.8, -60, M.pillar, { cast: false });
+  // E — finish platform and the door
+  solid(-HALF_W, HALF_W, 1.9 - 1.6, 1.9, -49.8, -60, M.plaza, { cast: false });
   C.exit = exitDoor(-58.2, 1.9);
+  { // checkered finish line in front of the door
+    const c = document.createElement('canvas'); c.width = 64; c.height = 16; const g = c.getContext('2d');
+    for (let i = 0; i < 16; i++) for (let j = 0; j < 4; j++) { g.fillStyle = (i + j) % 2 ? '#1d1d1f' : '#ffffff'; g.fillRect(i * 4, j * 4, 4, 4); }
+    const t = new THREE.CanvasTexture(c); t.magFilter = THREE.NearestFilter; t.colorSpace = THREE.SRGBColorSpace;
+    const fl = new THREE.Mesh(new THREE.PlaneGeometry(6, 1.5), new THREE.MeshStandardMaterial({ map: t, roughness: 0.6 }));
+    fl.rotation.x = -Math.PI / 2; fl.position.set(0, 1.905, -56.6); fl.receiveShadow = true; scene.add(fl);
+  }
+
+  // scenery: floating blocks around the course (depth + "sky obby" feel), a baseplate far below
+  const deco = ['#ff6b6b', '#4aa8ff', '#ffd23f', '#5dc761', '#b57bff', '#ff9f1c'];
+  let seed = 3; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  for (let i = 0; i < 26; i++) {
+    const side = i % 2 ? 1 : -1, s = 1 + rnd() * 3.5;
+    const x = side * (8 + rnd() * 22), z = 10 - rnd() * 80, y = -6 + rnd() * 14;
+    const b = new THREE.Mesh(worldBox(s, s * (0.4 + rnd() * 0.8), s, 2, 2), P(deco[i % deco.length]));
+    b.position.set(x, y, z); b.rotation.y = rnd() * 0.6; b.castShadow = false; b.receiveShadow = true; scene.add(b);
+  }
+  const base = new THREE.Mesh(new THREE.PlaneGeometry(600, 600), new THREE.MeshStandardMaterial({ map: (() => { const t = plasticTexture(); t.repeat.set(150, 150); return t; })(), color: '#5fbf5a', roughness: 0.8 }));
+  base.rotation.x = -Math.PI / 2; base.position.y = -30; scene.add(base);
 
   // ---------- pieces ----------
   function checkpoint(i, x, z, lit = false) {
     const g = new THREE.Group(); g.position.set(x, 0.005, z); scene.add(g);
     const ring = new THREE.Mesh(new THREE.RingGeometry(0.62, 0.86, 40), lit ? M.gold : M.goldDim.clone());
     ring.rotation.x = -Math.PI / 2; g.add(ring);
-    const disc = new THREE.Mesh(new THREE.CircleGeometry(0.62, 40), new THREE.MeshStandardMaterial({ color: '#8d8780', roughness: 0.8 }));
+    const disc = new THREE.Mesh(new THREE.CircleGeometry(0.62, 40), new THREE.MeshStandardMaterial({ color: '#d5dae1', roughness: 0.6 }));
     disc.rotation.x = -Math.PI / 2; disc.position.y = -0.002; disc.receiveShadow = true; g.add(disc);
     const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.75, 3, 24, 1, true),
       new THREE.MeshBasicMaterial({ map: shaftTexture(), color: GOLD, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, fog: false }));
@@ -142,16 +151,16 @@ export function buildCourse(scene) {
     const DW = 2.6, DH = 3.1, T = 0.8;
     // the end wall with a doorway; tall so it reads from the start line
     const wy0 = y, wy1 = y + 6.5;
-    solid(-HALF_W - WALL_T, -DW / 2, PIT_Y, wy1, z + T / 2, z - T / 2, M.wall, { wall: true, tileV: 1 });
-    solid(DW / 2, HALF_W + WALL_T, PIT_Y, wy1, z + T / 2, z - T / 2, M.wall, { wall: true, tileV: 1 });
-    solid(-DW / 2, DW / 2, wy0 + DH, wy1, z + T / 2, z - T / 2, M.wall, { wall: true, tileV: 1 });
+    solid(-HALF_W - WALL_T, -DW / 2, wy0 - 1.6, wy1, z + T / 2, z - T / 2, M.wall, { wall: true });
+    solid(DW / 2, HALF_W + WALL_T, wy0 - 1.6, wy1, z + T / 2, z - T / 2, M.wall, { wall: true });
+    solid(-DW / 2, DW / 2, wy0 + DH, wy1, z + T / 2, z - T / 2, M.wall, { wall: true });
     // gold frame (visible from far away)
     for (const [x0, x1, y0, y1] of [[-DW / 2 - 0.18, -DW / 2, wy0, wy0 + DH + 0.18], [DW / 2, DW / 2 + 0.18, wy0, wy0 + DH + 0.18], [-DW / 2 - 0.18, DW / 2 + 0.18, wy0 + DH, wy0 + DH + 0.18]]) {
       const f = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, 0.12), M.gold);
       f.position.set((x0 + x1) / 2, (y0 + y1) / 2, z + T / 2 + 0.06); g.add(f);
     }
     // two sliding steel leaves
-    const leafMat = new THREE.MeshStandardMaterial({ map: tex.steel, color: '#8f8b85', roughness: 0.5, metalness: 0.4 });
+    const leafMat = P('#4aa8ff');
     const leaves = [-1, 1].map((s) => {
       const m = new THREE.Mesh(worldBox(DW / 2, DH, 0.2, 1.3, 1.5), leafMat);
       m.position.set(s * DW / 4, wy0 + DH / 2, z); m.castShadow = true; g.add(m); return m;
@@ -197,9 +206,10 @@ export function buildCourse(scene) {
   };
   C.step = (t) => { for (const mv of C.movers) setMover(mv, t, false); };
   C.visual = (t, dt) => {
+    M.kill.emissiveIntensity = 0.75 + 0.25 * Math.sin(t * 6);
     for (const tr of C.traps) {
       const h = C.trapHeight(tr, t);
-      tr.group.position.y = tr.baseY - 0.5 + h * 0.5; tr.hz.active = h > 0.45; tr.h = h;
+      tr.group.position.y = tr.baseY - 0.9 + h * 0.9; tr.hz.active = h > 0.45; tr.h = h;
     }
     for (const cp of C.checkpoints) {
       cp.flash = Math.max(0, cp.flash - dt);
