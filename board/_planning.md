@@ -7,7 +7,7 @@
 - 10-20 추가 결정: How Things Work 를 **"만져서 아는 앱"(A)** 으로 — 글 줄이고 직접 작동시키기·그림 퀴즈, 레슨 2~3개 웹에서 먼저 느낌. **Google Play 도 이 앱으로**(개인 계정 → 비공개 테스트 12명×14일, iOS 베타와 묶음). `PRODUCT.md` 결정 로그.
 - **10-23 변경: 대표 앱 = Kitty Queens**(How Things Work 보류). 외부 베타 테스터 모집 → 반영 빌드 → 9문항 답장. `board/catdoku.md` 이어받기에 순서 적음.
 - **10-30 결정: YouTube Playables 진출(A, 관심 신청서 + 파트너 동시)** — `board/playables.md`. Kitty Queens 애플·Play 베타와 병행.
-- **11-09 Playables 큐**: Sudoku(진행) → Coloring → Solitaire → Tricky 퍼즐. 하나 끝나고 보고 받은 뒤 다음.
+- **Playables 큐(11-10 갱신)**: Sudoku(라이브) → Coloring(진행) → **3D 탈출 시험판**(`plans/escape-3d-trial.md`) → Solitaire → Tricky 퍼즐. 하나 끝나고 보고 받은 뒤 다음.
 - **다음 할 일**: ①Playables 추적(카탈로그 페이지·영문 소개 → 사용자 신청서 제출·퍼블리셔 채널 A/B·파트너 답·SDK 시범) ②Kitty Queens 외부 베타(TestFlight 공개 링크·Play 비공개 테스트 12명×14일) → 9문항 답장 ③매주 월 07:45 KST 주간 점검
 - ~~다음 할 일~~(10-20, 대표 앱 부분은 바뀜): 4.3 대응 추적 — How Things Work "만져서 아는" 레슨 2~3개 느낌 → 30개·네이티브 이식·외부 베타 10명+(Play 12명×14일 겸) → 9문항 답 검토 → 첫 제출 판단. 다른 앱은 손대지 않음. 대표 앱 통과 뒤: 다음 앱 순서·Glance 합치기 검토. 매주 월 07:45 KST 주간 점검.
 - 새 계정에서 붙여 넣을 말:
