@@ -54,7 +54,7 @@
 - 아쉬운 점(숨기지 않음): ⓪ 확대(+) 버튼 14px 안쪽 조각은 탭이 버튼으로 끌려감(브라우저 터치 보정) — 확대·끌기로 비켜 칠해야 함 ⓪-2 그림이 커져서(130~510조각) 한 장 칠하는 시간이 이전의 2~3배 ① 실기기 사파리 미확인 ② 그림 오른쪽 아래 줌 버튼(+/−/1×)이 그 자리 조각을 가림 — 줌·끌기로 비켜 칠할 수 있지만 첫 사용자는 모를 수 있음(로봇은 그 자리 조각 1개를 디버그 탭으로 처리) ③ BGM 1곡뿐(스도쿠는 2곡) ④ 데일리 만다라는 매일 다르지만 모두 '동심원' 구조라 2~3주 지나면 비슷해 보일 수 있음 ⑤ 데스크톱 커서가 조각 위에서 바뀌지 않음(포인터 기본).
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
-- 11-10 샌드박스 게시 질문에 **"응"** = yes → publish_sandbox 호출(아카이브 1.5.2 `cmwa62fcb108oog0hhlzmozz7`): **샌드박스 URL https://playgama.ai/play/ncezmriqyxkqmr** (siteId `ncezmriqyxkqmr`), 처음엔 PENDING — get_publications 로 PUBLISHED 확인.
+- 11-10 샌드박스 게시 질문에 **"응"** = yes → publish_sandbox 호출(아카이브 1.5.2 `cmwa62fcb108oog0hhlzmozz7`): **샌드박스 URL https://playgama.ai/play/ncezmriqyxkqmr** (siteId `ncezmriqyxkqmr`), **PUBLISHED**(publication `cmwagqjsl1bvum80hcczfg6mq`, release `cmwagqjsa1bvrm80h1avm7egi`, 2026-11-10 09:03Z).
 - 11-10 (v1.5.2 실기기) **"아이제된다"** → 눈 버튼 꾹 누르기 아이폰에서 정상 확인(사용자 폰). 더 안 건드림.
 - 11-10 (v1.5.1 뒤) **"오잉 눌러야지 나오는데 누르고잇으면 안나오고. 아까처럼"** → 원인: 아이폰 사파리는 누름이 '길게 누르기'로 바뀌는 순간 pointercancel·lostpointercapture 를 보내는데, 그걸 손 뗌으로 처리해 꺼 버렸다. v1.5.2: 터치는 touchstart/touchend 로 직접 받고(pointercancel 무시), 버튼에 touch-action:none·callout 끔, 마우스는 mousedown/window mouseup. 로봇이 누르는 중에 pointercancel 을 흉내 내는 검사 추가 — 옛 코드에서 FAIL 재현 확인 후 새 코드 PASS. 로봇 98/98. 실기기 확인은 사용자.
 - 11-10 (v1.5.0 뒤) **"아니 눈 누르고잇을동안 켜지고 손떼면 꺼지고 로 하면 어때"** → v1.5.1: 누르는 동안만 완성본(포인터 캡처, 손 떼면/취소되면/창 포커스 잃으면 즉시 끔), 버튼에 touchstart preventDefault(iOS 길게 누르기 메뉴·확대 방지). 웹판 '꾹 누르기 → 시트 닫힘' 교훈은 이 판엔 해당 없음(전체 고정 화면, 스크롤 0 — 로봇이 1.2초 누르는 동안 스크롤 0 확인). 로봇 97/97.
