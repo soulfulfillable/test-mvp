@@ -166,7 +166,7 @@ export function buildCourse(scene) {
     const seam = new THREE.Mesh(new THREE.PlaneGeometry(0.07, DH), new THREE.MeshBasicMaterial({ color: '#fff0cc', fog: false })); seam.position.set(0, wy0 + DH / 2, z + 0.11); g.add(seam);
     const glowMap = glowTexture();
     const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowMap, color: '#ffd896', transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
-    glow.scale.set(12, 12, 1); glow.position.set(0, wy0 + DH * 0.55, z + 0.6); g.add(glow);
+    glow.scale.set(12, 12, 1); glow.position.set(0, wy0 + DH * 0.55, z - 1.4); g.add(glow);
     const shafts = [];
     const shaftMat = new THREE.MeshBasicMaterial({ map: shaftTexture(), color: '#ffe2a8', transparent: true, opacity: 0.0, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, fog: false });
     for (let i = 0; i < 3; i++) {
@@ -213,10 +213,10 @@ export function buildCourse(scene) {
     E.leaves[0].position.x = -E.DW / 4 - o * (E.DW / 2); E.leaves[1].position.x = E.DW / 4 + o * (E.DW / 2);
     E.doorBox.max.y = o > 0.6 ? E.doorBox.min.y : E.y + 3.1; // passable once mostly open
     const pulse = 0.5 + 0.5 * Math.sin(t * 2.2);
-    E.glow.material.opacity = 0.65 + 0.2 * pulse + o * 0.3;
+    E.glow.material.opacity = 0.7 + 0.2 * pulse;
     E.glow.scale.setScalar(11 + pulse * 1.2 + o * 6);
     E.shaftMat.opacity = 0.10 + 0.06 * pulse + o * 0.35;
-    E.lamp.intensity = 25 + 10 * pulse + o * 60;
+    E.lamp.intensity = 25 + 10 * pulse + o * 15;
     E.seam.visible = o < 0.05;
   };
   C.unlight = (cp) => { cp.lit = false; cp.ring.material = M.goldDim.clone(); cp.flash = 0; };

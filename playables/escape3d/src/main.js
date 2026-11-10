@@ -185,7 +185,7 @@ function restart() {
   G.cp = 0; G.deaths = G.falls = G.spikes = 0; G.runTime = 0; G.running = false; G.finished = false; G.cpTimes = [];
   for (const cp of C.checkpoints) if (cp.i > 0) C.unlight(cp);
   C.exit.open = 0; C.exit.opening = false;
-  $('panel').classList.add('hidden'); $('flash').className = '';
+  $('panel').classList.add('hidden'); $('flash').className = ''; document.body.classList.remove('done');
   P.reset(C.checkpoints[0].pos); camYLevel = 0; placeCamera(1, true);
   G.state = 'play'; updateDots(); audio.play('respawn', { vol: 0.4 });
 }
@@ -298,7 +298,7 @@ function adapt(dt) {
 function showPanel() {
   $('p-time').textContent = fmt(G.runTime);
   $('p-sub').textContent = G.newBest ? (G.deaths ? `New best · ${G.deaths} ${G.deaths === 1 ? 'retry' : 'retries'}` : 'New best · no retries') : `Best ${fmt(G.best)} · ${G.deaths} ${G.deaths === 1 ? 'retry' : 'retries'}`;
-  $('panel').classList.remove('hidden');
+  $('panel').classList.remove('hidden'); document.body.classList.add('done');
 }
 
 function resize() {
