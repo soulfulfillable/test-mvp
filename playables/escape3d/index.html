@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#9a948b">
+<title>Escape 3D — loading</title>
+<link rel="icon" href="data:,">
+<style>
+:root{--gold:#ffc261;--ink:#1c1c1e;--glass:rgba(28,26,24,.42);--line:rgba(255,255,255,.55)}
+html{height:100%}
+/* 240px scroll buffer under a fixed app: an in-app browser sheet then has scroll room and does not grab a drag as "close" */
+body{margin:0;min-height:calc(100% + 240px);background:#9a948b;font:16px/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;color:#fff;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overscroll-behavior:none}
+#app{position:fixed;inset:0;overflow:hidden}
+#app canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#hud{position:absolute;inset:0;pointer-events:none;--top:max(14px,env(safe-area-inset-top));--side:max(16px,env(safe-area-inset-left));--sideR:max(16px,env(safe-area-inset-right));--bottom:max(22px,calc(env(safe-area-inset-bottom) + 12px))}
+#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15px;color:rgba(255,255,255,.85);letter-spacing:.01em}
+body.ready #loading{display:none}
+
+/* top bar: time + progress (3 checkpoints → exit) */
+#bar{position:absolute;left:var(--side);top:var(--top);height:36px;display:flex;align-items:center;gap:10px;padding:0 14px 0 12px;border-radius:18px;background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#time{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;min-width:52px}
+#dots{display:flex;align-items:center;gap:5px}
+#dots i{display:block;width:7px;height:7px;border-radius:2px;transform:rotate(45deg);background:rgba(255,255,255,.35)}
+#dots i.exit{width:10px;height:12px;border-radius:2px 2px 0 0;transform:none;margin-left:3px}
+#dots i.on{background:var(--gold);box-shadow:0 0 8px rgba(255,194,97,.8)}
+#btn-sound{position:absolute;right:var(--sideR);top:var(--top);width:36px;height:36px;border-radius:18px;border:0;padding:0;background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer}
+#btn-sound svg{width:18px;height:18px;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+#btn-sound .x{display:none}#btn-sound.off .x{display:block}#btn-sound.off .w{display:none}
+
+/* touch controls */
+#stick-zone{position:absolute;left:0;bottom:0;width:55%;height:55%;pointer-events:auto;touch-action:none;display:none}
+#stick{position:absolute;width:124px;height:124px;margin:-62px 0 0 -62px;border-radius:50%;border:2px solid var(--line);background:rgba(28,26,24,.18);transition:opacity .15s;opacity:.75}
+#stick.on{opacity:1;transition:none}
+#knob{position:absolute;left:50%;top:50%;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.88);box-shadow:0 2px 8px rgba(0,0,0,.25);transform:translate(-50%,-50%)}
+#jump{position:absolute;right:calc(var(--sideR) + 8px);bottom:calc(var(--bottom) + 26px);width:86px;height:86px;border-radius:50%;border:2px solid var(--line);background:rgba(28,26,24,.28);display:none;align-items:center;justify-content:center;pointer-events:auto;touch-action:none;transition:transform .08s}
+#jump svg{width:34px;height:34px;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+#jump.down{transform:scale(.92);background:rgba(255,194,97,.55);border-color:var(--gold)}
+body.touch #stick-zone{display:block}
+body.touch #jump{display:flex}
+#keys{position:absolute;left:50%;bottom:var(--bottom);transform:translateX(-50%);font-size:13px;color:rgba(255,255,255,.92);background:var(--glass);padding:7px 12px;border-radius:12px;white-space:nowrap;transition:opacity .4s}
+#keys b{font-weight:600}
+body.touch #keys,body.moved #keys{opacity:0}
+
+/* screen flashes */
+#flash{position:absolute;inset:0;pointer-events:none;opacity:0}
+#flash.hurt{background:radial-gradient(ellipse at center,rgba(170,30,20,0) 35%,rgba(170,30,20,.55) 100%);animation:fl .5s ease-out}
+#flash.fall{background:#1a1816;animation:fall .5s ease-in-out}
+#flash.win{background:radial-gradient(ellipse at 50% 40%,rgba(255,244,220,.95),rgba(255,214,140,.5) 70%);animation:win 1.6s ease-out forwards}
+@keyframes fl{0%{opacity:1}100%{opacity:0}}
+@keyframes fall{0%{opacity:0}45%{opacity:.85}100%{opacity:0}}
+@keyframes win{0%{opacity:0}18%{opacity:.9}100%{opacity:.18}}
+
+/* finish */
+#panel{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:auto;padding:24px}
+#panel.hidden{display:none}
+.card{background:rgba(255,255,255,.96);color:var(--ink);border-radius:20px;padding:22px 22px 18px;width:min(300px,100%);text-align:center;box-shadow:0 18px 50px rgba(40,30,10,.28);animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{0%{transform:scale(.85);opacity:0}100%{transform:none;opacity:1}}
+.card h2{margin:0;font-size:15px;font-weight:600;color:#8a6a2a;letter-spacing:.02em}
+#p-time{font-size:46px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin:2px 0 2px}
+#p-sub{font-size:15px;color:#6c6c70;margin:0 0 16px}
+#btn-again{display:block;width:100%;height:48px;border:0;border-radius:14px;background:var(--gold);color:#2b1d05;font:600 17px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;cursor:pointer}
+#btn-again:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){#flash.win,#flash.hurt,#flash.fall,.card{animation-duration:.01s}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="hud">
+    <div id="loading">Loading…</div>
+    <div id="flash"></div>
+    <div id="bar"><span id="time">0:00.0</span><span id="dots"><i></i><i></i><i class="exit"></i></span></div>
+    <button id="btn-sound" aria-label="Sound"><svg viewBox="0 0 20 20"><path d="M3.5 7.5h3l4-3.2v11.4l-4-3.2h-3z"/><g class="w"><path d="M13 7a4.2 4.2 0 0 1 0 6"/><path d="M15.2 4.8a7.3 7.3 0 0 1 0 10.4"/></g><g class="x"><path d="M13 7.5l5 5M18 7.5l-5 5"/></g></svg></button>
+    <div id="stick-zone"><div id="stick" style="left:110px;top:calc(100% - 120px)"><div id="knob"></div></div></div>
+    <div id="jump" aria-label="Jump"><svg viewBox="0 0 34 34"><path d="M8 21l9-9 9 9"/></svg></div>
+    <div id="keys"><b>WASD</b> move · <b>Space</b> jump</div>
+    <div id="panel" class="hidden"><div class="card"><h2>You escaped</h2><div id="p-time">0:00.0</div><p id="p-sub"></p><button id="btn-again">Run again</button></div></div>
+  </div>
+</div>
+<script type="module" src="game.js"></script>
+</body>
+</html>

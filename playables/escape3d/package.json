@@ -1,0 +1,8 @@
+{
+  "name": "escape3d",
+  "private": true,
+  "type": "module",
+  "description": "Escape 3D trial — one 3D obstacle course (three.js). `npm install` then `./build.sh` → docs/escape-3d/. Tests: `node robot.cjs`.",
+  "dependencies": { "three": "0.170.0" },
+  "devDependencies": { "esbuild": "0.24.2" }
+}
