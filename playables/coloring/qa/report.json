@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-10T03:38:45.195Z",
+  "startedAt": "2026-11-10T03:51:39.761Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -72,7 +72,7 @@
     {
       "name": "gallery list scrolls with a finger",
       "ok": true,
-      "detail": "575px"
+      "detail": "646px"
     },
     {
       "name": "tapping a locked picture keeps you in the gallery (with a note)",
@@ -85,9 +85,9 @@
       "detail": "{\"home\":false,\"id\":\"ladybug\",\"mode\":\"num\",\"filled\":0,\"total\":130,\"sel\":0,\"done\":[],\"panel\":false,\"ads\":[],\"z\":1}"
     },
     {
-      "name": "eye button: the finished picture fades in over the canvas, then goes away by itself; nothing gets colored",
+      "name": "hold the eye button: the finished picture shows the whole time; lift: it is gone at once; nothing colored, no page scroll",
       "ok": true,
-      "detail": "[{\"on\":true,\"op\":1,\"colored\":130,\"total\":130,\"filled\":0},{\"gone\":true,\"filled\":0}]"
+      "detail": "[{\"on\":true,\"op\":1,\"colored\":130,\"total\":130,\"filled\":0,\"home\":false},{\"gone\":true,\"filled\":0,\"scroll\":0}]"
     },
     {
       "name": "every number label is placed on a visible point of its piece (no hidden-label console error)",
@@ -102,12 +102,12 @@
     {
       "name": "finish burst: pieces pop in a wave, shine sweep, sparkles, glow, palette confetti, big word — panel not yet",
       "ok": true,
-      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Beautiful!\",\"glow\":true,\"shine\":true,\"panel\":false}"
+      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Lovely!\",\"glow\":true,\"shine\":true,\"panel\":false}"
     },
     {
       "name": "picture 01 colored to 100% by 129 real taps (1 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
       "ok": true,
-      "detail": "{\"confetti\":91,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":130} in 9079ms misses []"
+      "detail": "{\"confetti\":90,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":130} in 9499ms misses []"
     },
     {
       "name": "Next picture button counts down (auto-advance armed)",
@@ -267,7 +267,7 @@
     {
       "name": "audio files decoded or fetched (ogg/mp3 shipped in the archive)",
       "ok": true,
-      "detail": "pick,finish,dab,color-done,swoosh,mute-on"
+      "detail": "pick,dab,swoosh,mute-off,finish,mute-on,color-done"
     },
     {
       "name": "desktop: click opens picture 01 in landscape layout",
@@ -526,7 +526,7 @@
   ],
   "taps": 496,
   "debugTaps": 7,
-  "finishedAt": "2026-11-10T03:40:10.305Z",
+  "finishedAt": "2026-11-10T03:53:05.390Z",
   "passed": 97,
   "failed": 0
 }

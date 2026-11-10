@@ -174,13 +174,20 @@ async function swipe(page, x, y0, y1, steps = 10) {
     let st = await state(page);
     const first = Pics.ORDER[0].id;
     check('first card opens picture 01 (' + first + ') in number mode', !st.home && st.id === first && st.mode === 'num' && st.filled === 0, JSON.stringify(st));
-    // peek: the finished picture shows for a moment, then your work is back, nothing changed
-    await tapEl(page, '#peek-btn', true); await sleep(700);
-    const pk1 = await page.evaluate(() => { const v = document.getElementById('peek'); return { on: !!v && v.classList.contains('on'), op: v ? +getComputedStyle(v).opacity : 0, colored: v ? v.querySelectorAll('.region.filled').length : 0, total: window.__game.cur.pic.rg.length, filled: window.__game.cur.filled.size }; });
-    await shot(page, 'phone-390x844-peek');
-    await sleep(1500);
-    const pk2 = await page.evaluate(() => ({ gone: !document.getElementById('peek'), filled: window.__game.cur.filled.size }));
-    check('eye button: the finished picture fades in over the canvas, then goes away by itself; nothing gets colored', pk1.on && pk1.op > 0.9 && pk1.colored === pk1.total && pk1.filled === 0 && pk2.gone && pk2.filled === 0, JSON.stringify([pk1, pk2]));
+    // peek: hold the eye button → finished picture; lift the finger → gone at once; nothing gets colored
+    {
+      const r = await page.evaluate(() => { const b = document.getElementById('peek-btn').getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + b.height / 2 }; });
+      const cdp = await page.context().newCDPSession(page);
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: r.x, y: r.y, id: 0 }] });
+      await sleep(1200);   // a long hold
+      const pk1 = await page.evaluate(() => { const v = document.getElementById('peek'); return { on: !!v && v.classList.contains('on'), op: v ? +getComputedStyle(v).opacity : 0, colored: v ? v.querySelectorAll('.region.filled').length : 0, total: window.__game.cur.pic.rg.length, filled: window.__game.cur.filled.size, home: window.__game.home }; });
+      await shot(page, 'phone-390x844-peek');
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await cdp.detach();
+      await sleep(80);
+      const pk2 = await page.evaluate(() => ({ gone: !document.getElementById('peek'), filled: window.__game.cur.filled.size, scroll: document.documentElement.scrollTop + document.body.scrollTop }));
+      report.taps++;
+      check('hold the eye button: the finished picture shows the whole time; lift: it is gone at once; nothing colored, no page scroll', pk1.on && pk1.op > 0.9 && pk1.colored === pk1.total && pk1.filled === 0 && !pk1.home && pk2.gone && pk2.filled === 0 && pk2.scroll === 0, JSON.stringify([pk1, pk2]));
+    }
     check('every number label is placed on a visible point of its piece (no hidden-label console error)', report.consoleErrors.length === 0, report.consoleErrors.join(' | '));
     await shot(page, 'phone-390x844-first-picture');
     // wrong color: pick color 1, tap a piece of another color → nothing colored, piece shakes

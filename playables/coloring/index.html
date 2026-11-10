@@ -118,7 +118,7 @@
   #art-wrap { grid-area: art; display: flex; align-items: center; justify-content: center; min-height: 0; min-width: 0; padding: 6px 12px; position: relative; }
   #art-vp { position: relative; overflow: hidden; background: #fff; border-radius: 16px; box-shadow: 0 12px 34px rgba(43,35,64,0.16); touch-action: none; }
   #art-tf { transform-origin: 0 0; position: relative; }
-  #peek { position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+  #peek { position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; transition: opacity 0.12s ease; }
   #peek.on { opacity: 1; }
   #peek-btn.on { background: var(--sun); }
   #art-vp svg { display: block; }
@@ -249,7 +249,7 @@
       <button id="btn-back" class="ibtn pressable" aria-label="Back to gallery"><svg class="ico"><use href="#s-back"/></svg></button>
       <div id="head-mid"><div id="pic-name"></div><div id="pbar"><div id="pbar-fill"></div></div></div>
       <div id="pct">0%</div>
-      <button id="peek-btn" class="ibtn pressable" aria-label="Peek at the finished picture"><svg class="ico"><use href="#s-eye"/></svg></button>
+      <button id="peek-btn" class="ibtn pressable" aria-label="Hold to see the finished picture"><svg class="ico"><use href="#s-eye"/></svg></button>
       <button id="play-mute" class="ibtn pressable" data-muted="0" aria-label="Sound on/off"><svg class="ico on"><use href="#s-sound-on"/></svg><svg class="ico off"><use href="#s-sound-off"/></svg></button>
     </div>
     <div id="art-wrap">
@@ -279,7 +279,7 @@
 <script>
 (function () {
   'use strict';
-  var GAME_VERSION = '1.5.0';
+  var GAME_VERSION = '1.5.1';
   var GAME_TITLE = 'Cozy Coloring';
   var NS = 'http://www.w3.org/2000/svg';
   var CP = window.ColoringPics, PICS = CP.ORDER;
@@ -1088,22 +1088,25 @@
   onTap($('zoom-in'), function () { play('pick'); zoomAt(1.6, Z.w / 2, Z.h / 2); });
   onTap($('zoom-out'), function () { play('pick'); zoomAt(1 / 1.6, Z.w / 2, Z.h / 2); });
   onTap($('zoom-reset'), function () { play('pick'); resetZoom(); });
-  // peek: the finished picture fades in over the canvas for a moment, then back to your work (tap, never hold)
-  var peekT = null;
-  function hidePeek() { clearTimeout(peekT); peekT = null; var pk = $('peek'); if (pk) pk.remove(); $('peek-btn').classList.remove('on'); }
-  function peek() {
-    if (!cur) return;
-    hidePeek();
+  // peek: the finished picture shows while the eye button is held, and goes away the moment the finger lifts
+  var peeking = false;
+  function hidePeek() { peeking = false; var pk = $('peek'); if (pk) pk.remove(); $('peek-btn').classList.remove('on'); }
+  function peekOn() {
+    if (!cur || peeking) return;
+    peeking = true;
     var full = new Map(); cur.pic.rg.forEach(function (rg, i) { full.set(i, rg.c - 1); });
     var v = buildSVG(cur.pic, full, false).svg; v.id = 'peek';
     v.setAttribute('width', cur.view.svg.getAttribute('width')); v.setAttribute('height', cur.view.svg.getAttribute('height'));
     artTf.appendChild(v); $('peek-btn').classList.add('on');
-    requestAnimationFrame(function () { requestAnimationFrame(function () { v.classList.add('on'); }); });
+    requestAnimationFrame(function () { if (v.parentNode) v.classList.add('on'); });
     play('pick', 1.3);
-    peekT = setTimeout(function () { v.classList.remove('on'); peekT = setTimeout(hidePeek, 350); }, 1500);
     analytics('peek', { id: cur.pic.id, filled: cur.filled.size });
   }
-  onTap($('peek-btn'), peek);
+  var peekBtn = $('peek-btn');
+  peekBtn.addEventListener('pointerdown', function (e) { e.preventDefault(); unlockAudio(); try { peekBtn.setPointerCapture(e.pointerId); } catch (x) {} peekOn(); });
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (t) { peekBtn.addEventListener(t, hidePeek); });
+  peekBtn.addEventListener('touchstart', function (e) { e.preventDefault(); }, { passive: false });   // no iOS callout or double-tap zoom on a held button
+  window.addEventListener('blur', hidePeek);
   onTap($('boost-btn'), requestBoost);
   onTap($('home-mute'), toggleMute); onTap($('play-mute'), toggleMute);
   document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
