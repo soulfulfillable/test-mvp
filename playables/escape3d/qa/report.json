@@ -1,0 +1,357 @@
+{
+  "startedAt": "2026-11-10T09:49:18.233Z",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "checks": [
+    {
+      "name": "total download < 5 MB",
+      "ok": true,
+      "detail": "780 KB"
+    },
+    {
+      "name": "phone-390x844: exit on screen at first frame",
+      "ok": true,
+      "detail": "195,412"
+    },
+    {
+      "name": "phone-390x844: exit on screen when play starts",
+      "ok": true,
+      "detail": "195,139"
+    },
+    {
+      "name": "phone-390x844: HUD inside viewport, no overlap",
+      "ok": true,
+      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+    },
+    {
+      "name": "phone-390x844: joystick + jump shown on touch",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "phone-360x640: exit on screen at first frame",
+      "ok": true,
+      "detail": "180,313"
+    },
+    {
+      "name": "phone-360x640: exit on screen when play starts",
+      "ok": true,
+      "detail": "180,106"
+    },
+    {
+      "name": "phone-360x640: HUD inside viewport, no overlap",
+      "ok": true,
+      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+    },
+    {
+      "name": "phone-360x640: joystick + jump shown on touch",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "phone-430x932: exit on screen at first frame",
+      "ok": true,
+      "detail": "215,455"
+    },
+    {
+      "name": "phone-430x932: exit on screen when play starts",
+      "ok": true,
+      "detail": "215,154"
+    },
+    {
+      "name": "phone-430x932: HUD inside viewport, no overlap",
+      "ok": true,
+      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+    },
+    {
+      "name": "phone-430x932: joystick + jump shown on touch",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "land-844x390: exit on screen at first frame",
+      "ok": true,
+      "detail": "422,190"
+    },
+    {
+      "name": "land-844x390: exit on screen when play starts",
+      "ok": true,
+      "detail": "422,91"
+    },
+    {
+      "name": "land-844x390: HUD inside viewport, no overlap",
+      "ok": true,
+      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+    },
+    {
+      "name": "land-844x390: joystick + jump shown on touch",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "tablet-768x1024: exit on screen at first frame",
+      "ok": true,
+      "detail": "384,498"
+    },
+    {
+      "name": "tablet-768x1024: exit on screen when play starts",
+      "ok": true,
+      "detail": "384,89"
+    },
+    {
+      "name": "tablet-768x1024: HUD inside viewport, no overlap",
+      "ok": true,
+      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+    },
+    {
+      "name": "tablet-768x1024: joystick + jump shown on touch",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desk-1280x720: exit on screen at first frame",
+      "ok": true,
+      "detail": "640,350"
+    },
+    {
+      "name": "desk-1280x720: exit on screen when play starts",
+      "ok": true,
+      "detail": "640,168"
+    },
+    {
+      "name": "desk-1280x720: HUD inside viewport, no overlap",
+      "ok": true,
+      "detail": "shown=bar,btn-sound,keys out=[] overlap=[]"
+    },
+    {
+      "name": "desk-1280x720: key hint shown on desktop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desk-1920x1080: exit on screen at first frame",
+      "ok": true,
+      "detail": "960,525"
+    },
+    {
+      "name": "desk-1920x1080: exit on screen when play starts",
+      "ok": true,
+      "detail": "960,252"
+    },
+    {
+      "name": "desk-1920x1080: HUD inside viewport, no overlap",
+      "ok": true,
+      "detail": "shown=bar,btn-sound,keys out=[] overlap=[]"
+    },
+    {
+      "name": "desk-1920x1080: key hint shown on desktop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "iframe-800x450: exit on screen at first frame",
+      "ok": true,
+      "detail": "400,219"
+    },
+    {
+      "name": "iframe-800x450: exit on screen when play starts",
+      "ok": true,
+      "detail": "400,105"
+    },
+    {
+      "name": "iframe-800x450: HUD inside viewport, no overlap",
+      "ok": true,
+      "detail": "shown=bar,btn-sound,keys out=[] overlap=[]"
+    },
+    {
+      "name": "iframe-800x450: key hint shown on desktop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "touch: joystick up moves the hero forward",
+      "ok": true,
+      "detail": "z 1.60 → -3.77, anim sprint"
+    },
+    {
+      "name": "touch: jump button lifts the hero",
+      "ok": true,
+      "detail": "peak y 1.78"
+    },
+    {
+      "name": "touch: run + jump with two thumbs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop: W moves forward",
+      "ok": true,
+      "detail": "z 1.60 → -0.65"
+    },
+    {
+      "name": "desktop: Space jumps",
+      "ok": true,
+      "detail": "peak y 1.79"
+    },
+    {
+      "name": "spikes: touching them counts a hit",
+      "ok": true,
+      "detail": "spikes=1"
+    },
+    {
+      "name": "spikes: hero is back on checkpoint 0 right away",
+      "ok": true,
+      "detail": "{\"x\":0,\"y\":0,\"z\":1.6}"
+    },
+    {
+      "name": "phone-390x844: autopilot reaches the exit (touch controls only)",
+      "ok": true,
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 137 s"
+    },
+    {
+      "name": "phone-390x844: all 3 checkpoints lit on the way",
+      "ok": true,
+      "detail": "cp=2"
+    },
+    {
+      "name": "phone-390x844: finish panel shows the time",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "phone-390x844: \"Run again\" button fully on screen",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "phone-390x844: \"Run again\" restarts at the start",
+      "ok": true,
+      "detail": "{\"s\":\"play\",\"z\":1.6,\"cp\":0}"
+    },
+    {
+      "name": "phone-360x640: autopilot reaches the exit (touch controls only)",
+      "ok": true,
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 96 s"
+    },
+    {
+      "name": "phone-360x640: all 3 checkpoints lit on the way",
+      "ok": true,
+      "detail": "cp=2"
+    },
+    {
+      "name": "phone-360x640: finish panel shows the time",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "phone-360x640: \"Run again\" button fully on screen",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "phone-360x640: \"Run again\" restarts at the start",
+      "ok": true,
+      "detail": "{\"s\":\"play\",\"z\":1.6,\"cp\":0}"
+    },
+    {
+      "name": "pit: falling counts a fall",
+      "ok": true,
+      "detail": "falls=1"
+    },
+    {
+      "name": "pit: hero is back on checkpoint 1",
+      "ok": true,
+      "detail": "{\"x\":0,\"y\":0,\"z\":-21.6}"
+    },
+    {
+      "name": "sound: mute survives reload",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "frame: measured (headless software renderer)",
+      "ok": true,
+      "detail": "avg 28.5 ms/frame (35 fps in SwiftShader), last frame CPU+submit 6.1 ms, draw calls 105, triangles 3672"
+    },
+    {
+      "name": "frame: draw calls ≤ 150",
+      "ok": true,
+      "detail": "105"
+    },
+    {
+      "name": "console errors = 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "page errors = 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "no external requests",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "screenshots": [
+    "phone-390x844-0-intro.png",
+    "phone-390x844-1-start.png",
+    "phone-360x640-1-start.png",
+    "phone-430x932-1-start.png",
+    "land-844x390-1-start.png",
+    "tablet-768x1024-1-start.png",
+    "desk-1280x720-0-intro.png",
+    "desk-1280x720-1-start.png",
+    "desk-1920x1080-1-start.png",
+    "iframe-800x450-1-start.png",
+    "touch-joystick-held.png",
+    "hazard-spike-hit.png",
+    "run-1-spike-hall.png",
+    "run-2-moving-platforms.png",
+    "run-3-jumps.png",
+    "run-4-door-opening.png",
+    "run-5-escaped.png",
+    "phone-390x844-finish.png",
+    "phone-360x640-finish.png",
+    "hazard-fall.png"
+  ],
+  "numbers": {
+    "totalKB": 780,
+    "phone-390x844-run": {
+      "time": 23.25,
+      "deaths": 0,
+      "falls": 0,
+      "spikes": 0,
+      "log": [
+        [
+          "finished",
+          23.24999999999932
+        ]
+      ]
+    },
+    "phone-360x640-run": {
+      "time": 23.23,
+      "deaths": 0,
+      "falls": 0,
+      "spikes": 0,
+      "log": [
+        [
+          "finished",
+          23.233333333332656
+        ]
+      ]
+    },
+    "frame": {
+      "avgMs": 28.495800000000017,
+      "calls": 105,
+      "tris": 3672,
+      "cpu": 6.100000000093132,
+      "pr": 1
+    }
+  },
+  "finishedAt": "2026-11-10T09:56:46.641Z",
+  "pass": 58,
+  "fail": 0
+}
