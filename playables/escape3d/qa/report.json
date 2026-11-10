@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-10T09:49:18.233Z",
+  "startedAt": "2026-11-10T10:14:10.216Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -7,7 +7,7 @@
     {
       "name": "total download < 5 MB",
       "ok": true,
-      "detail": "780 KB"
+      "detail": "919 KB"
     },
     {
       "name": "phone-390x844: exit on screen at first frame",
@@ -22,7 +22,7 @@
     {
       "name": "phone-390x844: HUD inside viewport, no overlap",
       "ok": true,
-      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+      "detail": "shown=bar,btn-hero,btn-sound,stick,jump out=[] overlap=[]"
     },
     {
       "name": "phone-390x844: joystick + jump shown on touch",
@@ -42,7 +42,7 @@
     {
       "name": "phone-360x640: HUD inside viewport, no overlap",
       "ok": true,
-      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+      "detail": "shown=bar,btn-hero,btn-sound,stick,jump out=[] overlap=[]"
     },
     {
       "name": "phone-360x640: joystick + jump shown on touch",
@@ -62,7 +62,7 @@
     {
       "name": "phone-430x932: HUD inside viewport, no overlap",
       "ok": true,
-      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+      "detail": "shown=bar,btn-hero,btn-sound,stick,jump out=[] overlap=[]"
     },
     {
       "name": "phone-430x932: joystick + jump shown on touch",
@@ -82,7 +82,7 @@
     {
       "name": "land-844x390: HUD inside viewport, no overlap",
       "ok": true,
-      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+      "detail": "shown=bar,btn-hero,btn-sound,stick,jump out=[] overlap=[]"
     },
     {
       "name": "land-844x390: joystick + jump shown on touch",
@@ -102,7 +102,7 @@
     {
       "name": "tablet-768x1024: HUD inside viewport, no overlap",
       "ok": true,
-      "detail": "shown=bar,btn-sound,stick,jump out=[] overlap=[]"
+      "detail": "shown=bar,btn-hero,btn-sound,stick,jump out=[] overlap=[]"
     },
     {
       "name": "tablet-768x1024: joystick + jump shown on touch",
@@ -122,7 +122,7 @@
     {
       "name": "desk-1280x720: HUD inside viewport, no overlap",
       "ok": true,
-      "detail": "shown=bar,btn-sound,keys out=[] overlap=[]"
+      "detail": "shown=bar,btn-hero,btn-sound,keys out=[] overlap=[]"
     },
     {
       "name": "desk-1280x720: key hint shown on desktop",
@@ -142,7 +142,7 @@
     {
       "name": "desk-1920x1080: HUD inside viewport, no overlap",
       "ok": true,
-      "detail": "shown=bar,btn-sound,keys out=[] overlap=[]"
+      "detail": "shown=bar,btn-hero,btn-sound,keys out=[] overlap=[]"
     },
     {
       "name": "desk-1920x1080: key hint shown on desktop",
@@ -162,7 +162,7 @@
     {
       "name": "iframe-800x450: HUD inside viewport, no overlap",
       "ok": true,
-      "detail": "shown=bar,btn-sound,keys out=[] overlap=[]"
+      "detail": "shown=bar,btn-hero,btn-sound,keys out=[] overlap=[]"
     },
     {
       "name": "iframe-800x450: key hint shown on desktop",
@@ -172,12 +172,12 @@
     {
       "name": "touch: joystick up moves the hero forward",
       "ok": true,
-      "detail": "z 1.60 → -3.77, anim sprint"
+      "detail": "z 1.60 → -3.94, anim sprint"
     },
     {
       "name": "touch: jump button lifts the hero",
       "ok": true,
-      "detail": "peak y 1.78"
+      "detail": "peak y 1.81"
     },
     {
       "name": "touch: run + jump with two thumbs",
@@ -187,12 +187,12 @@
     {
       "name": "desktop: W moves forward",
       "ok": true,
-      "detail": "z 1.60 → -0.65"
+      "detail": "z 1.60 → -1.40"
     },
     {
       "name": "desktop: Space jumps",
       "ok": true,
-      "detail": "peak y 1.79"
+      "detail": "peak y 1.81"
     },
     {
       "name": "spikes: touching them counts a hit",
@@ -207,7 +207,7 @@
     {
       "name": "phone-390x844: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 137 s"
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 123 s"
     },
     {
       "name": "phone-390x844: all 3 checkpoints lit on the way",
@@ -232,7 +232,7 @@
     {
       "name": "phone-360x640: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 96 s"
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 95 s"
     },
     {
       "name": "phone-360x640: all 3 checkpoints lit on the way",
@@ -265,6 +265,31 @@
       "detail": "{\"x\":0,\"y\":0,\"z\":-21.6}"
     },
     {
+      "name": "picker: default hero is the pup",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "picker: 3 portraits, all on screen",
+      "ok": true,
+      "detail": "[{\"h\":\"dog\",\"inside\":true,\"img\":true},{\"h\":\"cat\",\"inside\":true,\"img\":true},{\"h\":\"kid\",\"inside\":true,\"img\":true}]"
+    },
+    {
+      "name": "picker: tapping Kitty swaps the hero and closes the sheet",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "picker: the new hero runs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "picker: choice survives reload",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "sound: mute survives reload",
       "ok": true,
       "detail": ""
@@ -272,12 +297,12 @@
     {
       "name": "frame: measured (headless software renderer)",
       "ok": true,
-      "detail": "avg 28.5 ms/frame (35 fps in SwiftShader), last frame CPU+submit 6.1 ms, draw calls 105, triangles 3672"
+      "detail": "avg 45.2 ms/frame (22 fps in SwiftShader), last frame CPU+submit 3.1 ms, draw calls 141, triangles 5874"
     },
     {
       "name": "frame: draw calls ≤ 150",
       "ok": true,
-      "detail": "105"
+      "detail": "141"
     },
     {
       "name": "console errors = 0",
@@ -315,43 +340,44 @@
     "run-5-escaped.png",
     "phone-390x844-finish.png",
     "phone-360x640-finish.png",
-    "hazard-fall.png"
+    "hazard-fall.png",
+    "picker-open.png"
   ],
   "numbers": {
-    "totalKB": 780,
+    "totalKB": 919,
     "phone-390x844-run": {
-      "time": 23.25,
+      "time": 23.22,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          23.24999999999932
+          23.21666666666599
         ]
       ]
     },
     "phone-360x640-run": {
-      "time": 23.23,
+      "time": 23.2,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          23.233333333332656
+          23.199999999999324
         ]
       ]
     },
     "frame": {
-      "avgMs": 28.495800000000017,
-      "calls": 105,
-      "tris": 3672,
-      "cpu": 6.100000000093132,
+      "avgMs": 45.188888888888904,
+      "calls": 141,
+      "tris": 5874,
+      "cpu": 3.1000000000931323,
       "pr": 1
     }
   },
-  "finishedAt": "2026-11-10T09:56:46.641Z",
-  "pass": 58,
+  "finishedAt": "2026-11-10T10:21:18.586Z",
+  "pass": 63,
   "fail": 0
 }
