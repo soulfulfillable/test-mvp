@@ -33,7 +33,7 @@ license in the package. Refresh it with `npm pack @playgama/bridge` before each 
 
 ## Everything else
 
-Code (`index.html`, `coloring-pics.js`, `gen-data.js`), the 20 pictures and the daily mandala generator, the stroked tool icons and all text:
+Code (`index.html`, `coloring-pics.js`, `gen-data.js`), the 20 pictures, the stroked tool icons and all text:
 © 2026 Soulfulfill / Treasurefield Studio. Every picture is drawn by our own code: we outline each subject with a few
 polygons, our generator scatters points, triangulates them (Bowyer-Watson Delaunay), shades each facet from a fixed light
 direction and merges facets into tappable pieces. `coloring-data.js` is that output, precomputed so phones load fast.
