@@ -2,6 +2,7 @@
 // Everything solid is an axis-aligned box collider; spikes are hazard boxes; moving platforms are boxes whose
 // position is a pure function of time (so the controller can carry the hero exactly and a robot can predict them).
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { plasticTexture, glowTexture, shaftTexture, worldBox, brickTexture, roofTexture, facadeTexture, grateTexture, streetTexture } from './textures.js';
 
 export const GOLD = new THREE.Color('#ffc93c');
@@ -20,8 +21,8 @@ export function buildCourse(scene) {
     pillar: STD({ map: brickTexture('#8a4d36') }), wall: STD({ map: brickTexture('#86412d') }),
     facade: fac,
     grate: STD({ map: grateTexture(), roughness: 0.6, metalness: 0.4 }),
-    kill: new THREE.MeshStandardMaterial({ color: '#ff6a1a', emissive: '#ff4a10', emissiveIntensity: 1.2, roughness: 0.4 }),
-    steam: new THREE.MeshBasicMaterial({ map: glowTexture(), color: '#ffffff', transparent: true, opacity: 0.0, depthWrite: false }),
+    kill: new THREE.MeshStandardMaterial({ color: '#ff7a1a', emissive: '#ff5a10', emissiveIntensity: 1.7, roughness: 0.4 }),
+    steam: new THREE.MeshBasicMaterial({ map: glowTexture(), color: '#fff4ea', transparent: true, opacity: 0.0, depthWrite: false }),
     steel: STD({ color: '#8d969e', roughness: 0.5, metalness: 0.5 }),
     stripe: STD({ color: '#f2c230', roughness: 0.6 }),
     metal: STD({ color: '#5d656c', roughness: 0.5, metalness: 0.6 }),
@@ -65,21 +66,21 @@ export function buildCourse(scene) {
   function spikes(x0, x1, z0, z1, y = 0, trap = null) {
     const w = Math.abs(x1 - x0), d = Math.abs(z1 - z0), cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
     const g = new THREE.Group(); g.position.set(cx, y, cz); scene.add(g);
-    const glow = new THREE.Mesh(new THREE.BoxGeometry(w, 0.1, d), M.kill); glow.position.y = 0.05; g.add(glow);
+    const glow = new THREE.Mesh(new THREE.BoxGeometry(w, 0.16, d), M.kill); glow.position.y = 0.08; g.add(glow);
     const grate = new THREE.Mesh(worldBox(w + 0.12, 0.18, d + 0.12, 1, 1), M.grate); grate.position.y = 0.11;
     grate.material = M.grate; grate.castShadow = true; grate.receiveShadow = true;
     const frame = new THREE.Group(); g.add(frame);
     // the grate is see-through slats: draw it as thin bars so the orange glow shows between them
-    const nb = Math.max(2, Math.round(Math.max(w, d) / 0.22)); const alongX = w >= d;
+    const nb = Math.max(2, Math.round(Math.max(w, d) / 0.34)); const alongX = w >= d;
     for (let i = 0; i < nb; i++) {
-      const bar = new THREE.Mesh(new THREE.BoxGeometry(alongX ? 0.07 : w, 0.16, alongX ? d : 0.07), M.metal);
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(alongX ? 0.06 : w, 0.12, alongX ? d : 0.06), M.metal);
       if (alongX) bar.position.set(-w / 2 + (i + 0.5) * (w / nb), 0.12, 0); else bar.position.set(0, 0.12, -d / 2 + (i + 0.5) * (d / nb));
       bar.castShadow = true; frame.add(bar);
     }
     const rim = new THREE.Mesh(new THREE.BoxGeometry(w + 0.16, 0.12, d + 0.16), M.metal); rim.position.y = 0.06; rim.scale.set(1, 1, 1); g.add(rim); rim.visible = false;
     // steam puffs (sprites) — updated in C.visual
     const puffs = [];
-    const n = Math.max(3, Math.round(w * d * 2));
+    const n = Math.min(hzCount(trap), Math.max(3, Math.round(w * d * 1.2)));
     for (let i = 0; i < n; i++) {
       const sp = new THREE.Sprite(M.steam.clone()); sp.userData = { x: (Math.random() - 0.5) * w, z: (Math.random() - 0.5) * d, o: Math.random() };
       g.add(sp); puffs.push(sp);
@@ -89,6 +90,7 @@ export function buildCourse(scene) {
     if (trap) { trap.hz = hz; trap.group = g; trap.baseY = y; trap.h = 0; C.traps.push(trap); }
     return hz;
   }
+  function hzCount(trap) { return trap ? 9 : 5; }
   const deco = (x0, x1, y0, y1, z0, z1, mat) => solid(x0, x1, y0, y1, z0, z1, mat, { tileU: 1, tileV: 1 });
 
   // ---------- course ----------
@@ -233,7 +235,7 @@ export function buildCourse(scene) {
     const wt = waterTower(); wt.position.set(1.6, wy1, z - 0.2); wt.scale.setScalar(1.15); g.add(wt);
     const cap = new THREE.Mesh(new THREE.BoxGeometry(2 * HALF_W + 2.3, 0.3, 1.1), M.trim); cap.position.set(0, wy1 + 0.15, z); g.add(cap);
     const lamp = new THREE.PointLight('#ffcf8a', 30, 16, 1.6); lamp.position.set(0, wy0 + 2.2, z + 1.4); g.add(lamp);
-    return { z, y: wy0, leaves, doorBox, glow, shafts, shaftMat, seam, lamp, DW, open: 0, opening: false, trigger: { z: z - 0.1, x: DW / 2 - 0.2 } };
+    return { g, z, y: wy0, leaves, doorBox, glow, shafts, shaftMat, seam, lamp, DW, open: 0, opening: false, trigger: { z: z - 0.1, x: DW / 2 - 0.2 } };
   }
 
   // ---------- time update (deterministic: everything is a function of t) ----------
@@ -256,7 +258,7 @@ export function buildCourse(scene) {
   };
   C.step = (t) => { for (const mv of C.movers) setMover(mv, t, false); };
   C.visual = (t, dt) => {
-    M.kill.emissiveIntensity = 1.0 + 0.35 * Math.sin(t * 7);
+    M.kill.emissiveIntensity = 1.7 + 0.5 * Math.sin(t * 7);
     for (const tr of C.traps) { const h = C.trapHeight(tr, t); tr.hz.active = h > 0.45; tr.h = h; }
     for (const hz of C.hazards) { // steam: soft puffs always; the trap row blasts a tall white column when active
       const tall = hz.trap ? (C.traps.find((q) => q.hz === hz).h || 0) : 0;
@@ -264,9 +266,9 @@ export function buildCourse(scene) {
         const u = sp.userData; const k = (t * (hz.trap && tall > 0.3 ? 1.6 : 0.55) + u.o) % 1;
         const rise = hz.trap ? 0.25 + tall * 2.6 : 0.9;
         sp.position.set(u.x, 0.2 + k * rise, u.z);
-        const size = (hz.trap ? 0.5 + tall * 0.9 : 0.45) * (0.6 + k);
+        const size = (hz.trap ? 0.6 + tall * 1.0 : 0.6) * (0.6 + k);
         sp.scale.set(size, size, 1);
-        sp.material.opacity = (1 - k) * (hz.trap ? 0.25 + tall * 0.6 : 0.35);
+        sp.material.opacity = (1 - k) * (hz.trap ? 0.3 + tall * 0.65 : 0.55);
       }
     }
     for (const cp of C.checkpoints) {
@@ -290,5 +292,26 @@ export function buildCourse(scene) {
   C.unlight = (cp) => { cp.lit = false; cp.ring.material = M.goldDim.clone(); cp.flash = 0; };
   C.light = (cp) => { cp.lit = true; cp.ring.material = M.gold; cp.flash = 1.2; };
   C.HALF_W = HALF_W;
+
+  // ---------- merge everything static into one mesh per material (hundreds of boxes → a few dozen draw calls) ----------
+  const dyn = new Set([...C.movers.map((m) => m.g), C.exit.g, ...C.checkpoints.map((c) => c.group)]);
+  const keep = new Set(C.walls);
+  scene.updateMatrixWorld(true);
+  const buckets = new Map(), victims = [];
+  scene.traverse((o) => {
+    if (!o.isMesh || keep.has(o) || o.material.isMeshBasicMaterial || o.material.transparent || o.material.vertexColors) return;
+    for (let p = o; p; p = p.parent) if (dyn.has(p)) return;
+    const key = o.material.uuid + (o.castShadow ? 'c' : '') + (o.receiveShadow ? 'r' : '');
+    if (!buckets.has(key)) buckets.set(key, { mat: o.material, cast: o.castShadow, recv: o.receiveShadow, geos: [] });
+    const gg = o.geometry.index ? o.geometry.clone() : o.geometry.clone();
+    gg.applyMatrix4(o.matrixWorld); for (const k of Object.keys(gg.attributes)) if (!['position', 'normal', 'uv'].includes(k)) gg.deleteAttribute(k);
+    buckets.get(key).geos.push(gg.index ? gg : gg); victims.push(o);
+  });
+  for (const o of victims) o.parent.remove(o);
+  for (const b of buckets.values()) {
+    const geos = b.geos.map((g) => (g.index ? g.toNonIndexed() : g));
+    const merged = mergeGeometries(geos, false); if (!merged) continue;
+    const m = new THREE.Mesh(merged, b.mat); m.castShadow = b.cast; m.receiveShadow = b.recv; m.matrixAutoUpdate = false; scene.add(m);
+  }
   return C;
 }

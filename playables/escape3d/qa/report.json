@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-10T10:26:21.623Z",
+  "startedAt": "2026-11-10T13:00:54.065Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -7,7 +7,7 @@
     {
       "name": "total download < 5 MB",
       "ok": true,
-      "detail": "604 KB"
+      "detail": "614 KB"
     },
     {
       "name": "phone-390x844: exit on screen at first frame",
@@ -137,7 +137,7 @@
     {
       "name": "desk-1920x1080: exit on screen when play starts",
       "ok": true,
-      "detail": "960,252"
+      "detail": "960,259"
     },
     {
       "name": "desk-1920x1080: HUD inside viewport, no overlap",
@@ -172,7 +172,7 @@
     {
       "name": "touch: joystick up moves the hero forward",
       "ok": true,
-      "detail": "z 1.60 → -4.78, anim run"
+      "detail": "z 1.60 → -3.29, anim run"
     },
     {
       "name": "touch: jump button lifts the hero",
@@ -187,7 +187,7 @@
     {
       "name": "desktop: W moves forward",
       "ok": true,
-      "detail": "z 1.60 → -1.25"
+      "detail": "z 1.60 → -0.40"
     },
     {
       "name": "desktop: Space jumps",
@@ -207,7 +207,7 @@
     {
       "name": "phone-390x844: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 95 s"
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 191 s"
     },
     {
       "name": "phone-390x844: all 3 checkpoints lit on the way",
@@ -232,7 +232,7 @@
     {
       "name": "phone-360x640: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 75 s"
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 148 s"
     },
     {
       "name": "phone-360x640: all 3 checkpoints lit on the way",
@@ -297,12 +297,12 @@
     {
       "name": "frame: measured (headless software renderer)",
       "ok": true,
-      "detail": "avg 27.6 ms/frame (36 fps in SwiftShader), last frame CPU+submit 1.7 ms, draw calls 100, triangles 8290"
+      "detail": "avg 28.6 ms/frame (35 fps in SwiftShader), last frame CPU+submit 6.2 ms, draw calls 146, triangles 18954"
     },
     {
       "name": "frame: draw calls ≤ 150",
       "ok": true,
-      "detail": "100"
+      "detail": "146"
     },
     {
       "name": "console errors = 0",
@@ -344,7 +344,7 @@
     "picker-open.png"
   ],
   "numbers": {
-    "totalKB": 604,
+    "totalKB": 614,
     "phone-390x844-run": {
       "time": 23.18,
       "deaths": 0,
@@ -370,14 +370,14 @@
       ]
     },
     "frame": {
-      "avgMs": 27.57090909090909,
-      "calls": 100,
-      "tris": 8290,
-      "cpu": 1.7000000001862645,
+      "avgMs": 28.57142857142857,
+      "calls": 146,
+      "tris": 18954,
+      "cpu": 6.2000000001862645,
       "pr": 1
     }
   },
-  "finishedAt": "2026-11-10T10:32:10.279Z",
+  "finishedAt": "2026-11-10T13:12:28.256Z",
   "pass": 63,
   "fail": 0
 }
