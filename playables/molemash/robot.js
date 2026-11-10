@@ -100,25 +100,33 @@ async function playAgain(page) {
     check('bridge initialized (mock platform outside Playgama)', await page.evaluate(() => window.__game.bridgeReady && window.bridge.platform.id), await page.evaluate(() => window.bridge.platform.id));
     const msgs = await page.evaluate(() => window.__msgs.slice());
     check('game_ready sent exactly once', msgs.filter((m) => m === 'game_ready').length === 1, JSON.stringify(msgs));
-    await shot(page, 'phone-390x844-title');
-    await page.click('#sfx-btn');
-    await page.waitForTimeout(100);
-    check('hit-sound button cycles the style and saves it', await page.evaluate(() => window.__game.store.settings.sfx === 'cute' && /Cute/.test(document.getElementById('sfx-btn').textContent)));
-    await page.click('#sfx-btn'); await page.click('#sfx-btn'); await page.click('#sfx-btn'); await page.click('#sfx-btn');
-    check('five styles wrap around', await page.evaluate(() => window.__game.store.settings.sfx === 'classic'));
-    check('music button shows the default track', await page.evaluate(() => window.__game.store.settings.bgm === 'chiptune' && /Chiptune/.test(document.getElementById('bgm-btn').textContent)));
-    check('only the chosen music track is downloaded', await page.evaluate(() => window.__game.bufs.filter((k) => k.indexOf('bgm_') === 0).join(',') === 'bgm_chiptune'), await page.evaluate(() => window.__game.bufs.filter((k) => k.indexOf('bgm_') === 0).join(',')));
-    await page.click('#bgm-btn');
-    await page.waitForFunction(() => window.__game.bgmKey === 'bgm_rush', null, { timeout: 8000 }).catch(() => {});
-    check('music button switches the track mid-play and saves it', await page.evaluate(() => window.__game.store.settings.bgm === 'rush' && window.__game.bgmPlaying && window.__game.bgmKey === 'bgm_rush' && /rush/.test(document.getElementById('bgm-btn').textContent)), await page.evaluate(() => window.__game.bgmKey + ' ' + window.__game.store.settings.bgm));
-    for (let i = 0; i < 5; i++) await page.click('#bgm-btn');
-    await page.waitForFunction(() => window.__game.bgmKey === 'bgm_chiptune', null, { timeout: 8000 }).catch(() => {});
-    check('six music tracks wrap around to the first', await page.evaluate(() => window.__game.store.settings.bgm === 'chiptune' && window.__game.bgmKey === 'bgm_chiptune'));
-    check('title state before first tap', await page.evaluate(() => window.__game.state === 0));
-    check('tutorial on for a new player', await page.evaluate(() => window.__game.store.progress.played === 0));
+    // v2.0 (11-10): no title screen — the game opens straight on level 1, holding the clock until the first touch
+    const open0 = await page.evaluate(() => ({ state: window.__game.state, level: window.__game.level, hold: window.__game.waitFirstTap, tut: window.__game.tutorial, t: window.__game.timeLeft, pause: !document.getElementById('pause-btn').classList.contains('hidden'), msgs: window.__msgs.slice() }));
+    check('opens straight into level 1 (no title, no start button)', open0.state === 1 && open0.level === 1 && open0.pause, JSON.stringify(open0));
+    check('game_ready comes before level_started', open0.msgs.indexOf('game_ready') >= 0 && open0.msgs.indexOf('game_ready') < open0.msgs.indexOf('level_started'), JSON.stringify(open0.msgs));
+    check('tutorial on for a new player', open0.tut && await page.evaluate(() => window.__game.store.progress.played === 0));
+    await page.waitForTimeout(700);
+    check('clock holds until the first touch', open0.hold && Math.abs(await page.evaluate(() => window.__game.timeLeft) - open0.t) < 0.01);
+    await shot(page, 'phone-390x844-open');
     await page.tap('#game');
     await page.waitForTimeout(400);
-    check('tap starts the round', await page.evaluate(() => window.__game.state === 1));
+    check('first touch starts the clock', await page.evaluate(() => window.__game.state === 1 && !window.__game.waitFirstTap));
+    // hit sound / music pickers live in the pause menu now (the title screen is gone)
+    await page.keyboard.press('KeyP'); await page.waitForTimeout(100);
+    await page.click('#pause-sfx-btn');
+    await page.waitForTimeout(100);
+    check('hit-sound button cycles the style and saves it', await page.evaluate(() => window.__game.store.settings.sfx === 'cute' && /Cute/.test(document.getElementById('pause-sfx-btn').textContent)));
+    await page.click('#pause-sfx-btn'); await page.click('#pause-sfx-btn'); await page.click('#pause-sfx-btn'); await page.click('#pause-sfx-btn');
+    check('five styles wrap around', await page.evaluate(() => window.__game.store.settings.sfx === 'classic'));
+    check('music button shows the default track', await page.evaluate(() => window.__game.store.settings.bgm === 'chiptune' && /Chiptune/.test(document.getElementById('pause-bgm-btn').textContent)));
+    await page.waitForTimeout(1200);
+    check('only the chosen music track is downloaded', await page.evaluate(() => window.__game.bufs.filter((k) => k.indexOf('bgm_') === 0).join(',') === 'bgm_chiptune'), await page.evaluate(() => window.__game.bufs.filter((k) => k.indexOf('bgm_') === 0).join(',')));
+    await page.click('#pause-bgm-btn');
+    await page.waitForFunction(() => window.__game.store.settings.bgm === 'rush', null, { timeout: 8000 }).catch(() => {});
+    check('music button switches the track and saves it', await page.evaluate(() => window.__game.store.settings.bgm === 'rush' && /rush/.test(document.getElementById('pause-bgm-btn').textContent)));
+    for (let i = 0; i < 5; i++) await page.click('#pause-bgm-btn');
+    check('six music tracks wrap around to the first', await page.evaluate(() => window.__game.store.settings.bgm === 'chiptune'));
+    await page.click('#resume-btn'); await page.waitForTimeout(100);
     check('level_started message after start', await page.evaluate(() => window.__msgs.includes('level_started')));
     // audio unlocked on the first gesture; files decode after game_ready
     await page.waitForTimeout(1500);
@@ -176,13 +184,29 @@ async function playAgain(page) {
     await page.evaluate(() => { window.__game.timeLeft = 7.3; });
     await page.waitForTimeout(350);
     await shot(page, 'phone-390x844-countdown');
-    await page.evaluate(() => { window.__game.timeLeft = 0.6; });
-    await page.waitForTimeout(1500);
+    // the clock runs out → LEVEL 1 CLEAR! for a moment → level 2 starts on its own (no tap), and so on
+    await page.evaluate(() => { window.__game.lives = 2; window.__game.timeLeft = 0.3; });
+    await page.waitForTimeout(600);
+    const lc = await page.evaluate(() => ({ state: window.__game.state, lb: window.__game.levelBreak, level: window.__game.level, lives: window.__game.lives, run: window.__game.store.progress.run, msgs: window.__msgs.slice(-4) }));
+    check('time up = LEVEL CLEAR card, run saved, a heart back', lc.state === 1 && lc.lb > 0 && lc.level === 1 && lc.lives === 3 && lc.run && lc.run.level === 2 && lc.msgs.includes('level_completed'), JSON.stringify(lc));
+    await shot(page, 'phone-390x844-level-clear');
+    await page.waitForTimeout(2300);
+    const l2 = await page.evaluate(() => ({ state: window.__game.state, level: window.__game.level, lb: window.__game.levelBreak, t: window.__game.timeLeft, msgs: window.__msgs.slice(-3) }));
+    check('level 2 starts by itself after the card', l2.state === 1 && l2.level === 2 && l2.lb === 0 && l2.t > 25 && l2.msgs.includes('level_started'), JSON.stringify(l2));
+    await page.evaluate(() => { window.__game.timeLeft = 0.3; });
+    await page.waitForTimeout(3000);
+    check('level 3 follows the same way', await page.evaluate(() => window.__game.state === 1 && window.__game.level === 3));
+    await shot(page, 'phone-390x844-level3');
+    // out of hearts → the run ends on the results panel
+    await page.evaluate(() => { window.__game.lives = 1; window.__game.moles.length = 0; window.__game.spawnMole('mole'); });
+    await page.waitForFunction(() => window.__game.state === 2, null, { timeout: 6000 }).catch(() => {});
+    await waitPanel(page);
     await page.waitForTimeout(300);
-    const over = await page.evaluate(() => ({ state: window.__game.state, score: window.__game.score, panel: !document.getElementById('over-panel').classList.contains('hidden'), title: document.getElementById('over-title-text').textContent, best: window.__game.store.progress.best, ranks: window.__game.store.progress.ranks.length, msgs: window.__msgs.slice() }));
-    check('round ends at 0 s with the game-over panel', over.state === 2 && over.panel, JSON.stringify({ title: over.title, score: over.score }));
+    const over = await page.evaluate(() => ({ state: window.__game.state, score: window.__game.score, panel: !document.getElementById('over-panel').classList.contains('hidden'), title: document.getElementById('over-title-text').textContent, best: window.__game.store.progress.best, ranks: window.__game.store.progress.ranks.length, msgs: window.__msgs.slice(), tgt: document.getElementById('next-target').textContent, run: window.__game.store.progress.run, bestLevel: window.__game.store.progress.bestLevel }));
+    check('losing the last heart ends the run on the results panel', over.state === 2 && over.panel && /HEARTS/.test(over.title), JSON.stringify({ title: over.title, score: over.score }));
     check('best and rank recorded', over.best === over.score && over.ranks === 1, `best ${over.best}`);
-    check('level_completed message on time-up', over.msgs.includes('level_completed'), over.msgs.join(','));
+    check('results say how far the run went; saved run cleared, best level kept', /Reached level 3/.test(over.tgt) && !over.run && over.bestLevel >= 3, JSON.stringify({ tgt: over.tgt, run: over.run, bestLevel: over.bestLevel }));
+    check('level_failed message when the hearts run out', over.msgs.includes('level_failed'), over.msgs.slice(-4).join(','));
     await shot(page, 'phone-390x844-over');
     await page.click('#share-btn');
     await page.waitForTimeout(300);
@@ -210,7 +234,7 @@ async function playAgain(page) {
     await page.evaluate(() => { window.__forceRewarded = true; });
     await page.tap('#game');
     await page.waitForTimeout(200);
-    await page.evaluate(() => { window.__game.timeLeft = 0.2; });
+    await page.evaluate(() => { window.__game.gameOver('hearts'); });
     await page.waitForTimeout(600);
     const o2 = await page.evaluate(() => ({ state: window.__game.state, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
     check('continue (rewarded) button offered once per attempt', o2.state === 2 && o2.btn, JSON.stringify(o2));
@@ -255,7 +279,7 @@ async function playAgain(page) {
     await page.evaluate(() => { window.__game.pauseGame(true); });
     check('platform pause during the count-in shows no pause panel', await page.evaluate(() => !window.__game.userPaused && document.getElementById('pause-panel').classList.contains('hidden')));
     await page.evaluate(() => { window.__game.countIn = 0; });
-    await page.evaluate(() => { window.__game.timeLeft = 0.2; });
+    await page.evaluate(() => { window.__game.gameOver('hearts'); });
     await page.waitForTimeout(600); await waitPanel(page);
     const o3 = await page.evaluate(() => ({ state: window.__game.state, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
     check('no second continue in the same attempt', o3.state === 2 && !o3.btn, JSON.stringify(o3));
@@ -263,7 +287,7 @@ async function playAgain(page) {
     await page.waitForTimeout(700);
     await playAgain(page);
     await page.waitForTimeout(2400);
-    await page.evaluate(() => { window.__game.timeLeft = 0.2; });
+    await page.evaluate(() => { window.__game.gameOver('hearts'); });
     await page.waitForTimeout(900); await waitPanel(page);
     const sc0 = await page.evaluate(() => ({ state: window.__game.state, btn: !document.getElementById('continue-btn').classList.contains('hidden') }));
     if (sc0.btn) {
@@ -276,7 +300,7 @@ async function playAgain(page) {
       await page.waitForTimeout(200);
       const after = await page.evaluate(() => ({ state: window.__game.state, score: window.__game.score, lives: window.__game.lives, used: window.__game.continueUsed, countIn: window.__game.countIn }));
       check('closed-then-rewarded order still continues the same run (score kept)', mid.state === 2 && after.state === 1 && after.score === scoreBefore && after.lives === 3 && after.used, JSON.stringify({ mid, after, scoreBefore }));
-      await page.evaluate(() => { window.__game.countIn = 0; window.__game.timeLeft = 0.2; });
+      await page.evaluate(() => { window.__game.countIn = 0; window.__game.gameOver('hearts'); });
       await page.waitForTimeout(900);
     } else check('closed-then-rewarded order test reachable', false, JSON.stringify(sc0));
     // out of hearts path
@@ -307,7 +331,7 @@ async function playAgain(page) {
     await page.click('#later-btn');
     await page.waitForTimeout(150);
     check('Later keeps the box and starts the round', await page.evaluate(() => window.__game.state === 1 && window.__game.store.progress.boxesReady === 1));
-    await page.evaluate(() => { window.__game.timeLeft = 0.2; });
+    await page.evaluate(() => { window.__game.gameOver('hearts'); });
     await page.waitForTimeout(900);
     await page.click('#retry-btn');
     await page.waitForTimeout(200);
@@ -351,14 +375,14 @@ async function playAgain(page) {
     await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('rewarded'); window.__game.onRewardedState('closed'); });
     await page.waitForTimeout(200);
     check('continue from the restored run keeps the score and clears the saved run', await page.evaluate(() => window.__game.state === 1 && window.__game.score === 23 && !window.__game.store.progress.pendingRun));
-    await page.evaluate(() => { window.__game.countIn = 0; window.__game.timeLeft = 0.2; });
+    await page.evaluate(() => { window.__game.countIn = 0; window.__game.gameOver('hearts'); });
     await page.waitForTimeout(900);
     // all five collected → bar says so, no box screen
     await page.evaluate(() => { const p = window.__game.store.progress; p.hammers = window.__game.hammers.slice(); p.boxesReady = 0; p.boxFill = 0; window.__game.saveStore(['progress']); });
     await page.waitForTimeout(700);
     if (await page.evaluate(() => window.__game.state === 2)) await playAgain(page); else await page.tap('#game');
     await page.waitForTimeout(200);
-    await page.evaluate(() => { window.__game.timeLeft = 0.2; });
+    await page.evaluate(() => { window.__game.gameOver('hearts'); });
     await page.waitForTimeout(700);
     const done = await page.evaluate(() => ({ label: document.getElementById('box-label').textContent, state: window.__game.state }));
     check('all hammers collected: bar reads so', /All hammers collected/.test(done.label) && done.state === 2, JSON.stringify(done));

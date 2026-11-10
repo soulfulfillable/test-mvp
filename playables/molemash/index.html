@@ -264,9 +264,10 @@
 (function () {
   'use strict';
 
-  var GAME_VERSION = '1.9.1';
-  var TIME_LIMIT = 60;           // seconds per round (player feedback 11-01: 45 felt too short)
-  var HEAT_T = 45;               // the pace ramps over the first 45 s, then stays at full heat
+  var GAME_VERSION = '2.0.0';
+  var TIME_LIMIT = 30;           // seconds per level; levels follow one another until the hearts run out (decision 11-10)
+  var LEVEL_BREAK = 2.2;         // seconds of "LEVEL n CLEAR!" between levels
+  var HEAT_T = 45;               // within a level the pace ramps with time; each new level starts hotter (heatFloor)
   var CLOCK_TIME = 5;            // the clock mole adds five seconds
   var CONTINUE_SECONDS = 10;     // rewarded continue bonus
   var hash = location.hash || '';
@@ -298,7 +299,7 @@
   ];
   var BOX_GOAL_FIRST = 12, BOX_GOAL = 18;   // moles per gift box: the first box opens after a decent first round
   var store = {
-    progress: { v: 2, best: 0, played: 0, ranks: [], name: '', hammers: ['classic'], equipped: 'classic', boxFill: 0, boxesReady: 0, boxesOpened: 0, pendingRun: null },
+    progress: { v: 2, best: 0, played: 0, ranks: [], name: '', hammers: ['classic'], equipped: 'classic', boxFill: 0, boxesReady: 0, boxesOpened: 0, pendingRun: null, run: null, bestLevel: 0 },
     settings: { v: 1, muted: false, sfx: 'classic', bgm: 'chiptune' }
   };
   function hammerById(id) { for (var i = 0; i < HAMMERS.length; i++) if (HAMMERS[i].id === id) return HAMMERS[i]; return HAMMERS[0]; }
@@ -327,6 +328,8 @@
       p.boxFill = Math.max(0, parseInt(p.boxFill, 10) || 0);
       p.boxesReady = Math.max(0, parseInt(p.boxesReady, 10) || 0);
       p.boxesOpened = Math.max(0, parseInt(p.boxesOpened, 10) || 0);
+      p.bestLevel = Math.max(0, parseInt(p.bestLevel, 10) || 0);
+      p.run = (p.run && p.run.level > 1 && typeof p.run.score === 'number') ? { level: Math.min(99, parseInt(p.run.level, 10) || 1), score: Math.max(0, Math.round(p.run.score)), lives: Math.max(1, Math.min(3, parseInt(p.run.lives, 10) || 3)) } : null;
       p.ranks = Array.isArray(p.ranks) ? p.ranks
         .filter(function (r) { return r && typeof r.s === 'number' && isFinite(r.s); })
         .map(function (r) { return { n: String(r.n || 'Me').slice(0, 8), s: Math.max(0, Math.round(r.s)), t: r.t || 0 }; })
@@ -498,7 +501,10 @@
   var adOpen = false;
   var continueUsed = false, continueOffered = false, rewardPending = null;
   var tutorial = false, tutHits = 0;
-  var roundIndex = 0;
+  var roundIndex = 0;        // runs this session (a run = levels until the hearts run out)
+  var level = 1, levelBreak = 0, levelStartScore = 0, levelPlayT = 0, heartBack = false;
+  var readySent = false, levelMsgPending = false;   // level_started never goes out before game_ready
+  var waitFirstTap = false;  // the game opens straight into a level: the clock holds and misses are free until the first touch
   var whacked = 0;           // moles whacked this round (feeds the gift box)
   var combo = 0, lastHitAt = -9; // consecutive hits within 0.9 s
   var rings = [];            // impact rings {x, y, t}
@@ -512,10 +518,17 @@
 
   // difficulty: time and score both tighten the window
   // pacing (player feedback 11-01 "it goes slack in the middle"): the ramp starts right after the opening moles
-  function heat()      { return Math.min(1, (playT / HEAT_T) * 0.8 + (score / 45) * 0.4); }
-  function stayTime()  { return 1.8 - 1.3 * heat(); }                 // 1.8 s at the start → 0.5 s at full heat
-  function spawnGap()  { return 0.9 - 0.6 * heat(); }
-  function maxActive() { if ((tutorial && tutHits < 3) || playT < (tutorial ? 8 : 4)) return 1; var h = heat(); return h < 0.15 ? 1 : (h < 0.5 ? 2 : 3); }
+  // levels (11-10): each level starts hotter than the last and, past full heat, the moles keep getting quicker
+  function heatFloor() { return Math.min(0.5, (level - 1) * 0.12); }
+  function levelSpeed() { return Math.max(0.62, 1 - (level - 1) * 0.05); }   // multiplies stay time and spawn gap
+  function heat()      { return Math.min(1, heatFloor() + (levelPlayT / HEAT_T) * 0.8 + ((score - levelStartScore) / 45) * 0.4); }
+  function stayTime()  { return (1.8 - 1.3 * heat()) * levelSpeed(); }  // level 1: 1.8 s → 0.5 s; later levels shorter still
+  function spawnGap()  { return (0.9 - 0.6 * heat()) * levelSpeed(); }
+  function maxActive() {
+    if ((tutorial && tutHits < 3) || levelPlayT < (tutorial ? 8 : (level > 1 ? 1.5 : 4))) return 1;
+    var h = heat(), n = h < 0.15 ? 1 : (h < 0.5 ? 2 : 3);
+    return level >= 4 && h >= 0.6 ? 4 : n;
+  }
   function onboarding() { return tutorial && tutHits < 3; }           // first round: the first three moles teach, misses are free
 
   // ---------- sound: files only, one volume controller ----------
@@ -730,10 +743,13 @@
     score = 0; lives = 3; playT = 0; introT = 2.0; spawnTimer = 0.6;
     shake = 0; heartFlash = 0; hitStop = 0; flashA = 0;
     timeLeft = TIME_LIMIT; lastTick = -1;
+    level = 1; levelBreak = 0; levelStartScore = 0; levelPlayT = 0; heartBack = false; waitFirstTap = false;
+    var saved = store.progress.run;   // a run that was closed mid-way comes back at its level (rule 3.2.3)
+    if (saved && saved.level > 1) { level = saved.level; score = saved.score; levelStartScore = score; lives = saved.lives; introT = 2.4; }
     isNewBest = false; bestShown = false;
     endCelebration(); worldTopShown = false;
     continueUsed = false; continueOffered = false; rewardPending = null;
-    tutorial = store.progress.played === 0; tutHits = 0;
+    tutorial = store.progress.played === 0 && level === 1; tutHits = 0;
     roundIndex++;
     whacked = 0; boxGained = 0; combo = 0; lastHitAt = -9; rings = []; bestCombo = 0; comboPulse = 0;
   }
@@ -755,9 +771,9 @@
     var kind = 'mole', roll = Math.random();
     if (forceKind) kind = forceKind;
     else if (!onboarding()) {
-      if (score >= 5 && roll < 0.16) kind = 'bomb';
+      if (score >= 5 && roll < 0.16 + Math.min(0.08, (level - 1) * 0.02)) kind = 'bomb';   // a few more bombs each level
       else if (score >= 10 && roll > 0.92) kind = 'gold';
-      else if (score >= 6 && timeLeft <= 25 && roll > 0.84) kind = 'clock';   // only when the clock is actually low
+      else if (score >= 6 && timeLeft <= 12 && roll > 0.84) kind = 'clock';   // only when the clock is actually low
     }
     var st = stayTime();
     if (onboarding()) st = [3.0, 2.6, 2.2][tutHits];   // onboarding: the first three moles wait for you
@@ -769,7 +785,8 @@
 
   // tap = whack that spot (tap only; no hold, no drag)
   function whackAt(px, py) {
-    if (state !== STATE_PLAY || frozen() || countIn > 0) return;
+    if (state !== STATE_PLAY || frozen() || countIn > 0 || levelBreak > 0) return;
+    waitFirstTap = false;
     mallets.push({ x: px, y: py, t: 0 });
     var hitHole = -1, bestD = 1e9;
     for (var i = 0; i < holes.length; i++) {
@@ -912,8 +929,8 @@
     userPaused = false;
     document.getElementById('pause-btn').classList.remove('hidden');
     play('start');
-    sendMsg('level_started', { level: String(roundIndex) });
-    analytics('progression_started', { step_id: 'round', tutorial: tutorial ? 1 : 0 });
+    if (readySent) sendMsg('level_started', { level: String(level) }); else levelMsgPending = true;
+    analytics('progression_started', { step_id: 'level', level: level, tutorial: tutorial ? 1 : 0, resumed: level > 1 ? 1 : 0 });
     if (fromOver) analytics('next_round_started', { hammer: store.progress.equipped });
     // no ad here: pressing Play again must never turn into an ad (player feedback 11-01)
   }
@@ -933,14 +950,14 @@
     userPaused = true;
     document.getElementById('pause-keys').textContent = isDesktop ? 'Keys: 1–9 whack a hole · P pause · Space start' : '';
     document.getElementById('pause-panel').classList.remove('hidden');
-    sendMsg('level_paused', { level: String(roundIndex) });
+    sendMsg('level_paused', { level: String(level) });
     // no ad on pause (player feedback 11-01): the only interstitial is at round end
   }
   function resumeGame() {
     if (!userPaused) return;
     userPaused = false;
     document.getElementById('pause-panel').classList.add('hidden');
-    sendMsg('level_resumed', { level: String(roundIndex) });
+    sendMsg('level_resumed', { level: String(level) });
   }
   function quitToTitle() {
     userPaused = false;
@@ -963,18 +980,66 @@
     prevBestScore = store.progress.best;
     if (score > store.progress.best) { store.progress.best = score; isNewBest = true; }
     if (!continueUsed && !continueOffered) store.progress.played++;
+    store.progress.run = null;   // the run is over; Play again starts at level 1
+    if (level > store.progress.bestLevel) store.progress.bestLevel = level;
     recordRank(score);
     feedBox(whacked);
     submitScore(score);
     saveStore(['progress']);                      // before anything that can end the session (an ad)
     document.getElementById('pause-btn').classList.add('hidden');
-    sendMsg(reason === 'time' ? 'level_completed' : 'level_failed', { level: String(roundIndex) });
-    analytics(reason === 'time' ? 'progression_completed' : 'progression_failed', { step_id: 'round', outcome: reason, continued: continueUsed ? 1 : 0 });
+    sendMsg(reason === 'time' ? 'level_completed' : 'level_failed', { level: String(level) });
+    analytics(reason === 'time' ? 'progression_completed' : 'progression_failed', { step_id: 'level', level: level, outcome: reason, continued: continueUsed ? 1 : 0 });
+    analytics('run_end', { level: level, score: score });
     if (tutorial && tutHits >= 3) analytics('tutorial_completed', { step_id: 'round' });
     // the round itself is the natural pause: the ad comes before the results, except after the session's first round
     var big = (isNewBest && prevBestScore > 0 && lastScore > 0 && !COVER) || (beatsWorld && !COVER);   // a real record or the top of the world: celebrate first, panel after
     if (roundIndex > 1 && !continueUsed && !big) showInterstitial('round_end');
     if (big) { if (beatsWorld) worldTopShown = true; startCelebration(beatsWorld ? 'top1' : 'best', roundIndex > 1 && !continueUsed); } else showOverPanel();
+  }
+
+  // ---------- levels: the clock runs out → LEVEL n CLEAR! for a moment → the next, faster level ----------
+  function levelClear() {
+    timeLeft = 0;
+    sendMsg('level_completed', { level: String(level) });
+    analytics('progression_completed', { step_id: 'level', level: level, score: score - levelStartScore, outcome: 'time', continued: continueUsed ? 1 : 0 });
+    if (tutorial && tutHits >= 3) analytics('tutorial_completed', { step_id: 'level' });
+    heartBack = lives < 3;
+    if (heartBack) lives++;   // a cleared level gives one heart back
+    store.progress.run = { level: level + 1, score: score, lives: lives };
+    if (level + 1 > store.progress.bestLevel) store.progress.bestLevel = level + 1;
+    saveStore(['progress']);
+    moles = []; mallets = []; combo = 0;
+    levelBreak = LEVEL_BREAK; countShown = -1;
+    play('best'); buzz([30, 40, 30]);
+    showInterstitial('round_end');   // a natural pause between levels; the Bridge decides whether an ad fits
+  }
+  function startNextLevel() {
+    level++; levelBreak = 0;
+    levelStartScore = score; levelPlayT = 0;
+    timeLeft = TIME_LIMIT; tickAcc = 0; lastTick = -1;
+    introT = 0; spawnTimer = 0.5; tutorial = false; heartBack = false;
+    continueUsed = false; continueOffered = false;   // the rewarded continue is once per level attempt (rule 2.2.4)
+    play('start');
+    sendMsg('level_started', { level: String(level) });
+    analytics('progression_started', { step_id: 'level', level: level, tutorial: 0, resumed: 0 });
+  }
+  function drawLevelBreak() {
+    var k = 1 - levelBreak / LEVEL_BREAK;   // 0 → 1 over the break
+    var cx = grid.x + grid.w / 2, cy = grid.y + grid.h * 0.42;
+    var pop = k < 0.12 ? 0.6 + 0.4 * (k / 0.12) * (1 + 0.25 * Math.sin((k / 0.12) * Math.PI)) : 1;
+    ctx.save();
+    ctx.fillStyle = 'rgba(46,28,16,' + Math.min(0.55, k * 4) + ')'; ctx.fillRect(-20, -20, W + 40, H + 40);
+    ctx.translate(cx, cy); ctx.scale(pop, pop); ctx.translate(-cx, -cy);
+    var cardW = Math.min(W - 24, 320 * UI), cardH = 150 * UI;
+    ctx.fillStyle = 'rgba(255,246,234,0.97)'; roundRect(cx - cardW / 2, cy - cardH / 2, cardW, cardH, 16 * UI); ctx.fill();
+    ctx.strokeStyle = '#ffc94d'; ctx.lineWidth = 3; ctx.stroke();
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#3d2812'; ctx.font = fontBig(34 * UI); ctx.fillText('LEVEL ' + level + ' CLEAR!', cx, cy - 22 * UI);
+    ctx.fillStyle = '#8a5a34'; ctx.font = fontPx(15, 'bold');
+    ctx.fillText((score - levelStartScore) + ' moles this level' + (heartBack ? '  ·  +1 heart' : ''), cx, cy + 6 * UI);
+    ctx.fillStyle = '#d1342a'; ctx.font = fontBig(26 * UI);
+    ctx.fillText('LEVEL ' + (level + 1) + ' · FASTER!', cx, cy + 46 * UI);
+    ctx.restore();
   }
 
   // ---------- celebration: new personal best, or #1 on the world board ----------
@@ -1239,6 +1304,7 @@
       line.textContent = '#' + pos + ' of your ' + ranks.length + ' run' + (ranks.length === 1 ? '' : 's');
       tgt.textContent = (store.progress.best - lastScore) + ' more to beat your best (' + store.progress.best + ')' + (bestCombo >= 3 ? ' · best combo x' + bestCombo : '');
     } else { line.textContent = ''; tgt.textContent = 'Best: ' + store.progress.best + ' moles'; }
+    tgt.textContent = 'Reached level ' + level + (store.progress.bestLevel > level ? ' (best: level ' + store.progress.bestLevel + ')' : '') + (tgt.textContent ? ' · ' + tgt.textContent : '');
     renderBoxRow();
     document.getElementById('ad-note').textContent = '';
     // rewarded continue: opt-in, once per attempt, only where the platform supports it (rules 2.2.x, step 8)
@@ -1257,7 +1323,7 @@
     document.getElementById('ad-note').textContent = 'Loading the ad…';
     analytics('ad_opt_in', { offer: 'continue' });
     // if the ad unloads the page (seen on iOS), the run comes back on the results screen instead of vanishing
-    store.progress.pendingRun = { ts: Date.now(), score: score, timeLeft: Math.round(timeLeft), whacked: whacked, playT: Math.round(playT), reason: overReason, round: roundIndex, bestCombo: bestCombo };
+    store.progress.pendingRun = { ts: Date.now(), score: score, timeLeft: Math.round(timeLeft), whacked: whacked, playT: Math.round(playT), reason: overReason, round: roundIndex, bestCombo: bestCombo, level: level, levelStartScore: levelStartScore };
     saveStore(['progress']);
     if (DEBUG && window.__forceRewarded) return;   // the test drives onRewardedState() itself
     var ok = safe(function () { B.advertisement.showRewarded('continue'); return true; }, false);
@@ -1322,6 +1388,7 @@
     score = pr.score; lastScore = pr.score; timeLeft = pr.timeLeft || 0; whacked = pr.whacked || 0; playT = pr.playT || 0; bestCombo = pr.bestCombo || 0;
     overReason = pr.reason === 'time' ? 'time' : 'hearts'; lives = overReason === 'hearts' ? 0 : lives;
     roundIndex = pr.round || roundIndex;
+    level = Math.max(1, parseInt(pr.level, 10) || 1); levelStartScore = typeof pr.levelStartScore === 'number' ? pr.levelStartScore : 0;
     state = STATE_OVER; overAt = performance.now() - 1000;
     isNewBest = false; boxGained = 0; myRankRow = null;
     showPills(false);
@@ -1473,11 +1540,12 @@
       if (pa.t > pa.life) particles.splice(q, 1);
     }
     if (state !== STATE_PLAY) return;
+    if (levelBreak > 0) { levelBreak -= dt; if (levelBreak <= 0) startNextLevel(); return; }
     if (countIn > 0) { countIn -= dt; if (countIn <= 0) { countIn = 0; last = performance.now(); } return; }
     if (hitStop > 0) { hitStop -= dt; return; }
-    playT += dt;
+    playT += dt; levelPlayT += dt;
     if (introT > 0) introT -= dt;
-    timeLeft -= dt;
+    if (!waitFirstTap) timeLeft -= dt;
     // last 10 seconds: a tick every second, then from 5 s the ticks crowd together and climb in pitch
     if (timeLeft <= 10 && timeLeft > 0) {
       tickAcc -= dt;
@@ -1487,7 +1555,7 @@
         sndTick((tickTock ? 1 : 0.9) + (10 - timeLeft) * 0.07, timeLeft > 5 ? 0.6 : 0.75 + (5 - timeLeft) * 0.06);
       }
     } else tickAcc = 0;
-    if (timeLeft <= 0) { timeLeft = 0; gameOver('time'); return; }
+    if (timeLeft <= 0) { levelClear(); return; }
     for (var m = moles.length - 1; m >= 0; m--) {
       var mo = moles[m];
       mo.t += dt;
@@ -1497,7 +1565,7 @@
         if (mo.p <= 0) {
           var h = holes[mo.hole];
           if (mo.kind === 'mole' || mo.kind === 'gold') {   // a bomb or a clock sinking costs nothing
-            if (onboarding()) floats.push({ x: h.x, y: h.y - moleH * 0.7, text: 'FASTER!', color: '#d1342a', t: 0, size: 22 });
+            if (onboarding() || waitFirstTap) floats.push({ x: h.x, y: h.y - moleH * 0.7, text: waitFirstTap ? 'TAP!' : 'FASTER!', color: '#d1342a', t: 0, size: 22 });
             else loseLife('MISSED!', h.x, h.y - moleH * 0.7, '#d1342a');
             sndMiss();
           }
@@ -1819,19 +1887,19 @@
     if (hud.mode === 'top') {
       var cx = hud.x + hud.w / 2, y = hud.y;
       ctx.fillStyle = '#3d2812'; ctx.font = fontBig(48 * UI); ctx.fillText(String(score), cx, y + 46 * UI);
-      ctx.font = fontPx(13); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.fillText(bestShown ? 'NEW BEST!' : 'BEST ' + best(), cx, y + 64 * UI);
+      ctx.font = fontPx(13); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.fillText('LEVEL ' + level + ' · ' + (bestShown ? 'NEW BEST!' : 'BEST ' + best()), cx, y + 64 * UI);
       drawTimerBar(cx, y + 74 * UI, Math.min(hud.w * 0.56, 230));
       drawHearts(cx, y + 112 * UI);
     } else if (hud.mode === 'compact') {
       var cx2 = hud.x + hud.w / 2, y2 = hud.y;
       ctx.fillStyle = '#3d2812'; ctx.font = fontBig(36 * UI); ctx.fillText(String(score), cx2, y2 + 34 * UI);
-      ctx.font = fontPx(12); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.textAlign = 'left'; ctx.fillText(bestShown ? 'NEW BEST!' : 'BEST ' + best(), cx2 + 40 * UI, y2 + 34 * UI);
+      ctx.font = fontPx(12); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.textAlign = 'left'; ctx.fillText('LV ' + level + ' · ' + (bestShown ? 'NEW BEST!' : 'BEST ' + best()), cx2 + 40 * UI, y2 + 34 * UI);
       drawHearts(cx2 - hud.w * 0.22, y2 + 58 * UI);
       drawTimerBar(cx2 + hud.w * 0.2, y2 + 50 * UI, Math.min(hud.w * 0.32, 200));
     } else {
       var cx3 = hud.x + hud.w / 2, y3 = hud.y + hud.h / 2 - 60 * UI;
       ctx.fillStyle = '#3d2812'; ctx.font = fontBig(44 * UI); ctx.fillText(String(score), cx3, y3 + 40 * UI);
-      ctx.font = fontPx(13); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.fillText(bestShown ? 'NEW BEST!' : 'BEST ' + best(), cx3, y3 + 58 * UI);
+      ctx.font = fontPx(13); ctx.fillStyle = bestShown ? '#e8731a' : 'rgba(61,40,18,0.65)'; ctx.fillText('LEVEL ' + level + ' · ' + (bestShown ? 'NEW BEST!' : 'BEST ' + best()), cx3, y3 + 58 * UI);
       drawTimerBar(cx3, y3 + 70 * UI, Math.min(hud.w - 28, 200));
       drawHearts(cx3, y3 + 108 * UI);
     }
@@ -1952,6 +2020,7 @@
         ctx.restore();
       }
       if (countIn > 0 && !frozen()) drawCountIn();
+      if (levelBreak > 0) drawLevelBreak();
       if (userPaused || frozen()) { ctx.fillStyle = 'rgba(0,0,0,0.35)'; ctx.fillRect(-20, -20, W + 40, H + 40); }
     } else if (state === STATE_TITLE) {
       drawTitle();
@@ -2046,10 +2115,13 @@
       resize();
       if (COVER) setupCover();
       if (!COVER && restorePendingRun()) { /* the results of the interrupted run are on screen */ }
+      else if (!COVER) { startRound(false); waitFirstTap = true; }   // no title screen: the game opens on the board (decision 11-10)
       draw();                                  // first playable frame is on screen …
       document.getElementById('loading').classList.add('hidden');
       requestAnimationFrame(loop);
       sendMsg('game_ready');                   // … then tell the platform (step 6)
+      readySent = true;
+      if (levelMsgPending) { levelMsgPending = false; sendMsg('level_started', { level: String(level) }); }
       fetchAudio();                            // music and effects load after game_ready
       if (DEBUG) installDebug();
     });
@@ -2080,7 +2152,7 @@
       requestContinue: requestContinue, resize: resize, perfFlush: perfFlush,
       nextRound: nextRound, requestOpenBox: requestOpenBox, feedBox: feedBox, equipHammer: equipHammer, saveStore: saveStore,
       get hammers() { return HAMMERS.map(function (h) { return h.id; }); }, get whacked() { return whacked; }, get combo() { return combo; },
-      get rewardEarned() { return rewardEarned; }, get lbType() { return lbType(); }, cycleSfx: cycleSfx, get bestCombo() { return bestCombo; }, comboMult: comboMult, showOverPanel: showOverPanel,
+      get rewardEarned() { return rewardEarned; }, get lbType() { return lbType(); }, cycleSfx: cycleSfx, get bestCombo() { return bestCombo; }, comboMult: comboMult, showOverPanel: showOverPanel, get level() { return level; }, get levelBreak() { return levelBreak; }, get waitFirstTap() { return waitFirstTap; }, set waitFirstTap(v) { waitFirstTap = v; }, levelClear: levelClear,
       setScore: function (n) { score = n; whacked = n; }, celebrate: function (kind) { startCelebration(kind, false); },
       get celeb() { return celeb ? { kind: celeb.kind, t: celeb.t, panel: !!celeb.panel, fx: fxParts.length, fxOn: fxCanvas.classList.contains('on'), cheering: moles.filter(function (m) { return m.phase === 'cheer'; }).length } : null; }
     };

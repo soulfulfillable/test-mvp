@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-07T16:28:02.599Z",
+  "startedAt": "2026-11-10T13:00:23.000Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -17,7 +17,32 @@
     {
       "name": "game_ready sent exactly once",
       "ok": true,
-      "detail": "[\"game_ready\"]"
+      "detail": "[\"game_ready\",\"level_started\"]"
+    },
+    {
+      "name": "opens straight into level 1 (no title, no start button)",
+      "ok": true,
+      "detail": "{\"state\":1,\"level\":1,\"hold\":true,\"tut\":true,\"t\":30,\"pause\":true,\"msgs\":[\"game_ready\",\"level_started\"]}"
+    },
+    {
+      "name": "game_ready comes before level_started",
+      "ok": true,
+      "detail": "[\"game_ready\",\"level_started\"]"
+    },
+    {
+      "name": "tutorial on for a new player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "clock holds until the first touch",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "first touch starts the clock",
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "hit-sound button cycles the style and saves it",
@@ -40,27 +65,12 @@
       "detail": "bgm_chiptune"
     },
     {
-      "name": "music button switches the track mid-play and saves it",
+      "name": "music button switches the track and saves it",
       "ok": true,
-      "detail": "bgm_rush rush"
+      "detail": ""
     },
     {
       "name": "six music tracks wrap around to the first",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "title state before first tap",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "tutorial on for a new player",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "tap starts the round",
       "ok": true,
       "detail": ""
     },
@@ -77,7 +87,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "bonk,gold,bonk2,tick,skunk,heart,miss,best,whiff,over,hit_cute,start,hit2_cute,hit_pop,hit2_pop,hit_arcade,fanfare,hit2_arcade,hit_chime,muteOn,hit2_chime,muteOff,bgm_chiptune,bgm_rush,bgm_ragtime,bgm_funky,bgm_ukulele,bgm_battle"
+      "detail": "bonk2,bonk,skunk,gold,miss,heart,best,tick,over,whiff,start,hit_cute,hit_pop,hit2_cute,hit2_pop,hit_arcade,hit2_arcade,fanfare,hit_chime,muteOn,hit2_chime,muteOff,bgm_chiptune,bgm_ragtime,bgm_rush,bgm_funky,bgm_ukulele,bgm_battle"
     },
     {
       "name": "music looping",
@@ -87,7 +97,7 @@
     {
       "name": "scored by whacking moles",
       "ok": true,
-      "detail": "score 15, whacks 14, lives 3"
+      "detail": "score 22, whacks 15, lives 3"
     },
     {
       "name": "one bomb = one heart (the other moles duck, no second miss)",
@@ -102,7 +112,7 @@
     {
       "name": "timer frozen while paused",
       "ok": true,
-      "detail": "43.98 → 43.98"
+      "detail": "13.90 → 13.90"
     },
     {
       "name": "Resume continues the round",
@@ -130,24 +140,44 @@
       "detail": ""
     },
     {
-      "name": "round ends at 0 s with the game-over panel",
+      "name": "time up = LEVEL CLEAR card, run saved, a heart back",
       "ok": true,
-      "detail": "{\"title\":\"TIME'S UP!\",\"score\":15}"
+      "detail": "{\"state\":1,\"lb\":1.9167000000000014,\"level\":1,\"lives\":3,\"run\":{\"level\":2,\"score\":22,\"lives\":3},\"msgs\":[\"level_resumed\",\"level_paused\",\"level_resumed\",\"level_completed\"]}"
+    },
+    {
+      "name": "level 2 starts by itself after the card",
+      "ok": true,
+      "detail": "{\"state\":1,\"level\":2,\"lb\":0,\"t\":29.583400000000026,\"msgs\":[\"level_resumed\",\"level_completed\",\"level_started\"]}"
+    },
+    {
+      "name": "level 3 follows the same way",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "losing the last heart ends the run on the results panel",
+      "ok": true,
+      "detail": "{\"title\":\"OUT OF HEARTS!\",\"score\":22}"
     },
     {
       "name": "best and rank recorded",
       "ok": true,
-      "detail": "best 15"
+      "detail": "best 22"
     },
     {
-      "name": "level_completed message on time-up",
+      "name": "results say how far the run went; saved run cleared, best level kept",
       "ok": true,
-      "detail": "game_ready,level_started,level_paused,level_resumed,level_paused,level_resumed,level_completed"
+      "detail": "{\"tgt\":\"Reached level 3 · Next target: 25 moles · best combo x10\",\"run\":null,\"bestLevel\":3}"
+    },
+    {
+      "name": "level_failed message when the hearts run out",
+      "ok": true,
+      "detail": "level_started,level_completed,level_started,level_failed"
     },
     {
       "name": "Share my score copies or shares the score text",
       "ok": true,
-      "detail": "I whacked 15 moles in Mole Mash. Beat me: https://playgama.a"
+      "detail": "I whacked 22 moles in Mole Mash. Beat me: https://playgama.a"
     },
     {
       "name": "mute button silences and shows the off icon",
@@ -167,7 +197,7 @@
     {
       "name": "reload restores best, name, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"best\":15,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
+      "detail": "{\"best\":22,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"played\":1}"
     },
     {
       "name": "reload while muted stays silent from the first frame",
@@ -197,7 +227,7 @@
     {
       "name": "rewarded: round continues with hearts back and +10 s",
       "ok": true,
-      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":10,\"used\":true,\"ranks\":1}"
+      "detail": "{\"state\":1,\"lives\":3,\"timeLeft\":39.8,\"used\":true,\"ranks\":1}"
     },
     {
       "name": "SECOND WIND count-in holds the moles for a moment",
@@ -207,7 +237,7 @@
     {
       "name": "stale platform pause during the count-in is cleared by the watchdog within ~2 s (3-2-1 runs on its own)",
       "ok": true,
-      "detail": "{\"frozenNow\":true,\"thawed\":{\"frozen\":false,\"paused\":false,\"state\":1,\"countIn\":1.9814000000000076}}"
+      "detail": "{\"frozenNow\":true,\"thawed\":{\"frozen\":false,\"paused\":false,\"state\":1,\"countIn\":1.9394999999999694}}"
     },
     {
       "name": "passing the saved best mid-round fires the NEW BEST! shout once",
@@ -227,17 +257,17 @@
     {
       "name": "closed-then-rewarded order still continues the same run (score kept)",
       "ok": true,
-      "detail": "{\"mid\":{\"state\":2,\"pending\":false},\"after\":{\"state\":1,\"score\":0,\"lives\":3,\"used\":true,\"countIn\":4.004799999999997},\"scoreBefore\":0}"
+      "detail": "{\"mid\":{\"state\":2,\"pending\":false},\"after\":{\"state\":1,\"score\":0,\"lives\":3,\"used\":true,\"countIn\":4.000499999999974},\"scoreBefore\":0}"
     },
     {
       "name": "ignoring moles loses 3 hearts → OUT OF HEARTS",
       "ok": true,
-      "detail": "{\"state\":2,\"lives\":0,\"title\":\"OUT OF HEARTS!\",\"msgs\":[\"level_completed\",\"level_started\",\"level_failed\"]}"
+      "detail": "{\"state\":2,\"lives\":0,\"title\":\"OUT OF HEARTS!\",\"msgs\":[\"level_failed\",\"level_started\",\"level_failed\"]}"
     },
     {
       "name": "results panel shows the gift box bar and 5 hammer slots",
       "ok": true,
-      "detail": "{\"label\":\"Gift box ready! next box 4 / 18\",\"fill\":4,\"ready\":1,\"hammers\":[\"classic\"]}"
+      "detail": "{\"label\":\"Gift box ready! next box 5 / 18\",\"fill\":5,\"ready\":1,\"hammers\":[\"classic\"]}"
     },
     {
       "name": "Play again with a ready box opens the box screen first (not next to the continue offer)",
@@ -257,17 +287,17 @@
     {
       "name": "rewarded: box opens, a new hammer is revealed, box count drops",
       "ok": true,
-      "detail": "{\"open\":true,\"name\":\"Golden Mallet\",\"hammers\":[\"classic\",\"gold\"],\"ready\":0}"
+      "detail": "{\"open\":true,\"name\":\"Squeaky Rubber\",\"hammers\":[\"classic\",\"rubber\"],\"ready\":0}"
     },
     {
       "name": "Equip and play: new hammer equipped, round starts",
       "ok": true,
-      "detail": "{\"state\":1,\"equipped\":\"gold\"}"
+      "detail": "{\"state\":1,\"equipped\":\"rubber\"}"
     },
     {
       "name": "reload keeps owned hammers, the equipped one and the box fill",
       "ok": true,
-      "detail": "{\"equipped\":\"gold\",\"hammers\":2,\"fill\":4}"
+      "detail": "{\"equipped\":\"rubber\",\"hammers\":2,\"fill\":5}"
     },
     {
       "name": "interrupted run restored after reload, continue still available",
@@ -297,7 +327,7 @@
     {
       "name": "the party starts the instant the round ends (no tap, under 0.5 s)",
       "ok": true,
-      "detail": "{\"kind\":\"best\",\"t\":0.13329999999999997,\"panel\":false,\"fx\":16,\"fxOn\":true,\"cheering\":9}"
+      "detail": "{\"kind\":\"best\",\"t\":0.13330000000000017,\"panel\":false,\"fx\":16,\"fxOn\":true,\"cheering\":9}"
     },
     {
       "name": "new best starts the celebration before the panel",
@@ -312,7 +342,7 @@
     {
       "name": "fireworks and confetti on the overlay",
       "ok": true,
-      "detail": "{\"kind\":\"best\",\"t\":1.2666000000000008,\"panel\":false,\"fx\":230,\"fxOn\":true,\"cheering\":9}"
+      "detail": "{\"kind\":\"best\",\"t\":1.2666000000000004,\"panel\":false,\"fx\":224,\"fxOn\":true,\"cheering\":9}"
     },
     {
       "name": "a tap during the celebration does not start the next round",
@@ -322,7 +352,7 @@
     {
       "name": "party panel arrives with NEW BEST! and the trophy",
       "ok": true,
-      "detail": "{\"c\":{\"kind\":\"best\",\"t\":3.1998999999999986,\"panel\":true,\"fx\":479,\"fxOn\":true,\"cheering\":9},\"panel\":true,\"party\":true,\"title\":\"NEW BEST!\",\"line\":\"+29 over your old record (12)\",\"best\":41}"
+      "detail": "{\"c\":{\"kind\":\"best\",\"t\":3.2330999999999976,\"panel\":true,\"fx\":506,\"fxOn\":true,\"cheering\":9},\"panel\":true,\"party\":true,\"title\":\"NEW BEST!\",\"line\":\"+29 over your old record (12)\",\"best\":41}"
     },
     {
       "name": "Play again clears the party",
@@ -337,7 +367,7 @@
     {
       "name": "number key whacks the matching hole",
       "ok": true,
-      "detail": "hole 5"
+      "detail": "hole 8"
     },
     {
       "name": "Esc does nothing (1.5.2)",
@@ -372,7 +402,7 @@
     {
       "name": "celebration runs at land-844x390",
       "ok": true,
-      "detail": "{\"c\":{\"kind\":\"best\",\"t\":1.1166,\"panel\":false,\"fx\":219,\"fxOn\":true,\"cheering\":9},\"fxFits\":true,\"panelHidden\":true}"
+      "detail": "{\"c\":{\"kind\":\"best\",\"t\":1.0999000000000003,\"panel\":false,\"fx\":215,\"fxOn\":true,\"cheering\":9},\"fxFits\":true,\"panelHidden\":true}"
     },
     {
       "name": "party panel fits at land-844x390",
@@ -407,7 +437,7 @@
     {
       "name": "celebration runs at square-640x640",
       "ok": true,
-      "detail": "{\"c\":{\"kind\":\"best\",\"t\":1.0999,\"panel\":false,\"fx\":221,\"fxOn\":true,\"cheering\":9},\"fxFits\":true,\"panelHidden\":true}"
+      "detail": "{\"c\":{\"kind\":\"best\",\"t\":1.0999000000000005,\"panel\":false,\"fx\":264,\"fxOn\":true,\"cheering\":9},\"fxFits\":true,\"panelHidden\":true}"
     },
     {
       "name": "party panel fits at square-640x640",
@@ -461,12 +491,14 @@
     }
   ],
   "screenshots": [
-    "phone-390x844-title.png",
+    "phone-390x844-open.png",
     "phone-390x844-play-tutorial.png",
     "phone-390x844-play-hit.png",
     "phone-390x844-play.png",
     "phone-390x844-paused.png",
     "phone-390x844-countdown.png",
+    "phone-390x844-level-clear.png",
+    "phone-390x844-level3.png",
     "phone-390x844-over.png",
     "phone-390x844-over-continue.png",
     "phone-390x844-new-best-live.png",
@@ -499,6 +531,6 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "passed": 91,
+  "passed": 97,
   "failed": 0
 }
