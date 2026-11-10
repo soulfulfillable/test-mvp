@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-08T11:36:30.488Z",
+  "startedAt": "2026-11-10T03:52:25.040Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -7,7 +7,7 @@
     {
       "name": "levels 1..300: unique solution, difficulty matches the label (node, same code as the game)",
       "ok": true,
-      "detail": "1749ms {\"9-easy\":{\"easy\":100},\"9-medium\":{\"medium\":100},\"9-hard\":{\"hard\":41,\"medium\":59}}"
+      "detail": "1701ms {\"9-easy\":{\"easy\":100},\"9-medium\":{\"medium\":100},\"9-hard\":{\"hard\":41,\"medium\":59}}"
     },
     {
       "name": "level ladder is 9×9 only: easy 1–100, medium 101–200, hard 201–300",
@@ -82,7 +82,7 @@
     {
       "name": "sound files decoded (effects + music)",
       "ok": true,
-      "detail": "mark,cat,clear,wrong,win,heart,start,lose,mute-on,hint,mute-off,bgm_ragtime,bgm_ukulele"
+      "detail": "clear,mark,cat,win,wrong,heart,lose,start,mute-on,mute-off,hint,bgm_ragtime,bgm_ukulele"
     },
     {
       "name": "music looping",
@@ -100,7 +100,7 @@
       "detail": "{\"i\":0,\"v\":3,\"count\":5}"
     },
     {
-      "name": "clashing number: stays in red with the number it clashes with, Mistakes 1/3, Horangi grumbles, no text lecture",
+      "name": "clashing number: stays in red with the number it clashes with, Mistakes 1/3, the cat grumbles, no text lecture",
       "ok": true,
       "detail": "{\"v\":3,\"wrong\":3,\"red\":\"rgb(209, 52, 42)\",\"mistakes\":1,\"cat\":\"#s-cat-mad\",\"tip\":\"\",\"msg\":\"\"}"
     },
@@ -130,7 +130,7 @@
       "detail": ""
     },
     {
-      "name": "right number: blue, Horangi hops, the tip line is gone, the same pencil mark in a peer cell is cleared",
+      "name": "right number: blue, the cat hops, the tip line is gone, the same pencil mark in a peer cell is cleared",
       "ok": true,
       "detail": "{\"v\":7,\"pn\":0,\"cat\":\"#s-cat-happy\",\"tip\":\"\",\"undo\":5}"
     },
@@ -155,7 +155,7 @@
       "detail": "true,true,true,true,true,true,true,true,true"
     },
     {
-      "name": "level 1 solved by taps: SOLVED!, numbers wave, Horangi dances, every pad number done",
+      "name": "level 1 solved by taps: SOLVED!, numbers wave, the cat dances, every pad number done",
       "ok": true,
       "detail": "{\"won\":true,\"msg\":\"SOLVED!\",\"cat\":true,\"done\":9}"
     },
@@ -225,7 +225,7 @@
       "detail": ""
     },
     {
-      "name": "P pauses: pause panel, Horangi naps",
+      "name": "P pauses: pause panel, the cat naps",
       "ok": true,
       "detail": "{\"p\":true,\"vis\":true,\"frozen\":true,\"cat\":\"#s-cat-sleep\"}"
     },
@@ -312,17 +312,17 @@
     {
       "name": "daily solved by taps: time recorded, rank list and \"Challenge a friend\" shown (web build)",
       "ok": true,
-      "detail": "{\"state\":2,\"won\":true,\"solved\":1.7982999999999885,\"ranks\":1,\"day\":\"20261108\",\"rankVis\":true,\"share\":true,\"label\":\"Challenge a friend\"}"
+      "detail": "{\"state\":2,\"won\":true,\"solved\":1.7881999999999534,\"ranks\":1,\"day\":\"20261110\",\"rankVis\":true,\"share\":true,\"label\":\"Challenge a friend\"}"
     },
     {
       "name": "share text carries a challenge link with the time, name and day",
       "ok": true,
-      "detail": "Kitty Sudoku Nov 8: I solved today’s 6×6 in 0:02 with no mistakes. Same puzzle for everyone today. Can you beat my time? https://soulfulfill"
+      "detail": "Kitty Sudoku Nov 10: I solved today’s 6×6 in 0:02 with no mistakes. Same puzzle for everyone today. Can you beat my time? https://soulfulfil"
     },
     {
       "name": "Challenge a friend copies or shares the text",
       "ok": true,
-      "detail": "Kitty Sudoku Nov 8: I solved today’s 6×6 in 0:02 with no mis"
+      "detail": "Kitty Sudoku Nov 10: I solved today’s 6×6 in 0:02 with no mi"
     },
     {
       "name": "Title button leaves the results panel",
@@ -337,7 +337,7 @@
     {
       "name": "reload restores levels, name, daily time, first-level flag, mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"cleared\":3,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":1.7982999999999885,\"tut\":1,\"sub\":\"Solved today in 0:02 · practice runs\"}"
+      "detail": "{\"cleared\":3,\"name\":\"Robo\",\"muted\":true,\"attr\":\"1\",\"audible\":false,\"solved\":1.7881999999999534,\"tut\":1,\"sub\":\"Solved today in 0:02 · practice runs\"}"
     },
     {
       "name": "second daily run is practice (first time is the record)",
@@ -367,7 +367,7 @@
     {
       "name": "challenge link read: Robo 1:35 for today, shown under Today's puzzle",
       "ok": true,
-      "detail": "{\"ch\":{\"time\":95,\"name\":\"Robo\",\"day\":\"20261108\",\"today\":true},\"sub\":\"Robo did it in 1:35 today. Beat it!\"}"
+      "detail": "{\"ch\":{\"time\":95,\"name\":\"Robo\",\"day\":\"20261110\",\"today\":true},\"sub\":\"Robo did it in 1:35 today. Beat it!\"}"
     },
     {
       "name": "friend's time sits in the HUD while playing today's puzzle",
@@ -435,9 +435,9 @@
       "detail": ""
     },
     {
-      "name": "layout phone-360x640 (portrait): board 340px, cells 37px, pad keys 33×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout phone-360x640 (portrait): board 326px, cells 36px, pad keys 33×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.91\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "results panel fits at phone-360x640",
@@ -450,9 +450,9 @@
       "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout phone-430x932 (portrait): board 394px, cells 43px, pad keys 41×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout phone-430x932 (portrait): board 409px, cells 45px, pad keys 41×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "layout land-844x390 (landscape): board 359px, cells 39px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
@@ -462,7 +462,7 @@
     {
       "name": "results panel fits at land-844x390",
       "ok": true,
-      "detail": "panel 364px of 390"
+      "detail": "panel 365px of 390"
     },
     {
       "name": "levels list fits and scrolls at land-844x390",
@@ -475,9 +475,9 @@
       "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout tablet-768x1024 (portrait): board 718px, cells 79px, pad keys 79×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout tablet-768x1024 (portrait): board 746px, cells 82px, pad keys 79×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.93\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.97\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "layout tablet-1024x768 (landscape): board 622px, cells 69px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
@@ -500,7 +500,7 @@
       "detail": "{\"fits\":true,\"scrolls\":true,\"cell\":81}"
     },
     {
-      "name": "layout iframe-800x450 (landscape): board 423px, cells 47px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout iframe-800x450 (landscape): board 422px, cells 46px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
       "detail": "{\"fill\":\"0.94\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
@@ -520,14 +520,14 @@
       "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout tall-9x21-390x910 (portrait): board 370px, cells 41px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout tall-9x21-390x910 (portrait): board 355px, cells 39px, pad keys 37×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.95\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.91\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
-      "name": "layout wide-21x9-910x390 (landscape): board 359px, cells 39px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
+      "name": "layout wide-21x9-910x390 (landscape): board 374px, cells 41px, pad keys 110×54, no overlap, on screen, fills ≥ 55% of the short side",
       "ok": true,
-      "detail": "{\"fill\":\"0.92\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
+      "detail": "{\"fill\":\"0.96\",\"hudOverBoard\":false,\"footOverBoard\":false,\"hudOverFoot\":false,\"inside\":true}"
     },
     {
       "name": "console errors: 0",

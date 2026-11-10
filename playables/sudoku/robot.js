@@ -168,7 +168,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     const wv = await wrongValue(page, i);
     await tapNum(page, wv, true); await sleep(150);
     const w1 = await page.evaluate((i) => ({ v: window.__game.cells[i], wrong: document.querySelectorAll('.cell.wrong').length, red: getComputedStyle(document.querySelectorAll('.cell')[i].querySelector('.v')).color, mistakes: window.__game.mistakes, cat: document.querySelector('#cat use').getAttribute('href'), tip: document.getElementById('tip').textContent, msg: document.getElementById('msg').textContent }), i);
-    check('clashing number: stays in red with the number it clashes with, Mistakes 1/3, Horangi grumbles, no text lecture', w1.v === wv && w1.wrong >= 2 && w1.mistakes === 1 && /209, 52, 42/.test(w1.red) && w1.cat === '#s-cat-mad' && w1.tip === '' && w1.msg === '', JSON.stringify(w1));
+    check('clashing number: stays in red with the number it clashes with, Mistakes 1/3, the cat grumbles, no text lecture', w1.v === wv && w1.wrong >= 2 && w1.mistakes === 1 && /209, 52, 42/.test(w1.red) && w1.cat === '#s-cat-mad' && w1.tip === '' && w1.msg === '', JSON.stringify(w1));
     await shot(page, 'phone-390x844-wrong');
     // undo
     await page.tap('#undo-btn'); await sleep(80);
@@ -197,7 +197,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     await page.tap('#notes-btn'); await sleep(50);
     await tapCell(page, i, true); await tapNum(page, rv, true); await sleep(150);
     const n2 = await page.evaluate(([i, p]) => ({ v: window.__game.cells[i], pn: window.__game.notes[p], cat: document.querySelector('#cat use').getAttribute('href'), tip: document.getElementById('tip').textContent, undo: window.__game.undoLen }), [i, peer]);
-    check('right number: blue, Horangi hops, the tip line is gone, the same pencil mark in a peer cell is cleared', n2.v === rv && n2.pn === 0 && n2.cat === '#s-cat-happy' && n2.tip === '', JSON.stringify(n2));
+    check('right number: blue, the cat hops, the tip line is gone, the same pencil mark in a peer cell is cleared', n2.v === rv && n2.pn === 0 && n2.cat === '#s-cat-happy' && n2.tip === '', JSON.stringify(n2));
     await page.tap('#undo-btn'); await sleep(50);
     check('Undo restores the number and the cleared pencil mark', await page.evaluate(([i, p, rv]) => window.__game.cells[i] === 0 && window.__game.notes[p] === (1 << rv), [i, peer, rv]));
     // erase
@@ -213,7 +213,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     await solveBoard(page, true, 60);
     await sleep(300);
     const won = await page.evaluate(() => ({ won: document.getElementById('board').classList.contains('won'), msg: document.getElementById('msg').textContent, cat: document.getElementById('cat').classList.contains('dance'), done: document.querySelectorAll('.num.done').length }));
-    check('level 1 solved by taps: SOLVED!, numbers wave, Horangi dances, every pad number done', won.won && /SOLVED/.test(won.msg) && won.cat && won.done === 9, JSON.stringify(won));
+    check('level 1 solved by taps: SOLVED!, numbers wave, the cat dances, every pad number done', won.won && /SOLVED/.test(won.msg) && won.cat && won.done === 9, JSON.stringify(won));
     await shot(page, 'phone-390x844-level1-solved');
     await sleep(900);
     const w = await page.evaluate(() => ({ state: window.__game.state, won: window.__game.won, panel: !document.getElementById('over-panel').classList.contains('hidden'), cleared: window.__game.store.progress.cleared, tut: window.__game.store.progress.tut, title: document.getElementById('over-title').textContent, msgs: window.__msgs.slice(-2) }));
@@ -254,7 +254,7 @@ async function state(page) { return page.evaluate(() => { const g = window.__gam
     // pause (P), timer frozen, hidden, ad
     await page.keyboard.press('KeyP'); await sleep(150);
     const paused = await page.evaluate(() => ({ p: window.__game.userPaused, vis: !document.getElementById('pause-panel').classList.contains('hidden'), frozen: window.__game.frozen, cat: document.querySelector('#cat use').getAttribute('href') }));
-    check('P pauses: pause panel, Horangi naps', paused.p && paused.vis && paused.frozen && paused.cat === '#s-cat-sleep', JSON.stringify(paused));
+    check('P pauses: pause panel, the cat naps', paused.p && paused.vis && paused.frozen && paused.cat === '#s-cat-sleep', JSON.stringify(paused));
     const e1 = await page.evaluate(() => window.__game.elapsed); await sleep(700); const e2 = await page.evaluate(() => window.__game.elapsed);
     check('timer frozen while paused', Math.abs(e1 - e2) < 0.01, `${e1.toFixed(2)} → ${e2.toFixed(2)}`);
     await shot(page, 'phone-390x844-paused');
