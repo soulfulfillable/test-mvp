@@ -3,7 +3,9 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { buildCourse, GOLD } from './course.js';
-import { createPlayer, R as PR, H as PH } from './player.js';
+import { createPlayer, RIGS, R as PR, H as PH } from './player.js';
+import { dressDog, dressCat } from './pets.js';
+import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { createInput } from './input.js';
 import { createAudio } from './audio.js';
 import { glowTexture, blobTexture } from './textures.js';
@@ -91,20 +93,68 @@ $('btn-sound').addEventListener('click', (e) => {
 $('btn-again').addEventListener('click', () => restart());
 addEventListener('keydown', (e) => { if (G.state === 'finish' && G.finishT > 1.2 && (e.code === 'Enter' || e.code === 'Space')) restart(); });
 
-// ---------- load hero ----------
+// ---------- load heroes (pup = default, kitty, kid) ----------
 let P;
 const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
-loader.load('./assets/hero.glb', (gltf) => {
-  P = createPlayer(gltf, scene);
+const GL = {};
+let heroName = 'dog';
+try { const h = localStorage.getItem('escape3d.hero'); if (RIGS[h]) heroName = h; } catch (e) { /* */ }
+if (RIGS[params.get('hero')]) heroName = params.get('hero');
+Promise.all(Object.entries(RIGS).map(([name, rig]) => loader.loadAsync('./assets/' + rig.file).then((g) => {
+  if (name === 'dog') dressDog(g); else if (name === 'cat') dressCat(g);
+  GL[name] = g;
+}))).then(() => {
+  P = createPlayer(scene);
+  P.setRig(heroName, GL[heroName]);
   P.reset(C.checkpoints[0].pos);
-  P.facing = Math.PI;
   G.state = params.has('nointro') ? 'play' : 'intro';
   if (G.state === 'play') G.introDone = true;
   resize(); scene.updateMatrixWorld(true); placeCamera(1, true);
+  buildPicker();
   document.title = 'Escape 3D';
   document.body.classList.add('ready');
   requestAnimationFrame(frame);
-}, undefined, (err) => { console.error('hero failed to load', err); $('loading').textContent = 'Could not load. Pull to refresh.'; });
+}).catch((err) => { console.error('hero failed to load', err); $('loading').textContent = 'Could not load. Pull to refresh.'; });
+
+// character picker: portraits rendered once from the real models
+function portrait(name) {
+  const r = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+  r.setSize(160, 160); r.outputColorSpace = THREE.SRGBColorSpace; r.toneMapping = THREE.ACESFilmicToneMapping;
+  const sc = new THREE.Scene(); sc.add(new THREE.HemisphereLight('#ffffff', '#8a8178', 1.8)); const dl = new THREE.DirectionalLight('#fff3e0', 2.2); dl.position.set(2, 4, 5); sc.add(dl);
+  const m = cloneSkinned(GL[name].scene); m.position.set(0, 0, 0); m.scale.setScalar(1); m.updateMatrixWorld(true);
+  const mix = new THREE.AnimationMixer(m); const clipN = RIGS[name].clips.idle; const clip = GL[name].animations.find((a) => a.name === clipN || a.name.endsWith('|' + clipN)); if (clip) { mix.clipAction(clip).play(); mix.update(0.3); }
+  m.rotation.y = 0.55; sc.add(m); m.updateMatrixWorld(true);
+  const bb = new THREE.Box3().setFromObject(m), c = bb.getCenter(new THREE.Vector3()), sz = bb.getSize(new THREE.Vector3());
+  const cam = new THREE.PerspectiveCamera(30, 1, 0.01, 100); const d = Math.max(sz.x, sz.y, sz.z) * 2.1;
+  cam.position.set(c.x, c.y + sz.y * 0.15, c.z + d); cam.lookAt(c.x, c.y + sz.y * 0.05, c.z);
+  r.render(sc, cam); const url = r.domElement.toDataURL('image/png'); r.dispose(); r.forceContextLoss();
+  return url;
+}
+function buildPicker() {
+  const list = $('pick-list'); list.innerHTML = '';
+  const labels = { dog: 'Pup', cat: 'Kitty', kid: 'Runner' };
+  for (const name of Object.keys(RIGS)) {
+    const b = document.createElement('button'); b.className = 'pick' + (name === heroName ? ' on' : ''); b.dataset.hero = name;
+    const img = new Image(); img.src = portrait(name); img.alt = ''; b.append(img);
+    const sp = document.createElement('span'); sp.textContent = labels[name]; b.append(sp);
+    b.addEventListener('click', (e) => { e.stopPropagation(); chooseHero(name); });
+    list.append(b);
+  }
+  $('btn-hero').querySelector('img').src = list.querySelector('.pick.on img').src;
+}
+function chooseHero(name) {
+  heroName = name; try { localStorage.setItem('escape3d.hero', name); } catch (e) { /* */ }
+  const keep = P.pos.clone(), f = P.facing; P.setRig(name, GL[name]); P.pos.copy(keep); P.facing = f; P.squash = 0.25;
+  puff(P.pos.clone().add(new THREE.Vector3(0, 0.4, 0)), 12, GOLD, { speed: 2, add: true, alpha: 0.9, life: 0.5, size: 0.3, up: 1.4 });
+  audio.play('checkpoint', { vol: 0.5, rate: 1.3 });
+  for (const b of document.querySelectorAll('.pick')) b.classList.toggle('on', b.dataset.hero === name);
+  $('btn-hero').querySelector('img').src = document.querySelector('.pick.on img').src;
+  closePicker();
+}
+function openPicker() { $('pick').classList.remove('hidden'); input.release(); }
+function closePicker() { $('pick').classList.add('hidden'); }
+$('btn-hero').addEventListener('click', (e) => { e.stopPropagation(); openPicker(); });
+$('pick').addEventListener('click', () => closePicker());
 
 // ---------- camera ----------
 const camPos = new THREE.Vector3(), camLook = new THREE.Vector3();
@@ -320,7 +370,7 @@ window.__game = {
   get state() { return G.state; }, get t() { return G.t; }, get runTime() { return G.runTime; }, get cp() { return G.cp; },
   get deaths() { return G.deaths; }, get falls() { return G.falls; }, get spikes() { return G.spikes; }, get finished() { return G.finished; },
   get pos() { return P ? { x: P.pos.x, y: P.pos.y, z: P.pos.z } : null; }, get grounded() { return !!(P && P.grounded); },
-  get anim() { return P && P.anim; }, get doorOpen() { return C.exit.open; }, get pixelRatio() { return pixelRatio; },
+  get anim() { return P && P.anim; }, get hero() { return P && P.rigName; }, get doorOpen() { return C.exit.open; }, get pixelRatio() { return pixelRatio; },
   movers: () => C.movers.map((m) => ({ x: m.pos.x, y: m.pos.y, z: m.pos.z, W: m.W, D: m.D })),
   moverAt: (i, t) => { const v = C.movers[i].at(t); return { x: v.x, z: v.z }; },
   trap: (t) => C.trapHeight(C.traps[0], t ?? G.t), trapPeriod: C.traps[0].period,

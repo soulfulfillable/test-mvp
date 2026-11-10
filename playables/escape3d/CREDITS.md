@@ -13,6 +13,17 @@ Obtained through the npm package `@netforge/asset-library-files@0.2.0` (`library
 a meshopt-compressed copy of the Kenney file; the package is MIT, its NOTICE lists each pack and where the license was
 verified — copied to `assets/NOTICE-netforge.txt`). CC0 legal text: `assets/CC0-1.0.txt`.
 
+## Pup and Kitty — Quaternius cartoon animals, CC0 1.0
+
+| In game | Source | License |
+|---|---|---|
+| `assets/dog.glb` ("Pup", the default hero) | Quaternius cartoon **Wolf** — https://quaternius.com (Poly Pizza, listed Public Domain) | CC0 1.0 |
+| `assets/cat.glb` ("Kitty") | Quaternius cartoon **Cat** | CC0 1.0 |
+
+Same npm package (`library/lowpoly/wolf_cartoon.glb`, `cat.glb`). We change them in code at load time (`src/pets.js`):
+the palette texture is repainted (apricot/cream pup, orange tabby kitty), and the pup gets blocky fur tufts, floppy ears,
+a beard and an orange harness parented to its bones — made by us, inspired by the developer's own dog and cat.
+
 ## Sound effects — Kenney sound packs, CC0 1.0
 
 From the same npm package (`library/audio/sfx/*.ogg`; Kenney Impact / Interface / RPG / Digital Audio packs, each

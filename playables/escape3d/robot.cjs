@@ -77,7 +77,7 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const inView = (e) => e.inFront && e.x > 0 && e.x < w && e.y > 0 && e.y < h;
     check(`${name}: exit on screen at first frame`, inView(ex0), `${ex0.x.toFixed(0)},${ex0.y.toFixed(0)}`);
     check(`${name}: exit on screen when play starts`, inView(ex1), `${ex1.x.toFixed(0)},${ex1.y.toFixed(0)}`);
-    const boxes = await page.evaluate(() => Object.fromEntries(['bar', 'btn-sound', 'stick', 'jump', 'keys'].map((id) => {
+    const boxes = await page.evaluate(() => Object.fromEntries(['bar', 'btn-hero', 'btn-sound', 'stick', 'jump', 'keys'].map((id) => {
       const el = document.getElementById(id); const r = el.getBoundingClientRect(); const cs = getComputedStyle(el);
       const vis = cs.display !== 'none' && cs.visibility !== 'hidden' && r.width > 0 && el.offsetParent !== null && !(id === 'keys' && document.body.classList.contains('touch'));
       return [id, { x: r.left, y: r.top, w: r.width, h: r.height, vis }];
@@ -206,6 +206,23 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const s = await st(page);
     check('pit: falling counts a fall', fell, `falls=${s.falls}`);
     check('pit: hero is back on checkpoint 1', fell && Math.abs(s.pos.z + 21.6) < 0.3 && s.cp === 1, JSON.stringify(s.pos));
+    await context.close();
+  }
+
+  // 6b) character picker: default is the pup; choose the kitty by tapping; it moves; the choice survives reload
+  {
+    const { context, page } = await newPage(browser, 390, 844, base + '?nointro', true);
+    check('picker: default hero is the pup', (await page.evaluate(() => __game.hero)) === 'dog');
+    await page.tap('#btn-hero'); await sleep(300);
+    const tiles = await page.evaluate(() => [...document.querySelectorAll('.pick')].map((b) => { const r = b.getBoundingClientRect(); const img = b.querySelector('img'); return { h: b.dataset.hero, inside: r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight, img: img.complete && img.naturalWidth > 0 }; }));
+    await shot(page, 'picker-open');
+    check('picker: 3 portraits, all on screen', tiles.length === 3 && tiles.every((t) => t.inside && t.img), JSON.stringify(tiles));
+    await page.tap('.pick[data-hero="cat"]'); await sleep(300);
+    check('picker: tapping Kitty swaps the hero and closes the sheet', (await page.evaluate(() => __game.hero)) === 'cat' && (await page.evaluate(() => document.getElementById('pick').classList.contains('hidden'))));
+    const z0 = (await st(page)).pos.z; await page.keyboard.down('KeyW'); await sleep(700); await page.keyboard.up('KeyW');
+    check('picker: the new hero runs', (await st(page)).pos.z < z0 - 1);
+    await page.reload(); await page.waitForFunction(() => document.body.classList.contains('ready'), null, { timeout: 90000 });
+    check('picker: choice survives reload', (await page.evaluate(() => __game.hero)) === 'cat');
     await context.close();
   }
 
