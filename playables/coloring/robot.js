@@ -8,7 +8,7 @@
 //           taps (number mode, free mode, number mode + rewarded "fill this color"), wrong-number tap colors nothing,
 //           interstitial on leaving a finished picture, rewarded only on 'rewarded' (closed early = nothing), one
 //           boost per picture, ad unlock of the next picture, pinch zoom + tap while zoomed + one-finger pan,
-//           wheel zoom + keyboard on desktop, daily picture, reload restores progress + mute (Bridge storage),
+//           wheel zoom + keyboard on desktop, reload restores progress + mute (Bridge storage),
 //           hidden page / ad = silent, Esc unused, home list scrolls by touch, 14 sizes, covers.
 'use strict';
 const http = require('http');
@@ -130,15 +130,6 @@ async function swipe(page, x, y0, y1, steps = 10) {
     { const fresh = JSON.stringify(Pics.PICS); global.self = { ColoringData: null }; const built = fs.readFileSync(path.join(ROOT, 'coloring-data.js'), 'utf8'); check('coloring-data.js is up to date with coloring-pics.js (build.sh regenerates it)', built.indexOf(JSON.stringify({ PICS: Pics.PICS })) >= 0, built.length + ' bytes'); }
     let bad = 0; Pics.PICS.forEach((p) => p.rg.forEach((r) => { if (!(r.c >= 1 && r.c <= p.pal.length)) bad++; }));
     check('every piece points at a palette color', bad === 0, bad);
-    const d = new Date(Date.UTC(2026, 10, 1)); let mn = 1e9, mx = 0, det = true, dbad = 0; const variants = new Set();
-    for (let k = 0; k < 400; k++, d.setUTCDate(d.getUTCDate() + 1)) {
-      const key = d.toISOString().slice(0, 10).replace(/-/g, '');
-      const a = Pics.genDaily(key), b = Pics.genDaily(key);
-      if (JSON.stringify(a.rg) !== JSON.stringify(b.rg)) det = false;
-      mn = Math.min(mn, a.rg.length); mx = Math.max(mx, a.rg.length); variants.add(a.rg.length + a.pal[3] + a.rg[0].d.slice(0, 12));
-      a.rg.forEach((r) => { if (!(r.c >= 1 && r.c <= a.pal.length)) dbad++; });
-    }
-    check('dailies Nov 2026 → Dec 2027 (400 days): deterministic, 50–200 pieces, colors valid, many variants', det && mn >= 50 && mx <= 200 && dbad === 0 && variants.size > 200, `${mn}–${mx} pieces, ${variants.size} variants`);
   }
 
   const srv = await serve();
@@ -148,8 +139,8 @@ async function swipe(page, x, y0, y1, steps = 10) {
   // ── 1. page = node ──
   {
     const { context, page } = await newPage(browser, 390, 844, base + '#debug', { touch: true });
-    const inPage = await page.evaluate(() => window.__game.PICS.map((p) => p.id + ':' + p.rg.length + ':' + JSON.stringify(p.rg[p.rg.length - 1])).concat([JSON.stringify(window.__game.genDaily('20261109').rg.slice(0, 3))]));
-    const inNode = Pics.ORDER.map((p) => p.id + ':' + p.rg.length + ':' + JSON.stringify(p.rg[p.rg.length - 1])).concat([JSON.stringify(Pics.genDaily('20261109').rg.slice(0, 3))]);
+    const inPage = await page.evaluate(() => window.__game.PICS.map((p) => p.id + ':' + p.rg.length + ':' + JSON.stringify(p.rg[p.rg.length - 1])));
+    const inNode = Pics.ORDER.map((p) => p.id + ':' + p.rg.length + ':' + JSON.stringify(p.rg[p.rg.length - 1]));
     check('same pictures in the page and in node (shared module)', JSON.stringify(inPage) === JSON.stringify(inNode));
     await context.close();
   }
@@ -164,8 +155,8 @@ async function swipe(page, x, y0, y1, steps = 10) {
     check('title on screen matches the publication title (rule 3.5.1)', await page.evaluate(() => /Cozy Coloring/.test(document.querySelector('#home-head h1').textContent) && document.title === 'Cozy Coloring'));
     check('no emoji anywhere in the page text (rule 4.3.2)', await page.evaluate(() => !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(document.body.innerText)));
     check('no browser page scroll (rule 1.6.3)', await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight + 1 && document.body.scrollHeight <= innerHeight + 1));
-    const home0 = await page.evaluate(() => { const cards = [...document.querySelectorAll('#grid .card')]; return { n: cards.length, locked: cards.map((c) => c.classList.contains('locked')), daily: document.querySelector('#daily-row .cname').textContent, dailyBtn: document.querySelector('#daily-row .btn-red').textContent, unlockBtn: !!document.getElementById('unlock-btn'), studio: document.getElementById('home-foot').textContent }; });
-    check('gallery: 20 cards, only the first unlocked, today\'s mandala on top, no ad-unlock button on the mock platform (rewarded unsupported)', home0.n === 20 && home0.locked[0] === false && home0.locked.slice(1).every(Boolean) && /Daily Mandala/.test(home0.daily) && home0.dailyBtn === 'Color' && !home0.unlockBtn && /Treasurefield/.test(home0.studio), JSON.stringify(home0));
+    const home0 = await page.evaluate(() => { const cards = [...document.querySelectorAll('#grid .card')]; return { n: cards.length, locked: cards.map((c) => c.classList.contains('locked')), daily: !!document.getElementById('daily-row'), mandala: /mandala/i.test(document.body.innerText), unlockBtn: !!document.getElementById('unlock-btn'), studio: document.getElementById('home-foot').textContent }; });
+    check('gallery: 20 cards, only the first unlocked, no daily mandala anywhere (user: no mandala), no ad-unlock button on the mock platform (rewarded unsupported)', home0.n === 20 && home0.locked[0] === false && home0.locked.slice(1).every(Boolean) && !home0.daily && !home0.mandala && !home0.unlockBtn && /Treasurefield/.test(home0.studio), JSON.stringify(home0));
     await shot(page, 'phone-390x844-gallery-first');
     // home list scrolls by touch
     await swipe(page, 195, 700, 300); await sleep(300);
@@ -315,17 +306,10 @@ async function swipe(page, x, y0, y1, steps = 10) {
     check('+ button zooms in', await page.evaluate(() => window.__game.Z.z > 1.5));
     await tapEl(page, '#zoom-reset', true); await sleep(100);
 
-    // ── daily picture: color a few pieces, mute, hidden, reload ──
-    await tapEl(page, '#btn-back', true); await sleep(250);
-    await page.evaluate(() => { document.getElementById('home-scroll').scrollTop = 0; }); await sleep(100);
-    await tapEl(page, '#daily-row .btn-red', true); await sleep(250);
-    st = await state(page);
-    const today = await page.evaluate(() => window.__game.dayKey());
-    check('Today\'s picture opens (daily mandala, date-seeded)', st.id === 'd:' + today && st.total >= 60, st.id + ' ' + st.total + ' pieces');
-    const dTodo = await page.evaluate(() => { const g = window.__game; const out = []; g.cur.pic.rg.forEach((rg, i) => { if (rg.c === g.cur.sel + 1 && out.length < 5) out.push(i); }); return out; });
+    // ── picture 05 in progress: color 4 more pieces, then mute, hidden, reload ──
+    const dTodo = await page.evaluate(() => { const g = window.__game; const out = []; g.cur.pic.rg.forEach((rg, i) => { if (rg.c === g.cur.sel + 1 && !g.cur.filled.has(i) && out.length < 4) out.push(i); }); return out; });
     for (const i of dTodo) await tapPiece(page, i, true);
     await sleep(100);
-    await shot(page, 'phone-390x844-daily');
     await tapEl(page, '#play-mute', true); await sleep(100);
     const mu = await page.evaluate(() => ({ muted: window.__game.store.progress && window.__game.store.settings.muted, attr: document.getElementById('play-mute').getAttribute('data-muted'), audible: window.__game.audible, ctx: window.__game.ctxState }));
     check('mute button: silent, icon switches', mu.muted === true && mu.attr === '1' && !mu.audible, JSON.stringify(mu));
@@ -336,8 +320,8 @@ async function swipe(page, x, y0, y1, steps = 10) {
     await sleep(1400); // let the debounced save land
     await page.reload({ waitUntil: 'load' });
     await page.waitForFunction(() => window.__game && window.__game.PICS, null, { timeout: 15000 });
-    const re = await page.evaluate((today) => { const g = window.__game, p = g.store.progress; return { done: Object.keys(p.done).length, daily: (p.fills['d:' + today] || []).length, unlocked: Object.keys(p.unlocked), boost: Object.keys(p.boost), muted: g.store.settings.muted, attr: document.getElementById('home-mute').getAttribute('data-muted'), audible: g.audible, dailyBtn: document.querySelector('#daily-row .btn-red').textContent, doneChips: document.querySelectorAll('#grid .card.done').length, free: Object.keys(p.free) }; }, today);
-    check('reload restores 3 finished pictures, 5 daily pieces, the ad unlock, the used boost and mute (Bridge storage)', re.done === 3 && re.daily === 5 && re.unlocked.length === 1 && re.boost.length === 1 && re.muted && re.attr === '1' && !re.audible && re.dailyBtn === 'Resume' && re.doneChips === 3, JSON.stringify(re));
+    const re = await page.evaluate((fifth) => { const g = window.__game, p = g.store.progress; return { done: Object.keys(p.done).length, daily: (p.fills[fifth] || []).length, unlocked: Object.keys(p.unlocked), boost: Object.keys(p.boost), muted: g.store.settings.muted, attr: document.getElementById('home-mute').getAttribute('data-muted'), audible: g.audible, doneChips: document.querySelectorAll('#grid .card.done').length, free: Object.keys(p.free) }; }, fifth);
+    check('reload restores 3 finished pictures, 5 colored pieces of picture 05, the ad unlock, the used boost and mute (Bridge storage)', re.done === 3 && re.daily === 5 && re.unlocked.length === 1 && re.boost.length === 1 && re.muted && re.attr === '1' && !re.audible && re.doneChips === 3, JSON.stringify(re));
     await shot(page, 'phone-390x844-gallery-after-reload');
     // Continue row appears for the unfinished picture 05
     check('Continue row shows the unfinished picture', await page.evaluate(() => !document.getElementById('cont-row').classList.contains('hidden') && /Resume/.test(document.querySelector('#cont-row .btn-red').textContent)));
