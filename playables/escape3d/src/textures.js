@@ -136,3 +136,61 @@ export function plasticTexture() {
   g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 2; g.strokeRect(5, 5, S - 10, S - 10);
   return tex(c);
 }
+
+// ---- city rooftop theme ----
+// red brick with mortar lines (one tile = 2 m wide × 1 m tall)
+export function brickTexture(base = '#9a4a32') {
+  const W = 256, H = 128, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d'); const r = rng(21);
+  g.fillStyle = '#b9ab98'; g.fillRect(0, 0, W, H); // mortar
+  const bh = H / 8, bw = W / 6;
+  for (let row = 0; row < 8; row++) for (let i = -1; i < 7; i++) {
+    const x = i * bw + (row % 2 ? bw / 2 : 0), y = row * bh;
+    const v = (r() - 0.5) * 34; const col = new THREE.Color(base); col.offsetHSL((r() - 0.5) * 0.02, 0, v / 400);
+    g.fillStyle = '#' + col.getHexString(); g.fillRect(x + 1.5, y + 1.5, bw - 3, bh - 3);
+  }
+  speckle(g, W, r, 1500, '#c98a6a', '#4a2418', 0.25);
+  blotches(g, W, r, 6, 'rgba(40,30,25,A)', 0.12);
+  const t = tex(c); return t;
+}
+// tar / gravel roof
+export function roofTexture() {
+  const S = 256, [c, g] = canvas(S), r = rng(9);
+  g.fillStyle = '#5b5a58'; g.fillRect(0, 0, S, S);
+  speckle(g, S, r, 5000, '#8a8986', '#2f2e2d', 0.45);
+  blotches(g, S, r, 10, 'rgba(30,30,30,A)', 0.18);
+  g.strokeStyle = 'rgba(20,20,20,.35)'; g.lineWidth = 2; g.strokeRect(1, 1, S - 2, S - 2); // membrane seams
+  return tex(c);
+}
+// building facade: windows in a grid (some lit), one tile = 4 m × 4 m
+export function facadeTexture(wall = '#8c6f5a', seed = 1) {
+  const S = 256, [c, g] = canvas(S), r = rng(seed);
+  g.fillStyle = wall; g.fillRect(0, 0, S, S);
+  speckle(g, S, r, 1200, 'rgba(255,255,255,.4)', 'rgba(0,0,0,.4)', 0.2);
+  const n = 4, cw = S / n;
+  for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+    const wx = x * cw + cw * 0.22, wy = y * cw + cw * 0.18, ww = cw * 0.56, wh = cw * 0.6;
+    const lit = r() < 0.18;
+    g.fillStyle = lit ? '#f7d58c' : (r() < 0.5 ? '#2c3a4a' : '#3b4c5e'); g.fillRect(wx, wy, ww, wh);
+    g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(wx, wy, ww, wh * 0.18);
+    g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(wx - 2, wy + wh, ww + 4, 4); // sill
+    g.fillStyle = 'rgba(0,0,0,.25)'; g.fillRect(wx + ww / 2 - 1, wy, 2, wh);
+  }
+  return tex(c);
+}
+// metal grate (vents)
+export function grateTexture() {
+  const S = 64, [c, g] = canvas(S);
+  g.fillStyle = '#6d7277'; g.fillRect(0, 0, S, S);
+  g.fillStyle = '#2a2d30'; for (let i = 0; i < 8; i++) g.fillRect(4, 4 + i * 7.5, S - 8, 3.5);
+  g.strokeStyle = 'rgba(0,0,0,.4)'; g.lineWidth = 2; g.strokeRect(1, 1, S - 2, S - 2);
+  return tex(c);
+}
+// asphalt street with lane marks
+export function streetTexture() {
+  const S = 256, [c, g] = canvas(S), r = rng(4);
+  g.fillStyle = '#3a3b3d'; g.fillRect(0, 0, S, S);
+  speckle(g, S, r, 3000, '#5a5b5d', '#222', 0.4);
+  g.fillStyle = '#e8c547'; g.fillRect(S / 2 - 3, 0, 2, S); g.fillRect(S / 2 + 1, 0, 2, S);
+  g.fillStyle = '#d9d9d9'; for (let y = 0; y < S; y += 64) { g.fillRect(S * 0.25, y, 3, 32); g.fillRect(S * 0.75, y, 3, 32); }
+  return tex(c);
+}

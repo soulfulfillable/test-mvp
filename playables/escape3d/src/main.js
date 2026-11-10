@@ -23,23 +23,23 @@ renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadow
 app.prepend(renderer.domElement);
 
 const scene = new THREE.Scene();
-const SKY_TOP = new THREE.Color('#3f8fff'), SKY_BOT = new THREE.Color('#cfe8ff');
-scene.fog = new THREE.Fog('#cfe8ff', 45, 160);
+const SKY_TOP = new THREE.Color('#5d8fd0'), SKY_BOT = new THREE.Color('#f7d9ad');
+scene.fog = new THREE.Fog('#e8d3b6', 40, 170);
 { // sky dome: vertical gradient, unaffected by fog
-  const geo = new THREE.SphereGeometry(200, 24, 12); const col = [];
+  const geo = new THREE.SphereGeometry(230, 24, 12); const col = [];
   const p = geo.attributes.position; for (let i = 0; i < p.count; i++) { const t = Math.max(0, Math.min(1, p.getY(i) / 120 + 0.25)); const c = SKY_BOT.clone().lerp(SKY_TOP, t); col.push(c.r, c.g, c.b); }
   geo.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
   scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.BackSide, fog: false, depthWrite: false })));
 }
-scene.add(new THREE.HemisphereLight('#dcecff', '#8a9a7a', 1.5));
-const sun = new THREE.DirectionalLight('#ffffff', 2.4);
+scene.add(new THREE.HemisphereLight('#dfe8f5', '#8a7a68', 1.35));
+const sun = new THREE.DirectionalLight('#ffe2bb', 2.6);
 sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
 Object.assign(sun.shadow.camera, { left: -11, right: 11, top: 11, bottom: -11, near: 1, far: 40 });
 sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.03;
 scene.add(sun, sun.target);
 const SUN_OFF = new THREE.Vector3(3.5, 14, -6); // light comes from the exit side, shadows fall toward the camera
 
-const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 260);
+const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 300);
 const C = buildCourse(scene);
 
 // ---------- fx: dust puffs, gold sparkles ----------
