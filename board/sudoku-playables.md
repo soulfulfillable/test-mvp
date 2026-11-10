@@ -88,3 +88,6 @@
 - **(Kitty Queens 세션·기획 파트너) 사용자 11-10: "실명 호랑이 저거 쓰기싫어"** — Kitty Sudoku 에선 뺐다. Kitty Queens Playables/앱은 'Horangi' 를 타이틀 필·튜토리얼·폼에 쓰고 있으니 사용자 확인 뒤 같은 처리 필요. PRODUCT 11-07 결정("기본 고양이 = 호랑이")은 그림만 유지하고 이름은 안 쓰는 쪽으로 바뀐 듯.
 - 이름 확정: "Kitty Sudoku"(가칭) vs 다른 이름 — CAT' SUDOKU 등록 상표(미국)와 가까운지 판단.
 - 데일리 크기: 6×6(지금) vs 9×9 — 사용자 반응 보고 결정.
+
+## 부스트 기록
+- 11-10 10:09Z (기획 세션, 사용자가 Threads 글 https://www.threads.com/share/BA4b_utL8a 를 올리고 링크 줌): 이미 RUNNING 이던 무료 캠페인 `cmwa5rsdd0zw7og0hbo5xottq`(11-10 03:56Z 시작, 첫 링크 share/_y9k-8-pb)에 **두 번째 링크 추가** → budget 6→12, endsAt 11-13 03:56Z → **11-13 10:09Z**, status PENDING(갱신 처리). 새 게임 슬롯을 쓰지 않음 — 조직 무료 1회는 그대로 남음(다른 게임용). 게임당 링크 최대 2개라 이 캠페인엔 더 추가 불가.
