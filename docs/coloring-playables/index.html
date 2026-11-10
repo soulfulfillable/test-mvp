@@ -156,6 +156,7 @@
   #boost-btn svg { width: 16px; height: 16px; }
   #boost-btn .badge { font-size: 9px; padding: 2px 6px; border-radius: 999px; background: var(--plum); color: var(--cream); letter-spacing: 0.3px; }
   #boost-btn:disabled { opacity: 0.45; }
+  #boost-btn .left { font-size: 11px; font-weight: 700; opacity: 0.75; }
   #palette { flex: none; display: flex; gap: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 14px 16px 16px; touch-action: pan-x; }
   #palette::-webkit-scrollbar { display: none; }
   #play.land #palette { flex: 1; min-height: 0; flex-wrap: wrap; align-content: flex-start; overflow-x: hidden; overflow-y: auto; touch-action: pan-y; padding: 12px 6px 10px; }
@@ -268,7 +269,7 @@
     <div id="foot">
       <div id="mode-row">
         <div class="seg"><button id="mode-num" class="sel">123 Number</button><button id="mode-free"><svg class="ico"><use href="#s-brush"/></svg>Free</button></div>
-        <button id="boost-btn" class="hidden pressable"><svg class="ico"><use href="#s-ad"/></svg><span>Fill this color</span><span class="badge">AD</span></button>
+        <button id="boost-btn" class="hidden pressable"><svg class="ico"><use href="#s-ad"/></svg><span>Fill this color</span><span class="badge">AD</span><span id="boost-left" class="left"></span></button>
       </div>
       <div id="palette"></div>
     </div>
@@ -280,7 +281,7 @@
 <script>
 (function () {
   'use strict';
-  var GAME_VERSION = '1.5.2';
+  var GAME_VERSION = '1.6.0';
   var GAME_TITLE = 'Cozy Coloring';
   var NS = 'http://www.w3.org/2000/svg';
   var CP = window.ColoringPics, PICS = CP.ORDER;
@@ -297,7 +298,7 @@
   // ---------- persistent state (Bridge storage only; rule 3.2.1) ----------
   // progress.fills[id] = [piece indexes colored by number]   progress.free[id] = { index: colorIndex }
   // progress.mode[id] = 'free' | undefined   progress.done[id] = timestamp   progress.unlocked[id] = 1 (ad unlock)
-  // progress.boost[id] = 1 (the one-per-picture "fill this color" ad was used)   progress.last[id] = timestamp
+  // progress.boost[id] = how many "fill this color" ads were used on this picture (up to BOOST_MAX)   progress.last[id] = timestamp
   var store = {
     progress: { v: 1, fills: {}, free: {}, mode: {}, done: {}, unlocked: {}, boost: {}, last: {}, played: 0 },
     settings: { v: 1, muted: false }
@@ -852,10 +853,13 @@
 
   // ---------- rewarded: "fill this color" (one per picture) and "unlock the next picture" ----------
   var rewardPending = null, rewardEarned = null, rewardT = null, adOpen = false, adSeenClosed = false, adFailStreak = 0, adSeq = 0, rewardTarget = null;
-  function boostAvailable() { return cur && cur.mode === 'num' && !store.progress.boost[cur.pic.id] && rewardedSupported() && cur.filled.size < cur.pic.rg.length; }
+  var BOOST_MAX = 3, boostDead = false;   // boostDead: two no-fills in a row hide the offer for this session
+  function boostUsed(id) { var v = store.progress.boost[id]; return v === true ? 1 : Math.max(0, parseInt(v, 10) || 0); }
+  function boostAvailable() { return cur && cur.mode === 'num' && !boostDead && boostUsed(cur.pic.id) < BOOST_MAX && rewardedSupported() && cur.filled.size < cur.pic.rg.length; }
   function renderBoost() {
     var b = $('boost-btn'); if (!cur) { b.classList.add('hidden'); return; }
     b.classList.toggle('hidden', !boostAvailable());
+    $('boost-left').textContent = (BOOST_MAX - boostUsed(cur.pic.id)) + ' left';
     b.disabled = !!rewardPending || !(cur.counts[cur.sel] > 0);
   }
   function requestBoost() {
@@ -896,7 +900,7 @@
     if (stage === 'failed') adFailStreak++; else adFailStreak = 0;
     analytics('ad_failed', { offer: offer, stage: stage, streak: adFailStreak });
     flashNote(stage !== 'failed' ? 'The ad was closed early, so no reward this time' : 'No ad could be loaded right now');
-    if (adFailStreak >= 2) { if (offer === 'boost' && rewardTarget) store.progress.boost[rewardTarget.pic.id] = 1; }
+    if (adFailStreak >= 2 && offer === 'boost') boostDead = true;
     renderBoost(); if (!homeEl.classList.contains('hidden')) renderHome(); else { var b = $('unlock-btn'); if (b) b.disabled = false; }
   }
   function applyReward() {
@@ -909,7 +913,7 @@
   function grantBoost() {
     var t = rewardTarget; rewardTarget = null;
     if (!t || !cur || cur.pic !== t.pic || cur.mode !== 'num') return;
-    store.progress.boost[t.pic.id] = 1;
+    store.progress.boost[t.pic.id] = boostUsed(t.pic.id) + 1;
     var todo = []; t.pic.rg.forEach(function (rg, i) { if (rg.c === t.ci + 1 && !cur.filled.has(i)) todo.push(i); });
     play('swoosh'); buzz(20);
     todo.forEach(function (i, k) { setTimeout(function () { if (cur && cur.pic === t.pic && !cur.filled.has(i)) fillRegion(i, null, k % 3 !== 0); }, 45 * k); });

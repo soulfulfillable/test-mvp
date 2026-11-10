@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-10T04:02:56.517Z",
+  "startedAt": "2026-11-10T09:09:40.540Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -72,7 +72,7 @@
     {
       "name": "gallery list scrolls with a finger",
       "ok": true,
-      "detail": "618px"
+      "detail": "620px"
     },
     {
       "name": "tapping a locked picture keeps you in the gallery (with a note)",
@@ -86,8 +86,8 @@
     },
     {
       "name": "hold the eye button (even after the iOS long-press pointercancel): the finished picture shows the whole time; lift: it is gone at once; nothing colored, no page scroll",
-      "ok": false,
-      "detail": "[{\"on\":false,\"op\":0,\"colored\":0,\"total\":130,\"filled\":0,\"home\":false},{\"gone\":true,\"filled\":0,\"scroll\":0}]"
+      "ok": true,
+      "detail": "[{\"on\":true,\"op\":1,\"colored\":130,\"total\":130,\"filled\":0,\"home\":false},{\"gone\":true,\"filled\":0,\"scroll\":0}]"
     },
     {
       "name": "every number label is placed on a visible point of its piece (no hidden-label console error)",
@@ -102,12 +102,12 @@
     {
       "name": "finish burst: pieces pop in a wave, shine sweep, sparkles, glow, palette confetti, big word — panel not yet",
       "ok": true,
-      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Gorgeous!\",\"glow\":true,\"shine\":true,\"panel\":false}"
+      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Masterpiece!\",\"glow\":true,\"shine\":true,\"panel\":false}"
     },
     {
       "name": "picture 01 colored to 100% by 129 real taps (1 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
       "ok": true,
-      "detail": "{\"confetti\":91,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":130} in 11125ms misses []"
+      "detail": "{\"confetti\":94,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":130} in 11658ms misses []"
     },
     {
       "name": "Next picture button counts down (auto-advance armed)",
@@ -152,7 +152,7 @@
     {
       "name": "picture 03 opens; \"Fill this color · AD\" button visible when rewarded ads are supported",
       "ok": true,
-      "detail": "{\"vis\":true,\"text\":\"Fill this colorAD\"}"
+      "detail": "{\"vis\":true,\"text\":\"Fill this colorAD3 left\"}"
     },
     {
       "name": "boost requested (ad opt-in)",
@@ -170,12 +170,17 @@
       "detail": "{\"filled\":0,\"pending\":null,\"used\":false,\"vis\":true,\"audible\":true}"
     },
     {
-      "name": "rewarded: all 29 pieces of the chosen color filled, boost marked used, button gone (one per picture)",
+      "name": "rewarded: all 29 pieces of the chosen color filled, 1 of 3 used, button still there with \"2 left\"",
       "ok": true,
-      "detail": "{\"left\":40,\"filled\":29,\"used\":true,\"vis\":false,\"sel\":1}"
+      "detail": "{\"left\":40,\"filled\":29,\"used\":true,\"vis\":true,\"sel\":1}"
     },
     {
-      "name": "picture 03 finished after the boost by 180 real taps",
+      "name": "three boosts per picture, then the button is gone",
+      "ok": true,
+      "detail": "{\"used\":3,\"vis\":false}"
+    },
+    {
+      "name": "picture 03 finished after the boost by 121 real taps",
       "ok": true,
       "detail": "{\"filled\":213,\"total\":213,\"misses\":[]}"
     },
@@ -267,7 +272,7 @@
     {
       "name": "audio files decoded or fetched (ogg/mp3 shipped in the archive)",
       "ok": true,
-      "detail": "dab,finish,pick,swoosh,mute-off,color-done"
+      "detail": "pick,color-done,dab,finish,swoosh,mute-off,mute-on"
     },
     {
       "name": "desktop: click opens picture 01 in landscape layout",
@@ -529,9 +534,9 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "taps": 496,
-  "debugTaps": 7,
-  "finishedAt": "2026-11-10T04:04:24.501Z",
-  "passed": 97,
-  "failed": 1
+  "taps": 437,
+  "debugTaps": 3,
+  "finishedAt": "2026-11-10T09:11:21.365Z",
+  "passed": 99,
+  "failed": 0
 }

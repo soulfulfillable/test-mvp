@@ -7,7 +7,7 @@
 //           game_ready once, no emoji, no page scroll, gallery lock order, three pictures colored to 100% by real
 //           taps (number mode, free mode, number mode + rewarded "fill this color"), wrong-number tap colors nothing,
 //           interstitial on leaving a finished picture, rewarded only on 'rewarded' (closed early = nothing), one
-//           boost per picture, ad unlock of the next picture, pinch zoom + tap while zoomed + one-finger pan,
+//           three boosts per picture, ad unlock of the next picture, pinch zoom + tap while zoomed + one-finger pan,
 //           wheel zoom + keyboard on desktop, reload restores progress + mute (Bridge storage),
 //           hidden page / ad = silent, Esc unused, home list scrolls by touch, 14 sizes, covers.
 'use strict';
@@ -266,7 +266,17 @@ async function swipe(page, x, y0, y1, steps = 10) {
     await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('rewarded'); window.__game.onRewardedState('closed'); });
     await sleep(45 * selCount + 600);
     const bg = await page.evaluate(() => { const g = window.__game, pic = g.cur.pic; const left = pic.rg.filter((rg, i) => rg.c === g.cur.sel + 1 && !g.cur.filled.has(i)).length; return { left, filled: g.cur.filled.size, used: !!g.store.progress.boost[pic.id], vis: !document.getElementById('boost-btn').classList.contains('hidden'), sel: g.cur.sel }; });
-    check(`rewarded: all ${selCount} pieces of the chosen color filled, boost marked used, button gone (one per picture)`, bg.filled === selCount && bg.used && !bg.vis, JSON.stringify(bg));
+    check(`rewarded: all ${selCount} pieces of the chosen color filled, 1 of 3 used, button still there with "2 left"`, bg.filled === selCount && bg.used && bg.vis && /2 left/.test(await page.evaluate(() => document.getElementById('boost-btn').textContent)), JSON.stringify(bg));
+    // two more boosts on the next colors, then the offer is gone for this picture
+    for (let k = 2; k <= 3; k++) {
+      await sleep(400);
+      const n = await page.evaluate(() => window.__game.cur.counts[window.__game.cur.sel]);
+      await tapEl(page, '#boost-btn', true); await sleep(100);
+      await page.evaluate(() => { window.__game.onRewardedState('opened'); window.__game.onRewardedState('rewarded'); window.__game.onRewardedState('closed'); });
+      await sleep(45 * n + 600);
+    }
+    const b3 = await page.evaluate(() => ({ used: window.__game.store.progress.boost[window.__game.cur.pic.id], vis: !document.getElementById('boost-btn').classList.contains('hidden') }));
+    check('three boosts per picture, then the button is gone', b3.used === 3 && !b3.vis, JSON.stringify(b3));
     await shot(page, 'phone-390x844-boost');
     // finish picture 03 by taps (the remaining colors)
     const r3 = await colorByNumber(page, true); await sleep(2300);
