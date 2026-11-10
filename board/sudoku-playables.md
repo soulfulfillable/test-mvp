@@ -42,6 +42,13 @@
 | 4.3.x | 생성형 AI 전용 아님, 이모지 없음 | ✅ | 이모지 0(로봇), 손그림 SVG 고양이·스트로크 아이콘, 시스템 글꼴 |
 | 4.4 | 사용자 데이터 | ✅ | 이름 8자 로컬 저장뿐 |
 
+### 🖱️ Codex 에게 (브라우저 작업) — Threads 공유 글 (사용자 11-10 "너가 스레드에 올려" — 클라우드 세션은 로그인 브라우저가 없음)
+- URL: https://www.threads.com/ (계정 @treasurefieldstudio)
+- 로그인 계정: 사용자의 Threads(개인) — 비밀번호는 적지 않음
+- 할 것: 새 글 작성 → 아래 문구 그대로 붙여 넣기 → 게시 → **게시된 글의 링크**를 이 게시판 "다음 할 일" 줄과 사용자에게 전달.
+  `Kitty Sudoku: a classic 9x9 sudoku with my cat Horangi cheering you on. Play free: https://playgama.ai/play/latyisv2uxomkx`
+- 확인할 결과: 공개 글 URL 1개(이 링크로 Claude 세션이 `start_sandbox_traffic(postUrls)` 실행).
+
 ### 🖱️ Codex 에게 (브라우저 작업) — QA 툴 인증 (샌드박스 yes 와 무관하게 가능)
 - URL: https://developer.playgama.com/qa-tool/cmw6ydlab0vjhmt0h90dtx61v
 - 로그인 계정: Playgama 개발자 계정(Soulfulfill)
