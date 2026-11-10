@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-10T10:14:10.216Z",
+  "startedAt": "2026-11-10T10:26:21.623Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -7,7 +7,7 @@
     {
       "name": "total download < 5 MB",
       "ok": true,
-      "detail": "919 KB"
+      "detail": "604 KB"
     },
     {
       "name": "phone-390x844: exit on screen at first frame",
@@ -172,7 +172,7 @@
     {
       "name": "touch: joystick up moves the hero forward",
       "ok": true,
-      "detail": "z 1.60 → -3.94, anim sprint"
+      "detail": "z 1.60 → -4.78, anim run"
     },
     {
       "name": "touch: jump button lifts the hero",
@@ -187,7 +187,7 @@
     {
       "name": "desktop: W moves forward",
       "ok": true,
-      "detail": "z 1.60 → -1.40"
+      "detail": "z 1.60 → -1.25"
     },
     {
       "name": "desktop: Space jumps",
@@ -207,7 +207,7 @@
     {
       "name": "phone-390x844: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 123 s"
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 95 s"
     },
     {
       "name": "phone-390x844: all 3 checkpoints lit on the way",
@@ -232,7 +232,7 @@
     {
       "name": "phone-360x640: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 95 s"
+      "detail": "game time 23.2 s, retries 0 (falls 0, spikes 0), wall 75 s"
     },
     {
       "name": "phone-360x640: all 3 checkpoints lit on the way",
@@ -297,12 +297,12 @@
     {
       "name": "frame: measured (headless software renderer)",
       "ok": true,
-      "detail": "avg 45.2 ms/frame (22 fps in SwiftShader), last frame CPU+submit 3.1 ms, draw calls 141, triangles 5874"
+      "detail": "avg 27.6 ms/frame (36 fps in SwiftShader), last frame CPU+submit 1.7 ms, draw calls 100, triangles 8290"
     },
     {
       "name": "frame: draw calls ≤ 150",
       "ok": true,
-      "detail": "141"
+      "detail": "100"
     },
     {
       "name": "console errors = 0",
@@ -344,16 +344,16 @@
     "picker-open.png"
   ],
   "numbers": {
-    "totalKB": 919,
+    "totalKB": 604,
     "phone-390x844-run": {
-      "time": 23.22,
+      "time": 23.18,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          23.21666666666599
+          23.18333333333266
         ]
       ]
     },
@@ -370,14 +370,14 @@
       ]
     },
     "frame": {
-      "avgMs": 45.188888888888904,
-      "calls": 141,
-      "tris": 5874,
-      "cpu": 3.1000000000931323,
+      "avgMs": 27.57090909090909,
+      "calls": 100,
+      "tris": 8290,
+      "cpu": 1.7000000001862645,
       "pr": 1
     }
   },
-  "finishedAt": "2026-11-10T10:21:18.586Z",
+  "finishedAt": "2026-11-10T10:32:10.279Z",
   "pass": 63,
   "fail": 0
 }
