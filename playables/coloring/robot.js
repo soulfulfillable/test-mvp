@@ -158,6 +158,8 @@ async function swipe(page, x, y0, y1, steps = 10) {
     const home0 = await page.evaluate(() => { const cards = [...document.querySelectorAll('#grid .card')]; return { n: cards.length, locked: cards.map((c) => c.classList.contains('locked')), daily: !!document.getElementById('daily-row'), mandala: /mandala/i.test(document.body.innerText), unlockBtn: !!document.getElementById('unlock-btn'), studio: document.getElementById('home-foot').textContent }; });
     check('gallery: 20 cards, only the first unlocked, no daily mandala anywhere (user: no mandala), no ad-unlock button on the mock platform (rewarded unsupported)', home0.n === 20 && home0.locked[0] === false && home0.locked.slice(1).every(Boolean) && !home0.daily && !home0.mandala && !home0.unlockBtn && /Treasurefield/.test(home0.studio), JSON.stringify(home0));
     await shot(page, 'phone-390x844-gallery-first');
+    const lockPeek = await page.evaluate(() => { const c = document.querySelectorAll('#grid .card')[1], svg = c.querySelector('.thumb svg'); return { colored: svg.querySelectorAll('.region.filled').length, total: svg.querySelectorAll('.region').length, blur: /blur/.test(getComputedStyle(svg).filter), lock: !!c.querySelector('.lock') }; });
+    check('locked cards show the finished picture, blurred, under the lock', lockPeek.colored === lockPeek.total && lockPeek.total > 50 && lockPeek.blur && lockPeek.lock, JSON.stringify(lockPeek));
     // home list scrolls by touch
     await swipe(page, 195, 700, 300); await sleep(300);
     const sc = await page.evaluate(() => document.getElementById('home-scroll').scrollTop);
@@ -172,6 +174,13 @@ async function swipe(page, x, y0, y1, steps = 10) {
     let st = await state(page);
     const first = Pics.ORDER[0].id;
     check('first card opens picture 01 (' + first + ') in number mode', !st.home && st.id === first && st.mode === 'num' && st.filled === 0, JSON.stringify(st));
+    // peek: the finished picture shows for a moment, then your work is back, nothing changed
+    await tapEl(page, '#peek-btn', true); await sleep(700);
+    const pk1 = await page.evaluate(() => { const v = document.getElementById('peek'); return { on: !!v && v.classList.contains('on'), op: v ? +getComputedStyle(v).opacity : 0, colored: v ? v.querySelectorAll('.region.filled').length : 0, total: window.__game.cur.pic.rg.length, filled: window.__game.cur.filled.size }; });
+    await shot(page, 'phone-390x844-peek');
+    await sleep(1500);
+    const pk2 = await page.evaluate(() => ({ gone: !document.getElementById('peek'), filled: window.__game.cur.filled.size }));
+    check('eye button: the finished picture fades in over the canvas, then goes away by itself; nothing gets colored', pk1.on && pk1.op > 0.9 && pk1.colored === pk1.total && pk1.filled === 0 && pk2.gone && pk2.filled === 0, JSON.stringify([pk1, pk2]));
     check('every number label is placed on a visible point of its piece (no hidden-label console error)', report.consoleErrors.length === 0, report.consoleErrors.join(' | '));
     await shot(page, 'phone-390x844-first-picture');
     // wrong color: pick color 1, tap a piece of another color → nothing colored, piece shakes
