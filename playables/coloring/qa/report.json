@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-09T23:31:13.927Z",
+  "startedAt": "2026-11-10T03:38:45.195Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -23,11 +23,6 @@
       "name": "every piece points at a palette color",
       "ok": true,
       "detail": "0"
-    },
-    {
-      "name": "dailies Nov 2026 → Dec 2027 (400 days): deterministic, 50–200 pieces, colors valid, many variants",
-      "ok": true,
-      "detail": "59–183 pieces, 236 variants"
     },
     {
       "name": "same pictures in the page and in node (shared module)",
@@ -65,14 +60,19 @@
       "detail": ""
     },
     {
-      "name": "gallery: 20 cards, only the first unlocked, today's mandala on top, no ad-unlock button on the mock platform (rewarded unsupported)",
+      "name": "gallery: 20 cards, only the first unlocked, no daily mandala anywhere (user: no mandala), no ad-unlock button on the mock platform (rewarded unsupported)",
       "ok": true,
-      "detail": "{\"n\":20,\"locked\":[false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true],\"daily\":\"Daily Mandala\",\"dailyBtn\":\"Color\",\"unlockBtn\":false,\"studio\":\"Treasurefield Studio\"}"
+      "detail": "{\"n\":20,\"locked\":[false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true],\"daily\":false,\"mandala\":false,\"unlockBtn\":false,\"studio\":\"Treasurefield Studio\"}"
+    },
+    {
+      "name": "locked cards show the finished picture, blurred, under the lock",
+      "ok": true,
+      "detail": "{\"colored\":136,\"total\":136,\"blur\":true,\"lock\":true}"
     },
     {
       "name": "gallery list scrolls with a finger",
       "ok": true,
-      "detail": "607px"
+      "detail": "575px"
     },
     {
       "name": "tapping a locked picture keeps you in the gallery (with a note)",
@@ -83,6 +83,11 @@
       "name": "first card opens picture 01 (ladybug) in number mode",
       "ok": true,
       "detail": "{\"home\":false,\"id\":\"ladybug\",\"mode\":\"num\",\"filled\":0,\"total\":130,\"sel\":0,\"done\":[],\"panel\":false,\"ads\":[],\"z\":1}"
+    },
+    {
+      "name": "eye button: the finished picture fades in over the canvas, then goes away by itself; nothing gets colored",
+      "ok": true,
+      "detail": "[{\"on\":true,\"op\":1,\"colored\":130,\"total\":130,\"filled\":0},{\"gone\":true,\"filled\":0}]"
     },
     {
       "name": "every number label is placed on a visible point of its piece (no hidden-label console error)",
@@ -97,12 +102,12 @@
     {
       "name": "finish burst: pieces pop in a wave, shine sweep, sparkles, glow, palette confetti, big word — panel not yet",
       "ok": true,
-      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Lovely!\",\"glow\":true,\"shine\":true,\"panel\":false}"
+      "detail": "{\"won\":true,\"sparkles\":18,\"confetti\":330,\"cheer\":\"Beautiful!\",\"glow\":true,\"shine\":true,\"panel\":false}"
     },
     {
       "name": "picture 01 colored to 100% by 129 real taps (1 under the zoom buttons → debug tap): done panel, confetti, Next picture offered, saved",
       "ok": true,
-      "detail": "{\"confetti\":90,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":130} in 9074ms misses []"
+      "detail": "{\"confetti\":91,\"panel\":true,\"title\":\"Beautiful!\",\"next\":true,\"pct\":\"100%\",\"saved\":130} in 9079ms misses []"
     },
     {
       "name": "Next picture button counts down (auto-advance armed)",
@@ -225,11 +230,6 @@
       "detail": ""
     },
     {
-      "name": "Today's picture opens (daily mandala, date-seeded)",
-      "ok": true,
-      "detail": "d:20261110 119 pieces"
-    },
-    {
       "name": "mute button: silent, icon switches",
       "ok": true,
       "detail": "{\"muted\":true,\"attr\":\"1\",\"audible\":false,\"ctx\":\"running\"}"
@@ -240,9 +240,9 @@
       "detail": "{\"hidden\":true,\"audible\":false,\"ctx\":\"suspended\"}"
     },
     {
-      "name": "reload restores 3 finished pictures, 5 daily pieces, the ad unlock, the used boost and mute (Bridge storage)",
+      "name": "reload restores 3 finished pictures, 5 colored pieces of picture 05, the ad unlock, the used boost and mute (Bridge storage)",
       "ok": true,
-      "detail": "{\"done\":3,\"daily\":5,\"unlocked\":[\"cactus\"],\"boost\":[\"kitten\"],\"muted\":true,\"attr\":\"1\",\"audible\":false,\"dailyBtn\":\"Resume\",\"doneChips\":3,\"free\":[\"sail\"]}"
+      "detail": "{\"done\":3,\"daily\":5,\"unlocked\":[\"cactus\"],\"boost\":[\"kitten\"],\"muted\":true,\"attr\":\"1\",\"audible\":false,\"doneChips\":3,\"free\":[\"sail\"]}"
     },
     {
       "name": "Continue row shows the unfinished picture",
@@ -267,7 +267,7 @@
     {
       "name": "audio files decoded or fetched (ogg/mp3 shipped in the archive)",
       "ok": true,
-      "detail": "dab,pick,color-done"
+      "detail": "pick,finish,dab,color-done,swoosh,mute-on"
     },
     {
       "name": "desktop: click opens picture 01 in landscape layout",
@@ -492,6 +492,7 @@
   ],
   "screenshots": [
     "phone-390x844-gallery-first.png",
+    "phone-390x844-peek.png",
     "phone-390x844-first-picture.png",
     "phone-390x844-finish-burst.png",
     "phone-390x844-first-done.png",
@@ -500,7 +501,6 @@
     "phone-390x844-boost.png",
     "phone-390x844-unlock.png",
     "phone-390x844-zoomed.png",
-    "phone-390x844-daily.png",
     "phone-390x844-gallery-after-reload.png",
     "desk-1366x768-play.png",
     "phone-360x640-play.png",
@@ -524,9 +524,9 @@
     "tall-9x21-390x910-play.png",
     "wide-21x9-910x390-play.png"
   ],
-  "taps": 498,
+  "taps": 496,
   "debugTaps": 7,
-  "finishedAt": "2026-11-09T23:32:33.754Z",
+  "finishedAt": "2026-11-10T03:40:10.305Z",
   "passed": 97,
   "failed": 0
 }

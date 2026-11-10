@@ -739,48 +739,5 @@
   // level order: fewest pieces first (the player grows into the big ones)
   var ORDER = PICS.slice().sort(function (a, b) { return a.rg.length - b.rg.length || (a.id < b.id ? -1 : 1); });
 
-  // ── daily mandala: a new picture from the date (KST key YYYYMMDD) ──
-  var DAILY_PALS = [
-    ['#F6EEE0', '#EEE2CC', '#FAF4E8', '#D9534F', '#F2A541', '#FFD23F', '#2A9D8F', '#264653', '#E76F51', '#8E5572', '#F4A6C1', '#6BA292', '#3E5C76'],
-    ['#E6F0F7', '#D5E6F2', '#F2F8FC', '#2E6CB8', '#4F8FD9', '#8FC1F0', '#F2A54A', '#FFD35C', '#FFFFFF', '#F8A8C0', '#C84B5A', '#6B4B3A', '#1F2A44'],
-    ['#F7E9EC', '#F1DCE1', '#FBF2F4', '#C23B22', '#E8732F', '#F7C48A', '#8C5E3C', '#6B8E4E', '#F2C14E', '#3B2A20', '#FFF4E6', '#D8C3A5', '#7B2D8E'],
-    ['#E8F3EC', '#D8EBDF', '#F3F9F5', '#2E7D9A', '#3A93B2', '#7FC46A', '#4E9944', '#FFD35C', '#F26D4B', '#FFFFFF', '#F8A8C0', '#255F78', '#B9E3EF'],
-    ['#2A2F45', '#343A57', '#20243A', '#F4E1A6', '#C9A84B', '#E8D8A8', '#F2A541', '#7A8CB8', '#A3C6A0', '#FFFFFF', '#E76F51', '#3E4A6B', '#2A9D8F'],
-    ['#FFF1E0', '#FFE6CC', '#FFF8EE', '#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#FF9F1C', '#C77DFF', '#2EC4B6', '#FFFFFF', '#845EC2', '#1F2A44']
-  ];
-  function genDaily(key) {
-    var seed = (parseInt(key, 10) || 0) ^ 0x5bd1e995;
-    var r = rng(seed);
-    var pick = function (arr) { return arr[(r() * arr.length) | 0]; };
-    var pal = DAILY_PALS[(r() * DAILY_PALS.length) | 0].slice();
-    var cx = 180, cy = 220, rg = [];
-    var bgKind = (r() * 3) | 0;
-    // disc radii chosen so every grid corner left outside the disc is at least 9px from its rim (no sliver pieces)
-    var R0 = (bgKind === 2 ? [150, 160, 168] : [146, 172, 176])[(r() * 3) | 0];
-    if (bgKind === 0) rg = rg.concat(mosaic(0, 0, 360, 440, 4, 5, [1, 2, 3], seed, { jitter: 0, skip: coveredBy(cx, cy, R0, 45, 44) }));
-    else if (bgKind === 1) rg = rg.concat(wedges(cx, cy, 0, 330, pick([12, 16, 20]), -90, [1, 2]));
-    else rg = rg.concat(mosaic(0, 0, 360, 440, 3, 4, [1, 2, 3], seed + 7, { tri: true, jitter: 0, skip: coveredBy(cx, cy, R0, 60, 55) }));
-    rg.push(C(cx, cy, R0, pick([13, 12, 3]), { lx: cx, ly: cy - R0 + 14 }));
-    var rr = R0, ring = 0, cols = [4, 5, 6, 7, 8, 9, 10, 11];
-    while (rr > 44 && ring < 5) {
-      var kind = (r() * 4) | 0, band = 18 + ((r() * 3) | 0) * 6;
-      var n = pick([8, 12, 16, 20]);
-      var c1 = pick(cols), c2 = pick(cols); if (c2 === c1) c2 = cols[(cols.indexOf(c1) + 3) % cols.length];
-      if (kind === 0) { rg = rg.concat(wedges(cx, cy, rr - band, rr, n, -90, [c1, c2], 0.6)); }
-      else if (kind === 1) { var ry = band / 2 + 4, rx = Math.max(6, Math.min(16, Math.PI * (rr - ry) / n * 0.8)); rg = rg.concat(ringPetals(cx, cy, n, rr - ry - 2, rx, ry, c1, -90)); if (r() < 0.5) rg = rg.concat(ringDots(cx, cy, n, rr - ry - 2, Math.max(3, rx * 0.35), c2, -90 + 180 / n)); }
-      else if (kind === 2) { rg = rg.concat(ringDots(cx, cy, n, rr - band / 2, Math.max(4, band / 2 - 3), c1, -90)); }
-      else { rg = rg.concat(spikes(cx, cy, rr - band, rr, n, -90, Math.min(8, 160 / n), [c1, c2])); }
-      rr -= band + 4; ring++;
-    }
-    rg.push(C(cx, cy, Math.max(12, rr - 4), pick(cols)));
-    rg.push(C(cx, cy, Math.max(5, (rr - 4) * 0.45), pick(cols)));
-    if (r() < 0.6) { // corner ornaments
-      var cc = pick(cols), cc2 = pick(cols);
-      [[36, 40], [324, 40], [36, 404], [324, 404]].forEach(function (p) { rg = rg.concat(ringPetals(p[0], p[1], 5, 12, 6, 10, cc, -90)); rg.push(C(p[0], p[1], 6, cc2)); });
-    }
-    var label = 'Daily Mandala';
-    return { id: 'd:' + key, name: label, day: key, w: 360, h: 440, pal: pal, rg: rg, deco: [], daily: true };
-  }
-
-  return { PICS: PICS, ORDER: ORDER, genDaily: genDaily, DAILY_PALS: DAILY_PALS, SAMPLES: [], polyArt: polyArt, version: 1 };
+  return { PICS: PICS, ORDER: ORDER, SAMPLES: [], polyArt: polyArt, version: 1 };
 });
