@@ -179,14 +179,16 @@ async function swipe(page, x, y0, y1, steps = 10) {
       const r = await page.evaluate(() => { const b = document.getElementById('peek-btn').getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + b.height / 2 }; });
       const cdp = await page.context().newCDPSession(page);
       await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: r.x, y: r.y, id: 0 }] });
-      await sleep(1200);   // a long hold
+      await sleep(600);
+      await page.evaluate(() => { const b = document.getElementById('peek-btn'); b.dispatchEvent(new PointerEvent('pointercancel', { bubbles: true, pointerType: 'touch' })); b.dispatchEvent(new Event('lostpointercapture')); });   // what iOS Safari sends once a press turns into a long press
+      await sleep(600);   // a long hold
       const pk1 = await page.evaluate(() => { const v = document.getElementById('peek'); return { on: !!v && v.classList.contains('on'), op: v ? +getComputedStyle(v).opacity : 0, colored: v ? v.querySelectorAll('.region.filled').length : 0, total: window.__game.cur.pic.rg.length, filled: window.__game.cur.filled.size, home: window.__game.home }; });
       await shot(page, 'phone-390x844-peek');
       await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await cdp.detach();
       await sleep(80);
       const pk2 = await page.evaluate(() => ({ gone: !document.getElementById('peek'), filled: window.__game.cur.filled.size, scroll: document.documentElement.scrollTop + document.body.scrollTop }));
       report.taps++;
-      check('hold the eye button: the finished picture shows the whole time; lift: it is gone at once; nothing colored, no page scroll', pk1.on && pk1.op > 0.9 && pk1.colored === pk1.total && pk1.filled === 0 && !pk1.home && pk2.gone && pk2.filled === 0 && pk2.scroll === 0, JSON.stringify([pk1, pk2]));
+      check('hold the eye button (even after the iOS long-press pointercancel): the finished picture shows the whole time; lift: it is gone at once; nothing colored, no page scroll', pk1.on && pk1.op > 0.9 && pk1.colored === pk1.total && pk1.filled === 0 && !pk1.home && pk2.gone && pk2.filled === 0 && pk2.scroll === 0, JSON.stringify([pk1, pk2]));
     }
     check('every number label is placed on a visible point of its piece (no hidden-label console error)', report.consoleErrors.length === 0, report.consoleErrors.join(' | '));
     await shot(page, 'phone-390x844-first-picture');
@@ -366,6 +368,14 @@ async function swipe(page, x, y0, y1, steps = 10) {
     await page.mouse.move(vp.left + vp.w / 2, vp.top + vp.h / 2);
     await page.mouse.wheel(0, -300); await sleep(100);
     check('mouse wheel zooms', await page.evaluate(() => window.__game.Z.z > 1.2), await page.evaluate(() => window.__game.Z.z.toFixed(2)));
+    {
+      const r = await page.evaluate(() => { const b = document.getElementById('peek-btn').getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + b.height / 2 }; });
+      await page.mouse.move(r.x, r.y); await page.mouse.down(); await sleep(900);
+      const on = await page.evaluate(() => !!document.getElementById('peek'));
+      await page.mouse.move(r.x + 200, r.y + 200); await page.mouse.up(); await sleep(60);
+      const off = await page.evaluate(() => !document.getElementById('peek'));
+      check('desktop: hold the mouse on the eye button shows the finished picture, letting go anywhere hides it', on && off, JSON.stringify({ on, off }));
+    }
     await page.keyboard.press('3'); await sleep(50);
     check('key 3 picks color 3', await page.evaluate(() => window.__game.cur.sel === 2));
     await page.evaluate(() => window.__game.resetZoom());
