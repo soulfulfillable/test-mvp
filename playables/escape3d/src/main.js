@@ -1,6 +1,6 @@
 // Escape 3D — trial build: one 3D obstacle course. three.js, own kinematic controller, CC0 hero + sounds.
 import * as THREE from 'three';
-import { buildCourse, GOLD } from './course.js';
+import { buildCourse, GOLD } from './prison.js';
 import { createPlayer, RIGS, R as PR, H as PH } from './player.js';
 import { MAKERS } from './blocky.js';
 import { createInput } from './input.js';
@@ -146,41 +146,81 @@ function closePicker() { $('pick').classList.add('hidden'); }
 $('btn-hero').addEventListener('click', (e) => { e.stopPropagation(); openPicker(); });
 $('pick').addEventListener('click', () => closePicker());
 
-// ---------- camera ----------
+// ---------- camera: third person, orbits around the hero ----------
+// yaw 0 = camera south of the hero looking north (−z). Drag the screen (right side on phones) to look around;
+// while you run, it eases back behind you. It never sits inside or behind a wall (ray vs the collision boxes).
 const camPos = new THREE.Vector3(), camLook = new THREE.Vector3();
-const ray = new THREE.Raycaster();
-let camYLevel = 0;
+let camYLevel = 0, camYaw = C.start.yaw, camPitch = 0.46, lookT = 99;
+const camTarget = new THREE.Vector3();
 function desiredCamera(outPos, outLook) {
   const p = P.pos;
-  // follow height smoothly; don't dive into a pit after a fall
-  const groundY = P.grounded ? P.pos.y : Math.max(camYLevel - 1.5, Math.min(camYLevel, p.y));
-  camYLevel += (groundY - camYLevel) * 0.08;
+  const groundY = P.grounded ? P.pos.y : Math.max(camYLevel - 1.5, Math.min(camYLevel + 2, p.y));
+  camYLevel += (groundY - camYLevel) * 0.1;
   const portrait = innerHeight > innerWidth * 1.1;
-  const back = portrait ? 8.2 : 7.0, up = portrait ? 4.9 : 3.8;
-  outLook.set(p.x * 0.55, camYLevel + (portrait ? -1.4 : 0.2), p.z - 6.5);
-  outPos.set(p.x * 0.55, camYLevel + up, p.z + back);
+  const dist = portrait ? 6.6 : 5.8;
+  camTarget.set(p.x, camYLevel + 1.15, p.z);
+  const cp = Math.cos(camPitch), sp = Math.sin(camPitch);
+  outPos.set(camTarget.x + Math.sin(camYaw) * dist * cp, camTarget.y + dist * sp, camTarget.z + Math.cos(camYaw) * dist * cp);
+  outLook.set(camTarget.x - Math.sin(camYaw) * 1.2, camTarget.y + (portrait ? -0.35 : 0.1), camTarget.z - Math.cos(camYaw) * 1.2);
+}
+// slab test: distance along the ray to the first box it enters (boxes grown by `pad`), or Infinity
+function rayBoxes(o, d, far, pad) {
+  let best = far;
+  for (const b of C.solids) {
+    if (b.seeThrough || b.mover) continue;
+    let t0 = 0, t1 = best;
+    for (const ax of ['x', 'y', 'z']) {
+      const mn = b.min[ax] - pad, mx = b.max[ax] + pad;
+      if (Math.abs(d[ax]) < 1e-9) { if (o[ax] < mn || o[ax] > mx) { t0 = Infinity; break; } continue; }
+      let ta = (mn - o[ax]) / d[ax], tb = (mx - o[ax]) / d[ax]; if (ta > tb) [ta, tb] = [tb, ta];
+      t0 = Math.max(t0, ta); t1 = Math.min(t1, tb); if (t0 > t1) break;
+    }
+    if (t0 <= t1 && t0 > 0.05 && t0 < best) best = t0;
+  }
+  return best;
 }
 function placeCamera(dt, snap) {
   const tp = new THREE.Vector3(), tl = new THREE.Vector3();
   desiredCamera(tp, tl);
   if (snap) { camPos.copy(tp); camLook.copy(tl); }
-  else { const k = 1 - Math.exp(-dt * 7); camPos.lerp(tp, k); camLook.lerp(tl, 1 - Math.exp(-dt * 9)); }
-  // keep walls out of the view line: if anything solid sits between the hero and the camera, put the camera in front of it
-  const head = P.pos.clone(); head.y += PH * 0.8;
-  const dir = camPos.clone().sub(head); const dist = dir.length(); dir.normalize();
-  ray.set(head, dir); ray.far = dist;
-  const hit = ray.intersectObjects(C.walls, false)[0];
-  if (hit) camPos.copy(head).addScaledVector(dir, Math.max(0.6, hit.distance - 0.35));
+  else { const k = 1 - Math.exp(-dt * 10); camPos.lerp(tp, k); camLook.lerp(tl, 1 - Math.exp(-dt * 12)); }
+  const dir = camPos.clone().sub(camTarget); const dist = dir.length(); dir.normalize();
+  const hit = rayBoxes(camTarget, dir, dist, 0.25);
+  if (hit < dist) camPos.copy(camTarget).addScaledVector(dir, Math.max(0.5, hit - 0.15));
   camera.position.copy(camPos);
   if (G.shake > 0) camera.position.add(new THREE.Vector3((Math.random() - 0.5) * G.shake, (Math.random() - 0.5) * G.shake, 0));
   camera.lookAt(camLook);
 }
-// intro: open on the glowing exit, then glide back to the hero (any input skips)
-const INTRO_LEN = 2.4;
+function steerCamera(dt) {
+  lookT += dt;
+  if (keysYaw) { camYaw += keysYaw * dt * 2.2; lookT = 0; }
+  const hs = Math.hypot(P.vel.x, P.vel.z);
+  if (lookT > 1.0 && hs > 2 && P.grounded && G.state === 'play') { // ease in behind the hero
+    const want = Math.atan2(-P.vel.x, -P.vel.z); let d = want - camYaw; d = Math.atan2(Math.sin(d), Math.cos(d));
+    const w = Math.max(0, Math.min(1, (Math.cos(d) + 0.4) / 1.4));
+    camYaw += d * Math.min(1, dt * 1.6) * w;
+  }
+}
+// look-around: drag anywhere that isn't a control (touch) or the canvas (mouse); Q/E keys
+let keysYaw = 0; const lk = { id: null, x: 0, y: 0 };
+function lookStart(x, y, id) { lk.id = id; lk.x = x; lk.y = y; }
+function lookMove(x, y) { camYaw -= (x - lk.x) * 0.0065; camPitch = Math.max(0.12, Math.min(1.05, camPitch + (y - lk.y) * 0.004)); lk.x = x; lk.y = y; lookT = 0; }
+const lookEl = $('look');
+lookEl.addEventListener('touchstart', (e) => { e.preventDefault(); audio.unlock(); if (lk.id === null) { const t = e.changedTouches[0]; lookStart(t.clientX, t.clientY, t.identifier); } }, { passive: false });
+lookEl.addEventListener('touchmove', (e) => { e.preventDefault(); for (const t of e.changedTouches) if (t.identifier === lk.id) lookMove(t.clientX, t.clientY); }, { passive: false });
+const lkEnd = (e) => { for (const t of e.changedTouches) if (t.identifier === lk.id) lk.id = null; };
+lookEl.addEventListener('touchend', lkEnd); lookEl.addEventListener('touchcancel', lkEnd);
+lookEl.addEventListener('mousedown', (e) => { lookStart(e.clientX, e.clientY, 'm'); });
+addEventListener('mousemove', (e) => { if (lk.id === 'm') lookMove(e.clientX, e.clientY); });
+addEventListener('mouseup', () => { if (lk.id === 'm') lk.id = null; });
+addEventListener('keydown', (e) => { if (e.code === 'KeyQ') keysYaw = 1; if (e.code === 'KeyE') keysYaw = -1; });
+addEventListener('keyup', (e) => { if (e.code === 'KeyQ' || e.code === 'KeyE') keysYaw = 0; });
+// intro: start high over the prison looking at the glowing gate, then glide down behind the hero (any input skips)
+const INTRO_LEN = 2.8;
 function introCamera(t) {
   const tp = new THREE.Vector3(), tl = new THREE.Vector3(); desiredCamera(tp, tl);
-  const k = Math.min(1, Math.max(0, (t - 0.7) / (INTRO_LEN - 0.7))); const e = k * k * (3 - 2 * k);
-  const fromPos = new THREE.Vector3(0, 5.2, -42), fromLook = new THREE.Vector3(0, 3.2, -58);
+  const k = Math.min(1, Math.max(0, (t - 0.8) / (INTRO_LEN - 0.8))); const e = k * k * (3 - 2 * k);
+  const E = C.exit; const fromPos = new THREE.Vector3(E.x + 4, 17, E.z + 24), fromLook = new THREE.Vector3(E.x, 2, E.z);
   camera.position.lerpVectors(fromPos, tp, e); camLook.lerpVectors(fromLook, tl, e); camera.lookAt(camLook);
   camPos.copy(camera.position);
 }
@@ -198,7 +238,7 @@ function die(kind) {
 }
 function respawn() {
   const cp = C.checkpoints[G.cp];
-  P.reset(cp.pos); camYLevel = cp.pos.y;
+  P.reset(cp.pos); P.facing = Math.PI + camYaw; camYLevel = cp.pos.y;
   G.state = 'play';
   puff(cp.pos.clone(), 14, GOLD, { speed: 2.2, add: true, alpha: 0.9, life: 0.6, size: 0.35, up: 1.6 });
   audio.play('respawn', { vol: 0.45 });
@@ -226,7 +266,7 @@ function restart() {
   for (const cp of C.checkpoints) if (cp.i > 0) C.unlight(cp);
   C.exit.open = 0; C.exit.opening = false;
   $('panel').classList.add('hidden'); $('flash').className = ''; document.body.classList.remove('done');
-  P.reset(C.checkpoints[0].pos); camYLevel = 0; placeCamera(1, true);
+  P.reset(C.checkpoints[0].pos); camYLevel = 0; camYaw = C.start.yaw; camPitch = 0.46; placeCamera(1, true);
   G.state = 'play'; updateDots(); audio.play('respawn', { vol: 0.4 });
 }
 function vibrate(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) { /* */ } }
@@ -262,7 +302,7 @@ function simStep(inp) {
     const cx = Math.max(hz.min.x, Math.min(P.pos.x, hz.max.x)), cz = Math.max(hz.min.z, Math.min(P.pos.z, hz.max.z));
     const r = PR * 0.75; if ((P.pos.x - cx) ** 2 + (P.pos.z - cz) ** 2 < r * r) { die('spike'); return; }
   }
-  if (P.pos.y < -4) { die('fall'); return; }
+  if (P.pos.y < C.killY) { die('fall'); return; }
   // checkpoints
   for (const cp of C.checkpoints) {
     if (cp.i <= G.cp) continue;
@@ -270,8 +310,8 @@ function simStep(inp) {
   }
   // exit: the door opens as you get close; walk through to finish
   const E = C.exit;
-  if (!E.opening && P.pos.z < E.z + 7 && P.pos.y > E.y - 0.5) { E.opening = true; audio.play('door', { vol: 0.7, rate: 0.8 }); }
-  if (P.pos.z < E.trigger.z - 0.3 && Math.abs(P.pos.x) < E.trigger.x + 0.3) finish();
+  if (!E.opening && Math.hypot(P.pos.x - E.x, P.pos.z - E.z) < 8 && P.pos.y > E.y - 0.5) { E.opening = true; audio.play('door', { vol: 0.7, rate: 0.8 }); }
+  if (P.pos.z < E.z - 0.35 && Math.abs(P.pos.x - E.x) < E.DW / 2) finish();
 }
 
 // ---------- frame ----------
@@ -296,8 +336,11 @@ function frame(now) {
     // a press is kept until a physics step consumes it (a 144 Hz screen can have frames with no step)
     if (inp.jumpPressed) G.pendingJump = true;
     let n = 0;
+    steerCamera(dt);
+    const cy = Math.cos(camYaw), sy = Math.sin(camYaw); // stick is camera-relative
+    const wx = inp.x * cy + inp.z * sy, wz = -inp.x * sy + inp.z * cy;
     while (G.acc >= STEP && n < 12) {
-      _in.x = inp.x; _in.z = inp.z; _in.jumpHeld = inp.jumpHeld || G.pendingJump; _in.jumpPressed = G.pendingJump; G.pendingJump = false;
+      _in.x = wx; _in.z = wz; _in.jumpHeld = inp.jumpHeld || G.pendingJump; _in.jumpPressed = G.pendingJump; G.pendingJump = false;
       simStep(_in); G.acc -= STEP; n++;
     }
     if (n === 12) G.acc = 0;
@@ -360,7 +403,7 @@ window.__game = {
   get state() { return G.state; }, get t() { return G.t; }, get runTime() { return G.runTime; }, get cp() { return G.cp; },
   get deaths() { return G.deaths; }, get falls() { return G.falls; }, get spikes() { return G.spikes; }, get finished() { return G.finished; },
   get pos() { return P ? { x: P.pos.x, y: P.pos.y, z: P.pos.z } : null; }, get grounded() { return !!(P && P.grounded); },
-  get anim() { return P && P.anim; }, get hero() { return P && P.rigName; }, get doorOpen() { return C.exit.open; }, get pixelRatio() { return pixelRatio; },
+  get anim() { return P && P.anim; }, get camYaw() { return camYaw; }, get exitPos() { return { x: C.exit.x, y: C.exit.y + 1.7, z: C.exit.z }; }, get cpPos() { return C.checkpoints.map((c) => ({ x: c.pos.x, y: c.pos.y, z: c.pos.z })); }, get hero() { return P && P.rigName; }, get doorOpen() { return C.exit.open; }, get pixelRatio() { return pixelRatio; },
   movers: () => C.movers.map((m) => ({ x: m.pos.x, y: m.pos.y, z: m.pos.z, W: m.W, D: m.D })),
   moverAt: (i, t) => { const v = C.movers[i].at(t); return { x: v.x, z: v.z }; },
   trap: (t) => C.trapHeight(C.traps[0], t ?? G.t), trapPeriod: C.traps[0].period,

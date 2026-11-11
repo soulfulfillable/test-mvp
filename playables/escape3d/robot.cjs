@@ -69,11 +69,11 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
   for (const [name, w, h, t] of SIZES) {
     const { context, page } = await newPage(browser, w, h, base, t);
     await sleep(150);
-    const ex0 = await page.evaluate(() => __game.project(0, 3.4, -58.2));
+    const ex0 = await page.evaluate(() => (() => { const e = __game.exitPos; return __game.project(e.x, e.y, e.z); })());
     if (name === 'phone-390x844' || name === 'desk-1280x720') await shot(page, name + '-0-intro');
     await until(page, () => __game.state === 'play', null, 20000);
     await sleep(400);
-    const ex1 = await page.evaluate(() => __game.project(0, 3.4, -58.2));
+    const ex1 = await page.evaluate(() => (() => { const e = __game.exitPos; return __game.project(e.x, e.y, e.z); })());
     const inView = (e) => e.inFront && e.x > 0 && e.x < w && e.y > 0 && e.y < h;
     check(`${name}: exit on screen at first frame`, inView(ex0), `${ex0.x.toFixed(0)},${ex0.y.toFixed(0)}`);
     check(`${name}: exit on screen when play starts`, inView(ex1), `${ex1.x.toFixed(0)},${ex1.y.toFixed(0)}`);
@@ -141,14 +141,15 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const { context, page } = await newPage(browser, 390, 844, base + '?nointro&dt=60', true);
     await page.addScriptTag({ content: AUTOPILOT });
     // walk straight into the first spike strip
-    await page.evaluate(() => __auto.stick(0, -1));
+    // the live puddle is behind-left of the start (camera yaw 0 → stick (−x, +z) walks south-west)
+    await page.evaluate(() => __auto.stick(-0.55, 0.8));
     const hit = await until(page, () => __game.spikes >= 1, null, 30000);
     await page.evaluate(() => __auto.stick(0, 0));
     await sleep(200); await shot(page, 'hazard-spike-hit');
     const back = await until(page, () => __game.state === 'play', null, 10000);
     const s1 = await st(page);
-    check('spikes: touching them counts a hit', hit, `spikes=${s1.spikes}`);
-    check('spikes: hero is back on checkpoint 0 right away', back && Math.abs(s1.pos.z - 1.6) < 0.05 && Math.abs(s1.pos.x) < 0.05, JSON.stringify(s1.pos));
+    check('hazard: stepping in the live puddle counts a hit', hit, `spikes=${s1.spikes}`);
+    check('hazard: hero is back on checkpoint 0 right away', back && Math.abs(s1.pos.z - 3.0) < 0.05 && Math.abs(s1.pos.x) < 0.05, JSON.stringify(s1.pos));
     await context.close();
   }
 
@@ -163,17 +164,17 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
       last = await st(page);
       if (last.finished) { ok = true; break; }
       if (name === 'phone-390x844') {
-        if (!shots.trap && last.pos.z < -14 && last.pos.z > -15) { shots.trap = true; await shot(page, 'run-1-spike-hall'); }
-        if (!shots.pit && last.pos.z < -27 && last.pos.y > -0.2) { shots.pit = true; await shot(page, 'run-2-moving-platforms'); }
-        if (!shots.jumps && last.pos.z < -43.5 && last.pos.y > 0.9) { shots.jumps = true; await shot(page, 'run-3-jumps'); }
-        if (!shots.door && last.pos.z < -54) { shots.door = true; await shot(page, 'run-4-door-opening'); }
+        if (!shots.trap && last.pos.y > 3.4 && last.pos.z < -8 && last.pos.z > -10.4) { shots.trap = true; await shot(page, 'run-1-catwalk'); }
+        if (!shots.pit && last.pos.y < -0.3 && last.pos.y > -0.8) { shots.pit = true; await shot(page, 'run-2-pallets'); }
+        if (!shots.jumps && last.pos.z < -29.5 && last.pos.x > 10) { shots.jumps = true; await shot(page, 'run-3-yard'); }
+        if (!shots.door && last.pos.z < -37.5 && last.pos.x > -3) { shots.door = true; await shot(page, 'run-4-door-opening'); }
       }
       await sleep(250);
     }
     const log = await page.evaluate(() => __auto.log);
     check(`${name}: autopilot reaches the exit (touch controls only)`, ok, `game time ${last.runTime.toFixed(1)} s, retries ${last.deaths} (falls ${last.falls}, spikes ${last.spikes}), wall ${(Date.now() - t0) / 1000 | 0} s`);
     report.numbers[name + '-run'] = { time: +last.runTime.toFixed(2), deaths: last.deaths, falls: last.falls, spikes: last.spikes, log };
-    check(`${name}: all 3 checkpoints lit on the way`, last.cp === 2, `cp=${last.cp}`);
+    check(`${name}: all 4 checkpoints lit on the way`, last.cp === 3, `cp=${last.cp}`);
     if (ok) {
       await sleep(500); if (name === 'phone-390x844') await shot(page, 'run-5-escaped');
       const panel = await until(page, () => !document.getElementById('panel').classList.contains('hidden'), null, 20000);
@@ -184,7 +185,7 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
       check(`${name}: "Run again" button fully on screen`, btn.inside);
       await page.touchscreen.tap(btn.x, btn.y); await sleep(500);
       const r = await st(page);
-      check(`${name}: "Run again" restarts at the start`, r.state === 'play' && Math.abs(r.pos.z - 1.6) < 0.1 && !r.finished && r.cp === 0, JSON.stringify({ s: r.state, z: r.pos.z, cp: r.cp }));
+      check(`${name}: "Run again" restarts at the start`, r.state === 'play' && Math.abs(r.pos.z - 3.0) < 0.1 && !r.finished && r.cp === 0, JSON.stringify({ s: r.state, z: r.pos.z, cp: r.cp }));
     }
     await context.close();
   }
@@ -194,18 +195,18 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const { context, page } = await newPage(browser, 390, 844, base + '?nointro&dt=60', true);
     await page.addScriptTag({ content: AUTOPILOT });
     await page.evaluate(() => __auto.start());
-    await until(page, () => __game.cp >= 1, null, 300000);
+    await until(page, () => __game.cp >= 2, null, 300000);
     await page.evaluate(() => __auto.stop());
     const before = (await st(page)).falls;
-    // walk slowly off the ledge: the 1.1 m gap before the first platform swallows a slow walker
-    await page.evaluate(() => __auto.stick(0, -0.25));
+    // from checkpoint 2 (laundry, east of the drain) walk west, slowly, straight into the drain water
+    await page.evaluate(() => { const y = __game.camYaw, c = Math.cos(y), s = Math.sin(y); __auto.stick((-1 * c) * 0.35, (-1 * s) * 0.35); });
     const fell = await until(page, (b) => __game.falls > b, before, 30000);
     await page.evaluate(() => __auto.stick(0, 0));
     await sleep(200); await shot(page, 'hazard-fall');
     await until(page, () => __game.state === 'play', null, 10000);
     const s = await st(page);
-    check('pit: falling counts a fall', fell, `falls=${s.falls}`);
-    check('pit: hero is back on checkpoint 1', fell && Math.abs(s.pos.z + 21.6) < 0.3 && s.cp === 1, JSON.stringify(s.pos));
+    check('drain: falling in the water counts a fall', fell, `falls=${s.falls}`);
+    check('drain: hero is back on checkpoint 2', fell && Math.abs(s.pos.z + 21.6) < 0.3 && Math.abs(s.pos.x - 19.6) < 0.3 && s.cp === 2, JSON.stringify(s.pos));
     await context.close();
   }
 

@@ -4,6 +4,7 @@ import * as THREE from 'three';
 
 export const R = 0.3;        // capsule radius
 export const H = 1.05;       // capsule height
+const STEP_UP = 0.55;
 const SPEED = 6.0, ACC_G = 55, ACC_A = 22, GRAV = 28, JUMP_V = 10.2, COYOTE = 0.1, BUFFER = 0.14, MAX_FALL = 30;
 
 import { MAKERS } from './blocky.js';
@@ -31,6 +32,8 @@ export function createPlayer(scene) {
   function pushOut(solids) {
     for (const b of solids) {
       if (P.pos.y + 0.05 >= b.max.y || P.pos.y + H <= b.min.y) continue;
+      // stairs / kerbs: a ledge up to STEP_UP high is walked onto instead of blocking (only while on the ground)
+      if (P.grounded && !b.noStep && b.top - P.pos.y <= STEP_UP && overlapsXZ(b, R)) { P.pos.y = b.top; P.grounded = b; P.vel.y = 0; continue; }
       const cx = Math.max(b.min.x, Math.min(P.pos.x, b.max.x));
       const cz = Math.max(b.min.z, Math.min(P.pos.z, b.max.z));
       let dx = P.pos.x - cx, dz = P.pos.z - cz; const d2 = dx * dx + dz * dz;
