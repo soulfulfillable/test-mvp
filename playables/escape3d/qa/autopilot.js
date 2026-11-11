@@ -22,10 +22,12 @@
     const r = jumpEl.getBoundingClientRect(); const t = T(jumpEl, r.left + r.width / 2, r.top + r.height / 2, 9);
     fire(jumpEl, on ? 'touchstart' : 'touchend', t);
   }
-  function steer([tx, tz], gain = 2.4) {
+  function steer([tx, tz], gain = 2.4, cap = 6) {
     const p = g.pos; let vx = (tx - p.x) * gain, vz = (tz - p.z) * gain;
-    const v = Math.hypot(vx, vz); if (v > 6) { vx *= 6 / v; vz *= 6 / v; }
-    stick(vx / 6, vz / 6);
+    const v = Math.hypot(vx, vz); if (v > cap) { vx *= cap / v; vz *= cap / v; }
+    // world wish → camera-relative stick (the stick is turned by the camera yaw)
+    const y = g.camYaw, c = Math.cos(y), s = Math.sin(y);
+    stick((vx * c - vz * s) / 6, (vx * s + vz * c) / 6);
   }
   const near = ([x, z], r = 0.35) => Math.hypot(g.pos.x - x, g.pos.z - z) < r;
   const mv = (i, dt = 0) => g.moverAt(i, g.t + dt);
@@ -33,25 +35,27 @@
   const trapPhase = () => ((g.t % g.trapPeriod) + g.trapPeriod) % g.trapPeriod;
 
   // legs: walk to `to`, or (jump legs) wait at `hold` until `ready`, then jump and steer at `aim` until landed near it
+  const P = (i, dt = 0) => g.moverAt(i, g.t + dt);
   const L = [
-    { cp: 0, to: [2, -6] }, { to: [2, -10.4] }, { to: [-2, -11.4] }, { to: [-2, -14.3] },
-    { hold: () => [-2, -14.3], ready: () => trapPhase() < 0.55, to: [-2, -18.6] },
-    { to: [-2, -21.0] }, { to: [0, -21.6] },
-    { cp: 1, to: [0, -22.1] },
-    { jump: true, hold: () => [0, -22.1], ready: () => Math.abs(mv(0, 0.6).x) < 0.5, aim: () => { const m = mv(0, 0.25); return [m.x, m.z]; }, land: () => Math.abs(g.pos.z - M()[0].z) < 1.2 && g.pos.y > -0.2 },
-    { jump: true, hold: () => { const m = M()[0]; return [m.x, m.z - 0.6]; }, ready: () => mv(1, 0.55).z > -28.9 && Math.abs(M()[0].x) < 1.2, aim: () => { const m = mv(1, 0.25); return [m.x, m.z]; }, land: () => Math.abs(g.pos.z - M()[1].z) < 1.2 && g.pos.y > -0.2 },
-    { jump: true, hold: () => { const m = M()[1]; return [m.x, m.z - 0.6]; }, ready: () => M()[1].z < -30.4 && Math.abs(mv(2, 0.55).x) < 0.6, aim: () => { const m = mv(2, 0.25); return [m.x, m.z]; }, land: () => Math.abs(g.pos.z - M()[2].z) < 1.2 && g.pos.y > -0.2 },
-    { jump: true, hold: () => { const m = M()[2]; return [m.x, m.z - 0.6]; }, ready: () => Math.abs(M()[2].x) < 1.4, aim: () => [0, -38.2], land: () => g.pos.z < -37.2 },
-    { to: [0, -38.6] },
-    { cp: 2, to: [-1.2, -39.9] },
-    { jump: true, hold: () => [-1.2, -39.9], ready: () => true, aim: () => [-1.2, -42.1], land: () => g.pos.y > 0.45 },
-    { to: [-0.7, -42.6] },
-    { jump: true, hold: () => [-0.7, -42.6], ready: () => true, aim: () => [1.1, -44.9], land: () => g.pos.y > 0.95 },
-    { to: [0.8, -45.4] },
-    { jump: true, hold: () => [0.8, -45.4], ready: () => true, aim: () => [-0.6, -47.7], land: () => g.pos.y > 1.4 },
-    { to: [-0.5, -48.3] },
-    { jump: true, hold: () => [-0.5, -48.3], ready: () => true, aim: () => [0, -51.0], land: () => g.pos.y > 1.85 && g.pos.z < -50 },
-    { to: [0, -56] }, { to: [0, -61] },
+    { cp: 0, to: [3.5, 1.2] },                                   // to the foot of the stairs
+    { to: [3.5, -6.5] },                                          // walk up the steps
+    { to: [6.2, -6.5] },                                          // onto the catwalk
+    { to: [6.2, -10.1] },
+    { jump: true, hold: () => [6.2, -10.1], ready: () => true, aim: () => [6.2, -13.4], land: () => g.pos.y > 3.4 && g.pos.z < -12.6 }, // the broken gap
+    { to: [6.2, -14.0] },
+    { cp: 1, to: [6.2, -16.3] },
+    { to: [9.8, -16.3] },                                         // through the hole onto the landing
+    { slow: true, to: [11.2, -16.3], until: () => g.pos.y < 0.2 }, // step off, drop to the floor
+    { to: [10.6, -16.3] },
+    { hold: () => [10.6, -16.3], ready: () => trapPhase() < 0.4, to: [12.7, -16.3] }, // time the steam strip
+    { jump: true, hold: () => [12.7, g.pos.z], ready: () => Math.abs(P(0, 0.55).z - g.pos.z) < 0.5, aim: () => { const m = P(0, 0.2); return [m.x, m.z]; }, land: () => g.pos.y < -0.3 && g.pos.y > -0.8 && Math.abs(g.pos.x - 14.3) < 0.9 },
+    { jump: true, hold: () => { const m = M()[0]; return [m.x + 0.3, m.z]; }, ready: () => Math.abs(P(1, 0.5).z - P(0, 0.5).z) < 0.5, aim: () => { const m = P(1, 0.2); return [m.x, m.z]; }, land: () => g.pos.y < -0.3 && g.pos.y > -0.8 && Math.abs(g.pos.x - 16.7) < 0.9 },
+    { jump: true, hold: () => { const m = M()[1]; return [m.x + 0.3, m.z]; }, ready: () => true, aim: () => [19.2, g.pos.z], land: () => g.pos.y > -0.05 && g.pos.x > 18.1 },
+    { to: [19.6, -21.6] },
+    { cp: 2, to: [19.1, -23.0] }, { to: [19.1, -26.3] },
+    { cp: 3, to: [19.0, -29.5] }, { to: [14.5, -33.6] }, { to: [9.0, -33.6] },
+    { runjump: true, to: [0.6, -33.6], at: () => g.pos.x < 5.7, land: () => g.pos.x < 2.0 }, // run-up jump over the live puddle
+    { to: [-6.0, -33.6] }, { to: [-6.0, -38.0] }, { to: [0, -38.0] }, { to: [0, -42] },
   ];
   const cpStart = {}; L.forEach((l, i) => { if (l.cp !== undefined) cpStart[l.cp] = i; });
 
@@ -74,7 +78,14 @@
       }
       A.phase = 'walk';
     }
+    if (l.runjump && A.phase !== 'air') { // run at full speed, take off at the edge
+      steer(l.to, 6, 6); if (g.grounded && l.at()) { A.phase = 'air'; jump(true); A.jumpT = g.t; } return;
+    }
+    if (A.phase === 'air' && l.runjump) {
+      steer(l.to, 6, 6); if (g.grounded && g.t - A.jumpT > 0.15) { jump(false); if (l.land()) A.i++; A.phase = 'go'; } return;
+    }
     if (A.phase === 'walk') {
+      if (l.slow) { steer(l.to, 2.4, 1.6); if (l.until()) { A.i++; A.phase = 'go'; } return; }
       steer(l.to); if (near(l.to, 0.4)) { A.i++; A.phase = 'go'; }
       return;
     }
