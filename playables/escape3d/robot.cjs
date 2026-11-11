@@ -128,7 +128,7 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
   {
     const { context, page } = await newPage(browser, 1280, 720, base + '?nointro', false);
     const z0 = (await st(page)).pos.z;
-    await page.keyboard.down('KeyW'); await sleep(900); const a = await st(page);
+    await page.keyboard.down('KeyW'); await until(page, (z) => __game.pos.z < z - 1.5, z0, 4000); const a = await st(page);
     await page.keyboard.down('Space'); let maxY = 0; for (let i = 0; i < 6; i++) { await sleep(60); maxY = Math.max(maxY, (await st(page)).pos.y); }
     await page.keyboard.up('Space'); await page.keyboard.up('KeyW');
     check('desktop: W moves forward', a.pos.z < z0 - 1.5, `z ${z0.toFixed(2)} → ${a.pos.z.toFixed(2)}`);

@@ -313,7 +313,8 @@ export function buildCourse(scene) {
   // YARD  x[-14, 22]  z[-20.6, -40]  — fence, razor wire, a live puddle; the gate in the north wall
   // =====================================================================================
   const YW = 6;
-  solid(-14.6, 22.6, -0.4, 0, -20.0, -40.6, M.asphalt, { cast: false, tileU: 4, tileV: 4 });
+  solid(-14.6, 8.6, -0.4, 0, -20.0, -40.6, M.asphalt, { cast: false, tileU: 4, tileV: 4 });   // (stops at the laundry: its drain
+  solid(8.6, 22.6, -0.4, 0, -24.6, -40.6, M.asphalt, { cast: false, tileU: 4, tileV: 4 });    //  runs right up to the north wall)
   wallZ(-20.0, -40.6, -14.6, -14.0, 0, YW, M.concrete);                         // west
   wallZ(-24.0, -40.6, 22.0, 22.6, 0, YW, M.concrete);                           // east
   wallX(-14.6, -8.6, -20.0, -20.6, 0, YW, M.concrete);                          // the bit south-west of the hall
