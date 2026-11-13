@@ -92,3 +92,4 @@
 
 ## 부스트 기록
 - 11-10 10:09Z (기획 세션, 사용자가 Threads 글 https://www.threads.com/share/BA4b_utL8a 를 올리고 링크 줌): 이미 RUNNING 이던 무료 캠페인 `cmwa5rsdd0zw7og0hbo5xottq`(11-10 03:56Z 시작, 첫 링크 share/_y9k-8-pb)에 **두 번째 링크 추가** → budget 6→12, endsAt 11-13 03:56Z → **11-13 10:09Z**, status PENDING(갱신 처리). 새 게임 슬롯을 쓰지 않음 — 조직 무료 1회는 그대로 남음(다른 게임용). 게임당 링크 최대 2개라 이 캠페인엔 더 추가 불가.
+- 11-13 10:30Z (기획 세션 예약 확인): run cmwa5rsdd… **FINISHED**, goalProgress 0.509, spentRatio 0.114(예산 12 중 약 11%만 소진), failureReason null, creativeCount 20. 텔레메트리 11-08~13: 세션 262·사용자 218, 레벨 시작 69세션, 세션 평균 612초(중앙값 0 — 측정 한계 가능, 최대 5.6시간 이상치). `get_submission_state`(archive cmwa5mvqw…, 샌드박스 라이브): 여전히 **MODERATION_UNAVAILABLE, catalogAvailable false**. 새 캠페인(이 게임은 유료만 가능 $20)·재게시·Submit 안 함. 조직 무료 1회 남음.
