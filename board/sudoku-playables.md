@@ -60,6 +60,7 @@
 - 아쉬운 점(숨기지 않음): ① 실기기 사파리 미확인 ② 판 중간 상태(진행 중인 숫자) 저장 없음 — 나가면 그 판은 처음부터(레벨 진행은 저장) ③ 랭킹은 기기 로컬 + 도전장 링크뿐, Bridge 리더보드 `levels` 는 config 선언·setScore 만 ④ 도전장 링크는 Pages 판에서만(Playgama 는 URL 을 못 바꿈) ⑤ BGM 2곡은 Mole Mash·Kitty Queens 와 같은 CC0 곡 ⑥ 데일리 6×6 은 내 결정(사용자가 9×9 를 원하면 한 줄 수정).
 
 ## 사용자 피드백 기록 (최신이 위, 원문 인용 + 어떻게 반영했나)
+- 11-13 13:30 KST 예약 점검: 부스트 run `cmwa5rsdd0zw7og0hbo5xottq` **아직 RUNNING** — 두 번째 Threads 링크(`https://www.threads.com/share/BA4b_utL8a`)가 붙어 예산 2배·**종료 11-13 10:09Z(19:09 KST)로 연장**. goalProgress 0.49, 지출 11%. 무료 부스트 남은 것 없음(다음은 유료 $20). 심사 제출 여전히 닫힘(MODERATION_UNAVAILABLE — 샌드박스 목표 미달). 다음 점검 11-13 20:30 KST 예약.
 - 11-10 샌드박스 1.2.1 폰 캡처(6 played, Hint AD 보임) 뒤 **"아냐 갠찮은듯"** → 수정 없음. 부스트 끝(11-13)까지 대기.
 - 11-10 사용자가 Threads 글 링크 전달 **https://www.threads.com/share/_y9k-8-pb** → `start_sandbox_traffic(postUrls)` 실행: **run `cmwa5rsdd0zw7og0hbo5xottq`** (FREE, PENDING → RUNNING, 2026-11-10 03:56Z ~ 11-13 03:56Z, 예상 ~50플레이). 조직 무료 부스트 남은 횟수 1(두 번째 링크를 더 주면 같은 캠페인에 1단위 추가·3일 연장). 결과는 `get_sandbox_traffic` 로 추적, 끝나면 콘솔 샌드박스 카드 목표 확인(사용자 캡처).
 - 11-10 **"아니근데 실명 호랑이 저거 쓰기싫어 ㅠ"** → 고양이 실명 'Horangi' 를 **Kitty Sudoku 에서 전부 제거**(게임 문구 2곳·CREDITS·Playgama 설명/story·Threads 문구). 그림은 그대로, 이름 없이 'the cat'. v1.2.1 → Playgama 아카이브 **kitty-sudoku-1.2.1 id `cmwa5mvqw0zsfog0haac5t0kj`** confirm, **빌드 체크 PASSED**. 로봇 108/108. 샌드박스는 아직 1.2.0(이름 2곳 남음) — 교체는 사용자 yes. 폼 description/story 도 이름 제거 저장됨. ⚠️ **Kitty Queens Playables 는 이름을 크게 씀**("Starring Horangi" 필, 튜토리얼 문구, 폼) — 그 세션/기획 파트너가 사용자에게 확인 뒤 처리(이 세션은 그 폴더를 안 건드림).
