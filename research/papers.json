@@ -4719,5 +4719,28 @@
       "tongue image constitution reasoning language model"
     ],
     "first_seen": "2026-11-10"
+  },
+  {
+    "id": "doi:10.3350/cmh.2026.0258",
+    "title": "Artificial intelligence and generative models in hepatology: from large language models to digital pathology in liver disease diagnosis and treatment.",
+    "authors": [
+      "Peng N",
+      "Wang MY",
+      "Song SJ",
+      "Lai JC",
+      "Hui VW",
+      "Wong VW",
+      "Wong GL",
+      "Bhat M",
+      "Yip TC."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.3350/cmh.2026.0258",
+    "abstract": "Artificial intelligence (AI), particularly foundation and generative models, is reshaping the practice of hepatology through enhanced knowledge synthesis, quantitative and reproducible analysis of multimodal data, and personalized clinical decision support. This narrative review examines the transition from task-specific discrimination AI to large language models (LLMs), multimodal foundation models, and agentic AI. We synthesize evidence from original and validation studies, clinical evaluations, and benchmark studies, as well as expert reviews and regulatory frameworks across metabolic dysfunction-associated steatotic liver disease, chronic hepatitis B, cirrhosis and portal hypertension, hepatocellular carcinoma, and liver transplantation. LLMs can convert free-text notes into structured data, summarize longitudinal electronic health records, support patient education, and retrieve guideline-based information. Retrieval-augmented generation and agentic AI may improve traceability and workflow support, but current evidence is largely retrospective or proof-of-concept. In digital pathology and imaging, discriminative AI has enabled more quantitative and reproducible histologic scoring and biomarker analysis. Pathology and multimodal foundation models offer transferable representations, report generation, and cross-modal reasoning, but hepatology-specific validation remains limited. Key risks include hallucination, automation bias, domain shift across centers and devices, and inequities due to under-representation of patient subgroups. We outline the future directions for safe AI model deployment based on multimodal foundation models, prospective and federated evaluation, lifecycle governance, and continuous monitoring for performance, calibration, and equity. Most generative AI applications in hepatology remain at the proof-of-concept stage, and rigorous prospective validation with human-in-the-loop oversight is required before clinical integration.",
+    "matched_queries": [
+      "chain of thought reasoning traditional chinese medicine"
+    ],
+    "first_seen": "2026-11-13"
   }
 ]
