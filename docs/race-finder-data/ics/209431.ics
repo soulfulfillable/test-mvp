@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209431@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T080000
+DTEND;TZID=America/Los_Angeles:20261121T100000
+SUMMARY:Gobbler 5K\, 10K\, 13.1M at Vancouver\, WA (47)
+LOCATION:800 NE 117th St\, Vancouver\, WA\, 98685
+URL:https://runsignup.com/Race/WA/Vancouver/47VancouverWA
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Vancouver/47VancouverW
+ A
+END:VEVENT
+END:VCALENDAR

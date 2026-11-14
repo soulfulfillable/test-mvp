@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173015@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261115T073000
+DTEND;TZID=America/Chicago:20261115T093000
+SUMMARY:La Porte By the Bay Half Marathon
+LOCATION:636 N. Bayshore Dr.\, La Porte\, TX\, 77571
+URL:https://runsignup.com/Race/TX/LaPorte/LaPorteByTheBayHalf
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/LaPorte/LaPorteByTheBa
+ yHalf
+END:VEVENT
+END:VCALENDAR

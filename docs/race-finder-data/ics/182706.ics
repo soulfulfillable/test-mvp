@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-182706@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T050000
+DTEND;TZID=America/New_York:20261231T070000
+SUMMARY:Tunnel to Towers Foundation Striped Bass Fishing Tournament Briel
+ le NJ
+LOCATION:Waypoint 622 (Captains Dinner and Program. 5/16)\, BRIELLE\, NJ
+ \, 08730
+URL:https://runsignup.com/Race/NJ/BRIELLE/TunnelToTowersFoundationBassFis
+ hingTournamentBrielleNJ
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/BRIELLE/TunnelToTowers
+ FoundationBassFishingTournamentBrielleNJ
+END:VEVENT
+END:VCALENDAR

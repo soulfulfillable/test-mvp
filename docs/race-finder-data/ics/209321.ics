@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209321@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T080000
+DTEND;TZID=America/New_York:20261206T100000
+SUMMARY:Stocking Suffer 8-Hour Endurance Run
+LOCATION:191 Log Canoe Circle\, Stevensville\, MD\, 21666
+URL:https://runsignup.com/Race/MD/Stevensville/StockingSufferRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Stevensville/StockingS
+ ufferRun
+END:VEVENT
+END:VCALENDAR

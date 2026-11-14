@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136117@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T083000
+DTEND;TZID=America/New_York:20261114T103000
+SUMMARY:Stars and Strides 5K & Family Fun Day - Delaware
+LOCATION:200 Christina Pkwy\, Newark\, DE\, 19713
+URL:https://runsignup.com/Race/DE/Newark/StarsandStrides5KDelaware
+DESCRIPTION:Sign up: https://runsignup.com/Race/DE/Newark/StarsandStrides
+ 5KDelaware
+END:VEVENT
+END:VCALENDAR

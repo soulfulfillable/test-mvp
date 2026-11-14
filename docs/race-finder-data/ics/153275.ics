@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153275@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T093000
+DTEND;TZID=America/New_York:20261121T113000
+SUMMARY:Sargent Elementary 5K Turkey Trot
+LOCATION:29 Education Drive\, Beacon\, NY\, 12508
+URL:https://runsignup.com/Race/NY/Beacon/sargentturkeytrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Beacon/sargentturkeytr
+ ot
+END:VEVENT
+END:VCALENDAR

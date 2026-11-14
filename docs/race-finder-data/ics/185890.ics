@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-185890@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261122T070000
+DTEND;TZID=America/Chicago:20261122T090000
+SUMMARY:Turkey Dri Tri Oak Brook Park District
+LOCATION:1450 Forest Gate Road\, Oak Brook\, IL\, 60523
+URL:https://runsignup.com/Race/IL/OakBrook/TurkeyDriTriOakBrookParkDistri
+ ct
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/OakBrook/TurkeyDriTriO
+ akBrookParkDistrict
+END:VEVENT
+END:VCALENDAR

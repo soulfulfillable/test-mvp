@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193987@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T093000
+DTEND;TZID=America/Chicago:20261205T113000
+SUMMARY:The Village of Norridge 5K Reindeer Run and Kids Dash
+LOCATION:7740 W Montrose Ave\, Norridge\, IL\, 60706
+URL:https://runsignup.com/Race/IL/Norridge/TheVillageOfNorridge5KReindeer
+ RunAndKidsDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Norridge/TheVillageOfN
+ orridge5KReindeerRunAndKidsDash
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215601@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261201T060000
+DTEND;TZID=America/Detroit:20261201T080000
+SUMMARY:Grayling Youth Wrestling 2026/2027 sign-up
+LOCATION:557 I-75 Business Lp\, Grayling\, MI\, 49738
+URL:https://runsignup.com/Race/MI/Grayling/Graylingyouthwrestling
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Grayling/Graylingyouth
+ wrestling
+END:VEVENT
+END:VCALENDAR

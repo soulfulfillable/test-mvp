@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213981@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T090000
+DTEND;TZID=America/Chicago:20261121T110000
+SUMMARY:Logan Turkey Trot 5k/1mile
+LOCATION:1200 N 2nd Ave\, Logan\, IA\, 51546
+URL:https://runsignup.com/Race/IA/Logan/LoganIowaFoundationTurkeyTrot5k1m
+ ile
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/Logan/LoganIowaFoundat
+ ionTurkeyTrot5k1mile
+END:VEVENT
+END:VCALENDAR

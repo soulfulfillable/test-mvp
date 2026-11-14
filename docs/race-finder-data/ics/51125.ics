@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-51125@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T234500
+DTEND;TZID=America/New_York:20270101T014500
+SUMMARY:Midnight Special 5K
+LOCATION:4730 W Bancroft Street #8\, Toledo\, OH\, 43615
+URL:https://runsignup.com/Race/OH/Toledo/MidnightSpecial5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Toledo/MidnightSpecial
+ 5K
+END:VEVENT
+END:VCALENDAR

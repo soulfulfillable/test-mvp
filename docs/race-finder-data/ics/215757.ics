@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215757@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261213T084500
+DTEND;TZID=America/Los_Angeles:20261213T104500
+SUMMARY:12ks of Christmas
+LOCATION:7525 166th Ave NE\, Redmond\, WA\, 98052
+URL:https://runsignup.com/Race/WA/Redmond/12kOfChristmas
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Redmond/12kOfChristmas
+END:VEVENT
+END:VCALENDAR

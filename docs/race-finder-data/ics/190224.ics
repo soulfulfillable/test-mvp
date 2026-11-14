@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190224@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261205T090000
+DTEND;TZID=America/Phoenix:20261205T110000
+SUMMARY:The Lainy's Light 5K Santa Run/Walk
+LOCATION:University of Arizona Mall\, Tucson\, AZ\, 85721
+URL:https://runsignup.com/Race/AZ/Tucson/LainysLight5KSantaRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Tucson/LainysLight5KSa
+ ntaRun
+END:VEVENT
+END:VCALENDAR

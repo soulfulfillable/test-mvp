@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-156150@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261205T173000
+DTEND;TZID=America/Los_Angeles:20261205T193000
+SUMMARY:Jingle Bell 5k Relay or 3k Individual
+LOCATION:200 Water St NE - Riverfront Park\, Salem\, OR\, 97301
+URL:https://runsignup.com/Race/OR/Salem/JingleBell5kRelay
+DESCRIPTION:Sign up: https://runsignup.com/Race/OR/Salem/JingleBell5kRela
+ y
+END:VEVENT
+END:VCALENDAR

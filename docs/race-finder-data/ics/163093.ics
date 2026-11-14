@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-163093@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:Gobbler 5K\, 10K\, & 13.1M at Winston-Salem\, NC (47)
+LOCATION:285 Meadowlark Dr\, Winston-Salem\, NC\, 27106
+URL:https://runsignup.com/Race/NC/WinstonSalem/Jamison11162024
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/WinstonSalem/Jamison11
+ 162024
+END:VEVENT
+END:VCALENDAR

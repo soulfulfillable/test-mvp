@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205129@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T073000
+DTEND;TZID=America/New_York:20261114T093000
+SUMMARY:Veterans Day Freedom Run 5K/10K/13.1 MIAMI
+LOCATION:Playita (Course Map will be emailed)\, Key Biscayne\, FL\, 33149
+URL:https://runsignup.com/Race/FL/KeyBiscayne/VeteransDayFreedomRun5K10KM
+ IAMI1114
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/KeyBiscayne/VeteransDa
+ yFreedomRun5K10KMIAMI1114
+END:VEVENT
+END:VCALENDAR

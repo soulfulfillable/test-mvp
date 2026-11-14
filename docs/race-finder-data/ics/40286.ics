@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-40286@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261120T170000
+DTEND;TZID=America/New_York:20261120T190000
+SUMMARY:Dashin' thru the .... Lights! 2 Mile Run
+LOCATION:931 Stony Hill Rd\, Yardley\, PA\, 19067
+URL:https://runsignup.com/Race/PA/Yardley/DashinThroughtheLights2milerunw
+ alk
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Yardley/DashinThrought
+ heLights2milerunwalk
+END:VEVENT
+END:VCALENDAR

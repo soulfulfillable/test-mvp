@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-28520@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261121T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261121T120000
+SUMMARY:32nd Annual Turkey Trot 5K
+LOCATION:Homestead High School Environmental Center\, Fort Wayne\, IN\, 4
+ 6804
+URL:https://runsignup.com/Race/IN/FortWayne/FortWayneRunningClubTurkeyTro
+ t
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/FortWayne/FortWayneRun
+ ningClubTurkeyTrot
+END:VEVENT
+END:VCALENDAR

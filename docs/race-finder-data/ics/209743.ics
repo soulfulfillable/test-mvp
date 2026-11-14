@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209743@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T081500
+DTEND;TZID=America/Los_Angeles:20261121T101500
+SUMMARY:MVRRC 13th Annual Turkey Run 1M\, 5K and 10K Walk/Race
+LOCATION:17801 Lake Perris  Perris\, CA 92571\, Perris\, CA\, 92571
+URL:https://runsignup.com/Race/CA/Perris/MVRRCThAnnualTurkeyRunM5KAnd10KW
+ alkRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Perris/MVRRCThAnnualTu
+ rkeyRunM5KAnd10KWalkRace
+END:VEVENT
+END:VCALENDAR

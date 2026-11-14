@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172243@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270103T000000
+DTEND;TZID=America/New_York:20270103T020000
+SUMMARY:Freeze Your Buns Winter 5K Series
+LOCATION:Conway Ice Arena\, Nashua\, NH\, 03062
+URL:https://runsignup.com/Race/NH/Nashua/FreezeYourBuns
+DESCRIPTION:Sign up: https://runsignup.com/Race/NH/Nashua/FreezeYourBuns
+END:VEVENT
+END:VCALENDAR

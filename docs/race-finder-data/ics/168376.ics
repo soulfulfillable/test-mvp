@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168376@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T080000
+DTEND;TZID=America/New_York:20261212T100000
+SUMMARY:Run for the Beaches 5K & Fun Run/Walk
+LOCATION:Gulf Front Park (10400 Gulf Blvd)\, Treasure Island\, FL\, 33706
+URL:https://runsignup.com/Race/FL/TreasureIsland/RunfortheBeaches5KFunRun
+ Walk
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/TreasureIsland/Runfort
+ heBeaches5KFunRunWalk
+END:VEVENT
+END:VCALENDAR

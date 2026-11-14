@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155033@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T090000
+DTEND;TZID=America/Chicago:20261205T110000
+SUMMARY:Red Nose Run 10K 2026
+LOCATION:1330 Chisholm Trail Parkway\, Duncan\, OK\, 73533
+URL:https://runsignup.com/Race/OK/Duncan/RedNoseRunDuncanOk
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Duncan/RedNoseRunDunca
+ nOk
+END:VEVENT
+END:VCALENDAR

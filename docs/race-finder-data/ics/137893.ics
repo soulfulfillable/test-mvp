@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137893@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261202T180000
+DTEND;TZID=America/Detroit:20261202T200000
+SUMMARY:Eggnog Jog
+LOCATION:Calhoun County Fairgrounds\, Marshall\, MI\, 49068
+URL:https://runsignup.com/Race/MI/Marshall/EggnogJog1mile
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Marshall/EggnogJog1mil
+ e
+END:VEVENT
+END:VCALENDAR

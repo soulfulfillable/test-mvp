@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213512@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:Swampfest 5k Gator Stomp
+LOCATION:5401 Land O' Lakes Blvd\,\, Land O Lakes\, FL\, 34639
+URL:https://runsignup.com/Race/FL/LandOLakes/Swampfest5kGatorStomp
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/LandOLakes/Swampfest5k
+ GatorStomp
+END:VEVENT
+END:VCALENDAR

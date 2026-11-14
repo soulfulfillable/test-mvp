@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-2465@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261219T100000
+DTEND;TZID=America/Chicago:20261219T120000
+SUMMARY:Tour de Trails
+LOCATION:See Description Below for Each Race Location\, Rockford\, IL\, 6
+ 1102
+URL:https://runsignup.com/Race/IL/Rockford/TourdeTrails
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Rockford/TourdeTrails
+END:VEVENT
+END:VCALENDAR

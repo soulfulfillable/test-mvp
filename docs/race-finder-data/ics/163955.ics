@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-163955@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T080000
+DTEND;TZID=America/New_York:20261206T100000
+SUMMARY:Caloosa Fest
+LOCATION:18251 N River Rd\, Alva\, FL\, 33920
+URL:https://runsignup.com/Race/FL/Alva/CaloosaAR
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Alva/CaloosaAR
+END:VEVENT
+END:VCALENDAR

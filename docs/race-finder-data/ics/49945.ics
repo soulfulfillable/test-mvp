@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-49945@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:The Frosty 5K
+LOCATION:6700 Clark Road\, Sarasota\, FL\, 34241
+URL:https://runsignup.com/Race/FL/Sarasota/TheFrosty5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Sarasota/TheFrosty5K
+END:VEVENT
+END:VCALENDAR

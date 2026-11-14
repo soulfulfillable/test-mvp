@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-120393@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T090000
+DTEND;TZID=America/Chicago:20261126T110000
+SUMMARY:Turkey Trot at Wahlert High School
+LOCATION:2005 Kane St\, Dubuque\, IA\, 52001
+URL:https://runsignup.com/Race/IA/Dubuque/TurkeyTrotatWahlertHighSchool
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/Dubuque/TurkeyTrotatWa
+ hlertHighSchool
+END:VEVENT
+END:VCALENDAR

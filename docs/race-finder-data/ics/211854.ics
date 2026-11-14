@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211854@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T093000
+DTEND;TZID=America/New_York:20261212T113000
+SUMMARY:Miles for Migraine Miami
+LOCATION:4803 SW 82nd Street\, Miami\, FL\, 33155
+URL:https://runsignup.com/Race/FL/Miami/MilesForMigraineFL
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Miami/MilesForMigraine
+ FL
+END:VEVENT
+END:VCALENDAR

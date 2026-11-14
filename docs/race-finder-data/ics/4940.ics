@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-4940@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270104T000000
+DTEND;TZID=America/New_York:20270104T020000
+SUMMARY:DAVE'S SPRING IN-TRAINING • 2027
+LOCATION:5700 Monroe Street\, Sylvania\, OH\, 43560
+URL:https://runsignup.com/Race/OH/Sylvania/SpringMarathonTraining
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Sylvania/SpringMaratho
+ nTraining
+END:VEVENT
+END:VCALENDAR

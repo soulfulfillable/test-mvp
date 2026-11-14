@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-23828@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T161000
+DTEND;TZID=America/New_York:20261212T181000
+SUMMARY:Ocala Reindeer Run Presented by the Gaekwad Family
+LOCATION:NDS Global\, Ocala\, FL\, 34470
+URL:https://runsignup.com/Race/FL/Ocala/OcalaReindeerRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Ocala/OcalaReindeerRun
+END:VEVENT
+END:VCALENDAR

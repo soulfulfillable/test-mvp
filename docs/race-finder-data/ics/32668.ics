@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-32668@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T093000
+DTEND;TZID=America/New_York:20261126T113000
+SUMMARY:2026 CEA/Johanna Foods Turkey Trot
+LOCATION:43 Park Avenue (Court Street Park)\, Flemington\, NJ\, 08822
+URL:https://runsignup.com/Race/NJ/Flemington/CEAJohannaFoodsTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Flemington/CEAJohannaF
+ oodsTurkeyTrot
+END:VEVENT
+END:VCALENDAR

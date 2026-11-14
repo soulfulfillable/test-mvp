@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-200961@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:Pope Memorial SPCA Frosty Paws 5K
+LOCATION:95 Silk Farm Road\, Concord\, NH\, 03301
+URL:https://runsignup.com/Race/NH/Concord/PopeMemorialSPCAFrostyPaws5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NH/Concord/PopeMemorialSP
+ CAFrostyPaws5k
+END:VEVENT
+END:VCALENDAR

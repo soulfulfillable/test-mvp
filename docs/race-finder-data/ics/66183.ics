@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66183@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261126T083000
+DTEND;TZID=America/Denver:20261126T103000
+SUMMARY:The Official Las Cruces Thanksgiving Day Turkey Trot
+LOCATION:Field of Dream\, Las Cruces\, NM\, 88007
+URL:https://runsignup.com/Race/NM/LasCruces/OfficialLasCrucesThanksgiving
+ DayTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NM/LasCruces/OfficialLasC
+ rucesThanksgivingDayTurkeyTrot
+END:VEVENT
+END:VCALENDAR

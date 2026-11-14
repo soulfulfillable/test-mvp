@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-189641@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261119T180000
+DTEND;TZID=America/New_York:20261119T200000
+SUMMARY:Fifth Street Cross Series
+LOCATION:165 Klines Lane\, Emmaus\, PA\, 18049
+URL:https://runsignup.com/Race/PA/Emmaus/FifthStreetCrossSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Emmaus/FifthStreetCros
+ sSeries
+END:VEVENT
+END:VCALENDAR

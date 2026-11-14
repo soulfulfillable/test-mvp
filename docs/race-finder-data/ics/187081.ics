@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187081@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T100000
+DTEND;TZID=America/New_York:20270101T120000
+SUMMARY:Run for the Call 2027
+LOCATION:500 Boardwalk\, Point Pleasant Beach\, NJ\, 08742
+URL:https://runsignup.com/Race/NJ/PointPleasantBeach/RunForTheCall
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/PointPleasantBeach/Run
+ ForTheCall
+END:VEVENT
+END:VCALENDAR

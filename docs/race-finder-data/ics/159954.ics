@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-159954@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T080000
+DTEND;TZID=America/Chicago:20261212T100000
+SUMMARY:Holiday 5K\, 10K\, & 13.1M at Sapulpa\, OK (50)
+LOCATION:1151 S Park St\, Sapulpa\, OK\, 74066
+URL:https://runsignup.com/Race/OK/Sapulpa/Kelly1272024
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Sapulpa/Kelly1272024
+END:VEVENT
+END:VCALENDAR

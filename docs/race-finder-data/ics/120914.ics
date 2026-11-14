@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-120914@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T090000
+DTEND;TZID=America/Chicago:20261205T110000
+SUMMARY:Hearts of Gold Classic 5K Run/Walk Project Compassion
+LOCATION:7200 South Zero Street\, Fort Smith\, AR\, 72903
+URL:https://runsignup.com/Race/AR/FortSmith/HeartsofGoldClassic5KRunWalkP
+ rojectCompassion
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/FortSmith/HeartsofGold
+ Classic5KRunWalkProjectCompassion
+END:VEVENT
+END:VCALENDAR

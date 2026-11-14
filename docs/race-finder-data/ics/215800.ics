@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215800@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T100000
+DTEND;TZID=America/New_York:20261114T120000
+SUMMARY:Hope In Motion
+LOCATION:622 Lakestone Commons\, Fuquay Varina\, NC\, 27526
+URL:https://runsignup.com/Race/NC/FuquayVarina/HopeInMotionChallenge
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/FuquayVarina/HopeInMot
+ ionChallenge
+END:VEVENT
+END:VCALENDAR

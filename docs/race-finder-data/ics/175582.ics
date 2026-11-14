@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-175582@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261205T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261205T150000
+SUMMARY:Reindeer Romp
+LOCATION:1801 Indiana 46 East\, Nashville\, IN\, 47448
+URL:https://runsignup.com/Race/IN/Nashville/YMCAReindeerRomp
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Nashville/YMCAReindeer
+ Romp
+END:VEVENT
+END:VCALENDAR

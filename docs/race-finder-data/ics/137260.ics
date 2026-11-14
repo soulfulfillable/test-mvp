@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137260@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261204T173000
+DTEND;TZID=America/Chicago:20261204T193000
+SUMMARY:Run For a Claus Presented by First Independent Bank
+LOCATION:Independence Park - enter the park off E. Lyon St.\, Marshall\, 
+ MN\, 56258
+URL:https://runsignup.com/Race/MN/Marshall/RunforAClausmarshall22
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Marshall/RunforAClausm
+ arshall22
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215871@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T080000
+DTEND;TZID=America/New_York:20261213T100000
+SUMMARY:Miles for Mark (B.E. F.A.S.T.)
+LOCATION:Park Side Ave & Parade Pl\,\, Brooklyn\, NY\, 11215
+URL:https://runsignup.com/Race/NY/Brooklyn/MilesForMarkBEFAST
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Brooklyn/MilesForMarkB
+ EFAST
+END:VEVENT
+END:VCALENDAR

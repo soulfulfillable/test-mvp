@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-95387@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:2026 Davidson Turkey Trot
+LOCATION:119 South Main Street\, Davidson\, NC\, 28036
+URL:https://runsignup.com/Race/NC/Davidson/DavidsonTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Davidson/DavidsonTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

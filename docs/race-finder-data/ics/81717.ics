@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81717@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261125T100000
+DTEND;TZID=America/Chicago:20261125T120000
+SUMMARY:Beau Chene Country Club Turkey Trot Classic 1 Mile Fun Run and 5K
+LOCATION:602 N. Beau Chene Drive\, Mandeville\, LA\, 70471
+URL:https://runsignup.com/Race/LA/Mandeville/BeauCheneCountryClubTurkeyDa
+ yClassic1mileFunRunand5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Mandeville/BeauCheneCo
+ untryClubTurkeyDayClassic1mileFunRunand5K
+END:VEVENT
+END:VCALENDAR

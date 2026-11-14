@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168319@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261127T150000
+DTEND;TZID=America/New_York:20261127T170000
+SUMMARY:JB Sunset 5K
+LOCATION:RF&P Park\, Glen Allen\, VA\, 23060
+URL:https://runsignup.com/Race/VA/GlenAllen/JBSunset5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/GlenAllen/JBSunset5K
+END:VEVENT
+END:VCALENDAR

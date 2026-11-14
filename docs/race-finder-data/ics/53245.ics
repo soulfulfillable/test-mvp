@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-53245@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T091500
+DTEND;TZID=America/New_York:20270101T111500
+SUMMARY:12th Annual Resolution 5K and 1-Mile Run
+LOCATION:24th Street Park\, Virginia Beach\, VA\, 23451
+URL:https://runsignup.com/Race/VA/VirginiaBeach/3rdAnnualResolution5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/VirginiaBeach/3rdAnnua
+ lResolution5K
+END:VEVENT
+END:VCALENDAR

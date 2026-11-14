@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-133191@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T073000
+DTEND;TZID=America/Chicago:20261126T093000
+SUMMARY:Galveston Island Turkey Trot
+LOCATION:2222 28th Street\, Galveston\, TX\, 77550
+URL:https://runsignup.com/Race/TX/Galveston/GalvestonIslandTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Galveston/GalvestonIsl
+ andTurkeyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-83646@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261212T090000
+DTEND;TZID=America/Denver:20261212T110000
+SUMMARY:Santa Catch 5k & 10k
+LOCATION:100 N 5th St\, Windsor\, CO\, 80550
+URL:https://runsignup.com/Race/CO/Windsor/SantaCatch5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Windsor/SantaCatch5K
+END:VEVENT
+END:VCALENDAR

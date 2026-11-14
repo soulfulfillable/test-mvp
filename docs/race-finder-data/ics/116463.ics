@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-116463@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T085000
+DTEND;TZID=America/New_York:20261212T105000
+SUMMARY:Chattanooga Bar Foundation and Chattanooga Bar Association Fourth
+  Annual Lawyers Have Hear
+LOCATION:Camp Jordan\, East Ridge\, TN\, 37412
+URL:https://runsignup.com/Race/TN/EastRidge/ChattanoogaBarAssociationLawy
+ ersHaveHeart
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/EastRidge/ChattanoogaB
+ arAssociationLawyersHaveHeart
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-134277@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T083000
+DTEND;TZID=America/New_York:20261121T103000
+SUMMARY:Christ the King Regional School's 29th Annual King's Run
+LOCATION:Christ the King Regional School\, Haddonfield\, NJ\, 08033
+URL:https://runsignup.com/Race/NJ/Haddonfield/The25thAnnualCKRSKingsRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Haddonfield/The25thAnn
+ ualCKRSKingsRun
+END:VEVENT
+END:VCALENDAR

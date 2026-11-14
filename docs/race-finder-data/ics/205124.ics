@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205124@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T073000
+DTEND;TZID=America/Denver:20261114T093000
+SUMMARY:Veterans Day Freedom Run 5K/10K/13.1 DENVER/AURORA
+LOCATION:Piney Creek Hollow Park (Course Map will be emailed)\, Centennia
+ l\, CO\, 80016
+URL:https://runsignup.com/Race/CO/Centennial/VeteransDayFreedomRun5K10KDE
+ NVERAURORA1114
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Centennial/VeteransDay
+ FreedomRun5K10KDENVERAURORA1114
+END:VEVENT
+END:VCALENDAR

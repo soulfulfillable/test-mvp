@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217833@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T080000
+DTEND;TZID=America/New_York:20261212T100000
+SUMMARY:Jolly Jog 2026
+LOCATION:201 Market St. West\, Gaithersburg\, MD\, 20878
+URL:https://runsignup.com/Race/MD/Gaithersburg/JollyJogGburg2026
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Gaithersburg/JollyJogG
+ burg2026
+END:VEVENT
+END:VCALENDAR

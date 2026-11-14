@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212577@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261115T080000
+DTEND;TZID=America/Denver:20261115T100000
+SUMMARY:Salute  to Veterans 5K/10K/Half Marathon - Colorado Springs
+LOCATION:3225 Mark Dabling Blvd\, Colorado Springs\, CO\, 80907
+URL:https://runsignup.com/Race/CO/ColoradoSprings/SaluteToVeterans5K10KHa
+ lfMarathonColoradoSprings
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/ColoradoSprings/Salute
+ ToVeterans5K10KHalfMarathonColoradoSprings
+END:VEVENT
+END:VCALENDAR

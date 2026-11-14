@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-186869@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T111500
+DTEND;TZID=America/New_York:20261114T131500
+SUMMARY:Hobble Gobble Prediction Walk/Run
+LOCATION:The Stables at Windy Point\, Potsdam\, NY\, 13676
+URL:https://runsignup.com/Race/NY/Potsdam/HobbleGobblePredictionWalkRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Potsdam/HobbleGobblePr
+ edictionWalkRun
+END:VEVENT
+END:VCALENDAR

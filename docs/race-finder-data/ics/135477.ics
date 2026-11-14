@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135477@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261205T090000
+DTEND;TZID=America/Los_Angeles:20261205T110000
+SUMMARY:Stockton Santa Dash! 5K & 10K
+LOCATION:University of the Pacific\, Stockton\, CA\, 95207
+URL:https://runsignup.com/Race/CA/Stockton/StocktonSantaDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Stockton/StocktonSanta
+ Dash
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-99873@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T081500
+DTEND;TZID=America/New_York:20261126T101500
+SUMMARY:Pequot Runners Thanksgiving Day Race
+LOCATION:Wakeman Boys & Girls Club\,  385 Center Street\, Southport\, CT\
+ , 06890
+URL:https://runsignup.com/Race/CT/Southport/PequotRunners5MileTDayRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Southport/PequotRunner
+ s5MileTDayRace
+END:VEVENT
+END:VCALENDAR

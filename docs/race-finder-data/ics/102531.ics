@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-102531@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T180000
+DTEND;TZID=America/New_York:20261219T200000
+SUMMARY:The Longest Night (50mi - 50k - 26.2 - 13.1 - 10k)
+LOCATION:220 Lakewood Drive\, Greenville\, SC\, 29607
+URL:https://runsignup.com/Race/SC/Greenville/TheLongestNightTrailRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Greenville/TheLongestN
+ ightTrailRun
+END:VEVENT
+END:VCALENDAR

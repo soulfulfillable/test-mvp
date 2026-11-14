@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137615@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T103000
+DTEND;TZID=America/New_York:20261122T123000
+SUMMARY:"I'd Rather Be Indoors" 5k
+LOCATION:50 Asylum Rd\, Bristol\, RI\, 02809
+URL:https://runsignup.com/Race/RI/Bristol/IdRatherBeInside5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/RI/Bristol/IdRatherBeInsi
+ de5k
+END:VEVENT
+END:VCALENDAR

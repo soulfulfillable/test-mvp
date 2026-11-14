@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135394@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:5k/1 mile Turkey Trot at Union League Liberty Hill
+LOCATION:Union League Liberty Hill\, Lafayette Hill\, PA\, 19444
+URL:https://runsignup.com/Race/PA/LafayetteHill/5k1mileTurkeyTrotatUnionL
+ eagueLibertyHill
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/LafayetteHill/5k1mileT
+ urkeyTrotatUnionLeagueLibertyHill
+END:VEVENT
+END:VCALENDAR

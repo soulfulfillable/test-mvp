@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-201439@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261114T073000
+DTEND;TZID=America/Los_Angeles:20261114T093000
+SUMMARY:Run for Mental Health 5K/10K/13.1 SAN FRANCISCO
+LOCATION:Crissy Field (Course Map will be emailed)\, San Francisco\, CA\,
+  94129
+URL:https://runsignup.com/Race/CA/SanFrancisco/RunForMentalHealth5K10KSAN
+ FRANCISCO1114
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanFrancisco/RunForMen
+ talHealth5K10KSANFRANCISCO1114
+END:VEVENT
+END:VCALENDAR

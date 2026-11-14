@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-8602@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T050000
+DTEND;TZID=America/Chicago:20261205T070000
+SUMMARY:Jacob Wells 3 Bridges Marathon
+LOCATION:4468 River Mountain Road\, Little Rock\, AR\, 72212
+URL:https://runsignup.com/Race/AR/LittleRock/3BridgesMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/LittleRock/3BridgesMar
+ athon
+END:VEVENT
+END:VCALENDAR

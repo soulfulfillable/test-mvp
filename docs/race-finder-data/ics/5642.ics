@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5642@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T090000
+DTEND;TZID=America/New_York:20261212T110000
+SUMMARY:Lifesaver 5K / 10K
+LOCATION:1277 State Route #430\, Mansfield\, OH\, 44903
+URL:https://runsignup.com/Race/OH/Mansfield/lifesaver5k10k
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Mansfield/lifesaver5k1
+ 0k
+END:VEVENT
+END:VCALENDAR

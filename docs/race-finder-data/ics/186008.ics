@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-186008@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T170000
+DTEND;TZID=America/New_York:20261231T190000
+SUMMARY:Cheers to New Year's 5k Run/Walk - Punta Gorda
+LOCATION:South County Regional Park\, Punta Gorda\, FL\, 33950
+URL:https://runsignup.com/Race/FL/PuntaGorda/CheersToNewYears5kRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/PuntaGorda/CheersToNew
+ Years5kRunWalk
+END:VEVENT
+END:VCALENDAR

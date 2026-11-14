@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-158886@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T082000
+DTEND;TZID=America/Chicago:20261126T102000
+SUMMARY:Ward Parkway Thanksgiving Day Run
+LOCATION:8600 Ward Parkway\, Kansas City\, MO\, 64114
+URL:https://runsignup.com/Race/MO/KansasCity/WardParkwayThanksgivingDayRu
+ n
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/KansasCity/WardParkway
+ ThanksgivingDayRun
+END:VEVENT
+END:VCALENDAR

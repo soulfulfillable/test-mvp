@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153911@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T100000
+DTEND;TZID=America/Chicago:20261205T120000
+SUMMARY:Remember the Removal Walk\, Ride\, and Bike
+LOCATION:101 MO Highway 8 east\, Steelville\, MO\, 65565
+URL:https://runsignup.com/Race/MO/Steelville/TrailofTearsRideWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/Steelville/TrailofTear
+ sRideWalk
+END:VEVENT
+END:VCALENDAR

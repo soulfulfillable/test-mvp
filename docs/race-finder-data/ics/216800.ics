@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216800@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261213T160000
+DTEND;TZID=America/Denver:20261213T180000
+SUMMARY:Jolly Jog Fun Run/Walk
+LOCATION:3659 Austin Bluffs Pkwy\, Colorado Springs\, CO\, 80918
+URL:https://runsignup.com/Race/CO/ColoradoSprings/BACKUPTEMPLATE14JollyJo
+ gFunRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/ColoradoSprings/BACKUP
+ TEMPLATE14JollyJogFunRunWalk
+END:VEVENT
+END:VCALENDAR

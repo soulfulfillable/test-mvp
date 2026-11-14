@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217972@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Seymour Park Turkey Trot on the Trail
+LOCATION:260 Community Park Rd\, Seymour\, TN\, 37865
+URL:https://runsignup.com/Race/TN/Seymour/SeymourParkTurkeyTrotOnTheTrail
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Seymour/SeymourParkTur
+ keyTrotOnTheTrail
+END:VEVENT
+END:VCALENDAR

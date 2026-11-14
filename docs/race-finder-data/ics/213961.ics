@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213961@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261126T083000
+DTEND;TZID=America/Indiana/Indianapolis:20261126T103000
+SUMMARY:Cornucopia Classic 5K Run/Walk
+LOCATION:104 West Main Street\, Hartford City\, IN\, 47348
+URL:https://runsignup.com/Race/IN/HartfordCity/CornucopiaClassic5KRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/HartfordCity/Cornucopi
+ aClassic5KRunWalk
+END:VEVENT
+END:VCALENDAR

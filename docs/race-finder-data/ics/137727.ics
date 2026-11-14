@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137727@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Lowville Turkey Day 5 K
+LOCATION:5431 Trinity Avenue\, Lowville\, NY\, 13367
+URL:https://runsignup.com/Race/NY/Lowville/LowvilleTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Lowville/LowvilleTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

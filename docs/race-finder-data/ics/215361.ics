@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215361@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261219T080000
+DTEND;TZID=America/Los_Angeles:20261219T100000
+SUMMARY:The Ugly Sweater 5k
+LOCATION:9200 Tule Springs Rd\, Las Vegas\, NV\, 89131
+URL:https://runsignup.com/Race/NV/LasVegas/TheUglySweater5k2026
+DESCRIPTION:Sign up: https://runsignup.com/Race/NV/LasVegas/TheUglySweate
+ r5k2026
+END:VEVENT
+END:VCALENDAR

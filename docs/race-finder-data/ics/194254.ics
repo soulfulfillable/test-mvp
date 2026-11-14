@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194254@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/North_Dakota/New_Salem:20261212T161500
+DTEND;TZID=America/North_Dakota/New_Salem:20261212T181500
+SUMMARY:North Dakota Santa Run
+LOCATION:411 West Main St.\, Mandan\, ND\, 58554
+URL:https://runsignup.com/Race/ND/Mandan/NorthDakotaSantaRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/ND/Mandan/NorthDakotaSant
+ aRun
+END:VEVENT
+END:VCALENDAR

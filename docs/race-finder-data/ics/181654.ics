@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-181654@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T080000
+DTEND;TZID=America/New_York:20261212T100000
+SUMMARY:Holiday 5K & 10K at Westminster\, MD (50)
+LOCATION:Avondale Park\, Westminster\, MD\, 21157
+URL:https://runsignup.com/Race/MD/Westminster/Avondale50
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Westminster/Avondale50
+END:VEVENT
+END:VCALENDAR

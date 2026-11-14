@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-197264@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261126T090000
+DTEND;TZID=America/Denver:20261126T110000
+SUMMARY:We Run For Them - MMIW/MMIP Honor Run
+LOCATION:950 W 200 N\, Kaysville\, UT\, 84037
+URL:https://runsignup.com/Race/UT/Kaysville/WeRunForThemMMIWMMIPHonorRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/UT/Kaysville/WeRunForThem
+ MMIWMMIPHonorRun
+END:VEVENT
+END:VCALENDAR

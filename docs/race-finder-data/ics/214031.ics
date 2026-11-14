@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214031@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261114T074500
+DTEND;TZID=America/Phoenix:20261114T094500
+SUMMARY:Rancho Sahuarita Trails and Tails 5K
+LOCATION:15466 S. Rancho Sahuarita Blvd.\, Sahuarita\, AZ\, 85629
+URL:https://runsignup.com/Race/AZ/Sahuarita/RanchoSahuaritaTrailsAndTails
+ 5KAnd1MileDoggieDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Sahuarita/RanchoSahuar
+ itaTrailsAndTails5KAnd1MileDoggieDash
+END:VEVENT
+END:VCALENDAR

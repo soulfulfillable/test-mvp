@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-44939@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:The Grove City Area Federal Credit Union Grateful Gallop 5K
+LOCATION:620 Greenwood Drive\, Grove City\, PA\, 16127
+URL:https://runsignup.com/Race/PA/GroveCity/GratefulGallop5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/GroveCity/GratefulGall
+ op5k
+END:VEVENT
+END:VCALENDAR

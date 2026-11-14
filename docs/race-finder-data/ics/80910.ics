@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-80910@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261121T180000
+DTEND;TZID=America/Denver:20261121T200000
+SUMMARY:Fall Series and Community Cup Awards + Membership Dinner
+LOCATION:101 Pro Rodeo Drive\, Colorado Springs\, CO\, 80919
+URL:https://runsignup.com/Race/CO/ColoradoSprings/FallSeriesDinnerandAwar
+ ds
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/ColoradoSprings/FallSe
+ riesDinnerandAwards
+END:VEVENT
+END:VCALENDAR

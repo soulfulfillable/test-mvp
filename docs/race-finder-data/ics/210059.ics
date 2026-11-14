@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-210059@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:Miami Backyard Ultra
+LOCATION:3505 Rickenbacker Cswy\, Key Biscayne\, FL\, 33149
+URL:https://runsignup.com/Race/FL/KeyBiscayne/MiamiBackyardUltra
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/KeyBiscayne/MiamiBacky
+ ardUltra
+END:VEVENT
+END:VCALENDAR

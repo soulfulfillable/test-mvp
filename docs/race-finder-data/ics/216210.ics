@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216210@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261121T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261121T110000
+SUMMARY:LV Ugly Sweater Run
+LOCATION:69969 US 31\, Lakeville\, IN\, 46536
+URL:https://runsignup.com/Race/IN/Lakeville/LVUglySweaterRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Lakeville/LVUglySweate
+ rRun
+END:VEVENT
+END:VCALENDAR

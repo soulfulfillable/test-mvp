@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-113840@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T080000
+DTEND;TZID=America/Chicago:20261121T100000
+SUMMARY:Semper Fi Strides 5K/1 Mile Walk
+LOCATION:1001 Apollo Road\, Scott\, LA\, 70583
+URL:https://runsignup.com/Race/LA/Scott/SemperFiStrides5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Scott/SemperFiStrides5
+ K
+END:VEVENT
+END:VCALENDAR

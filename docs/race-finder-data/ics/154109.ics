@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154109@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T080000
+DTEND;TZID=America/Chicago:20261212T100000
+SUMMARY:Monroe Alumnae's Annual Red Reindeer 5K Fun Run/Walk
+LOCATION:2401 Sycamore Street\, Monroe\, LA\, 71201
+URL:https://runsignup.com/Race/LA/Monroe/RedReindeerFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Monroe/RedReindeerFunR
+ un
+END:VEVENT
+END:VCALENDAR

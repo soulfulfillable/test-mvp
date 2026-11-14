@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-139503@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T100000
+DTEND;TZID=America/New_York:20270109T120000
+SUMMARY:2027 Chautauqua Striders Winter 5K Series Race #1
+LOCATION:Chautauqua Harbor Hotel\, Celoron\, NY\, 14720
+URL:https://runsignup.com/Race/NY/Celoron/2023ChautauquaStridersWinter5KR
+ ace1
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Celoron/2023Chautauqua
+ StridersWinter5KRace1
+END:VEVENT
+END:VCALENDAR

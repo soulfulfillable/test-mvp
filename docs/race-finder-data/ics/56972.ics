@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-56972@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:Zoom Through the Zoo 5K
+LOCATION:150 Cleveland Park Drive\, Greenville\, SC\, 29601
+URL:https://runsignup.com/Race/SC/Greenville/zoomthroughthezoo
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Greenville/zoomthrough
+ thezoo
+END:VEVENT
+END:VCALENDAR

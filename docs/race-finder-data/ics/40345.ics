@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-40345@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:The 11th Annual Savage Family Turkey Trot 5k (Run/Walk)
+LOCATION:Bug Light Park\, South Portland\, ME\, 04106
+URL:https://runsignup.com/Race/ME/SouthPortland/TheSavageFamilyTurkeyTrot
+ 5kRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/ME/SouthPortland/TheSavag
+ eFamilyTurkeyTrot5kRunWalk
+END:VEVENT
+END:VCALENDAR

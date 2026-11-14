@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-169638@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261231T090000
+DTEND;TZID=America/Los_Angeles:20261231T110000
+SUMMARY:Last Chance Marathon and Half Marathon
+LOCATION:107 Chuckanut Dr N\, Bellingham\, WA\, 98225
+URL:https://runsignup.com/Race/WA/Bellingham/LastChanceMarathonAndHalfMar
+ athon
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Bellingham/LastChanceM
+ arathonAndHalfMarathon
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-166461@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270102T083000
+DTEND;TZID=America/New_York:20270102T103000
+SUMMARY:New Year 5K\, 10K\, & 13.1M\, Grand Ledge\, MI (01)
+LOCATION:7419 E Mt Hope Hwy\, Grand Ledge\, MI\, 48837
+URL:https://runsignup.com/Race/MI/GrandLedge/MountHope1242025
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/GrandLedge/MountHope12
+ 42025
+END:VEVENT
+END:VCALENDAR

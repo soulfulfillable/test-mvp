@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-189848@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T180000
+DTEND;TZID=America/New_York:20261121T200000
+SUMMARY:Chasing Dreams 5K Run/Walk
+LOCATION:Iroquois Park\, Louisville\, KY\, 40214
+URL:https://runsignup.com/Race/KY/Louisville/ChasingDreams5KRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Louisville/ChasingDrea
+ ms5KRunWalk
+END:VEVENT
+END:VCALENDAR

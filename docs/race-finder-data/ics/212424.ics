@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212424@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T090000
+DTEND;TZID=America/Chicago:20261121T110000
+SUMMARY:New Market Fire Department 5K Burnt Turkey Run
+LOCATION:783 Coleman Rd\, New Market\, AL\, 35761
+URL:https://runsignup.com/Race/AL/NewMarket/5KBurntTurkeyRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/NewMarket/5KBurntTurke
+ yRun
+END:VEVENT
+END:VCALENDAR

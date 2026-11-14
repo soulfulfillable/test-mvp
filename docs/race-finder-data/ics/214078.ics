@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214078@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T100000
+DTEND;TZID=America/Chicago:20261114T120000
+SUMMARY:YMCA STRIDE Boy’s Running & Character Fitness Program
+LOCATION:601 North 4th Street\, Springfield\, IL\, 62702
+URL:https://runsignup.com/Race/IL/Springfield/YMCASTRIDE
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Springfield/YMCASTRIDE
+END:VEVENT
+END:VCALENDAR

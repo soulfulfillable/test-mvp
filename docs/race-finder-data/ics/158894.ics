@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-158894@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261212T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261212T110000
+SUMMARY:Grandview 13.1 & 5k
+LOCATION:12454 W Youth Camp Road\, Columbus\, IN\, 47201
+URL:https://runsignup.com/Race/IN/Columbus/Grandview131
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Columbus/Grandview131
+END:VEVENT
+END:VCALENDAR

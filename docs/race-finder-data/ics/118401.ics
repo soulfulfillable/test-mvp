@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-118401@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:FTC Jingle Bell Jog 5k and Holiday Social
+LOCATION:3838 SW 98th Terrace\, Gainesville\, FL\, 32608
+URL:https://runsignup.com/Race/FL/Gainesville/JingleBellJog5kandsocial
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Gainesville/JingleBell
+ Jog5kandsocial
+END:VEVENT
+END:VCALENDAR

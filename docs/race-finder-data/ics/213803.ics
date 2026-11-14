@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213803@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T140000
+DTEND;TZID=America/New_York:20261115T160000
+SUMMARY:Triangle Run Smart Fall 2026 Kids Race
+LOCATION:441 Mills Park Drive\, Cary\, NC\, 27519
+URL:https://runsignup.com/Race/NC/Cary/TriangleRunSmartFall2026KidsRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Cary/TriangleRunSmartF
+ all2026KidsRace
+END:VEVENT
+END:VCALENDAR

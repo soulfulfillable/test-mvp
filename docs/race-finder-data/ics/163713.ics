@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-163713@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T080000
+DTEND;TZID=America/New_York:20261213T100000
+SUMMARY:Students of Scriptures 5K -  Race of Champions
+LOCATION:Vista View Park\, Davie\, FL\, 33330
+URL:https://runsignup.com/Race/FL/Davie/studentsofscriptures
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Davie/studentsofscript
+ ures
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187193@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261226T080000
+DTEND;TZID=America/Chicago:20261226T100000
+SUMMARY:Holiday 5K\, 10K\, & 13.1M at Shreveport\, LA (52)
+LOCATION:E Stoner Ave\, Shreveport\, LA\, 71101
+URL:https://runsignup.com/Race/LA/Shreveport/Stoner52
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Shreveport/Stoner52
+END:VEVENT
+END:VCALENDAR

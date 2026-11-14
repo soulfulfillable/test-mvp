@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-167915@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261129T080000
+DTEND;TZID=America/Chicago:20261129T100000
+SUMMARY:Turkey Trails - San Antonio
+LOCATION:Lady Bird Johnson Trail Park\, San Antonio\, TX\, 78217
+URL:https://runsignup.com/Race/TX/SanAntonio/TurkeyTrailsSanAntonio
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAntonio/TurkeyTrail
+ sSanAntonio
+END:VEVENT
+END:VCALENDAR

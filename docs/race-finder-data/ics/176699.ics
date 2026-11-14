@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-176699@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261227T083000
+DTEND;TZID=America/New_York:20261227T103000
+SUMMARY:Ugly Sweater Run - Olmsted Falls
+LOCATION:8170 Mapleway Dr\, Olmsted Falls\, OH\, 44138
+URL:https://runsignup.com/Race/OH/OlmstedFalls/RunUglySweater
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/OlmstedFalls/RunUglySw
+ eater
+END:VEVENT
+END:VCALENDAR

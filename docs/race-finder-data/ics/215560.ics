@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215560@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T160000
+DTEND;TZID=America/New_York:20270109T180000
+SUMMARY:Winter 2027 Kids Speed & Conditioning Saturdays - Cary
+LOCATION:242 S. Main Street\, Suite 102\, Holly Springs\, NC\, 27540
+URL:https://runsignup.com/Race/NC/HollySprings/Winter2027KidsSpeedConditi
+ oningSaturdaysCary
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/HollySprings/Winter202
+ 7KidsSpeedConditioningSaturdaysCary
+END:VEVENT
+END:VCALENDAR

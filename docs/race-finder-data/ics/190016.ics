@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190016@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:Rush 2 Brush 5k
+LOCATION:1121 N Jefferson St\, Jackson\, MS\, 39216
+URL:https://runsignup.com/Race/MS/Jackson/Rush2Brush5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MS/Jackson/Rush2Brush5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218780@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T100000
+DTEND;TZID=America/New_York:20261121T120000
+SUMMARY:Strides for Service
+LOCATION:3800 James River Rd.\, Midlothian\, VA\, 23113
+URL:https://runsignup.com/Race/VA/Midlothian/StridesForService2026
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Midlothian/StridesForS
+ ervice2026
+END:VEVENT
+END:VCALENDAR

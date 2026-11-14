@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-197858@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270109T083000
+DTEND;TZID=America/Chicago:20270109T103000
+SUMMARY:River Ranch Resolution Run
+LOCATION:194 Reveille Way Liberty Hill\, TX 78642\, Liberty Hill\, TX\, 7
+ 5057
+URL:https://runsignup.com/Race/TX/LibertyHill/RiverRanchResolutionRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/LibertyHill/RiverRanch
+ ResolutionRun
+END:VEVENT
+END:VCALENDAR

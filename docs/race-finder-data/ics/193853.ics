@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193853@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T100000
+DTEND;TZID=America/New_York:20270101T120000
+SUMMARY:Pottstown Polar Run
+LOCATION:140 College Drive\, Pottstown\, PA\, 19464
+URL:https://runsignup.com/Race/PA/Pottstown/PottstownPolarRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Pottstown/PottstownPol
+ arRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171983@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270103T080000
+DTEND;TZID=America/Chicago:20270103T100000
+SUMMARY:ShITR - Shivery Icy Trail Run - 1 MILE | 5K | 10K | HALF MARATHON
+LOCATION:2160 Creve Coeur Mill Rd\, Saint Louis\, MO\, 63146
+URL:https://runsignup.com/Race/MO/SaintLouis/ShiveryIcyTrailRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/SaintLouis/ShiveryIcyT
+ railRun
+END:VEVENT
+END:VCALENDAR

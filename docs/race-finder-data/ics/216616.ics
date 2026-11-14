@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216616@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261220T073000
+DTEND;TZID=America/New_York:20261220T093000
+SUMMARY:2026 I Love the 80s 5K Miami
+LOCATION:7900 SW 40th St.\, Miami\, FL\, 33155
+URL:https://runsignup.com/Race/FL/Miami/ILoveTheS5KMiami
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Miami/ILoveTheS5KMiami
+END:VEVENT
+END:VCALENDAR

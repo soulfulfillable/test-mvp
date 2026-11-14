@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-78714@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T073000
+DTEND;TZID=America/New_York:20261219T093000
+SUMMARY:Dream Finders Homes 12Ks of Christmas\, Christmas 5k & Kids Races
+LOCATION:14111 Shoreside Way\, Winter Garden\, FL\, 34787
+URL:https://runsignup.com/Race/FL/WinterGarden/Hamlin12KsofChristmas
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/WinterGarden/Hamlin12K
+ sofChristmas
+END:VEVENT
+END:VCALENDAR

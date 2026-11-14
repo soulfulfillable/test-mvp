@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81736@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:ADAC Reindeer Run
+LOCATION:601 N. 2nd Street\, Lufkin\, TX\, 75904
+URL:https://runsignup.com/Race/TX/Lufkin/ADACReindeerRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Lufkin/ADACReindeerRun
+END:VEVENT
+END:VCALENDAR

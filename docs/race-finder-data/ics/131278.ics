@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-131278@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Notre Dame Bob Agan Memorial TD5K
+LOCATION:Notre Dame High School\, Elmira\, NY\, 14904
+URL:https://runsignup.com/Race/NY/Elmira/NotreDameThanksgivingDay5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Elmira/NotreDameThanks
+ givingDay5k
+END:VEVENT
+END:VCALENDAR

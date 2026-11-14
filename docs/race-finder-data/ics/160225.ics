@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-160225@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T083000
+DTEND;TZID=America/New_York:20261114T103000
+SUMMARY:Union County Sheriff’s Office (UCSO) Deputy Dash 5K Trail Run P
+ resented by Echo Sierra Tac
+LOCATION:The Simpson Event Center\, Monroe\, NC\, 28112
+URL:https://runsignup.com/Race/NC/Monroe/UnionCountySheriffsOfficeUCSODep
+ utyDash5KTrailRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Monroe/UnionCountySher
+ iffsOfficeUCSODeputyDash5KTrailRun
+END:VEVENT
+END:VCALENDAR

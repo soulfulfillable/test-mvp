@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-170231@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T080000
+DTEND;TZID=America/Chicago:20261128T100000
+SUMMARY:Plano Pacers Turkey Run Off - 5K/15K and Free Kid's 1K
+LOCATION:Windhaven Meadows Park\, Plano\, TX\, 75093
+URL:https://runsignup.com/Race/TX/Plano/TurkeyRunOffKKAndFreeKidSK
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Plano/TurkeyRunOffKKAn
+ dFreeKidSK
+END:VEVENT
+END:VCALENDAR

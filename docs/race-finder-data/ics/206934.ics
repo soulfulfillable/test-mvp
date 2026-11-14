@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-206934@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261114T080000
+DTEND;TZID=America/Los_Angeles:20261114T100000
+SUMMARY:The Stuffing Shuffle – 5K\, 10K\, Half Marathon
+LOCATION:16801 Euclid St\, Fountain Valley\, CA\, 92708
+URL:https://runsignup.com/Race/CA/FountainValley/TheStuffingShuffle5K10KH
+ alfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/FountainValley/TheStuf
+ fingShuffle5K10KHalfMarathon
+END:VEVENT
+END:VCALENDAR

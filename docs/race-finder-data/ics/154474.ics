@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154474@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261227T100000
+DTEND;TZID=America/New_York:20261227T120000
+SUMMARY:Last Chance Mile
+LOCATION:1700 East 1st St\, Ashtabula\, OH\, 44004
+URL:https://runsignup.com/Race/OH/Ashtabula/LastChanceMile
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Ashtabula/LastChanceMi
+ le
+END:VEVENT
+END:VCALENDAR

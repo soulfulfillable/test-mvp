@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-101384@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T074500
+DTEND;TZID=America/Chicago:20261121T094500
+SUMMARY:Running of the Elves 5K
+LOCATION:13845 Hooper Rd\, Central\, LA\, 70818
+URL:https://runsignup.com/Race/LA/Central/ElfRun5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Central/ElfRun5K
+END:VEVENT
+END:VCALENDAR

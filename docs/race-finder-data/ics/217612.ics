@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217612@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T100000
+DTEND;TZID=America/New_York:20261205T120000
+SUMMARY:Jingle Jog 5k - St. Jude Children's Hospital
+LOCATION:1150 Douglas Pike\, Smithfield\, RI\, 02917
+URL:https://runsignup.com/Race/RI/Smithfield/JingleJog5kStJudesBryantUniv
+ ersity
+DESCRIPTION:Sign up: https://runsignup.com/Race/RI/Smithfield/JingleJog5k
+ StJudesBryantUniversity
+END:VEVENT
+END:VCALENDAR

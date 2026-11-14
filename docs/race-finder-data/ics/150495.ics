@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-150495@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T093000
+DTEND;TZID=America/Los_Angeles:20261121T113000
+SUMMARY:Turkey Trot Fun Run/Walk - 1k/5k/10k
+LOCATION:200 Water St NE - Riverfront Park Pavilion\, Salem\, OR\, 97301
+URL:https://runsignup.com/Race/OR/Salem/TurkeyTrotFunRunWalk1k5k10k
+DESCRIPTION:Sign up: https://runsignup.com/Race/OR/Salem/TurkeyTrotFunRun
+ Walk1k5k10k
+END:VEVENT
+END:VCALENDAR

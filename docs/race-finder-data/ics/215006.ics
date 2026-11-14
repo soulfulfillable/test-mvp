@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215006@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T080000
+DTEND;TZID=America/New_York:20261128T100000
+SUMMARY:Vision of Hope 5K
+LOCATION:406 S College Ave\, Kenly\, NC\, 27542
+URL:https://runsignup.com/Race/NC/Kenly/VisionOfHope5KFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Kenly/VisionOfHope5KFu
+ nRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173637@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Anchorage:20261212T160000
+DTEND;TZID=America/Anchorage:20261212T180000
+SUMMARY:Running of the Beers
+LOCATION:562 S Denali St\, Palmer\, AK\, 99645
+URL:https://runsignup.com/Race/AK/Palmer/RunningOfTheBeers
+DESCRIPTION:Sign up: https://runsignup.com/Race/AK/Palmer/RunningOfTheBee
+ rs
+END:VEVENT
+END:VCALENDAR

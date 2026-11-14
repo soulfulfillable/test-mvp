@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-82333@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T163000
+DTEND;TZID=America/New_York:20261231T183000
+SUMMARY:NYE Glow Run
+LOCATION:680 Garbers Church Rd\, Harrisonburg\, VA\, 22801
+URL:https://runsignup.com/Race/VA/Harrisonburg/2019NYEGlowRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Harrisonburg/2019NYEGl
+ owRun
+END:VEVENT
+END:VCALENDAR

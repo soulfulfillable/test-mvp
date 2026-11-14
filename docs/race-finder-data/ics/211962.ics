@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211962@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T090000
+DTEND;TZID=America/Chicago:20261126T110000
+SUMMARY:Parkville Turkey Trail Trot 5k
+LOCATION:135 S Main St\, Parkville\, MO\, 64152
+URL:https://runsignup.com/Race/MO/Parkville/ParkvilleTurkeyTrailTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/Parkville/ParkvilleTur
+ keyTrailTrot
+END:VEVENT
+END:VCALENDAR

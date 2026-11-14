@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215213@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261115T090000
+DTEND;TZID=America/Los_Angeles:20261115T110000
+SUMMARY:Kirkland Turkey Trot
+LOCATION:9703 NE Juanita Dr\, Kirkland\, WA\, 98034
+URL:https://runsignup.com/Race/WA/Kirkland/KirklandTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Kirkland/KirklandTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

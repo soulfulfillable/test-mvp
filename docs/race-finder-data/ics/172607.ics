@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172607@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T100000
+DTEND;TZID=America/New_York:20261231T120000
+SUMMARY:Elvir's Check In Testing
+LOCATION:201 Concourse Blvd\, Glen Allen\, VA\, 23059
+URL:https://runsignup.com/Race/VA/GlenAllen/ElvirSCheckInTesting
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/GlenAllen/ElvirSCheckI
+ nTesting
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-51850@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T063000
+DTEND;TZID=America/Chicago:20261205T083000
+SUMMARY:Active Auburn Jingle Jog 5k and Santa Stroll Fun Run
+LOCATION:100 N College Street\, Auburn\, AL\, 36830
+URL:https://runsignup.com/Race/AL/Auburn/ActiveAuburnJingleJog5kandSantaS
+ trollFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Auburn/ActiveAuburnJin
+ gleJog5kandSantaStrollFunRun
+END:VEVENT
+END:VCALENDAR

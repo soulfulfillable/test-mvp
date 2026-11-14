@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-93684@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T073000
+DTEND;TZID=America/Los_Angeles:20261126T093000
+SUMMARY:Claremont Turkey Trot
+LOCATION:850 N Yale Ave\, CLAREMONT\, CA\, 91711
+URL:https://runsignup.com/Race/CA/CLAREMONT/ClaremontSunriseRotaryTurkeyT
+ rot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/CLAREMONT/ClaremontSun
+ riseRotaryTurkeyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209975@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:Holiday 5K\, 10K\, & 13.1M at Stockbridge\, GA (51)
+LOCATION:3909 E Fairview Rd SW\, Stockbridge\, GA\, 30281
+URL:https://runsignup.com/Race/GA/Stockbridge/StockbridgeGA51
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Stockbridge/Stockbridg
+ eGA51
+END:VEVENT
+END:VCALENDAR

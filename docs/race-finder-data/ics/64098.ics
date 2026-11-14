@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-64098@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261212T090000
+DTEND;TZID=America/Detroit:20261212T110000
+SUMMARY:Paw Paw Rotary 5K Santa Run
+LOCATION:600 E. Michigan Avenue\, Paw Paw\, MI\, 49079
+URL:https://runsignup.com/Race/MI/PawPaw/PawPawRotarySantaRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/PawPaw/PawPawRotarySan
+ taRun
+END:VEVENT
+END:VCALENDAR

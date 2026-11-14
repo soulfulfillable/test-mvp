@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-104623@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270101T100000
+DTEND;TZID=America/Los_Angeles:20270101T120000
+SUMMARY:Clovis New Year's Day 5K
+LOCATION:California Health Sciences University\, Clovis\, CA\, 93612
+URL:https://runsignup.com/Race/CA/Clovis/ClovisNewYearsDay5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Clovis/ClovisNewYearsD
+ ay5k
+END:VEVENT
+END:VCALENDAR

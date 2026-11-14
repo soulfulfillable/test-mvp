@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217482@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T080000
+DTEND;TZID=America/New_York:20261206T100000
+SUMMARY:Bergen to Back Bay Marathon
+LOCATION:40 Railroad Ave\, Rochelle Park\, NJ\, 07662
+URL:https://runsignup.com/Race/NJ/RochellePark/BergenToBackBayMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/RochellePark/BergenToB
+ ackBayMarathon
+END:VEVENT
+END:VCALENDAR

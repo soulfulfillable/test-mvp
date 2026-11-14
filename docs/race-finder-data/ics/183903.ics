@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-183903@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Kentucky/Louisville:20261231T080000
+DTEND;TZID=America/Kentucky/Louisville:20261231T100000
+SUMMARY:Rainbow Dash
+LOCATION:3070 Pee Wee Reese Rd\, Louisville\, KY 40207\, Louisville\, KY\
+ , 40217
+URL:https://runsignup.com/Race/KY/Louisville/RainbowDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Louisville/RainbowDash
+END:VEVENT
+END:VCALENDAR

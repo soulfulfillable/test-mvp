@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-52075@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T120000
+DTEND;TZID=America/Chicago:20261128T140000
+SUMMARY:2026 - Stroll on State Dasher Dash 5K Presented by Bucciferro Fam
+ ily McDonald's
+LOCATION:320 S Wyman St.\, Rockford\, IL\, 61101
+URL:https://runsignup.com/Race/IL/Rockford/StrollonStateDasherDash5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Rockford/StrollonState
+ DasherDash5k
+END:VEVENT
+END:VCALENDAR

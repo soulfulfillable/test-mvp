@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-123119@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270105T173000
+DTEND;TZID=America/Chicago:20270105T193000
+SUMMARY:LCW Juniors - Winter Programs
+LOCATION:1221 Theodore Wirth Parkway\, Minneapolis\, MN\, 55422
+URL:https://runsignup.com/Race/MN/Minneapolis/LCWJuniorsWinterPrograms
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Minneapolis/LCWJuniors
+ WinterPrograms
+END:VEVENT
+END:VCALENDAR

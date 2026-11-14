@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217140@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T090000
+DTEND;TZID=America/Chicago:20261121T110000
+SUMMARY:The Skylar Project Prematurity Awareness Month 5K Run and Walk
+LOCATION:1704 Main St\, Daphne\, AL\, 36526
+URL:https://runsignup.com/Race/AL/Daphne/TheSkylarProjectPrematurityAware
+ nessMonth5KRunAndWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Daphne/TheSkylarProjec
+ tPrematurityAwarenessMonth5KRunAndWalk
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-176270@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=Pacific/Honolulu:20261121T062000
+DTEND;TZID=Pacific/Honolulu:20261121T082000
+SUMMARY:Makoa 5K\, 10K & Half Marathon
+LOCATION:91-1621 Keone'ula Blvd\, Ewa Beach\, HI\, 96706
+URL:https://runsignup.com/Race/HI/EwaBeach/Makoa510Half
+DESCRIPTION:Sign up: https://runsignup.com/Race/HI/EwaBeach/Makoa510Half
+END:VEVENT
+END:VCALENDAR

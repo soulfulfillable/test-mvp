@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137206@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261211T165000
+DTEND;TZID=America/Chicago:20261211T185000
+SUMMARY:Jolly Jog at Trees on the Tees
+LOCATION:727 W Weaver Rd\, Forsyth\, IL\, 62535
+URL:https://runsignup.com/Race/IL/Forsyth/FFSantaShuffle
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Forsyth/FFSantaShuffle
+END:VEVENT
+END:VCALENDAR

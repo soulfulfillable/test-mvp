@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212638@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261213T090000
+DTEND;TZID=America/Phoenix:20261213T110000
+SUMMARY:Telegraph 'Ram'page Trail Race
+LOCATION:Interstate 8 Frontage Road\, Yuma\, AZ\, 85367
+URL:https://runsignup.com/Race/AZ/Yuma/TelegraphRamPageTrailRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Yuma/TelegraphRamPageT
+ railRace
+END:VEVENT
+END:VCALENDAR

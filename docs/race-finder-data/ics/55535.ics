@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-55535@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T093000
+DTEND;TZID=America/Los_Angeles:20261126T113000
+SUMMARY:Thanksgiving Day Apple Cup 5K
+LOCATION:Green Lake Park\, Seattle\, WA\, 98115
+URL:https://runsignup.com/Race/WA/Seattle/AppleCup5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Seattle/AppleCup5K
+END:VEVENT
+END:VCALENDAR

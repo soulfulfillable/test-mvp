@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-26541@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T074500
+DTEND;TZID=America/Chicago:20261126T094500
+SUMMARY:Texas Tough Turkey Chase 5k/10k and Kids Run
+LOCATION:8 Dominion Dr bldg 100\, San Antonio\, TX 78257\, San Antonio\, 
+ TX\, 78257
+URL:https://runsignup.com/Race/TX/SanAntonio/TurkeyChase5k10kandKidsRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAntonio/TurkeyChase
+ 5k10kandKidsRun
+END:VEVENT
+END:VCALENDAR

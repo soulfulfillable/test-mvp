@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153366@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T100000
+DTEND;TZID=America/New_York:20261128T120000
+SUMMARY:The ODO Gobbler Run & Ruck
+LOCATION:275 Dug Rd\, South Glastonbury\, CT\, 06073
+URL:https://runsignup.com/Race/CT/SouthGlastonbury/ODOGobblerRunRuck
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/SouthGlastonbury/ODOGo
+ bblerRunRuck
+END:VEVENT
+END:VCALENDAR

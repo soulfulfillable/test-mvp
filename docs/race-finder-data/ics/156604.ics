@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-156604@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261219T090000
+DTEND;TZID=America/Chicago:20261219T110000
+SUMMARY:Candy Cane Course - Milwaukee
+LOCATION:Milwaukee County Sports Complex\, Franklin\, WI\, 53132
+URL:https://runsignup.com/Race/WI/Franklin/CandyCaneCourseMilwaukee
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Franklin/CandyCaneCour
+ seMilwaukee
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173112@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T083000
+DTEND;TZID=America/New_York:20261114T103000
+SUMMARY:Gobbler 5K\, 10K & 13.1M at Richmond\, KY (46)
+LOCATION:500 White Hall Shrine Rd.\, Richmond\, KY\, 40475
+URL:https://runsignup.com/Race/KY/Richmond/Whitehall111825
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Richmond/Whitehall1118
+ 25
+END:VEVENT
+END:VCALENDAR

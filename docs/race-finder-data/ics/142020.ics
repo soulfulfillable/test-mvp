@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-142020@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T170000
+DTEND;TZID=America/New_York:20261205T190000
+SUMMARY:North Creek Explorer 5K Run/Walk
+LOCATION:4601 NW 71st Place\, Coconut Creek\, FL\, 33073
+URL:https://runsignup.com/Race/FL/CoconutCreek/NorthCreekExplorer
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/CoconutCreek/NorthCree
+ kExplorer
+END:VEVENT
+END:VCALENDAR

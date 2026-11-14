@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214930@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270101T000000
+DTEND;TZID=America/Los_Angeles:20270101T020000
+SUMMARY:2027 SRC Season Pass and Multi-Race Passes
+LOCATION:811 Rainier St.\, Snohomish\, WA\, 98290
+URL:https://runsignup.com/Race/WA/Snohomish/SRCSeasonPassAndMultiRacePass
+ es
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Snohomish/SRCSeasonPas
+ sAndMultiRacePasses
+END:VEVENT
+END:VCALENDAR

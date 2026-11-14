@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209542@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T083000
+DTEND;TZID=America/Chicago:20261121T103000
+SUMMARY:FFF5K Social Run/Walk with Community Beer Company - November
+LOCATION:3110 Commonwealth Drive\, Dallas\, TX\, 75247
+URL:https://runsignup.com/Race/TX/Dallas/FFF5KSocialRunWalkWithCommunityB
+ eerCompanyNovember
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Dallas/FFF5KSocialRunW
+ alkWithCommunityBeerCompanyNovember
+END:VEVENT
+END:VCALENDAR

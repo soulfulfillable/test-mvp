@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13091@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T090000
+DTEND;TZID=America/Los_Angeles:20261121T110000
+SUMMARY:Yuba-Sutter Turkey Trot 5k/10k Walk/Run to benefit Hands of Hope
+LOCATION:301 Stewart Road\, Yuba City\, CA\, 95991
+URL:https://runsignup.com/Race/CA/YubaCity/HandsofHope
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/YubaCity/HandsofHope
+END:VEVENT
+END:VCALENDAR

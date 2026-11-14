@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-22974@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T084500
+DTEND;TZID=America/New_York:20261128T104500
+SUMMARY:St. Bernadette's 18th Annual Turkey Trot
+LOCATION:St. Bernadette School\, Drexel Hill\, PA\, 19026
+URL:https://runsignup.com/Race/PA/DrexelHill/StBernadetteTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/DrexelHill/StBernadett
+ eTurkeyTrot
+END:VEVENT
+END:VCALENDAR

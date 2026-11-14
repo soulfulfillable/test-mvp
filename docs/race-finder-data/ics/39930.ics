@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-39930@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T070000
+DTEND;TZID=America/Los_Angeles:20261121T090000
+SUMMARY:Davis Turkey Trot Vendor Registration
+LOCATION:6th and C Street\, Davis\, CA\, 95616
+URL:https://runsignup.com/Race/CA/Davis/DavisTurkeyTrotVendorRegistration
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Davis/DavisTurkeyTrotV
+ endorRegistration
+END:VEVENT
+END:VCALENDAR

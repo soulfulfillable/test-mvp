@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190992@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T083000
+DTEND;TZID=America/Chicago:20261114T103000
+SUMMARY:Missions Madness 5K Mud Run & 2-Mile Fun Run
+LOCATION:23030 Wolf Bay Dr\, Foley\, AL\, 36535
+URL:https://runsignup.com/Race/AL/Foley/MissionsMadnessMudRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Foley/MissionsMadnessM
+ udRun
+END:VEVENT
+END:VCALENDAR

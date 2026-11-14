@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194395@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270102T100000
+DTEND;TZID=America/New_York:20270102T120000
+SUMMARY:The Resolution Run @ Caesar Creek
+LOCATION:Caesar Creek Campground\, Wilmington\, OH\, 45177
+URL:https://runsignup.com/Race/OH/Wilmington/TheResolutionRunCaesarCreek
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Wilmington/TheResoluti
+ onRunCaesarCreek
+END:VEVENT
+END:VCALENDAR

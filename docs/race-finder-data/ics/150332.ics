@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-150332@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261122T091500
+DTEND;TZID=America/Los_Angeles:20261122T111500
+SUMMARY:Ukiah Turkey Trot
+LOCATION:Lake Mendocino\, Joe Riley Picnic Area/South Boat Ramp\, Ukiah\,
+  CA\, 95482
+URL:https://runsignup.com/Race/CA/Ukiah/NCSTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Ukiah/NCSTurkeyTrot
+END:VEVENT
+END:VCALENDAR

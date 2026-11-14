@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214536@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T090000
+DTEND;TZID=America/New_York:20261212T110000
+SUMMARY:Bartram Springs Jingle All The Way 5k race and 1.55 mile Fun Run
+LOCATION:14530 Cherry Lake Drive East St.\, Jacksonville\, FL\, 32258
+URL:https://runsignup.com/Race/FL/Jacksonville/BartramSpringsJingleJog5kR
+ aceAnd55MileFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Jacksonville/BartramSp
+ ringsJingleJog5kRaceAnd55MileFunRun
+END:VEVENT
+END:VCALENDAR

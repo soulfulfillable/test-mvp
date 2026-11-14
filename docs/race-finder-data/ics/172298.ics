@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172298@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261126T084500
+DTEND;TZID=America/Denver:20261126T104500
+SUMMARY:Harvesting Hope 5k
+LOCATION:Central Park\, Denver\, CO\, 80238
+URL:https://runsignup.com/Race/CO/Denver/HarvestingHopeK
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Denver/HarvestingHopeK
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173330@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T073000
+DTEND;TZID=America/New_York:20261213T093000
+SUMMARY:The Coach Spo's 5K\, benefiting Nicklaus Children's and the Miami
+  HEAT Charitable Fund
+LOCATION:Nicklaus Children's\, Miami\, FL\, 33155
+URL:https://runsignup.com/Race/FL/Miami/CoachSpo5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Miami/CoachSpo5K
+END:VEVENT
+END:VCALENDAR

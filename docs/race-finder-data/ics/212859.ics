@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212859@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T100000
+DTEND;TZID=America/New_York:20270101T120000
+SUMMARY:16th Annual Hair of the Dog 5k\, 1 Mile Walk and 30th Annual Leo 
+ Brady Ocean Plunge
+LOCATION:97 Garfield Pkwy\, Bethany Beach\, DE\, 19930
+URL:https://runsignup.com/Race/DE/BethanyBeach/HairOfTheDog5k1MileWalkAnd
+ LeoBradyOceanPlunge
+DESCRIPTION:Sign up: https://runsignup.com/Race/DE/BethanyBeach/HairOfThe
+ Dog5k1MileWalkAndLeoBradyOceanPlunge
+END:VEVENT
+END:VCALENDAR

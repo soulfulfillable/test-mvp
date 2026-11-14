@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136783@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T090000
+DTEND;TZID=America/New_York:20261212T110000
+SUMMARY:2026 Jingle Bell Run - Miami\, FL
+LOCATION:10800 Collins Ave\, Miami\, FL\, 33154
+URL:https://runsignup.com/Race/FL/Miami/jbrmiami
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Miami/jbrmiami
+END:VEVENT
+END:VCALENDAR

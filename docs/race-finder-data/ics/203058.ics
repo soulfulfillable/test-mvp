@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-203058@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T174500
+DTEND;TZID=America/Indiana/Indianapolis:20261114T194500
+SUMMARY:Fort4Fitness Winter Wonder Dash - GSNIM
+LOCATION:3411 Sherman Blvd.\, Fort Wayne\, IN\, 46808
+URL:https://runsignup.com/Race/IN/FortWayne/FortFitnessWinterWonderDashGS
+ NIM
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/FortWayne/FortFitnessW
+ interWonderDashGSNIM
+END:VEVENT
+END:VCALENDAR

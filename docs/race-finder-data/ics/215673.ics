@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215673@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T110000
+DTEND;TZID=America/New_York:20261205T130000
+SUMMARY:Brunswick's Only 5k Til' Christmas
+LOCATION:1473 Parschen Blvd\, Brunswick\, OH\, 44212
+URL:https://runsignup.com/Race/OH/Brunswick/BrunswickSOnly5kTilChristmas
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Brunswick/BrunswickSOn
+ ly5kTilChristmas
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172851@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T080000
+DTEND;TZID=America/Chicago:20261212T100000
+SUMMARY:Rowlett Holiday 5K & Fun Run
+LOCATION:Rowlett High School\, Rowlett\, TX\, 75088
+URL:https://runsignup.com/Race/TX/Rowlett/RowlettCommunityK
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Rowlett/RowlettCommuni
+ tyK
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-97127@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T130000
+DTEND;TZID=America/Chicago:20261212T150000
+SUMMARY:Ugliest Sweater Run
+LOCATION:1020 S Morris Ave\, Bloomington\, IL\, 61701
+URL:https://runsignup.com/Race/IL/Bloomington/UgliestSweaterRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Bloomington/UgliestSwe
+ aterRun
+END:VEVENT
+END:VCALENDAR

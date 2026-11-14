@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218974@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T090000
+DTEND;TZID=America/New_York:20261121T110000
+SUMMARY:2026 Blazer CCCNYC Registration
+LOCATION:251 N Main St\, Cedarville\, OH\, 45314
+URL:https://runsignup.com/Race/OH/Cedarville/BlazerCCCNYCRegistration
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Cedarville/BlazerCCCNY
+ CRegistration
+END:VEVENT
+END:VCALENDAR

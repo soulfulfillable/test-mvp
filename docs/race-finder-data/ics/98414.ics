@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-98414@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261205T080000
+DTEND;TZID=America/Los_Angeles:20261205T100000
+SUMMARY:Chino Valley YMCA Reindeer Romp 5K
+LOCATION:5665 Edison Ave\, Chino\, CA\, 91710
+URL:https://runsignup.com/Race/CA/Chino/ChinoValleyYMCAReindeerRomp5K10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Chino/ChinoValleyYMCAR
+ eindeerRomp5K10K
+END:VEVENT
+END:VCALENDAR

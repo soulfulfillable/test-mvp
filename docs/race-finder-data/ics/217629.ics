@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217629@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261115T130000
+DTEND;TZID=America/Chicago:20261115T150000
+SUMMARY:Shred the Pines MTB Series - Lincoln Parish Park
+LOCATION:440 Parish Park rd\, Ruston\, LA\, 71270
+URL:https://runsignup.com/Race/LA/Ruston/ShredThePinesMTBSeriesLincolnPar
+ ishPark
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Ruston/ShredThePinesMT
+ BSeriesLincolnParishPark
+END:VEVENT
+END:VCALENDAR

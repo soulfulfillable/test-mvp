@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213903@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T110000
+DTEND;TZID=America/New_York:20261212T130000
+SUMMARY:Special Olympics Greenville Holiday Shuffle
+LOCATION:813 Laurens Rd.\, Greenville\, SC\, 29607
+URL:https://runsignup.com/Race/SC/Greenville/SpecialOlympicsGreenvilleHol
+ lidayShuffle
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Greenville/SpecialOlym
+ picsGreenvilleHollidayShuffle
+END:VEVENT
+END:VCALENDAR

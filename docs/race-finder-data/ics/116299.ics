@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-116299@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T093000
+DTEND;TZID=America/New_York:20261114T113000
+SUMMARY:Braden Kramer Foundation- Beer Chase 5K
+LOCATION:213 E Crawford St\, Findlay\, OH\, 45840
+URL:https://runsignup.com/Race/OH/Findlay/FindlayBeerChase5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Findlay/FindlayBeerCha
+ se5K
+END:VEVENT
+END:VCALENDAR

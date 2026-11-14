@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-150210@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T160000
+DTEND;TZID=America/New_York:20261231T180000
+SUMMARY:2026 Great New Year's Eve Race 5K
+LOCATION:3227 East Graham Rd\, Stow\, OH\, 44224
+URL:https://runsignup.com/Race/OH/Stow/2023GreatNewYearsEveRace5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Stow/2023GreatNewYears
+ EveRace5K
+END:VEVENT
+END:VCALENDAR

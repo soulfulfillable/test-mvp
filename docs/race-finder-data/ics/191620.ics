@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-191620@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T090000
+DTEND;TZID=America/Chicago:20261126T110000
+SUMMARY:Bemidji Holiday Running Series
+LOCATION:300 Bemidji Ave N\, Bemidji\, MN\, 56601
+URL:https://runsignup.com/Race/MN/Bemidji/BemidjiHolidayRunningSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Bemidji/BemidjiHoliday
+ RunningSeries
+END:VEVENT
+END:VCALENDAR

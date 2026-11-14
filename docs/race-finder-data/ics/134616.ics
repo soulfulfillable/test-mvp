@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-134616@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:Thanksgiving Day 5K\, Kids' Fun Runs & Tot Trot
+LOCATION:185 South Warrior Drive\, Stephens City\, VA\, 22655
+URL:https://runsignup.com/Race/VA/StephensCity/Thanksgiving5kandKidsFunRu
+ n
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/StephensCity/Thanksgiv
+ ing5kandKidsFunRun
+END:VEVENT
+END:VCALENDAR

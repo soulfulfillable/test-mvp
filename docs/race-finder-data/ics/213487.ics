@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213487@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T123000
+DTEND;TZID=America/New_York:20261114T143000
+SUMMARY:Duff Run 2026
+LOCATION:66 Spring Street\, Marion\, MA\, 02738
+URL:https://runsignup.com/Race/MA/Marion/DuffRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/Marion/DuffRun
+END:VEVENT
+END:VCALENDAR

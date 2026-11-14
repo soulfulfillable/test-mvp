@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-140087@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20270109T083000
+DTEND;TZID=America/Denver:20270109T103000
+SUMMARY:Chilly Willy 5K/10K/Half Marathon - Albuquerque
+LOCATION:Mariposa Basin Park\, Albuquerque\, NM\, 87120
+URL:https://runsignup.com/Race/NM/Albuquerque/ChillyWilly5K10KHalfMaratho
+ nAlbuquerque
+DESCRIPTION:Sign up: https://runsignup.com/Race/NM/Albuquerque/ChillyWill
+ y5K10KHalfMarathonAlbuquerque
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-191652@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T113000
+DTEND;TZID=America/New_York:20261122T133000
+SUMMARY:After The Leaves/Josh Feldt Half Marathon
+LOCATION:5281 Route 44-55\, Kerhonkson\, NY\, 12446
+URL:https://runsignup.com/Race/NY/Kerhonkson/AfterTheLeavesJoshFedltHalfM
+ arathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Kerhonkson/AfterTheLea
+ vesJoshFedltHalfMarathon
+END:VEVENT
+END:VCALENDAR

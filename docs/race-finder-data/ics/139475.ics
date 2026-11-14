@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-139475@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T073000
+DTEND;TZID=America/Chicago:20261126T093000
+SUMMARY:Bentonville Gobbler 5k
+LOCATION:1101 SW Citizen Cir\, Bentonville\, AR\, 72712
+URL:https://runsignup.com/Race/AR/Bentonville/BentonvilleGobbler5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/Bentonville/Bentonvill
+ eGobbler5k
+END:VEVENT
+END:VCALENDAR

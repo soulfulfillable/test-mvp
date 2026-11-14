@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217042@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261116T080000
+DTEND;TZID=America/New_York:20261116T100000
+SUMMARY:2027 Running the Richmond Marathon - Charity Entries
+LOCATION:4921 Lakeside Avenue\, Richmond\, VA\, 23228
+URL:https://runsignup.com/Race/VA/Richmond/RunningTheRichmondMarathonChar
+ ityEntries
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Richmond/RunningTheRic
+ hmondMarathonCharityEntries
+END:VEVENT
+END:VCALENDAR

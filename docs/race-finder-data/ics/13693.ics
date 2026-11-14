@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13693@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T090000
+DTEND;TZID=America/New_York:20270109T110000
+SUMMARY:Mutts & Marshmallows
+LOCATION:201 Soccer Park Dr.\, Cary\, NC\, 27511
+URL:https://runsignup.com/Race/NC/Cary/MuttsandMarshmallows
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Cary/MuttsandMarshmall
+ ows
+END:VEVENT
+END:VCALENDAR

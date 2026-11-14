@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-84976@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261219T073000
+DTEND;TZID=America/Los_Angeles:20261219T093000
+SUMMARY:San Diego Holiday Half Marathon & 5K
+LOCATION:14455 Penasquitos Rd\, San Diego\, CA\, 92129
+URL:https://runsignup.com/Race/CA/SanDiego/SanDiegoHolidayHalf
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanDiego/SanDiegoHolid
+ ayHalf
+END:VEVENT
+END:VCALENDAR

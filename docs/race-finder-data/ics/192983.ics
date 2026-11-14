@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-192983@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T090000
+DTEND;TZID=America/Chicago:20261126T110000
+SUMMARY:Batesville Turkey Day 5K
+LOCATION:600 Eagle Mountain Boulevard\, Batesville\, AR\, 72501
+URL:https://runsignup.com/Race/AR/Batesville/BatesvilleSwimTurkeyDay5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/Batesville/BatesvilleS
+ wimTurkeyDay5K
+END:VEVENT
+END:VCALENDAR

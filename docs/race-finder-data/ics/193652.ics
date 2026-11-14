@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193652@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T090000
+DTEND;TZID=America/New_York:20261212T110000
+SUMMARY:B-P Bells & Bows
+LOCATION:100 Bridge Street\, Broadalbin\, NY\, 12025
+URL:https://runsignup.com/Race/NY/Broadalbin/BellsandBows
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Broadalbin/BellsandBow
+ s
+END:VEVENT
+END:VCALENDAR

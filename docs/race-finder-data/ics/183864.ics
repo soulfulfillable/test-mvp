@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-183864@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T093000
+DTEND;TZID=America/New_York:20261114T113000
+SUMMARY:The NY Skyline Half\, 10K\, and 5K
+LOCATION:200 Morris Pesin Dr Jersey City\, NJ 07305\, Jersey City\, NJ\, 
+ 07305
+URL:https://runsignup.com/Race/NJ/JerseyCity/TheNYSkylineHalf10KAnd5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/JerseyCity/TheNYSkylin
+ eHalf10KAnd5K
+END:VEVENT
+END:VCALENDAR

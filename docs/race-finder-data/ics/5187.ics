@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5187@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T100000
+DTEND;TZID=America/New_York:20261205T120000
+SUMMARY:Winter Wonder Run 6K at the Institute Woods
+LOCATION:470 Quaker Road\, Princeton\, NJ\, 08540
+URL:https://runsignup.com/Race/NJ/Princeton/WinterWonderRun6KattheInstitu
+ teWoods
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Princeton/WinterWonder
+ Run6KattheInstituteWoods
+END:VEVENT
+END:VCALENDAR

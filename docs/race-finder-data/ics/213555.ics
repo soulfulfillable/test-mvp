@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213555@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T073000
+DTEND;TZID=America/Chicago:20261128T093000
+SUMMARY:Texas Turkey Run (5k & 10k + 1-Mile)
+LOCATION:2115 S Veterans Blvd.\, Mission\, TX\, 78539
+URL:https://runsignup.com/Race/TX/Mission/TexasTurkeyRun5k10kPlusMile
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Mission/TexasTurkeyRun
+ 5k10kPlusMile
+END:VEVENT
+END:VCALENDAR

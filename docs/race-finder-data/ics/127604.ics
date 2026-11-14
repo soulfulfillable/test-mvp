@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-127604@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T090000
+DTEND;TZID=America/Chicago:20261114T110000
+SUMMARY:2026 Hytrol Industrial Park 5K/10K
+LOCATION:2020 Hytrol Street\, Jonesboro\, AR\, 72401
+URL:https://runsignup.com/Race/AR/Jonesboro/HytrolIndustrialPark5K10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/Jonesboro/HytrolIndust
+ rialPark5K10K
+END:VEVENT
+END:VCALENDAR

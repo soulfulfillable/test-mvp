@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190237@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T070000
+DTEND;TZID=America/New_York:20261114T090000
+SUMMARY:Steps for STETSON 5K & 1 Mile Fun Run
+LOCATION:13515 N. US Hwy. 301\, Thonotosassa\, FL\, 33592
+URL:https://runsignup.com/Race/FL/Thonotosassa/StepsForSTETSON5K1MileFunR
+ un
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Thonotosassa/StepsForS
+ TETSON5K1MileFunRun
+END:VEVENT
+END:VCALENDAR

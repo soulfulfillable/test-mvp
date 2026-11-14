@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215541@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T083000
+DTEND;TZID=America/New_York:20261121T103000
+SUMMARY:Fall Fun Walk/Run 5k
+LOCATION:678 Wallace Wilkinson BLVD\, Liberty\, KY\, 42539
+URL:https://runsignup.com/Race/KY/Liberty/FallFunWalkRun5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Liberty/FallFunWalkRun
+ 5k
+END:VEVENT
+END:VCALENDAR

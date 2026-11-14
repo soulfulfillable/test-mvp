@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153241@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261205T090000
+DTEND;TZID=America/Denver:20261205T110000
+SUMMARY:Candy Cane Course - Colorado Springs
+LOCATION:El Pomar Youth Sports Park\, Colorado Springs\, CO\, 80906
+URL:https://runsignup.com/Race/CO/ColoradoSprings/CandyCaneCourseColorado
+ Springs
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/ColoradoSprings/CandyC
+ aneCourseColoradoSprings
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194325@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T180000
+DTEND;TZID=America/New_York:20261115T200000
+SUMMARY:Cline-Holder Electric Speedway in Lights 5K presented by Fleet Fe
+ et Sports
+LOCATION:151 Speedway Blvd\, Bristol\, TN\, 37620
+URL:https://runsignup.com/Race/TN/Bristol/SpeedwayinLights
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Bristol/SpeedwayinLigh
+ ts
+END:VEVENT
+END:VCALENDAR

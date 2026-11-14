@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193871@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T090000
+DTEND;TZID=America/Chicago:20261205T110000
+SUMMARY:ATSU Reindeer Romp
+LOCATION:111 S Elson St\, Kirksville\, MO\, 63501
+URL:https://runsignup.com/Race/MO/Kirksville/ATSUReindeerRompRaces
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/Kirksville/ATSUReindee
+ rRompRaces
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216618@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:Tini Semeria Spark in the Dark 5k Walk/Run/Bike/Row - November 14
+ \, 2026 @ 9:00am
+LOCATION:980 Birmingham Road\, Milton\, GA\, 30004
+URL:https://runsignup.com/Race/GA/Milton/TiniSemeriaSparkInTheDark5kWalkR
+ unBikeRowNovemberAm
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Milton/TiniSemeriaSpar
+ kInTheDark5kWalkRunBikeRowNovemberAm
+END:VEVENT
+END:VCALENDAR

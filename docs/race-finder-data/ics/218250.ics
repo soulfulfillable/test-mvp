@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218250@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T075500
+DTEND;TZID=America/Detroit:20261126T095500
+SUMMARY:****MTT GREAT LAKES ONLY*****     Thanksgiving Trot
+LOCATION:NIles\, Niles\, MI\, 49120
+URL:https://runsignup.com/Race/MI/Niles/MTTGREATLAKESONLYThanksgivingTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Niles/MTTGREATLAKESONL
+ YThanksgivingTrot
+END:VEVENT
+END:VCALENDAR

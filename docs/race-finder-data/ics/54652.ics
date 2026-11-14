@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-54652@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T070000
+DTEND;TZID=America/Chicago:20261205T090000
+SUMMARY:Experience Fayetteville Half Marathon
+LOCATION:450 S. Razorback Rd\, Fayetteville\, AR\, 72701
+URL:https://runsignup.com/Race/AR/Fayetteville/FayettevilleHalfMarathon10
+ K5KFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/Fayetteville/Fayettevi
+ lleHalfMarathon10K5KFunRun
+END:VEVENT
+END:VCALENDAR

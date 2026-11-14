@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-182596@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261205T073000
+DTEND;TZID=America/Indiana/Indianapolis:20261205T093000
+SUMMARY:Jackson County Ultras
+LOCATION:Pyoca Camp and Retreat Center\, Inc.\, 886 E County Rd 100 S\, B
+ rownstown\, IN\, 47220
+URL:https://runsignup.com/Race/IN/Brownstown/JacksonCountyUltras
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Brownstown/JacksonCoun
+ tyUltras
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-22950@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:The Seabrook Island Half Marathon and 5k
+LOCATION:165 Village Green Ln\, Seabrook Island\, SC\, 29455
+URL:https://runsignup.com/Race/SC/SeabrookIsland/bohicketrun
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/SeabrookIsland/bohicke
+ trun
+END:VEVENT
+END:VCALENDAR

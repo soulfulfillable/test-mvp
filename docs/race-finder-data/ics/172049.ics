@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172049@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270103T070000
+DTEND;TZID=America/Los_Angeles:20270103T090000
+SUMMARY:The Coffee Cruise  – 5K\, 10K\, 10-Miler\, Half Marathon
+LOCATION:780 E Shoreline Ave\, Long Beach\, CA\, 90802
+URL:https://runsignup.com/Race/CA/LongBeach/FrostyFunRunRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/LongBeach/FrostyFunRun
+ Race
+END:VEVENT
+END:VCALENDAR

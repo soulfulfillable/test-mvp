@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-76182@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T073000
+DTEND;TZID=America/New_York:20261205T093000
+SUMMARY:Angel Tree Toy Run 5K & 1 Mile
+LOCATION:340 14th Ave. South\, St. Pete\, FL\, 33701
+URL:https://runsignup.com/Race/FL/StPete/4thAnnualKettleKrush5K1MileFunRu
+ nWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/StPete/4thAnnualKettle
+ Krush5K1MileFunRunWalk
+END:VEVENT
+END:VCALENDAR

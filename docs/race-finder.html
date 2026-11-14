@@ -15,6 +15,7 @@
   --bg:#000; --surface:#1c1c1e; --ink:#fff; --ink2:rgba(235,235,245,.64); --ink3:rgba(235,235,245,.32);
   --line:rgba(84,84,88,.6); --fill:rgba(118,118,128,.24); --go:#30d18f; --go-ink:#00291a; --rise:#ffa733; --rise-bg:rgba(255,159,10,.18);
 }}
+@media (prefers-color-scheme: dark){.sheet{--bg:#1c1c1e;--surface:#2c2c2e}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:-apple-system-body;font-family:-apple-system,system-ui,"SF Pro Text","Helvetica Neue",sans-serif;line-height:1.3;
@@ -116,7 +117,7 @@ nav svg{width:25px;height:25px}
 .sheet .acts{margin-top:16px}
 .sheet .acts .btn{flex:1 1 46%}
 .sheet .acts .btn.wide{flex-basis:100%}
-.toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:.88em;font-weight:500;border-radius:20px;padding:9px 16px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:.88em;font-weight:500;border-radius:20px;padding:9px 16px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
 @media (prefers-reduced-motion: reduce){.sheet,.veil{transition:none}.sheet.on .stairs .done{animation:none;stroke-dashoffset:0}.sheet.on .stairs .now{animation:none;opacity:1}.skel{animation:none}}
 </style>
@@ -367,20 +368,12 @@ function openRace(id){
   });
   var isSaved=!!S.saved[r.i];
   html+='</div><div class="acts"><a class="btn wide" id="reg" href="'+esc(r.u)+'" target="_blank" rel="noopener" style="text-decoration:none">Sign up on RunSignup</a>'+
-    '<button class="btn quiet" id="saveBtn">'+(isSaved?'Remove from Saved':'Save')+'</button><button class="btn quiet" id="cal">Add to Calendar</button></div>'+
+    '<button class="btn quiet" id="saveBtn">'+(isSaved?'Remove from Saved':'Save')+'</button><a class="btn quiet" id="cal" href="'+DATA+'ics/'+r.i+'.ics" style="text-decoration:none">Add to Calendar</a></div>'+
     '<p class="foot" style="margin-top:14px">Prices are RunSignup’s entry fees before processing fees, as of '+esc(shortDate((S.meta||{fetched:ymd(NOW)}).fetched))+'.</p>';
   openSheet(html);
   $('saveBtn').onclick=function(){if(S.saved[r.i]){delete S.saved[r.i];toast('Removed from Saved')}else{S.saved[r.i]=r;toast('Saved')}
     save('saved',S.saved);this.textContent=S.saved[r.i]?'Remove from Saved':'Save';render()};
-  $('cal').onclick=function(){calendar(r)};
 }
-function calendar(r){var e=r.e[0],s=e.t.replace(/[-:]/g,'')+'00',d=parse(e.t);d.setHours(d.getHours()+2);
-  var en=ymd(d).replace(/-/g,'')+'T'+pad(d.getHours())+pad(d.getMinutes())+'00';
-  function x(t){return String(t).replace(/([,;\\])/g,'\\$1')}
-  var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Soulfulfill//Race Finder//EN','BEGIN:VEVENT','UID:race-'+r.i+'@racefinder','DTSTAMP:'+new Date().toISOString().replace(/[-:]|\.\d+/g,''),
-    'DTSTART:'+s,'DTEND:'+en,'SUMMARY:'+x(r.n),'LOCATION:'+x([r.st,r.c,r.s,r.z].filter(Boolean).join(', ')),'URL:'+r.u,'DESCRIPTION:'+x('Sign up: '+r.u),'END:VEVENT','END:VCALENDAR'].join('\r\n');
-  var a=document.createElement('a');a.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);a.download='race-'+r.i+'.ics';document.body.appendChild(a);a.click();a.remove();
-  window.__lastICS=ics;toast('Calendar file ready')}
 function toast(t){var el=$('toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('on')},1600)}
 
 function openLocation(){

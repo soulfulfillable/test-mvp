@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-195227@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261219T173000
+DTEND;TZID=America/Indiana/Indianapolis:20261219T193000
+SUMMARY:Dash Away Jr.
+LOCATION:17746 CR 34\, Goshen\, IN\, 46528
+URL:https://runsignup.com/Race/IN/Goshen/DashAwayJr
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Goshen/DashAwayJr
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-24685@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:15th Annual Seneca Valley Cross Country Turkey Chase 5K
+LOCATION:260 Graham Park Drive\, Cranberry Twp\, PA\, 16066
+URL:https://runsignup.com/Race/PA/CranberryTwp/svccturkeytrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/CranberryTwp/svccturke
+ ytrot
+END:VEVENT
+END:VCALENDAR

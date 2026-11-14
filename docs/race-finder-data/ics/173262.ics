@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173262@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T100000
+DTEND;TZID=America/New_York:20261231T120000
+SUMMARY:Seton Swim Lap A Thon
+LOCATION:9100 Freedom Center Blvd\, Manassas\, VA 20110\, Manassas\, VA\,
+  20110
+URL:https://runsignup.com/Race/VA/Manassas/SetonSwimLapAThon
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Manassas/SetonSwimLapA
+ Thon
+END:VEVENT
+END:VCALENDAR

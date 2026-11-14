@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-38757@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Tinsel Trot 5K & 1K Fun Run
+LOCATION:103 South 3rd Street\, Silsbee\, TX\, 77656
+URL:https://runsignup.com/Race/TX/Silsbee/TinselTrot5Kand1KFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Silsbee/TinselTrot5Kan
+ d1KFunRun
+END:VEVENT
+END:VCALENDAR

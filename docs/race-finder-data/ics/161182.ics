@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-161182@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:Gobbler 5K\, 10K\, 13.1M & 26.2M at Little Rock\, AR (46)
+LOCATION:6900 Two Rivers Park Road\, Little Rock\, AR\, 72223
+URL:https://runsignup.com/Race/AR/LittleRock/TwoRivers1192024
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/LittleRock/TwoRivers11
+ 92024
+END:VEVENT
+END:VCALENDAR

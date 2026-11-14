@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-133283@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T095000
+DTEND;TZID=America/New_York:20261121T115000
+SUMMARY:Girls on the Run of the Greater Piedmont Fall 5K
+LOCATION:935 Hurley School Rd.\, Salisbury\, NC\, 28147
+URL:https://runsignup.com/Race/NC/Salisbury/GirlsontheRunoftheGreaterPied
+ mont5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Salisbury/GirlsontheRu
+ noftheGreaterPiedmont5k
+END:VEVENT
+END:VCALENDAR

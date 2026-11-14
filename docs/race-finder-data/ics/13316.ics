@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13316@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T091000
+DTEND;TZID=America/Los_Angeles:20261126T111000
+SUMMARY:Salem Run'ucopia Thanksgiving Day Turkey Trot 6k/10k/15k
+LOCATION:Salem Riverfront Park\, Salem\, OR\, 97301
+URL:https://runsignup.com/Race/OR/Salem/SalemRunucopia
+DESCRIPTION:Sign up: https://runsignup.com/Race/OR/Salem/SalemRunucopia
+END:VEVENT
+END:VCALENDAR

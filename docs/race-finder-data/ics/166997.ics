@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-166997@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261206T080000
+DTEND;TZID=America/Phoenix:20261206T100000
+SUMMARY:Hanukkah Hot Cocoa Run 5k/1k/1mile
+LOCATION:3800 E River Road\, Tucson\, AZ\, 85718
+URL:https://runsignup.com/Race/AZ/Tucson/HanukkahHotCocoaRun5k1k1mile
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Tucson/HanukkahHotCoco
+ aRun5k1k1mile
+END:VEVENT
+END:VCALENDAR

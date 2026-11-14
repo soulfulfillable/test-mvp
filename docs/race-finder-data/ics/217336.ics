@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217336@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261115T060000
+DTEND;TZID=America/Chicago:20261115T080000
+SUMMARY:1058th Race
+LOCATION:1000 S Ware Rd\, McAllen\, TX 78501\, Mcallen\, TX\, 78501
+URL:https://runsignup.com/Race/TX/Mcallen/ThEndOfTourRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Mcallen/ThEndOfTourRac
+ e
+END:VEVENT
+END:VCALENDAR

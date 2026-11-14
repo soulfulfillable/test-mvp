@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-156657@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T081000
+DTEND;TZID=America/New_York:20261126T101000
+SUMMARY:22nd Annual Catonsville High School XC Turkey Trot
+LOCATION:421 Bloomsbury Ave.\, Catonsville\, MD\, 21228
+URL:https://runsignup.com/Race/MD/Catonsville/20thAnnualCatonsvilleHighSc
+ hoolXCTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Catonsville/20thAnnual
+ CatonsvilleHighSchoolXCTurkeyTrot
+END:VEVENT
+END:VCALENDAR

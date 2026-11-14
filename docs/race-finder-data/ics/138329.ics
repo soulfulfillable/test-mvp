@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-138329@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T084500
+DTEND;TZID=America/New_York:20261206T104500
+SUMMARY:Holiday Hustle
+LOCATION:2260 Cromwell Bridge Rd\, Parkville\, MD\, 21234
+URL:https://runsignup.com/Race/MD/Parkville/BRRCHolidayHustle
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Parkville/BRRCHolidayH
+ ustle
+END:VEVENT
+END:VCALENDAR

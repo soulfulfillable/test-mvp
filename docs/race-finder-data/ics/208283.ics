@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-208283@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261226T080000
+DTEND;TZID=America/New_York:20261226T100000
+SUMMARY:Run Ohio Races Christmas 1.5 mile fun run 5k\, 10k\, 15k
+LOCATION:1267 E Xenia Dr\, Fairborn\, OH\, 45324
+URL:https://runsignup.com/Race/OH/Fairborn/RunOhioRacesChristmas5MileFunR
+ un5k10k15k
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Fairborn/RunOhioRacesC
+ hristmas5MileFunRun5k10k15k
+END:VEVENT
+END:VCALENDAR

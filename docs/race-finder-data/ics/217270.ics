@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217270@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T080000
+DTEND;TZID=America/Chicago:20261121T100000
+SUMMARY:RVYF Turkey Trot 5K & Kids Gobble Wobble 1 Mile
+LOCATION:320 W C St\, Russellville\, AR\, 72801
+URL:https://runsignup.com/Race/AR/Russellville/RVYFTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/Russellville/RVYFTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

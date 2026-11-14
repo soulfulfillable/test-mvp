@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-53374@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261211T180000
+DTEND;TZID=America/New_York:20261211T200000
+SUMMARY:2026 GCR Holiday Party
+LOCATION:600 Goodlette Rd.\, Naples\, FL\, 34102
+URL:https://runsignup.com/Race/FL/Naples/2017GCRHolidayParty
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Naples/2017GCRHolidayP
+ arty
+END:VEVENT
+END:VCALENDAR

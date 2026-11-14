@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213412@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T180000
+DTEND;TZID=America/Chicago:20261114T200000
+SUMMARY:Metroplex Mile
+LOCATION:5401 Heritage Ave.\, Colleyville\, TX\, 76034
+URL:https://runsignup.com/Race/TX/Colleyville/MetroplexMile
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Colleyville/MetroplexM
+ ile
+END:VEVENT
+END:VCALENDAR

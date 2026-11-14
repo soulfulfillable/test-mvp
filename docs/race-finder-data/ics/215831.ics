@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215831@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261212T160000
+DTEND;TZID=America/Denver:20261212T180000
+SUMMARY:Sleigh Bell Shuffle
+LOCATION:6105 Sky Pond Dr\, Loveland\, CO\, 80538
+URL:https://runsignup.com/Race/CO/Loveland/SleighBellShuffle
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Loveland/SleighBellShu
+ ffle
+END:VEVENT
+END:VCALENDAR

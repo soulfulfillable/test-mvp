@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-189015@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261115T160000
+DTEND;TZID=America/Chicago:20261115T180000
+SUMMARY:Healthy Kids Running Series Fall 2026 - League City\, TX
+LOCATION:Hometown Heroes Park\, League City\, TX\, 77573
+URL:https://runsignup.com/Race/TX/LeagueCity/HealthyKidsRunningSeriesLeag
+ ueCityTX
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/LeagueCity/HealthyKids
+ RunningSeriesLeagueCityTX
+END:VEVENT
+END:VCALENDAR

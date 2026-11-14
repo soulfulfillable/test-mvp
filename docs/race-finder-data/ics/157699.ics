@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-157699@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T090000
+DTEND;TZID=America/New_York:20261219T110000
+SUMMARY:Holiday 5K & 13.1M at Raleigh\, NC (51)
+LOCATION:9300 Deponie Dr\, Raleigh\, NC\, 27614
+URL:https://runsignup.com/Race/NC/Raleigh/GreenHills12142024
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Raleigh/GreenHills1214
+ 2024
+END:VEVENT
+END:VCALENDAR

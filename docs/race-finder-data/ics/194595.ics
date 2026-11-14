@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194595@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T083000
+DTEND;TZID=America/Chicago:20261205T103000
+SUMMARY:Holiday Hustle
+LOCATION:703 W Main St\, Collinsville\, IL\, 62234
+URL:https://runsignup.com/Race/IL/Collinsville/CollinsvilleHolidayHustle
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Collinsville/Collinsvi
+ lleHolidayHustle
+END:VEVENT
+END:VCALENDAR

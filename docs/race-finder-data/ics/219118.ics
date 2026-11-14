@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-219118@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261127T183000
+DTEND;TZID=America/New_York:20261127T203000
+SUMMARY:The Mallett Brothers FREE Pass Holder Ticket
+LOCATION:10 base lodge rd\, South Londonderry\, VT\, 05155
+URL:https://runsignup.com/Race/VT/SouthLondonderry/MallettBrothersFREEPas
+ sholderTicket
+DESCRIPTION:Sign up: https://runsignup.com/Race/VT/SouthLondonderry/Malle
+ ttBrothersFREEPassholderTicket
+END:VEVENT
+END:VCALENDAR

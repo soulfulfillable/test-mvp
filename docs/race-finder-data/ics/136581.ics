@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136581@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T191500
+DTEND;TZID=America/New_York:20261205T211500
+SUMMARY:Green Wave Jingle Jam 5k
+LOCATION:154 Green Wave Blvd\, Easley\, SC\, 29642
+URL:https://runsignup.com/Race/SC/Easley/GreenWaveJingleJam5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Easley/GreenWaveJingle
+ Jam5k
+END:VEVENT
+END:VCALENDAR

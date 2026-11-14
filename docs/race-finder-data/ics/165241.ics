@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-165241@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T073000
+DTEND;TZID=America/New_York:20261128T093000
+SUMMARY:Pelham Half Marathon\, 10K and 1K Kids Fun Run
+LOCATION:20 Fifth Avenue\, Pelham\, NY\, 10803
+URL:https://runsignup.com/Race/NY/Pelham/PelhamHalfMarathonand10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Pelham/PelhamHalfMarat
+ honand10K
+END:VEVENT
+END:VCALENDAR

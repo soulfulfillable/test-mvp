@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-219083@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T140000
+DTEND;TZID=America/Chicago:20261212T160000
+SUMMARY:Our Lady of Guadalupe 5K Fun Run
+LOCATION:3700 Sheridan Blvd Suite 1\, Lincoln\, NE\, 68506
+URL:https://runsignup.com/Race/NE/Lincoln/OurLadyOfGuadalupe5KFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NE/Lincoln/OurLadyOfGuada
+ lupe5KFunRun
+END:VEVENT
+END:VCALENDAR

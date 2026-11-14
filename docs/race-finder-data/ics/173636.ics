@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173636@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:2026 Turkey Trot 5k & Fun Run
+LOCATION:7500 US Hwy 43\, Guin\, AL\, 35563
+URL:https://runsignup.com/Race/AL/Guin/TurkeyTrotKFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Guin/TurkeyTrotKFunRun
+END:VEVENT
+END:VCALENDAR

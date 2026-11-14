@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-118126@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261212T090000
+DTEND;TZID=America/Los_Angeles:20261212T110000
+SUMMARY:12K's of Christmas
+LOCATION:2225 Benton Dr\, Redding\, CA\, 96003
+URL:https://runsignup.com/Race/CA/Redding/12KsofChristmas96003
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Redding/12KsofChristma
+ s96003
+END:VEVENT
+END:VCALENDAR

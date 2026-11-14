@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-49541@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T160000
+DTEND;TZID=America/Chicago:20261121T180000
+SUMMARY:Holiday Lights Hunger Run/Walk
+LOCATION:Sheboygan Jaycees Quarryview Center Area and Evergreen Park\, Sh
+ eboygan\, WI\, 53083
+URL:https://runsignup.com/Race/WI/Sheboygan/HolidayLightsHungerRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Sheboygan/HolidayLight
+ sHungerRunWalk
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-191908@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:Santa Hustle Johnson City
+LOCATION:510 Bert St\, Johnson City\, TN\, 37601
+URL:https://runsignup.com/Race/TN/JohnsonCity/SantaHustleJohnsonCity
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/JohnsonCity/SantaHustl
+ eJohnsonCity
+END:VEVENT
+END:VCALENDAR

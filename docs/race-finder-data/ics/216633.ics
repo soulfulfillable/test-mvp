@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216633@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T093000
+DTEND;TZID=America/New_York:20261126T113000
+SUMMARY:Westwind Functional Fitness Turkey Trot
+LOCATION:60 Nichols Ave\, Westfield\, NY\, 14787
+URL:https://runsignup.com/Race/NY/Westfield/WestwindFunctionalFitnessTurk
+ eyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Westfield/WestwindFunc
+ tionalFitnessTurkeyTrot
+END:VEVENT
+END:VCALENDAR

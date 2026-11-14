@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-68850@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T083000
+DTEND;TZID=America/Los_Angeles:20261126T103000
+SUMMARY:Rose Bowl Turkey Trot
+LOCATION:1001 Rose Bowl Drive\, Pasadena\, CA\, 91103
+URL:https://runsignup.com/Race/CA/Pasadena/RoseBowlTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Pasadena/RoseBowlTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

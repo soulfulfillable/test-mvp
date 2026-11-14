@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211343@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T091500
+DTEND;TZID=America/Chicago:20261114T111500
+SUMMARY:2nd Annual Farmingdale Elementary PTC Turkey Trot 5K & Fun Run
+LOCATION:2473 N Farmingdale Rd\, Pleasant Plains\, IL\, 62677
+URL:https://runsignup.com/Race/IL/PleasantPlains/FarmingdaleElementaryPTC
+ TurkeyTrot5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/PleasantPlains/Farming
+ daleElementaryPTCTurkeyTrot5K
+END:VEVENT
+END:VCALENDAR

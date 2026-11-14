@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215511@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261127T093000
+DTEND;TZID=America/New_York:20261127T113000
+SUMMARY:1925 Eagle Foundation annual Turkey Trot
+LOCATION:221 West Side Drive\, Rehoboth Beach\, DE\, 19971
+URL:https://runsignup.com/Race/DE/RehobothBeach/EagleFoundationTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/DE/RehobothBeach/EagleFou
+ ndationTurkeyTrot
+END:VEVENT
+END:VCALENDAR

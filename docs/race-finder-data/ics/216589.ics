@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216589@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T090000
+DTEND;TZID=America/New_York:20261212T110000
+SUMMARY:Fleet Feet Princeton Jolly Jog Fun Run/Walk
+LOCATION:108 Nassau Street\, Princeton\, NJ\, 08542
+URL:https://runsignup.com/Race/NJ/Princeton/JollyJogPrinceton
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Princeton/JollyJogPrin
+ ceton
+END:VEVENT
+END:VCALENDAR

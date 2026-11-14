@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-178143@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270103T080000
+DTEND;TZID=America/New_York:20270103T100000
+SUMMARY:LB Endurance Swim Clinic Series 2027 (Pool & Open Water)
+LOCATION:1700 Louisville Rd\, Alcoa\, TN\, 37701
+URL:https://runsignup.com/Race/TN/Alcoa/LBEnduranceSwimClinics
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Alcoa/LBEnduranceSwimC
+ linics
+END:VEVENT
+END:VCALENDAR

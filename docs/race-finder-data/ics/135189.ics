@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135189@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T100000
+DTEND;TZID=America/New_York:20261212T120000
+SUMMARY:Santa Stampede - Buffalo\, NY - Benefits Ronald McDonald House Ch
+ arities of WNY
+LOCATION:2290 Delaware Ave\, Buffalo\, NY\, 14216
+URL:https://runsignup.com/Race/NY/Buffalo/SantaStampedeBuffaloNY
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Buffalo/SantaStampedeB
+ uffaloNY
+END:VEVENT
+END:VCALENDAR

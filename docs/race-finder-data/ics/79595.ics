@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-79595@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T100000
+DTEND;TZID=America/New_York:20261128T120000
+SUMMARY:Pigskin Classic 5K
+LOCATION:1214 W. 6th Street\, Cleveland\, OH\, 44113
+URL:https://runsignup.com/Race/OH/Cleveland/PigskinClassic5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Cleveland/PigskinClass
+ ic5K
+END:VEVENT
+END:VCALENDAR

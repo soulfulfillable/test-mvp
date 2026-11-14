@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-52547@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T110000
+DTEND;TZID=America/New_York:20261206T130000
+SUMMARY:Utica Ugly Sweater 5K
+LOCATION:9 Clinton St\, New York Mills\, NY\, 13417
+URL:https://runsignup.com/Race/NY/NewYorkMills/UticaUglySweater5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/NewYorkMills/UticaUgly
+ Sweater5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-25936@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:Reindeer Run 2 Miler
+LOCATION:Hydaway Outdoor Center\, Lynchburg\, VA\, 24502
+URL:https://runsignup.com/Race/VA/Lynchburg/ReindeerRun2Miler
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Lynchburg/ReindeerRun2
+ Miler
+END:VEVENT
+END:VCALENDAR

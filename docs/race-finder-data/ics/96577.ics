@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-96577@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261212T130000
+DTEND;TZID=America/Denver:20261212T150000
+SUMMARY:Frosty 5K
+LOCATION:3645 Alice Street\, Helena\, MT\, 59602
+URL:https://runsignup.com/Race/MT/Helena/12DaysofChristmasVirtual5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MT/Helena/12DaysofChristm
+ asVirtual5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215489@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T170000
+DTEND;TZID=America/Chicago:20261205T190000
+SUMMARY:Merry Miles 5K Fun Run/Walk & Kids Dash Presented By South Texas 
+ Striders Run/Walk Club
+LOCATION:201 N. Madison St\, Beeville\, TX\, 78102
+URL:https://runsignup.com/Race/TX/Beeville/MerryMiles5KFunRunWalkKidsDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Beeville/MerryMiles5KF
+ unRunWalkKidsDash
+END:VEVENT
+END:VCALENDAR

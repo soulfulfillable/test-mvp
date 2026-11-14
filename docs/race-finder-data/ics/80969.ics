@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-80969@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270101T110000
+DTEND;TZID=America/Chicago:20270101T130000
+SUMMARY:Chilly 5k presented by Freeman Health System
+LOCATION:Joplin Family Y\, Joplin\, MO\, 64801
+URL:https://runsignup.com/Race/MO/Joplin/Chilly5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/Joplin/Chilly5K
+END:VEVENT
+END:VCALENDAR

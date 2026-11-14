@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-201477@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T073000
+DTEND;TZID=America/Chicago:20261128T093000
+SUMMARY:Coffee Lovers Run 5K/10K/13.1 SAN ANTONIO
+LOCATION:Olmos Basin Park (Course Map will be emailed)\, San Antonio\, TX
+ \, 78212
+URL:https://runsignup.com/Race/TX/SanAntonio/CoffeeLoversRun5K10KSANANTON
+ IO1128
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAntonio/CoffeeLover
+ sRun5K10KSANANTONIO1128
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81192@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Da Deer Run Run
+LOCATION:20 Timber Pointe Lane\, Hudson\, IL\, 61748
+URL:https://runsignup.com/Race/IL/Hudson/DeerRunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Hudson/DeerRunRun
+END:VEVENT
+END:VCALENDAR

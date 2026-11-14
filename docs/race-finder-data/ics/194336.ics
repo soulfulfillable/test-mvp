@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194336@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T090000
+DTEND;TZID=America/Chicago:20261205T110000
+SUMMARY:Sycamore 8
+LOCATION:4301 NW 66th Ave\, Johnston\, IA\, 50131
+URL:https://runsignup.com/Race/IA/Johnston/Sycamore8
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/Johnston/Sycamore8
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214829@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T083000
+DTEND;TZID=America/Los_Angeles:20261126T103000
+SUMMARY:Tenino Turkey Day 5k 2026
+LOCATION:215 Park Ave E\, Tenino\, WA\, 98589
+URL:https://runsignup.com/Race/WA/Tenino/TeninoTurkeyDay5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Tenino/TeninoTurkeyDay
+ 5k
+END:VEVENT
+END:VCALENDAR

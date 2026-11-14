@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-161976@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261206T120000
+DTEND;TZID=America/Los_Angeles:20261206T140000
+SUMMARY:Run or Wine 5K Series - December 2026
+LOCATION:14735 NE 145th Street\, Woodinville\, WA\, 98072
+URL:https://runsignup.com/Race/WA/Woodinville/RunorWine5KSeriesDecember20
+ 24
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Woodinville/RunorWine5
+ KSeriesDecember2024
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-25903@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261205T090000
+DTEND;TZID=America/Denver:20261205T110000
+SUMMARY:Santa Run for Education 5K Race
+LOCATION:404 W. Main Street\, Bozeman\, MT\, 59715
+URL:https://runsignup.com/Race/MT/Bozeman/SantaRunforEducation5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MT/Bozeman/SantaRunforEdu
+ cation5K
+END:VEVENT
+END:VCALENDAR

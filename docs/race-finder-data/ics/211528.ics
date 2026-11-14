@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211528@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=Pacific/Honolulu:20270109T064500
+DTEND;TZID=Pacific/Honolulu:20270109T084500
+SUMMARY:HOST Park's 2027 Cold Start Warm Finish Family Fun Run/Walk
+LOCATION:73-4460 Queen Kaahumanu Hwy.\,\, Kailua Kona\, HI\, 96740
+URL:https://runsignup.com/Race/HI/KailuaKona/ColdStartWarmFinishFunRunWal
+ kCanicross
+DESCRIPTION:Sign up: https://runsignup.com/Race/HI/KailuaKona/ColdStartWa
+ rmFinishFunRunWalkCanicross
+END:VEVENT
+END:VCALENDAR

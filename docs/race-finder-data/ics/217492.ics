@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217492@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T100000
+DTEND;TZID=America/New_York:20261121T120000
+SUMMARY:French's Ledges Trail 10k & Fun Family Story Walk
+LOCATION:92 Bonner Road\, Meriden\, NH\, 03770
+URL:https://runsignup.com/Race/NH/Meriden/FrenchSLedgesTrail10kFunFamilyS
+ toryWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/NH/Meriden/FrenchSLedgesT
+ rail10kFunFamilyStoryWalk
+END:VEVENT
+END:VCALENDAR

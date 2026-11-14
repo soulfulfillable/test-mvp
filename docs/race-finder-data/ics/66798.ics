@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66798@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261114T123000
+DTEND;TZID=America/Detroit:20261114T143000
+SUMMARY:2026 MITCA Michigan Meet of Champions Presented by HOKA (Team Mic
+ higan Senior Mid East Qua
+LOCATION:321 S. Fourth Street\, Shepherd\, MI\, 48883
+URL:https://runsignup.com/Race/MI/Shepherd/TeamMichigan
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Shepherd/TeamMichigan
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-53150@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T100000
+DTEND;TZID=America/Chicago:20261205T120000
+SUMMARY:Jolly Jog for Havis' Kids
+LOCATION:501 Main Street\, Corinth\, MS\, 38834
+URL:https://runsignup.com/Race/MS/Corinth/JollyJogforHavisKids
+DESCRIPTION:Sign up: https://runsignup.com/Race/MS/Corinth/JollyJogforHav
+ isKids
+END:VEVENT
+END:VCALENDAR

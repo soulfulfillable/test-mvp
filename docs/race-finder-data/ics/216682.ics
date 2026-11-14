@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216682@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261205T083000
+DTEND;TZID=America/Phoenix:20261205T103000
+SUMMARY:Holiday 5K\, 10K & 13.1M at Phoenix\, AZ (49)
+LOCATION:19602 N 19th Ave\, Phoenix\, AZ\, 85023
+URL:https://runsignup.com/Race/AZ/Phoenix/49Holiday5K10KMAtPhoenixAZ
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Phoenix/49Holiday5K10K
+ MAtPhoenixAZ
+END:VEVENT
+END:VCALENDAR

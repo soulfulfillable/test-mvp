@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-14246@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:Star City Half Marathon & 10K
+LOCATION:Rivers Edge North\, Roanoke\, VA\, 24016
+URL:https://runsignup.com/Race/VA/Roanoke/StarCityHalfMarathon10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Roanoke/StarCityHalfMa
+ rathon10K
+END:VEVENT
+END:VCALENDAR

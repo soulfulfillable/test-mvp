@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-196454@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261114T111100
+DTEND;TZID=America/Detroit:20261114T131100
+SUMMARY:Burton Race Series
+LOCATION:4303 S. Center Road\, Burton\, MI\, 48519
+URL:https://runsignup.com/Race/MI/Burton/BurtonRaceSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Burton/BurtonRaceSerie
+ s
+END:VEVENT
+END:VCALENDAR

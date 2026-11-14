@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215945@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:Jennings Jaguar 5k and Fun Run Supporting Kevin's Afterglow
+LOCATION:31 Palm Drive\, Fairfield\, CT\, 06825
+URL:https://runsignup.com/Race/CT/Fairfield/JenningsJaguarAndFunRunSuppor
+ tingKevinSAfterglow
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Fairfield/JenningsJagu
+ arAndFunRunSupportingKevinSAfterglow
+END:VEVENT
+END:VCALENDAR

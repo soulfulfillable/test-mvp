@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153025@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:ATA Jingle Bell Jog
+LOCATION:817 Carolina Avenue\, Chester\, WV\, 26034
+URL:https://runsignup.com/Race/WV/Chester/ATAJingleBellJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/WV/Chester/ATAJingleBellJ
+ og
+END:VEVENT
+END:VCALENDAR

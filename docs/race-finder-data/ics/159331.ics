@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-159331@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T060000
+DTEND;TZID=America/Chicago:20261205T080000
+SUMMARY:Brazos Bend 100
+LOCATION:21901 Farm to Market Rd 762\, Needville\, TX\, 77461
+URL:https://runsignup.com/Race/TX/Needville/BrazosBend1002
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Needville/BrazosBend10
+ 02
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-12223@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T090000
+DTEND;TZID=America/Los_Angeles:20261126T110000
+SUMMARY:Cheney Turkey Trot
+LOCATION:460 N. 6th St.\, Cheney\, WA\, 99004
+URL:https://runsignup.com/Race/WA/Cheney/CheneyTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Cheney/CheneyTurkeyTro
+ t
+END:VEVENT
+END:VCALENDAR

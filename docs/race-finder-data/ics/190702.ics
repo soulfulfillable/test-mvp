@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190702@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T210000
+DTEND;TZID=America/New_York:20261121T230000
+SUMMARY:FDR Memorial Candlelight Tour 5K
+LOCATION:Meriwether County Chamber of Commerce Building\, Warm Springs\, 
+ GA\, 31830
+URL:https://runsignup.com/Race/GA/WarmSprings/CandleLight5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/WarmSprings/CandleLigh
+ t5K
+END:VEVENT
+END:VCALENDAR

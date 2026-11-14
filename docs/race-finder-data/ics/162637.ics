@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-162637@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T071500
+DTEND;TZID=America/Los_Angeles:20261126T091500
+SUMMARY:25th Annual Run for Hope Thanksgiving Day 5K
+LOCATION:Balboa Park\, 1549 El Prado\, San Diego\, CA\, 92101
+URL:https://runsignup.com/Race/CA/SanDiego/FJV5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanDiego/FJV5K
+END:VEVENT
+END:VCALENDAR

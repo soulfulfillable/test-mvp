@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168487@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T090000
+DTEND;TZID=America/New_York:20261121T110000
+SUMMARY:St. Vincent De Paul Turkeyfoot Trot
+LOCATION:Thomas More University\, Crestview Hills\, KY\, 41017
+URL:https://runsignup.com/Race/KY/CrestviewHills/StVinventDePaulTurkeyfoo
+ tTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/CrestviewHills/StVinve
+ ntDePaulTurkeyfootTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209973@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:Gobbler 5K\, 10K\, & 13.1M at Stockbridge\, GA (47)
+LOCATION:3909 E Fairview Rd SW\, Stockbridge\, GA\, 30281
+URL:https://runsignup.com/Race/GA/Stockbridge/StockbridgeGA47
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Stockbridge/Stockbridg
+ eGA47
+END:VEVENT
+END:VCALENDAR

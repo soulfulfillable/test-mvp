@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-53143@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T093000
+DTEND;TZID=America/New_York:20261205T113000
+SUMMARY:Jingle Bells 5k
+LOCATION:Dansville Community Center\, Dansville\, NY\, 14437
+URL:https://runsignup.com/Race/NY/Dansville/JingleBells5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Dansville/JingleBells5
+ k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214809@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T150000
+DTEND;TZID=America/New_York:20261212T170000
+SUMMARY:Sleigh the Shore 5K
+LOCATION:830 N Bay Ave #23\, Beach Haven\, NJ\, 08008
+URL:https://runsignup.com/Race/NJ/BeachHaven/SleighTheShore5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/BeachHaven/SleighTheSh
+ ore5K
+END:VEVENT
+END:VCALENDAR

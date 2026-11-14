@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-24658@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:MoTown Turkey Trot
+LOCATION:1020 Horsham Rd\, Montgomery Township Aka: "MoTown"\, PA\, 19454
+URL:https://runsignup.com/Race/PA/MontgomeryTownshipAkaMoTown/NorthWalesT
+ urkeyTrot5k8kKidsFunRunand12mileWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/MontgomeryTownshipAkaM
+ oTown/NorthWalesTurkeyTrot5k8kKidsFunRunand12mileWalk
+END:VEVENT
+END:VCALENDAR

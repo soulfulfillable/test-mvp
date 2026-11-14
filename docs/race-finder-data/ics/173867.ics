@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173867@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20270107T180000
+DTEND;TZID=America/Detroit:20270107T200000
+SUMMARY:KAR Running Mechanics Workshop
+LOCATION:1401 West Michigan Ave.\, Kalamazoo\, MI\, 49008
+URL:https://runsignup.com/Race/MI/Kalamazoo/KARWinterOffSeasonTrainingPro
+ gram
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Kalamazoo/KARWinterOff
+ SeasonTrainingProgram
+END:VEVENT
+END:VCALENDAR

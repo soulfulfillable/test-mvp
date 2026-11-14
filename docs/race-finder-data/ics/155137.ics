@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155137@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270101T093000
+DTEND;TZID=America/Los_Angeles:20270101T113000
+SUMMARY:Tesh 5K Fun Run! 50th Year!
+LOCATION:2411 N Atlas Rd\, ID 83814\, Coeur d'Alene\, ID 83814\, Coeur D'
+  Alene\, ID\, 83814
+URL:https://runsignup.com/Race/ID/CoeurDAlene/AnnualTesh5KFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/ID/CoeurDAlene/AnnualTesh
+ 5KFunRun
+END:VEVENT
+END:VCALENDAR

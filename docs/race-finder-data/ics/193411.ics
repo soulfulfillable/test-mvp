@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193411@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261126T080000
+DTEND;TZID=America/Indiana/Indianapolis:20261126T100000
+SUMMARY:Turkey Trot 5k
+LOCATION:50 Short Street\, North Vernon\, IN\, North Vernon\, IN\, 47265
+URL:https://runsignup.com/Race/IN/NorthVernon/TurkeyTrotNVMS5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/NorthVernon/TurkeyTrot
+ NVMS5k
+END:VEVENT
+END:VCALENDAR

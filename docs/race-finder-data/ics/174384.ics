@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-174384@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261219T100000
+DTEND;TZID=America/Los_Angeles:20261219T120000
+SUMMARY:Bulldog 5K Sleigh Ride Fun Run/Walk
+LOCATION:2700 Martin Road\, Mount Vernon\, WA\, 98273
+URL:https://runsignup.com/Race/WA/MountVernon/BulldogKSleighRideFunRunWal
+ k
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/MountVernon/BulldogKSl
+ eighRideFunRunWalk
+END:VEVENT
+END:VCALENDAR

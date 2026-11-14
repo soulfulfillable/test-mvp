@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-3950@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T080000
+DTEND;TZID=America/New_York:20261212T100000
+SUMMARY:Santa Suits On The Loose 5K Walk/Jog/Run
+LOCATION:350 A1A Beach Blvd\, St. Augustine\, FL\, 32080
+URL:https://runsignup.com/Race/FL/StAugustine/SantaSuitsOnTheLoose5KWalkJ
+ ogRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/StAugustine/SantaSuits
+ OnTheLoose5KWalkJogRun
+END:VEVENT
+END:VCALENDAR

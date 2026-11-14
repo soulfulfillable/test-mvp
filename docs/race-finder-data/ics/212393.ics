@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212393@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:Gobble ’Til You Wobble 5K & Fun Run + Free Family Fall Festival
+LOCATION:499 Front Beach\, Ocean Springs\, MS\, 39564
+URL:https://runsignup.com/Race/MS/OceanSprings/GobbleTilYouWobble5KFunRun
+ FreeFamilyFallFestival
+DESCRIPTION:Sign up: https://runsignup.com/Race/MS/OceanSprings/GobbleTil
+ YouWobble5KFunRunFreeFamilyFallFestival
+END:VEVENT
+END:VCALENDAR

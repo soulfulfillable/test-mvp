@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205882@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T070000
+DTEND;TZID=America/New_York:20261213T090000
+SUMMARY:Running for Children's Rights to Both Parents - 12 of 50 Half Mar
+ athons in 50 States - Mis
+LOCATION:105 Caillavet Boulevard\, Biloxi\, MS\, 39530
+URL:https://runsignup.com/Race/MS/Biloxi/50state50halfmarathonsMississipp
+ i
+DESCRIPTION:Sign up: https://runsignup.com/Race/MS/Biloxi/50state50halfma
+ rathonsMississippi
+END:VEVENT
+END:VCALENDAR

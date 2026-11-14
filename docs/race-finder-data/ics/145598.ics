@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-145598@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:2026 Wild Turkey Chase
+LOCATION:202 Austin Street\, Pickrell\, NE\, 68422
+URL:https://runsignup.com/Race/NE/Pickrell/WildTurkeyChase
+DESCRIPTION:Sign up: https://runsignup.com/Race/NE/Pickrell/WildTurkeyCha
+ se
+END:VEVENT
+END:VCALENDAR

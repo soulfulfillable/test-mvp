@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136488@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T083000
+DTEND;TZID=America/Los_Angeles:20261126T103000
+SUMMARY:2026 Turkey Trot
+LOCATION:2290 Benton Drive\, Redding\, CA\, 96001
+URL:https://runsignup.com/Race/CA/Redding/thanksgivingrun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Redding/thanksgivingru
+ n
+END:VEVENT
+END:VCALENDAR

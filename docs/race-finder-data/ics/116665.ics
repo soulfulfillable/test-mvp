@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-116665@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261204T193000
+DTEND;TZID=America/Chicago:20261204T213000
+SUMMARY:Santa Scurry 5K - Keller\, TX
+LOCATION:1100 Bear Creek Parkway\, Keller\, TX\, 76248
+URL:https://runsignup.com/Race/TX/Keller/SantaScurry
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Keller/SantaScurry
+END:VEVENT
+END:VCALENDAR

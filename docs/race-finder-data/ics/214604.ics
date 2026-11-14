@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214604@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261114T120000
+SUMMARY:Care Cuts Dignity Dash VIRTUAL 5K + 1-Mile Run/Walk
+LOCATION:N/A\, N/A\, IN\, 47304
+URL:https://runsignup.com/Race/IN/NA/CareCutsDignityDash5KMileRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/NA/CareCutsDignityDash
+ 5KMileRunWalk
+END:VEVENT
+END:VCALENDAR

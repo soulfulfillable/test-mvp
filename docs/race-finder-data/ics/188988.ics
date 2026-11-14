@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-188988@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Turkey Day 5K Tampa Bay
+LOCATION:7505 Gunn Hwy\, Tampa\, FL\, 33625
+URL:https://runsignup.com/Race/FL/Tampa/TurkeyDay5KTampaBay
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Tampa/TurkeyDay5KTampa
+ Bay
+END:VEVENT
+END:VCALENDAR

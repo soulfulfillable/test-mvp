@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215305@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261209T235900
+DTEND;TZID=America/New_York:20261210T015900
+SUMMARY:Last Man Standing Ultra | IRONHIKE ANSWER THE BELL - FULL SOLO | 
+ Amicalola Falls State Par
+LOCATION:418 Amicalola Falls Lodge Rd\, Dawsonville\, GA\, 30534
+URL:https://runsignup.com/Race/GA/Dawsonville/IronHikeAnswerTheBellFullFa
+ llGA
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Dawsonville/IronHikeAn
+ swerTheBellFullFallGA
+END:VEVENT
+END:VCALENDAR

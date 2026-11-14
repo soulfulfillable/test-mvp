@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-197356@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:Holiday 5K & 10K at Merritt Island\, FL (51)
+LOCATION:2455 N Banana River Dr\, Merritt Island\, FL\, 32952
+URL:https://runsignup.com/Race/FL/MerrittIsland/Holiday5K10KAtMerrittIsla
+ ndFL
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/MerrittIsland/Holiday5
+ K10KAtMerrittIslandFL
+END:VEVENT
+END:VCALENDAR

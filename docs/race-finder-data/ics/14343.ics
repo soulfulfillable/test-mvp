@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-14343@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261226T100000
+DTEND;TZID=America/Detroit:20261226T120000
+SUMMARY:✨ Bauman's New Year's Resolution Race
+LOCATION:5039 Deland Rd\, Flushing\, MI\, Flushing\, MI\, 48433
+URL:https://runsignup.com/Race/MI/Flushing/NewYearsResolutionRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Flushing/NewYearsResol
+ utionRace
+END:VEVENT
+END:VCALENDAR

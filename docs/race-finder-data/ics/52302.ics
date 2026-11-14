@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-52302@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261126T083000
+DTEND;TZID=America/Phoenix:20261126T103000
+SUMMARY:Run\, Turkey\, Run! 5K/1 Mile
+LOCATION:Goodyear Recreation Campus\, Goodyear\, AZ\, 85338
+URL:https://runsignup.com/Race/AZ/Goodyear/RunTurkeyRunAZ
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Goodyear/RunTurkeyRunA
+ Z
+END:VEVENT
+END:VCALENDAR

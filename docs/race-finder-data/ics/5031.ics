@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5031@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261121T090000
+DTEND;TZID=America/Detroit:20261121T110000
+SUMMARY:Silver Bells 5K
+LOCATION:Downtown Lansing\, Lansing\, MI\, 48933
+URL:https://runsignup.com/Race/MI/Lansing/SilverBellsFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Lansing/SilverBellsFun
+ Run
+END:VEVENT
+END:VCALENDAR

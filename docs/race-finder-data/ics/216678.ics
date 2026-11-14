@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216678@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261217T180000
+DTEND;TZID=America/New_York:20261217T200000
+SUMMARY:Jolly Jog Fun Run/Walk
+LOCATION:1937 Washington Blvd\, Ogden\, UT\, 84401
+URL:https://runsignup.com/Race/UT/Ogden/BACKUPTEMPLAT02EJollyJogFunRunWal
+ k
+DESCRIPTION:Sign up: https://runsignup.com/Race/UT/Ogden/BACKUPTEMPLAT02E
+ JollyJogFunRunWalk
+END:VEVENT
+END:VCALENDAR

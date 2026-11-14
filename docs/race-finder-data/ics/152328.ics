@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-152328@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T090000
+DTEND;TZID=America/New_York:20261115T110000
+SUMMARY:Turkey Trot Tune Up and Kid's Turkey Dash
+LOCATION:449 Forest Ave Suite 201\, Portland\, ME\, 04103
+URL:https://runsignup.com/Race/ME/Portland/TurkeyTrotTuneUp5KandKidsTurke
+ yDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/ME/Portland/TurkeyTrotTun
+ eUp5KandKidsTurkeyDash
+END:VEVENT
+END:VCALENDAR

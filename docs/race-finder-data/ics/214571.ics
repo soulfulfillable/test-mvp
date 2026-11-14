@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214571@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T073000
+DTEND;TZID=America/Chicago:20261114T093000
+SUMMARY:Faith Family Health 5K
+LOCATION:107 W. Private Lazaro Solis St.\, Grulla\, TX\, 78548
+URL:https://runsignup.com/Race/TX/Grulla/FaithFamilyHealth5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Grulla/FaithFamilyHeal
+ th5K
+END:VEVENT
+END:VCALENDAR

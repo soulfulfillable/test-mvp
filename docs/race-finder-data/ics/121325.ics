@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121325@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270109T080000
+DTEND;TZID=America/Chicago:20270109T100000
+SUMMARY:Wellness Resolution Run
+LOCATION:102 Thomas Rd\, West Monroe\, LA\, 71291
+URL:https://runsignup.com/Race/LA/WestMonroe/WellnessResolutionRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/WestMonroe/WellnessRes
+ olutionRun
+END:VEVENT
+END:VCALENDAR

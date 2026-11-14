@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-210157@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T090000
+DTEND;TZID=America/Chicago:20261114T110000
+SUMMARY:2nd Annual Blazers Run and 1-Mile Walk
+LOCATION:1451 E Northgate Drive Irving\, TX 75062\, Irving\, TX\, 75039
+URL:https://runsignup.com/Race/TX/Irving/2ndAnnualBlazerRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Irving/2ndAnnualBlazer
+ Run
+END:VEVENT
+END:VCALENDAR

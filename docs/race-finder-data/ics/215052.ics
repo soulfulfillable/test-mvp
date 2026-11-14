@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215052@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T090000
+DTEND;TZID=America/Chicago:20261126T110000
+SUMMARY:Highland Parks & Recreation's 51st Annual Pumpkin Plod
+LOCATION:2450 Lincoln Street\, Highland\, IN\, 46322
+URL:https://runsignup.com/Race/IN/Highland/PumpkinPlod
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Highland/PumpkinPlod
+END:VEVENT
+END:VCALENDAR

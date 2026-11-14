@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-203823@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T100000
+DTEND;TZID=America/New_York:20261231T120000
+SUMMARY:2026 Unified 5K Virtual
+LOCATION:Remote\, Lancaster\, MA\, 01523
+URL:https://runsignup.com/Race/MA/Lancaster/Unified5KRemote
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/Lancaster/Unified5KRem
+ ote
+END:VEVENT
+END:VCALENDAR

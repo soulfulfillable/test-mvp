@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-68175@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T073000
+DTEND;TZID=America/Chicago:20261126T093000
+SUMMARY:Drumstick Dash Thanksgiving Day Events
+LOCATION:4135 W Lake Harriet Parkway\, Minneapolis\, MN\, 55409
+URL:https://runsignup.com/Race/MN/Minneapolis/DrumstickDashThanksgivingDa
+ yEvents
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Minneapolis/DrumstickD
+ ashThanksgivingDayEvents
+END:VEVENT
+END:VCALENDAR

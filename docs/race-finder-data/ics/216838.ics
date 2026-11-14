@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216838@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T143000
+DTEND;TZID=America/New_York:20261213T163000
+SUMMARY:Jingle Jingle Jingle All The Way 5k
+LOCATION:2012 Simonton Rd\, Statesville\, NC\, 28625
+URL:https://runsignup.com/Race/NC/Statesville/JingleJingleJingleAllTheWay
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Statesville/JingleJing
+ leJingleAllTheWay
+END:VEVENT
+END:VCALENDAR

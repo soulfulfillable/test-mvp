@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-158552@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T083000
+DTEND;TZID=America/Chicago:20261126T103000
+SUMMARY:Gobble Wobble 2026
+LOCATION:225 Hoel Avenue\, Stoughton\, WI\, 53589
+URL:https://runsignup.com/Race/WI/Stoughton/GobbleWobble2024
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Stoughton/GobbleWobble
+ 2024
+END:VEVENT
+END:VCALENDAR

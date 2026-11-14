@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137431@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T090000
+DTEND;TZID=America/Chicago:20261114T110000
+SUMMARY:Turkey Trot For Trinity
+LOCATION:116 S. Main Street\, Protivin\, IA\, 52163
+URL:https://runsignup.com/Race/IA/Protivin/TurkeyTrotForTrinity
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/Protivin/TurkeyTrotFor
+ Trinity
+END:VEVENT
+END:VCALENDAR

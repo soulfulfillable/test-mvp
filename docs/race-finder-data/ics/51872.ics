@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-51872@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T083000
+DTEND;TZID=America/New_York:20261212T103000
+SUMMARY:Hoboken's Jingle Bell 10K\, 5K and 1 Mile Presented by City Fitne
+ ss
+LOCATION:100 SINATRA DRIVE SOUTH\, Hoboken\, NJ\, 07030
+URL:https://runsignup.com/Race/NJ/Hoboken/HobokenJingleBell5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Hoboken/HobokenJingleB
+ ell5K
+END:VEVENT
+END:VCALENDAR

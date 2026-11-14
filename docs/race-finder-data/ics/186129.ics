@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-186129@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:AGAPE Run 4 Love 5K
+LOCATION:1660 Johnson Road NW\, Atlanta\, GA\, 30318
+URL:https://runsignup.com/Race/GA/Atlanta/AGAPERunForLove5KKidsFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Atlanta/AGAPERunForLov
+ e5KKidsFunRun
+END:VEVENT
+END:VCALENDAR

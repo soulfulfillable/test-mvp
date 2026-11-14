@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218249@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261218T181500
+DTEND;TZID=America/Chicago:20261218T201500
+SUMMARY:Jingle Bell Glow Fun Run
+LOCATION:Downtown Henderson\, Henderson\, TX\, 75652
+URL:https://runsignup.com/Race/TX/Henderson/JingleBellGlowFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Henderson/JingleBellGl
+ owFunRun
+END:VEVENT
+END:VCALENDAR

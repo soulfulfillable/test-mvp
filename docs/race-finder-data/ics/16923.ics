@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-16923@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T080000
+DTEND;TZID=America/New_York:20261212T100000
+SUMMARY:Craven Smart Start Holiday Hustle
+LOCATION:210 E. Front Street\, New Bern\, NC\, 28560
+URL:https://runsignup.com/Race/NC/NewBern/CravenSmartStartHolidayHustle
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/NewBern/CravenSmartSta
+ rtHolidayHustle
+END:VEVENT
+END:VCALENDAR

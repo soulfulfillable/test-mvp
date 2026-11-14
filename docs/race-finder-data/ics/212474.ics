@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212474@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T153000
+DTEND;TZID=America/Chicago:20261121T173000
+SUMMARY:Harvest Hustle 5K\, 2 Mile Walk\, & Fun Run
+LOCATION:415 Central Ave\, Laurel\, MS 39440\, Laurel\, MS\, 39440
+URL:https://runsignup.com/Race/MS/Laurel/HarvestHustle5K2MileWalkFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MS/Laurel/HarvestHustle5K
+ 2MileWalkFunRun
+END:VEVENT
+END:VCALENDAR

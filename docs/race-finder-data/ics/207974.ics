@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-207974@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T073000
+DTEND;TZID=America/Chicago:20261212T093000
+SUMMARY:Sunrise Marathon 5K/10K/13.1 CHICAGO/EVANSTON
+LOCATION:Lakefront Trail (Course Map will be emailed)\, Chicago\, IL\, 60
+ 640
+URL:https://runsignup.com/Race/IL/Chicago/SunriseMarathon5K10KCHICAGOEVAN
+ STON1212
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Chicago/SunriseMaratho
+ n5K10KCHICAGOEVANSTON1212
+END:VEVENT
+END:VCALENDAR

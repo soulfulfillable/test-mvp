@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211184@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T123000
+DTEND;TZID=America/New_York:20261122T143000
+SUMMARY:Mary's Meals "Run for Hope" 5K Run/Walk
+LOCATION:9466 Columbus Pike\, Lewis Center\, OH 43015\, Lewis Center\, OH
+ \, 43035
+URL:https://runsignup.com/Race/OH/LewisCenter/MarySMealsRunForHope
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/LewisCenter/MarySMeals
+ RunForHope
+END:VEVENT
+END:VCALENDAR

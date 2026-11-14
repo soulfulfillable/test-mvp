@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214111@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261206T080000
+DTEND;TZID=America/Los_Angeles:20261206T100000
+SUMMARY:Reindeer Run 5k Fun Run
+LOCATION:34009 Alvarado-Niles Road\, Union City\, CA\, Union City\, CA\, 
+ 94587
+URL:https://runsignup.com/Race/CA/UnionCity/ReindeerRun5kFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/UnionCity/ReindeerRun5
+ kFunRun
+END:VEVENT
+END:VCALENDAR

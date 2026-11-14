@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-83466@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261129T090000
+DTEND;TZID=America/Denver:20261129T110000
+SUMMARY:James RunSignup Test Page
+LOCATION:Anywhere\, World Wide!\, VA\, 22192
+URL:https://runsignup.com/Race/VA/WorldWide/JamesProdTest2
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/WorldWide/JamesProdTes
+ t2
+END:VEVENT
+END:VCALENDAR

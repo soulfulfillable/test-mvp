@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-67399@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261205T163000
+DTEND;TZID=America/Los_Angeles:20261205T183000
+SUMMARY:Jamestown Glow Run/Walk
+LOCATION:Jamestown S'Klallam Tribal Center\, Sequim\, WA\, 98382
+URL:https://runsignup.com/Race/WA/Sequim/JamestownSKlallamTribe
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Sequim/JamestownSKlall
+ amTribe
+END:VEVENT
+END:VCALENDAR

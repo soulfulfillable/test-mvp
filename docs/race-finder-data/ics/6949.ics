@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-6949@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T101500
+DTEND;TZID=America/New_York:20270109T121500
+SUMMARY:Fantastic Frigid 5K Series
+LOCATION:3083 Liberty Road\, Delaware\, OH\, 43015
+URL:https://runsignup.com/Race/OH/Delaware/frigid5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Delaware/frigid5k
+END:VEVENT
+END:VCALENDAR

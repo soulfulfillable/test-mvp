@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-54093@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261121T090000
+DTEND;TZID=America/Denver:20261121T110000
+SUMMARY:Farmington 5K Turkey Trot & 2-mile Gobble Wobble
+LOCATION:Orchard Plaza\, Farmington\, NM\, 87401
+URL:https://runsignup.com/Race/NM/Farmington/FarmingtonTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NM/Farmington/FarmingtonT
+ urkeyTrot
+END:VEVENT
+END:VCALENDAR

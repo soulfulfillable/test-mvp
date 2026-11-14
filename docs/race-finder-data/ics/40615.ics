@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-40615@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T110000
+DTEND;TZID=America/New_York:20270101T130000
+SUMMARY:RRRC First Day 5K
+LOCATION:ACAC - Midlothian\, Midlothian\, VA\, 23113
+URL:https://runsignup.com/Race/VA/Midlothian/1STDay5K1KKidsRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Midlothian/1STDay5K1KK
+ idsRun
+END:VEVENT
+END:VCALENDAR

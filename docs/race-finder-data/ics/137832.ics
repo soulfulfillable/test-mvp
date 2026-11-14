@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137832@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261226T180000
+DTEND;TZID=America/Chicago:20261226T200000
+SUMMARY:GrindFest Progression Run
+LOCATION:500 S 84th St.\, Milwaukee\, WI\, 53214
+URL:https://runsignup.com/Race/WI/Milwaukee/GrindFestProgressionRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Milwaukee/GrindFestPro
+ gressionRun
+END:VEVENT
+END:VCALENDAR

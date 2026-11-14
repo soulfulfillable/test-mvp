@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155656@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T085000
+DTEND;TZID=America/New_York:20261126T105000
+SUMMARY:High Country Turkey Trot 5K & 10K
+LOCATION:355 M.L.K. Jr. St\, Boone\, NC\, 28607
+URL:https://runsignup.com/Race/NC/Boone/HighCountryTurkeyTrot5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Boone/HighCountryTurke
+ yTrot5K
+END:VEVENT
+END:VCALENDAR

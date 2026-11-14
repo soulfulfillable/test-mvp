@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-37185@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T083000
+DTEND;TZID=America/New_York:20261212T103000
+SUMMARY:TCRR Club Championship 7M & 5k
+LOCATION:11301 Johnson Road\, Petersburg\, VA\, 23805
+URL:https://runsignup.com/Race/VA/Petersburg/TCRRClubChampionship7M5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Petersburg/TCRRClubCha
+ mpionship7M5k
+END:VEVENT
+END:VCALENDAR

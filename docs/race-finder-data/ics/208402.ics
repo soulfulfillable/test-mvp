@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-208402@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T073000
+DTEND;TZID=America/New_York:20261114T093000
+SUMMARY:Run for Mental Health 5K/10K/13.1 NYC Central
+LOCATION:NYC Central (Course Map will be emailed)\, New York City\, NY\, 
+ 10025
+URL:https://runsignup.com/Race/NY/NewYorkCity/RunForMentalHealth5K10KNYCC
+ entral1114
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/NewYorkCity/RunForMent
+ alHealth5K10KNYCCentral1114
+END:VEVENT
+END:VCALENDAR

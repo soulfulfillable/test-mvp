@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216112@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T100000
+DTEND;TZID=America/New_York:20261205T120000
+SUMMARY:Joel Barlow 5K Reindeer Run
+LOCATION:100 Black Rock Turnpike\, Redding\, CT\, 06896
+URL:https://runsignup.com/Race/CT/Redding/JoelBarlowReindeerRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Redding/JoelBarlowRein
+ deerRun
+END:VEVENT
+END:VCALENDAR

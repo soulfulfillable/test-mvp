@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-166281@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T161500
+DTEND;TZID=America/New_York:20261128T181500
+SUMMARY:Winter Wonderland Run
+LOCATION:161 Chestnut St\, Rochester\, NY\, 14604
+URL:https://runsignup.com/Race/NY/Rochester/WinterWonderlandRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Rochester/WinterWonder
+ landRun
+END:VEVENT
+END:VCALENDAR

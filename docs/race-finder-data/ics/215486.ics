@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215486@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:Farm City Week 5K Trail Run/Walk
+LOCATION:294 Hawkins Loop\, Hurdle Mills\, NC\, 27541
+URL:https://runsignup.com/Race/NC/HurdleMills/FarmCityWeek5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/HurdleMills/FarmCityWe
+ ek5K
+END:VEVENT
+END:VCALENDAR

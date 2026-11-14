@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-25893@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:15th Annual - Trot the Manor - Thanksgiving 2026
+LOCATION:Jackson and Rowan Rd\, Chatham\, NJ\, 07928
+URL:https://runsignup.com/Race/NJ/Chatham/TrottheManor
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Chatham/TrottheManor
+END:VEVENT
+END:VCALENDAR

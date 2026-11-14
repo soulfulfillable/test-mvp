@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-156470@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261224T130000
+DTEND;TZID=America/New_York:20261224T150000
+SUMMARY:Frosty 5K and Jingle Bell Mile
+LOCATION:1413 North Main Street\, Blacksburg\, VA\, 24060
+URL:https://runsignup.com/Race/VA/Blacksburg/Frosty5KandJingleBellMile
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Blacksburg/Frosty5Kand
+ JingleBellMile
+END:VEVENT
+END:VCALENDAR

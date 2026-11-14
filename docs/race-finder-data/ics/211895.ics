@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211895@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T071500
+DTEND;TZID=America/Chicago:20261205T091500
+SUMMARY:Weslaco Scholarship Foundation Scholar Stride 5k
+LOCATION:1020 W. 18th Street\, Weslaco\, TX\, 78596
+URL:https://runsignup.com/Race/TX/Weslaco/WeslacoScholarshipFoundationSch
+ olarStride5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Weslaco/WeslacoScholar
+ shipFoundationScholarStride5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-38788@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T130000
+DTEND;TZID=America/New_York:20261213T150000
+SUMMARY:Frostbite 5-Mile Run & Penguin 5K Walk
+LOCATION:2651 Euclid Ave\, Duboistown\, PA\, 17702
+URL:https://runsignup.com/Race/PA/Duboistown/Frostbite5MileRunandPenguin5
+ kWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Duboistown/Frostbite5M
+ ileRunandPenguin5kWalk
+END:VEVENT
+END:VCALENDAR

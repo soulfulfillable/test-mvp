@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136676@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Menominee:20261126T093000
+DTEND;TZID=America/Menominee:20261126T113000
+SUMMARY:Iron Mountain | Kingsford Turkey Trot 5K Run/Walk presented by Ha
+ ll Orthodontics
+LOCATION:800 Crystal Lake Blvd # 110\, Iron Mountain\, MI\, 49801
+URL:https://runsignup.com/Race/MI/IronMountain/IronMountainKingsfordTurke
+ yTrot5KRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/IronMountain/IronMount
+ ainKingsfordTurkeyTrot5KRunWalk
+END:VEVENT
+END:VCALENDAR

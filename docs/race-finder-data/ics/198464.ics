@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-198464@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261226T083000
+DTEND;TZID=America/New_York:20261226T103000
+SUMMARY:Holiday 5K & 10K at Knoxville\, TN (52)
+LOCATION:1807 Adair Dr\, Knoxville\, TN\, 37918
+URL:https://runsignup.com/Race/TN/Knoxville/52AdairParkKnoxvilleTN
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Knoxville/52AdairParkK
+ noxvilleTN
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-132974@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T070000
+DTEND;TZID=America/Chicago:20261114T090000
+SUMMARY:Battle of Leon Creek: 20-Miles\, 13.1\, 10-Mile\, 5K
+LOCATION:16102 Old Fredericksburg Rd\, San Antonio\, TX\, 78257
+URL:https://runsignup.com/Race/TX/SanAntonio/BattleofLeonCreek20Miles1311
+ 0Mile5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAntonio/BattleofLeo
+ nCreek20Miles13110Mile5K
+END:VEVENT
+END:VCALENDAR

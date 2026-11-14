@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-37702@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T090000
+DTEND;TZID=America/New_York:20261219T110000
+SUMMARY:Santa Run 8K/5K & Snowman Dash
+LOCATION:324 S. Mint St\, Charlotte\, NC\, 28202
+URL:https://runsignup.com/Race/NC/Charlotte/SantaRun8KSnowmanDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Charlotte/SantaRun8KSn
+ owmanDash
+END:VEVENT
+END:VCALENDAR

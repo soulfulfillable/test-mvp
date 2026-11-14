@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217792@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T090000
+DTEND;TZID=America/Los_Angeles:20261126T110000
+SUMMARY:Dublin Turkey Trot 2026: Run\, Walk\, Give Thanks
+LOCATION:4201 Central Pkwy\, Dublin\, CA\, 94568
+URL:https://runsignup.com/Race/CA/Dublin/DublinTurkeyTrotRunWalkGiveThank
+ s
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Dublin/DublinTurkeyTro
+ tRunWalkGiveThanks
+END:VEVENT
+END:VCALENDAR

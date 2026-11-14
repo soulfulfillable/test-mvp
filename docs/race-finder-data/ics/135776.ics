@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135776@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T090000
+DTEND;TZID=America/Chicago:20261205T110000
+SUMMARY:Miracle on College Street Mile Run/Walk
+LOCATION:Fountain Square Park\, Bowling Green\, KY\, 42101
+URL:https://runsignup.com/Race/KY/BowlingGreen/MiracleonCollegeStreetMile
+ RunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/BowlingGreen/Miracleon
+ CollegeStreetMileRunWalk
+END:VEVENT
+END:VCALENDAR

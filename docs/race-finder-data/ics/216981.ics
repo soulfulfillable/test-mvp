@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216981@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T090000
+DTEND;TZID=America/New_York:20270109T110000
+SUMMARY:Vero OnTrack
+LOCATION:1900 16th St\, Vero Beach\, FL\, 32960
+URL:https://runsignup.com/Race/FL/VeroBeach/VeroOnTrack
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/VeroBeach/VeroOnTrack
+END:VEVENT
+END:VCALENDAR

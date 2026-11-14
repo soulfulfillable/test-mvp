@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-50146@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T084500
+DTEND;TZID=America/New_York:20261126T104500
+SUMMARY:Westchester Turkey Trot 10K & 5K presented by Northwell Orthopedi
+ cs
+LOCATION:75 Grasslands Rd\, Valhalla\, NY\, 10595
+URL:https://runsignup.com/Race/NY/Valhalla/QueensTurkeyTrot5k8k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Valhalla/QueensTurkeyT
+ rot5k8k
+END:VEVENT
+END:VCALENDAR

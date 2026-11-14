@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216777@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T090000
+DTEND;TZID=America/Chicago:20261212T110000
+SUMMARY:Christmas Fun Run
+LOCATION:519 East Harper Street\, Troy\, TN\, 38260
+URL:https://runsignup.com/Race/TN/Troy/ChristmasFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Troy/ChristmasFunRun
+END:VEVENT
+END:VCALENDAR

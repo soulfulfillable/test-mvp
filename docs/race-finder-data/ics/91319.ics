@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-91319@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Turkey Strut 5K
+LOCATION:Winston-Salem Fairgrounds\, Winston Salem\, NC\, 27105
+URL:https://runsignup.com/Race/NC/WinstonSalem/JRCTurkeyStrut5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/WinstonSalem/JRCTurkey
+ Strut5K
+END:VEVENT
+END:VCALENDAR

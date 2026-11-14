@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212444@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261201T080000
+DTEND;TZID=America/New_York:20261201T100000
+SUMMARY:Winter Warriors with Fleet Feet Knoxville
+LOCATION:11619 Parkside Dr\, Knoxville\, TN\, 37934
+URL:https://runsignup.com/Race/TN/Knoxville/WinterWarriorsWithFleetFeetKn
+ oxville
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Knoxville/WinterWarrio
+ rsWithFleetFeetKnoxville
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-86416@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T090000
+DTEND;TZID=America/New_York:20261212T110000
+SUMMARY:Frosty 5K and Reindeer Run
+LOCATION:1600 Mine Road\, Stafford\, VA\, 22554
+URL:https://runsignup.com/Race/VA/Stafford/Frosty3andReindeerRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Stafford/Frosty3andRei
+ ndeerRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211696@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T080000
+DTEND;TZID=America/New_York:20270109T100000
+SUMMARY:The JoAnn Walz Memorial 5K Race
+LOCATION:1704 Duane Palmer Blvd.\, Sebring\, FL\, 33870
+URL:https://runsignup.com/Race/FL/Sebring/TheJoAnnWalzMemorial5KRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Sebring/TheJoAnnWalzMe
+ morial5KRace
+END:VEVENT
+END:VCALENDAR

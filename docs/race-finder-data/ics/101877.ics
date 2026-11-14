@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-101877@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T071500
+DTEND;TZID=America/Chicago:20261121T091500
+SUMMARY:Broussard Community Fair 5K/1 Mile Run
+LOCATION:835 E Main Street\, Broussard\, LA\, 70518
+URL:https://runsignup.com/Race/LA/Broussard/CommunityFair
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Broussard/CommunityFai
+ r
+END:VEVENT
+END:VCALENDAR

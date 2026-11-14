@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-100016@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Vincennes:20261126T080000
+DTEND;TZID=America/Indiana/Vincennes:20261126T100000
+SUMMARY:Downtown Jasper IN Turkey Trot 5K
+LOCATION:605 Main Street\, Jasper\, IN\, 47546
+URL:https://runsignup.com/Race/IN/Jasper/TurkeyTrotDowntownJasperIN
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Jasper/TurkeyTrotDownt
+ ownJasperIN
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154918@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T130000
+DTEND;TZID=America/New_York:20261213T150000
+SUMMARY:Saratoga Ugly Sweater 5K (Team GRINCH vs Team SANTA)
+LOCATION:19 Roosevelt Dr.\, Saratoga Springs\, NY\, 12866
+URL:https://runsignup.com/Race/NY/SaratogaSprings/SaratogaUglySweater5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/SaratogaSprings/Sarato
+ gaUglySweater5K
+END:VEVENT
+END:VCALENDAR

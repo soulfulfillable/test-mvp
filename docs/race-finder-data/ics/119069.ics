@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-119069@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261219T070000
+DTEND;TZID=America/Chicago:20261219T090000
+SUMMARY:Texas Double
+LOCATION:3500 W Northwest Hwy\, Dallas\, TX\, 75220
+URL:https://runsignup.com/Race/TX/Dallas/TexasDouble
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Dallas/TexasDouble
+END:VEVENT
+END:VCALENDAR

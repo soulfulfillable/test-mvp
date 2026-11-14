@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218025@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Vincennes:20261205T085500
+DTEND;TZID=America/Indiana/Vincennes:20261205T105500
+SUMMARY:Good Samaritan Ho Ho Hustle on the Wabash 5k and Kids Fun Run
+LOCATION:S 1st Street\, Vincennes\, IN\, 47591
+URL:https://runsignup.com/Race/IN/Vincennes/GoodSamaritanHoHoHustleOnTheW
+ abash5kAndKidsFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Vincennes/GoodSamarita
+ nHoHoHustleOnTheWabash5kAndKidsFunRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-103655@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T100000
+DTEND;TZID=America/New_York:20261213T120000
+SUMMARY:21st Run with Santa 5k at Cape Henlopen State Park
+LOCATION:1 Bathhouse/Main beach\, Lewes\, DE\, 19958
+URL:https://runsignup.com/Race/DE/Lewes/RunwithSanta5katCapeHenlopenState
+ Park
+DESCRIPTION:Sign up: https://runsignup.com/Race/DE/Lewes/RunwithSanta5kat
+ CapeHenlopenStatePark
+END:VEVENT
+END:VCALENDAR

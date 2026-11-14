@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212085@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T100000
+DTEND;TZID=America/New_York:20261128T120000
+SUMMARY:Krampus 5K and Walk
+LOCATION:5535 Flanagan Rd\, Marcy\, NY\, 13403
+URL:https://runsignup.com/Race/NY/Marcy/Krampus5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Marcy/Krampus5k
+END:VEVENT
+END:VCALENDAR

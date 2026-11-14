@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-160270@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:The Run Before Christmas - SantaCon 8k
+LOCATION:Red Mill Museum Village\, Clinton\, NJ\, 08801
+URL:https://runsignup.com/Race/NJ/Clinton/SantaCon
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Clinton/SantaCon
+END:VEVENT
+END:VCALENDAR

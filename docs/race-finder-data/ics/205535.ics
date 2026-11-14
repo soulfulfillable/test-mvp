@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205535@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T071500
+DTEND;TZID=America/New_York:20261126T091500
+SUMMARY:Inaugural Manatee River Turkey Trot Bridge Run Hosted by the Palm
+ etto Marriott Resort & Sp
+LOCATION:600 US-41 HWY\, Palmetto\, FL\, 34221
+URL:https://runsignup.com/Race/FL/Palmetto/ManateeRiverTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Palmetto/ManateeRiverT
+ urkeyTrot
+END:VEVENT
+END:VCALENDAR

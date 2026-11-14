@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-188582@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261126T080000
+DTEND;TZID=America/Indiana/Indianapolis:20261126T100000
+SUMMARY:Clay County YMCA Turkey Trot 5k
+LOCATION:225 E Kruzan St\, Brazil\, IN\, 47834
+URL:https://runsignup.com/Race/IN/Brazil/ClayCountyYMCATurkeyTrot5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Brazil/ClayCountyYMCAT
+ urkeyTrot5k
+END:VEVENT
+END:VCALENDAR

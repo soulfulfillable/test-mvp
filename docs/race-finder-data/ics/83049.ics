@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-83049@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T110000
+DTEND;TZID=America/New_York:20270101T130000
+SUMMARY:Brookfield Lions Run for Sight 4-Miler
+LOCATION:Brookfield High School\, 45 Long Meadow Hill Road\, Brookfield\,
+  CT\, 06804
+URL:https://runsignup.com/Race/CT/Brookfield/BrookfieldLionsRunforSight4M
+ iler
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Brookfield/BrookfieldL
+ ionsRunforSight4Miler
+END:VEVENT
+END:VCALENDAR

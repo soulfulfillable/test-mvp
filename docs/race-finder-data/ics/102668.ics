@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-102668@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T080000
+DTEND;TZID=America/Chicago:20261212T100000
+SUMMARY:St. Louis Track Club 2026-2027 Frostbite Series
+LOCATION:5595 Grand Dr\, Saint Louis\, MO\, 63112
+URL:https://runsignup.com/Race/MO/SaintLouis/TheFrostbiteSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/SaintLouis/TheFrostbit
+ eSeries
+END:VEVENT
+END:VCALENDAR

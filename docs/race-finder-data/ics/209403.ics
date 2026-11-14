@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209403@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T081500
+DTEND;TZID=America/Chicago:20261121T101500
+SUMMARY:WHATABURGER ‘WHATARUN 5K/10K’ (San Antonio\, TX)
+LOCATION:Start Line Location: SeaWorld San Antonio\, San Antonio\, TX\, 7
+ 8251
+URL:https://runsignup.com/Race/TX/SanAntonio/whatarun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAntonio/whatarun
+END:VEVENT
+END:VCALENDAR

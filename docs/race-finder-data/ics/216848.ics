@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216848@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T083000
+DTEND;TZID=America/New_York:20261206T103000
+SUMMARY:Fleet Feet Syracuse Jolly Jog Fun Run/Walk
+LOCATION:5800 Bridge Street\, East Syracuse\, NY\, 13057
+URL:https://runsignup.com/Race/NY/EastSyracuse/BACKUPTEMPLATE18JollyJogFu
+ nRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/EastSyracuse/BACKUPTEM
+ PLATE18JollyJogFunRunWalk
+END:VEVENT
+END:VCALENDAR

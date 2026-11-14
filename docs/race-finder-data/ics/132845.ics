@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-132845@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T081500
+DTEND;TZID=America/New_York:20261126T101500
+SUMMARY:Great Turkey Chase 5K
+LOCATION:996 East High Street\, Elizabethtown\, PA\, 17022
+URL:https://runsignup.com/Race/PA/Elizabethtown/GreatTurkeyChase
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Elizabethtown/GreatTur
+ keyChase
+END:VEVENT
+END:VCALENDAR

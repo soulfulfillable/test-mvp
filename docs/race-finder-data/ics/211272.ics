@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211272@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Hardin Elementary Color Run
+LOCATION:291 Huck Finn Road\, Redfield\, AR\, 72132
+URL:https://runsignup.com/Race/AR/Redfield/HardinElementaryColorRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/Redfield/HardinElement
+ aryColorRun
+END:VEVENT
+END:VCALENDAR

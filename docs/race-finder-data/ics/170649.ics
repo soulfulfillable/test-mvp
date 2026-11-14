@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-170649@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261211T163000
+DTEND;TZID=America/Los_Angeles:20261211T183000
+SUMMARY:California December Distance Night
+LOCATION:Occidental College Track\, Los Angeles\, CA\, 90041
+URL:https://runsignup.com/Race/CA/LosAngeles/CaliforniaDecemberDistanceNi
+ ght
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/LosAngeles/CaliforniaD
+ ecemberDistanceNight
+END:VEVENT
+END:VCALENDAR

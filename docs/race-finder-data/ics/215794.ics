@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215794@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261114T074500
+DTEND;TZID=America/Los_Angeles:20261114T094500
+SUMMARY:Downey Dance Team Turkey Trot 5K & Group Relay
+LOCATION:10900 Brookshire Ave.\, Downey\, CA\, 90241
+URL:https://runsignup.com/Race/CA/Downey/DowneyDanceTeamTurkeyTrot5kAndRe
+ lay
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Downey/DowneyDanceTeam
+ TurkeyTrot5kAndRelay
+END:VEVENT
+END:VCALENDAR

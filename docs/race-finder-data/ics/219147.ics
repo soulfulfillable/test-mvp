@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-219147@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:2026 GA Raider Run
+LOCATION:412 E Washington St\, Milledgeville\, GA\, 31061
+URL:https://runsignup.com/Race/GA/Milledgeville/2026GARaiderRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Milledgeville/2026GARa
+ iderRun
+END:VEVENT
+END:VCALENDAR

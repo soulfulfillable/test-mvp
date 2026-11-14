@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217702@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261202T173000
+DTEND;TZID=America/Los_Angeles:20261202T193000
+SUMMARY:Sweet Shapes and Sprinkles Cookie Workshop
+LOCATION:3632 Tulagi Rd.\, San Diego\, CA\, 92155
+URL:https://runsignup.com/Race/CA/SanDiego/SweetShapesAndSprinklesCookieW
+ orkshop
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanDiego/SweetShapesAn
+ dSprinklesCookieWorkshop
+END:VEVENT
+END:VCALENDAR

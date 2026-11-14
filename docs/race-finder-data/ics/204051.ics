@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-204051@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T093000
+DTEND;TZID=America/New_York:20261212T113000
+SUMMARY:Downtown Florence Reindeer Dash 5K
+LOCATION:119 S. Dargan Street\, Florence\, SC\, 29506
+URL:https://runsignup.com/Race/SC/Florence/DowntownFlorenceReindeerDash5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Florence/DowntownFlore
+ nceReindeerDash5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215357@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T110000
+DTEND;TZID=America/New_York:20261114T130000
+SUMMARY:Miles with Mallory 2026
+LOCATION:355 M.L.K Jr. Street\, Boone\, NC\, 28607
+URL:https://runsignup.com/Race/NC/Boone/MilesForMallory
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Boone/MilesForMallory
+END:VEVENT
+END:VCALENDAR

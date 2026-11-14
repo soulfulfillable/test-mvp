@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218220@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261216T190000
+DTEND;TZID=America/New_York:20261216T210000
+SUMMARY:NC Urban Mushing Human Nutrition Webinar with Liz Raynor\, RD
+LOCATION:123 Main St\, Durham\, NC\, 27713
+URL:https://runsignup.com/Race/NC/Durham/NCUMHumanNutritionWebinar
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Durham/NCUMHumanNutrit
+ ionWebinar
+END:VEVENT
+END:VCALENDAR

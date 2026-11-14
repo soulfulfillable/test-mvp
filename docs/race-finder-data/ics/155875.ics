@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155875@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261226T083000
+DTEND;TZID=America/New_York:20261226T103000
+SUMMARY:Holiday 5K\, & 10K at Manheim\, PA\, (52)
+LOCATION:Lancaster Junction Trail\, Manheim\, PA\, 17545
+URL:https://runsignup.com/Race/PA/Manheim/Lancaster12282024
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Manheim/Lancaster12282
+ 024
+END:VEVENT
+END:VCALENDAR

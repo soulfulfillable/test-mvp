@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-186586@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:Naturally Outdoors Endurance Race: 2Hr + 4Hr Run & Ruck
+LOCATION:1000 Soccer Way\, Florence\, SC\, 29501
+URL:https://runsignup.com/Race/SC/Florence/naturallyoutdoorsendurance
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Florence/naturallyoutd
+ oorsendurance
+END:VEVENT
+END:VCALENDAR

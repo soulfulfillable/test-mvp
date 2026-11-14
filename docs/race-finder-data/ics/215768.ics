@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215768@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T170000
+DTEND;TZID=America/New_York:20261121T190000
+SUMMARY:Hustle for the Hive 5K for Emory and Henry Cheer
+LOCATION:12228 Itta Bena Road\, Emory\, VA\, 24361
+URL:https://runsignup.com/Race/VA/Emory/FrightNight5KRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Emory/FrightNight5KRun
+ Walk
+END:VEVENT
+END:VCALENDAR

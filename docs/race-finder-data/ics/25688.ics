@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-25688@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T130000
+DTEND;TZID=America/New_York:20270101T150000
+SUMMARY:Beer Mile
+LOCATION:142 W Commercial St\, Winchester\, VA\, 22601
+URL:https://runsignup.com/Race/VA/Winchester/WinchesterBeerMile
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Winchester/WinchesterB
+ eerMile
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-139178@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270103T090000
+DTEND;TZID=America/Chicago:20270103T110000
+SUMMARY:Time Travel Half-Marathon/5K/10K - St. Louis
+LOCATION:Creve Coeur Park- Tremayne Shelter\, Maryland Heights\, MO\, 630
+ 43
+URL:https://runsignup.com/Race/MO/MarylandHeights/TimeTravelHalfMarathona
+ nd5k10kStLouisStPeters
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/MarylandHeights/TimeTr
+ avelHalfMarathonand5k10kStLouisStPeters
+END:VEVENT
+END:VCALENDAR

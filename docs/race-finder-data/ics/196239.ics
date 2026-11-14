@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-196239@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:2026 Aiken Turkey Trot and 1-Mile Fun Run
+LOCATION:651 Old Airport Rd.\, Aiken\, SC\, 29803
+URL:https://runsignup.com/Race/SC/Aiken/AikenTurkeyTrotAndMileFunRun2026
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Aiken/AikenTurkeyTrotA
+ ndMileFunRun2026
+END:VEVENT
+END:VCALENDAR

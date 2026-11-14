@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-170456@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T130000
+DTEND;TZID=America/New_York:20261114T150000
+SUMMARY:Fur-k Wag\, Walk & Run
+LOCATION:1325 Newcastle\, Brunswick\, GA\, 31520
+URL:https://runsignup.com/Race/GA/Brunswick/FurKWagWalkRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Brunswick/FurKWagWalkR
+ un
+END:VEVENT
+END:VCALENDAR

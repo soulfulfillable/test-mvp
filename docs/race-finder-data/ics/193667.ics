@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193667@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T093000
+DTEND;TZID=America/New_York:20261126T113000
+SUMMARY:Burn North Charlotte 7th Annual Turkey Trot
+LOCATION:8505 David Lake Parkway\, Charlotte\, NC\, 28269
+URL:https://runsignup.com/Race/NC/Charlotte/BurnNorthCharlotteThAnnualTro
+ t
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Charlotte/BurnNorthCha
+ rlotteThAnnualTrot
+END:VEVENT
+END:VCALENDAR

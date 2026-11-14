@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-142692@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T120000
+DTEND;TZID=America/New_York:20261205T140000
+SUMMARY:Santa Will Run for Beer 5K-ish
+LOCATION:21 E Elizabeth\, Bethlehem\, PA\, 18018
+URL:https://runsignup.com/Race/PA/Bethlehem/SantaWillRunforBeer5Kish
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Bethlehem/SantaWillRun
+ forBeer5Kish
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-161102@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T090000
+DTEND;TZID=America/Chicago:20261212T110000
+SUMMARY:Candy Cane Course- Springfield
+LOCATION:Rutledge Wilson Farm\, Springfield\, MO\, 65802
+URL:https://runsignup.com/Race/MO/Springfield/CandyCaneCourseSpringfield
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/Springfield/CandyCaneC
+ ourseSpringfield
+END:VEVENT
+END:VCALENDAR

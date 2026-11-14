@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-169919@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T090000
+DTEND;TZID=America/Chicago:20261205T110000
+SUMMARY:Candy Cane Course - St. Paul
+LOCATION:Lake Elmo Park\, Lake Elmo\, MN\, 55042
+URL:https://runsignup.com/Race/MN/LakeElmo/CandyCaneCourseStPaul
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/LakeElmo/CandyCaneCour
+ seStPaul
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-182335@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T073000
+DTEND;TZID=America/New_York:20261126T093000
+SUMMARY:Hartsville YMCA Turkey Trot
+LOCATION:111 E Carolina Ave\, Hartsville\, SC\, 29550
+URL:https://runsignup.com/Race/SC/Hartsville/HartsvilleYMCATurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Hartsville/HartsvilleY
+ MCATurkeyTrot
+END:VEVENT
+END:VCALENDAR

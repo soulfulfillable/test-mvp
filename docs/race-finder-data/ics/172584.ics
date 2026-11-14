@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172584@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Wheeling Turkey Trot
+LOCATION:Wheeling University McDonough Center\, Wheeling\, WV\, 26003
+URL:https://runsignup.com/Race/WV/Wheeling/WheelingTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/WV/Wheeling/WheelingTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

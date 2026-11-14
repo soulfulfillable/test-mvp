@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-219051@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261207T180000
+DTEND;TZID=America/New_York:20261207T200000
+SUMMARY:GTC December Meeting Honoring Greenville County High School All-C
+ ounty Cross Country Runne
+LOCATION:424 Westfield Street\, Greenville\, SC\, 29601
+URL:https://runsignup.com/Race/SC/Greenville/Decembermeeting
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Greenville/Decembermee
+ ting
+END:VEVENT
+END:VCALENDAR

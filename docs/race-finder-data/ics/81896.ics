@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81896@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T110000
+DTEND;TZID=America/New_York:20261205T130000
+SUMMARY:Saint Bartholomew Church Ugly Christmas Sweater 5k & 2 Mile Walk
+LOCATION:2538 US- Rt 119\, Crabtree\, PA\, 15624
+URL:https://runsignup.com/Race/PA/Crabtree/SaintBartholomewChurchUglyChri
+ stmasSweater5k2MileWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Crabtree/SaintBartholo
+ mewChurchUglyChristmasSweater5k2MileWalk
+END:VEVENT
+END:VCALENDAR

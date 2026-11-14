@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-6301@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T070500
+DTEND;TZID=America/New_York:20261219T090500
+SUMMARY:Mount Dora Half Marathon & 5K
+LOCATION:100 N. Donnelly St\, Mount Dora\, FL\, 32757
+URL:https://runsignup.com/Race/FL/MountDora/MountDoraHalfMarathon5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/MountDora/MountDoraHal
+ fMarathon5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-167058@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T160000
+DTEND;TZID=America/Chicago:20261121T180000
+SUMMARY:Run\, Run\, Rudolph 5K
+LOCATION:Hewlett Park\, Granbury\, TX\, 76048
+URL:https://runsignup.com/Race/TX/Granbury/GranburyRunRunRudolph5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Granbury/GranburyRunRu
+ nRudolph5K
+END:VEVENT
+END:VCALENDAR

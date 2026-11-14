@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218172@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270101T080000
+DTEND;TZID=America/Chicago:20270101T100000
+SUMMARY:New Year’s Run & Rescue
+LOCATION:518 23rd. St.\, Galveston\, TX\, 77550
+URL:https://runsignup.com/Race/TX/Galveston/ResolutionRunRescue
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Galveston/ResolutionRu
+ nRescue
+END:VEVENT
+END:VCALENDAR

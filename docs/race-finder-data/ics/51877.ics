@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-51877@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:‘A CHARLIE BROWN CHRISTMAS 5K/10K’ (Houston\, TX)
+LOCATION:Start Line Location: Addicks Park and Ride (Energy Corridor\,\, 
+ Houston\, TX\, 77079
+URL:https://runsignup.com/Race/TX/Houston/houstonholiday5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Houston/houstonholiday
+ 5k
+END:VEVENT
+END:VCALENDAR

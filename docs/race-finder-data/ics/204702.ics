@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-204702@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T083000
+DTEND;TZID=America/New_York:20261128T103000
+SUMMARY:Gobbler 5K & 10K 13.1 & 26.2 at Boone\, NC (48)
+LOCATION:355 M.L.K. Jr. St\, Boone\, NC\, 28607
+URL:https://runsignup.com/Race/NC/Boone/Gobbler5K10KAtBooneNC48
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Boone/Gobbler5K10KAtBo
+ oneNC48
+END:VEVENT
+END:VCALENDAR

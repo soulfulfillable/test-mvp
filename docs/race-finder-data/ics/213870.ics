@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213870@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T090000
+DTEND;TZID=America/New_York:20261115T110000
+SUMMARY:2026 Chasing Zero 5.5k (and 22k) Turkey Trot
+LOCATION:39098 Irene Road\, Hamilton\, VA\, 20158
+URL:https://runsignup.com/Race/VA/Hamilton/ChasingZero22k
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Hamilton/ChasingZero22
+ k
+END:VEVENT
+END:VCALENDAR

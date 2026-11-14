@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-27827@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T090000
+DTEND;TZID=America/New_York:20261212T110000
+SUMMARY:Fire & Ice Holiday 5k
+LOCATION:8905 West Smith Street\, Yorktown\, IN\, 47396
+URL:https://runsignup.com/Race/IN/Yorktown/FireIceHoliday5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Yorktown/FireIceHolida
+ y5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135684@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T080000
+DTEND;TZID=America/Chicago:20261121T100000
+SUMMARY:Ron Smith Memorial Run The Runway 5K Run and Fun Walk
+LOCATION:4400 Airpark Blvd\, Baton Rouge\, LA\, 70807
+URL:https://runsignup.com/Race/LA/BatonRouge/RunTheRunway5KRunandFunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/BatonRouge/RunTheRunwa
+ y5KRunandFunWalk
+END:VEVENT
+END:VCALENDAR

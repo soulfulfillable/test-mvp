@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-182849@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T080000
+DTEND;TZID=America/New_York:20261212T100000
+SUMMARY:Jingle Bell 5K
+LOCATION:2130 Timothy Drive\, Irwin\, PA\, 15642
+URL:https://runsignup.com/Race/PA/Irwin/JingleBell5KNorthHuntingdon
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Irwin/JingleBell5KNort
+ hHuntingdon
+END:VEVENT
+END:VCALENDAR

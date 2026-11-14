@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216384@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270109T080000
+DTEND;TZID=America/Chicago:20270109T100000
+SUMMARY:New Year 5K\, 10K\, & 13.1M at Slidell\, LA (02)
+LOCATION:105 Robert Blvd\, Slidell\, LA\, 70458
+URL:https://runsignup.com/Race/LA/Slidell/NewYear5K10KMAtSlidellLA
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Slidell/NewYear5K10KMA
+ tSlidellLA
+END:VEVENT
+END:VCALENDAR

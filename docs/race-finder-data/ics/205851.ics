@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205851@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:Friendship and Service 5k : Sponsored by Omega Limited Scholarshi
+ p Foundation
+LOCATION:840 Mauldin Rd\, Greenville\, SC\, 29607
+URL:https://runsignup.com/Race/SC/Greenville/FriendshipAndService5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Greenville/FriendshipA
+ ndService5k
+END:VEVENT
+END:VCALENDAR

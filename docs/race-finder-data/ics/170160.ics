@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-170160@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T090000
+DTEND;TZID=America/Los_Angeles:20261126T110000
+SUMMARY:Gobble ‘n’ Scoop 5K and Fun Run
+LOCATION:208 N Main St\, Newberg\, OR\, 97132
+URL:https://runsignup.com/Race/OR/Newberg/GobbleNScoopKAndFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/OR/Newberg/GobbleNScoopKA
+ ndFunRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-164584@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261127T080000
+DTEND;TZID=America/Chicago:20261127T100000
+SUMMARY:Colorado River Run 250K • 100 Mile • 50 Mile • 50K • Mara
+ thon • Half Marathon & Ruck • 10K
+LOCATION:1884 State Highway 71 West\,\, Cedar Creek\, TX\, 78612
+URL:https://runsignup.com/Race/TX/CedarCreek/ColoradoRiverTrailRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/CedarCreek/ColoradoRiv
+ erTrailRun
+END:VEVENT
+END:VCALENDAR

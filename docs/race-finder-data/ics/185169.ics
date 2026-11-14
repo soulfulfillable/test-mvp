@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-185169@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:Season of Hope Run
+LOCATION:3300 SE 15th Street\, Gainesville\, FL\, 32641
+URL:https://runsignup.com/Race/FL/Gainesville/Tylershopeseasonofhope2025
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Gainesville/Tylershope
+ seasonofhope2025
+END:VEVENT
+END:VCALENDAR

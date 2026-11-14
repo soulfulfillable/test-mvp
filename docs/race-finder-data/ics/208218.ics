@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-208218@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:Aware Color Run-Colors of Connection
+LOCATION:11 Middleville Road\, Northport\, NY\, 11768
+URL:https://runsignup.com/Race/NY/Northport/AwareColorRunColorsOfConnecti
+ on
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Northport/AwareColorRu
+ nColorsOfConnection
+END:VEVENT
+END:VCALENDAR

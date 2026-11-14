@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-36739@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261115T100000
+DTEND;TZID=America/Denver:20261115T120000
+SUMMARY:Fall Series - Get Dirty! Get Muddy!
+LOCATION:Colorado Springs\, Colorado Springs\, CO\, 80903
+URL:https://runsignup.com/Race/CO/ColoradoSprings/FallSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/ColoradoSprings/FallSe
+ ries
+END:VEVENT
+END:VCALENDAR

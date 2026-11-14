@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-103284@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T070000
+DTEND;TZID=America/New_York:20261206T090000
+SUMMARY:Tidewater Strider Dismal Swamp 50K / Marathon /Half Marathon/50K 
+ Relay
+LOCATION:Rest stop at mile post 4 Dismal Swamp\, Chesapeake\, VA\, 23322
+URL:https://runsignup.com/Race/VA/Chesapeake/TidewaterStriderDismalSwamp5
+ 0Kand100K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Chesapeake/TidewaterSt
+ riderDismalSwamp50Kand100K
+END:VEVENT
+END:VCALENDAR

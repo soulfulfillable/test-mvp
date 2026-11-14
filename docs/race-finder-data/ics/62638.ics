@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-62638@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:The Pumpkin Run™ - 5K
+LOCATION:13085 SW 1 Ln\, Newberry\, FL\, 32669
+URL:https://runsignup.com/Race/FL/Newberry/Pumpkin5KRunGainesville
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Newberry/Pumpkin5KRunG
+ ainesville
+END:VEVENT
+END:VCALENDAR

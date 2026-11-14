@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-208407@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T080000
+DTEND;TZID=America/Los_Angeles:20261126T100000
+SUMMARY:The Turkey Rock 10K/5K/1M
+LOCATION:9200 Tule Springs Rd\, Las Vegas\, NV\, 89131
+URL:https://runsignup.com/Race/NV/LasVegas/TheTurkeyRock10K5KM
+DESCRIPTION:Sign up: https://runsignup.com/Race/NV/LasVegas/TheTurkeyRock
+ 10K5KM
+END:VEVENT
+END:VCALENDAR

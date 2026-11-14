@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-22605@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:MOTM and MWC Reindeer Run 5K
+LOCATION:107 E. Clay Street\, Mebane\, NC\, 27302
+URL:https://runsignup.com/Race/NC/Mebane/MebaneOnTheMove5K10KMadDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Mebane/MebaneOnTheMove
+ 5K10KMadDash
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-174341@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270108T060000
+DTEND;TZID=America/New_York:20270108T080000
+SUMMARY:Greenville Triathlon Club Winter Swim Clinic 2027
+LOCATION:550 Brookwood Point Place\, Simpsonville\, SC\, 29687
+URL:https://runsignup.com/Race/SC/Simpsonville/TriClubSwimClinic
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Simpsonville/TriClubSw
+ imClinic
+END:VEVENT
+END:VCALENDAR

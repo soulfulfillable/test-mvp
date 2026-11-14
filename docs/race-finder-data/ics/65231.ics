@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-65231@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:Bethel Turkey Trot
+LOCATION:Bethel Municipal Center\, Bethel\, CT\, 06801
+URL:https://runsignup.com/Race/CT/Bethel/BethelTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Bethel/BethelTurkeyTro
+ t
+END:VEVENT
+END:VCALENDAR

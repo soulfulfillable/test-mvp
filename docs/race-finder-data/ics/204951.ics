@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-204951@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261226T073000
+DTEND;TZID=America/Chicago:20261226T093000
+SUMMARY:A Merry Christmas Run 5K/10K/13.1 HOUSTON
+LOCATION:Eleanor Tinsley Park (Course Map will be emailed)\, Houston\, TX
+ \, 77019
+URL:https://runsignup.com/Race/TX/Houston/AMerryChristmasRun5K10KHOUSTON1
+ 226
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Houston/AMerryChristma
+ sRun5K10KHOUSTON1226
+END:VEVENT
+END:VCALENDAR

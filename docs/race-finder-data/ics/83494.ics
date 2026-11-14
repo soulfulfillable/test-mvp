@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-83494@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T090000
+DTEND;TZID=America/New_York:20270101T110000
+SUMMARY:New Years Wake Up 5K & 1 Mile
+LOCATION:Warriors Path State Park\, Kingsport\, TN\, 37663
+URL:https://runsignup.com/Race/TN/Kingsport/NewYearsWakeUp5K1Mile
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Kingsport/NewYearsWake
+ Up5K1Mile
+END:VEVENT
+END:VCALENDAR

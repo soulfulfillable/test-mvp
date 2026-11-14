@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-207889@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270109T110000
+DTEND;TZID=America/Chicago:20270109T130000
+SUMMARY:Frozen Fairway 5K
+LOCATION:1901 N Towanda Ave\, Normal\, IL\, 61761
+URL:https://runsignup.com/Race/IL/Normal/FrozenFrostyFairwaysRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Normal/FrozenFrostyFai
+ rwaysRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218057@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261119T180000
+DTEND;TZID=America/New_York:20261119T200000
+SUMMARY:Early Bird 5K Fun Run at Runners Edge
+LOCATION:3195 N Federal Hwy\, Boca Raton\, FL\, 33431
+URL:https://runsignup.com/Race/FL/BocaRaton/EarlyBird5KFunRunAtRunnersEdg
+ e
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/BocaRaton/EarlyBird5KF
+ unRunAtRunnersEdge
+END:VEVENT
+END:VCALENDAR

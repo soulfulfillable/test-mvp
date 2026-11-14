@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-162289@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261127T073000
+DTEND;TZID=America/Chicago:20261127T093000
+SUMMARY:JUNIOR CAMPS
+LOCATION:713 Minnehaha Ave E\, Saint Paul\, MN\, 55106
+URL:https://runsignup.com/Race/MN/SaintPaul/JuniorCamp
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/SaintPaul/JuniorCamp
+END:VEVENT
+END:VCALENDAR

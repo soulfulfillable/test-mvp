@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214456@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T100000
+DTEND;TZID=America/New_York:20261212T120000
+SUMMARY:OH WHAT FUN HOLIDAY RUN
+LOCATION:445 Avon Belden Rd\, Avon Lake\, OH\, 44012
+URL:https://runsignup.com/Race/OH/AvonLake/OhWhatFunHolidayRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/AvonLake/OhWhatFunHoli
+ dayRun
+END:VEVENT
+END:VCALENDAR

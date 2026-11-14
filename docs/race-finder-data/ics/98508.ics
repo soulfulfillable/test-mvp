@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-98508@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T093000
+DTEND;TZID=America/New_York:20261126T113000
+SUMMARY:Family of New Paltz 5K Turkey Trot
+LOCATION:Water Street Market\, New Paltz\, NY\, 12561
+URL:https://runsignup.com/Race/NY/NewPaltz/FamilyofNewPaltzTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/NewPaltz/FamilyofNewPa
+ ltzTurkeyTrot
+END:VEVENT
+END:VCALENDAR

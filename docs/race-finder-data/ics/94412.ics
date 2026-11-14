@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-94412@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T150000
+DTEND;TZID=America/New_York:20261115T170000
+SUMMARY:Knox County Suicide Prevention Coalition 5K/10K
+LOCATION:10 Pittsburgh Ave\, Mount Vernon\, OH\, 43050
+URL:https://runsignup.com/Race/OH/MountVernon/knoxcountysuicideprevention
+ 5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/MountVernon/knoxcounty
+ suicideprevention5k
+END:VEVENT
+END:VCALENDAR

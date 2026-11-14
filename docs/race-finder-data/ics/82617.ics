@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-82617@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T130000
+DTEND;TZID=America/New_York:20261128T150000
+SUMMARY:Andy Gavin's Green Ridge Mile
+LOCATION:1392 N. Washington Ave\, Scranton\, PA\, 18509
+URL:https://runsignup.com/Race/PA/Scranton/GreenRidgeMile
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Scranton/GreenRidgeMil
+ e
+END:VEVENT
+END:VCALENDAR

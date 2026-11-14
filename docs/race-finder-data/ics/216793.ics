@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216793@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T100000
+DTEND;TZID=America/New_York:20261212T120000
+SUMMARY:Fleet Feet Tallahassee Jolly Jog Fun Run/Walk
+LOCATION:717 S Gadsden St\, Tallahassee\, FL\, 32301
+URL:https://runsignup.com/Race/FL/Tallahassee/BACKUPTEMPLATE09JollyJogFun
+ RunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Tallahassee/BACKUPTEMP
+ LATE09JollyJogFunRunWalk
+END:VEVENT
+END:VCALENDAR

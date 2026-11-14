@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-28088@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T083000
+DTEND;TZID=America/New_York:20261122T103000
+SUMMARY:The Gobbler Half Marathon\, 10K & 5K
+LOCATION:Mereworth Farm\, Lexington\, KY\, 40511
+URL:https://runsignup.com/Race/KY/Lexington/TheGobblerHalfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Lexington/TheGobblerHa
+ lfMarathon
+END:VEVENT
+END:VCALENDAR

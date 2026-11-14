@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-170860@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261126T093000
+DTEND;TZID=America/Indiana/Indianapolis:20261126T113000
+SUMMARY:2026 Gobble Wobble 5K for Food Finders presented by Purdue Federa
+ l Credit Union
+LOCATION:3101 N Salisbury St\, West Lafayette\, IN\, 47906
+URL:https://runsignup.com/Race/IN/WestLafayette/GobbleWobble5KWL
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/WestLafayette/GobbleWo
+ bble5KWL
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-146489@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T090000
+DTEND;TZID=America/New_York:20261206T110000
+SUMMARY:Checkers A.C. Christmas 3k Race
+LOCATION:Indian Hunter Statue\, Buffalo\, NY\, 14214
+URL:https://runsignup.com/Race/NY/Buffalo/CheckersACChristmas3kRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Buffalo/CheckersACChri
+ stmas3kRace
+END:VEVENT
+END:VCALENDAR

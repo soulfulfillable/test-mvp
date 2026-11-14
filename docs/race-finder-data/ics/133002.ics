@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-133002@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261125T183000
+DTEND;TZID=America/New_York:20261125T203000
+SUMMARY:Glowing Gobbler 5K
+LOCATION:901 Clubhouse Way\, Newport News\, VA\, 23608
+URL:https://runsignup.com/Race/VA/NewportNews/GlowingGobbler5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/NewportNews/GlowingGob
+ bler5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217222@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T200000
+DTEND;TZID=America/New_York:20261114T220000
+SUMMARY:AdventHealth Manchester Glow For Good 5k!!
+LOCATION:102 Richmond Road\, Manchester\, KY\, 40962
+URL:https://runsignup.com/Race/KY/Manchester/AdventHealthManchesterGlowFo
+ rGood5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Manchester/AdventHealt
+ hManchesterGlowForGood5k
+END:VEVENT
+END:VCALENDAR

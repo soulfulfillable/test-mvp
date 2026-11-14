@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121333@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270102T080000
+DTEND;TZID=America/Los_Angeles:20270102T100000
+SUMMARY:Frosty Fun Runs
+LOCATION:2225 Benton Dr.\, Redding\, CA\, 96003
+URL:https://runsignup.com/Race/CA/Redding/FrostyFunRuns
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Redding/FrostyFunRuns
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135043@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T100000
+DTEND;TZID=America/New_York:20261114T120000
+SUMMARY:Hillacious Half Marathon
+LOCATION:American Legion Post 27\, Litchfield\, CT\, 06759
+URL:https://runsignup.com/Race/CT/Litchfield/HillaciousHalfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Litchfield/HillaciousH
+ alfMarathon
+END:VEVENT
+END:VCALENDAR

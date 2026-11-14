@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214675@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T100000
+DTEND;TZID=America/New_York:20261115T120000
+SUMMARY:Theta Chi Trot for Troops
+LOCATION:514 University Avenue\, Selinsgrove\, PA\, 17870
+URL:https://runsignup.com/Race/PA/Selinsgrove/ThetaChiTrotForTheTroops
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Selinsgrove/ThetaChiTr
+ otForTheTroops
+END:VEVENT
+END:VCALENDAR

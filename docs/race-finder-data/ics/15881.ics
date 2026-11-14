@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-15881@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:2026 Thanksgiving Wattle
+LOCATION:1270 Lamplighter Drive\, Grove City\, OH\, 43123
+URL:https://runsignup.com/Race/OH/GroveCity/ThanksgivingWattle
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/GroveCity/Thanksgiving
+ Wattle
+END:VEVENT
+END:VCALENDAR

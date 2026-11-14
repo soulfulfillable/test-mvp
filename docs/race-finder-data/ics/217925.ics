@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217925@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Rugby Hall 5k Turkey Trot
+LOCATION:1171 Buckingham Road\, Arnold\, MD\, 21012
+URL:https://runsignup.com/Race/MD/Arnold/RugbyHall5kTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Arnold/RugbyHall5kTurk
+ eyTrot
+END:VEVENT
+END:VCALENDAR

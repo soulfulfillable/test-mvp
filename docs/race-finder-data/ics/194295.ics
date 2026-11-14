@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194295@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Jingle Bell Run
+LOCATION:1000 Airport Rd\, Lafayette\, TN\, 37083
+URL:https://runsignup.com/Race/TN/Lafayette/JingleBellRun2025
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Lafayette/JingleBellRu
+ n2025
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-202772@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270107T043000
+DTEND;TZID=America/New_York:20270107T063000
+SUMMARY:2027 Walt Disney World® Marathon Weekend
+LOCATION:ESPN Wide World of Sports\, Orlando\, FL\, 32830
+URL:https://runsignup.com/Race/FL/Orlando/WALTDISNEYWORLD2027TeamMarathon
+ Kids
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Orlando/WALTDISNEYWORL
+ D2027TeamMarathonKids
+END:VEVENT
+END:VCALENDAR

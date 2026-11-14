@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-68283@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Navarre Jingle Bell Run
+LOCATION:8618 Esplanade St.\, Navarre\, FL\, 32566
+URL:https://runsignup.com/Race/FL/Navarre/NavarreJingleBellRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Navarre/NavarreJingleB
+ ellRun
+END:VEVENT
+END:VCALENDAR

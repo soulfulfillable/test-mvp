@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-74925@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270109T090000
+DTEND;TZID=America/Chicago:20270109T110000
+SUMMARY:Snow Crown Series
+LOCATION:1580 Lineveill Rd\, Suamico\, WI\, 54313
+URL:https://runsignup.com/Race/WI/Suamico/SnowCrown
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Suamico/SnowCrown
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215448@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T160000
+DTEND;TZID=America/Chicago:20261114T180000
+SUMMARY:Trail Running Film Festival & Run Party! Presented by RunWell
+LOCATION:4515 Hencken Rd\, St. Louis\, MO\, 63069
+URL:https://runsignup.com/Race/MO/StLouis/TrailRunningFilmFestivalRunPart
+ y
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/StLouis/TrailRunningFi
+ lmFestivalRunParty
+END:VEVENT
+END:VCALENDAR

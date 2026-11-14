@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-192108@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T150000
+DTEND;TZID=America/New_York:20261114T170000
+SUMMARY:S'mores Run Townsend 5K & 10K
+LOCATION:7765 River Road\, Townsend\, TN\, 37882
+URL:https://runsignup.com/Race/TN/Townsend/SMoresRun5k10kTownsendTN
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Townsend/SMoresRun5k10
+ kTownsendTN
+END:VEVENT
+END:VCALENDAR

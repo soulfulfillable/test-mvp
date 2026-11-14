@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187192@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T080000
+DTEND;TZID=America/Chicago:20261128T100000
+SUMMARY:Gobbler 5K\, 10K\, & 13.1M at Shreveport\, LA (48)
+LOCATION:E Stoner Ave\, Shreveport\, LA\, 71101
+URL:https://runsignup.com/Race/LA/Shreveport/Stoner47
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Shreveport/Stoner47
+END:VEVENT
+END:VCALENDAR

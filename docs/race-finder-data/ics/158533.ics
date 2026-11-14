@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-158533@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T083000
+DTEND;TZID=America/New_York:20261121T103000
+SUMMARY:Broad River Half Marathon Run/Hike
+LOCATION:5600 Broad River Road\, Columbia\, SC\, 29212
+URL:https://runsignup.com/Race/SC/Columbia/BroadRiverHalfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Columbia/BroadRiverHal
+ fMarathon
+END:VEVENT
+END:VCALENDAR

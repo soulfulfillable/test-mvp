@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-65171@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261212T100000
+DTEND;TZID=America/Denver:20261212T120000
+SUMMARY:Jingle Jog 5K
+LOCATION:11 W. Main Street\, Belgrade\, MT\, 59714
+URL:https://runsignup.com/Race/MT/Belgrade/BelgradeJingleJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/MT/Belgrade/BelgradeJingl
+ eJog
+END:VEVENT
+END:VCALENDAR

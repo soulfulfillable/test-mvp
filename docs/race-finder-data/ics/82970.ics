@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-82970@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T100000
+DTEND;TZID=America/New_York:20270101T120000
+SUMMARY:MCRRC New Year's Day 5K
+LOCATION:Manna Food Center\, Gaithersburg\, MD\, 20877
+URL:https://runsignup.com/Race/MD/Gaithersburg/MCRRCNewYearsDay5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Gaithersburg/MCRRCNewY
+ earsDay5K
+END:VEVENT
+END:VCALENDAR

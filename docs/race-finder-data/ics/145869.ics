@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-145869@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T000000
+DTEND;TZID=America/New_York:20270101T020000
+SUMMARY:FSRC Race Services
+LOCATION:PO Box 681\, Frederick\, MD\, 21705
+URL:https://runsignup.com/Race/MD/Frederick/FSRCRaceServices
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Frederick/FSRCRaceServ
+ ices
+END:VEVENT
+END:VCALENDAR

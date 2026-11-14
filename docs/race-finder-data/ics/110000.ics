@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-110000@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:17th Annual Surfside Beach Rotary Turkey Trot 5K presented by Mag
+ uire Law Firm
+LOCATION:Surfside Beach\, Surfside Beach\, SC\, 29575
+URL:https://runsignup.com/Race/SC/SurfsideBeach/SurfsideRotaryTurkeyTrot5
+ K10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/SurfsideBeach/Surfside
+ RotaryTurkeyTrot5K10K
+END:VEVENT
+END:VCALENDAR

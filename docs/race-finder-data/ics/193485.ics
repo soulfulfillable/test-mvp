@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193485@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T083000
+DTEND;TZID=America/New_York:20261212T103000
+SUMMARY:Santa Paws 5k-9 and 10K-9 Run/Walk - Gainesville
+LOCATION:1001 NW 34th St\, Gainesville\, FL\, 32605
+URL:https://runsignup.com/Race/FL/Gainesville/SantaPaws5kand10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Gainesville/SantaPaws5
+ kand10K
+END:VEVENT
+END:VCALENDAR

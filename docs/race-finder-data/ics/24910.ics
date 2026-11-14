@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-24910@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T093000
+DTEND;TZID=America/Chicago:20261126T113000
+SUMMARY:Y Doug Opel's Run for the Kids
+LOCATION:The Sheboygan YMCA\, Sheboygan\, WI\, 53081
+URL:https://runsignup.com/Race/WI/Sheboygan/DougOpelsRunfortheKids
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Sheboygan/DougOpelsRun
+ fortheKids
+END:VEVENT
+END:VCALENDAR

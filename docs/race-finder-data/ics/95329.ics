@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-95329@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T081500
+DTEND;TZID=America/New_York:20261114T101500
+SUMMARY:Harvest Moon Race
+LOCATION:1629 Beaver Grade Road\, Coraopolis\, PA\, 15108
+URL:https://runsignup.com/Race/PA/Coraopolis/HarvestMoonRaces
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Coraopolis/HarvestMoon
+ Races
+END:VEVENT
+END:VCALENDAR

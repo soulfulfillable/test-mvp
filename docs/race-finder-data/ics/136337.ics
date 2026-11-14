@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136337@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T173000
+DTEND;TZID=America/New_York:20261115T193000
+SUMMARY:Stroll Into Light
+LOCATION:Mount Tabor High School Track\, Winston Salem\, NC\, 27106
+URL:https://runsignup.com/Race/NC/WinstonSalem/StrollIntoLight
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/WinstonSalem/StrollInt
+ oLight
+END:VEVENT
+END:VCALENDAR

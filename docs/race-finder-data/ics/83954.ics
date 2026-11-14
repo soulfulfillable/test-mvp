@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-83954@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T091500
+DTEND;TZID=America/New_York:20261205T111500
+SUMMARY:Pete Sanfilippo 45th Annual Holiday Run
+LOCATION:2660 E Main St\, Wappingers Falls\, NY\, 12590
+URL:https://runsignup.com/Race/NY/WappingersFalls/PeteSanfilippoHolidayRu
+ n
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/WappingersFalls/PeteSa
+ nfilippoHolidayRun
+END:VEVENT
+END:VCALENDAR

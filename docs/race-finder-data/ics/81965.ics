@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81965@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T083000
+DTEND;TZID=America/New_York:20261115T103000
+SUMMARY:Run the Vineyards - Cork High & Bottle Deep - Half Marathon
+LOCATION:Blue Cork Winery and Vineyard\, Williamstown\, NJ\, 08094
+URL:https://runsignup.com/Race/NJ/Williamstown/RuntheVineyardsCorkHighBot
+ tleDeepHalfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Williamstown/RuntheVin
+ eyardsCorkHighBottleDeepHalfMarathon
+END:VEVENT
+END:VCALENDAR

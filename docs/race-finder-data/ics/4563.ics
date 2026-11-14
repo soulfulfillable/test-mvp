@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-4563@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T173000
+DTEND;TZID=America/New_York:20261219T193000
+SUMMARY:Jingle Bell 2 Miler
+LOCATION:Satellite Beach Library\, Satellite Beach\, FL\, 32935
+URL:https://runsignup.com/Race/FL/SatelliteBeach/JingleBell2Miler
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/SatelliteBeach/JingleB
+ ell2Miler
+END:VEVENT
+END:VCALENDAR

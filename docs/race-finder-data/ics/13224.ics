@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13224@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T080000
+DTEND;TZID=America/New_York:20261213T100000
+SUMMARY:Naughty or Nice 5K - Lake Mary
+LOCATION:1061 S Sun Dr\, Lake Mary\, FL\, 32746
+URL:https://runsignup.com/Race/FL/LakeMary/NaughtyorNice5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/LakeMary/NaughtyorNice
+ 5K
+END:VEVENT
+END:VCALENDAR

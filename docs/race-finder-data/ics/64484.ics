@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-64484@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T065500
+DTEND;TZID=America/New_York:20261206T085500
+SUMMARY:Game On! - Treasure Coast Tri - Winter
+LOCATION:Jetty Park\, Fort Pierce\, FL\, 34949
+URL:https://runsignup.com/Race/FL/FortPierce/GameOnTriathlon
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/FortPierce/GameOnTriat
+ hlon
+END:VEVENT
+END:VCALENDAR

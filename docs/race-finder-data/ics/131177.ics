@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-131177@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:NorthStone Turkey Trot
+LOCATION:15801 Northstone Dr\, Huntersville\, NC\, 28078
+URL:https://runsignup.com/Race/NC/Huntersville/Lincolnton
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Huntersville/Lincolnto
+ n
+END:VEVENT
+END:VCALENDAR

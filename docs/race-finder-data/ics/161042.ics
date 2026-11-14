@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-161042@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=Pacific/Honolulu:20261219T030000
+DTEND;TZID=Pacific/Honolulu:20261219T050000
+SUMMARY:Hawaii Kai Ultra Run - Kalama Valley 2026
+LOCATION:555 Kealahou St\, Honolulu\, HI\, 96825
+URL:https://runsignup.com/Race/HI/Honolulu/HawaiiKaiUltraRunKalamaValley
+DESCRIPTION:Sign up: https://runsignup.com/Race/HI/Honolulu/HawaiiKaiUltr
+ aRunKalamaValley
+END:VEVENT
+END:VCALENDAR

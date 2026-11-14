@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-149003@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T100000
+DTEND;TZID=America/Chicago:20261212T120000
+SUMMARY:Santa Run 5k
+LOCATION:521 E Locust Street\, Des Moines\, IA\, 50309
+URL:https://runsignup.com/Race/IA/DesMoines/SantaRun5k2023
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/DesMoines/SantaRun5k20
+ 23
+END:VEVENT
+END:VCALENDAR

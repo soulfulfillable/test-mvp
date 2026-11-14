@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-98627@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T153000
+DTEND;TZID=America/New_York:20261231T173000
+SUMMARY:Harmony Silvester
+LOCATION:538 Main Street\, Harmony\, PA\, 16037
+URL:https://runsignup.com/Race/PA/Harmony/HarmonySilvester5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Harmony/HarmonySilvest
+ er5K
+END:VEVENT
+END:VCALENDAR

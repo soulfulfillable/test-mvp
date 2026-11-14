@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-200906@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T073000
+DTEND;TZID=America/New_York:20261114T093000
+SUMMARY:Wave of Hope 2 Miler
+LOCATION:Satellite Beach Dog Park\, Satellite Beach\, FL\, 32937
+URL:https://runsignup.com/Race/FL/SatelliteBeach/WaveOfHope
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/SatelliteBeach/WaveOfH
+ ope
+END:VEVENT
+END:VCALENDAR

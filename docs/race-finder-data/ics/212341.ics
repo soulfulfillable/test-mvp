@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212341@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T073000
+DTEND;TZID=America/Chicago:20261128T093000
+SUMMARY:Faith\, Hope and Love 5k
+LOCATION:1020 W 18th St.\, Weslaco\, TX\, 78596
+URL:https://runsignup.com/Race/TX/Weslaco/FaithHopeAndLove5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Weslaco/FaithHopeAndLo
+ ve5k
+END:VEVENT
+END:VCALENDAR

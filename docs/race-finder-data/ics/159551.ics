@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-159551@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T073000
+DTEND;TZID=America/New_York:20261205T093000
+SUMMARY:.The Aden Perry Hero Event 5k
+LOCATION:Markham Park\, Sunrise\, FL\, 33326
+URL:https://runsignup.com/Race/FL/Sunrise/TheAdenPerryHeroEvent5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Sunrise/TheAdenPerryHe
+ roEvent5k
+END:VEVENT
+END:VCALENDAR

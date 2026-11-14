@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-189344@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261121T073000
+DTEND;TZID=America/Phoenix:20261121T093000
+SUMMARY:Retro Metro District Fun Run
+LOCATION:9610 N. Metro Parkway West\, Phoenix\, AZ\, 85051
+URL:https://runsignup.com/Race/AZ/Phoenix/MetroDistrictFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Phoenix/MetroDistrictF
+ unRun
+END:VEVENT
+END:VCALENDAR

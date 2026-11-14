@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-201427@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T073000
+DTEND;TZID=America/Chicago:20261114T093000
+SUMMARY:Run for Mental Health 5K/10K/13.1 KANSAS CITY
+LOCATION:Gillham Park (Course Map will be emailed)\, Kansas City\, MO\, 6
+ 4110
+URL:https://runsignup.com/Race/MO/KansasCity/RunForMentalHealth5K10KKANSA
+ SCITY1114
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/KansasCity/RunForMenta
+ lHealth5K10KKANSASCITY1114
+END:VEVENT
+END:VCALENDAR

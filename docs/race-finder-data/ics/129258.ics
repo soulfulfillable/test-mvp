@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-129258@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T100000
+DTEND;TZID=America/New_York:20261212T120000
+SUMMARY:2026 Jingle Bell Run - Charlotte\, NC
+LOCATION:15810 Ballantyne Medical Pl\, Charlotte\, NC\, 28277
+URL:https://runsignup.com/Race/NC/Charlotte/JingleBellRunCharlotte
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Charlotte/JingleBellRu
+ nCharlotte
+END:VEVENT
+END:VCALENDAR

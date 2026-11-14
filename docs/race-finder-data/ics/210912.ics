@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-210912@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261211T033000
+DTEND;TZID=America/Los_Angeles:20261211T053000
+SUMMARY:The Blackhorse Marathon in Honor of MG(R) Sunell
+LOCATION:CPT Litynski RS3\, Fort Irwin\, CA\, 92310
+URL:https://runsignup.com/Race/CA/FortIrwin/TheBlackhorseMarathonInHonorO
+ fMGRSunell
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/FortIrwin/TheBlackhors
+ eMarathonInHonorOfMGRSunell
+END:VEVENT
+END:VCALENDAR

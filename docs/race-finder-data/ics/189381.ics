@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-189381@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261126T090000
+DTEND;TZID=America/Denver:20261126T110000
+SUMMARY:Fort Collins Thanksgiving Day Run
+LOCATION:147 S College Ave\, Fort Collins\, CO\, 80524
+URL:https://runsignup.com/Race/CO/FortCollins/FortCollinsThanksgivingDayR
+ un
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/FortCollins/FortCollin
+ sThanksgivingDayRun
+END:VEVENT
+END:VCALENDAR

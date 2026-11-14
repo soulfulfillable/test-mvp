@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211651@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T080000
+DTEND;TZID=America/Chicago:20261121T100000
+SUMMARY:Washington Parish St. Jude Turkey Trot
+LOCATION:625 Willis Ave\, Bogalusa\, LA\, 70427
+URL:https://runsignup.com/Race/LA/Bogalusa/WashingtonParishStJudeTurkeyTr
+ ot
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Bogalusa/WashingtonPar
+ ishStJudeTurkeyTrot
+END:VEVENT
+END:VCALENDAR

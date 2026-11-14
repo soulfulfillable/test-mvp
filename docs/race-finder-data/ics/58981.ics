@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-58981@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261121T090000
+DTEND;TZID=America/Denver:20261121T110000
+SUMMARY:Monument Valley Veterans Marathon & Half Marathon
+LOCATION:P.O. Box 360289\, Monument Valley\, UT\, 84536
+URL:https://runsignup.com/Race/UT/MonumentValley/MonumentValleyMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/UT/MonumentValley/Monumen
+ tValleyMarathon
+END:VEVENT
+END:VCALENDAR

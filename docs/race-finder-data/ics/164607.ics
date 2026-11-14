@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-164607@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T090000
+DTEND;TZID=America/Chicago:20261114T110000
+SUMMARY:Watson Strong 5k Color Fun Run
+LOCATION:112 Front Street\, Vidalia\, LA\, 71373
+URL:https://runsignup.com/Race/LA/Vidalia/WatsonStrong5kColorRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Vidalia/WatsonStrong5k
+ ColorRun
+END:VEVENT
+END:VCALENDAR

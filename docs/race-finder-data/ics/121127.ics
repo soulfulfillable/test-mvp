@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121127@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270104T160000
+DTEND;TZID=America/Los_Angeles:20270104T180000
+SUMMARY:Walnut Creek Run Club
+LOCATION:551 Marshall Dr\, Walnut Creek\, CA\, 94598
+URL:https://runsignup.com/Race/CA/WalnutCreek/WalnutCreekRunClub
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/WalnutCreek/WalnutCree
+ kRunClub
+END:VEVENT
+END:VCALENDAR

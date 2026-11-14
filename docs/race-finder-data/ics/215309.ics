@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215309@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T090000
+DTEND;TZID=America/Denver:20261114T110000
+SUMMARY:Run for Ukraine
+LOCATION:600 Harvey Milk Blvd\, Salt Lake City\, UT\, 84105
+URL:https://runsignup.com/Race/UT/SaltLakeCity/RunForUkraineRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/UT/SaltLakeCity/RunForUkr
+ aineRace
+END:VEVENT
+END:VCALENDAR

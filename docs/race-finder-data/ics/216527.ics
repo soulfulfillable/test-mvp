@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216527@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T090000
+DTEND;TZID=America/New_York:20261122T110000
+SUMMARY:Blake High School 5K Turkey Trot
+LOCATION:300 Norwood Rd\, Silver Spring\, MD\, 20905
+URL:https://runsignup.com/Race/MD/SilverSpring/BlakeHighSchool5KTurkeyTro
+ t
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/SilverSpring/BlakeHigh
+ School5KTurkeyTrot
+END:VEVENT
+END:VCALENDAR

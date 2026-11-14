@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217685@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T100000
+DTEND;TZID=America/Chicago:20261121T120000
+SUMMARY:Healing Heart Threads Gobble Wobble: A 5K For Foster Families
+LOCATION:601 Enzor Road (Outdoor Track)\, Troy\, AL\, 36081
+URL:https://runsignup.com/Race/AL/Troy/HealingHeartThreadsGobbleWobbleA5K
+ ForFosterFamilies
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Troy/HealingHeartThrea
+ dsGobbleWobbleA5KForFosterFamilies
+END:VEVENT
+END:VCALENDAR

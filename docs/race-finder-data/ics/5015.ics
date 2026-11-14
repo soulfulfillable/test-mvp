@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5015@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Trot For HOPE
+LOCATION:100 Memorial Parkway\, Palatka\, FL\, 32177
+URL:https://runsignup.com/Race/FL/Palatka/TrotForHOPE
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Palatka/TrotForHOPE
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187364@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T083000
+DTEND;TZID=America/New_York:20261212T103000
+SUMMARY:NC4K Reindeer Run
+LOCATION:300 W Broad St\, Columbus\, OH\, 43215
+URL:https://runsignup.com/Race/OH/Columbus/NC4KReindeerRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Columbus/NC4KReindeerR
+ un
+END:VEVENT
+END:VCALENDAR

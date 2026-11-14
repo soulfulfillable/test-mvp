@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-170287@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:Jacked 4 Vets
+LOCATION:36 West Buffalo St\, Warsaw\, NY\, 14569
+URL:https://runsignup.com/Race/NY/Warsaw/JackedVets
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Warsaw/JackedVets
+END:VEVENT
+END:VCALENDAR

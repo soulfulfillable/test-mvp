@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-185377@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T110000
+DTEND;TZID=America/Chicago:20261114T130000
+SUMMARY:Wango Tango
+LOCATION:City Lake Park\, Siloam Springs\, AR\, 72761
+URL:https://runsignup.com/Race/AR/SiloamSprings/WangoTangoEvents
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/SiloamSprings/WangoTan
+ goEvents
+END:VEVENT
+END:VCALENDAR

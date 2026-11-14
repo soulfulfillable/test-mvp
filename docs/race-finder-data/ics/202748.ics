@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-202748@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T074500
+DTEND;TZID=America/Chicago:20261114T094500
+SUMMARY:Giving Thanks 5K/10K/Kids'K
+LOCATION:18427 Southwest Fwy\, Sugar Land\, TX\, 77479
+URL:https://runsignup.com/Race/TX/SugarLand/GivingThanks5K10KKidsK
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SugarLand/GivingThanks
+ 5K10KKidsK
+END:VEVENT
+END:VCALENDAR

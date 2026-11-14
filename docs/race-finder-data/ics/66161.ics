@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66161@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T123000
+DTEND;TZID=America/New_York:20261115T143000
+SUMMARY:YRRC Winter Series 2026-2027
+LOCATION:Multiple Locations\, York\, PA\, 17402
+URL:https://runsignup.com/Race/PA/York/YRRCWinterSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/York/YRRCWinterSeries
+END:VEVENT
+END:VCALENDAR

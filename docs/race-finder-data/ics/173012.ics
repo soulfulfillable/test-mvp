@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173012@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T090000
+DTEND;TZID=America/Denver:20261114T110000
+SUMMARY:Clinton City Turkey Trot 2026
+LOCATION:1651 W 2300 N\, Clinton\, UT\, 84015
+URL:https://runsignup.com/Race/UT/Clinton/ClintonCityTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/UT/Clinton/ClintonCityTur
+ keyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-61126@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:Early Bird Turkey Trot 5K\, 10K\, 15K\, & Half Marathon
+LOCATION:Zama Mexican Cuisine - Kennesaw\, Kennesaw\, GA\, 30144
+URL:https://runsignup.com/Race/GA/Kennesaw/FiveStarEarlyBirdThanksgivingT
+ urkeyTrot5K10K15KHalfMarathon2018
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Kennesaw/FiveStarEarly
+ BirdThanksgivingTurkeyTrot5K10K15KHalfMarathon2018
+END:VEVENT
+END:VCALENDAR

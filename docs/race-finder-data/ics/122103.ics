@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-122103@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261124T000100
+DTEND;TZID=America/Chicago:20261124T020100
+SUMMARY:Daily Minneapolis Park & Recreation Board Ski Trail Passes
+LOCATION:1221 Theodore Wirth Parkway\, Minneapolis\, MN\, 55422
+URL:https://runsignup.com/Race/MN/Minneapolis/MPRBDailySkiPass
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Minneapolis/MPRBDailyS
+ kiPass
+END:VEVENT
+END:VCALENDAR

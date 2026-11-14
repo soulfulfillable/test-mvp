@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214624@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T120000
+DTEND;TZID=America/New_York:20261212T140000
+SUMMARY:Trail Ultra Marathon Relay | IRONHIKE DOUBLE KUWOHI - TRAIL BUDDY
+  FLEX RELAY | Amicalola F
+LOCATION:418 Amicalola Falls Lodge Rd\, Dawsonville\, GA\, 30534
+URL:https://runsignup.com/Race/GA/Dawsonville/IronHikeDoubleKuwohiFallTra
+ ilBuddyRelayGA
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Dawsonville/IronHikeDo
+ ubleKuwohiFallTrailBuddyRelayGA
+END:VEVENT
+END:VCALENDAR

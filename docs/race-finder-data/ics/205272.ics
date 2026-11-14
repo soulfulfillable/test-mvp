@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205272@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T073000
+DTEND;TZID=America/Chicago:20261128T093000
+SUMMARY:Thanksgiving Gobble Trot Run 5K/10K/13.1 AUSTIN/ROUNDROCK
+LOCATION:Brushy Creek Lake Park (Course Map will be emailed)\, Cedar Park
+ \, TX\, 78613
+URL:https://runsignup.com/Race/TX/CedarPark/ThanksgivingGobbleTrotRun5K10
+ KAUSTINROUNDROCK1128
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/CedarPark/Thanksgiving
+ GobbleTrotRun5K10KAUSTINROUNDROCK1128
+END:VEVENT
+END:VCALENDAR

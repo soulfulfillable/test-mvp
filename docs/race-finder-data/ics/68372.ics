@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-68372@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261227T122900
+DTEND;TZID=America/New_York:20261227T142900
+SUMMARY:December Dash 6.0 Mile or Kilometer Run/walk and .60 mile Kids' D
+ ash
+LOCATION:1025 W. River Rd\, Maumee\, OH\, 43537
+URL:https://runsignup.com/Race/OH/Maumee/TRRCDecemberDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Maumee/TRRCDecemberDas
+ h
+END:VEVENT
+END:VCALENDAR

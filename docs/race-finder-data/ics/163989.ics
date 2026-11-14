@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-163989@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261226T080000
+DTEND;TZID=America/New_York:20261226T100000
+SUMMARY:Holiday 5K & 10K at Gainesville\, FL (52)
+LOCATION:7400 SW 41st Pl\, Gainesville\, FL\, 32608
+URL:https://runsignup.com/Race/FL/Gainesville/Albert12282024
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Gainesville/Albert1228
+ 2024
+END:VEVENT
+END:VCALENDAR

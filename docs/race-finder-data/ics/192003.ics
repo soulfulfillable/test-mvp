@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-192003@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261205T090000
+DTEND;TZID=America/Los_Angeles:20261205T110000
+SUMMARY:DIRTY 30 XL - GRAVEL vs MTB
+LOCATION:13455 San Pasqual Rd\, Escondido\, CA\, 92025
+URL:https://runsignup.com/Race/CA/Escondido/Dirty30
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Escondido/Dirty30
+END:VEVENT
+END:VCALENDAR

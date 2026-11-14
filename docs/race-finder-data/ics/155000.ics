@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155000@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T090000
+DTEND;TZID=America/Detroit:20261126T110000
+SUMMARY:CrossFit Lapeer's 6th Annual Turkey Chase 5K
+LOCATION:865 Whitney Dr\, Lapeer\, MI\, 48446
+URL:https://runsignup.com/Race/MI/Lapeer/CFLTurkeyChase5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Lapeer/CFLTurkeyChase5
+ K
+END:VEVENT
+END:VCALENDAR

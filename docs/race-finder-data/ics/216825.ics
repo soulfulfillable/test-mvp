@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216825@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261124T123000
+DTEND;TZID=America/New_York:20261124T143000
+SUMMARY:Norwood Elementary Color Run
+LOCATION:400 S Main St\,\, Norwood\, NC\, 28128
+URL:https://runsignup.com/Race/NC/Norwood/NorwoodElementaryColorRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Norwood/NorwoodElement
+ aryColorRun
+END:VEVENT
+END:VCALENDAR

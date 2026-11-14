@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-95212@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261126T080000
+DTEND;TZID=America/Indiana/Indianapolis:20261126T100000
+SUMMARY:Fishers YMCA 2026 Wishbone 5K
+LOCATION:9012 East 126th Street\, Fishers\, IN\, 46038
+URL:https://runsignup.com/Race/IN/Fishers/FishersYMCAWishbone5KRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Fishers/FishersYMCAWis
+ hbone5KRunWalk
+END:VEVENT
+END:VCALENDAR

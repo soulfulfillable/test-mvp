@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187969@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T080000
+DTEND;TZID=America/Chicago:20261212T100000
+SUMMARY:Park Ridge Santa Stroll 5k - Stroll Mile - Jingle Jog
+LOCATION:1500 Stewart Ave\, Park Ridge\, IL\, 60068
+URL:https://runsignup.com/Race/IL/ParkRidge/SantaStroll5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/ParkRidge/SantaStroll5
+ k
+END:VEVENT
+END:VCALENDAR

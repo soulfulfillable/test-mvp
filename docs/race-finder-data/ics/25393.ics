@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-25393@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T081500
+DTEND;TZID=America/Chicago:20261126T101500
+SUMMARY:Madison Turkey Trot 5K
+LOCATION:1919 Alliant Energy Center Way\, Madison\, WI\, 53713
+URL:https://runsignup.com/Race/WI/Madison/MadisonTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Madison/MadisonTurkeyT
+ rot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-139031@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270101T100000
+DTEND;TZID=America/Los_Angeles:20270101T120000
+SUMMARY:Prance N Plunge
+LOCATION:9245 NW Holy Rd\, Bremerton\, WA\, 98312
+URL:https://runsignup.com/Race/WA/Bremerton/PranceNPlungeReturns
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Bremerton/PranceNPlung
+ eReturns
+END:VEVENT
+END:VCALENDAR

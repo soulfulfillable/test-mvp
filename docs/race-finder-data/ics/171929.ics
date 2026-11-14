@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171929@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T090000
+DTEND;TZID=America/Detroit:20261126T110000
+SUMMARY:Sherman Lake YMCA Turkey Trot
+LOCATION:Sherman Lake YMCA Outdoor Center\, Augusta\, MI\, 49012
+URL:https://runsignup.com/Race/MI/Augusta/ShermanLakeYMCATurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Augusta/ShermanLakeYMC
+ ATurkeyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-207597@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T100000
+DTEND;TZID=America/New_York:20261114T120000
+SUMMARY:Community Impact 5K Run/Walk
+LOCATION:501 N Maple St\, Marysville\, OH\, 43040
+URL:https://runsignup.com/Race/OH/Marysville/CommunityImpact5KRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Marysville/CommunityIm
+ pact5KRunWalk
+END:VEVENT
+END:VCALENDAR

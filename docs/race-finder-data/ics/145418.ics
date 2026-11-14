@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-145418@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T080000
+DTEND;TZID=America/New_York:20261219T100000
+SUMMARY:Holiday 5K\, 10K & 13.1M at Wilmington\, NC (51)
+LOCATION:4099 S 17th St\, Wilmington\, NC\, 28412
+URL:https://runsignup.com/Race/NC/Wilmington/HalyburtonPark122023
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Wilmington/HalyburtonP
+ ark122023
+END:VEVENT
+END:VCALENDAR

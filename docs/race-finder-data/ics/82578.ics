@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-82578@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261205T100000
+DTEND;TZID=America/Detroit:20261205T120000
+SUMMARY:Manistee Jingle Bell Jog 5K Run/Walk
+LOCATION:Manistee Elementary School\, Manistee\, MI\, 49660
+URL:https://runsignup.com/Race/MI/Manistee/ManisteeJingleBellJog5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Manistee/ManisteeJingl
+ eBellJog5K
+END:VEVENT
+END:VCALENDAR

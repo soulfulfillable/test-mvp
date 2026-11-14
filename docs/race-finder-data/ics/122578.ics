@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-122578@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270103T073000
+DTEND;TZID=America/Chicago:20270103T093000
+SUMMARY:Second Wind Christie Clinic Illinois Race Weekend Training Progra
+ m
+LOCATION:PO Box 6082\, Champaign\, IL\, 61826
+URL:https://runsignup.com/Race/IL/Champaign/SecondWindMarathonHalfMaratho
+ nTrainingProgram
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Champaign/SecondWindMa
+ rathonHalfMarathonTrainingProgram
+END:VEVENT
+END:VCALENDAR

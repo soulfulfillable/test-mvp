@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218252@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261211T210000
+DTEND;TZID=America/New_York:20261211T230000
+SUMMARY:Red Nose 5K and 1 Mile Light Walk
+LOCATION:2150 Sontag Road\, Rocky Mount\, VA\, 24151
+URL:https://runsignup.com/Race/VA/RockyMount/RedNose5KAnd1MileLightWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/RockyMount/RedNose5KAn
+ d1MileLightWalk
+END:VEVENT
+END:VCALENDAR

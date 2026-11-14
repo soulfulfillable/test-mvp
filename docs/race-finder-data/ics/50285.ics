@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-50285@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261115T073000
+DTEND;TZID=America/Chicago:20261115T093000
+SUMMARY:New Braunfels Half Marathon\, 10K-5K
+LOCATION:Stars and Stripes Drive-In Theatre\, New Braunfels\, TX\, 78130
+URL:https://runsignup.com/Race/TX/NewBraunfels/NewBraunfelsHalfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/NewBraunfels/NewBraunf
+ elsHalfMarathon
+END:VEVENT
+END:VCALENDAR

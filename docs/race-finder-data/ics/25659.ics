@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-25659@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:26th Annual Irvington Turkey Trot & Animal Rescue Donation Drive
+LOCATION:Irvington Town Commons\, 98 King Carter Drive\, Irvington\, VA\,
+  22480
+URL:https://runsignup.com/Race/VA/Irvington/IrvingtonTurkeyTrotAnimalFood
+ Drive
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Irvington/IrvingtonTur
+ keyTrotAnimalFoodDrive
+END:VEVENT
+END:VCALENDAR

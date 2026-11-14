@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-71191@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:16th Annual City Manager’s 5K Walk & Run
+LOCATION:SeaWorld San Antonio\, San Antonio\, TX\, 78251
+URL:https://runsignup.com/Race/TX/SanAntonio/CityManagers5KWalkRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAntonio/CityManager
+ s5KWalkRun
+END:VEVENT
+END:VCALENDAR

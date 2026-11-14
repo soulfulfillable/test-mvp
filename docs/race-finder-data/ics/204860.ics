@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-204860@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261212T073000
+DTEND;TZID=America/Los_Angeles:20261212T093000
+SUMMARY:Run for Breast Cancer 5K/10K/13.1 SACRAMENTO
+LOCATION:Sutters Landing Park (Course Map will be emailed)\, Sacramento\,
+  CA\, 95816
+URL:https://runsignup.com/Race/CA/Sacramento/RunForBreastCancer5K10KSACRA
+ MENTO1212
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Sacramento/RunForBreas
+ tCancer5K10KSACRAMENTO1212
+END:VEVENT
+END:VCALENDAR

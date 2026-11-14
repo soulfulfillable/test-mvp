@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190363@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T093000
+DTEND;TZID=America/New_York:20261121T113000
+SUMMARY:"Run 2 Grandma" St. Anne's 2nd Annual RUNraiser
+LOCATION:JF Gregory Park\, Richmond Hill\, GA\, 31324
+URL:https://runsignup.com/Race/GA/RichmondHill/RunToGrandmaStAnneRUNraise
+ r
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/RichmondHill/RunToGran
+ dmaStAnneRUNraiser
+END:VEVENT
+END:VCALENDAR

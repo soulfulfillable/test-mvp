@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-50294@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T081500
+DTEND;TZID=America/Chicago:20261126T101500
+SUMMARY:Nashville Turkey Trot 10 Mile and 5K
+LOCATION:2320 Two Rivers Pkwy\, Nashville\, TN\, 37214
+URL:https://runsignup.com/Race/TN/Nashville/NashvilleTurkeyTrot10Mileand5
+ k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Nashville/NashvilleTur
+ keyTrot10Mileand5k
+END:VEVENT
+END:VCALENDAR

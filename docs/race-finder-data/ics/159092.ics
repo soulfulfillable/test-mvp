@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-159092@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T073000
+DTEND;TZID=America/New_York:20261115T093000
+SUMMARY:Solar Strides 5K
+LOCATION:230 E Cameron Ave\, Chapel Hill\, NC\, 27514
+URL:https://runsignup.com/Race/NC/ChapelHill/Sustainability5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/ChapelHill/Sustainabil
+ ity5k
+END:VEVENT
+END:VCALENDAR

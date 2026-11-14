@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136000@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T063000
+DTEND;TZID=America/New_York:20261206T083000
+SUMMARY:Bound for Boston Marathon & Half Marathon - Sarasota
+LOCATION:Nathan Benderson Park\, Sarasota\, FL\, 34235
+URL:https://runsignup.com/Race/FL/Sarasota/BostonBoundMarathonHalfMaratho
+ nSarasota
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Sarasota/BostonBoundMa
+ rathonHalfMarathonSarasota
+END:VEVENT
+END:VCALENDAR

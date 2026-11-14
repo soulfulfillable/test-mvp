@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-132509@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Downtown Columbia Turkey Trot 5K
+LOCATION:10300 Little Patuxent Pkwy\, Columbia\, MD\, 21044
+URL:https://runsignup.com/Race/MD/Columbia/2022DowntownColumbiaTurkeyTrot
+ 5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Columbia/2022DowntownC
+ olumbiaTurkeyTrot5K
+END:VEVENT
+END:VCALENDAR

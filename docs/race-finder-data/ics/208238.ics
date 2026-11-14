@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-208238@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261213T140000
+DTEND;TZID=America/Denver:20261213T160000
+SUMMARY:Run Against Traffick 5K
+LOCATION:4900 Balloon Fiesta Pkwy NE\, Albuquerque\, NM\, 87113
+URL:https://runsignup.com/Race/NM/Albuquerque/NMDCRunAgainstTraffick5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NM/Albuquerque/NMDCRunAga
+ instTraffick5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-219126@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261226T173000
+DTEND;TZID=America/New_York:20261226T193000
+SUMMARY:Holly Jolly Jog
+LOCATION:460 Hay St\, Fayetteville\, NC\, 28301
+URL:https://runsignup.com/Race/NC/Fayetteville/BunkersHollyJollyJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Fayetteville/BunkersHo
+ llyJollyJog
+END:VEVENT
+END:VCALENDAR

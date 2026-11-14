@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-7341@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T100000
+DTEND;TZID=America/New_York:20261115T120000
+SUMMARY:GOTR NJ North Fall 5K
+LOCATION:Sussex County Fairgrounds\, Augusta\, NJ\, 07822
+URL:https://runsignup.com/Race/NJ/Augusta/GirlsontheRun5KLakeMohawkChalle
+ nge82mile
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Augusta/GirlsontheRun5
+ KLakeMohawkChallenge82mile
+END:VEVENT
+END:VCALENDAR

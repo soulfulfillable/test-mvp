@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-100255@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T093000
+DTEND;TZID=America/New_York:20261121T113000
+SUMMARY:7th Annual Survivor Day 5K
+LOCATION:5 Wanamaker Municipal Complex\, Island Heights\, NJ\, 08732
+URL:https://runsignup.com/Race/NJ/IslandHeights/SurvivorDay5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/IslandHeights/Survivor
+ Day5K
+END:VEVENT
+END:VCALENDAR

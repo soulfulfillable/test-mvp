@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216106@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T100000
+DTEND;TZID=America/Chicago:20261114T120000
+SUMMARY:The Little Big Run (100 Club Fundraiser .5K)
+LOCATION:6280 Phelan Blvd\, Beaumont\, TX\, 77706
+URL:https://runsignup.com/Race/TX/Beaumont/TheLittleBigRunClubFundraiser5
+ K
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Beaumont/TheLittleBigR
+ unClubFundraiser5K
+END:VEVENT
+END:VCALENDAR

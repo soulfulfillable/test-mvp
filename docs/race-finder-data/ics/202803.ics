@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-202803@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261126T070000
+DTEND;TZID=America/Phoenix:20261126T090000
+SUMMARY:Alexander & Adan's 5K Turkey Run
+LOCATION:1900 N Civic Sq\, Goodyear\, AZ 85395\, Goodyear\, AZ\, 85395
+URL:https://runsignup.com/Race/AZ/Goodyear/SajaBullRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Goodyear/SajaBullRun
+END:VEVENT
+END:VCALENDAR

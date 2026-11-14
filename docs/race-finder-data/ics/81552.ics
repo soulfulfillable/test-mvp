@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81552@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:Mid-Hudson Road Runners Club Annual Turkey Trot
+LOCATION:Arlington High School\, Lagrangeville\, NY\, 12540
+URL:https://runsignup.com/Race/NY/Lagrangeville/MidHudsonRoadRunnersClubA
+ nnualTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Lagrangeville/MidHudso
+ nRoadRunnersClubAnnualTurkeyTrot
+END:VEVENT
+END:VCALENDAR

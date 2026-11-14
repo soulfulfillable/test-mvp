@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-127318@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T081000
+DTEND;TZID=America/Denver:20261114T101000
+SUMMARY:Flying Horse Half Marathon\, 10K & 5K
+LOCATION:1200 Futurity Dr\, Sunland Park\, NM\, 88063
+URL:https://runsignup.com/Race/NM/SunlandPark/FlyingHorseRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/NM/SunlandPark/FlyingHors
+ eRace
+END:VEVENT
+END:VCALENDAR

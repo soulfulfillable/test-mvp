@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121964@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T080000
+DTEND;TZID=America/Chicago:20261121T100000
+SUMMARY:Turkey Trails - Austin
+LOCATION:Southeast Metro Park\, Del Valle\, TX\, 78617
+URL:https://runsignup.com/Race/TX/DelValle/BodiesTurkeyTrailsAustin
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/DelValle/BodiesTurkeyT
+ railsAustin
+END:VEVENT
+END:VCALENDAR

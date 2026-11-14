@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218822@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T110000
+DTEND;TZID=America/New_York:20261219T130000
+SUMMARY:Naughty or Nice 5k
+LOCATION:3740 N Buffalo St\, Orchard Park\, NY\, 14127
+URL:https://runsignup.com/Race/NY/OrchardPark/NaughtyOrNice5kRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/OrchardPark/NaughtyOrN
+ ice5kRun
+END:VEVENT
+END:VCALENDAR

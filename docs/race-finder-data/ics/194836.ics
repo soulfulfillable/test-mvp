@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194836@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Bradley Beach Turkey Trot
+LOCATION:101 Fifth Ave\, Bradley Beach\, NJ\, 07720
+URL:https://runsignup.com/Race/NJ/BradleyBeach/BBTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/BradleyBeach/BBTurkeyT
+ rot
+END:VEVENT
+END:VCALENDAR

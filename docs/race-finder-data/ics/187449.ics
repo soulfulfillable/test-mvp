@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187449@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Kentucky/Louisville:20261213T090000
+DTEND;TZID=America/Kentucky/Louisville:20261213T110000
+SUMMARY:Waverly Winter Warrior
+LOCATION:4800 Waverly Park Rd\, Louisville\, KY\, 40214
+URL:https://runsignup.com/Race/KY/Louisville/WaverlyWinterWarrior
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Louisville/WaverlyWint
+ erWarrior
+END:VEVENT
+END:VCALENDAR

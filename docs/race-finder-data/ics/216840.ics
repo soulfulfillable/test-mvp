@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216840@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270101T090000
+DTEND;TZID=America/Chicago:20270101T110000
+SUMMARY:KC Running Company's Rockin' New Year's Day Run
+LOCATION:200 E 135TH ST\, Kansas City\, MO\, 64145
+URL:https://runsignup.com/Race/MO/KansasCity/KCRunningCompanySRockinNewYe
+ arSDayRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/KansasCity/KCRunningCo
+ mpanySRockinNewYearSDayRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-85207@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T083000
+DTEND;TZID=America/New_York:20261212T103000
+SUMMARY:2026 YMCA Santa Run 5K/10K and One Mile Elf Run/Walk
+LOCATION:Monocacy Village Park\, Frederick\, MD\, 21701
+URL:https://runsignup.com/Race/MD/Frederick/SantaRun5K10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Frederick/SantaRun5K10
+ K
+END:VEVENT
+END:VCALENDAR

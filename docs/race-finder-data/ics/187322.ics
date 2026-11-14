@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187322@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:Shrewsbury Fall Fest & Run
+LOCATION:12824 Shrewsbury Church Rd\, Kennedyville\, MD\, 21645
+URL:https://runsignup.com/Race/MD/Kennedyville/ShrewsburyFallRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Kennedyville/Shrewsbur
+ yFallRun
+END:VEVENT
+END:VCALENDAR

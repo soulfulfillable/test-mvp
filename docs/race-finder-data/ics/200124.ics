@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-200124@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261114T111100
+DTEND;TZID=America/Detroit:20261114T131100
+SUMMARY:City of Burton Parks & Rec Veterans Honor Run 2026
+LOCATION:6340 Roberta St\, Burton\, MI\, 48509
+URL:https://runsignup.com/Race/MI/Burton/CityofBurtonVeteransHonorRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Burton/CityofBurtonVet
+ eransHonorRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153238@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261226T073000
+DTEND;TZID=America/New_York:20261226T093000
+SUMMARY:The Ritz-Carlton Winter GLO 5k
+LOCATION:4012  Central Florida Parkway\, Orlando\, FL\, 32837
+URL:https://runsignup.com/Race/FL/Orlando/TheRitzCarltonHolidayGLO5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Orlando/TheRitzCarlton
+ HolidayGLO5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214925@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T080000
+DTEND;TZID=America/New_York:20261231T100000
+SUMMARY:New Year 5K & 10K at Midlothian\, VA (53)
+LOCATION:13301 N Woolridge Rd\, Midlothian\, VA\, 23114
+URL:https://runsignup.com/Race/VA/Midlothian/NewYear5K10KAtMidlothianVA
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Midlothian/NewYear5K10
+ KAtMidlothianVA
+END:VEVENT
+END:VCALENDAR

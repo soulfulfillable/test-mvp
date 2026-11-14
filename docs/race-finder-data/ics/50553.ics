@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-50553@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270102T110000
+DTEND;TZID=America/Los_Angeles:20270102T130000
+SUMMARY:Bend Marathon and Half
+LOCATION:344 Shevlin Hixon Dr\, Bend\, OR\, 97702
+URL:https://runsignup.com/Race/OR/Bend/BendMarathonHalf
+DESCRIPTION:Sign up: https://runsignup.com/Race/OR/Bend/BendMarathonHalf
+END:VEVENT
+END:VCALENDAR

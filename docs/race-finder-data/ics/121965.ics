@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121965@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261219T090000
+DTEND;TZID=America/Chicago:20261219T110000
+SUMMARY:Candy Cane Course - Austin
+LOCATION:Southeast Metro Park\, Del Valle\, TX\, 78617
+URL:https://runsignup.com/Race/TX/DelValle/BodiesCandyCaneCourseAustin
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/DelValle/BodiesCandyCa
+ neCourseAustin
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-129345@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261114T090000
+DTEND;TZID=America/Los_Angeles:20261114T110000
+SUMMARY:Columbia River Classic Run
+LOCATION:USS Triton Submarine Memorial off the intersection of 11th A\, R
+ ichland\, WA\, 99352
+URL:https://runsignup.com/Race/WA/Richland/ColumbiaRiverClassicrun
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Richland/ColumbiaRiver
+ Classicrun
+END:VEVENT
+END:VCALENDAR

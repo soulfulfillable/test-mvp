@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214838@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T154500
+DTEND;TZID=America/New_York:20261219T174500
+SUMMARY:A Very Merry 5K
+LOCATION:4001-4007 Central Ave\, Shadyside\, OH\, 43947
+URL:https://runsignup.com/Race/OH/Shadyside/AVeryMerry5KShadysideohio
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Shadyside/AVeryMerry5K
+ Shadysideohio
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218026@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T070000
+DTEND;TZID=America/Chicago:20261205T090000
+SUMMARY:Christmas City Under the Lights 5K & 1Mile - Minden\, NE
+LOCATION:322 E 5th Street\, Minden\, NE\, 68959
+URL:https://runsignup.com/Race/NE/Minden/ChristmasCityUnderTheLights
+DESCRIPTION:Sign up: https://runsignup.com/Race/NE/Minden/ChristmasCityUn
+ derTheLights
+END:VEVENT
+END:VCALENDAR

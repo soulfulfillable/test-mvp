@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-208400@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T073000
+DTEND;TZID=America/New_York:20261114T093000
+SUMMARY:Veterans Day Freedom Run 5K/10K/13.1 NYC Central
+LOCATION:NYC Central (Course Map will be emailed)\, New York City\, NY\, 
+ 10025
+URL:https://runsignup.com/Race/NY/NewYorkCity/VeteransDayFreedomRun5K10KN
+ YCCentral11242026
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/NewYorkCity/VeteransDa
+ yFreedomRun5K10KNYCCentral11242026
+END:VEVENT
+END:VCALENDAR

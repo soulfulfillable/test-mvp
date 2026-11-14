@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66966@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T100000
+DTEND;TZID=America/New_York:20261205T120000
+SUMMARY:Holiday Bowl- Jinglin All the Way Polar Cat Race 1- Festive 5k
+LOCATION:12 Main Street\, Le Roy\, NY\, 14482
+URL:https://runsignup.com/Race/NY/LeRoy/JinglinAllTheWay
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/LeRoy/JinglinAllTheWay
+END:VEVENT
+END:VCALENDAR

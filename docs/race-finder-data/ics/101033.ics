@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-101033@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T161500
+DTEND;TZID=America/Chicago:20261205T181500
+SUMMARY:2026 Ugly Sweater 5k\, Presented by Northwestern Mutual
+LOCATION:Myrick Park to Riverside Park\, La Crosse\, WI\, 54601
+URL:https://runsignup.com/Race/WI/LaCrosse/UglySweater5k2020
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/LaCrosse/UglySweater5k
+ 2020
+END:VEVENT
+END:VCALENDAR

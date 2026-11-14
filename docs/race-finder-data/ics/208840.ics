@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-208840@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270109T075500
+DTEND;TZID=America/Chicago:20270109T095500
+SUMMARY:Bigfoot Classic - Galveston
+LOCATION:401 Seawall Blvd\, Galveston\, TX\, 77550
+URL:https://runsignup.com/Race/TX/Galveston/BigfootClassicGalveston
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Galveston/BigfootClass
+ icGalveston
+END:VEVENT
+END:VCALENDAR

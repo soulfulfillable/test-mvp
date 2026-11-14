@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172490@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261126T090000
+DTEND;TZID=America/Denver:20261126T110000
+SUMMARY:Grand Junction Fire Fighters Foundation GJ Turkey Trot
+LOCATION:998 N 12th Street\, Grand Junction\, CO\, 81501
+URL:https://runsignup.com/Race/CO/GrandJunction/GJTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/GrandJunction/GJTurkey
+ Trot
+END:VEVENT
+END:VCALENDAR

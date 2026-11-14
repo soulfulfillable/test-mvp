@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-82116@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Boise:20261126T080000
+DTEND;TZID=America/Boise:20261126T100000
+SUMMARY:Nampa Pumpkin Spice 5K
+LOCATION:310 W Iowa Ave\, Nampa\, ID\, 83686
+URL:https://runsignup.com/Race/ID/Nampa/NampaPumpkinSpice5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/ID/Nampa/NampaPumpkinSpic
+ e5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173463@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261205T093000
+DTEND;TZID=America/Detroit:20261205T113000
+SUMMARY:Eggnog Jog
+LOCATION:8409 Hall Road\, Utica\, MI\, 48317
+URL:https://runsignup.com/Race/MI/Utica/HansonsEggnogJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Utica/HansonsEggnogJog
+END:VEVENT
+END:VCALENDAR

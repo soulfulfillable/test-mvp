@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-139556@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:Bound for the Hounds 6 Hour Ultra
+LOCATION:3325 Marvin Sands Drive\, Canandaigua\, NY\, 14424
+URL:https://runsignup.com/Race/NY/Canandaigua/5thAnnualBoundfortheHounds6
+ HourUltra
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Canandaigua/5thAnnualB
+ oundfortheHounds6HourUltra
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-156388@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T080000
+DTEND;TZID=America/New_York:20261205T100000
+SUMMARY:Holiday 5K\, 10K\, & 13.1M at Venice\, FL (49)
+LOCATION:Shamrock Park\, Venice\, FL\, 34293
+URL:https://runsignup.com/Race/FL/Venice/Shamrock1272024
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Venice/Shamrock1272024
+END:VEVENT
+END:VCALENDAR

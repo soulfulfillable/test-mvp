@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5477@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261212T094000
+DTEND;TZID=America/Detroit:20261212T114000
+SUMMARY:Come Home to Alma for the Holidays - Jingle Bell 5K and 10K
+LOCATION:St. Mary's Gymnasium\, 220 W Downie Street\, Alma\, MI\, 48801
+URL:https://runsignup.com/Race/MI/Alma/ComeHometoAlmafortheHolidaysJingle
+ Bell5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Alma/ComeHometoAlmafor
+ theHolidaysJingleBell5K
+END:VEVENT
+END:VCALENDAR

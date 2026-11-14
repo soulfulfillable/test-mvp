@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136292@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261213T083000
+DTEND;TZID=America/Los_Angeles:20261213T103000
+SUMMARY:2026 Jingle Bell Run - Seattle\, WA
+LOCATION:2101 N. Northlake Way\, Seattle\, WA\, 98103
+URL:https://runsignup.com/Race/WA/Seattle/JingleBellRunSeattle
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Seattle/JingleBellRunS
+ eattle
+END:VEVENT
+END:VCALENDAR

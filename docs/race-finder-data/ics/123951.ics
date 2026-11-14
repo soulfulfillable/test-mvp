@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-123951@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T080000
+DTEND;TZID=America/Chicago:20261128T100000
+SUMMARY:Coastal Half Marathon\, 5K & 1 Mile Fun Run
+LOCATION:Orange Beach Sportsplex\, Orange Beach\, AL\, 36561
+URL:https://runsignup.com/Race/AL/OrangeBeach/CoastalHalf
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/OrangeBeach/CoastalHal
+ f
+END:VEVENT
+END:VCALENDAR

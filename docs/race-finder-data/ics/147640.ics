@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-147640@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T080000
+DTEND;TZID=America/Los_Angeles:20261121T100000
+SUMMARY:Annual San Bernardino Turkey Trot
+LOCATION:5500 University Pkwy\, San Bernardino\, CA\, 92407
+URL:https://runsignup.com/Race/CA/SanBernardino/SBTT
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanBernardino/SBTT
+END:VEVENT
+END:VCALENDAR

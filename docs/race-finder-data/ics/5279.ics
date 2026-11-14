@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5279@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261205T153000
+DTEND;TZID=America/Detroit:20261205T173000
+SUMMARY:Dashing Through the Snow and Fire 5k
+LOCATION:115 S Ann St\, Fowlerville\, MI\, 48836
+URL:https://runsignup.com/Race/MI/Fowlerville/DashingThroughtheSnow5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Fowlerville/DashingThr
+ oughtheSnow5k
+END:VEVENT
+END:VCALENDAR

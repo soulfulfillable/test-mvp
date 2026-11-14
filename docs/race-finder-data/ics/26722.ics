@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-26722@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Kentucky/Louisville:20270101T090000
+DTEND;TZID=America/Kentucky/Louisville:20270101T110000
+SUMMARY:Norton Sports Health Lights RUNder Louisville
+LOCATION:1841 Taylor Avenue\, Louisville\, KY\, 40213
+URL:https://runsignup.com/Race/KY/Louisville/NortonSportsHealthLightsRUNd
+ erLouisville
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Louisville/NortonSport
+ sHealthLightsRUNderLouisville
+END:VEVENT
+END:VCALENDAR

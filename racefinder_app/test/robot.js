@@ -75,8 +75,11 @@ const listReady = p => p.waitForSelector('.race, .state', { timeout: 15000 });
   await p.waitForSelector('.sheet.on #saveBtn'); await p.waitForTimeout(1500);
   await shot(p, '05-detail-price-stairs');
   await p.tap('#saveBtn'); ok('Save → 버튼이 Remove 로', (await p.locator('#saveBtn').innerText()) === 'Remove from Saved');
-  await p.tap('#cal'); const ics = await p.evaluate(() => window.__lastICS || '');
-  ok('Add to Calendar → 달력 파일 내용', /BEGIN:VEVENT/.test(ics) && /DTSTART:\d{8}T\d{6}/.test(ics) && /URL:https:\/\/runsignup/.test(ics));
+  // 달력: 실제 파일 주소로 연결돼야 한다(아이폰 사파리는 data: 주소의 달력 파일을 열지 않는다)
+  const cal = await p.evaluate(async () => { const a = document.getElementById('cal'); const r = await fetch(a.href); return { tag: a.tagName, dl: a.hasAttribute('download'), http: /^https?:/.test(a.href), status: r.status, type: r.headers.get('content-type') || '', body: await r.text(), title: document.querySelector('#sheet h2').innerText }; });
+  ok('Add to Calendar → 실제 달력 파일 주소(링크, 200)', cal.tag === 'A' && cal.http && !cal.dl && cal.status === 200, cal.type);
+  ok('달력 파일 내용이 이 대회와 일치', /BEGIN:VEVENT/.test(cal.body) && /DTSTART(;TZID=[\w\/]+)?:\d{8}T\d{6}/.test(cal.body) && /URL:https:\/\/runsignup/.test(cal.body) && cal.body.replace(/\r\n /g, '').includes('SUMMARY:' + cal.title.replace(/([,;])/g, '\\$1').slice(0, 20)));
+  if (process.env.LIVE) ok('배포 서버가 text/calendar 로 내려줌', /text\/calendar/.test(cal.type), cal.type);
   await p.locator('#veil').tap({ position: { x: 10, y: 10 } }); await p.waitForSelector('.sheet', { state: 'hidden' });
   ok('바깥 눌러 닫기', true);
   ok('목록에 Saved 표시', await p.locator('.away b').count() === 1);
@@ -140,6 +143,7 @@ const listReady = p => p.waitForSelector('.race, .state', { timeout: 15000 });
     const sov = await p.evaluate(() => { const s = document.getElementById('sheet'); return s.scrollWidth > s.clientWidth + 1; });
     ok(`${name}: 상세 넘침 없음, Done 버튼 보임`, !sov && await p.locator('#close').isVisible());
     await shot(p, `12-${name}-detail`);
+    if (name === 'dark') ok('dark: 시트가 뒤 화면과 다른 색', await p.evaluate(() => getComputedStyle(document.getElementById('sheet')).backgroundColor !== getComputedStyle(document.body).backgroundColor));
     ok(`${name}: 콘솔 에러 0`, p.errs.length === 0, p.errs.join(' / ')); await p.context().close();
   }
 

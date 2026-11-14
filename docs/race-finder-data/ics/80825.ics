@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-80825@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270109T080000
+DTEND;TZID=America/Los_Angeles:20270109T100000
+SUMMARY:Fog Run
+LOCATION:6299 Lake Ming Road\, Bakersfield\, CA\, 93306
+URL:https://runsignup.com/Race/CA/Bakersfield/FogRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Bakersfield/FogRun
+END:VEVENT
+END:VCALENDAR

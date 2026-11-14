@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190648@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T080000
+DTEND;TZID=America/Chicago:20261212T100000
+SUMMARY:Top Gym Road Race
+LOCATION:101-131 Golf Course Rd. Mercedes Texas 78570\, Mercedes\, TX\, 7
+ 8570
+URL:https://runsignup.com/Race/TX/Mercedes/TopGym5k10kKidsMile
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Mercedes/TopGym5k10kKi
+ dsMile
+END:VEVENT
+END:VCALENDAR

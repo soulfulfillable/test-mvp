@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216562@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261211T060000
+DTEND;TZID=America/Los_Angeles:20261211T080000
+SUMMARY:Jolly Jog Fun Run/Walk - Donut Run
+LOCATION:8749 Auburn Folsom Rd\, Granite Bay\, CA\, 95746
+URL:https://runsignup.com/Race/CA/GraniteBay/JollyJogFunRunWalkFolsomRose
+ ville
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/GraniteBay/JollyJogFun
+ RunWalkFolsomRoseville
+END:VEVENT
+END:VCALENDAR

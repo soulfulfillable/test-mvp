@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136671@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261122T101500
+DTEND;TZID=America/Chicago:20261122T121500
+SUMMARY:2026 Jingle Bell Run - Minnesota
+LOCATION:401 Chicago Avenue\, Minneapolis\, MN\, 55415
+URL:https://runsignup.com/Race/MN/Minneapolis/jbrtwincites
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Minneapolis/jbrtwincit
+ es
+END:VEVENT
+END:VCALENDAR

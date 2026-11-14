@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-24009@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T090000
+DTEND;TZID=America/Chicago:20261114T110000
+SUMMARY:Gobble Wobble Run/Walk
+LOCATION:523 Sarah Lane\, Haysville\, KS\, 67060
+URL:https://runsignup.com/Race/KS/Haysville/GobbleWobbleRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/KS/Haysville/GobbleWobble
+ RunWalk
+END:VEVENT
+END:VCALENDAR

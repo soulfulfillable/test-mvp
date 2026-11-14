@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81020@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261127T100000
+DTEND;TZID=America/New_York:20261127T120000
+SUMMARY:Shandon Turkey Trot & Burn 5K
+LOCATION:607 Woodrow Street\, Columbia\, SC\, 29205
+URL:https://runsignup.com/Race/SC/Columbia/ShandonTurkeyTrotBurn5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Columbia/ShandonTurkey
+ TrotBurn5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-26574@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:31st Annual Thanksgiving WALK of Awareness (2026)
+LOCATION:VFW Post 4075\, Frankfort\, KY\, 40601
+URL:https://runsignup.com/Race/KY/Frankfort/AnnualThanksgivingWALKofAware
+ nessForACCESSSoupKitchen
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Frankfort/AnnualThanks
+ givingWALKofAwarenessForACCESSSoupKitchen
+END:VEVENT
+END:VCALENDAR

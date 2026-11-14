@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-197454@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T090000
+DTEND;TZID=America/New_York:20261219T110000
+SUMMARY:EquiSol Race Series (A Park for All Seasons) - Winter Solstice 5k
+LOCATION:4515 Lenora Church Rd\, Snellville\, GA\, 30039
+URL:https://runsignup.com/Race/GA/Snellville/EquiSolRaceSeriesAParkForAll
+ SeasonsWinterSolstice5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Snellville/EquiSolRace
+ SeriesAParkForAllSeasonsWinterSolstice5k
+END:VEVENT
+END:VCALENDAR

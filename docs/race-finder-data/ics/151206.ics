@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-151206@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T090000
+DTEND;TZID=America/New_York:20261128T110000
+SUMMARY:Saxonburg Truthahntrab 5k and 1K Fun Run
+LOCATION:147 N Rebecca St\, Saxonburg\, PA\, 16056
+URL:https://runsignup.com/Race/PA/Saxonburg/SaxonburgTruthahntrab5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Saxonburg/SaxonburgTru
+ thahntrab5k
+END:VEVENT
+END:VCALENDAR

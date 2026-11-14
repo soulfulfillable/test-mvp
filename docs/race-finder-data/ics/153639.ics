@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153639@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261120T181500
+DTEND;TZID=America/New_York:20261120T201500
+SUMMARY:Run the Glen 2026 - Glow Run!
+LOCATION:87 Old Mine Road\, Lebanon\, PA\, 17042
+URL:https://runsignup.com/Race/PA/Lebanon/RuntheGlen2023GlowRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Lebanon/RuntheGlen2023
+ GlowRun
+END:VEVENT
+END:VCALENDAR

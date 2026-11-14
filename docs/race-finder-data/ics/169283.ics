@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-169283@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T090000
+DTEND;TZID=America/Los_Angeles:20261121T110000
+SUMMARY:Mountain Valley Turkey Trot 2026
+LOCATION:Mountain Valley Therapy\, La Grande\, OR\, 97850
+URL:https://runsignup.com/Race/OR/LaGrande/MountainValleyTurkeyTrot2024
+DESCRIPTION:Sign up: https://runsignup.com/Race/OR/LaGrande/MountainValle
+ yTurkeyTrot2024
+END:VEVENT
+END:VCALENDAR

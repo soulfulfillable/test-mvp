@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-169483@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T080000
+DTEND;TZID=America/New_York:20261115T100000
+SUMMARY:Ox Trot 5K
+LOCATION:Old Sturbridge Village\, Sturbridge\, MA\, 01566
+URL:https://runsignup.com/Race/MA/Sturbridge/OxTrotK
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/Sturbridge/OxTrotK
+END:VEVENT
+END:VCALENDAR

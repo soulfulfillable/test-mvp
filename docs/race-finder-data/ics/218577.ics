@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218577@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:The Resort Jingle Bell Jog 1K and 5K
+LOCATION:5700 Resort Blvd\, Fort Worth\, TX\, 76179
+URL:https://runsignup.com/Race/TX/FortWorth/ResortJingleBellJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/FortWorth/ResortJingle
+ BellJog
+END:VEVENT
+END:VCALENDAR

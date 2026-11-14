@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-4501@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T090000
+DTEND;TZID=America/New_York:20261121T110000
+SUMMARY:Gobble Waddle 5K/10K
+LOCATION:218 S. 2nd St.\, Smithfield\, NC\, 27577
+URL:https://runsignup.com/Race/NC/Smithfield/GobbleWaddle5K10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Smithfield/GobbleWaddl
+ e5K10K
+END:VEVENT
+END:VCALENDAR

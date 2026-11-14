@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-169023@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T110000
+DTEND;TZID=America/New_York:20261128T130000
+SUMMARY:Home Pro Exteriors' Livingston Manor Turkey "Trout" 5K & 1 Mile R
+ un/Walk
+LOCATION:Renaissance Park\, Livingston Manor Main Street\, Livingston Man
+ or\, NY\, 12758
+URL:https://runsignup.com/Race/NY/LivingstonManor/LivingstonManorTurkeyTr
+ outKRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/LivingstonManor/Living
+ stonManorTurkeyTroutKRunWalk
+END:VEVENT
+END:VCALENDAR

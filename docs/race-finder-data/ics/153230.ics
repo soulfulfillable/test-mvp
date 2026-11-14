@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153230@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261212T080000
+DTEND;TZID=America/Indiana/Indianapolis:20261212T100000
+SUMMARY:Fort Wayne Great Santa Run
+LOCATION:202 W Superior St\, Fort Wayne\, IN\, 46802
+URL:https://runsignup.com/Race/IN/FortWayne/FortWayneGreatSantaRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/FortWayne/FortWayneGre
+ atSantaRun
+END:VEVENT
+END:VCALENDAR

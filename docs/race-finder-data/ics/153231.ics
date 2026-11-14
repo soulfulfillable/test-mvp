@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153231@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261213T070000
+DTEND;TZID=America/Los_Angeles:20261213T090000
+SUMMARY:2026 Jingle Bell Run - San Diego\, CA
+LOCATION:2455 Cushing Road\, San Diego\, CA\, 92106
+URL:https://runsignup.com/Race/CA/SanDiego/JingleBellRunSanDiego
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanDiego/JingleBellRun
+ SanDiego
+END:VEVENT
+END:VCALENDAR

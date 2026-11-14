@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-49875@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T084500
+DTEND;TZID=America/Detroit:20261126T104500
+SUMMARY:Traverse City Turkey Trot
+LOCATION:123 E. Eleventh St.\, Traverse City\, MI\, 49684
+URL:https://runsignup.com/Race/MI/TraverseCity/TraverseCityTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/TraverseCity/TraverseC
+ ityTurkeyTrot
+END:VEVENT
+END:VCALENDAR

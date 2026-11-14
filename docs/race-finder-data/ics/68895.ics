@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-68895@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T074500
+DTEND;TZID=America/New_York:20261126T094500
+SUMMARY:17th Annual Gainesville Turkey Trot 5K/10K/Half Marathon and YOUT
+ H FUN RUN presented by Li
+LOCATION:Riverside Military Academy (Track Area)\, Gainesville\, GA\, 305
+ 01
+URL:https://runsignup.com/Race/GA/Gainesville/LimestoneShirtFactory
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Gainesville/LimestoneS
+ hirtFactory
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154082@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261121T093000
+DTEND;TZID=America/Detroit:20261121T113000
+SUMMARY:Blake's Holiday Hustle 5k
+LOCATION:Blake's Orchard and Cider Mill\, Armada\, MI\, 48005
+URL:https://runsignup.com/Race/MI/Armada/BlakesHolidayHustle5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Armada/BlakesHolidayHu
+ stle5k
+END:VEVENT
+END:VCALENDAR

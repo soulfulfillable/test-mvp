@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-115012@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T073000
+DTEND;TZID=America/New_York:20261212T093000
+SUMMARY:Jingle Bell Jog 5K / 10K
+LOCATION:1103 North Federal Highway\, Pompano\, FL\, 33062
+URL:https://runsignup.com/Race/FL/Pompano/JingleBellJog5K10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Pompano/JingleBellJog5
+ K10K
+END:VEVENT
+END:VCALENDAR

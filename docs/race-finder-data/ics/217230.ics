@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217230@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T140000
+DTEND;TZID=America/New_York:20261128T160000
+SUMMARY:All-American Christmas 5K Run/Walk
+LOCATION:115E Main St.\, Harrisville\, WV\, 26362
+URL:https://runsignup.com/Race/WV/Harrisville/AllAmericanChristmas5KRunWa
+ lk
+DESCRIPTION:Sign up: https://runsignup.com/Race/WV/Harrisville/AllAmerica
+ nChristmas5KRunWalk
+END:VEVENT
+END:VCALENDAR

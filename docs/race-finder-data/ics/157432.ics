@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-157432@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261226T080000
+DTEND;TZID=America/Chicago:20261226T100000
+SUMMARY:Plano Pacers Holiday Hustle 3K/8K + Free Kids 1K
+LOCATION:Windhaven Meadows Park\, Plano\, TX\, 75074
+URL:https://runsignup.com/Race/TX/Plano/PlanoPacersHolidayHustle3K8K
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Plano/PlanoPacersHolid
+ ayHustle3K8K
+END:VEVENT
+END:VCALENDAR

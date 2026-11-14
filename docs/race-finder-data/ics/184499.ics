@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-184499@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T110000
+DTEND;TZID=America/New_York:20270101T130000
+SUMMARY:2027 New Years 3/6 Mile Run & Pup Strut
+LOCATION:Veterans Park\, Hamilton Township\, NJ\, 08690
+URL:https://runsignup.com/Race/NJ/HamiltonTownship/MegaBiteEventsNewYears
+ Hangover5k1MileKWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/HamiltonTownship/MegaB
+ iteEventsNewYearsHangover5k1MileKWalk
+END:VEVENT
+END:VCALENDAR

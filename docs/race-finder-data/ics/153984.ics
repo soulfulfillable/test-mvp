@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153984@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261120T180000
+DTEND;TZID=America/New_York:20261120T200000
+SUMMARY:GDTC Annual Dinner
+LOCATION:Atkinson Resort & Country Club\, Atkinson\, NH\, 03811
+URL:https://runsignup.com/Race/NH/Atkinson/GDTCAnnualDinner
+DESCRIPTION:Sign up: https://runsignup.com/Race/NH/Atkinson/GDTCAnnualDin
+ ner
+END:VEVENT
+END:VCALENDAR

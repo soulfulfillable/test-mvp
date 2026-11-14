@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-148371@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:Palatine Park District Turkey Trot
+LOCATION:Harper College Health and Recreation Center\, Palatine\, IL\, 60
+ 067
+URL:https://runsignup.com/Race/IL/Palatine/PalatineParkDistrictTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Palatine/PalatineParkD
+ istrictTurkeyTrot
+END:VEVENT
+END:VCALENDAR

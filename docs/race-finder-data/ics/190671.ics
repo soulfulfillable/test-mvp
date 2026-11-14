@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190671@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T084500
+DTEND;TZID=America/New_York:20261114T104500
+SUMMARY:Estella's Memorial 5k Run/Walk to Cure Pancreatic Cancer
+LOCATION:Suffolk County Farm and Education Center\, Yaphank\, NY\, 11980
+URL:https://runsignup.com/Race/NY/Yaphank/EstellaSMemorial5kToCurePancrea
+ ticCancer
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Yaphank/EstellaSMemori
+ al5kToCurePancreaticCancer
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217783@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261119T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261119T203000
+SUMMARY:Bends & Brews
+LOCATION:710 Mulberry St.\, Bluffton\, IN\, 46714
+URL:https://runsignup.com/Race/IN/Bluffton/BendsandBrews
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Bluffton/BendsandBrews
+END:VEVENT
+END:VCALENDAR

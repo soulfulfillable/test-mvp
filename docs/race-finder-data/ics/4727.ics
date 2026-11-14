@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-4727@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T100000
+DTEND;TZID=America/New_York:20261128T120000
+SUMMARY:Huff and Puff after you stuff/Smiles for Margaret 5k Memorial Run
+LOCATION:Registration- American Legion Hall on Willow Grove St\, Hacketts
+ town\, NJ\, 07840
+URL:https://runsignup.com/Race/NJ/Hackettstown/MargaretWalling
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Hackettstown/MargaretW
+ alling
+END:VEVENT
+END:VCALENDAR

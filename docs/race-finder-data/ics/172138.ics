@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172138@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261121T090000
+DTEND;TZID=America/Detroit:20261121T110000
+SUMMARY:Santa 5k Run/Walk
+LOCATION:550 W Seven Mile Rd\, Northville\, MI 48167\, Northville\, MI\, 
+ 48167
+URL:https://runsignup.com/Race/MI/Northville/Santa5knorthville
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Northville/Santa5knort
+ hville
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-185891@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T073000
+DTEND;TZID=America/New_York:20261126T093000
+SUMMARY:SOME's Trot for Hunger
+LOCATION:1325 Pennsylvania Ave NW\, Washington\, DC\, 20004
+URL:https://runsignup.com/Race/DC/Washington/americastrotforhunger
+DESCRIPTION:Sign up: https://runsignup.com/Race/DC/Washington/americastro
+ tforhunger
+END:VEVENT
+END:VCALENDAR

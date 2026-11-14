@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171165@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270102T083000
+DTEND;TZID=America/New_York:20270102T103000
+SUMMARY:New Year 5K\, 10K\, & 13.1M at Williamsburg\, VA (01)
+LOCATION:850 Jolly Pond Rd\, Williamsburg\, VA\, 23188
+URL:https://runsignup.com/Race/VA/Williamsburg/FreedomP1125
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Williamsburg/FreedomP1
+ 125
+END:VEVENT
+END:VCALENDAR

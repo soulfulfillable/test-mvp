@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212139@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:2026 Run for Warriors 5K
+LOCATION:1500 Sunset Drive\, Guntersville\, AL\, 35976
+URL:https://runsignup.com/Race/AL/Guntersville/ALRunForWarriors
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Guntersville/ALRunForW
+ arriors
+END:VEVENT
+END:VCALENDAR

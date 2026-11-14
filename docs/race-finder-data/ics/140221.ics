@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-140221@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T153000
+DTEND;TZID=America/New_York:20261213T173000
+SUMMARY:Downtown Jingle 5K
+LOCATION:11 Tidewater St\, Pawtucket\, RI\, 02860
+URL:https://runsignup.com/Race/RI/Pawtucket/DowntownJingle5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/RI/Pawtucket/DowntownJing
+ le5K
+END:VEVENT
+END:VCALENDAR

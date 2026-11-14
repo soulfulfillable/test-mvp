@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-79123@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:Sheppard Pratt Turkey Trot in Frederick
+LOCATION:Baker Park\, Frederick\, MD\, 21701
+URL:https://runsignup.com/Race/MD/Frederick/SheppardPrattFrederickTurkeyT
+ rot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Frederick/SheppardPrat
+ tFrederickTurkeyTrot
+END:VEVENT
+END:VCALENDAR

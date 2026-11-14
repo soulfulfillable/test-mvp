@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-174051@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T080000
+DTEND;TZID=America/Los_Angeles:20261121T100000
+SUMMARY:Running with the Wildcats
+LOCATION:1000 Villanova Rd\, Ojai\, CA\, 93024
+URL:https://runsignup.com/Race/CA/Ojai/RunningwiththeWildcats
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Ojai/RunningwiththeWil
+ dcats
+END:VEVENT
+END:VCALENDAR

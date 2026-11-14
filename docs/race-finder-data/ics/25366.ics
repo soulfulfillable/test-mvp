@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-25366@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T084500
+DTEND;TZID=America/Los_Angeles:20261126T104500
+SUMMARY:MJC Turkey Trot 5k Run and Gobbler Walk
+LOCATION:1200 Tioga Drive\, Modesto\, CA\, 95354
+URL:https://runsignup.com/Race/CA/Modesto/MJCTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Modesto/MJCTurkeyTrot
+END:VEVENT
+END:VCALENDAR

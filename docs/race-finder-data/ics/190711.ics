@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190711@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:2026 River Vale Run 4 the Love and Fitness with Friends Turkey Tr
+ ot Charity 5K
+LOCATION:Mark Lane Sports Complex\, River Vale\, NJ\, 07675
+URL:https://runsignup.com/Race/NJ/RiverVale/RiverValeTurkeyTrotFamily5KRu
+ nWalkForCharity
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/RiverVale/RiverValeTur
+ keyTrotFamily5KRunWalkForCharity
+END:VEVENT
+END:VCALENDAR

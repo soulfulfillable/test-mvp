@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171060@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270109T070000
+DTEND;TZID=America/Los_Angeles:20270109T090000
+SUMMARY:Grievances & Gratitude Run – New Year Reset 5K 10K Half Maratho
+ n
+LOCATION:5400 E  Ocean Blvd\, Long Beach\, CA\, 90803
+URL:https://runsignup.com/Race/CA/LongBeach/GrievancesGratitudeRun5K10KHa
+ lfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/LongBeach/GrievancesGr
+ atitudeRun5K10KHalfMarathon
+END:VEVENT
+END:VCALENDAR

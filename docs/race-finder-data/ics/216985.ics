@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216985@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T090000
+DTEND;TZID=America/New_York:20261115T110000
+SUMMARY:Mountain Bike Biathlon
+LOCATION:58 Roberts Road\, Norway\, ME\, 04268
+URL:https://runsignup.com/Race/ME/Norway/MountainBikeBiathlon
+DESCRIPTION:Sign up: https://runsignup.com/Race/ME/Norway/MountainBikeBia
+ thlon
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-141132@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261227T060000
+DTEND;TZID=America/New_York:20261227T080000
+SUMMARY:Holiday Five (Five Days\, Five Distances to choose from)
+LOCATION:Cady Way Trail Head\, Winter Park\, FL\, 32792
+URL:https://runsignup.com/Race/FL/WinterPark/HolidayFive
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/WinterPark/HolidayFive
+END:VEVENT
+END:VCALENDAR

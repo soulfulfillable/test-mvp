@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209674@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:Thanksgiving 5K presented by St Pete Running Company
+LOCATION:6901 22nd Ave N\, Saint Petersburg\, FL\, 33710
+URL:https://runsignup.com/Race/FL/SaintPetersburg/StPeteRunningCoThanksgi
+ ving5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/SaintPetersburg/StPete
+ RunningCoThanksgiving5K
+END:VEVENT
+END:VCALENDAR

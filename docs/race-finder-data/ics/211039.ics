@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211039@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T071500
+DTEND;TZID=America/Chicago:20261126T091500
+SUMMARY:Gobble Dash
+LOCATION:342 W. Oates Rd.\, Garland\, TX\, 75043
+URL:https://runsignup.com/Race/TX/Garland/GobbleDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Garland/GobbleDash
+END:VEVENT
+END:VCALENDAR

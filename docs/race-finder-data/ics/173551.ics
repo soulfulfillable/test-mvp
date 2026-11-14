@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173551@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261205T110000
+DTEND;TZID=America/Detroit:20261205T130000
+SUMMARY:Charlevoix Hot Cocoa Run
+LOCATION:327 Bridge Street\, Charlevoix\, MI\, 49720
+URL:https://runsignup.com/Race/MI/Charlevoix/CharlevoixHotCocoaRunK
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Charlevoix/CharlevoixH
+ otCocoaRunK
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-34812@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261121T100000
+DTEND;TZID=America/Denver:20261121T120000
+SUMMARY:Turkey Trot Predict
+LOCATION:Memorial Park\, Colorado Springs\, CO\, 80903
+URL:https://runsignup.com/Race/CO/ColoradoSprings/TurkeyTrotPredict
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/ColoradoSprings/Turkey
+ TrotPredict
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-119365@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T080000
+DTEND;TZID=America/Chicago:20261121T100000
+SUMMARY:Run Young & Free 5K & 1K Fun Run
+LOCATION:Majestic Ball Park\, Hot Springs National Park\, AR\, 71901
+URL:https://runsignup.com/Race/AR/HotSpringsNationalPark/RunYoungFree5KKi
+ dsRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/HotSpringsNationalPark
+ /RunYoungFree5KKidsRun
+END:VEVENT
+END:VCALENDAR

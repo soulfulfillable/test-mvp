@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-23643@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270101T100000
+DTEND;TZID=America/Chicago:20270101T120000
+SUMMARY:The Fleet Feet New Year's Day Dash Presented by Incredible Bank
+LOCATION:2616 N Pleasant View Rd\, Middleton\, WI\, 53562
+URL:https://runsignup.com/Race/WI/Middleton/NewYearsDayDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Middleton/NewYearsDayD
+ ash
+END:VEVENT
+END:VCALENDAR

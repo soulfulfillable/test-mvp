@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-116324@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T073000
+DTEND;TZID=America/Chicago:20261126T093000
+SUMMARY:Joplin Turkey Trot
+LOCATION:300 S. Main\, Joplin\, MO\, 64801
+URL:https://runsignup.com/Race/MO/Joplin/JoplinTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/Joplin/JoplinTurkeyTro
+ t
+END:VEVENT
+END:VCALENDAR

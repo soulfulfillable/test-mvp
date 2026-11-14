@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172045@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T083000
+DTEND;TZID=America/Chicago:20261126T103000
+SUMMARY:Cowboy Wrestling Club Turkey Trot
+LOCATION:Boomer Lake- Shelter number 2\, Stillwater\, OK\, 74074
+URL:https://runsignup.com/Race/OK/Stillwater/CowboyWrestlingClub
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Stillwater/CowboyWrest
+ lingClub
+END:VEVENT
+END:VCALENDAR

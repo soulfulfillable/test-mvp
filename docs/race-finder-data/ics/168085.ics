@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168085@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Boise:20261212T093000
+DTEND;TZID=America/Boise:20261212T113000
+SUMMARY:Holiday Hot Cocoa Hustle 5K & 1-Miler
+LOCATION:Reid Merrill Park\, Eagle\, ID\, 83616
+URL:https://runsignup.com/Race/ID/Eagle/holidayhustlerun
+DESCRIPTION:Sign up: https://runsignup.com/Race/ID/Eagle/holidayhustlerun
+END:VEVENT
+END:VCALENDAR

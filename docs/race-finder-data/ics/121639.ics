@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121639@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261213T100000
+DTEND;TZID=America/Los_Angeles:20261213T120000
+SUMMARY:Homeless for the Holidays 5K Run / 2.5K Walk L.A.
+LOCATION:4730 Crystal Springs Drive\, Los Angeles\, CA\, 90027
+URL:https://runsignup.com/Race/CA/LosAngeles/HomelessfortheHolidaysLA
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/LosAngeles/Homelessfor
+ theHolidaysLA
+END:VEVENT
+END:VCALENDAR

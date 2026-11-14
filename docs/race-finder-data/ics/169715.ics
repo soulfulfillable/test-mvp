@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-169715@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261205T080000
+DTEND;TZID=America/Detroit:20261205T100000
+SUMMARY:Run Elf Run!
+LOCATION:1 S. Saginaw St.\, Pontiac\, MI\, 48342
+URL:https://runsignup.com/Race/MI/Pontiac/RunElfRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Pontiac/RunElfRun
+END:VEVENT
+END:VCALENDAR

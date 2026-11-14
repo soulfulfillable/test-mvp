@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-192102@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T154500
+DTEND;TZID=America/New_York:20261206T174500
+SUMMARY:Legendary Lights 5K - 10K - Kids Run
+LOCATION:9 Clay St.\, Clifton\, OH\, 45316
+URL:https://runsignup.com/Race/OH/Clifton/LegendaryLights5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Clifton/LegendaryLight
+ s5K
+END:VEVENT
+END:VCALENDAR

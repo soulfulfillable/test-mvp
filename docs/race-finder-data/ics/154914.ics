@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154914@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261214T090000
+DTEND;TZID=America/Chicago:20261214T110000
+SUMMARY:Alpine Learning Hill Passes
+LOCATION:1221 Theodore Wirth Parkway\, Minneapolis\, MN\, 55422
+URL:https://runsignup.com/Race/MN/Minneapolis/AlpineLearningHillPasses
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Minneapolis/AlpineLear
+ ningHillPasses
+END:VEVENT
+END:VCALENDAR

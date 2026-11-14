@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-131402@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T080000
+DTEND;TZID=America/New_York:20261122T100000
+SUMMARY:Iron Joe Turkey Ride & Walk
+LOCATION:11565 Tamiami Trail E\, Naples\, FL\, 34113
+URL:https://runsignup.com/Race/FL/Naples/IronJoeTurkeyRide
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Naples/IronJoeTurkeyRi
+ de
+END:VEVENT
+END:VCALENDAR

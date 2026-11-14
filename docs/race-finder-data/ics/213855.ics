@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213855@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T080000
+DTEND;TZID=America/Chicago:20261128T100000
+SUMMARY:Gobbler 5K\, 10K\, & 13.1M at Oklahoma City\, OK (48)
+LOCATION:8301 SE 104th St\, Oklahoma City\, OK\, 73165
+URL:https://runsignup.com/Race/OK/OklahomaCity/48OklahomaCityOK
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/OklahomaCity/48Oklahom
+ aCityOK
+END:VEVENT
+END:VCALENDAR

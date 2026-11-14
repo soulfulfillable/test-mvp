@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-52794@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:19th Annual Turkey Trot 5K Run/Walk - Williamsburg\, Ky
+LOCATION:423 Main Street\, Williamsburg\, KY\, 40769
+URL:https://runsignup.com/Race/KY/Williamsburg/TurkeyTrotWilliamsburgKy
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Williamsburg/TurkeyTro
+ tWilliamsburgKy
+END:VEVENT
+END:VCALENDAR

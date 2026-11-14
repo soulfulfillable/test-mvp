@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-170526@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261128T090000
+DTEND;TZID=America/Phoenix:20261128T110000
+SUMMARY:Miles for SoRaya
+LOCATION:Indian Rte 8090\, Chinle\, AZ\, 86503
+URL:https://runsignup.com/Race/AZ/Chinle/MilesForSoRaya
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Chinle/MilesForSoRaya
+END:VEVENT
+END:VCALENDAR

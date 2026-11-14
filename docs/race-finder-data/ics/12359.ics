@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-12359@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:Tacky Sweater 5K
+LOCATION:2330 Bowdens Ferry Road\, Suite 600\, Norfolk\, VA\, 23508
+URL:https://runsignup.com/Race/VA/Norfolk/TackySweater5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Norfolk/TackySweater5K
+END:VEVENT
+END:VCALENDAR

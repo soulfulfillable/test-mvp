@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121085@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T073000
+DTEND;TZID=America/Chicago:20261128T093000
+SUMMARY:Spring Hill Turkey Burn
+LOCATION:1 Raider Lane\, Columbia\, TN\, 38401
+URL:https://runsignup.com/Race/TN/Columbia/SpringHillTurkeyBurn2022
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Columbia/SpringHillTur
+ keyBurn2022
+END:VEVENT
+END:VCALENDAR

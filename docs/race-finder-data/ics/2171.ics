@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-2171@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270109T080000
+DTEND;TZID=America/Chicago:20270109T100000
+SUMMARY:LGRAW's Bold in the Cold 5K & 15K
+LOCATION:Lake Grapevine Runners and Walkers Clubhouse - Oak Grove Par\, G
+ rapevine\, TX\, 76051
+URL:https://runsignup.com/Race/TX/Grapevine/BoldintheCold
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Grapevine/BoldintheCol
+ d
+END:VEVENT
+END:VCALENDAR

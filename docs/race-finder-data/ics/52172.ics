@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-52172@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T063000
+DTEND;TZID=America/New_York:20261114T083000
+SUMMARY:ZooRun
+LOCATION:12400 SW 152nd St\, Miami\, FL\, 33177
+URL:https://runsignup.com/Race/FL/Miami/ZooRun5KZooKidsDashbenefitingWest
+ Kendal
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Miami/ZooRun5KZooKidsD
+ ashbenefitingWestKendal
+END:VEVENT
+END:VCALENDAR

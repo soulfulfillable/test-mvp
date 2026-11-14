@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-182554@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:BK5K Knoxville\, TN
+LOCATION:4901 Bradshaw Rd\, Knoxville\, TN\, 37912
+URL:https://runsignup.com/Race/TN/Knoxville/BK5KKnoxvilleTN
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Knoxville/BK5KKnoxvill
+ eTN
+END:VEVENT
+END:VCALENDAR

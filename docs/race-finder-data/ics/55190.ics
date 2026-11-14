@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-55190@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261127T090000
+DTEND;TZID=America/New_York:20261127T110000
+SUMMARY:Black Friday Relays Leftover Race
+LOCATION:815 Salem Lake Road\, Winston-Salem\, NC\, 27107
+URL:https://runsignup.com/Race/NC/WinstonSalem/BlackFriday20KRelays
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/WinstonSalem/BlackFrid
+ ay20KRelays
+END:VEVENT
+END:VCALENDAR

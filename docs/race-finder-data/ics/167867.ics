@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-167867@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T063000
+DTEND;TZID=America/New_York:20261115T083000
+SUMMARY:The RUGGED INDY 2026
+LOCATION:Independence Park [East Vincent Township]\, Spring City\, PA\, 1
+ 9475
+URL:https://runsignup.com/Race/PA/SpringCity/TheRUGGEDINDY
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/SpringCity/TheRUGGEDIN
+ DY
+END:VEVENT
+END:VCALENDAR

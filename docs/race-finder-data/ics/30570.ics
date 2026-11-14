@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-30570@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261212T080000
+DTEND;TZID=America/Los_Angeles:20261212T100000
+SUMMARY:Santa Claus For A Cause 5K/10K
+LOCATION:Bolsa Chica State Beach\, Huntington Beach\, CA\, 92648
+URL:https://runsignup.com/Race/CA/HuntingtonBeach/SantaClausForACause
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/HuntingtonBeach/SantaC
+ lausForACause
+END:VEVENT
+END:VCALENDAR

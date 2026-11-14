@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-440@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T101500
+DTEND;TZID=America/New_York:20270101T121500
+SUMMARY:Chilly Chili Run
+LOCATION:High Plains Community Center\, Orange\, CT\, 06525
+URL:https://runsignup.com/Race/CT/Orange/ChillyChiliRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Orange/ChillyChiliRun
+END:VEVENT
+END:VCALENDAR

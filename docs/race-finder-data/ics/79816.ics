@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-79816@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261125T173000
+DTEND;TZID=America/New_York:20261125T193000
+SUMMARY:Whispering Christmas Jingle Jog 5k Family Fun Run/Walk
+LOCATION:600 Hillcrest Dr\, Eaton\, OH\, 45356
+URL:https://runsignup.com/Race/OH/Eaton/WhisperingChristmasJingleJog5kFam
+ ilyFunRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Eaton/WhisperingChrist
+ masJingleJog5kFamilyFunRunWalk
+END:VEVENT
+END:VCALENDAR

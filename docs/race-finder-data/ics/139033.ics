@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-139033@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T090000
+DTEND;TZID=America/New_York:20261128T110000
+SUMMARY:Fleet Feet Poughkeepsie's 2026 Grateful Gallop 5K to Benefit Dutc
+ hess Outreach
+LOCATION:Stringham Park\, Lagrangeville\, NY\, 12540
+URL:https://runsignup.com/Race/NY/Lagrangeville/FleetFeetPoughkeepsiesGra
+ tefulGallop
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Lagrangeville/FleetFee
+ tPoughkeepsiesGratefulGallop
+END:VEVENT
+END:VCALENDAR

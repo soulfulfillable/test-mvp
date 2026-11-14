@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-51097@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T100000
+DTEND;TZID=America/New_York:20261205T120000
+SUMMARY:Santa Made Me Do It
+LOCATION:18 Main St South\, Bethlehem\, CT\, 06751
+URL:https://runsignup.com/Race/CT/Bethlehem/SantaMadeMeDoIt
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Bethlehem/SantaMadeMeD
+ oIt
+END:VEVENT
+END:VCALENDAR

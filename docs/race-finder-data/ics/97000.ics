@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-97000@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T180000
+DTEND;TZID=America/New_York:20261128T200000
+SUMMARY:ChristmasTown 5K
+LOCATION:Main Street\, McAdenville\, NC\, 28101
+URL:https://runsignup.com/Race/NC/McAdenville/ChristmasTown5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/McAdenville/ChristmasT
+ own5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-219139@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261221T101500
+DTEND;TZID=America/Chicago:20261221T121500
+SUMMARY:FTR Distance Track Camp
+LOCATION:7150 Highlands Ln\, Tyler\, TX\, 75703
+URL:https://runsignup.com/Race/TX/Tyler/FTRDistanceTrackCamp
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Tyler/FTRDistanceTrack
+ Camp
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155929@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270102T083000
+DTEND;TZID=America/Los_Angeles:20270102T103000
+SUMMARY:New Year 5K\, 10K\, & 13.1M\, Everett\, WA (01)
+LOCATION:600 128th St SE\, Everett\, WA\, 98206
+URL:https://runsignup.com/Race/WA/Everett/Langus162024
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Everett/Langus162024
+END:VEVENT
+END:VCALENDAR

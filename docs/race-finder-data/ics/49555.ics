@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-49555@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261219T080000
+DTEND;TZID=America/Los_Angeles:20261219T100000
+SUMMARY:Out with the Old 1/2 Marathon\, 10K\, and 5K
+LOCATION:2601 East Sunset Road\, Las Vegas\, NV\, 89120
+URL:https://runsignup.com/Race/NV/LasVegas/OutwiththeOld
+DESCRIPTION:Sign up: https://runsignup.com/Race/NV/LasVegas/OutwiththeOld
+END:VEVENT
+END:VCALENDAR

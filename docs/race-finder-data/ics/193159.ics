@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193159@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261120T130000
+DTEND;TZID=America/Denver:20261120T150000
+SUMMARY:Sussex School Turkey Trot Fun Run
+LOCATION:1800 South 2nd Street West\, Missoula\, MT\, 59801
+URL:https://runsignup.com/Race/MT/Missoula/SussexSchoolTurkeyTrotFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MT/Missoula/SussexSchoolT
+ urkeyTrotFunRun
+END:VEVENT
+END:VCALENDAR

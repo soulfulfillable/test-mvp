@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-210172@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Gobble Wobble Half Marathon and 5k
+LOCATION:1601 Co Hwy 52/27\, Williamson\, WV\, 25661
+URL:https://runsignup.com/Race/WV/Williamson/GobbleWobbleHalfMarathonAnd5
+ k
+DESCRIPTION:Sign up: https://runsignup.com/Race/WV/Williamson/GobbleWobbl
+ eHalfMarathonAnd5k
+END:VEVENT
+END:VCALENDAR

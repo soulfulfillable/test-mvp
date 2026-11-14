@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-162723@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:Gobbler 5K\, 10K\, & 13.1M at Bowling Green\, KY (46)
+LOCATION:885 Mount Olivet Rd\, Bowling Green\, KY\, 42101
+URL:https://runsignup.com/Race/KY/BowlingGreen/Ephram1192024
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/BowlingGreen/Ephram119
+ 2024
+END:VEVENT
+END:VCALENDAR

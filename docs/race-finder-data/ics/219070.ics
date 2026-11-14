@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-219070@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T133000
+DTEND;TZID=America/New_York:20261206T153000
+SUMMARY:Red Suit Pursuit 5K
+LOCATION:5741 SE Abshier Blvd\, Belleview\, FL\, 34420
+URL:https://runsignup.com/Race/FL/Belleview/RedSuitPursuit
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Belleview/RedSuitPursu
+ it
+END:VEVENT
+END:VCALENDAR

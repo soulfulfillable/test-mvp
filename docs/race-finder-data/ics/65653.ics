@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-65653@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Running of the Turkeys
+LOCATION:3802 Jaycee Park Drive\, Greensboro\, NC\, 27455
+URL:https://runsignup.com/Race/NC/Greensboro/runturkey
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Greensboro/runturkey
+END:VEVENT
+END:VCALENDAR

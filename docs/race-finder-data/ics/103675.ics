@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-103675@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261220T090000
+DTEND;TZID=America/New_York:20261220T110000
+SUMMARY:Jingle Bell 5.3 Miler
+LOCATION:Tyler State Park\, Newtown\, PA\, 18940
+URL:https://runsignup.com/Race/PA/Newtown/JingleBell2020
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Newtown/JingleBell2020
+END:VEVENT
+END:VCALENDAR

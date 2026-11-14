@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13419@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T100000
+DTEND;TZID=America/New_York:20261219T120000
+SUMMARY:Egg Nog Jog
+LOCATION:940 Pavilion St\, Cincinnati\, OH\, 45202
+URL:https://runsignup.com/Race/OH/Cincinnati/EggNogJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Cincinnati/EggNogJog
+END:VEVENT
+END:VCALENDAR

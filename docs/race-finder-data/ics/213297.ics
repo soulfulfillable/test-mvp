@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213297@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261114T090000
+DTEND;TZID=America/Phoenix:20261114T110000
+SUMMARY:River Rat Motorsports Desert Tromp Off Road Poker Run
+LOCATION:I-40 exit #2- Needles Mountain Road\, Topock\, AZ\, 86436
+URL:https://runsignup.com/Race/AZ/Topock/RiverRatMotorsportsDesertTromp
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Topock/RiverRatMotorsp
+ ortsDesertTromp
+END:VEVENT
+END:VCALENDAR

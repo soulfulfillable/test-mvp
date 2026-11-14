@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-80238@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T075500
+DTEND;TZID=America/Chicago:20261126T095500
+SUMMARY:Wonewoc 5K Turkey Trot
+LOCATION:101 School Rd.\, Wonewoc\, WI\, 53968
+URL:https://runsignup.com/Race/WI/Wonewoc/WonewocBadgers4HTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Wonewoc/WonewocBadgers
+ 4HTurkeyTrot
+END:VEVENT
+END:VCALENDAR

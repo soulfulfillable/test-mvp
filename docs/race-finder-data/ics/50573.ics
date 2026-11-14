@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-50573@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T084500
+DTEND;TZID=America/Chicago:20261126T104500
+SUMMARY:Rochester Turkey Trot 5K
+LOCATION:244 Soldiers Field Drive SE\, Rochester\, MN\, 55902
+URL:https://runsignup.com/Race/MN/Rochester/RochesterTurkeyTrot5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Rochester/RochesterTur
+ keyTrot5k
+END:VEVENT
+END:VCALENDAR

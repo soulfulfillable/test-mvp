@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66048@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T201500
+DTEND;TZID=America/Chicago:20261205T221500
+SUMMARY:Santa's Run through the Lights 5K Run/Walk
+LOCATION:34W002 Cherry Ln\, Geneva\, IL\, 60134
+URL:https://runsignup.com/Race/IL/Geneva/DeerParkCocoaClassic5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Geneva/DeerParkCocoaCl
+ assic5K
+END:VEVENT
+END:VCALENDAR

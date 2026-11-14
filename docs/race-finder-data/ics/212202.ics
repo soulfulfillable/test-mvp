@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212202@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Phoenix:20261115T080000
+DTEND;TZID=America/Phoenix:20261115T100000
+SUMMARY:The Space In Between 5K Family Fun Day
+LOCATION:Freestone Park\, Gilbert\, AZ\, 85234
+URL:https://runsignup.com/Race/AZ/Gilbert/5KFamilyFunDay
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/Gilbert/5KFamilyFunDay
+END:VEVENT
+END:VCALENDAR

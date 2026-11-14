@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215307@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:NWSL Championship 5K presented by CVS Health
+LOCATION:600 Water St SW\, Washington\, DC\, Washington\, DC\, 20024
+URL:https://runsignup.com/Race/DC/Washington/NWSL5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/DC/Washington/NWSL5K
+END:VEVENT
+END:VCALENDAR

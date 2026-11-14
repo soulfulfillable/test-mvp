@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-191196@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T080000
+DTEND;TZID=America/New_York:20261122T100000
+SUMMARY:North Garden 5K
+LOCATION:5005 Edge Valley Road\, North Garden\, VA\, 22959
+URL:https://runsignup.com/Race/VA/NorthGarden/NorthGarden5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/NorthGarden/NorthGarde
+ n5k
+END:VEVENT
+END:VCALENDAR

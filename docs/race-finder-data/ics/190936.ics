@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190936@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T100000
+DTEND;TZID=America/Chicago:20261212T120000
+SUMMARY:Aberdeen Santa Run 5K Fun Run/Walk
+LOCATION:2312 24th Ave NW\, Aberdeen\, SD\, 57401
+URL:https://runsignup.com/Race/SD/Aberdeen/AberdeenSantaRun5KFunRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/SD/Aberdeen/AberdeenSanta
+ Run5KFunRunWalk
+END:VEVENT
+END:VCALENDAR

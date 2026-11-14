@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187974@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T120000
+DTEND;TZID=America/New_York:20261121T140000
+SUMMARY:Gingerbread Dash 5K
+LOCATION:1 Municipal Dr\, Canterbury\, CT\, 06331
+URL:https://runsignup.com/Race/CT/Canterbury/GingerbreadDash5KCanterburyC
+ T
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Canterbury/Gingerbread
+ Dash5KCanterburyCT
+END:VEVENT
+END:VCALENDAR

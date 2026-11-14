@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217028@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261214T180000
+DTEND;TZID=America/Los_Angeles:20261214T200000
+SUMMARY:Jolly Jog Fun Run/Walk
+LOCATION:766 Lakefield Dr.\, Westlake Village\, CA\, 91361
+URL:https://runsignup.com/Race/CA/WestlakeVillage/WinterJollyJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/WestlakeVillage/Winter
+ JollyJog
+END:VEVENT
+END:VCALENDAR

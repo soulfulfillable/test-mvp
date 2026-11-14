@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-210129@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261212T100000
+DTEND;TZID=America/Los_Angeles:20261212T120000
+SUMMARY:Santa to the Sea Half Marathon Expo
+LOCATION:3600 Cabezone Cir.\, Oxnard\, CA\, 93035
+URL:https://runsignup.com/Race/CA/Oxnard/SantaToTheSeaHalfMarathonExpo
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Oxnard/SantaToTheSeaHa
+ lfMarathonExpo
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168771@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T090000
+DTEND;TZID=America/Chicago:20261114T110000
+SUMMARY:Monte Vista Historical Association 5K Fun Run & Walk
+LOCATION:233 Bushnell Avenue\, San Antonio\, TX\, 78212
+URL:https://runsignup.com/Race/TX/SanAntonio/MVHA5KFunRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAntonio/MVHA5KFunRu
+ nWalk
+END:VEVENT
+END:VCALENDAR

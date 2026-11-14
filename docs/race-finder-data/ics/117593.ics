@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-117593@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Crete Country Christmas 5k Grinch Run
+LOCATION:Division and Wood Street\, Crete\, IL\, 60417
+URL:https://runsignup.com/Race/IL/Crete/5kGrinchRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Crete/5kGrinchRun
+END:VEVENT
+END:VCALENDAR

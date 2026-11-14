@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-118496@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Face to Face Turkey Trot
+LOCATION:Forbidden Drive at the intersection of Thomas Road and W. No\, P
+ hiladelphia\, PA\, 19118
+URL:https://runsignup.com/Race/PA/Philadelphia/FacetoFaceTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Philadelphia/FacetoFac
+ eTurkeyTrot
+END:VEVENT
+END:VCALENDAR

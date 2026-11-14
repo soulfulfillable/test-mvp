@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-28493@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261127T110000
+DTEND;TZID=America/Detroit:20261127T130000
+SUMMARY:Black Toenail Friday Half Marathon and 7.5 Miler - MI
+LOCATION:2928 Glengary Rd\, Commerce Township\, MI\, 48382
+URL:https://runsignup.com/Race/MI/CommerceTownship/BlackToenailFridayHalf
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/CommerceTownship/Black
+ ToenailFridayHalf
+END:VEVENT
+END:VCALENDAR

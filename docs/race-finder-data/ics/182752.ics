@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-182752@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20270102T090000
+DTEND;TZID=America/Denver:20270102T110000
+SUMMARY:YMCA of Pueblo Hot Chocolate 5K
+LOCATION:3200 E Spaulding Ave\, Pueblo\, CO\, 81008
+URL:https://runsignup.com/Race/CO/Pueblo/YMCAOfPuebloHotChocolate5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Pueblo/YMCAOfPuebloHot
+ Chocolate5K
+END:VEVENT
+END:VCALENDAR

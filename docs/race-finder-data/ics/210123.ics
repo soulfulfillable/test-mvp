@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-210123@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261114T070000
+DTEND;TZID=America/Los_Angeles:20261114T090000
+SUMMARY:Merced Half Marathon
+LOCATION:1045 W 25th St.\, Merced\, CA\, 95340
+URL:https://runsignup.com/Race/CA/Merced/MercedHalfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Merced/MercedHalfMarat
+ hon
+END:VEVENT
+END:VCALENDAR

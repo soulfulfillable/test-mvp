@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-41369@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270103T083000
+DTEND;TZID=America/Los_Angeles:20270103T103000
+SUMMARY:Sycamore Island 5k & 10k Run/Walk
+LOCATION:Sycamore Island - 39664 Avenue 7 1/2\, Madera\, CA\, 93636
+URL:https://runsignup.com/Race/CA/Madera/SycamoreIsland5k10kRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Madera/SycamoreIsland5
+ k10kRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193497@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T100000
+DTEND;TZID=America/New_York:20261114T120000
+SUMMARY:Douglas Coffee County Food Bank Fun Run
+LOCATION:159 Trojan Way\, Douglas\, GA\, 31535
+URL:https://runsignup.com/Race/GA/Douglas/DouglasCoffeeCountyFoodBankFunR
+ un
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Douglas/DouglasCoffeeC
+ ountyFoodBankFunRun
+END:VEVENT
+END:VCALENDAR

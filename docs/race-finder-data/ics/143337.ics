@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-143337@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261220T090000
+DTEND;TZID=America/Chicago:20261220T110000
+SUMMARY:Candy Cane Course - Des Moines
+LOCATION:Altoona Aquatics Park\, Altoona\, IA\, 50009
+URL:https://runsignup.com/Race/IA/Altoona/CandyCaneCourseDesMoines
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/Altoona/CandyCaneCours
+ eDesMoines
+END:VEVENT
+END:VCALENDAR

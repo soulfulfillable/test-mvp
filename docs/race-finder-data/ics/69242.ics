@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-69242@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:Blue Ridge Turkey Trot
+LOCATION:907 East Main Street\, Blue Ridge\, GA\, 30513
+URL:https://runsignup.com/Race/GA/BlueRidge/BlueRidgeTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/BlueRidge/BlueRidgeTur
+ keyTrot
+END:VEVENT
+END:VCALENDAR

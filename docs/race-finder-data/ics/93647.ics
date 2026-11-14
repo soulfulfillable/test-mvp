@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-93647@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261125T160000
+DTEND;TZID=America/New_York:20261125T180000
+SUMMARY:34th Annual YMCA Turkey Trot
+LOCATION:2300 Washington Avenue\, Fredericksburg\, VA\, 22401
+URL:https://runsignup.com/Race/VA/Fredericksburg/AnnualYMCATurkeyTrotVA
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Fredericksburg/AnnualY
+ MCATurkeyTrotVA
+END:VEVENT
+END:VCALENDAR

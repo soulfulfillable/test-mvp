@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-151639@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:2026 Veterans Day Ruck March
+LOCATION:621 Boll Weevil Circle\, Enterprise\, AL\, 36330
+URL:https://runsignup.com/Race/AL/Enterprise/WiregrassHonorFlightRuckMarc
+ h
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Enterprise/WiregrassHo
+ norFlightRuckMarch
+END:VEVENT
+END:VCALENDAR

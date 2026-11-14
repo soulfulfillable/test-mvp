@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-32560@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261219T090000
+DTEND;TZID=America/Chicago:20261219T110000
+SUMMARY:Candy Cane Course - Kansas City
+LOCATION:First Bible Baptist\, Blue Springs\, MO\, 64014
+URL:https://runsignup.com/Race/MO/BlueSprings/CandyCaneCourse5k10k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/BlueSprings/CandyCaneC
+ ourse5k10k
+END:VEVENT
+END:VCALENDAR

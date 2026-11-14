@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-40954@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T103000
+DTEND;TZID=America/New_York:20270101T123000
+SUMMARY:Annual Hangover Classic 5 Miler
+LOCATION:3 Poppasquash Rd.\, Bristol\, RI\, 02809
+URL:https://runsignup.com/Race/RI/Bristol/HangoverClassic
+DESCRIPTION:Sign up: https://runsignup.com/Race/RI/Bristol/HangoverClassi
+ c
+END:VEVENT
+END:VCALENDAR

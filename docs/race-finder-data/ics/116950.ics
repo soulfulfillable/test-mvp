@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-116950@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270103T080000
+DTEND;TZID=America/Chicago:20270103T100000
+SUMMARY:Art Car IPA 5K Social Run/Walk at Flying Saucer - January
+LOCATION:705 Main Street\, Houston\, TX\, 77002
+URL:https://runsignup.com/Race/TX/Houston/ArtCarIPA5KSocialRunWalkatFlyin
+ gSaucerJanuary
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Houston/ArtCarIPA5KSoc
+ ialRunWalkatFlyingSaucerJanuary
+END:VEVENT
+END:VCALENDAR

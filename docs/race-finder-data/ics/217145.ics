@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217145@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T100000
+DTEND;TZID=America/Denver:20261114T120000
+SUMMARY:Yellowstone Turkey Trot
+LOCATION:616 River Dr\, Livingston\, MT\, 59047
+URL:https://runsignup.com/Race/MT/Livingston/YellowstoneTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MT/Livingston/Yellowstone
+ TurkeyTrot
+END:VEVENT
+END:VCALENDAR

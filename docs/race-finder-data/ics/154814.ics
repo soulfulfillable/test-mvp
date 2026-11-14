@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154814@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:Turkey Trot 5K for WTPS Unified Sports® sponsored by Wayne Speci
+ al Parents Association
+LOCATION:Wayne Hills High School\, Wayne\, NJ\, 07470
+URL:https://runsignup.com/Race/NJ/Wayne/TurkeyTrot5KforWTPSUnifiedSportsP
+ rogram
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Wayne/TurkeyTrot5KforW
+ TPSUnifiedSportsProgram
+END:VEVENT
+END:VCALENDAR

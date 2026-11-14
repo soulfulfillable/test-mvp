@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-201307@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T203000
+DTEND;TZID=America/New_York:20261231T223000
+SUMMARY:Roxbury Road Race Series Season Pass
+LOCATION:18 Apple Lane\, Roxbury\, CT\, 06783
+URL:https://runsignup.com/Race/CT/Roxbury/RoxburyRoadRaceSeriesSeasonPass
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Roxbury/RoxburyRoadRac
+ eSeriesSeasonPass
+END:VEVENT
+END:VCALENDAR

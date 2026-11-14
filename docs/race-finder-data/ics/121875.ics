@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121875@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T100000
+DTEND;TZID=America/New_York:20270101T120000
+SUMMARY:Wicked Frosty Four
+LOCATION:51 Charter St\, Salem\, MA\, 01970
+URL:https://runsignup.com/Race/MA/Salem/WickedFrostyFour
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/Salem/WickedFrostyFour
+END:VEVENT
+END:VCALENDAR

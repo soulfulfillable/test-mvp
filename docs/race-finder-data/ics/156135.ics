@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-156135@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T080000
+DTEND;TZID=America/New_York:20261205T100000
+SUMMARY:Holiday 5K\, 10K\, & 13.1M\, Beavercreek\, OH (49)
+LOCATION:E J Nutter Park\, Beavercreek\, OH\, 45434
+URL:https://runsignup.com/Race/OH/Beavercreek/NutterParkBeavercreekOH1272
+ 024
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Beavercreek/NutterPark
+ BeavercreekOH1272024
+END:VEVENT
+END:VCALENDAR

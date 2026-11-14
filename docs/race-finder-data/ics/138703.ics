@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-138703@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T090000
+DTEND;TZID=America/New_York:20270109T110000
+SUMMARY:Kelley's Pace Frostbite
+LOCATION:27 Coogan Blvd\, Mystic\, CT\, 06355
+URL:https://runsignup.com/Race/CT/Mystic/KelleysPaceFrostbite
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Mystic/KelleysPaceFros
+ tbite
+END:VEVENT
+END:VCALENDAR

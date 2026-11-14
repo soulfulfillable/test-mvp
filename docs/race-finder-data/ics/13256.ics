@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13256@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T080000
+DTEND;TZID=America/New_York:20261205T100000
+SUMMARY:Elves for the Shelves 5K\, Walk\, and Fun Run
+LOCATION:Radnor Memorial Library\, Wayne\, PA\, 19087
+URL:https://runsignup.com/Race/PA/Wayne/ElvesfortheShelves5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Wayne/ElvesfortheShelv
+ es5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194660@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Fred Walker Memorial Jingle Bells 5k
+LOCATION:Jeff Davis Ave\, Long Beach\, MS\, 39560
+URL:https://runsignup.com/Race/MS/LongBeach/FredWalkerJingleBells5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MS/LongBeach/FredWalkerJi
+ ngleBells5k
+END:VEVENT
+END:VCALENDAR

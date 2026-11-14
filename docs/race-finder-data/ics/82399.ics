@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-82399@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T140000
+DTEND;TZID=America/New_York:20261122T160000
+SUMMARY:Shenandoah Valley Track Club (Pre)Thanksgiving Run/Walk 5k and 1 
+ Mile
+LOCATION:201 Green Street\, Bridgewater\, VA\, 22812
+URL:https://runsignup.com/Race/VA/Bridgewater/ShenandoahValleyTrackClubTu
+ rkeyRunWalk5kand1Mile
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Bridgewater/Shenandoah
+ ValleyTrackClubTurkeyRunWalk5kand1Mile
+END:VEVENT
+END:VCALENDAR

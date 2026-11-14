@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-100427@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T070000
+DTEND;TZID=America/New_York:20261114T090000
+SUMMARY:Veterans Memorial Bridge 5K
+LOCATION:Jock Leighton Park\, Palm City\, FL\, 34990
+URL:https://runsignup.com/Race/FL/PalmCity/VeteransMemorialBridge5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/PalmCity/VeteransMemor
+ ialBridge5K
+END:VEVENT
+END:VCALENDAR

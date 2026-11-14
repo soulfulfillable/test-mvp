@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-108613@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T080000
+DTEND;TZID=America/Chicago:20261128T100000
+SUMMARY:Trail Trot on Turkey Ridge
+LOCATION:3199 Woods Rd\, Wildwood\, MO\, 63038
+URL:https://runsignup.com/Race/MO/Wildwood/TurkeyRidgeTrailTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/Wildwood/TurkeyRidgeTr
+ ailTrot
+END:VEVENT
+END:VCALENDAR

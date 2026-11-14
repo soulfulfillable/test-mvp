@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218185@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T120000
+DTEND;TZID=America/New_York:20261212T140000
+SUMMARY:24 Hour Track-athon For Charity
+LOCATION:3450 Monongahela Blvd\, Morgantown\, WV\, 26505
+URL:https://runsignup.com/Race/WV/Morgantown/24hourtrackforcharity
+DESCRIPTION:Sign up: https://runsignup.com/Race/WV/Morgantown/24hourtrack
+ forcharity
+END:VEVENT
+END:VCALENDAR

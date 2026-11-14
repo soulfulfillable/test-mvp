@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205639@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T110000
+DTEND;TZID=America/New_York:20261213T130000
+SUMMARY:Bill Rodgers Somerville Jingle Bell Run & Walk
+LOCATION:Elm Street\, Somerville\, MA\, 02144
+URL:https://runsignup.com/Race/MA/Somerville/BillRodgersSomervilleJingleB
+ ellRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/Somerville/BillRodgers
+ SomervilleJingleBellRun
+END:VEVENT
+END:VCALENDAR

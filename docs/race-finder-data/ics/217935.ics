@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217935@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261220T163000
+DTEND;TZID=America/Chicago:20261220T183000
+SUMMARY:2nd Annual Jolly Jingle 5k
+LOCATION:1901 S Cage Blvd\, Pharr\, TX\, 78577
+URL:https://runsignup.com/Race/TX/Pharr/NdAnnualJollyJingle5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Pharr/NdAnnualJollyJin
+ gle5k
+END:VEVENT
+END:VCALENDAR

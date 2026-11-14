@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-120227@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T150000
+DTEND;TZID=America/New_York:20261213T170000
+SUMMARY:13th Annual Jingle Run 5K
+LOCATION:400 N. Eastway Dr.\, Troutman\, NC\, 28166
+URL:https://runsignup.com/Race/NC/Troutman/JingleRunorWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Troutman/JingleRunorWa
+ lk
+END:VEVENT
+END:VCALENDAR

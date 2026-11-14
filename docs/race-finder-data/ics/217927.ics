@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217927@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:GiGi's Playhouse 5K and Dash for Down Syndrome
+LOCATION:600 N Shepherd Dr\, Ste 499\, Houston\, TX\, 77007
+URL:https://runsignup.com/Race/TX/Houston/GiGisPlayhouse5KHouston
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Houston/GiGisPlayhouse
+ 5KHouston
+END:VEVENT
+END:VCALENDAR

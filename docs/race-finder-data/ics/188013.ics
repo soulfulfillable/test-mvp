@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-188013@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T090000
+DTEND;TZID=America/Chicago:20261114T110000
+SUMMARY:Copper Collar 5K\, presented by the Man in the Sea Museum
+LOCATION:Harrison Avenue and East 4th Street\, Panama City\, FL\, 32401
+URL:https://runsignup.com/Race/FL/PanamaCity/CopperCollar5KRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/PanamaCity/CopperColla
+ r5KRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-175957@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270102T090000
+DTEND;TZID=America/Chicago:20270102T110000
+SUMMARY:2027 New Year Chase Peace 5k/10k
+LOCATION:1443 S St Mary's St.\, San Antonio\, TX\, 78210
+URL:https://runsignup.com/Race/TX/SanAntonio/16kSA
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAntonio/16kSA
+END:VEVENT
+END:VCALENDAR

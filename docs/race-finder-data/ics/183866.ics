@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-183866@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T093000
+DTEND;TZID=America/New_York:20261126T113000
+SUMMARY:The Big Turkey Half Marathon\, 10K\, 5K races
+LOCATION:136 Oak Ridge Road\, Clark\, NJ\, 07066
+URL:https://runsignup.com/Race/NJ/Clark/TheBigTurkeyHalfAnd5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Clark/TheBigTurkeyHalf
+ And5K
+END:VEVENT
+END:VCALENDAR

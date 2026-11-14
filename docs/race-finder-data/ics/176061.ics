@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-176061@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261115T073000
+DTEND;TZID=America/Chicago:20261115T093000
+SUMMARY:Carrollton Runners Club & Mid-Cities Running Crew
+LOCATION:McInnish & Josey Ranch Parks\, Carrollton\, TX\, 75006
+URL:https://runsignup.com/Race/TX/Carrollton/DFWRunClubs
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Carrollton/DFWRunClubs
+END:VEVENT
+END:VCALENDAR

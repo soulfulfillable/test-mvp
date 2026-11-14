@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-173155@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T080000
+DTEND;TZID=America/Chicago:20261212T100000
+SUMMARY:Holiday 5K\, 10K\, & 13.1M at Gadsden\, AL (50)
+LOCATION:829 Old S 4th St\, Gadsden\, AL\, 35901
+URL:https://runsignup.com/Race/AL/Gadsden/Martin121325
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Gadsden/Martin121325
+END:VEVENT
+END:VCALENDAR

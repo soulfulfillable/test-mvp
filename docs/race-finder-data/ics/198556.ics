@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-198556@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T083000
+DTEND;TZID=America/New_York:20261219T103000
+SUMMARY:The Dunedin Holiday 5K 10K 15K At HOB Brewing Company In Downtown
+  With Annual Toy Drive
+LOCATION:941 Huntley Avenue\, Dunedin\, FL\, 34698
+URL:https://runsignup.com/Race/FL/Dunedin/TheDunedinHoliday5K10K15KAtHOBB
+ rewingCompanyInDowntown
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Dunedin/TheDunedinHoli
+ day5K10K15KAtHOBBrewingCompanyInDowntown
+END:VEVENT
+END:VCALENDAR

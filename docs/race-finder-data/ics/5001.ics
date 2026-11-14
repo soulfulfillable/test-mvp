@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5001@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261129T164500
+DTEND;TZID=America/New_York:20261129T184500
+SUMMARY:Maumee Holiday Hustle 5K\, Walk\, and Elf FUN RUN
+LOCATION:601 Conant Street\, Maumee\, OH\, 43537
+URL:https://runsignup.com/Race/OH/Maumee/HolidayHustle5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Maumee/HolidayHustle5K
+END:VEVENT
+END:VCALENDAR

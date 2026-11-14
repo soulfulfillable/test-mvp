@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211530@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080500
+DTEND;TZID=America/Chicago:20261114T100500
+SUMMARY:Patriot 5K/10K Walk-Run/Run (AMERICAN LEGION AUX #402) 10th ANNUA
+ L
+LOCATION:17680 Ashley Drive\, Panama City Beach\, FL\, 32413
+URL:https://runsignup.com/Race/FL/PanamaCityBeach/Patriot5k10KRunWalkRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/PanamaCityBeach/Patrio
+ t5k10KRunWalkRun
+END:VEVENT
+END:VCALENDAR

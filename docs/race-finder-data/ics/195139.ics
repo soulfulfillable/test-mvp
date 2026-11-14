@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-195139@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T100000
+DTEND;TZID=America/Chicago:20261114T120000
+SUMMARY:Nikki Cozzi-Carso Scholarship Annual 5K
+LOCATION:Deer Grove-East Picnic Grove #4\, Palatine\, IL\, 60074
+URL:https://runsignup.com/Race/IL/Palatine/NikkiCozziCarsoScholarshipAnnu
+ al5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Palatine/NikkiCozziCar
+ soScholarshipAnnual5K
+END:VEVENT
+END:VCALENDAR

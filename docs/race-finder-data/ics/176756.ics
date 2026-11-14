@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-176756@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261231T070000
+DTEND;TZID=America/Los_Angeles:20261231T090000
+SUMMARY:Last Dash Before Midnight 5K\, 10K\, & Half Marathon by Califlow 
+ Runs
+LOCATION:5400 E Ocean Blvd\, Long Beach\, CA\, 90803
+URL:https://runsignup.com/Race/CA/LongBeach/LastDashBeforeMidnightKKHalfM
+ arathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/LongBeach/LastDashBefo
+ reMidnightKKHalfMarathon
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-112575@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261118T170000
+DTEND;TZID=America/Denver:20261118T190000
+SUMMARY:Tundra Cross
+LOCATION:515 South Ave East\, Missoula\, MT\, 59801
+URL:https://runsignup.com/Race/MT/Missoula/GravelBadgersYouthCyclocrossTe
+ am
+DESCRIPTION:Sign up: https://runsignup.com/Race/MT/Missoula/GravelBadgers
+ YouthCyclocrossTeam
+END:VEVENT
+END:VCALENDAR

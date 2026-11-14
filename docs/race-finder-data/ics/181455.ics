@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-181455@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T082500
+DTEND;TZID=America/Detroit:20261126T102500
+SUMMARY:myTEAM TRIUMPH West MI - GR Turkey Trot -- Captain & Angel Regist
+ ration
+LOCATION:130 Fulton St W\, Grand Rapids\, MI\, 49503
+URL:https://runsignup.com/Race/MI/GrandRapids/MTTWMGrandRapidsTurkeyTrot5
+ k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/GrandRapids/MTTWMGrand
+ RapidsTurkeyTrot5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172531@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T100000
+DTEND;TZID=America/New_York:20261122T120000
+SUMMARY:GNG Patriot Parents Turkey Trot
+LOCATION:10 Libby Hill Rd.\, Gray\, ME\, 04039
+URL:https://runsignup.com/Race/ME/Gray/GNGHSTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/ME/Gray/GNGHSTurkeyTrot
+END:VEVENT
+END:VCALENDAR

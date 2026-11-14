@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-119647@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261205T093000
+DTEND;TZID=America/Los_Angeles:20261205T113000
+SUMMARY:Celebrate Woodinville Winterfest 5k
+LOCATION:17301 131st Ave NE\, Woodinville\, WA\, 98072
+URL:https://runsignup.com/Race/WA/Woodinville/CelebrateWoodinvilleWinterf
+ est5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Woodinville/CelebrateW
+ oodinvilleWinterfest5k
+END:VEVENT
+END:VCALENDAR

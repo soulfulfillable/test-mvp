@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-192157@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:White Elephant 5K/10K/Half Marathon - Chattanooga
+LOCATION:Shelter #1 Tennessee Riverwalk\, Chattanooga\, TN\, 37406
+URL:https://runsignup.com/Race/TN/Chattanooga/WhiteElephant5K10KChattanoo
+ ga
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Chattanooga/WhiteEleph
+ ant5K10KChattanooga
+END:VEVENT
+END:VCALENDAR

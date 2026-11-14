@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-192077@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T073000
+DTEND;TZID=America/New_York:20261205T093000
+SUMMARY:2026 CCA Fall 5K Race
+LOCATION:2600 N Highlands Blvd\, Avon Park\, FL\, 33825
+URL:https://runsignup.com/Race/FL/AvonPark/CCAFall5kRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/AvonPark/CCAFall5kRace
+END:VEVENT
+END:VCALENDAR

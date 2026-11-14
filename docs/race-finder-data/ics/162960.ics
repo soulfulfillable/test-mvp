@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-162960@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261114T090000
+DTEND;TZID=America/Detroit:20261114T110000
+SUMMARY:Litehouse Family YMCA Turkey Trot 5k
+LOCATION:Wittenbach Wege Center\, Lowell\, MI\, 49331
+URL:https://runsignup.com/Race/MI/Lowell/LitehouseFamilyYMCATurkeyTrot5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Lowell/LitehouseFamily
+ YMCATurkeyTrot5k
+END:VEVENT
+END:VCALENDAR

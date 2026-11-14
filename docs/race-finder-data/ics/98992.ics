@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-98992@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T164500
+DTEND;TZID=America/Indiana/Indianapolis:20261114T184500
+SUMMARY:Race for Reading 5k & Fun Run 2026
+LOCATION:16998 IN-331\, Tippecanoe\, IN\, 46570
+URL:https://runsignup.com/Race/IN/Tippecanoe/RaceforReading5kFunRun2020
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Tippecanoe/RaceforRead
+ ing5kFunRun2020
+END:VEVENT
+END:VCALENDAR

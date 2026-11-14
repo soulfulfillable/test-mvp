@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-169651@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:Congaree and Penn Spiked Apple 5k
+LOCATION:Congaree and Penn\, Jacksonville\, FL\, 32219
+URL:https://runsignup.com/Race/FL/Jacksonville/CongareeAndPennSpikedApple
+ 5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Jacksonville/CongareeA
+ ndPennSpikedApple5K
+END:VEVENT
+END:VCALENDAR

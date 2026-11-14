@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-12834@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:Regal Knoxville Turkey Trot 5K + Little Gobbler Kid's Run
+LOCATION:227 West Depot Avenue\, Knoxville\, TN\, 37902
+URL:https://runsignup.com/Race/TN/Knoxville/knoxvilleturkeytrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Knoxville/knoxvilletur
+ keytrot
+END:VEVENT
+END:VCALENDAR

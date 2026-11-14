@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-198837@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:Turkey Trot 5K
+LOCATION:3659 Wyth Rd\, Waterloo\, IA\, 50703
+URL:https://runsignup.com/Race/IA/Waterloo/FTRTurkeyTrot5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/Waterloo/FTRTurkeyTrot
+ 5K
+END:VEVENT
+END:VCALENDAR

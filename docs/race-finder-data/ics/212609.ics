@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212609@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261219T083000
+DTEND;TZID=America/Los_Angeles:20261219T103000
+SUMMARY:Jingle Jog
+LOCATION:2723 West Rancho Vista Blvd.\, Palmdale\, CA\, 93551
+URL:https://runsignup.com/Race/CA/Palmdale/HDRJingleJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Palmdale/HDRJingleJog
+END:VEVENT
+END:VCALENDAR

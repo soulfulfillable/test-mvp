@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217064@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:Run 4 Veterans
+LOCATION:37800 Church Ave\, Dade City\, FL\, 33523
+URL:https://runsignup.com/Race/FL/DadeCity/RunVeterans
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/DadeCity/RunVeterans
+END:VEVENT
+END:VCALENDAR

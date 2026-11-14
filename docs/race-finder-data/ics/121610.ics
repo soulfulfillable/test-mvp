@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121610@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T181500
+DTEND;TZID=America/New_York:20261205T201500
+SUMMARY:City of Tallahassee Jingle Bell Run 2026
+LOCATION:South Monroe Street\, Tallahassee\, FL\, 32301
+URL:https://runsignup.com/Race/FL/Tallahassee/JingleBellRunFlorida
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Tallahassee/JingleBell
+ RunFlorida
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-143451@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T080000
+DTEND;TZID=America/New_York:20261231T100000
+SUMMARY:Greater Springfield Harriers Membership - 2026
+LOCATION:235 Elm Street\, West Springfield\, MA\, 01089
+URL:https://runsignup.com/Race/MA/WestSpringfield/GSHMembership
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/WestSpringfield/GSHMem
+ bership
+END:VEVENT
+END:VCALENDAR

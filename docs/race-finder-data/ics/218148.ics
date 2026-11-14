@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218148@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=Pacific/Honolulu:20270103T070000
+DTEND;TZID=Pacific/Honolulu:20270103T090000
+SUMMARY:Bob & Ron’s Manoa 5K & Aloha Series
+LOCATION:2721 Kaaipu Ave\, Honolulu\, HI\, 96822
+URL:https://runsignup.com/Race/HI/Honolulu/BobRonSManoa5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/HI/Honolulu/BobRonSManoa5
+ K
+END:VEVENT
+END:VCALENDAR

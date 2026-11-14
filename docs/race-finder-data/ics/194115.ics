@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194115@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261212T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261212T120000
+SUMMARY:Wabash River Blueway 5K
+LOCATION:108 N Monroe\, Williamsport\, IN\, 47993
+URL:https://runsignup.com/Race/IN/Williamsport/WabashRiverBlueway5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Williamsport/WabashRiv
+ erBlueway5K
+END:VEVENT
+END:VCALENDAR

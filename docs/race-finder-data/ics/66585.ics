@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66585@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:Wild Turkey Wattle
+LOCATION:15186 96th St NE\, Otsego\, MN\, 55330
+URL:https://runsignup.com/Race/MN/Otsego/WildTurkeyWattle2018
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Otsego/WildTurkeyWattl
+ e2018
+END:VEVENT
+END:VCALENDAR

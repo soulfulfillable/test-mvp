@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121295@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T140000
+DTEND;TZID=America/New_York:20261213T160000
+SUMMARY:The Charleston Winter Series
+LOCATION:2300 MacCorkle Ave SE\, Charleston\, WV\, 25304
+URL:https://runsignup.com/Race/WV/Charleston/CharlestonWinterSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/WV/Charleston/CharlestonW
+ interSeries
+END:VEVENT
+END:VCALENDAR

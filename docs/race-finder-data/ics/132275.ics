@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-132275@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=Pacific/Honolulu:20261126T073000
+DTEND;TZID=Pacific/Honolulu:20261126T093000
+SUMMARY:VIRR Turkey Trot
+LOCATION:Keokea Park\, Kula\, HI\, 96790
+URL:https://runsignup.com/Race/HI/Kula/ValleyIsleRRTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/HI/Kula/ValleyIsleRRTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

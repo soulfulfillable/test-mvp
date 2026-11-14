@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217575@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:Shake Your Tail Feather 5K
+LOCATION:2215 S Veterans Blvd.\, Edinburg\, TX\, 78539
+URL:https://runsignup.com/Race/TX/Edinburg/ShakeYourTailFeather5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Edinburg/ShakeYourTail
+ Feather5k
+END:VEVENT
+END:VCALENDAR

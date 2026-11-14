@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168587@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T090000
+DTEND;TZID=America/Los_Angeles:20261126T110000
+SUMMARY:2026 Reno's Wobble Before You Gobble 10K/ 5K/ 1 Mile Walk
+LOCATION:2 S. Arlington Ave\, Reno\, NV\, 89501
+URL:https://runsignup.com/Race/NV/Reno/RenosWobbleBeforeYouGobble
+DESCRIPTION:Sign up: https://runsignup.com/Race/NV/Reno/RenosWobbleBefore
+ YouGobble
+END:VEVENT
+END:VCALENDAR

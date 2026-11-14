@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-114409@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:6th Annual Bulverde Turkey Trot
+LOCATION:29815 Old Bulverde Rd\, Bulverde\, TX\, 78163
+URL:https://runsignup.com/Race/TX/Bulverde/BulverdeTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Bulverde/BulverdeTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

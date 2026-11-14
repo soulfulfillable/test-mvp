@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-70583@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261219T090000
+DTEND;TZID=America/Los_Angeles:20261219T110000
+SUMMARY:Bakersfield Jingle Bell Run for Toys for Tots
+LOCATION:The Park at River Walk\, Bakersfield\, CA\, 93311
+URL:https://runsignup.com/Race/CA/Bakersfield/BakersfieldJingleBellRunfor
+ ToysforTots
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Bakersfield/Bakersfiel
+ dJingleBellRunforToysforTots
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5087@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T081500
+DTEND;TZID=America/New_York:20261126T101500
+SUMMARY:Ashenfelter 8K Classic & The Tom Fleming 2K
+LOCATION:200 Ridgewood Avenue\, Glen Ridge\, NJ\, 07028
+URL:https://runsignup.com/Race/NJ/GlenRidge/Ashenfelter8KClassic
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/GlenRidge/Ashenfelter8
+ KClassic
+END:VEVENT
+END:VCALENDAR

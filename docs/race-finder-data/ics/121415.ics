@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-121415@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T090000
+DTEND;TZID=America/New_York:20261206T110000
+SUMMARY:MCRRC Seneca Slopes 9K
+LOCATION:Seneca Creek State Park\, Gaithersburg\, MD\, 20878
+URL:https://runsignup.com/Race/MD/Gaithersburg/MCRRCSenecaSlopes9K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Gaithersburg/MCRRCSene
+ caSlopes9K
+END:VEVENT
+END:VCALENDAR

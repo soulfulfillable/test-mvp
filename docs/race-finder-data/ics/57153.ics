@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-57153@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:St. Joseph Fullerton 2nd Annual Turkey Chaser 5K
+LOCATION:11101 Raphel Rd.\, Kingsville\, MD\, 21156
+URL:https://runsignup.com/Race/MD/Kingsville/StJosephSchoolFullertonHASA5
+ KFamilyFunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Kingsville/StJosephSch
+ oolFullertonHASA5KFamilyFunWalk
+END:VEVENT
+END:VCALENDAR

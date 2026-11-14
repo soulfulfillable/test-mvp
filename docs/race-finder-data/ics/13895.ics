@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13895@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261220T160000
+DTEND;TZID=America/Chicago:20261220T180000
+SUMMARY:Holiday Hustle 5K Run
+LOCATION:Prairie Queen Lake Site in La Vista.   Start/Finish at boat \, L
+ a Vista\, NE\, 68128
+URL:https://runsignup.com/Race/NE/LaVista/HolidayHustle2014
+DESCRIPTION:Sign up: https://runsignup.com/Race/NE/LaVista/HolidayHustle2
+ 014
+END:VEVENT
+END:VCALENDAR

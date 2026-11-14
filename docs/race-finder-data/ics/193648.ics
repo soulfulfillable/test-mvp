@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193648@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:REPLENISH 5K Turkey Trot 2026
+LOCATION:201 John T. O'Leary Blvd.\, South Amboy\, NJ\, 08879
+URL:https://runsignup.com/Race/NJ/SouthAmboy/REPLENISHTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/SouthAmboy/REPLENISHTu
+ rkeyTrot
+END:VEVENT
+END:VCALENDAR

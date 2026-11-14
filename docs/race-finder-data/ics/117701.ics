@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-117701@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T090000
+DTEND;TZID=America/New_York:20261128T110000
+SUMMARY:Cold-Stunned Plunge
+LOCATION:110 Ocean Way\, Jekyll Island\, GA\, 31527
+URL:https://runsignup.com/Race/GA/JekyllIsland/ColdStunnedPlunge
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/JekyllIsland/ColdStunn
+ edPlunge
+END:VEVENT
+END:VCALENDAR

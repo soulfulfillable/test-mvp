@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-184395@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T083000
+DTEND;TZID=America/New_York:20261122T103000
+SUMMARY:Formosa Wine Run Turkey Trot 5k
+LOCATION:Formosa Winery\, Kissimmee\, FL\, 34747
+URL:https://runsignup.com/Race/FL/Kissimmee/FormosaWineRunTurkeyTrot5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Kissimmee/FormosaWineR
+ unTurkeyTrot5k
+END:VEVENT
+END:VCALENDAR

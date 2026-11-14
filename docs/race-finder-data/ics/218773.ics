@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218773@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T110000
+DTEND;TZID=America/New_York:20261212T130000
+SUMMARY:NS Jingle Bell Dash
+LOCATION:10649 Somerset Pike\, Somerset\, PA\, 15501
+URL:https://runsignup.com/Race/PA/Somerset/NSJingleBellDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Somerset/NSJingleBellD
+ ash
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-166304@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T073000
+DTEND;TZID=America/Chicago:20261126T093000
+SUMMARY:Fleet Feet Turkey Day 8K
+LOCATION:500 Highway 51\, Ridgeland\, MS\, 39157
+URL:https://runsignup.com/Race/MS/Ridgeland/FleetFeetTurkeyDay8K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MS/Ridgeland/FleetFeetTur
+ keyDay8K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-100693@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261126T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261126T110000
+SUMMARY:FitLivin THXRUN
+LOCATION:Dr. James A. Dillon Park\, Noblesville\, IN\, 46062
+URL:https://runsignup.com/Race/IN/Noblesville/FitLivinThanksgivingDayRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Noblesville/FitLivinTh
+ anksgivingDayRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215889@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T100000
+DTEND;TZID=America/New_York:20261121T120000
+SUMMARY:Tough Turkey 1-day & 2-day Challenge
+LOCATION:140 Lone Oak Drive\, Nicholasville\, KY\, 40356
+URL:https://runsignup.com/Race/KY/Nicholasville/ToughTurkey2026
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Nicholasville/ToughTur
+ key2026
+END:VEVENT
+END:VCALENDAR

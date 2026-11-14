@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-39831@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T073000
+DTEND;TZID=America/New_York:20261219T093000
+SUMMARY:Run Run Santa 1 Mile
+LOCATION:Calvary Chapel Viera\, Viera\, FL\, 32940
+URL:https://runsignup.com/Race/FL/Viera/RunRunSanta1Mile
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Viera/RunRunSanta1Mile
+END:VEVENT
+END:VCALENDAR

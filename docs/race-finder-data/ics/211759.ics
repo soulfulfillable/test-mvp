@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211759@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261126T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261126T110000
+SUMMARY:Michael Treinen Turkey Trot
+LOCATION:16 S. 10th Street\, Noblesville\, IN\, 46062
+URL:https://runsignup.com/Race/IN/Noblesville/MichaelTreinenTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Noblesville/MichaelTre
+ inenTurkeyTrot
+END:VEVENT
+END:VCALENDAR

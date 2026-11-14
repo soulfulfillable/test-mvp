@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-82956@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Jingle Bell Dash
+LOCATION:Killeen Community Center/Andy K Wells Hike & Bike Trail\, Killee
+ n\, TX\, 76543
+URL:https://runsignup.com/Race/TX/Killeen/KilleenJingleBellDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Killeen/KilleenJingleB
+ ellDash
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-203547@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T083000
+DTEND;TZID=America/Chicago:20261212T103000
+SUMMARY:Santa Dash Away 5K
+LOCATION:W63N641 Washington Ave.\, Cedarburg\, WI\, 53012
+URL:https://runsignup.com/Race/WI/Cedarburg/SantaDashAway
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Cedarburg/SantaDashAwa
+ y
+END:VEVENT
+END:VCALENDAR

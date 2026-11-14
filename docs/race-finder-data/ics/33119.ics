@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-33119@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270101T080000
+DTEND;TZID=America/Los_Angeles:20270101T100000
+SUMMARY:Run In The New Year 5k/10K/Half Marathon
+LOCATION:Bolsa Chica State Beach (West Huntington Beach next to Sunse\, H
+ untington Beach\, CA\, 92648
+URL:https://runsignup.com/Race/CA/HuntingtonBeach/RunInTheNewYear2017
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/HuntingtonBeach/RunInT
+ heNewYear2017
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-52306@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261126T100000
+DTEND;TZID=America/Denver:20261126T120000
+SUMMARY:Durango Turkey Trot presented by Animas Surgical Hospital
+LOCATION:Fort Lewis College clocktower\, Durango\, CO\, 81301
+URL:https://runsignup.com/Race/CO/Durango/durangoturkeytrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Durango/durangoturkeyt
+ rot
+END:VEVENT
+END:VCALENDAR

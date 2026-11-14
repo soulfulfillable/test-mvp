@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-191976@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T073000
+DTEND;TZID=America/New_York:20261126T093000
+SUMMARY:Soul n Body Thanksgiving Trail Run
+LOCATION:201 Nichols Road\, Wolcott\, CT\, 06716
+URL:https://runsignup.com/Race/CT/Wolcott/SoulnBodyThanksgiving5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Wolcott/SoulnBodyThank
+ sgiving5k
+END:VEVENT
+END:VCALENDAR

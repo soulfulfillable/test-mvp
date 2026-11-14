@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-38943@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261129T100000
+DTEND;TZID=America/New_York:20261129T120000
+SUMMARY:Navesink Challenge 12k & 5k
+LOCATION:Bodman Park\, Middletown\, NJ\, 07701
+URL:https://runsignup.com/Race/NJ/Middletown/NavesinkChallenge
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Middletown/NavesinkCha
+ llenge
+END:VEVENT
+END:VCALENDAR

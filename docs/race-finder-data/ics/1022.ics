@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-1022@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261127T181500
+DTEND;TZID=America/New_York:20261127T201500
+SUMMARY:Jolly Holly Holiday Run & Walk
+LOCATION:66 Sassafras St\, Millville\, NJ\, 08332
+URL:https://runsignup.com/Race/NJ/Millville/JollyHolly5kand1MileFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Millville/JollyHolly5k
+ and1MileFunRun
+END:VEVENT
+END:VCALENDAR

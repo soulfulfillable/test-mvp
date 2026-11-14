@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-12713@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Jarred Williams Turkey Trot benefiting Never Give Up Ever 2026
+LOCATION:83 Huntington Rd.\, Richmond\, VT\, 05477
+URL:https://runsignup.com/Race/VT/Richmond/JarredWilliamsTurkeyTrotbenefi
+ tingNeverGiveUpEver
+DESCRIPTION:Sign up: https://runsignup.com/Race/VT/Richmond/JarredWilliam
+ sTurkeyTrotbenefitingNeverGiveUpEver
+END:VEVENT
+END:VCALENDAR

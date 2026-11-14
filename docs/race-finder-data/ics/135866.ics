@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135866@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261129T093000
+DTEND;TZID=America/New_York:20261129T113000
+SUMMARY:2026 Trot With Ted 5K\, 10K and Kids Fun Run
+LOCATION:319 Brookfield Road\, Fiskdale\, MA\, 01518
+URL:https://runsignup.com/Race/MA/Fiskdale/TrotWithTed
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/Fiskdale/TrotWithTed
+END:VEVENT
+END:VCALENDAR

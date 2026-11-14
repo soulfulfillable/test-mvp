@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171518@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T073000
+DTEND;TZID=America/Detroit:20261126T093000
+SUMMARY:S3 Turkey Trot Detroit
+LOCATION:9500 Mt. Elliott\, Studio A\, Detroit\, MI\, 48211
+URL:https://runsignup.com/Race/MI/Detroit/TheParadeCompanyDetroitTurkeyTr
+ ot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Detroit/TheParadeCompa
+ nyDetroitTurkeyTrot
+END:VEVENT
+END:VCALENDAR

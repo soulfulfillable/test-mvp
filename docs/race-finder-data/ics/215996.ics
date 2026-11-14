@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215996@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T074500
+DTEND;TZID=America/New_York:20261205T094500
+SUMMARY:First Annual Jingle Run & Family Walk Benefiting the Care Center 
+ Foundation in the Borough
+LOCATION:10 Church Street\, West Chester\, PA\, 19382
+URL:https://runsignup.com/Race/PA/WestChester/jinglecarecenterfoundationr
+ un2026
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/WestChester/jinglecare
+ centerfoundationrun2026
+END:VEVENT
+END:VCALENDAR

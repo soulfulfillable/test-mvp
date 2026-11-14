@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-220441@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270102T080000
+DTEND;TZID=America/New_York:20270102T100000
+SUMMARY:The Run League Presents: Ready\, Set\, 2027! 5K/10K
+LOCATION:265 Charles Dimmock Parkway\, Colonial Heights\, VA\, 23834
+URL:https://runsignup.com/Race/VA/ColonialHeights/TheRunLeaguePresentsRea
+ dySet5K10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/ColonialHeights/TheRun
+ LeaguePresentsReadySet5K10K
+END:VEVENT
+END:VCALENDAR

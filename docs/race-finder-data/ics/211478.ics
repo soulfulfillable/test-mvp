@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211478@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270101T083000
+DTEND;TZID=America/Los_Angeles:20270101T103000
+SUMMARY:Brazen New Year's Eve
+LOCATION:17600 Lake Chabot Road\, Castro Valley\, CA\, 94546
+URL:https://runsignup.com/Race/CA/CastroValley/BrazenNYE
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/CastroValley/BrazenNYE
+END:VEVENT
+END:VCALENDAR

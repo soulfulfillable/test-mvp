@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216205@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Christmas Tree Trail Run
+LOCATION:600 Rock City Road\, Section\, AL\, 35771
+URL:https://runsignup.com/Race/AL/Section/ChristmasTreeTrailRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Section/ChristmasTreeT
+ railRun
+END:VEVENT
+END:VCALENDAR

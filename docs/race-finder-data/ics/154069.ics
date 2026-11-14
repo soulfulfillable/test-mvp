@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154069@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T084000
+DTEND;TZID=America/Chicago:20261126T104000
+SUMMARY:Poultry and Pie Predictor 4 Mile Run/Walk and 1 Mile Kids Run
+LOCATION:Barber & Oberwortmann Horticultural Center\, Joliet\, IL\, 60432
+URL:https://runsignup.com/Race/IL/Joliet/PSRRPoultryandPiePredictor4MileF
+ unRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Joliet/PSRRPoultryandP
+ iePredictor4MileFunRun
+END:VEVENT
+END:VCALENDAR

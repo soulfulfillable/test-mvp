@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-148379@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T074500
+DTEND;TZID=America/Chicago:20261205T094500
+SUMMARY:YMCA Rudolph Run 2026 - 1 mile run fun\, 5k\, 8k
+LOCATION:2300 13th St\, Tuscaloosa\, AL\, 35401
+URL:https://runsignup.com/Race/AL/Tuscaloosa/YMCARudolphRun2023
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Tuscaloosa/YMCARudolph
+ Run2023
+END:VEVENT
+END:VCALENDAR

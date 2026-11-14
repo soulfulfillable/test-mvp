@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-169456@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T080000
+DTEND;TZID=America/New_York:20261212T100000
+SUMMARY:Holsenbeck Holiday Hustle 5K
+LOCATION:445 Holsenbeck School Rd\, Winder\, GA\, 30680
+URL:https://runsignup.com/Race/GA/Winder/HolsenbeckHolidayHustle5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Winder/HolsenbeckHolid
+ ayHustle5K
+END:VEVENT
+END:VCALENDAR

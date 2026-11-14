@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212064@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T070000
+DTEND;TZID=America/New_York:20261114T090000
+SUMMARY:ARTfactory 5K and Fun Run: A Frozen Experience
+LOCATION:15900 Berkeley Dr\, Haymarket\, VA\, 20169
+URL:https://runsignup.com/Race/VA/Haymarket/ARTfactory5KAFrozenExperience
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Haymarket/ARTfactory5K
+ AFrozenExperience
+END:VEVENT
+END:VCALENDAR

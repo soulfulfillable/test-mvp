@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154213@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T150000
+DTEND;TZID=America/Chicago:20261205T170000
+SUMMARY:Eggnog Jog 3K
+LOCATION:201 W. Diggins St\, Harvard\, IL\, 60033
+URL:https://runsignup.com/Race/IL/Harvard/3KEggNogJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Harvard/3KEggNogJog
+END:VEVENT
+END:VCALENDAR

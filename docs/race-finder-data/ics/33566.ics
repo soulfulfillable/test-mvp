@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-33566@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270101T100000
+DTEND;TZID=America/Los_Angeles:20270101T120000
+SUMMARY:Resolve2Run
+LOCATION:15725 Mount Olive Road\, Grass Valley\, CA\, 95945
+URL:https://runsignup.com/Race/CA/GrassValley/Resolve2Run
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/GrassValley/Resolve2Ru
+ n
+END:VEVENT
+END:VCALENDAR

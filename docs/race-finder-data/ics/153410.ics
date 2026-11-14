@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153410@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T110000
+DTEND;TZID=America/New_York:20261121T130000
+SUMMARY:Huntertown Turkey Trot Fun Run
+LOCATION:1546 Huntertown Road\, Versailles\, KY\, 40383
+URL:https://runsignup.com/Race/KY/Versailles/HuntertownTurkeyTrotFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Versailles/HuntertownT
+ urkeyTrotFunRun
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194185@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261121T100000
+DTEND;TZID=America/Denver:20261121T120000
+SUMMARY:Turkey Trot
+LOCATION:386 South Broadway St\, Center\, CO\, 81125
+URL:https://runsignup.com/Race/CO/Center/CVYCTurkeyTrot2025
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Center/CVYCTurkeyTrot2
+ 025
+END:VEVENT
+END:VCALENDAR

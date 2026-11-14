@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-188218@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T130000
+DTEND;TZID=America/New_York:20261128T150000
+SUMMARY:Candy Cane Sprint 2.5 Miler
+LOCATION:60 Hennequin Road\, Columbia\, CT\, 06237
+URL:https://runsignup.com/Race/CT/Columbia/CandyCaneSprint
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Columbia/CandyCaneSpri
+ nt
+END:VEVENT
+END:VCALENDAR

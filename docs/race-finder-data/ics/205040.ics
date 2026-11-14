@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205040@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T073000
+DTEND;TZID=America/New_York:20261114T093000
+SUMMARY:Veterans Day Freedom Run 5K/10K/13.1 ATLANTA
+LOCATION:S Peachtree Creek Trail (Course Map will be emailed)\, Atlanta\,
+  GA\, 30304
+URL:https://runsignup.com/Race/GA/Atlanta/VeteransDayFreedomRun5K10KATLAN
+ TA1114
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Atlanta/VeteransDayFre
+ edomRun5K10KATLANTA1114
+END:VEVENT
+END:VCALENDAR

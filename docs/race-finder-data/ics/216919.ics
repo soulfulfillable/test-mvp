@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216919@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261205T090000
+DTEND;TZID=America/Los_Angeles:20261205T110000
+SUMMARY:Beginner Sailing December 5/6
+LOCATION:3205 Highway 75\, San Diego\, CA\, 92155
+URL:https://runsignup.com/Race/CA/SanDiego/BeginnerSailingDecember5
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanDiego/BeginnerSaili
+ ngDecember5
+END:VEVENT
+END:VCALENDAR

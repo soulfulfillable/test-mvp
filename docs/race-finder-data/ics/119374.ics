@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-119374@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Sitka:20261126T090000
+DTEND;TZID=America/Sitka:20261126T110000
+SUMMARY:First City Feast Day Fun Run
+LOCATION:Ward Lake\, Ketchikan\, AK\, 99901
+URL:https://runsignup.com/Race/AK/Ketchikan/FeastDayFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AK/Ketchikan/FeastDayFunR
+ un
+END:VEVENT
+END:VCALENDAR

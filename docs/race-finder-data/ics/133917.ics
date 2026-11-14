@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-133917@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T160000
+DTEND;TZID=America/New_York:20261212T180000
+SUMMARY:Reindeer Run 5K & Family Fun Run - 2026
+LOCATION:Coral Oaks Golf Course\, Cape Coral\, FL\, 33993
+URL:https://runsignup.com/Race/FL/CapeCoral/CapeCoralReindeerRun2022
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/CapeCoral/CapeCoralRei
+ ndeerRun2022
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-102347@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T100000
+DTEND;TZID=America/New_York:20261128T120000
+SUMMARY:Rivalry Run 5K & 1 Mile Walk
+LOCATION:1308 Bridge St\, Ashtabula\, OH\, 44004
+URL:https://runsignup.com/Race/OH/Ashtabula/RivalryRun5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Ashtabula/RivalryRun5K
+END:VEVENT
+END:VCALENDAR

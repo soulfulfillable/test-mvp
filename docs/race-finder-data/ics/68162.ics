@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-68162@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:9th Annual Haddons Pre-Game Turkey Trot 5K and Fun Run
+LOCATION:Crows Woods\, Haddonfield\, NJ\, 08033
+URL:https://runsignup.com/Race/NJ/Haddonfield/HaddonsPreGameTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Haddonfield/HaddonsPre
+ GameTurkeyTrot
+END:VEVENT
+END:VCALENDAR

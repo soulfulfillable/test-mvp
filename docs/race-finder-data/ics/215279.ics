@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215279@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T090000
+DTEND;TZID=America/Denver:20261114T110000
+SUMMARY:Central Elementary 5K Run FUNdraiser
+LOCATION:602 Cedar St\, Santa Clara\, NM\, 88026
+URL:https://runsignup.com/Race/NM/SantaClara/CentralElementary5KFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NM/SantaClara/CentralElem
+ entary5KFunRun
+END:VEVENT
+END:VCALENDAR

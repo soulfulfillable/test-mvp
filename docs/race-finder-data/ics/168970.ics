@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168970@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T080000
+DTEND;TZID=America/New_York:20261115T100000
+SUMMARY:Glastonbury River Runners Race To Fill the Pantry - Presented by 
+ Fleet Feet
+LOCATION:Riverfront Park - 200 Welles Street\, Glastonbury\, CT\, 06033
+URL:https://runsignup.com/Race/CT/Glastonbury/GlastonburyRiverRunnersRace
+ ToFillThePantry
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Glastonbury/Glastonbur
+ yRiverRunnersRaceToFillThePantry
+END:VEVENT
+END:VCALENDAR

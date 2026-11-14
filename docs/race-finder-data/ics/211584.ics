@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211584@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T073000
+DTEND;TZID=America/New_York:20261114T093000
+SUMMARY:Freedom Isn't Free Run 5K
+LOCATION:31 Piazza Dr\, Port Saint Lucie\, FL\, 34986
+URL:https://runsignup.com/Race/FL/PortSaintLucie/FreedomIsnTFreeRun5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/PortSaintLucie/Freedom
+ IsnTFreeRun5K
+END:VEVENT
+END:VCALENDAR

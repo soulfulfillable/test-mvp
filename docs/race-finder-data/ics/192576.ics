@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-192576@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T090000
+DTEND;TZID=America/New_York:20261206T110000
+SUMMARY:RRRC Stony Point Snowman Shuffle 5K
+LOCATION:9200 Stony Point Pkwy\, Richmond\, VA\, 23235
+URL:https://runsignup.com/Race/VA/Richmond/StonyPointSnowmanShuffle5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Richmond/StonyPointSno
+ wmanShuffle5K
+END:VEVENT
+END:VCALENDAR

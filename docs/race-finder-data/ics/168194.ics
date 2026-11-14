@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168194@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T084500
+DTEND;TZID=America/Chicago:20261126T104500
+SUMMARY:West Chester Turkey Trot 5K
+LOCATION:7850 VOA Park Dr\, West Chester Township\, OH\, 45069
+URL:https://runsignup.com/Race/OH/WestChesterTownship/WestChesterTurkeyTr
+ ot5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/WestChesterTownship/We
+ stChesterTurkeyTrot5K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81671@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T120000
+DTEND;TZID=America/New_York:20270101T140000
+SUMMARY:Hangover Run 5K
+LOCATION:700 N Tuckahoe Road\, Williamstown\, NJ\, 08094
+URL:https://runsignup.com/Race/NJ/Williamstown/HangoverRunWilliamstown
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Williamstown/HangoverR
+ unWilliamstown
+END:VEVENT
+END:VCALENDAR

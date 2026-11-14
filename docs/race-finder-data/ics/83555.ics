@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-83555@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261231T180000
+DTEND;TZID=America/Chicago:20261231T200000
+SUMMARY:San Antonio New Years Eve 5k
+LOCATION:5102 old Pearsall Rd\, San antonio\, TX\, 78242
+URL:https://runsignup.com/Race/TX/Sanantonio/Edragonnewyearseve5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Sanantonio/Edragonnewy
+ earseve5k
+END:VEVENT
+END:VCALENDAR

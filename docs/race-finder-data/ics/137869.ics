@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137869@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T080000
+DTEND;TZID=America/New_York:20261205T100000
+SUMMARY:2026 Jingle Bell Run - Central MA
+LOCATION:138 Green St\, Worcester\, MA\, 01604
+URL:https://runsignup.com/Race/MA/Worcester/JingleBellRunCentralMass
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/Worcester/JingleBellRu
+ nCentralMass
+END:VEVENT
+END:VCALENDAR

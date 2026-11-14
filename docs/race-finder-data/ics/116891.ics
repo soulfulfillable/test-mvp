@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-116891@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261114T083000
+DTEND;TZID=America/Los_Angeles:20261114T103000
+SUMMARY:ZombieRunner Quarry Lakes (Rain or Shine!)
+LOCATION:Quarry Lakes Regional Recreation Area (Ensenada Pavilion)\, Frem
+ ont\, CA\, 94536
+URL:https://runsignup.com/Race/CA/Fremont/ZombieRunnerQuarryLakes
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Fremont/ZombieRunnerQu
+ arryLakes
+END:VEVENT
+END:VCALENDAR

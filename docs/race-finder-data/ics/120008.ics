@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-120008@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T070000
+DTEND;TZID=America/New_York:20261205T090000
+SUMMARY:CORE's 2026 Reindeer Run & Roll 5k
+LOCATION:1191 Comerce Park Dr.\, Altamonte Springs\, FL\, 32714
+URL:https://runsignup.com/Race/FL/AltamonteSprings/ReindeerRunRoll5kByCOR
+ E
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/AltamonteSprings/Reind
+ eerRunRoll5kByCORE
+END:VEVENT
+END:VCALENDAR

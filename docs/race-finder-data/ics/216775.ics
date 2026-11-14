@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216775@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T070000
+DTEND;TZID=America/New_York:20261206T090000
+SUMMARY:Port 27 Race Series
+LOCATION:30928 US HWY S\, Lake Hamilton\, FL\, 33844
+URL:https://runsignup.com/Race/FL/LakeHamilton/PortRaceSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/LakeHamilton/PortRaceS
+ eries
+END:VEVENT
+END:VCALENDAR

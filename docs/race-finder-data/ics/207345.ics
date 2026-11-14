@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-207345@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T060000
+DTEND;TZID=America/Chicago:20261126T080000
+SUMMARY:Bare Bones Turkey Trot Mattoon
+LOCATION:221 N 16th St\, Mattoon\, IL\, 61938
+URL:https://runsignup.com/Race/IL/Mattoon/BareBonesTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Mattoon/BareBonesTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

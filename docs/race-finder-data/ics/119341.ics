@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-119341@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261218T090000
+DTEND;TZID=America/Chicago:20261218T110000
+SUMMARY:LNR Adults - Winter Programs at Hyland
+LOCATION:Hyland Lake Park Reserve\, Minneapolis\, MN\, 55422
+URL:https://runsignup.com/Race/MN/Minneapolis/LNRAdultsWinterProgramsatHy
+ land
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Minneapolis/LNRAdultsW
+ interProgramsatHyland
+END:VEVENT
+END:VCALENDAR

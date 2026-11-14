@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-157813@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T093000
+DTEND;TZID=America/New_York:20261212T113000
+SUMMARY:Holiday 5K\, 10K\, 13.1M & 26.2M at Concord\, NC (50)
+LOCATION:760 Orphanage Rd\, Concord\, NC\, 28027
+URL:https://runsignup.com/Race/NC/Concord/Vietnam12142024
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Concord/Vietnam1214202
+ 4
+END:VEVENT
+END:VCALENDAR

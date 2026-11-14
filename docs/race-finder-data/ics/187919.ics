@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187919@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:Arlington Turkey Trot 5K
+LOCATION:3020 N Pershing Dr\, Arlington\, VA\, 22201
+URL:https://runsignup.com/Race/VA/Arlington/ArlingtonVATurkeyTrot5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Arlington/ArlingtonVAT
+ urkeyTrot5K
+END:VEVENT
+END:VCALENDAR

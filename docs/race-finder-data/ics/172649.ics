@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172649@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T100000
+DTEND;TZID=America/New_York:20261205T120000
+SUMMARY:2026 Jingle Bell Run - Connecticut
+LOCATION:370 Bassett Road\, North Haven\, CT\, 06473
+URL:https://runsignup.com/Race/CT/NorthHaven/JingleBellRunMadisonCT
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/NorthHaven/JingleBellR
+ unMadisonCT
+END:VEVENT
+END:VCALENDAR

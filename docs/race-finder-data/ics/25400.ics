@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-25400@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T084500
+DTEND;TZID=America/Chicago:20261126T104500
+SUMMARY:Cedar Rapids Turkey Trot 5K Run/Walk
+LOCATION:3rd St. SE & 10th Ave. SE\, Cedar Rapids\, IA\, 52401
+URL:https://runsignup.com/Race/IA/CedarRapids/CedarRapidsTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/CedarRapids/CedarRapid
+ sTurkeyTrot
+END:VEVENT
+END:VCALENDAR

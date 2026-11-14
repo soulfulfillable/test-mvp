@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194155@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T130000
+DTEND;TZID=America/New_York:20261205T150000
+SUMMARY:Das Holiday 5k at the Cincinnati Christkindlmarkt
+LOCATION:115 Joe Nuxhall Way\, Cincinnati\, OH\, 45202
+URL:https://runsignup.com/Race/OH/Cincinnati/DasHoliday5kAtTheCincinnatiC
+ hristkindlmarkt
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Cincinnati/DasHoliday5
+ kAtTheCincinnatiChristkindlmarkt
+END:VEVENT
+END:VCALENDAR

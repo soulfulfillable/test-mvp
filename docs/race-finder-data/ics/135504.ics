@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135504@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T090000
+DTEND;TZID=America/New_York:20261121T110000
+SUMMARY:Thanks-For-Giving Turkey Trot
+LOCATION:601 Route 530\, Manchester Township\, NJ\, 08759
+URL:https://runsignup.com/Race/NJ/ManchesterTownship/ThanksForGivingTurke
+ yTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/ManchesterTownship/Tha
+ nksForGivingTurkeyTrot
+END:VEVENT
+END:VCALENDAR

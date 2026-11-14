@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-16902@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T070000
+DTEND;TZID=America/New_York:20261126T090000
+SUMMARY:Calabash Turkey Trot
+LOCATION:9887 Oak St\, Calabash\, NC\, 28467
+URL:https://runsignup.com/Race/NC/Calabash/CalabashTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Calabash/CalabashTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

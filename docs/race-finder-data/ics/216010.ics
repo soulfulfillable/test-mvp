@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216010@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T073000
+DTEND;TZID=America/Chicago:20261126T093000
+SUMMARY:Friendswood Turkey Trot presented by Good Ranchers
+LOCATION:2200 S Friendswood Dr\, Friendswood\, TX\, 77546
+URL:https://runsignup.com/Race/TX/Friendswood/FriendswoodTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Friendswood/Friendswoo
+ dTurkeyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193241@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Summersville WV Turkey Trot 2026
+LOCATION:603 Church Street\, Summersville\, WV\, 26651
+URL:https://runsignup.com/Race/WV/Summersville/TurkeyTrot5KSummersville
+DESCRIPTION:Sign up: https://runsignup.com/Race/WV/Summersville/TurkeyTro
+ t5KSummersville
+END:VEVENT
+END:VCALENDAR

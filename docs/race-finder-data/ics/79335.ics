@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-79335@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Kentucky/Louisville:20261126T090000
+DTEND;TZID=America/Kentucky/Louisville:20261126T110000
+SUMMARY:47th Iroquois Hill Runners Thanksgiving Day Run
+LOCATION:1080 Amphitheater Rd\, Louisville\, KY\, 40214
+URL:https://runsignup.com/Race/KY/Louisville/IHRThanksgiving
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Louisville/IHRThanksgi
+ ving
+END:VEVENT
+END:VCALENDAR

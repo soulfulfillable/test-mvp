@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217560@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T100000
+DTEND;TZID=America/New_York:20261219T120000
+SUMMARY:The 12Ks of Christmas Run and Walk
+LOCATION:6911 Cleveland Ave\, Westerville\, OH\, 43081
+URL:https://runsignup.com/Race/OH/Westerville/The12KsOfChristmasRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Westerville/The12KsOfC
+ hristmasRunWalk
+END:VEVENT
+END:VCALENDAR

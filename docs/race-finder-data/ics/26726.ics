@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-26726@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T084500
+DTEND;TZID=America/Detroit:20261126T104500
+SUMMARY:JACKSON TURKEY TROT (Michigan)
+LOCATION:Ella Sharp Park\, Jackson\, MI\, 49203
+URL:https://runsignup.com/Race/MI/Jackson/JacksonTT
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Jackson/JacksonTT
+END:VEVENT
+END:VCALENDAR

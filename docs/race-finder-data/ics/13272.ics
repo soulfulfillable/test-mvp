@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13272@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:YMCA of Lincoln Turkey Trot presented by Union Bank & Trust
+LOCATION:Downtown Lincoln at the Railyard\, Lincoln\, NE\, 68508
+URL:https://runsignup.com/Race/NE/Lincoln/LincolnYMCATurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NE/Lincoln/LincolnYMCATur
+ keyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137458@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:Hardinsburg Turkey Trot
+LOCATION:Breckinridge County County Courthouse Square\, Hardinsburg\, KY\
+ , 40143
+URL:https://runsignup.com/Race/KY/Hardinsburg/HardinsburgTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Hardinsburg/Hardinsbur
+ gTurkeyTrot
+END:VEVENT
+END:VCALENDAR

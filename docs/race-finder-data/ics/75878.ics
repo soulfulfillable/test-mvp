@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-75878@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T063000
+DTEND;TZID=America/Chicago:20261114T083000
+SUMMARY:Wild Hare Trail Race
+LOCATION:537 Owl Creek Road\, Warda\, TX\, 78960
+URL:https://runsignup.com/Race/TX/Warda/TheWildHare
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Warda/TheWildHare
+END:VEVENT
+END:VCALENDAR

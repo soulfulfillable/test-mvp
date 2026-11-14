@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187471@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Rock Trot
+LOCATION:500 Schooleys Mountain Rd\, Hackettstown\, NJ\, 07840
+URL:https://runsignup.com/Race/NJ/Hackettstown/RockTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Hackettstown/RockTrot
+END:VEVENT
+END:VCALENDAR

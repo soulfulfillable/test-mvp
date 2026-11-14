@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-12790@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T100000
+DTEND;TZID=America/New_York:20261205T120000
+SUMMARY:St. Nicholas 5K Run and Fun Walk
+LOCATION:411 Church St\, Archbald\, PA\, 18403
+URL:https://runsignup.com/Race/PA/Archbald/StNicholas5KRunandFunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Archbald/StNicholas5KR
+ unandFunWalk
+END:VEVENT
+END:VCALENDAR

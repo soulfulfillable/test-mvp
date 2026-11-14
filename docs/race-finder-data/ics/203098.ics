@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-203098@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T100000
+DTEND;TZID=America/New_York:20261121T120000
+SUMMARY:Fall Dash to Restore the Splash
+LOCATION:264-298 Graeff Street\, Cressona\, PA\, 17929
+URL:https://runsignup.com/Race/PA/Cressona/Dash4Splash
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Cressona/Dash4Splash
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215547@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T000000
+DTEND;TZID=America/New_York:20261122T020000
+SUMMARY:Winter 2026/2027 Adult Full & Half Marathon Training Morning - Ho
+ lly Springs
+LOCATION:242 S. Main Street\, Suite 102\, Holly Springs\, NC\, 27540
+URL:https://runsignup.com/Race/NC/HollySprings/WinterAdultFullHalfMaratho
+ nTrainingMorningHollySprings
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/HollySprings/WinterAdu
+ ltFullHalfMarathonTrainingMorningHollySprings
+END:VEVENT
+END:VCALENDAR

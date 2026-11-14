@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-26052@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T083000
+DTEND;TZID=America/New_York:20261128T103000
+SUMMARY:Dayton Turkey Trot Half Marathon & 5K
+LOCATION:1601 S. Edwin C Moses Blvd.\, Dayton\, OH\, 45417
+URL:https://runsignup.com/Race/OH/Dayton/DaytonTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Dayton/DaytonTurkeyTro
+ t
+END:VEVENT
+END:VCALENDAR

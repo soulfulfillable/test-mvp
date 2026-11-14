@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153906@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T080000
+DTEND;TZID=America/New_York:20261213T100000
+SUMMARY:Running On Cookies\, Coffee and Cocoa
+LOCATION:603 Bloomfield Ave\, Montclair\, NJ\, 07042
+URL:https://runsignup.com/Race/NJ/Montclair/RunningOnCoffeeCocoaandHolida
+ yCheer
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Montclair/RunningOnCof
+ feeCocoaandHolidayCheer
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193907@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T120000
+DTEND;TZID=America/New_York:20270101T140000
+SUMMARY:Predictions and Resolutions 5K
+LOCATION:1301 N Stafford St\, Arlington\, VA\, 22201
+URL:https://runsignup.com/Race/VA/Arlington/PredictionsAndResolutions5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Arlington/PredictionsA
+ ndResolutions5K
+END:VEVENT
+END:VCALENDAR

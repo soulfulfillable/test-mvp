@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-191714@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T100000
+DTEND;TZID=America/New_York:20261206T120000
+SUMMARY:Bread Run 10K & Gingerbread 2-Miler
+LOCATION:7300 Macarthur Blvd\, Glen Echo\, MD\, 20812
+URL:https://runsignup.com/Race/MD/GlenEcho/BreadRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/GlenEcho/BreadRun
+END:VEVENT
+END:VCALENDAR

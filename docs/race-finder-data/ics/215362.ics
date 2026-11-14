@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215362@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261128T080000
+DTEND;TZID=America/Los_Angeles:20261128T100000
+SUMMARY:Tunnel to Towers 5K Run & Walk - Bakersfield\, CA
+LOCATION:11298 Stockdale HWY\, Bakersfield\, CA\, 93311
+URL:https://runsignup.com/Race/CA/Bakersfield/TunnelToTowers5KRunWalkBake
+ rsfieldCA
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Bakersfield/TunnelToTo
+ wers5KRunWalkBakersfieldCA
+END:VEVENT
+END:VCALENDAR

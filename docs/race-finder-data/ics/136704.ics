@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136704@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261219T080000
+DTEND;TZID=America/Chicago:20261219T100000
+SUMMARY:2026 Jingle Bell Run - North Texas
+LOCATION:5188 Monahans Ave\, Fort Worth\, TX\, 76109
+URL:https://runsignup.com/Race/TX/FortWorth/JingleBellRunNorthTexas
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/FortWorth/JingleBellRu
+ nNorthTexas
+END:VEVENT
+END:VCALENDAR

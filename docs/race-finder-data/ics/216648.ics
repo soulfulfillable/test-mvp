@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216648@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T080000
+DTEND;TZID=America/New_York:20261206T100000
+SUMMARY:Run Hard Youth 5k
+LOCATION:6901 S MacDill Ave\, Tampa\, FL\, 33611
+URL:https://runsignup.com/Race/FL/Tampa/RunHardYouth5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Tampa/RunHardYouth5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215368@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T080000
+DTEND;TZID=America/Chicago:20261126T100000
+SUMMARY:SARL Turkey Trot 5k & 1 mile
+LOCATION:290 W. River Drive\, San Angelo\, TX\, 76903
+URL:https://runsignup.com/Race/TX/SanAngelo/SanAngeloRoadLizardTurkeyTrot
+ 5k1Mile
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/SanAngelo/SanAngeloRoa
+ dLizardTurkeyTrot5k1Mile
+END:VEVENT
+END:VCALENDAR

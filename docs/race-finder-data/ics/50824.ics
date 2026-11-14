@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-50824@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:The  Hope Race 10K/5K
+LOCATION:E Blue Starr Dr\, Claremore\, OK\, 74017
+URL:https://runsignup.com/Race/OK/Claremore/ClaremoreHopeRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Claremore/ClaremoreHop
+ eRace
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-174227@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T090000
+DTEND;TZID=America/Detroit:20261126T110000
+SUMMARY:Charlevoix Turkey Trot Fun Run
+LOCATION:Charlevoix City Marina/Bandshell\, Charlevoix\, MI\, 49720
+URL:https://runsignup.com/Race/MI/Charlevoix/CharlevoixTurkeyTrotFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Charlevoix/CharlevoixT
+ urkeyTrotFunRun
+END:VEVENT
+END:VCALENDAR

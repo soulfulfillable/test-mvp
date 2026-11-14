@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-201306@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T083000
+DTEND;TZID=America/New_York:20261128T103000
+SUMMARY:Roxbury Road Race Series #36
+LOCATION:18 Apple Lane\, Roxbury\, CT\, 06783
+URL:https://runsignup.com/Race/CT/Roxbury/RoxburyRoadRaceSeries36
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Roxbury/RoxburyRoadRac
+ eSeries36
+END:VEVENT
+END:VCALENDAR

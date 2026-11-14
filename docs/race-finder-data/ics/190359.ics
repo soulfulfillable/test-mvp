@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190359@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T070000
+DTEND;TZID=America/Chicago:20261114T090000
+SUMMARY:Runner's Edge KC - Winter Training Program
+LOCATION:First Group Run Location is The Running Well Store\, Mission\, K
+ S\, 66202
+URL:https://runsignup.com/Race/KS/Mission/RunnersEdgeKCWinterTrainingProg
+ ram
+DESCRIPTION:Sign up: https://runsignup.com/Race/KS/Mission/RunnersEdgeKCW
+ interTrainingProgram
+END:VEVENT
+END:VCALENDAR

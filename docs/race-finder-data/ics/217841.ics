@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217841@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T090000
+DTEND;TZID=America/Los_Angeles:20261126T110000
+SUMMARY:Turkey Trot benefiting Quincy Elementary School Parent Cooperativ
+ e Organization (PCO) and 
+LOCATION:570 Golden Eagle Avenue\, Quincy\, CA\, 95971
+URL:https://runsignup.com/Race/CA/Quincy/TurkeyTrotPresentedByLostSierraC
+ ircuitAndHealthyBodiesGym
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Quincy/TurkeyTrotPrese
+ ntedByLostSierraCircuitAndHealthyBodiesGym
+END:VEVENT
+END:VCALENDAR

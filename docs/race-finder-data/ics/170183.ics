@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-170183@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:Love Like Alissa 5k
+LOCATION:7556 SC-219\, Newberry\, SC\, 29108
+URL:https://runsignup.com/Race/SC/Newberry/LoveLikeAlissaK
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Newberry/LoveLikeAliss
+ aK
+END:VEVENT
+END:VCALENDAR

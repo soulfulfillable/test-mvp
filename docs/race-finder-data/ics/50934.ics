@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-50934@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:The Joyce Allen Great Turkey Escape
+LOCATION:Redding Community Center\, Redding\, CT\, 06896
+URL:https://runsignup.com/Race/CT/Redding/TheGreatTurkeyEscape
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Redding/TheGreatTurkey
+ Escape
+END:VEVENT
+END:VCALENDAR

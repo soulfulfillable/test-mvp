@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217059@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261203T163000
+DTEND;TZID=America/Chicago:20261203T183000
+SUMMARY:Stonewall Santa Run 5k and Fun Run
+LOCATION:1225 LUMIERE Lane\, Stonewall\, LA\, 71078
+URL:https://runsignup.com/Race/LA/Stonewall/StonewallSantaRun5kAndFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Stonewall/StonewallSan
+ taRun5kAndFunRun
+END:VEVENT
+END:VCALENDAR

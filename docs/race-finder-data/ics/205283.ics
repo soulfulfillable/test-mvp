@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-205283@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T073000
+DTEND;TZID=America/New_York:20261128T093000
+SUMMARY:Thanksgiving Gobble Trot Run 5K/10K/13.1 NEW JERSEY
+LOCATION:Wiggins Waterfront Trail (Course Map will be emailed)\, Camden\,
+  NJ\, 08103
+URL:https://runsignup.com/Race/NJ/Camden/ThanksgivingGobbleTrotRun5K10KNE
+ WJERSEY1128
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Camden/ThanksgivingGob
+ bleTrotRun5K10KNEWJERSEY1128
+END:VEVENT
+END:VCALENDAR

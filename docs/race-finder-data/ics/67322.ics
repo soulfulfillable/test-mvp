@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-67322@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Boise:20261126T090000
+DTEND;TZID=America/Boise:20261126T110000
+SUMMARY:Big Sky Ski Education Foundation's 17th Annual Turkey Trot Presen
+ ted by Lone Mountain Land
+LOCATION:Fire Pit Park\, Ousel Falls Rd\, Big Sky\, MT\, 59716
+URL:https://runsignup.com/Race/MT/BigSky/TurkeyTrotBigSky
+DESCRIPTION:Sign up: https://runsignup.com/Race/MT/BigSky/TurkeyTrotBigSk
+ y
+END:VEVENT
+END:VCALENDAR

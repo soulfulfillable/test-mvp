@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-191680@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261219T083000
+DTEND;TZID=America/Los_Angeles:20261219T103000
+SUMMARY:Golden Eagle Track Fest & 5K
+LOCATION:5151 State University Dr\, Los Angeles\, CA\, 90032
+URL:https://runsignup.com/Race/CA/LosAngeles/GoldenEagleTrackFest5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/LosAngeles/GoldenEagle
+ TrackFest5K
+END:VEVENT
+END:VCALENDAR

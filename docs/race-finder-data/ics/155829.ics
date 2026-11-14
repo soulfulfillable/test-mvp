@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155829@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261205T140000
+DTEND;TZID=America/Denver:20261205T160000
+SUMMARY:Jingle Jog 5k and Fun Run
+LOCATION:300 Broadway St.\, Eagle\, CO\, 81631
+URL:https://runsignup.com/Race/CO/Eagle/MTPJingleJog
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Eagle/MTPJingleJog
+END:VEVENT
+END:VCALENDAR

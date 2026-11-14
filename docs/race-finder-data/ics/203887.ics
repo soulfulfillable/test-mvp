@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-203887@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261122T100000
+DTEND;TZID=America/Chicago:20261122T120000
+SUMMARY:Wolfpack 5K: The Great Turkey Chase
+LOCATION:6000 Dvorak Drive\, Crystal Lake\, IL\, 60012
+URL:https://runsignup.com/Race/IL/CrystalLake/Wolfpack5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/CrystalLake/Wolfpack5K
+END:VEVENT
+END:VCALENDAR

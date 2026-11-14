@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215788@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261129T080000
+DTEND;TZID=America/Denver:20261129T100000
+SUMMARY:Tiger Trail 5K Run/Walk
+LOCATION:170 W. Cache La Poudre\, Colorado Springs\, CO\, 80903
+URL:https://runsignup.com/Race/CO/ColoradoSprings/Tiger5KTrail
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/ColoradoSprings/Tiger5
+ KTrail
+END:VEVENT
+END:VCALENDAR

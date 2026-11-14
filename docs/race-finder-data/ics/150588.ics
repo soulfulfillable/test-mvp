@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-150588@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Camp Letts Turkey Chase Charity Race
+LOCATION:4003 Camp Letts Rd\, Edgewater\, MD\, 21037
+URL:https://runsignup.com/Race/MD/Edgewater/CampLettsTurkeyChaseRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Edgewater/CampLettsTur
+ keyChaseRace
+END:VEVENT
+END:VCALENDAR

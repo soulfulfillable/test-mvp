@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154362@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261126T090000
+DTEND;TZID=America/Denver:20261126T110000
+SUMMARY:Atalaya Elementary 2026 Turkey Trot
+LOCATION:Santa Fe Railyard\, Santa Fe\, NM\, 87501
+URL:https://runsignup.com/Race/NM/SantaFe/AtalayaElementaryTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NM/SantaFe/AtalayaElement
+ aryTurkeyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-118599@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270104T180000
+DTEND;TZID=America/Chicago:20270104T200000
+SUMMARY:Trail Kids Ski Program - Session 1
+LOCATION:1221 Theodore Wirth Parkway\, Minneapolis\, MN\, 55422
+URL:https://runsignup.com/Race/MN/Minneapolis/TrailKidsSkiProgramSession1
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Minneapolis/TrailKidsS
+ kiProgramSession1
+END:VEVENT
+END:VCALENDAR

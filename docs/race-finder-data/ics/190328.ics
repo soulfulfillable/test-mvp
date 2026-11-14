@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190328@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T090000
+DTEND;TZID=America/Denver:20261114T110000
+SUMMARY:8th Annual Run Craig Run
+LOCATION:2.5 miles North of Rock Point Store\, Highway 191\, 36.76427 N\,
+  Rock Point\, AZ\, 86545
+URL:https://runsignup.com/Race/AZ/RockPoint/RunCraigRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/AZ/RockPoint/RunCraigRun
+END:VEVENT
+END:VCALENDAR

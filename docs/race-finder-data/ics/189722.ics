@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-189722@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261129T110000
+DTEND;TZID=America/New_York:20261129T130000
+SUMMARY:Cody Michael Davison 5k Memorial Run
+LOCATION:Ernst Trail\, Mercer Pike Trailhead\, Meadville\, PA\, 16335
+URL:https://runsignup.com/Race/PA/Meadville/CodyMichaelDavisonMemorialRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Meadville/CodyMichaelD
+ avisonMemorialRun
+END:VEVENT
+END:VCALENDAR

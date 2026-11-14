@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217332@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T080000
+DTEND;TZID=America/Chicago:20261212T100000
+SUMMARY:Randy's Shoes Santa Run 2026
+LOCATION:920 SW 7th Avenue\, Amarillo\, TX\, 79101
+URL:https://runsignup.com/Race/TX/Amarillo/RandySShoesSantaRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Amarillo/RandySShoesSa
+ ntaRun
+END:VEVENT
+END:VCALENDAR

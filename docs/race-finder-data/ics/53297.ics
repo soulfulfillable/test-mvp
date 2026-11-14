@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-53297@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T120000
+DTEND;TZID=America/New_York:20261205T140000
+SUMMARY:Swarthmore Reindeer Dash - 1 Mile Sprint/Walk
+LOCATION:121 Park Ave.\, Swarthmore\, PA\, 19081
+URL:https://runsignup.com/Race/PA/Swarthmore/HomefortheHolidays
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Swarthmore/HomefortheH
+ olidays
+END:VEVENT
+END:VCALENDAR

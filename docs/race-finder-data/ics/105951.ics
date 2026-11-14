@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-105951@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T072000
+DTEND;TZID=America/New_York:20261121T092000
+SUMMARY:10th Annual Holly Springs Half Marathon\, 10k & 5k
+LOCATION:Ting Park\, Holly Springs\, NC\, 27540
+URL:https://runsignup.com/Race/NC/HollySprings/HollySpringsHalfMarathon
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/HollySprings/HollySpri
+ ngsHalfMarathon
+END:VEVENT
+END:VCALENDAR

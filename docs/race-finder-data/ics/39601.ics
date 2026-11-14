@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-39601@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:Gobble Gobble Run or Wobble 5K
+LOCATION:Courthouse\, Main Street\, Warrenton\, VA\, 20186
+URL:https://runsignup.com/Race/VA/Warrenton/GobbleGobbleRunorWobble
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Warrenton/GobbleGobble
+ RunorWobble
+END:VEVENT
+END:VCALENDAR

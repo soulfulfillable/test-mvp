@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-124047@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261115T083000
+DTEND;TZID=America/Los_Angeles:20261115T103000
+SUMMARY:Bowman Run with the Bulls presented by Hotel Vista Sierra
+LOCATION:855 Pacific Avenue\, Auburn\, CA\, 95603
+URL:https://runsignup.com/Race/CA/Auburn/BowmanSchoolRunwiththeBulls
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Auburn/BowmanSchoolRun
+ withtheBulls
+END:VEVENT
+END:VCALENDAR

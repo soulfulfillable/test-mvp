@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-176055@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T084500
+DTEND;TZID=America/Chicago:20261205T104500
+SUMMARY:Naughty or Nice List
+LOCATION:1011 Blue Ribbon Cir N\, Oconomowoc\, WI\, 53066
+URL:https://runsignup.com/Race/WI/Oconomowoc/NaughtyOrNiceList
+DESCRIPTION:Sign up: https://runsignup.com/Race/WI/Oconomowoc/NaughtyOrNi
+ ceList
+END:VEVENT
+END:VCALENDAR

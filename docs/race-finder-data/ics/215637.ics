@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215637@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T070000
+DTEND;TZID=America/New_York:20270109T090000
+SUMMARY:Women Who Train Together Challenge
+LOCATION:2 Independent Dr\, Jacksonville\, FL\, 32257
+URL:https://runsignup.com/Race/FL/Jacksonville/WomenWhoTrainTogetherChall
+ enge
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Jacksonville/WomenWhoT
+ rainTogetherChallenge
+END:VEVENT
+END:VCALENDAR

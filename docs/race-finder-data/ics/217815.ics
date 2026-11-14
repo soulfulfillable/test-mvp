@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217815@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T091500
+DTEND;TZID=America/New_York:20261206T111500
+SUMMARY:9th Annual Homewood Holiday 5k
+LOCATION:3400 N. Charles St.\, Baltimore\, MD\, 21218
+URL:https://runsignup.com/Race/MD/Baltimore/HomewoodHoliday5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Baltimore/HomewoodHoli
+ day5k
+END:VEVENT
+END:VCALENDAR

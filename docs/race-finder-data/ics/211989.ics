@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211989@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261213T120000
+DTEND;TZID=America/Detroit:20261213T140000
+SUMMARY:Bayne's Apple Valley Dashing Through The Snow 5K Trail Run
+LOCATION:3495 Midland Rd\, Saginaw\, MI\, 48602
+URL:https://runsignup.com/Race/MI/Saginaw/BayneSAppleValleyDashingThrough
+ TheSnow5KTrailRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Saginaw/BayneSAppleVal
+ leyDashingThroughTheSnow5KTrailRun
+END:VEVENT
+END:VCALENDAR

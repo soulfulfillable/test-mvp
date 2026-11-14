@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-83045@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Bank of Ocean City Bethany-Fenwick Turkey Trot
+LOCATION:Bethany Beach Bandstand\, Bethany Beach\, DE\, 19930
+URL:https://runsignup.com/Race/DE/BethanyBeach/BethanyFenwickTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/DE/BethanyBeach/BethanyFe
+ nwickTurkeyTrot
+END:VEVENT
+END:VCALENDAR

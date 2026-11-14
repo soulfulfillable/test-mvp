@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81758@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T160000
+DTEND;TZID=America/New_York:20261212T180000
+SUMMARY:Santas in Tremont
+LOCATION:The South Side\, Cleveland\, OH\, 44113
+URL:https://runsignup.com/Race/OH/Cleveland/SantasinTremont
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Cleveland/SantasinTrem
+ ont
+END:VEVENT
+END:VCALENDAR

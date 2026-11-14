@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13129@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261220T173000
+DTEND;TZID=America/Detroit:20261220T193000
+SUMMARY:TCTC Jingle Bell Run
+LOCATION:300 E. State Street\, Traverse City\, MI\, 49684
+URL:https://runsignup.com/Race/MI/TraverseCity/JingleBellRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/TraverseCity/JingleBel
+ lRun
+END:VEVENT
+END:VCALENDAR

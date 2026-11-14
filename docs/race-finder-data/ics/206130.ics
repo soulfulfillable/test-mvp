@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-206130@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261122T130000
+DTEND;TZID=America/Chicago:20261122T150000
+SUMMARY:The Mystery Race
+LOCATION:600 N. 7th Ave.\, Evansville\, IN\, 47710
+URL:https://runsignup.com/Race/IN/Evansville/TheMysteryRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Evansville/TheMysteryR
+ ace
+END:VEVENT
+END:VCALENDAR

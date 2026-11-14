@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-116906@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T093000
+DTEND;TZID=America/New_York:20261121T113000
+SUMMARY:Bordentown Turkey Trot 5K Run/Walk
+LOCATION:323 Ward Ave.\, Bordentown\, NJ\, 08505
+URL:https://runsignup.com/Race/NJ/Bordentown/BordentownTurkeyTrot5K1Mile
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Bordentown/BordentownT
+ urkeyTrot5K1Mile
+END:VEVENT
+END:VCALENDAR

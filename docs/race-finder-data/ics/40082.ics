@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-40082@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T081500
+DTEND;TZID=America/New_York:20261126T101500
+SUMMARY:Waynesboro Family YMCA Turkey Trot (In Memory of Dick Meador)
+LOCATION:648 South Wayne Avenue\, Waynesboro\, VA\, 22980
+URL:https://runsignup.com/Race/VA/Waynesboro/WaynesboroYMCATurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Waynesboro/WaynesboroY
+ MCATurkeyTrot
+END:VEVENT
+END:VCALENDAR

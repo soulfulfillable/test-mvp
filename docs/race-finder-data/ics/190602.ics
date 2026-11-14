@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-190602@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270102T083000
+DTEND;TZID=America/Chicago:20270102T103000
+SUMMARY:Holiday Hangover Hustle 5k
+LOCATION:Great Raft Brewing\, Shreveport\, LA\, 71104
+URL:https://runsignup.com/Race/LA/Shreveport/HolidayHangoverHustle5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Shreveport/HolidayHang
+ overHustle5k
+END:VEVENT
+END:VCALENDAR

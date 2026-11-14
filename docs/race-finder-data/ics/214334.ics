@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214334@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270102T093000
+DTEND;TZID=America/New_York:20270102T113000
+SUMMARY:New Year's 5k
+LOCATION:301 North Main Street\, Travelers Rest\, SC\, 29690
+URL:https://runsignup.com/Race/SC/TravelersRest/NewYear5kTRRotaryClub
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/TravelersRest/NewYear5
+ kTRRotaryClub
+END:VEVENT
+END:VCALENDAR

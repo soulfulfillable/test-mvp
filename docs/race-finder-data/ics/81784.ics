@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81784@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T163000
+DTEND;TZID=America/Chicago:20261205T183000
+SUMMARY:Garden of Lights Run
+LOCATION:Honor Heights Park\, Muskogee\, OK\, 74401
+URL:https://runsignup.com/Race/OK/Muskogee/GardenofLightsRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Muskogee/GardenofLight
+ sRun
+END:VEVENT
+END:VCALENDAR

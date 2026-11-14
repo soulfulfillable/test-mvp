@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-69572@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T074500
+DTEND;TZID=America/New_York:20261126T094500
+SUMMARY:Newtown Turkey Trot
+LOCATION:25 Main Street\, Newtown\, CT\, 06470
+URL:https://runsignup.com/Race/CT/Newtown/NewtownTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Newtown/NewtownTurkeyT
+ rot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-100296@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T073000
+DTEND;TZID=America/Chicago:20261126T093000
+SUMMARY:Tammany Turkey Trot
+LOCATION:701 N Columbia Street\, Covington\, LA\, 70433
+URL:https://runsignup.com/Race/LA/Covington/TammanyTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Covington/TammanyTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

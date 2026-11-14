@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194777@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261128T093000
+DTEND;TZID=America/Detroit:20261128T113000
+SUMMARY:Hospice of Gladwin 5K Walk/Run Turkey Trot
+LOCATION:West 1st Street\, Gladwin\, MI\, 48624
+URL:https://runsignup.com/Race/MI/Gladwin/HospiceOfGladwin5KWalkRunTurkey
+ Trot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Gladwin/HospiceOfGladw
+ in5KWalkRunTurkeyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171040@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T083000
+DTEND;TZID=America/Chicago:20261126T103000
+SUMMARY:Norman Turkey Day 5K
+LOCATION:911 W Main St\, Norman\, OK\, 73069
+URL:https://runsignup.com/Race/OK/Norman/TurkeyDayK
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Norman/TurkeyDayK
+END:VEVENT
+END:VCALENDAR

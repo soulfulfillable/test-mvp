@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171209@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T083000
+DTEND;TZID=America/Los_Angeles:20261126T103000
+SUMMARY:Bret Harte's Run Turkey Run 2026
+LOCATION:6677 Camden Avenue\, San Jose\, CA\, 95120
+URL:https://runsignup.com/Race/CA/SanJose/BretHarteMiddleSchoolBoosterClu
+ bSRunTurkeyRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanJose/BretHarteMiddl
+ eSchoolBoosterClubSRunTurkeyRun
+END:VEVENT
+END:VCALENDAR

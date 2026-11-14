@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-163823@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T073000
+DTEND;TZID=America/Chicago:20261126T093000
+SUMMARY:30A 10K Thanksgiving Day Races
+LOCATION:Barrett Square\, Rosemary Beach\, FL\, 32461
+URL:https://runsignup.com/Race/FL/RosemaryBeach/30A10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/RosemaryBeach/30A10K
+END:VEVENT
+END:VCALENDAR

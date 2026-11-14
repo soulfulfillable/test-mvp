@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-21025@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T080000
+DTEND;TZID=America/New_York:20270109T100000
+SUMMARY:Frozen Sasquatch Trail 50k/25k
+LOCATION:7500 Kanawha State Forest Drive\, Charleston\, WV\, 25314
+URL:https://runsignup.com/Race/WV/Charleston/FrozenSasquatchTrail
+DESCRIPTION:Sign up: https://runsignup.com/Race/WV/Charleston/FrozenSasqu
+ atchTrail
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154746@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T083000
+DTEND;TZID=America/New_York:20261205T103000
+SUMMARY:Imagine Mile Series
+LOCATION:5500 State Route 100\, Palm Coast\, FL\, 32164
+URL:https://runsignup.com/Race/FL/PalmCoast/ImagineMileSeries
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/PalmCoast/ImagineMileS
+ eries
+END:VEVENT
+END:VCALENDAR

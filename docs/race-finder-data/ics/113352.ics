@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-113352@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T073000
+DTEND;TZID=America/Chicago:20261205T093000
+SUMMARY:Bluff Park 8K
+LOCATION:733 Valley Street\, Birmingham\, AL\, 35226
+URL:https://runsignup.com/Race/AL/Birmingham/BluffPark10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Birmingham/BluffPark10
+ K
+END:VEVENT
+END:VCALENDAR

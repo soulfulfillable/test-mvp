@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-26207@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T070000
+DTEND;TZID=America/New_York:20270109T090000
+SUMMARY:Run For You - Run Far - Winter/Spring 2027
+LOCATION:Programs available at RFYL Midtown\, Piper Glen\, and Universi\,
+  Charlotte\, NC\, 28203
+URL:https://runsignup.com/Race/NC/Charlotte/RunForYouRunFarSession1
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Charlotte/RunForYouRun
+ FarSession1
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-45662@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T073000
+DTEND;TZID=America/New_York:20261126T093000
+SUMMARY:Space Coast Turkey Trot 5K
+LOCATION:Front Street Civic Center\, Melbourne\, FL\, 32901
+URL:https://runsignup.com/Race/FL/Melbourne/SpaceCoastTurkeyTrot5K10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Melbourne/SpaceCoastTu
+ rkeyTrot5K10K
+END:VEVENT
+END:VCALENDAR

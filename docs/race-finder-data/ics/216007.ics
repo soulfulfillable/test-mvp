@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216007@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261121T090000
+DTEND;TZID=America/Denver:20261121T110000
+SUMMARY:Girls on the Run Rio Grande 5K Celebration
+LOCATION:6000-6018 Los Poblanos Field Trails\, Albuquerque\, NM\, 87107
+URL:https://runsignup.com/Race/NM/Albuquerque/GirlsOnTheRunRioGrande5KCel
+ ebration
+DESCRIPTION:Sign up: https://runsignup.com/Race/NM/Albuquerque/GirlsOnThe
+ RunRioGrande5KCelebration
+END:VEVENT
+END:VCALENDAR

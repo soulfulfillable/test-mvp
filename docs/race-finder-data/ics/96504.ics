@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-96504@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T081500
+DTEND;TZID=America/New_York:20261126T101500
+SUMMARY:Delaware Turkey Trot
+LOCATION:84 E Winter St\, Delaware\, OH\, 43015
+URL:https://runsignup.com/Race/OH/Delaware/DelawareTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Delaware/DelawareTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-195640@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T085500
+DTEND;TZID=America/Chicago:20261205T105500
+SUMMARY:Gingerbread Lane 5K & 10K - Tulsa
+LOCATION:23rd Street\, Tulsa\, OK\, 74107
+URL:https://runsignup.com/Race/OK/Tulsa/GingerbreadLane5K10KTulsa
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Tulsa/GingerbreadLane5
+ K10KTulsa
+END:VEVENT
+END:VCALENDAR

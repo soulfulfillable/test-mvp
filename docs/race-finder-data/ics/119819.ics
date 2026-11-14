@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-119819@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:2026 Arkansas Grand Prix
+LOCATION:2324 Pear Orchard Dr.\, Little Rock\, AR\, 72211
+URL:https://runsignup.com/Race/AR/LittleRock/ArkansasGrandPrix
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/LittleRock/ArkansasGra
+ ndPrix
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-183314@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T074500
+DTEND;TZID=America/New_York:20261115T094500
+SUMMARY:Game On! Mirada Lagoon Triathlon Presented by SACFCU
+LOCATION:Mirada Lagoon\, San Antonio\, FL\, 33576
+URL:https://runsignup.com/Race/FL/SanAntonio/GameOnMiradaLagoonTriathlon
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/SanAntonio/GameOnMirad
+ aLagoonTriathlon
+END:VEVENT
+END:VCALENDAR

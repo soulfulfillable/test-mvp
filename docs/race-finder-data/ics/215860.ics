@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215860@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Boise:20261114T093000
+DTEND;TZID=America/Boise:20261114T113000
+SUMMARY:The Fantastic FAIR-field Turkey Trot
+LOCATION:412 Soldier Road\, Fairfield\, ID\, 83327
+URL:https://runsignup.com/Race/ID/Fairfield/TheFantasticFAIRFieldTurkeyTr
+ ot
+DESCRIPTION:Sign up: https://runsignup.com/Race/ID/Fairfield/TheFantastic
+ FAIRFieldTurkeyTrot
+END:VEVENT
+END:VCALENDAR

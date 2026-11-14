@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-197591@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=Pacific/Honolulu:20261213T064500
+DTEND;TZID=Pacific/Honolulu:20261213T084500
+SUMMARY:2026 Honolulu Marathon Semper Fi & America's Fund Team
+LOCATION:Queen St.\, Honolulu\, HI\, 96814
+URL:https://runsignup.com/Race/HI/Honolulu/HonoluluMarathonSemperFiAmeric
+ aSFundTeam
+DESCRIPTION:Sign up: https://runsignup.com/Race/HI/Honolulu/HonoluluMarat
+ honSemperFiAmericaSFundTeam
+END:VEVENT
+END:VCALENDAR

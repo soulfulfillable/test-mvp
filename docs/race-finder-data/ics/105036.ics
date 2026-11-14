@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-105036@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Anchorage:20270109T093000
+DTEND;TZID=America/Anchorage:20270109T113000
+SUMMARY:Frosty Bottom
+LOCATION:9401 Raspberry Rd\, Anchorage\, AK\, 99502
+URL:https://runsignup.com/Race/AK/Anchorage/FrostyBottom
+DESCRIPTION:Sign up: https://runsignup.com/Race/AK/Anchorage/FrostyBottom
+END:VEVENT
+END:VCALENDAR

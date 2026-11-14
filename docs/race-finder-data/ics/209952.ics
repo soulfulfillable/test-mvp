@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209952@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T090000
+DTEND;TZID=America/New_York:20261212T110000
+SUMMARY:Santa's Soccer Sprint
+LOCATION:100 E. Chestnut Street\, Goldsboro\, NC\, 27530
+URL:https://runsignup.com/Race/NC/Goldsboro/SantaSSoccerSprint
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Goldsboro/SantaSSoccer
+ Sprint
+END:VEVENT
+END:VCALENDAR

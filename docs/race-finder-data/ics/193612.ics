@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193612@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T090000
+DTEND;TZID=America/New_York:20261121T110000
+SUMMARY:2nd Annual Blue Comet Turkey Trot
+LOCATION:135 Sunset Ave\, Asheboro\, NC\, 27203
+URL:https://runsignup.com/Race/NC/Asheboro/BlueCometTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Asheboro/BlueCometTurk
+ eyTrot
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213850@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261222T173000
+DTEND;TZID=America/New_York:20261222T193000
+SUMMARY:Winter Sprinter 3K
+LOCATION:8225 N Wickham Road\, Melbourne\, FL\, 32940
+URL:https://runsignup.com/Race/FL/Melbourne/WinterSprinter3k
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Melbourne/WinterSprint
+ er3k
+END:VEVENT
+END:VCALENDAR

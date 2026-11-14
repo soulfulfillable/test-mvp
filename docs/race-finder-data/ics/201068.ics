@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-201068@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261231T120000
+DTEND;TZID=America/New_York:20261231T140000
+SUMMARY:Simple Waiver Demo
+LOCATION:2160 Stavemill Estates Dr\, Powhatan\, VA\, 23139
+URL:https://runsignup.com/Race/VA/Powhatan/SimpleWaiverDemo
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Powhatan/SimpleWaiverD
+ emo
+END:VEVENT
+END:VCALENDAR

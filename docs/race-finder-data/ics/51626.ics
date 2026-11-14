@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-51626@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T081500
+DTEND;TZID=America/New_York:20261128T101500
+SUMMARY:Cincinnati Turkey Trot Half Marathon\, 10K & 5K
+LOCATION:5057 Wooster Pike\, Cincinnati\, OH\, 45227
+URL:https://runsignup.com/Race/OH/Cincinnati/CincinnatiHungryTurkeyHalfMa
+ rathon5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Cincinnati/CincinnatiH
+ ungryTurkeyHalfMarathon5K
+END:VEVENT
+END:VCALENDAR

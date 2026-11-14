@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155745@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20270102T113000
+DTEND;TZID=America/Los_Angeles:20270102T133000
+SUMMARY:TAKEDOWN THE NEW YEAR - 5K RUN/WALK
+LOCATION:1800 Buhach Rd.\, Atwater\, CA\, 95301
+URL:https://runsignup.com/Race/CA/Atwater/StAnthonysResolutionRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Atwater/StAnthonysReso
+ lutionRun
+END:VEVENT
+END:VCALENDAR

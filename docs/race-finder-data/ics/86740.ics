@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-86740@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Powell Turkey Trot 4 Miler 2026
+LOCATION:47 Hall Street\, Powell\, OH\, 43065
+URL:https://runsignup.com/Race/OH/Powell/PowellTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Powell/PowellTurkeyTro
+ t
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-120729@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:Canandaigua Turkey Trot 5k Fun Run
+LOCATION:F.A. Baker Memorial Park\, Canandaigua\, NY\, 14424
+URL:https://runsignup.com/Race/NY/Canandaigua/CanandaiguaTurkeyTrot5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Canandaigua/Canandaigu
+ aTurkeyTrot5k
+END:VEVENT
+END:VCALENDAR

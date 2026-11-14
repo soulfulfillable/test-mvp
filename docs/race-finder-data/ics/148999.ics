@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-148999@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T100000
+DTEND;TZID=America/New_York:20261212T120000
+SUMMARY:2026 Jingle Bell Run - Philadelphia
+LOCATION:4747 South Broad Street\, Philadelphia\, PA\, 19112
+URL:https://runsignup.com/Race/PA/Philadelphia/JingleBellRunPhiladelphia
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Philadelphia/JingleBel
+ lRunPhiladelphia
+END:VEVENT
+END:VCALENDAR

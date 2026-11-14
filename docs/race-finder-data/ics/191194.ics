@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-191194@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080500
+DTEND;TZID=America/Chicago:20261114T100500
+SUMMARY:Run for the Kids of St Jude
+LOCATION:Stinson Park - Aksarben Village\, Omaha\, NE\, 68106
+URL:https://runsignup.com/Race/NE/Omaha/ForStJude
+DESCRIPTION:Sign up: https://runsignup.com/Race/NE/Omaha/ForStJude
+END:VEVENT
+END:VCALENDAR

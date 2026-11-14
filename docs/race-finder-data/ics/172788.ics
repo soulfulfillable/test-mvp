@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-172788@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261227T071500
+DTEND;TZID=America/New_York:20261227T091500
+SUMMARY:Boca 5K/10K
+LOCATION:3001 N State Road A1A\, Boca Raton\, FL\, 33431
+URL:https://runsignup.com/Race/FL/BocaRaton/42AnnualBoca5k10k
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/BocaRaton/42AnnualBoca
+ 5k10k
+END:VEVENT
+END:VCALENDAR

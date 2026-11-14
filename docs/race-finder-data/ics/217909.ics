@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217909@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:SGI Turkey Trot 5K
+LOCATION:128 E Pine Ave\, Eastpoint\, FL\, 32328
+URL:https://runsignup.com/Race/FL/Eastpoint/SGITurkeyTrot5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Eastpoint/SGITurkeyTro
+ t5K
+END:VEVENT
+END:VCALENDAR

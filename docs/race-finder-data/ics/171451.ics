@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171451@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20270109T090000
+DTEND;TZID=America/Denver:20270109T110000
+SUMMARY:Sentinel Flurry
+LOCATION:601 Corporate Cir\, Golden\, CO\, 80401
+URL:https://runsignup.com/Race/CO/Golden/SentinelFlurry
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Golden/SentinelFlurry
+END:VEVENT
+END:VCALENDAR

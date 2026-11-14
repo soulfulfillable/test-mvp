@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-156043@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T090000
+DTEND;TZID=America/Chicago:20261114T110000
+SUMMARY:Wilderness Run
+LOCATION:7000 NE Barry Rd\, Kansas City\, MO\, 64156
+URL:https://runsignup.com/Race/MO/KansasCity/WildernessRunHodgePark
+DESCRIPTION:Sign up: https://runsignup.com/Race/MO/KansasCity/WildernessR
+ unHodgePark
+END:VEVENT
+END:VCALENDAR

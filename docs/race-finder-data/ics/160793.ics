@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-160793@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/North_Dakota/Center:20261205T080000
+DTEND;TZID=America/North_Dakota/Center:20261205T100000
+SUMMARY:Holiday 5K\, 10K & 13.1M at Longview\, TX (49)
+LOCATION:1505 Princeton Ave\, Longview\, TX\, 75604
+URL:https://runsignup.com/Race/TX/Longview/Paul1272024
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Longview/Paul1272024
+END:VEVENT
+END:VCALENDAR

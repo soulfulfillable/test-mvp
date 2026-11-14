@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-133794@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T083000
+DTEND;TZID=America/Chicago:20261126T103000
+SUMMARY:Lindale Turkey Trot
+LOCATION:E.J. Moss Intermediate School\, Lindale\, TX\, 75771
+URL:https://runsignup.com/Race/TX/Lindale/LindaleTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Lindale/LindaleTurkeyT
+ rot
+END:VEVENT
+END:VCALENDAR

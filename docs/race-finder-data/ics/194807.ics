@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-194807@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261124T090000
+DTEND;TZID=America/New_York:20261124T110000
+SUMMARY:The Minutemen Muster Trot
+LOCATION:400 Barbour Road\, Morehead City\, NC\, 28557
+URL:https://runsignup.com/Race/NC/MoreheadCity/TheMinutemenMusterTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/MoreheadCity/TheMinute
+ menMusterTrot
+END:VEVENT
+END:VCALENDAR

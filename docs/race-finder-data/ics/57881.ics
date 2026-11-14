@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-57881@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:Urban Youth Impact Fall Stampede 5K Presented by Chick-fil-A
+LOCATION:Meyer Amphitheater\, West Palm Beach\, FL\, 33401
+URL:https://runsignup.com/Race/FL/WestPalmBeach/UrbanYouthImpact5KFallSta
+ mpedeWalkRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/WestPalmBeach/UrbanYou
+ thImpact5KFallStampedeWalkRun
+END:VEVENT
+END:VCALENDAR

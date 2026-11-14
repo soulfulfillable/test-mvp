@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217714@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261230T190000
+DTEND;TZID=America/Los_Angeles:20261230T210000
+SUMMARY:Meet at: Elf the Musical
+LOCATION:1100 Third Ave\, San Diego\, CA\, 92101
+URL:https://runsignup.com/Race/CA/SanDiego/MeetAtElfTheMusical
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanDiego/MeetAtElfTheM
+ usical
+END:VEVENT
+END:VCALENDAR

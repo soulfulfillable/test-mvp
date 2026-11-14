@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-168182@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T190000
+DTEND;TZID=America/New_York:20261115T210000
+SUMMARY:Fall League - Loggerhead Curling Club
+LOCATION:Palm Beach Skate Zone\, Lake Worth\, FL\, 33467
+URL:https://runsignup.com/Race/FL/LakeWorth/LoggerheadCurlingClubMemberEv
+ ents
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/LakeWorth/LoggerheadCu
+ rlingClubMemberEvents
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215406@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261115T090000
+DTEND;TZID=America/New_York:20261115T110000
+SUMMARY:Paws for a Purpose
+LOCATION:150 Discovery Ln\, Clemson\, SC\, 29634
+URL:https://runsignup.com/Race/SC/Clemson/ClemsonPawsForAPurpose
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Clemson/ClemsonPawsFor
+ APurpose
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-136763@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T073000
+DTEND;TZID=America/New_York:20261126T093000
+SUMMARY:Hingham Turkey Trot
+LOCATION:17 Union Street\, Hingham\, MA\, 02043
+URL:https://runsignup.com/Race/MA/Hingham/HinghamTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/MA/Hingham/HinghamTurkeyT
+ rot
+END:VEVENT
+END:VCALENDAR

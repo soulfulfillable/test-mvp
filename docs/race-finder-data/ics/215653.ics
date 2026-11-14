@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215653@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261213T070000
+DTEND;TZID=America/Los_Angeles:20261213T090000
+SUMMARY:The Krew Runner's 3rd Annual Santa Con Run
+LOCATION:300 Northridge Mall\, Salinas\, CA\, 93906
+URL:https://runsignup.com/Race/CA/Salinas/RUNSANTACONSALINAS
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Salinas/RUNSANTACONSAL
+ INAS
+END:VEVENT
+END:VCALENDAR

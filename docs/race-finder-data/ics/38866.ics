@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-38866@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T140000
+DTEND;TZID=America/New_York:20261121T160000
+SUMMARY:Santa Scramble 5K
+LOCATION:Concord High School - Race Day Packet Pickup location and ra\, C
+ oncord\, NC\, 28025
+URL:https://runsignup.com/Race/NC/Concord/SantaScramble5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Concord/SantaScramble5
+ K
+END:VEVENT
+END:VCALENDAR

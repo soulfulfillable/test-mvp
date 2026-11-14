@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-218295@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261126T073000
+DTEND;TZID=America/Denver:20261126T093000
+SUMMARY:2026 Turkey ROCK Trot
+LOCATION:500 Fairgrounds Road\, Castle Rock\, CO\, 80104
+URL:https://runsignup.com/Race/CO/CastleRock/2026TurkeyROCKTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/CastleRock/2026TurkeyR
+ OCKTrot
+END:VEVENT
+END:VCALENDAR

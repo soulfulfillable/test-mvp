@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-111325@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20270101T080000
+DTEND;TZID=America/Chicago:20270101T100000
+SUMMARY:Endure the Dirt 5k Cancer Mud Run
+LOCATION:2335 Highway 63 North\, Stuttgart\, AR\, 72160
+URL:https://runsignup.com/Race/AR/Stuttgart/EnduretheDirt5kCancerMudRunan
+ dNowWeSprint50mileVirtualRace
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/Stuttgart/EnduretheDir
+ t5kCancerMudRunandNowWeSprint50mileVirtualRace
+END:VEVENT
+END:VCALENDAR

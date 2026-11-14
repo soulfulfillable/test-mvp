@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-122960@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T090000
+DTEND;TZID=America/Chicago:20261121T110000
+SUMMARY:Los Pinos Ranch Wine Run Turkey Trot 5k
+LOCATION:Los Pinos Ranch Vineyards\, Pittsburg\, TX\, 75686
+URL:https://runsignup.com/Race/TX/Pittsburg/LosPinosRanchWineRun5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Pittsburg/LosPinosRanc
+ hWineRun5k
+END:VEVENT
+END:VCALENDAR

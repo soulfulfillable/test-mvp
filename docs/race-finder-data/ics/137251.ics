@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137251@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T080000
+DTEND;TZID=America/New_York:20261114T100000
+SUMMARY:33rd Annual Pawleys Island Turtle Strut 5K/8K Run/Walk presented 
+ by Pawleys Island Realty
+LOCATION:Town Hall of Pawleys Island\, Pawleys Island\, SC\, 29585
+URL:https://runsignup.com/Race/SC/PawleysIsland/PawleysIslandTurtleStrut5
+ K8K
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/PawleysIsland/PawleysI
+ slandTurtleStrut5K8K
+END:VEVENT
+END:VCALENDAR

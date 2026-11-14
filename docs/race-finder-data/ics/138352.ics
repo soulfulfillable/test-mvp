@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-138352@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:The 4 Day Movement Path to the PORTAL 8K\, 4K Run/Walk + .4K Kids
+  Run!
+LOCATION:3000 Wayne Memorial Drive\, Goldsboro\, NC\, 27534
+URL:https://runsignup.com/Race/NC/Goldsboro/The4DayMovementPathtothePorta
+ l8K4K4KKidsRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Goldsboro/The4DayMovem
+ entPathtothePortal8K4K4KKidsRun
+END:VEVENT
+END:VCALENDAR

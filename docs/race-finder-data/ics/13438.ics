@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-13438@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T020000
+DTEND;TZID=America/New_York:20270101T040000
+SUMMARY:DQ Events Bundle
+LOCATION:Anywhere\, Woodbury\, NJ\, 08096
+URL:https://runsignup.com/Race/NJ/Woodbury/DQEventsBundle
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Woodbury/DQEventsBundl
+ e
+END:VEVENT
+END:VCALENDAR

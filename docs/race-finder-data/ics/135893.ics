@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135893@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:Robeson County Holiday 5k and Fun Mile
+LOCATION:UNC Health Southeastern Fitness Center\, Lumberton\, NC\, 28358
+URL:https://runsignup.com/Race/NC/Lumberton/UNCHealthSoutheasternHoliday5
+ k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NC/Lumberton/UNCHealthSou
+ theasternHoliday5k
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216195@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T181500
+DTEND;TZID=America/New_York:20261114T201500
+SUMMARY:Rag Tag 5k
+LOCATION:11 Henry St.\, Red Bank\, NJ\, 07701
+URL:https://runsignup.com/Race/NJ/RedBank/RagTag5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/RedBank/RagTag5k
+END:VEVENT
+END:VCALENDAR

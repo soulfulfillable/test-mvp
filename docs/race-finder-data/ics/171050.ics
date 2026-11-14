@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-171050@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T173000
+DTEND;TZID=America/New_York:20261205T193000
+SUMMARY:Chesapeake Rotary Holly Jolly Jog Race and Fun Run presented by t
+ he YMCA of South Hampton 
+LOCATION:173 Mount Pleasant Rd\, Chesapeake\, VA\, 23322
+URL:https://runsignup.com/Race/VA/Chesapeake/ChesapeakeRotaryHollyJollyJo
+ g
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Chesapeake/ChesapeakeR
+ otaryHollyJollyJog
+END:VEVENT
+END:VCALENDAR

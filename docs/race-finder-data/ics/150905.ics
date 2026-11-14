@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-150905@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T090000
+DTEND;TZID=America/New_York:20261213T110000
+SUMMARY:Spirit of the Season / Frosty Frolic
+LOCATION:2517 Fulton Dr NW\, Canton\, OH\, 44718
+URL:https://runsignup.com/Race/OH/Canton/SpiritoftheSeason5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Canton/SpiritoftheSeas
+ on5k
+END:VEVENT
+END:VCALENDAR

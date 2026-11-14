@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-180047@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261206T073000
+DTEND;TZID=America/Los_Angeles:20261206T093000
+SUMMARY:Jingle Bell Dash Kids Dash\,  5K\, 10K and Half Marathon & Santa 
+ Paws Doggie Run
+LOCATION:17851 PCH\, Huntington Beach\, CA\, 92649
+URL:https://runsignup.com/Race/CA/HuntingtonBeach/TheKrisKringleJingleDas
+ h
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/HuntingtonBeach/TheKri
+ sKringleJingleDash
+END:VEVENT
+END:VCALENDAR

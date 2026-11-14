@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-186840@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261219T083000
+DTEND;TZID=America/Chicago:20261219T103000
+SUMMARY:Holiday 5K\, 10K\, & 13.1M at Bettendorf\, IA (51)
+LOCATION:2098 Parkway Dr\, Bettendorf\, IA\, 52722
+URL:https://runsignup.com/Race/IA/Bettendorf/Middle51
+DESCRIPTION:Sign up: https://runsignup.com/Race/IA/Bettendorf/Middle51
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216723@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270109T083000
+DTEND;TZID=America/New_York:20270109T103000
+SUMMARY:Dirty Spokes Mayhem on the Mountain
+LOCATION:2505 Bettis Tribble Gap Road\, Cumming\, GA\, 30040
+URL:https://runsignup.com/Race/GA/Cumming/DirtySpokesMayhemOnTheMountain
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Cumming/DirtySpokesMay
+ hemOnTheMountain
+END:VEVENT
+END:VCALENDAR

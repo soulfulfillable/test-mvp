@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-102689@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T100000
+DTEND;TZID=America/New_York:20261212T120000
+SUMMARY:Rutgers Big Chill 5K
+LOCATION:130 College Avenue\, New Brunswick\, NJ\, 08901
+URL:https://runsignup.com/Race/NJ/NewBrunswick/RutgersBigChill5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/NewBrunswick/RutgersBi
+ gChill5K
+END:VEVENT
+END:VCALENDAR

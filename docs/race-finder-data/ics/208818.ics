@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-208818@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261121T090000
+DTEND;TZID=America/Los_Angeles:20261121T110000
+SUMMARY:Get Up Show Up Community Day ~ Inspired by the Life of Jenn Casci
+LOCATION:For Parking Only: 833 Highway 49\, San Andreas\,. CA 95249\, San
+  Andreas\, CA\, 95249
+URL:https://runsignup.com/Race/CA/SanAndreas/GetUpShowUp5K10KWalkRunRuck
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanAndreas/GetUpShowUp
+ 5K10KWalkRunRuck
+END:VEVENT
+END:VCALENDAR

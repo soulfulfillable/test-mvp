@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-154870@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T080000
+DTEND;TZID=America/New_York:20261212T100000
+SUMMARY:Centennial Athletics December Dash
+LOCATION:1485 SW Cashmere Blvd\, Port Saint Lucie\, FL\, 34986
+URL:https://runsignup.com/Race/FL/PortSaintLucie/CentennialAthleticsDecem
+ berDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/PortSaintLucie/Centenn
+ ialAthleticsDecemberDash
+END:VEVENT
+END:VCALENDAR

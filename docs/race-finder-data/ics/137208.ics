@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-137208@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T090000
+DTEND;TZID=America/New_York:20261121T110000
+SUMMARY:Red Creek Turkey Trot 2026
+LOCATION:6592 South street\, Red Creek\, NY\, 13143
+URL:https://runsignup.com/Race/NY/RedCreek/RedCreekTurkeyTrot2022
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/RedCreek/RedCreekTurke
+ yTrot2022
+END:VEVENT
+END:VCALENDAR

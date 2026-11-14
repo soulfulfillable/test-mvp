@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-151618@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T090000
+DTEND;TZID=America/Chicago:20261121T110000
+SUMMARY:Coach Yantis 5K Turkey Trot
+LOCATION:2041 E Pioneer Way\, Olathe\, KS\, 66062
+URL:https://runsignup.com/Race/KS/Olathe/CoachYantis5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/KS/Olathe/CoachYantis5K
+END:VEVENT
+END:VCALENDAR

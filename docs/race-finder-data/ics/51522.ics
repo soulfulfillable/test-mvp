@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-51522@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261122T100000
+DTEND;TZID=America/New_York:20261122T120000
+SUMMARY:Hartford Track Club 8K Cross-Country Challenge
+LOCATION:1420 Farmington Avenue\, West Hartford\, CT\, 06107
+URL:https://runsignup.com/Race/CT/WestHartford/HTC8KCrossCountryChallenge
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/WestHartford/HTC8KCros
+ sCountryChallenge
+END:VEVENT
+END:VCALENDAR

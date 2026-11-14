@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-145550@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261128T093000
+DTEND;TZID=America/New_York:20261128T113000
+SUMMARY:Brigantine Ugly Sweater Run & Family Frolic
+LOCATION:265 42nd Street\, Brigantine\, NJ\, 08203
+URL:https://runsignup.com/Race/NJ/Brigantine/UglySweater5kFunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Brigantine/UglySweater
+ 5kFunWalk
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212186@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T040000
+DTEND;TZID=America/Chicago:20261212T060000
+SUMMARY:Route 66 Relay - Centennial Celebration
+LOCATION:Southwest Blvd at Riverside Dr\, Tulsa\, OK\, 74127
+URL:https://runsignup.com/Race/OK/Tulsa/Route66Relay
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Tulsa/Route66Relay
+END:VEVENT
+END:VCALENDAR

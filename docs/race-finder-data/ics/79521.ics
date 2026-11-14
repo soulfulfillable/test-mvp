@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-79521@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=Pacific/Honolulu:20261206T160000
+DTEND;TZID=Pacific/Honolulu:20261206T180000
+SUMMARY:Santa Hat 5K & 1M Family Fun Run/Walk
+LOCATION:Ala Moana Beach Park\, Honolulu\, HI\, 96814
+URL:https://runsignup.com/Race/HI/Honolulu/SantaHat5KFamilyFunRunWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/HI/Honolulu/SantaHat5KFam
+ ilyFunRunWalk
+END:VEVENT
+END:VCALENDAR

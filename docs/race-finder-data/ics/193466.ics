@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-193466@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261226T090000
+DTEND;TZID=America/New_York:20261226T110000
+SUMMARY:Trot For Spot 5K and 3K
+LOCATION:221 Sam Pitts Creek\, Clarkesville\, GA\, 30523
+URL:https://runsignup.com/Race/GA/Clarkesville/TrotForSpot5KAnd3K
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Clarkesville/TrotForSp
+ ot5KAnd3K
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66130@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T130000
+DTEND;TZID=America/New_York:20270101T150000
+SUMMARY:New Year’s Day 5k/10K Hot Chocolate Run 2027
+LOCATION:521 South Park Drive\, Salisbury\, MD\, 21804
+URL:https://runsignup.com/Race/MD/Salisbury/NewYearsDay5kHotChocolateRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Salisbury/NewYearsDay5
+ kHotChocolateRun
+END:VEVENT
+END:VCALENDAR

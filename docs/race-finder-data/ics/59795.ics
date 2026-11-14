@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-59795@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T084500
+DTEND;TZID=America/Los_Angeles:20261126T104500
+SUMMARY:Woodinville Turkey Trot 5K
+LOCATION:Wilmot Gateway Park\, Woodinville\, WA\, 98072
+URL:https://runsignup.com/Race/WA/Woodinville/WoodinvilleTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Woodinville/Woodinvill
+ eTurkeyTrot
+END:VEVENT
+END:VCALENDAR

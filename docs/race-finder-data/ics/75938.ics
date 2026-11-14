@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-75938@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T070000
+DTEND;TZID=America/Chicago:20261205T090000
+SUMMARY:Mosaic Trail Race
+LOCATION:16942 Ranch Road 2341\, Burnet\, TX\, 78611
+URL:https://runsignup.com/Race/TX/Burnet/MosaicTrailRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Burnet/MosaicTrailRun
+END:VEVENT
+END:VCALENDAR

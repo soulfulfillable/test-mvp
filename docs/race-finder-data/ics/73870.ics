@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-73870@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261127T100000
+DTEND;TZID=America/New_York:20261127T120000
+SUMMARY:Helen L. Diller Vacation Home for Blind Children Turkey Trot 5K R
+ un/1.5 Mile Walk
+LOCATION:3001 Avalon Avenue\, Avalon\, NJ\, 08202
+URL:https://runsignup.com/Race/NJ/Avalon/HelenLDillerVacationHomeTurkeyTr
+ ot5KRun15MileWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/Avalon/HelenLDillerVac
+ ationHomeTurkeyTrot5KRun15MileWalk
+END:VEVENT
+END:VCALENDAR

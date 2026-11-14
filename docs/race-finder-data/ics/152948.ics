@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-152948@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T080000
+DTEND;TZID=America/Chicago:20261205T100000
+SUMMARY:Santa's Hot Chocolate Run
+LOCATION:809 Kirby St.\, Lake Charles\, LA\, 70601
+URL:https://runsignup.com/Race/LA/LakeCharles/SantasHotChocolateRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/LakeCharles/SantasHotC
+ hocolateRun
+END:VEVENT
+END:VCALENDAR

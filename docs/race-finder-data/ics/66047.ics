@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66047@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T080000
+DTEND;TZID=America/Chicago:20261121T100000
+SUMMARY:Turkey Trails - Omaha
+LOCATION:Lake Zorinsky\, Omaha\, NE\, 68135
+URL:https://runsignup.com/Race/NE/Omaha/TurkeyTrails5k10kOmaha
+DESCRIPTION:Sign up: https://runsignup.com/Race/NE/Omaha/TurkeyTrails5k10
+ kOmaha
+END:VEVENT
+END:VCALENDAR

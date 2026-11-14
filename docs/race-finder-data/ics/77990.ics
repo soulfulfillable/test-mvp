@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-77990@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261122T084500
+DTEND;TZID=America/Chicago:20261122T104500
+SUMMARY:Lincolnwood Turkey Trot: 5K\, 10K\, Walk\, Dash
+LOCATION:6915 Kostner Avenue\, Lincolnwood\, IL\, 60712
+URL:https://runsignup.com/Race/IL/Lincolnwood/LWTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Lincolnwood/LWTurkeyTr
+ ot
+END:VEVENT
+END:VCALENDAR

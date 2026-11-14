@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-38720@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T090000
+DTEND;TZID=America/Chicago:20261212T110000
+SUMMARY:CHRISTmas Ugly Sweater 5K
+LOCATION:Trinity Lutheran Ministries\, Edwardsville\, IL\, 62025
+URL:https://runsignup.com/Race/IL/Edwardsville/CHRISTmasUglySweaterDash5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Edwardsville/CHRISTmas
+ UglySweaterDash5K
+END:VEVENT
+END:VCALENDAR

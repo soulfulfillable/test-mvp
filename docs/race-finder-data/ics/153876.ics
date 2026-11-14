@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-153876@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261127T100000
+DTEND;TZID=America/New_York:20261127T120000
+SUMMARY:Darien Depot Overstuffed Turkey Trot 5K and 1 Mile Fun Run
+LOCATION:Darien High School\, Darien\, CT\, 06820
+URL:https://runsignup.com/Race/CT/Darien/DarienDepotOverstuffed
+DESCRIPTION:Sign up: https://runsignup.com/Race/CT/Darien/DarienDepotOver
+ stuffed
+END:VEVENT
+END:VCALENDAR

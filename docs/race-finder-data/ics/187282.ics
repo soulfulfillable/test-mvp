@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-187282@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261114T090000
+DTEND;TZID=America/New_York:20261114T110000
+SUMMARY:2nd Annual Red\, White & Blue 5k
+LOCATION:109 Scenic Drive\, Lackawaxen\, PA\, 18435
+URL:https://runsignup.com/Race/PA/Lackawaxen/RunWalkVets5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Lackawaxen/RunWalkVets
+ 5K
+END:VEVENT
+END:VCALENDAR

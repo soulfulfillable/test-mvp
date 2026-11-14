@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-118444@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T090000
+DTEND;TZID=America/Chicago:20261126T110000
+SUMMARY:Turkey Trot-n-Trek
+LOCATION:251 N. West Avenue\, Fayetteville\, AR\, 72701
+URL:https://runsignup.com/Race/AR/Fayetteville/TurkeyTrotnTrekpbUnilever
+DESCRIPTION:Sign up: https://runsignup.com/Race/AR/Fayetteville/TurkeyTro
+ tnTrekpbUnilever
+END:VEVENT
+END:VCALENDAR

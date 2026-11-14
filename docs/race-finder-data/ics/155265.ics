@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-155265@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T120000
+DTEND;TZID=America/New_York:20261219T140000
+SUMMARY:Hamilton Santacon 1k Fun Run
+LOCATION:Marcum Park\, Hamilton\, OH\, 45011
+URL:https://runsignup.com/Race/OH/Hamilton/HamiltonSantacon1kFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Hamilton/HamiltonSanta
+ con1kFunRun
+END:VEVENT
+END:VCALENDAR

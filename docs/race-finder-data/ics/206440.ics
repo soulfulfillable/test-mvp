@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-206440@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T070000
+DTEND;TZID=America/Los_Angeles:20261126T090000
+SUMMARY:The Holiday Classic 2026
+LOCATION:8400 W Robindale Rd\, Las Vegas\, NV\, 89113
+URL:https://runsignup.com/Race/NV/LasVegas/TheHolidayClassic
+DESCRIPTION:Sign up: https://runsignup.com/Race/NV/LasVegas/TheHolidayCla
+ ssic
+END:VEVENT
+END:VCALENDAR

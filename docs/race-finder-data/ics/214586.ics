@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214586@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T073000
+DTEND;TZID=America/New_York:20261126T093000
+SUMMARY:Englewood Turkey Trot
+LOCATION:6751 San Casa Dr\, Englewood\, FL\, 34224
+URL:https://runsignup.com/Race/FL/Englewood/englewoodturkeytrot2026
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Englewood/englewoodtur
+ keytrot2026
+END:VEVENT
+END:VCALENDAR

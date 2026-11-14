@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-188249@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261217T174500
+DTEND;TZID=America/Indiana/Indianapolis:20261217T194500
+SUMMARY:Holiday Lights @ the Rails 5K & Kids Dash
+LOCATION:Depot Street Park\, Greenfield\, IN\, 46140
+URL:https://runsignup.com/Race/IN/Greenfield/HolidayLightsTheRails5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Greenfield/HolidayLigh
+ tsTheRails5K
+END:VEVENT
+END:VCALENDAR

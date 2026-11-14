@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217968@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261121T080000
+DTEND;TZID=America/Chicago:20261121T100000
+SUMMARY:The Next Loop Trail 5K/10K/15K | Lake Carl Blackwell
+LOCATION:11000 W Hwy 51\, Stillwater\, OK\, 74074
+URL:https://runsignup.com/Race/OK/Stillwater/TheNextLoopTrail5K10K15KLake
+ CarlBlackwell
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/Stillwater/TheNextLoop
+ Trail5K10K15KLakeCarlBlackwell
+END:VEVENT
+END:VCALENDAR

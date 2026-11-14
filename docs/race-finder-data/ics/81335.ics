@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81335@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261219T073000
+DTEND;TZID=America/New_York:20261219T093000
+SUMMARY:Naptown Half Marathon & 10K/5K
+LOCATION:550 Taylor Ave\, Annapolis\, MD\, 21401
+URL:https://runsignup.com/Race/MD/Annapolis/NaptownHalfMarathon10K
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Annapolis/NaptownHalfM
+ arathon10K
+END:VEVENT
+END:VCALENDAR

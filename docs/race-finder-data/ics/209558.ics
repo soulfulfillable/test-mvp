@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-209558@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T080000
+DTEND;TZID=America/Chicago:20261114T100000
+SUMMARY:Fall into Recovery 5K presented by Pecan Haven  Addiction Recover
+ y Center
+LOCATION:2300 Sycamore St\, Monroe\, LA\, 71202
+URL:https://runsignup.com/Race/LA/Monroe/PecanHavenAddictionRecoveryCente
+ r
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/Monroe/PecanHavenAddic
+ tionRecoveryCenter
+END:VEVENT
+END:VCALENDAR

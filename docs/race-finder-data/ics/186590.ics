@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-186590@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Detroit:20261126T080000
+DTEND;TZID=America/Detroit:20261126T100000
+SUMMARY:Holland Turkey Trot 5K
+LOCATION:2 E 8th Street\, Holland\, MI\, 49423
+URL:https://runsignup.com/Race/MI/Holland/HollandTurkeyTrot5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MI/Holland/HollandTurkeyT
+ rot5k
+END:VEVENT
+END:VCALENDAR

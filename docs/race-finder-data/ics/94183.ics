@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-94183@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T100000
+DTEND;TZID=America/New_York:20270101T120000
+SUMMARY:New Day * New Year 5k & HNY Fun Run (In person & Virtual)
+LOCATION:Lost Rhino Brewing Company 21730 Red Rum Dr\, Ashburn\, VA\, 201
+ 47
+URL:https://runsignup.com/Race/VA/Ashburn/NewDayNewYear5k10k
+DESCRIPTION:Sign up: https://runsignup.com/Race/VA/Ashburn/NewDayNewYear5
+ k10k
+END:VEVENT
+END:VCALENDAR

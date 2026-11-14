@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-212603@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T090000
+DTEND;TZID=America/New_York:20261205T110000
+SUMMARY:WhoVillage Holiday Dash
+LOCATION:301 3rd Street\, Fairport Harbor\, OH\, 44077
+URL:https://runsignup.com/Race/OH/FairportHarbor/WhoVillageHolidayDash
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/FairportHarbor/WhoVill
+ ageHolidayDash
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-156126@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T163000
+DTEND;TZID=America/Chicago:20261205T183000
+SUMMARY:Caddo Mills Christmas Parade 2026
+LOCATION:2700 Gilmer St\, Caddo Mills\, TX\, 75135
+URL:https://runsignup.com/Race/TX/CaddoMills/CaddoMillsChristmasParade202
+ 3
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/CaddoMills/CaddoMillsC
+ hristmasParade2023
+END:VEVENT
+END:VCALENDAR

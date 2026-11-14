@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215901@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T140000
+DTEND;TZID=America/New_York:20261205T160000
+SUMMARY:Holiday Cheer Meister Walk Benefiting Kelsey’s Christmas for Ki
+ ds
+LOCATION:9453 Bradmore Ln\,\, Ooltewah\, TN\, 37363
+URL:https://runsignup.com/Race/TN/Ooltewah/CheerMeisterWalk
+DESCRIPTION:Sign up: https://runsignup.com/Race/TN/Ooltewah/CheerMeisterW
+ alk
+END:VEVENT
+END:VCALENDAR

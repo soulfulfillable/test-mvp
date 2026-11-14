@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-122197@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261205T073000
+DTEND;TZID=America/New_York:20261205T093000
+SUMMARY:2026 Jingle Bell Run - Baltimore\, MD
+LOCATION:1 Safari Place\, Baltimore\, MD\, 21217
+URL:https://runsignup.com/Race/MD/Baltimore/JingleBellRun5KBaltimore
+DESCRIPTION:Sign up: https://runsignup.com/Race/MD/Baltimore/JingleBellRu
+ n5KBaltimore
+END:VEVENT
+END:VCALENDAR

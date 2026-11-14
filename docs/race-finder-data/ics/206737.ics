@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-206737@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T073000
+DTEND;TZID=America/Chicago:20261205T093000
+SUMMARY:7 Creeks Vineyard Christmas Wine Run 5k
+LOCATION:7 Creeks Vineyard\, Burnet\, TX\, 78611
+URL:https://runsignup.com/Race/TX/Burnet/CreeksVineyardWineRun5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/TX/Burnet/CreeksVineyardW
+ ineRun5k
+END:VEVENT
+END:VCALENDAR

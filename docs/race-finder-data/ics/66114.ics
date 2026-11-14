@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-66114@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261206T084000
+DTEND;TZID=America/New_York:20261206T104000
+SUMMARY:Elf 'N' Cocoa 8K/5K & 1 Mile Fun Run
+LOCATION:Riverwinds Community Center\, West Deptford\, NJ\, 08086
+URL:https://runsignup.com/Race/NJ/WestDeptford/ElfNCocoa8K5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/NJ/WestDeptford/ElfNCocoa
+ 8K5K
+END:VEVENT
+END:VCALENDAR

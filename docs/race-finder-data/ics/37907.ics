@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-37907@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261126T084500
+DTEND;TZID=America/Chicago:20261126T104500
+SUMMARY:Chanhassen Turkey Trot 5K
+LOCATION:2200 Lyman Blvd\, Chanhassen\, MN\, 55317
+URL:https://runsignup.com/Race/MN/Chanhassen/ChanhassenTurkeyTrot5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Chanhassen/ChanhassenT
+ urkeyTrot5k
+END:VEVENT
+END:VCALENDAR

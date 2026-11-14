@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216217@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261114T080000
+DTEND;TZID=America/Los_Angeles:20261114T100000
+SUMMARY:Badges and Laces 5k
+LOCATION:2108 20th Avenue\, Delano\, CA\, 93215
+URL:https://runsignup.com/Race/CA/Delano/BadgesAndLaces5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/Delano/BadgesAndLaces5
+ k
+END:VEVENT
+END:VCALENDAR

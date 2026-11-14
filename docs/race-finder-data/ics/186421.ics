@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-186421@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T080000
+DTEND;TZID=America/Los_Angeles:20261126T100000
+SUMMARY:Inspirada Runners Turkey Trot 5k*
+LOCATION:1890 Via Firenze\, Henderson\, NV\, 89044
+URL:https://runsignup.com/Race/NV/Henderson/InspiradaRunners5KTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/NV/Henderson/InspiradaRun
+ ners5KTurkeyTrot
+END:VEVENT
+END:VCALENDAR

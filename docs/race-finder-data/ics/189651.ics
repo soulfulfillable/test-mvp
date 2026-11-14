@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-189651@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T090000
+DTEND;TZID=America/New_York:20261121T110000
+SUMMARY:Isle of Wight Turkey Trot & Waddle 5K
+LOCATION:48 Fourth Street\, Midway\, GA\, 31320
+URL:https://runsignup.com/Race/GA/Midway/IsleOfWightTurkeyTrotWaddleColor
+ Run5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/GA/Midway/IsleOfWightTurk
+ eyTrotWaddleColorRun5K
+END:VEVENT
+END:VCALENDAR

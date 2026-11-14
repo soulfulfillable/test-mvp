@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-214435@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261114T100000
+DTEND;TZID=America/Chicago:20261114T120000
+SUMMARY:New Salem Children's Center Turkey Trot
+LOCATION:15588 History Ln\, Petersburg\, IL\, 62675
+URL:https://runsignup.com/Race/IL/Petersburg/NewSalemsChildrensCenter
+DESCRIPTION:Sign up: https://runsignup.com/Race/IL/Petersburg/NewSalemsCh
+ ildrensCenter
+END:VEVENT
+END:VCALENDAR

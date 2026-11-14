@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-219081@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T100000
+DTEND;TZID=America/Denver:20261114T120000
+SUMMARY:USATF Region 10 JO XC Championships
+LOCATION:1825 Culebra Avenue\, Colorado Springs\, CO\, 80907
+URL:https://runsignup.com/Race/CO/ColoradoSprings/USATFRegion10JOXCChampi
+ onships
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/ColoradoSprings/USATFR
+ egion10JOXCChampionships
+END:VEVENT
+END:VCALENDAR

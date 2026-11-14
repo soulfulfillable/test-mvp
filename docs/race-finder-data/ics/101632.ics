@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-101632@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T083000
+DTEND;TZID=America/New_York:20261126T103000
+SUMMARY:34th Annual Burgettstown Turkey Trot 5K Fun Run & Fitness Walk
+LOCATION:104 Bavington Road\, Burgettstown\, PA\, 15021
+URL:https://runsignup.com/Race/PA/Burgettstown/BurgettstownTurkeyTrot5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Burgettstown/Burgettst
+ ownTurkeyTrot5K
+END:VEVENT
+END:VCALENDAR

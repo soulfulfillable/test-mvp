@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-185610@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261128T083000
+DTEND;TZID=America/Los_Angeles:20261128T103000
+SUMMARY:Gobbler 5K\, 10K\, & 13.1M at Olympia\, WA (48)
+LOCATION:Heritage Park\, Olympia\, WA\, 98501
+URL:https://runsignup.com/Race/WA/Olympia/HeritagePark47
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Olympia/HeritagePark47
+END:VEVENT
+END:VCALENDAR

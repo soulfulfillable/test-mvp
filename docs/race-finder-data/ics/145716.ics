@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-145716@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T090000
+DTEND;TZID=America/New_York:20261126T110000
+SUMMARY:Carlisle YMCA Turkey Trot
+LOCATION:311 South West Street\, Carlisle\, PA\, 17013
+URL:https://runsignup.com/Race/PA/Carlisle/2023CarlisleYMCATurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/PA/Carlisle/2023CarlisleY
+ MCATurkeyTrot
+END:VEVENT
+END:VCALENDAR

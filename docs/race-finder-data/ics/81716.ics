@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-81716@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20270101T083000
+DTEND;TZID=America/New_York:20270101T103000
+SUMMARY:2027 Race the Landing 5K New Years Day Pajama Run -Recycle\, Reus
+ e and Renew
+LOCATION:1500 Old Towne Rd\, Charleston\, SC\, 29407
+URL:https://runsignup.com/Race/SC/Charleston/20205KNewYearsDayPajamaRunRe
+ cycleReuseandRenew
+DESCRIPTION:Sign up: https://runsignup.com/Race/SC/Charleston/20205KNewYe
+ arsDayPajamaRunRecycleReuseandRenew
+END:VEVENT
+END:VCALENDAR

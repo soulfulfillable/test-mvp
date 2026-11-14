@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-185585@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T080000
+DTEND;TZID=America/New_York:20261121T100000
+SUMMARY:Gobbler 5K\, 10K\, & 13.1M Beavercreek\, OH (47)
+LOCATION:E J Nutter Park\, Beavercreek\, OH\, 45434
+URL:https://runsignup.com/Race/OH/Beavercreek/Nutter47
+DESCRIPTION:Sign up: https://runsignup.com/Race/OH/Beavercreek/Nutter47
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213607@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261114T073000
+DTEND;TZID=America/Denver:20261114T093000
+SUMMARY:Lone Tree Reckoning Heavy 15K and 5K
+LOCATION:2939 N County Rd 31D\, Loveland\, CO\, 80538
+URL:https://runsignup.com/Race/CO/Loveland/LoneTreeReckoningHalfAnd5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/CO/Loveland/LoneTreeRecko
+ ningHalfAnd5K
+END:VEVENT
+END:VCALENDAR

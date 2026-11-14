@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-5481@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261212T100000
+DTEND;TZID=America/New_York:20261212T120000
+SUMMARY:YMCA REINDEER RAMBLE 5K    Presented by Publix®
+LOCATION:Keeneland\, Lexington\, KY\, 40510
+URL:https://runsignup.com/Race/KY/Lexington/ReindeerRamble5K
+DESCRIPTION:Sign up: https://runsignup.com/Race/KY/Lexington/ReindeerRamb
+ le5K
+END:VEVENT
+END:VCALENDAR

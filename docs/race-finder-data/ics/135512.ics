@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-135512@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T080000
+DTEND;TZID=America/New_York:20261126T100000
+SUMMARY:2026 PPTC Turkey Trot: Race for Reconciliation 5 Miler
+LOCATION:Prospect Park\, Brooklyn NY\, Brooklyn\, NY\, 11215
+URL:https://runsignup.com/Race/NY/Brooklyn/PPTCTurkeyTrotRaceforReconcili
+ ation5Miler
+DESCRIPTION:Sign up: https://runsignup.com/Race/NY/Brooklyn/PPTCTurkeyTro
+ tRaceforReconciliation5Miler
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-44733@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261212T070000
+DTEND;TZID=America/Chicago:20261212T090000
+SUMMARY:Rocket City Marathon
+LOCATION:700 Monroe Street SW\, Huntsville\, AL\, 35801
+URL:https://runsignup.com/Race/AL/Huntsville/RocketCity
+DESCRIPTION:Sign up: https://runsignup.com/Race/AL/Huntsville/RocketCity
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-206310@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261203T163000
+DTEND;TZID=America/New_York:20261203T183000
+SUMMARY:Love in Motion 2 Mile Walk/Run
+LOCATION:1 Indian Avenue\, Venice\, FL\, 34293
+URL:https://runsignup.com/Race/FL/Venice/LoveInMotion
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Venice/LoveInMotion
+END:VEVENT
+END:VCALENDAR

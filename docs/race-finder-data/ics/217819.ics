@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217819@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261213T080000
+DTEND;TZID=America/New_York:20261213T100000
+SUMMARY:Christmas on Wheels 2026
+LOCATION:1300 NW 50th St\, Miami\, FL 33142\, Miami\, FL\, 33142
+URL:https://runsignup.com/Race/FL/Miami/ChristmasOnWheels
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Miami/ChristmasOnWheel
+ s
+END:VEVENT
+END:VCALENDAR

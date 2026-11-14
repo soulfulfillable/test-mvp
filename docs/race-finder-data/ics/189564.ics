@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-189564@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261121T070000
+DTEND;TZID=America/New_York:20261121T090000
+SUMMARY:Run Manatee - Rye Preserve 5K -2026
+LOCATION:905 Rye Wilderness Trail\, Parrish\, FL\, 34219
+URL:https://runsignup.com/Race/FL/Parrish/runmanateeryepreserve2
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/Parrish/runmanateeryep
+ reserve2
+END:VEVENT
+END:VCALENDAR

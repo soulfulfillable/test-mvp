@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-211885@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261128T120000
+DTEND;TZID=America/Chicago:20261128T140000
+SUMMARY:The Challenge:  Walk/Run for Clean Water
+LOCATION:4453 Old Brownlee Rd\, Bossier City\, LA\, 71111
+URL:https://runsignup.com/Race/LA/BossierCity/HrChallengeHondurasWellProj
+ ects
+DESCRIPTION:Sign up: https://runsignup.com/Race/LA/BossierCity/HrChalleng
+ eHondurasWellProjects
+END:VEVENT
+END:VCALENDAR

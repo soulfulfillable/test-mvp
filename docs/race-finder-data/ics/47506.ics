@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-47506@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T073000
+DTEND;TZID=America/Los_Angeles:20261126T093000
+SUMMARY:2026 Mukilteo Turkey Trot 5K and 10K
+LOCATION:Kamiak High School\, Mukilteo\, WA\, 98275
+URL:https://runsignup.com/Race/WA/Mukilteo/2017MukilteoTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Mukilteo/2017MukilteoT
+ urkeyTrot
+END:VEVENT
+END:VCALENDAR

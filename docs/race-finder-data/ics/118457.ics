@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-118457@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261202T173000
+DTEND;TZID=America/Chicago:20261202T193000
+SUMMARY:Trail Kids Beginner Nordic Ski Clinics
+LOCATION:1221 Theodore Wirth Parkway\, Minneapolis\, MN\, 55422
+URL:https://runsignup.com/Race/MN/Minneapolis/TrailKidsBeginnerNordicSkiC
+ linics
+DESCRIPTION:Sign up: https://runsignup.com/Race/MN/Minneapolis/TrailKidsB
+ eginnerNordicSkiClinics
+END:VEVENT
+END:VCALENDAR

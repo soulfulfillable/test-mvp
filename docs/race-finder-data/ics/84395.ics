@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-84395@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Denver:20261128T163000
+DTEND;TZID=America/Denver:20261128T183000
+SUMMARY:Utah Santa Run - Ogden
+LOCATION:2250 Washington Blvd\, Ogden\, UT\, 84401
+URL:https://runsignup.com/Race/UT/Ogden/OgdenSantaRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/UT/Ogden/OgdenSantaRun
+END:VEVENT
+END:VCALENDAR

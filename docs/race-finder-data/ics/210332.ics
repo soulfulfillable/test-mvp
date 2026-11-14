@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-210332@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261114T110000
+SUMMARY:Annual Yorktown DECA Turkey Trot 2026
+LOCATION:1100 S Tiger Dr\, Yorktown\, IN\, 47396
+URL:https://runsignup.com/Race/IN/Yorktown/AnnualYorktownDECATurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/IN/Yorktown/AnnualYorktow
+ nDECATurkeyTrot
+END:VEVENT
+END:VCALENDAR

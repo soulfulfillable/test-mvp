@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-213484@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261126T090000
+DTEND;TZID=America/Los_Angeles:20261126T110000
+SUMMARY:Issaquah Turkey Trot 2026
+LOCATION:179 1st Ave SE\, Issaquah\, WA\, 98027
+URL:https://runsignup.com/Race/WA/Issaquah/IssaquahTurkeyTrot
+DESCRIPTION:Sign up: https://runsignup.com/Race/WA/Issaquah/IssaquahTurke
+ yTrot
+END:VEVENT
+END:VCALENDAR

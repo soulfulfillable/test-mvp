@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-60675@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261126T073000
+DTEND;TZID=America/New_York:20261126T093000
+SUMMARY:Gobbler 5K and 1 Mile Fun Run
+LOCATION:Jay B Starkey Park\, New Port Richey\, FL\, 34655
+URL:https://runsignup.com/Race/FL/NewPortRichey/Gobbler5Kand1MileFunRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/NewPortRichey/Gobbler5
+ Kand1MileFunRun
+END:VEVENT
+END:VCALENDAR

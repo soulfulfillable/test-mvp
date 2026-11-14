@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-216350@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Los_Angeles:20261212T060000
+DTEND;TZID=America/Los_Angeles:20261212T080000
+SUMMARY:Robin Ames Foundation 100 Mile Solo Run
+LOCATION:2749 N El Camino Real\, San Clemente\, CA\, 92672
+URL:https://runsignup.com/Race/CA/SanClemente/RobinAmesFoundation100MileS
+ oloRun
+DESCRIPTION:Sign up: https://runsignup.com/Race/CA/SanClemente/RobinAmesF
+ oundation100MileSoloRun
+END:VEVENT
+END:VCALENDAR

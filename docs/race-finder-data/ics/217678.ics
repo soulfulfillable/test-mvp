@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-217678@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/New_York:20261221T163000
+DTEND;TZID=America/New_York:20261221T183000
+SUMMARY:SBA Holiday Golf Cart Parade
+LOCATION:1120 Seaway Drive\, Fort Pierce\, FL\, 34949
+URL:https://runsignup.com/Race/FL/FortPierce/SBAHolidayGolfCartParade
+DESCRIPTION:Sign up: https://runsignup.com/Race/FL/FortPierce/SBAHolidayG
+ olfCartParade
+END:VEVENT
+END:VCALENDAR

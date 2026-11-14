@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Soulfulfill//Race Finder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:race-215193@racefinder.soulfulfill
+DTSTAMP:20261114T025931Z
+DTSTART;TZID=America/Chicago:20261205T170000
+DTEND;TZID=America/Chicago:20261205T190000
+SUMMARY:Frost Your Toes 5 K
+LOCATION:403 E Memorial Street\, Broken Bow\, OK\, 74728
+URL:https://runsignup.com/Race/OK/BrokenBow/frostyourtoes5k
+DESCRIPTION:Sign up: https://runsignup.com/Race/OK/BrokenBow/frostyourtoe
+ s5k
+END:VEVENT
+END:VCALENDAR
