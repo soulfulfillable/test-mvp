@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>문의 메일 초안</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--sub:#6e6e73;--line:#d2d2d7;--accent:#0a66c2}
+@media(prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--sub:#98989d;--line:#38383a;--accent:#4da3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 -apple-system,system-ui,sans-serif;padding:20px 16px 60px}
+main{max-width:680px;margin:0 auto}
+h1{font-size:26px;margin:8px 0 4px}
+h2{font-size:20px;margin:0 0 4px}
+p.sub{color:var(--sub);margin:0 0 20px;font-size:15px}
+section{background:var(--card);border-radius:14px;padding:18px 16px;margin-bottom:18px}
+dl{margin:10px 0;font-size:15px}
+dt{color:var(--sub);font-size:13px;margin-top:8px}
+dd{margin:0;word-break:break-word}
+pre{white-space:pre-wrap;word-break:break-word;font:15px/1.55 -apple-system,system-ui,sans-serif;border:1px solid var(--line);border-radius:10px;padding:14px;margin:10px 0}
+button{font:600 16px -apple-system,system-ui,sans-serif;color:#fff;background:var(--accent);border:0;border-radius:10px;padding:12px 16px;min-height:44px;margin:4px 8px 0 0}
+button.done{background:#2e7d32}
+ul{padding-left:20px;margin:8px 0;font-size:15px}
+</style></head><body><main>
+<h1>문의 메일 초안</h1>
+<p class="sub">2026-11-14 · 대회 모아보기 앱 후보 A·B. 답이 오는 쪽으로 정합니다.</p>
+
+<section>
+<h2>보내기 전에</h2>
+<ul>
+<li><b>회사 메일로 보내지 마세요.</b> 개인 메일(앱 지원용 주소)로 보냅니다.</li>
+<li>서명은 Soulfulfill 로만 되어 있습니다. 실명은 넣지 않았습니다.</li>
+<li>받는 주소 중 WCA 것은 WCA 문서에 나온 주소이고, RunSignup 것은 확인하지 못했습니다 — RunSignup 사이트의 API·지원 문의 창구로 보내는 것이 안전합니다.</li>
+</ul>
+</section>
+
+<section>
+<h2>A. 세계큐브협회 (WCA)</h2>
+<dl>
+<dt>받는 사람</dt><dd>software@worldcubeassociation.org (소프트웨어 팀. 제3자 사용 규정은 데이터 보호 위원회 담당이라 전달될 수 있음)</dd>
+<dt>제목</dt><dd id="a-subj">Question about using WCA public data in a free third-party iOS app</dd>
+</dl>
+<pre id="a-body">Hello WCA Software Team,
+
+I am an independent developer (publishing as Soulfulfill) and a fan of speedcubing. I would like to build a small, free iOS app that helps competitors and their families follow WCA competitions, and I want to make sure I do it in a way the WCA is comfortable with before I write any code.
+
+What the app would do:
+- Show upcoming WCA competitions near the user, with dates, events and a link to the official competition page.
+- Let a user follow a competitor by WCA ID and see their official results and personal records.
+- A simple "for parents" view that explains, in plain language, which round their child is in and whether they advanced.
+
+Data I would use:
+- Only public data: the official results export and the public competition listings.
+- No login, no private data, and no data on anyone beyond what the WCA already publishes.
+
+My questions:
+1. Is an app like this acceptable under the current terms for third-party use of WCA data?
+2. The app would be free to use and supported by a small banner ad (no subscription, no paywall). Is ad-supported use permitted? If not, I would like to know before I start.
+3. Is there a preferred way to access upcoming competitions and results (the results export, the v0 API, or the unofficial REST API), and are there rate limits I should respect?
+4. Is there any approved way to read live results from WCA Live, or should a third-party app only link out to it?
+5. What attribution and "not affiliated with the WCA" wording would you like me to display?
+
+I am happy to follow whatever conditions you set, to show the app to you before release, and to remove anything you ask me to.
+
+Thank you for your time, and for keeping this data open.
+
+Best regards,
+Soulfulfill</pre>
+<button data-copy="a-subj">제목 복사</button><button data-copy="a-body">본문 복사</button>
+</section>
+
+<section>
+<h2>B. RunSignup</h2>
+<dl>
+<dt>받는 사람</dt><dd>RunSignup 사이트의 API·지원 문의 창구 (주소 미확인)</dd>
+<dt>제목</dt><dd id="b-subj">API question: free race-discovery app that links runners to RunSignup registration pages</dd>
+</dl>
+<pre id="b-body">Hello RunSignup Team,
+
+I am an independent developer (publishing as Soulfulfill). I would like to build a small, free iOS app that helps runners find local races, and I have read the API Developer Contract. Before I register for API access, I want to confirm that what I have in mind is allowed.
+
+What the app would do:
+- "Races near me this weekend / this month": a simple list and map of upcoming public races, filtered by distance (5K, 10K, half, marathon) and by town.
+- Reminders before registration closes or prices go up.
+- Every race opens the official RunSignup race page for details and registration. The app would not take registrations, payments or participant data. It only sends runners to you.
+
+Data I would use:
+- Only public race listings from the races endpoint (name, date, location, distances, registration deadlines, race URL).
+- No participant data and no user login to RunSignup.
+
+My questions:
+1. The contract says the API may not be used to build applications that compete with RunSignup. Would a discovery-only app that links out to RunSignup registration pages be considered competing, or is it acceptable?
+2. The app would be free and supported by a small banner ad (no subscription, no paywall). Is ad-supported use permitted under the contract?
+3. Is it acceptable to cache public race listings on the device (for example, refreshing once a day) so the app works quickly and does not overload the API? Are there rate limits I should follow?
+4. Do you offer an affiliate or referral program for registrations sent from a third-party app?
+5. What attribution or "powered by RunSignup" wording would you like displayed?
+
+I am happy to follow any conditions you set and to show you the app before release.
+
+Thank you for your time.
+
+Best regards,
+Soulfulfill</pre>
+<button data-copy="b-subj">제목 복사</button><button data-copy="b-body">본문 복사</button>
+</section>
+</main>
+<script>
+document.querySelectorAll('button[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.copy).textContent, label=b.textContent;
+    function ok(){b.textContent='복사됨';b.classList.add('done');setTimeout(function(){b.textContent=label;b.classList.remove('done')},1500)}
+    function fallback(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){}a.remove()}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback)}else{fallback()}
+  });
+});
+</script>
+</body></html>
