@@ -9,7 +9,7 @@ const ok = (name, cond, extra = '') => { results.push(`${cond ? 'PASS' : 'FAIL'}
 const HOBOKEN = { latitude: 40.7445, longitude: -74.0329 };
 
 async function ctx(browser, o = {}) {
-  const c = await browser.newContext({ viewport: o.vp || { width: 390, height: 844 }, deviceScaleFactor: o.dsf || 1, hasTouch: true, isMobile: true,
+  const c = await browser.newContext({ ignoreHTTPSErrors: !!process.env.LIVE, viewport: o.vp || { width: 390, height: 844 }, deviceScaleFactor: o.dsf || 1, hasTouch: true, isMobile: true,
     colorScheme: o.dark ? 'dark' : 'light', geolocation: o.geo === undefined ? HOBOKEN : o.geo || undefined, permissions: o.geo === null ? [] : ['geolocation'] });
   const p = await c.newPage(); p.errs = [];
   p.on('console', m => m.type() === 'error' && !/Failed to load resource|ERR_FAILED|ERR_INTERNET/.test(m.text()) && p.errs.push(m.text()));
@@ -22,7 +22,7 @@ const shot = (p, n) => p.screenshot({ path: `${SHOTS}/${n}.png` });
 const listReady = p => p.waitForSelector('.race, .state', { timeout: 15000 });
 
 (async () => {
-  const b = await chromium.launch();
+  const b = await chromium.launch(process.env.LIVE ? { proxy: { server: process.env.HTTPS_PROXY } } : {});
 
   // 1. 첫 실행 → 내 위치 버튼
   let p = await ctx(b);
@@ -103,7 +103,7 @@ const listReady = p => p.waitForSelector('.race, .state', { timeout: 15000 });
   ok('5 콘솔 에러 0', p.errs.length === 0, p.errs.join(' / ')); await p.context().close();
 
   // 6. 빈 화면: 대회 없는 곳 → 버튼으로 넓히기
-  p = await ctx(b); await p.goto(BASE + '?zip=99723'); await p.waitForSelector('.state');
+  p = await ctx(b); await p.goto(BASE + '?zip=99723'); await p.waitForSelector('[data-act]');
   ok('빈 화면 문구', /^No races this weekend/.test(await p.locator('.state h2').innerText()), await p.locator('.state p').innerText());
   await shot(p, '09-empty');
   await p.tap('[data-act=wider]'); ok('Search within 50 mi 버튼', /50 mi/.test(await p.locator('#where').innerText()));

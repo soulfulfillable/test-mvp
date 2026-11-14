@@ -164,6 +164,7 @@ var S={loc:load('loc',null),radius:load('radius',25),period:load('period','weeke
        saved:load('saved',{}),tab:'races',races:null,meta:null,error:null,loading:false};
 if(qs.get('zip'))S.loc=null;
 if(S.loc)S.loading=true;
+var pendingZip=!!qs.get('zip');
 
 /* ---------- time helpers: race times are naive local strings 'YYYY-MM-DDTHH:MM' ---------- */
 var NOW=qs.get('now')?new Date(qs.get('now')):new Date();
@@ -276,6 +277,7 @@ function render(){
   $('title').textContent=S.loc?(S.period==='weekend'?'This weekend':S.period==='two'?'Next 2 weeks':'Next 8 weeks'):'Races near you';
   $('where').hidden=!S.loc;$('controls').hidden=!S.loc;
   if(S.loc)$('whereText').textContent='Within '+S.radius+' mi of '+S.loc.label;
+  if(!S.loc&&pendingZip){foot.hidden=true;main.innerHTML='<p class="count">Loading races\u2026</p>';return}
   if(!S.loc){foot.hidden=true;main.innerHTML=
     '<div class="state"><h2>Where do you run?</h2><p>See every 5K, 10K, half and marathon near you, with what it costs today and when the price goes up.</p>'+
     '<div class="acts"><button class="btn wide" id="gps">Use my location</button></div>'+
@@ -411,7 +413,7 @@ $('tabSaved').onclick=function(){S.tab='saved';render();scrollTo(0,0)};
 
 /* ---------- start ---------- */
 render();
-if(qs.get('zip'))lookupZip(qs.get('zip')).then(setLoc,function(){render()});
+if(pendingZip)lookupZip(qs.get('zip')).then(function(l){pendingZip=false;setLoc(l)},function(){pendingZip=false;render()});
 else if(S.loc)loadRaces();
 })();
 </script>
