@@ -1,6 +1,8 @@
 // 테스트 로봇: 모든 화면의 모든 버튼을 눌러 막힌 길·넘침·깨진 글자를 찾는다.
 // 사용: (docs 폴더를 8765 포트로 띄운 뒤) node robot.js [스크린샷 폴더]
-const { chromium } = require('playwright');
+const { chromium, webkit, devices } = require('playwright');
+// ENGINE=webkit 이면 사파리 엔진 + 아이폰 13 설정(UA·배율 3)으로 돈다. 실제 iOS 사파리 자체는 아니다(리눅스용 WebKit).
+const WK = process.env.ENGINE === 'webkit', IPHONE = devices['iPhone 13'];
 const BASE = process.env.BASE || 'http://localhost:8765/race-finder.html';
 const SHOTS = process.argv[2] || '/tmp/rf-shots';
 require('fs').mkdirSync(SHOTS, { recursive: true });
@@ -9,7 +11,7 @@ const ok = (name, cond, extra = '') => { results.push(`${cond ? 'PASS' : 'FAIL'}
 const HOBOKEN = { latitude: 40.7445, longitude: -74.0329 };
 
 async function ctx(browser, o = {}) {
-  const c = await browser.newContext({ ignoreHTTPSErrors: !!process.env.LIVE, viewport: o.vp || { width: 390, height: 844 }, deviceScaleFactor: o.dsf || 1, hasTouch: true, isMobile: true,
+  const c = await browser.newContext({ ...(WK ? IPHONE : {}), ignoreHTTPSErrors: !!process.env.LIVE, viewport: o.vp || (WK ? IPHONE.viewport : { width: 390, height: 844 }), deviceScaleFactor: WK ? 3 : (o.dsf || 1), hasTouch: true, isMobile: true,
     colorScheme: o.dark ? 'dark' : 'light', geolocation: o.geo === undefined ? HOBOKEN : o.geo || undefined, permissions: o.geo === null ? [] : ['geolocation'] });
   const p = await c.newPage(); p.errs = [];
   p.on('console', m => m.type() === 'error' && !/Failed to load resource|ERR_FAILED|ERR_INTERNET/.test(m.text()) && p.errs.push(m.text()));
@@ -22,7 +24,7 @@ const shot = (p, n) => p.screenshot({ path: `${SHOTS}/${n}.png` });
 const listReady = p => p.waitForSelector('.race, .state', { timeout: 15000 });
 
 (async () => {
-  const b = await chromium.launch(process.env.LIVE ? { proxy: { server: process.env.HTTPS_PROXY } } : {});
+  const b = await (WK ? webkit : chromium).launch(process.env.LIVE ? { proxy: { server: process.env.HTTPS_PROXY } } : {});
 
   // 1. 첫 실행 → 내 위치 버튼
   let p = await ctx(b);
@@ -94,6 +96,7 @@ const listReady = p => p.waitForSelector('.race, .state', { timeout: 15000 });
   await p.tap('#gps'); await p.waitForFunction(() => document.getElementById('err').textContent.length > 0);
   ok('위치 거부 → 안내 문구', /ZIP code instead/.test(await p.locator('#err').innerText()), await p.locator('#err').innerText());
   await p.fill('#zip', '12'); await p.tap('#zipform button'); ok('짧은 ZIP → 안내', /5-digit/.test(await p.locator('#err').innerText()));
+  ok('오류 문구가 빨간색(본문 회색과 다름)', await p.evaluate(() => { const c = getComputedStyle(document.getElementById('err')).color.match(/\d+/g).map(Number); return c[0] > 180 && c[1] < 120; }));
   await p.fill('#zip', '00000'); await p.tap('#zipform button'); await p.waitForFunction(() => /know that ZIP/.test(document.getElementById('err').textContent));
   ok('없는 ZIP → 안내', true);
   ok('키보드 높이(390×500)에서 입력칸·버튼 보임', await p.locator('#zipform button').isVisible() && !(await overflow(p)));
