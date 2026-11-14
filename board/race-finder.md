@@ -3,14 +3,14 @@
 
 ## 🔁 이어받기 (매 단계마다 갱신 — 크레딧이 막혀도 다른 계정에서 바로 이어받게)
 - 마지막 저장: 2026-11-14 KST · 작업 브랜치: claude/upbeat-franklin-pis0pn (main 에 반영됨)
-- 방금 끝낸 것: 웹 시제품 1차 `docs/race-finder.html` + 실제 데이터 스냅숏 `docs/race-finder-data/` + 로봇 68/68 (`racefinder_app/test/robot.js`)
+- 방금 끝낸 것: 웹 시제품 1차 `docs/race-finder.html` + 실제 데이터 스냅숏 `docs/race-finder-data/` + 로봇 70/70 (`racefinder_app/test/robot.js`, 배포 주소로도 실행해 통과 — `LIVE=1 BASE=<주소>`)
 - 진행 중이던 것(끝 못 낸 것): 없음
 - **다음 할 일**: ① 사용자 느낌 받기(https://soulfulfillable.github.io/test-mvp/race-finder.html) → 지적된 것만 고침 ② 계속이면 앱 이름·번들 ID A/B(미국 검색어: "5K races near me", "race finder") ③ 경쟁 앱 평가 수·리뷰 확인(환경 `test-mvp` 에 apps.apple.com 허용해 둠) ④ 그다음 예상: Flutter(`racefinder_app/flutter/`, 기기에서 ZIP+반경 직접 호출) → 인상 전날 로컬 알림 → 광고 → Release iOS. 스냅숏을 새로 받으려면 `python3 racefinder_app/tools/fetch_races.py <zips.json> docs/race-finder-data 8`(zips.json 은 npm `zipcodes` 에서 뽑음 — 스크립트 머리말)
 - 사용자 대기 중인 것: 시제품 써 본 느낌
 - 이어받는 세션에 붙여 넣을 말: `soulfulfillable/test-mvp 의 board/race-finder.md "🔁 이어받기" 와 plans/race-finder-app.md 를 읽고, "다음 할 일"부터 이어서 해줘.`
 
 ## 지금 상태 (3줄 이내)
-웹 시제품 1차 완성(실제 RunSignup 데이터 스냅숏, 로봇 68/68). 사용자 느낌 대기.
+웹 시제품 1차 완성(실제 RunSignup 데이터 스냅숏, 로봇 70/70, 배포 주소에서도 통과). 사용자 느낌 대기.
 
 ## 다음 할 일 / 사용자에게 받을 것
 위 "다음 할 일". 사용자에게는 웹 시제품 느낌과 이름 A/B 만.

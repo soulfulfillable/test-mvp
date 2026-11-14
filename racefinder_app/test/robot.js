@@ -102,6 +102,13 @@ const listReady = p => p.waitForSelector('.race, .state', { timeout: 15000 });
   ok('ZIP 60614(시카고) → 목록', /ZIP 60614/.test(await p.locator('#where').innerText()));
   ok('5 콘솔 에러 0', p.errs.length === 0, p.errs.join(' / ')); await p.context().close();
 
+  // 5-1. 인상 문구: 호보컨 터키 트롯 5K 는 11/15 23:59 까지 $45 → 11/14 에는 "after tomorrow", 11/15 에는 "tonight"
+  for (const [now, want] of [['2026-11-14T15:00:00Z', 'after tomorrow: $20 to $25'], ['2026-11-15T15:00:00Z', 'tonight: $20 to $25']]) {
+    p = await ctx(b); await p.goto(BASE + '?zip=07030&now=' + now); await p.waitForSelector('.race'); await p.tap('#period [data-p=two]');
+    const t = await p.locator('.race:has-text("Hoboken\'s Annual Turkey Trot") .rise').innerText();
+    ok('인상 문구 ' + now.slice(5, 10), t.includes(want), t); await p.context().close();
+  }
+
   // 6. 빈 화면: 대회 없는 곳 → 버튼으로 넓히기
   p = await ctx(b); await p.goto(BASE + '?zip=99723'); await p.waitForSelector('[data-act]');
   ok('빈 화면 문구', /^No races this weekend/.test(await p.locator('.state h2').innerText()), await p.locator('.state p').innerText());

@@ -52,3 +52,9 @@
 - **못 한 것·확인 못 한 것**: 실제 아이폰 사파리 미확인(헤드리스 크롬만). 대회 날 기온 한 줄은 안 만듦(예보 주소가 이 환경에서 막힘). 알림은 웹이라 달력 파일로 대신함. 경쟁 앱 평가 수·리뷰는 아직 안 봄. 스냅숏이라 날이 지나면 가격·마감이 낡는다.
 - 이 세션용 환경 `test-mvp` 를 새로 만듦(허용: runsignup.com, www.runsignup.com, apps.apple.com, itunes.apple.com).
 - 다음: 사용자 느낌 → (계속이면) 이름·번들 A/B → Flutter(기기에서 ZIP+반경으로 직접 호출 — 1,000개 제한·CORS 문제 없음) → 로컬 알림(인상 전날).
+
+### 2026-11-14 실제 주소에서 직접 확인 (사용자 "직접해봐")
+- 환경 `test-mvp` 에 `soulfulfillable.github.io` 허용 추가 → 로봇을 **배포된 주소**로 실행: `LIVE=1 BASE=https://soulfulfillable.github.io/test-mvp/race-finder.html node racefinder_app/test/robot.js` → 68/68.
+- 실제 주소에서만 드러난 것: `?zip=` 링크로 열면 ZIP 좌표를 받는 동안 첫 실행 화면이 잠깐 비침(로컬은 빨라서 안 보임) → 받는 동안 "Loading races…" 로.
+- 데이터 대조: 호보컨 터키 트롯의 접수 페이지 200, 종목 3개의 가격 단계가 RunSignup 현재 값과 일치.
+- 대조하다 찾은 문구 오류: 11/15 23:59 까지 현재가인데 11/14 에 "goes up tomorrow" 라고 표시 → 밤 8시 이후 마감이면 "after tomorrow / tonight / after Friday" 로. 로봇에 검사 2개 추가 → **70/70**.

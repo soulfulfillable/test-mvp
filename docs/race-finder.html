@@ -182,6 +182,8 @@ function clock(s){var h=+s.slice(11,13),m=s.slice(14,16);return {t:((h+11)%12+1)
 function shortDate(s){return MO[+s.slice(5,7)-1]+' '+(+s.slice(8,10))}
 function dayLabel(s,today){var n=dayDiff(today,s),d=parse(s);var base=WD[d.getDay()]+', '+shortDate(s);return n===0?'Today, '+shortDate(s):n===1?'Tomorrow, '+shortDate(s):base}
 function inDays(n,dateStr){if(n<=0)return 'today';if(n===1)return 'tomorrow';if(n<7)return 'on '+WD[parse(dateStr).getDay()];return 'on '+shortDate(dateStr)}
+// a price that holds until late evening changes *after* that day, not on it
+function riseWhen(now,at){var n=dayDiff(now,at),late=at.slice(11,13)>='20';if(!late)return inDays(n,at);if(n<=0)return 'tonight';if(n===1)return 'after tomorrow';if(n<7)return 'after '+WD[parse(at).getDay()];return 'after '+shortDate(at)}
 function money(f){return f===0?'Free':'$'+(f%1?f.toFixed(2):f)}
 
 /* ---------- pricing: what it costs now, and when it changes ---------- */
@@ -201,7 +203,7 @@ function headline(r,kind,now){ // the one line worth showing in the list
   evs.forEach(function(e){var p=pricing(e,now);if(p.state!=='open')return;anyOpen=true;
     if(p.riseAt&&(!best||p.riseAt<best.riseAt))best=p;
     if(!soonClose||p.closes<soonClose)soonClose=p.closes});
-  if(best){var n=dayDiff(now,best.riseAt);if(n<=14)return {up:true,text:'Price goes up '+inDays(n,best.riseAt)+': '+money(best.fee)+' to '+money(best.riseTo)}}
+  if(best){var n=dayDiff(now,best.riseAt);if(n<=14)return {up:true,text:'Price goes up '+riseWhen(now,best.riseAt)+': '+money(best.fee)+' to '+money(best.riseTo)}}
   if(anyOpen&&soonClose){var c=dayDiff(now,soonClose),raceDay=dayDiff(now,evs[0].t);if(c<raceDay&&c<=7)return {text:'Sign-up closes '+inDays(c,soonClose)}}
   if(!anyOpen&&evs.length){var st=evs.map(function(e){return pricing(e,now).state});
     if(st.indexOf('closed')>=0&&st.indexOf('opens')<0&&st.indexOf('unknown')<0)return {text:'Online sign-up has closed'}}
@@ -356,7 +358,7 @@ function openRace(id){
     '<a class="addr" href="'+maps+'" target="_blank" rel="noopener">'+esc([r.st,r.c+', '+r.s].filter(Boolean).join(', '))+(r.mi!=null&&S.loc?' ('+awayText(r.mi)+' away)':'')+'</a><div class="card">';
   r.e.forEach(function(e,i){var p=pricing(e,now),ec=clock(e.t),note='',up=false,fee='';
     if(p.state==='open'){fee=money(p.fee);
-      if(p.riseAt){up=true;note='Goes up to '+money(p.riseTo)+' '+inDays(dayDiff(now,p.riseAt),p.riseAt)}
+      if(p.riseAt){up=true;note='Goes up to '+money(p.riseTo)+' '+riseWhen(now,p.riseAt)}
       else note='Sign-up closes '+inDays(dayDiff(now,p.closes),p.closes)}
     else if(p.state==='opens'){fee=money(p.fee);note='Sign-up opens '+shortDate(p.at)}
     else if(p.state==='closed'){note='Online sign-up has closed'}
