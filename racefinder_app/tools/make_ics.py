@@ -8,7 +8,7 @@ import json, glob, os, sys, shutil, datetime as dt
 D = sys.argv[1]; OUT = os.path.join(D, "ics")
 shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT)
 
-def esc(t): return str(t).replace("\\", "\\\\").replace(";", "\;").replace(",", "\\,").replace("\n", " ")
+def esc(t): return str(t).replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\n", " ")
 def fold(line):  # RFC 5545: 75옥텟 넘으면 접는다
     b = line.encode(); out = []
     while len(b) > 73:

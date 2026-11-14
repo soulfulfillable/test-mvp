@@ -63,3 +63,10 @@
 - 환경에 `cdn.playwright.dev` 허용 → Playwright WebKit 26.6 설치 → `ENGINE=webkit LIVE=1 BASE=<배포 주소> node racefinder_app/test/robot.js`: 아이폰 13 설정(390×844, 배율 3, 사파리 UA)으로 70/70.
 - 스크린샷을 눈으로 보다 찾은 것: ZIP 오류 문구가 빨강이 아니라 회색(`.state p` 가 `.err` 를 이김) → 고치고 로봇에 색 검사 추가(71개).
 - **한계**: 리눅스용 WebKit 이라 iOS 사파리 자체가 아니다. 위치 허용 창, 인앱 브라우저(위로 뜨는 시트)에서의 끌기, 달력 파일(.ics) 열림, 큰 글씨 설정(Dynamic Type), SF 글꼴은 여전히 실제 폰에서만 확인된다.
+
+### 2026-11-14 실제 아이폰 피드백 — "Add to Calendar" 가 안 열림
+- 사용자 아이폰(다크 모드, 인앱 브라우저) 스크린샷 + "이렇게만나와": 누르면 "Calendar file ready" 안내만 뜨고 달력이 안 열림. 원인: `data:text/calendar` 주소를 `<a download>` 로 누르는 방식 — 아이폰은 이걸 열지 않는다. 안 된 일을 "ready" 라고 말한 문구도 잘못.
+- 고침: 대회마다 실제 달력 파일을 만들어(`racefinder_app/tools/make_ics.py` → `docs/race-finder-data/ics/<id>.ics`, 5,101개, 시간대 TZID 포함) 버튼을 그 https 주소로 가는 **평범한 링크**로 바꿈. 거짓 안내 문구 삭제. 배포 서버 응답 `content-type: text/calendar` 확인.
+- 같은 스크린샷에서 같이 고친 것: ①다크 모드에서 시트와 뒤 화면이 둘 다 검정이라 경계가 안 보임 → 시트를 한 단계 밝은 면(#1c1c1e, 카드 #2c2c2e)으로 ②안내 문구(토스트)가 접수 버튼을 가림 → 화면 위쪽으로.
+- 로봇: 로컬 73/73(크롬·WebKit), 배포 주소 WebKit 74/74(달력 링크가 실제 주소·200·내용이 그 대회와 일치, Content-Type, 다크 시트 색 검사 추가).
+- **아직 미확인**: 고친 달력 링크가 실제 아이폰에서 '달력에 추가' 창을 여는지(사파리는 될 가능성 높음, 인앱 브라우저는 앱마다 다름). 스냅숏을 새로 받으면 `make_ics.py` 도 다시 돌릴 것.
