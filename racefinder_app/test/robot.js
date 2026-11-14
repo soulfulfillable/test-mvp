@@ -26,8 +26,20 @@ const listReady = p => p.waitForSelector('.race, .state', { timeout: 15000 });
 (async () => {
   const b = await (WK ? webkit : chromium).launch(process.env.LIVE ? { proxy: { server: process.env.HTTPS_PROXY } } : {});
 
+  // 0. 시작 화면(로고): 열자마자 보이고, 2.5초 안에 사라지고, 사라진 뒤엔 탭을 막지 않는다
+  let p = await ctx(b); const t0 = Date.now();
+  await p.goto(BASE + '?zip=07030', { waitUntil: 'commit' }); await p.waitForSelector('#splash', { state: 'visible' });
+  await p.waitForTimeout(650); await shot(p, '00-splash');
+  ok('시작 화면: 로고와 이름이 보임', await p.locator('#splash .mark').isVisible() && (await p.locator('#splash b').innerText()) === 'Race Finder');
+  await p.waitForSelector('#splash', { state: 'hidden', timeout: 4000 }); const gone = Date.now() - t0;
+  ok('시작 화면: 0.9~3초 사이에 사라짐', gone >= 850 && gone < 3200, gone + 'ms');
+  ok('시작 화면이 사라지면 목록이 이미 떠 있음', await p.locator('.race').count() > 0);
+  let block0 = true; const p0 = await ctx(b); await p0.route('**/race-finder-data/**', r => block0 ? new Promise(() => {}) : r.continue());
+  await p0.goto(BASE + '?zip=07030', { waitUntil: 'commit' }); await p0.waitForSelector('#splash', { state: 'hidden', timeout: 4000 });
+  ok('데이터가 안 와도 시작 화면은 2.5초 뒤 비킴', true); await p0.context().close(); await p.context().close();
+
   // 1. 첫 실행 → 내 위치 버튼
-  let p = await ctx(b);
+  p = await ctx(b);
   await p.goto(BASE); await p.waitForSelector('#gps');
   ok('첫 실행: 위치 묻는 화면, 넘침 없음', !(await overflow(p)) && await p.locator('#controls').isHidden());
   await shot(p, '01-first-run');
