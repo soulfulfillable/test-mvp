@@ -18,6 +18,7 @@
 | ✅ | 10. Tolle | `board/bible-reading.md` | 공통 문장 (bible-reading) |
 | — | YouTube Playables | `board/playables.md` | 공통 문장 (playables) — 10-30 신설, 기존 HTML 게임을 유튜브 Playables 로 |
 | — | How It Works 앱 개발 | `board/how-it-works.md` | 공통 문장 (how-it-works) — 10-23 보류 |
+| — | Race Finder | `board/race-finder.md` | 게시판의 이어받기 문장 — 11-14 신설, 5K·마라톤 찾기 |
 | — | Kitty Path / Blessing Jar / Gifts Kit / Verse Weave | `board/path-puzzle.md` 등 | 필요할 때만 |
 
 공통 문장: `soulfulfillable/test-mvp 의 board/<게시판>.md "🔁 이어받기" 를 읽고 "다음 할 일"부터 이어서 해줘.`
