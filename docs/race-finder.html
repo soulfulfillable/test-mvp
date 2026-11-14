@@ -115,6 +115,7 @@ nav svg{width:25px;height:25px}
 .stairs text.nxt{fill:var(--rise);font-weight:600}
 .sheet .acts{margin-top:16px}
 .sheet .acts .btn{flex:1 1 46%}
+.sheet .acts .btn.wide{flex-basis:100%}
 .toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:.88em;font-weight:500;border-radius:20px;padding:9px 16px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
 @media (prefers-reduced-motion: reduce){.sheet,.veil{transition:none}.sheet.on .stairs .done{animation:none;stroke-dashoffset:0}.sheet.on .stairs .now{animation:none;opacity:1}.skel{animation:none}}
@@ -261,7 +262,7 @@ function label(e){return e.k==='5k'?'5K':e.k==='10k'?'10K':e.k==='half'?'Half':e
 function awayText(mi){return mi<1?'<1 mi':Math.round(mi)+' mi'}
 function rowHTML(x){var r=x.r,c=clock(x.first),h=headline(r,S.kind,x.now);
   return '<button class="race" data-id="'+r.i+'"><span class="time">'+c.t+'<small>'+c.ap+'</small></span>'+
-    '<span><span class="name">'+esc(r.n)+'</span><span class="meta" style="display:block">'+esc(distList(r))+' • '+esc(r.c)+'</span>'+
+    '<span><span class="name">'+esc(r.n)+'</span><span class="meta" style="display:block">'+esc(distList(r))+' in '+esc(r.c)+'</span>'+
     (h?'<span class="'+(h.up?'rise':'note')+'">'+esc(h.text)+'</span>':'')+'</span>'+
     '<span class="away">'+awayText(r.mi)+(S.saved[r.i]?'<b>Saved</b>':'')+'</span></button>'}
 
@@ -361,7 +362,7 @@ function openRace(id){
       (note?'<div class="evnote'+(up?' up':'')+'">'+esc(note)+'</div>':'')+(p.state==='open'?stairs(e,now):'');
   });
   var isSaved=!!S.saved[r.i];
-  html+='</div><div class="acts"><a class="btn wide" id="reg" href="'+esc(r.u)+'" target="_blank" rel="noopener" style="text-decoration:none">Open sign-up page on RunSignup</a>'+
+  html+='</div><div class="acts"><a class="btn wide" id="reg" href="'+esc(r.u)+'" target="_blank" rel="noopener" style="text-decoration:none">Sign up on RunSignup</a>'+
     '<button class="btn quiet" id="saveBtn">'+(isSaved?'Remove from Saved':'Save')+'</button><button class="btn quiet" id="cal">Add to Calendar</button></div>'+
     '<p class="foot" style="margin-top:14px">Prices are RunSignup’s entry fees before processing fees, as of '+esc(shortDate((S.meta||{fetched:ymd(NOW)}).fetched))+'.</p>';
   openSheet(html);
