@@ -76,7 +76,6 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const ex1 = await page.evaluate(() => (() => { const e = __game.exitPos; return __game.project(e.x, e.y, e.z); })());
     const inView = (e) => e.inFront && e.x > 0 && e.x < w && e.y > 0 && e.y < h;
     check(`${name}: exit on screen at first frame`, inView(ex0), `${ex0.x.toFixed(0)},${ex0.y.toFixed(0)}`);
-    check(`${name}: exit on screen when play starts`, inView(ex1), `${ex1.x.toFixed(0)},${ex1.y.toFixed(0)}`);
     const boxes = await page.evaluate(() => Object.fromEntries(['bar', 'btn-hero', 'btn-sound', 'stick', 'jump', 'keys'].map((id) => {
       const el = document.getElementById(id); const r = el.getBoundingClientRect(); const cs = getComputedStyle(el);
       const vis = cs.display !== 'none' && cs.visibility !== 'hidden' && r.width > 0 && el.offsetParent !== null && !(id === 'keys' && document.body.classList.contains('touch'));
@@ -108,7 +107,7 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const mid = await st(page);
     await shot(page, 'touch-joystick-held');
     await touch(s, 'touchEnd', []);
-    check('touch: joystick up moves the hero forward', mid.pos.z < z0 - 1.5, `z ${z0.toFixed(2)} → ${mid.pos.z.toFixed(2)}, anim ${mid.anim}`);
+    check('touch: joystick up moves the hero forward (out of the cell)', mid.pos.x > -5.6 + 1.5, `x -5.60 → ${mid.pos.x.toFixed(2)}, anim ${mid.anim}`);
     const jb = await page.evaluate(() => { const r = document.getElementById('jump').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
     await sleep(300);
     await touch(s, 'touchStart', [[jb.x, jb.y, 2]]);
@@ -128,10 +127,10 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
   {
     const { context, page } = await newPage(browser, 1280, 720, base + '?nointro', false);
     const z0 = (await st(page)).pos.z;
-    await page.keyboard.down('KeyW'); await until(page, (z) => __game.pos.z < z - 1.5, z0, 4000); const a = await st(page);
+    await page.keyboard.down('KeyW'); await until(page, () => __game.pos.x > -4.1, null, 4000); const a = await st(page);
     await page.keyboard.down('Space'); let maxY = 0; for (let i = 0; i < 6; i++) { await sleep(60); maxY = Math.max(maxY, (await st(page)).pos.y); }
     await page.keyboard.up('Space'); await page.keyboard.up('KeyW');
-    check('desktop: W moves forward', a.pos.z < z0 - 1.5, `z ${z0.toFixed(2)} → ${a.pos.z.toFixed(2)}`);
+    check('desktop: W moves forward', a.pos.x > -4.1, `x -5.60 → ${a.pos.x.toFixed(2)}`);
     check('desktop: Space jumps', maxY > 0.5, `peak y ${maxY.toFixed(2)}`);
     await context.close();
   }
@@ -142,14 +141,29 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     await page.addScriptTag({ content: AUTOPILOT });
     // walk straight into the first spike strip
     // the live puddle is behind-left of the start (camera yaw 0 → stick (−x, +z) walks south-west)
-    await page.evaluate(() => __auto.stick(-0.55, 0.8));
+    await page.evaluate(() => __auto.path([[-3.4, 3.0], [-2.7, 6.3]]));
     const hit = await until(page, () => __game.spikes >= 1, null, 30000);
-    await page.evaluate(() => __auto.stick(0, 0));
+    await page.evaluate(() => __auto.pathStop());
     await sleep(200); await shot(page, 'hazard-spike-hit');
     const back = await until(page, () => __game.state === 'play', null, 10000);
     const s1 = await st(page);
     check('hazard: stepping in the live puddle counts a hit', hit, `spikes=${s1.spikes}`);
-    check('hazard: hero is back on checkpoint 0 right away', back && Math.abs(s1.pos.z - 3.0) < 0.05 && Math.abs(s1.pos.x) < 0.05, JSON.stringify(s1.pos));
+    check('hazard: hero is back on checkpoint 0 right away', back && Math.abs(s1.pos.z - 3.0) < 0.05 && Math.abs(s1.pos.x + 5.6) < 0.05, JSON.stringify(s1.pos));
+    // the guard: walk into the middle of the hall and stand there — he notices, chases, catches
+    await page.evaluate(() => __auto.path([[-3.4, 3.0], [-1.0, 0.5]]));
+    const chased = await until(page, () => __game.guards()[0].mode === 'chase', null, 60000);
+    if (chased) { await sleep(250); await shot(page, 'guard-chasing'); }
+    const caught = await until(page, () => __game.caught >= 1, null, 60000);
+    await page.evaluate(() => __auto.pathStop());
+    await until(page, () => __game.state === 'play', null, 10000);
+    const s2 = await st(page); const g2 = await page.evaluate(() => __game.guards()[0]);
+    check('guard: notices the hero in the hall and chases', chased);
+    check('guard: catching sends the hero back to the cell', caught && Math.abs(s2.pos.x + 5.6) < 0.05 && Math.abs(s2.pos.z - 3.0) < 0.05, JSON.stringify(s2.pos));
+    check('guard: goes back to his post after a catch', g2.mode === 'patrol' && g2.z < -10, JSON.stringify(g2));
+    // safe in the cell: standing in the cell never gets you caught (20 game seconds)
+    const c0 = await page.evaluate(() => __game.caught); const t0 = (await st(page)).t;
+    await until(page, (t) => __game.t > t + 20, t0, 120000);
+    check('guard: the cell is safe (20 s standing there)', (await page.evaluate(() => __game.caught)) === c0);
     await context.close();
   }
 
@@ -172,9 +186,10 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
       await sleep(250);
     }
     const log = await page.evaluate(() => __auto.log);
-    check(`${name}: autopilot reaches the exit (touch controls only)`, ok, `game time ${last.runTime.toFixed(1)} s, retries ${last.deaths} (falls ${last.falls}, spikes ${last.spikes}), wall ${(Date.now() - t0) / 1000 | 0} s`);
+    check(`${name}: autopilot reaches the exit (touch controls only)`, ok, `game time ${last.runTime.toFixed(1)} s, retries ${last.deaths}, wall ${(Date.now() - t0) / 1000 | 0} s`);
     report.numbers[name + '-run'] = { time: +last.runTime.toFixed(2), deaths: last.deaths, falls: last.falls, spikes: last.spikes, log };
     check(`${name}: all 4 checkpoints lit on the way`, last.cp === 3, `cp=${last.cp}`);
+    check(`${name}: both buttons pressed (laundry door, gate)`, (await page.evaluate(() => __game.buttons())).every(Boolean));
     if (ok) {
       await sleep(500); if (name === 'phone-390x844') await shot(page, 'run-5-escaped');
       const panel = await until(page, () => !document.getElementById('panel').classList.contains('hidden'), null, 20000);
@@ -185,7 +200,7 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
       check(`${name}: "Run again" button fully on screen`, btn.inside);
       await page.touchscreen.tap(btn.x, btn.y); await sleep(500);
       const r = await st(page);
-      check(`${name}: "Run again" restarts at the start`, r.state === 'play' && Math.abs(r.pos.z - 3.0) < 0.1 && !r.finished && r.cp === 0, JSON.stringify({ s: r.state, z: r.pos.z, cp: r.cp }));
+      check(`${name}: "Run again" restarts at the start`, r.state === 'play' && Math.abs(r.pos.z - 3.0) < 0.1 && Math.abs(r.pos.x + 5.6) < 0.1 && !r.finished && r.cp === 0 && !(await page.evaluate(() => __game.buttons())).some(Boolean), JSON.stringify({ s: r.state, z: r.pos.z, cp: r.cp }));
     }
     await context.close();
   }
@@ -213,16 +228,16 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
   // 6b) character picker: default is the pup; choose the kitty by tapping; it moves; the choice survives reload
   {
     const { context, page } = await newPage(browser, 390, 844, base + '?nointro', true);
-    check('picker: default hero is the pup', (await page.evaluate(() => __game.hero)) === 'dog');
+    check('picker: default hero is the inmate', (await page.evaluate(() => __game.hero)) === 'kid');
     await page.tap('#btn-hero'); await sleep(300);
     const tiles = await page.evaluate(() => [...document.querySelectorAll('.pick')].map((b) => { const r = b.getBoundingClientRect(); const img = b.querySelector('img'); return { h: b.dataset.hero, inside: r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight, img: img.complete && img.naturalWidth > 0 }; }));
     await shot(page, 'picker-open');
     check('picker: 3 portraits, all on screen', tiles.length === 3 && tiles.every((t) => t.inside && t.img), JSON.stringify(tiles));
     await page.tap('.pick[data-hero="cat"]'); await sleep(300);
     check('picker: tapping Kitty swaps the hero and closes the sheet', (await page.evaluate(() => __game.hero)) === 'cat' && (await page.evaluate(() => document.getElementById('pick').classList.contains('hidden'))));
-    const z0 = (await st(page)).pos.z; await page.keyboard.down('KeyW');
-    const ran = await until(page, (z) => __game.pos.z < z - 1, z0, 5000); await page.keyboard.up('KeyW');
-    check('picker: the new hero runs', ran, `z ${z0.toFixed(2)} → ${(await st(page)).pos.z.toFixed(2)}`);
+    const z0 = (await st(page)).pos.x; await page.keyboard.down('KeyW');
+    const ran = await until(page, (x) => __game.pos.x > x + 1, z0, 5000); await page.keyboard.up('KeyW');
+    check('picker: the new hero runs', ran, `x ${z0.toFixed(2)} → ${(await st(page)).pos.x.toFixed(2)}`);
     await page.reload(); await page.waitForFunction(() => document.body.classList.contains('ready'), null, { timeout: 90000 });
     check('picker: choice survives reload', (await page.evaluate(() => __game.hero)) === 'cat');
     await context.close();

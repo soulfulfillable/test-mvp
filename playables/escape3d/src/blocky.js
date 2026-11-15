@@ -104,37 +104,67 @@ export function makeCat() {
   return { root, animate: quadAnimate(Q), height: 0.9 };
 }
 
-// the runner: a classic block avatar (head, torso, two arms, two legs)
+// the inmate: a block avatar in an orange jumpsuit with a number patch
 export function makeKid() {
   const root = new THREE.Group();
-  const SK = '#f5c99c', SH = '#ffc93c', PA = '#5b5bd6', HA = '#e2702e', DK = '#2b1d16', SHOE = '#2f2f36';
+  const SK = '#f0c08e', OR = '#f47a1c', ORD = '#d9620e', HA = '#3a2a22', DK = '#2b1d16', SHOE = '#f1f1f1', WH = '#ffffff';
   const hip = new THREE.Group(); hip.position.y = 0.56; root.add(hip);
-  const torso = part(hip, 0.5, 0.52, 0.26, SH, 0, 0.27, 0);
+  const torso = part(hip, 0.5, 0.52, 0.26, OR, 0, 0.27, 0);
+  part(hip, 0.2, 0.12, 0.02, WH, 0, 0.38, -0.135);            // number patch on the back
+  part(hip, 0.12, 0.08, 0.02, WH, -0.12, 0.4, 0.135);          // name tag on the chest
+  part(hip, 0.52, 0.06, 0.28, ORD, 0, 0.03, 0);                // waist seam
   const head = new THREE.Group(); head.position.set(0, 0.73, 0); hip.add(head);
   part(head, 0.36, 0.34, 0.34, SK, 0, 0, 0);
-  part(head, 0.4, 0.12, 0.38, HA, 0, 0.17, -0.01);
-  part(head, 0.4, 0.26, 0.1, HA, 0, 0.06, -0.15);
+  part(head, 0.38, 0.1, 0.36, HA, 0, 0.16, 0);                 // buzz cut
   flat(head, 0.05, 0.08, DK, -0.08, 0.02, 0.172); flat(head, 0.05, 0.08, DK, 0.08, 0.02, 0.172);
   flat(head, 0.12, 0.03, '#c0563f', 0, -0.08, 0.172);
-  const arm = (x) => { const g = part(hip, 0.2, 0.5, 0.22, SK, x, 0.52, 0, true); part(g, 0.22, 0.2, 0.24, SH, 0, -0.1, 0); return g; };
+  const arm = (x) => { const g = part(hip, 0.2, 0.36, 0.22, OR, x, 0.52, 0, true); part(g, 0.19, 0.16, 0.21, SK, 0, -0.42, 0); return g; };
   const la = arm(-0.36), ra = arm(0.36);
-  const legf = (x) => { const g = part(hip, 0.24, 0.52, 0.24, PA, x, 0.02, 0, true); part(g, 0.25, 0.1, 0.3, SHOE, 0, -0.48, 0.03); return g; };
+  const legf = (x) => { const g = part(hip, 0.24, 0.52, 0.24, OR, x, 0.02, 0, true); part(g, 0.25, 0.1, 0.3, SHOE, 0, -0.48, 0.03); return g; };
   const ll = legf(-0.13), rl = legf(0.13);
+  return { root, animate: bipedAnimate({ hip, hipY: 0.56, head, torso, la, ra, ll, rl }), height: 1.3 };
+}
+function bipedAnimate(B, rate = 1) {
   let ph = 0;
-  const animate = (pose, dt) => {
-    if (pose.mode === 'walk' || pose.mode === 'run') ph += dt * (3.5 + pose.speed * 1.6);
+  return (pose, dt) => {
+    const { hip, head, torso, la, ra, ll, rl } = B;
+    if (pose.mode === 'walk' || pose.mode === 'run') ph += dt * (3.5 + pose.speed * 1.6) * rate;
     const sw = pose.mode === 'run' ? 1.0 : pose.mode === 'walk' ? 0.6 : 0;
     const s = Math.sin(ph) * sw;
     la.rotation.set(s, 0, 0); ra.rotation.set(-s, 0, 0); ll.rotation.set(-s, 0, 0); rl.rotation.set(s, 0, 0);
-    hip.position.y = 0.56 + (pose.mode === 'run' ? Math.abs(Math.sin(ph)) * 0.05 : 0);
-    head.rotation.x = 0;
+    hip.position.y = B.hipY + (pose.mode === 'run' ? Math.abs(Math.sin(ph)) * 0.05 : 0);
+    head.rotation.set(0, 0, 0);
     if (pose.mode === 'jump') { la.rotation.set(-2.6, 0, -0.2); ra.rotation.set(-2.6, 0, 0.2); ll.rotation.x = -0.6; rl.rotation.x = 0.3; }
     if (pose.mode === 'fall') { la.rotation.set(-2.2 + Math.sin(pose.t * 18) * 0.4, 0, -0.5); ra.rotation.set(-2.2 - Math.sin(pose.t * 18) * 0.4, 0, 0.5); ll.rotation.x = 0.3; rl.rotation.x = -0.3; }
     if (pose.mode === 'idle') { la.rotation.z = -0.05; ra.rotation.z = 0.05; head.rotation.y = Math.sin(pose.t * 0.7) * 0.15; }
     if (pose.mode === 'cheer') { la.rotation.set(-2.9, 0, -0.3 + Math.sin(pose.t * 14) * 0.25); ra.rotation.set(-2.9, 0, 0.3 - Math.sin(pose.t * 14) * 0.25); }
+    if (B.chaser && pose.mode === 'run') { la.rotation.set(-1.5 + s * 0.2, 0, 0.15); ra.rotation.set(-1.9 - s * 0.3, 0, -0.15); } // reaching for you, baton up
     torso.rotation.x = pose.mode === 'run' ? 0.08 : 0;
   };
-  return { root, animate, height: 1.3 };
+}
+
+// the guard: twice your size, dark green uniform, cap, shades, baton
+export function makeGuard() {
+  const root = new THREE.Group();
+  const UNI = '#35573f', UNID = '#27402e', SK = '#e3ad80', DK = '#1d1d1f', BADGE = '#f2c230';
+  const hip = new THREE.Group(); hip.position.y = 1.0; root.add(hip);
+  const torso = part(hip, 1.2, 1.0, 0.8, UNI, 0, 0.52, 0);
+  part(hip, 1.24, 0.14, 0.84, DK, 0, 0.1, 0); part(hip, 0.2, 0.16, 0.06, BADGE, 0, 0.1, 0.42);     // belt + buckle
+  part(hip, 0.16, 0.18, 0.04, BADGE, -0.34, 0.8, 0.41);                                             // badge
+  part(hip, 0.5, 0.1, 0.5, UNID, 0, 1.03, 0);                                                       // collar
+  const head = new THREE.Group(); head.position.set(0, 1.38, 0); hip.add(head);
+  part(head, 0.62, 0.56, 0.58, SK, 0, 0, 0);
+  part(head, 0.56, 0.16, 0.5, SK, 0, -0.3, 0.05);                                                   // heavy jaw
+  part(head, 0.68, 0.2, 0.64, UNID, 0, 0.34, 0); part(head, 0.62, 0.06, 0.3, DK, 0, 0.25, 0.4);    // cap + brim
+  part(head, 0.14, 0.12, 0.04, BADGE, 0, 0.36, 0.33);
+  part(head, 0.58, 0.15, 0.06, DK, 0, 0.06, 0.29);                                                  // shades
+  flat(head, 0.3, 0.05, '#6b2f25', 0, -0.2, 0.302);                                                 // frown
+  const arm = (x) => { const g = part(hip, 0.34, 0.6, 0.36, UNI, x, 1.0, 0, true); part(g, 0.3, 0.42, 0.32, SK, 0, -0.75, 0); return g; };
+  const la = arm(-0.78), ra = arm(0.78);
+  part(ra, 0.1, 0.1, 0.8, DK, 0, -0.98, 0.32);                                                      // baton
+  const legf = (x) => { const g = part(hip, 0.46, 0.84, 0.5, UNID, x, 0.02, 0, true); part(g, 0.48, 0.16, 0.62, DK, 0, -0.92, 0.05); return g; };
+  const ll = legf(-0.3), rl = legf(0.3);
+  return { root, animate: bipedAnimate({ hip, hipY: 1.0, head, torso, la, ra, ll, rl, chaser: true }, 0.7), height: 2.75 };
 }
 
 export const MAKERS = { dog: makeDog, cat: makeCat, kid: makeKid };

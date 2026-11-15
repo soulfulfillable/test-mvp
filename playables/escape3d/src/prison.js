@@ -6,6 +6,7 @@
 // Same interface as before: solids / hazards / movers / traps / checkpoints / exit + step() / visual().
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import { createGuard } from './guard.js';
 import { floorTexture, wallTexture, grateTexture, glowTexture, shaftTexture, worldBox } from './textures.js';
 
 export const GOLD = new THREE.Color('#ffc93c');
@@ -50,7 +51,7 @@ function asphaltTex() {
 }
 
 export function buildCourse(scene) {
-  const C = { solids: [], hazards: [], movers: [], traps: [], checkpoints: [], walls: [], exit: null, killY: -1.0 };
+  const C = { solids: [], hazards: [], movers: [], traps: [], checkpoints: [], walls: [], buttons: [], doors: [], guards: [], exit: null, killY: -1.0 };
   const STD = (o) => new THREE.MeshStandardMaterial({ roughness: 0.9, metalness: 0, ...o });
   const M = {
     floor: STD({ map: floorTexture(), color: '#c9c6c0', roughness: 0.55 }),          // polished concrete
@@ -233,6 +234,31 @@ export function buildCourse(scene) {
     b.delta.copy(first ? new THREE.Vector3() : mv.pos.clone().sub(prev));
   }
 
+  // a big green floor button with a bobbing arrow above it; stepping on it runs `onPress`
+  function button(x, y, z, onPress) {
+    const g = new THREE.Group(); g.position.set(x, y, z); scene.add(g);
+    const base = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.68, 0.08, 24), M.steel); base.position.y = 0.04; g.add(base);
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.12, 24), new THREE.MeshStandardMaterial({ color: '#2fd15a', emissive: '#22c24c', emissiveIntensity: 1.3, roughness: 0.4 })); cap.position.y = 0.13; g.add(cap);
+    const arrow = new THREE.Group(); arrow.position.y = 1.9; g.add(arrow);
+    const am = new THREE.MeshStandardMaterial({ color: '#ffd21f', emissive: '#ffc400', emissiveIntensity: 0.9, roughness: 0.5 });
+    const shaft = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.5, 0.22), am); shaft.position.y = 0.35; arrow.add(shaft);
+    const tip = new THREE.Mesh(new THREE.ConeGeometry(0.34, 0.45, 4), am); tip.rotation.x = Math.PI; tip.position.y = -0.1; arrow.add(tip);
+    const light = new THREE.PointLight('#3dff7a', 4, 5, 2); light.position.y = 0.6; g.add(light);
+    const b = { pos: new THREE.Vector3(x, y, z), g, cap, arrow, light, pressed: false, onPress }; C.buttons.push(b); return b;
+  }
+  // a barred door across an opening in a wall along x; slides up when opened
+  function barDoor(x0, x1, z, h) {
+    const g = new THREE.Group(); scene.add(g);
+    const n = Math.round((x1 - x0) / 0.18);
+    for (let i = 0; i <= n; i++) { const b = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, h, 6), M.bars); b.position.set(x0 + (x1 - x0) * i / n, h / 2, z); b.castShadow = true; g.add(b); }
+    for (const yy of [0.08, h / 2, h - 0.08]) { const r = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, 0.1, 0.1), M.bars); r.position.set((x0 + x1) / 2, yy, z); g.add(r); }
+    const lampMat = new THREE.MeshStandardMaterial({ color: '#ff3b30', emissive: '#ff2a20', emissiveIntensity: 1.6 });
+    const lamp = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.22, 0.12), lampMat); lamp.position.set((x0 + x1) / 2, h + 0.35, z + 0.36); scene.add(lamp);
+    const box = { min: new THREE.Vector3(x0, 0, z - 0.15), max: new THREE.Vector3(x1, h, z + 0.15), top: h, seeThrough: true, noStep: true };
+    C.solids.push(box);
+    const d = { g, box, h, lamp, lampMat, open: 0, opening: false }; C.doors.push(d); return d;
+  }
+
   // =====================================================================================
   // CELL HALL  x[-8, 8]  z[8, -20]  — 9 m tall, open roof trusses (sky above)
   // =====================================================================================
@@ -252,14 +278,12 @@ export function buildCourse(scene) {
   for (let k = 0; k < 7; k++) {
     const z0 = 8 - k * 4, z1 = z0 - 4;
     solid(-8.0, -4.6, 0, 3.2, z0, z0 - 0.15, M.cream, { noStep: true });          // divider
-    deco(-8.0, -4.4, 3.2, 3.5, z0, z1, M.concrete);                                // cell ceiling
-    solid(-8.0, -4.4, 3.2, 3.5, z0, z1, null, { noStep: true });
+    deco(-8.0, -4.4, 3.2, 3.3, z0 - 0.02, z0 - 0.13, M.steel);                     // open-topped cells (the camera can look in from above)
     deco(-7.95, -7.0, 0, 0.45, z0 - 0.4, z0 - 2.4, M.bunk); deco(-7.95, -7.05, 0.45, 0.6, z0 - 0.45, z0 - 2.35, M.mattress); // bunk
     solid(-7.95, -7.0, 0, 0.6, z0 - 0.4, z0 - 2.4, null);
     deco(-7.9, -7.4, 0, 0.5, z1 + 0.9, z1 + 0.4, M.steelWhite); solid(-7.9, -7.4, 0, 0.5, z1 + 0.9, z1 + 0.4, null); // toilet
-    if (k === 1) { bars(-4.5, -4.5, z0 - 0.15, z0 - 1.2, 0, 3.2); bars(-4.62, -4.62, z0 - 1.25, z1 + 0.15, 0, 3.2, false); } // open door slid aside
+    if (k === 1) { bars(-4.5, -4.5, z0 - 1.85, z1 + 0.15, 0, 3.2); bars(-4.62, -4.62, z0 - 1.9, z1 + 0.5, 0, 3.2, false); } // your cell: the door is slid open
     else bars(-4.5, -4.5, z0 - 0.15, z1 + 0.15, 0, 3.2);
-    ceilingLamp(-6.2, 3.18, z0 - 2, 1.0);
   }
   // upper tier above the cells: barred windows high on the west wall (daylight in)
   for (let k = 0; k < 7; k++) { const z = 6 - k * 4; deco(-8.0, -7.95, 5.0, 7.4, z + 0.8, z - 0.8, new THREE.MeshBasicMaterial({ color: '#e9f1f5' }), { cast: false }); bars(-7.94, -7.94, z + 0.8, z - 0.8, 5.0, 7.4, false); }
@@ -278,7 +302,7 @@ export function buildCourse(scene) {
   for (let z = 6; z > -20; z -= 4) { deco(-8.6, 8.6, HY - 0.5, HY - 0.25, z + 0.12, z - 0.12, M.steel); ceilingLamp(0, HY - 0.6, z - 2, 2.2); }
   // a flooded corner with a live cable (south-west) — don't step in
   livePuddle(-3.8, -1.6, 7.4, 5.2);
-  checkpoint(0, 0, 0, 3.0, true);
+  checkpoint(0, -5.6, 0, 3.0, true);                                              // you start inside your (open) cell
   checkpoint(1, 6.25, 3.5, -14.0);
 
   // =====================================================================================
@@ -307,6 +331,8 @@ export function buildCourse(scene) {
   vents(11.3, 12.2, -8.0, -24.0, { period: 2.6, phase: 0 });                     // the steam-press vent strip (time it or jump it)
   pallet(new THREE.Vector3(14.3, -0.6, -16), new THREE.Vector3(0, 0, 1), 3.5, 5.0, 0);
   pallet(new THREE.Vector3(16.7, -0.6, -16), new THREE.Vector3(0, 0, 1), 3.5, 6.4, 0.3);
+  const laundryDoor = barDoor(17.6, 20.6, -24.3, 3.2);                          // the way out to the yard is barred…
+  button(20.2, 0, -9.8, () => { laundryDoor.opening = true; });                 // …until you step on the green button
   checkpoint(2, 19.6, 0, -21.6);
 
   // =====================================================================================
@@ -334,6 +360,10 @@ export function buildCourse(scene) {
   razorWire(-14.0, 12.0, -31.2, -32.0);   // pass it at the east end…
   razorWire(-4.0, 22.0, -35.2, -36.0);    // …and this one at the west end
   livePuddle(2.2, 4.8, -32.6, -34.6);     // jump over the live puddle in the middle lane
+  button(-11.2, 0, -33.6, () => { C.exit.opening = true; });                    // the gate button, at the far west end of the yard
+  // guards: one walks the cell hall floor, one walks the lane in front of the gate
+  C.guards.push(createGuard(scene, { zone: { x0: -4.0, x1: 2.2, z0: -19.2, z1: 4.6 }, a: [-1, -18], b: [-1, 3.6] }));
+  C.guards.push(createGuard(scene, { zone: { x0: -9.5, x1: 21, z0: -39.4, z1: -36.8 }, a: [15, -38.1], b: [4, -38.1] }));
   // guard tower (north-west corner) with a searchlight, floodlight poles, a basketball hoop — it's a real yard
   solid(-13.8, -10.8, 0, 6.5, -37.2, -40.0, M.concrete, { noStep: true });
   deco(-14.0, -10.6, 6.5, 6.8, -37.0, -40.2, M.steel);
@@ -381,6 +411,18 @@ export function buildCourse(scene) {
       cp.beam.scale.set(1 + (1 - cp.flash) * 0.3, 1, 1 + (1 - cp.flash) * 0.3);
       if (!cp.lit) cp.ring.material.emissiveIntensity = 0.12 + 0.1 * (0.5 + 0.5 * Math.sin(t * 3 + cp.i));
     }
+    for (const b of C.buttons) {
+      b.arrow.visible = !b.pressed; b.arrow.position.y = 1.9 + Math.sin(t * 4) * 0.15; b.arrow.rotation.y = t * 2;
+      b.cap.position.y += ((b.pressed ? 0.06 : 0.13) - b.cap.position.y) * Math.min(1, dt * 14);
+      b.cap.material.emissiveIntensity = b.pressed ? 0.15 : 1.1 + 0.4 * Math.sin(t * 5); b.light.intensity = b.pressed ? 0 : 4;
+    }
+    for (const d of C.doors) {
+      if (d.opening) d.open = Math.min(1, d.open + dt / 0.8);
+      const o = d.open * d.open * (3 - 2 * d.open); d.g.position.y = o * (d.h - 0.25);
+      d.box.max.y = o > 0.6 ? d.box.min.y : d.h;
+      const col = d.opening ? '#30d158' : '#ff3b30'; d.lampMat.color.set(col); d.lampMat.emissive.set(col);
+    }
+    for (const gd of C.guards) gd.render(dt);
     const E = C.exit;
     if (E.opening) E.open = Math.min(1, E.open + dt / 0.9);
     const o = E.open * E.open * (3 - 2 * E.open);
@@ -393,10 +435,17 @@ export function buildCourse(scene) {
   };
   C.unlight = (cp) => { cp.lit = false; cp.ring.material = M.goldDim.clone(); cp.flash = 0; };
   C.light = (cp) => { cp.lit = true; cp.ring.material = M.gold; cp.flash = 1.2; };
-  C.start = { pos: C.checkpoints[0].pos.clone(), yaw: 0 };
+  C.press = (b) => { b.pressed = true; b.onPress(); };
+  C.resetProgress = () => {
+    for (const b of C.buttons) b.pressed = false;
+    for (const d of C.doors) { d.open = 0; d.opening = false; }
+    C.exit.open = 0; C.exit.opening = false;
+    for (const gd of C.guards) gd.reset();
+  };
+  C.start = { pos: C.checkpoints[0].pos.clone(), yaw: -Math.PI / 2 }; // camera west of the hero, looking east out of the cell
 
   // ---------- merge static meshes per material (draw calls) ----------
-  const dyn = new Set([...C.movers.map((m) => m.g), C.exit.g, ...C.checkpoints.map((c) => c.group), ...C.hazards.filter((h) => h.group).map((h) => h.group)]);
+  const dyn = new Set([...C.movers.map((m) => m.g), C.exit.g, ...C.checkpoints.map((c) => c.group), ...C.hazards.filter((h) => h.group).map((h) => h.group), ...C.buttons.map((b) => b.g), ...C.doors.flatMap((d) => [d.g, d.lamp]), ...C.guards.map((g) => g.root)]);
   scene.updateMatrixWorld(true);
   const buckets = new Map(), victims = [];
   scene.traverse((o) => {

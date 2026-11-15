@@ -32,12 +32,15 @@
   const near = ([x, z], r = 0.35) => Math.hypot(g.pos.x - x, g.pos.z - z) < r;
   const mv = (i, dt = 0) => g.moverAt(i, g.t + dt);
   const M = () => g.movers();
+  const GD = () => g.guards();
   const trapPhase = () => ((g.t % g.trapPeriod) + g.trapPeriod) % g.trapPeriod;
 
   // legs: walk to `to`, or (jump legs) wait at `hold` until `ready`, then jump and steer at `aim` until landed near it
   const P = (i, dt = 0) => g.moverAt(i, g.t + dt);
   const L = [
-    { cp: 0, to: [3.5, 1.2] },                                   // to the foot of the stairs
+    // out of the cell when the hall guard is far up the hall, across to the foot of the stairs
+    { cp: 0, hold: () => [-5.0, 3.0], ready: () => GD()[0].z < -8 && GD()[0].mode === 'patrol', to: [2.9, 1.6] },
+    { to: [3.5, 1.0] },
     { to: [3.5, -6.5] },                                          // walk up the steps
     { to: [6.2, -6.5] },                                          // onto the catwalk
     { to: [6.2, -10.1] },
@@ -51,11 +54,16 @@
     { jump: true, hold: () => [12.7, g.pos.z], ready: () => Math.abs(P(0, 0.55).z - g.pos.z) < 0.5, aim: () => { const m = P(0, 0.2); return [m.x, m.z]; }, land: () => g.pos.y < -0.3 && g.pos.y > -0.8 && Math.abs(g.pos.x - 14.3) < 0.9 },
     { jump: true, hold: () => { const m = M()[0]; return [m.x + 0.3, m.z]; }, ready: () => Math.abs(P(1, 0.5).z - P(0, 0.5).z) < 0.5, aim: () => { const m = P(1, 0.2); return [m.x, m.z]; }, land: () => g.pos.y < -0.3 && g.pos.y > -0.8 && Math.abs(g.pos.x - 16.7) < 0.9 },
     { jump: true, hold: () => { const m = M()[1]; return [m.x + 0.3, m.z]; }, ready: () => true, aim: () => [19.2, g.pos.z], land: () => g.pos.y > -0.05 && g.pos.x > 18.1 },
+    { to: [20.2, -9.8] },                                         // the green button that opens the laundry door
     { to: [19.6, -21.6] },
     { cp: 2, to: [19.1, -23.0] }, { to: [19.1, -26.3] },
     { cp: 3, to: [19.0, -29.5] }, { to: [14.5, -33.6] }, { to: [9.0, -33.6] },
     { runjump: true, to: [0.6, -33.6], at: () => g.pos.x < 5.7, land: () => g.pos.x < 2.0 }, // run-up jump over the live puddle
-    { to: [-6.0, -33.6] }, { to: [-6.0, -38.0] }, { to: [0, -38.0] }, { to: [0, -42] },
+    { to: [-11.2, -33.6] },                                       // the gate button
+    { to: [-7.0, -34.4] },
+    // wait behind the wire until the yard guard walks away east, then dash for the gate
+    { hold: () => [-7.0, -35.5], ready: () => { const q = GD()[1]; return q.mode === 'patrol' && q.x > 8.5 && q.vx > 0.1; }, to: [-0.2, -38.2] },
+    { to: [0, -42] },
   ];
   const cpStart = {}; L.forEach((l, i) => { if (l.cp !== undefined) cpStart[l.cp] = i; });
 
@@ -94,5 +102,7 @@
       if (g.grounded && g.t - A.jumpT > 0.15) { jump(false); if (l.land()) { A.i++; A.phase = 'go'; } else { A.phase = 'go'; } }
     }
   }
-  window.__auto = { stop() { A.running = false; stick(0, 0); jump(false); }, start() { A.running = true; A.deaths = g.deaths; requestAnimationFrame(tick); }, get leg() { return A.i; }, get log() { return A.log; }, get running() { return A.running; }, stick, jump };
+  let path = null, pi = 0;
+  function pathTick() { if (!path) return; requestAnimationFrame(pathTick); if (g.state !== 'play') { stick(0, 0); return; } steer(path[pi]); if (near(path[pi], 0.35) && pi < path.length - 1) pi++; }
+  window.__auto = { path(pts) { path = pts; pi = 0; requestAnimationFrame(pathTick); }, pathStop() { path = null; stick(0, 0); }, stop() { A.running = false; stick(0, 0); jump(false); }, start() { A.running = true; A.deaths = g.deaths; requestAnimationFrame(tick); }, get leg() { return A.i; }, get log() { return A.log; }, get running() { return A.running; }, stick, jump };
 })();

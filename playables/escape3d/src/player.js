@@ -8,7 +8,7 @@ const STEP_UP = 0.55;
 const SPEED = 6.0, ACC_G = 55, ACC_A = 22, GRAV = 28, JUMP_V = 10.2, COYOTE = 0.1, BUFFER = 0.14, MAX_FALL = 30;
 
 import { MAKERS } from './blocky.js';
-export const RIGS = { dog: { label: 'Pup' }, cat: { label: 'Kitty' }, kid: { label: 'Runner' } };
+export const RIGS = { kid: { label: 'Inmate' }, dog: { label: 'Pup' }, cat: { label: 'Kitty' } };
 
 export function createPlayer(scene) {
   const root = new THREE.Group(); scene.add(root);

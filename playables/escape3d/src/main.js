@@ -69,7 +69,7 @@ blob.rotation.x = -Math.PI / 2; blob.renderOrder = 2; scene.add(blob);
 
 // ---------- state ----------
 const G = {
-  state: 'loading', t: 0, acc: 0, cp: 0, deaths: 0, falls: 0, spikes: 0, runTime: 0, running: false, finished: false, best: null,
+  state: 'loading', t: 0, acc: 0, cp: 0, deaths: 0, falls: 0, spikes: 0, caught: 0, runTime: 0, running: false, finished: false, best: null,
   dieT: 0, finishT: 0, introT: 0, stepT: 0, shake: 0, frames: [], introDone: false, cpTimes: [],
 };
 try { const b = parseFloat(localStorage.getItem('escape3d.best')); if (b > 0) G.best = b; } catch (e) { /* storage blocked */ }
@@ -92,13 +92,13 @@ addEventListener('keydown', (e) => { if (G.state === 'finish' && G.finishT > 1.2
 
 // ---------- load heroes (pup = default, kitty, kid) ----------
 let P;
-let heroName = 'dog';
+let heroName = 'kid';
 try { const h = localStorage.getItem('escape3d.hero'); if (RIGS[h]) heroName = h; } catch (e) { /* */ }
 if (RIGS[params.get('hero')]) heroName = params.get('hero');
 queueMicrotask(() => { // after the whole module has run (camera state etc. are declared below)
   P = createPlayer(scene);
   P.setRig(heroName);
-  P.reset(C.checkpoints[0].pos);
+  P.reset(C.checkpoints[0].pos); P.facing = Math.PI + C.start.yaw;
   G.state = params.has('nointro') ? 'play' : 'intro';
   if (G.state === 'play') G.introDone = true;
   resize(); scene.updateMatrixWorld(true); placeCamera(1, true);
@@ -159,7 +159,7 @@ function desiredCamera(outPos, outLook) {
   const portrait = innerHeight > innerWidth * 1.1;
   const dist = portrait ? 6.6 : 5.8;
   camTarget.set(p.x, camYLevel + 1.15, p.z);
-  const cp = Math.cos(camPitch), sp = Math.sin(camPitch);
+  const cp = Math.cos(pitchEff), sp = Math.sin(pitchEff);
   outPos.set(camTarget.x + Math.sin(camYaw) * dist * cp, camTarget.y + dist * sp, camTarget.z + Math.cos(camYaw) * dist * cp);
   outLook.set(camTarget.x - Math.sin(camYaw) * 1.2, camTarget.y + (portrait ? -0.35 : 0.1), camTarget.z - Math.cos(camYaw) * 1.2);
 }
@@ -179,8 +179,20 @@ function rayBoxes(o, d, far, pad) {
   }
   return best;
 }
+// in a tight spot (a cell, a corner) the camera climbs and looks down instead of jamming into the hero's back
+let pitchEff = 0.46;
+function freeAt(pitch, dist) {
+  const d = new THREE.Vector3(Math.sin(camYaw) * Math.cos(pitch), Math.sin(pitch), Math.cos(camYaw) * Math.cos(pitch));
+  return rayBoxes(camTarget, d, dist, 0.25);
+}
 function placeCamera(dt, snap) {
   const tp = new THREE.Vector3(), tl = new THREE.Vector3();
+  if (P) {
+    const dist = innerHeight > innerWidth * 1.1 ? 6.6 : 5.8; camTarget.set(P.pos.x, camYLevel + 1.15, P.pos.z);
+    let want = camPitch, best = -1;
+    for (const p of [camPitch, 0.75, 1.0, 1.22]) { if (p < camPitch) continue; const f = freeAt(p, dist); if (f >= Math.min(dist, 4.6)) { want = p; best = 99; break; } if (f > best) { best = f; want = p; } }
+    pitchEff = snap ? want : pitchEff + (want - pitchEff) * Math.min(1, dt * 5);
+  }
   desiredCamera(tp, tl);
   if (snap) { camPos.copy(tp); camLook.copy(tl); }
   else { const k = 1 - Math.exp(-dt * 10); camPos.lerp(tp, k); camLook.lerp(tl, 1 - Math.exp(-dt * 12)); }
@@ -229,7 +241,7 @@ function introCamera(t) {
 function startClock() { if (!G.running && !G.finished) { G.running = true; } }
 function die(kind) {
   if (G.state !== 'play') return;
-  G.state = 'dying'; G.dieT = 0; G.deaths++; if (kind === 'spike') G.spikes++; else G.falls++;
+  G.state = 'dying'; G.dieT = 0; G.deaths++; if (kind === 'caught') { G.caught++; kind = 'spike'; } else if (kind === 'spike') G.spikes++; else G.falls++;
   P.frozen = true; input.release();
   audio.play(kind === 'spike' ? 'spike' : 'land', { vol: kind === 'spike' ? 0.9 : 0.5, rate: kind === 'spike' ? 1 : 0.6 });
   if (kind === 'spike') { G.shake = 0.18; flash('hurt'); puff(P.pos.clone().add(new THREE.Vector3(0, 0.5, 0)), 10, '#ffffff', { speed: 2.4, alpha: 0.6, life: 0.4 }); }
@@ -239,6 +251,7 @@ function die(kind) {
 function respawn() {
   const cp = C.checkpoints[G.cp];
   P.reset(cp.pos); P.facing = Math.PI + camYaw; camYLevel = cp.pos.y;
+  for (const gd of C.guards) gd.reset();
   G.state = 'play';
   puff(cp.pos.clone(), 14, GOLD, { speed: 2.2, add: true, alpha: 0.9, life: 0.6, size: 0.35, up: 1.6 });
   audio.play('respawn', { vol: 0.45 });
@@ -266,7 +279,8 @@ function restart() {
   for (const cp of C.checkpoints) if (cp.i > 0) C.unlight(cp);
   C.exit.open = 0; C.exit.opening = false;
   $('panel').classList.add('hidden'); $('flash').className = ''; document.body.classList.remove('done');
-  P.reset(C.checkpoints[0].pos); camYLevel = 0; camYaw = C.start.yaw; camPitch = 0.46; placeCamera(1, true);
+  C.resetProgress(); G.caught = 0;
+  P.reset(C.checkpoints[0].pos); P.facing = Math.PI + C.start.yaw; camYLevel = 0; camYaw = C.start.yaw; camPitch = 0.46; placeCamera(1, true);
   G.state = 'play'; updateDots(); audio.play('respawn', { vol: 0.4 });
 }
 function vibrate(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) { /* */ } }
@@ -275,7 +289,7 @@ function flash(kind) { const f = $('flash'); f.className = ''; void f.offsetWidt
 function fmt(t) { const m = Math.floor(t / 60), s = t - m * 60; return m + ':' + (s < 10 ? '0' : '') + s.toFixed(1); }
 function updateDots() {
   const dots = $('dots').children;
-  for (let i = 0; i < dots.length; i++) dots[i].classList.toggle('on', i < 2 ? G.cp >= i + 1 : G.finished);
+  for (let i = 0; i < dots.length; i++) dots[i].classList.toggle('on', i < 3 ? G.cp >= i + 1 : G.finished);
 }
 
 // ---------- per-step simulation ----------
@@ -283,7 +297,7 @@ const _in = { x: 0, z: 0, jumpPressed: false, jumpHeld: false };
 function simStep(inp) {
   G.t += STEP;
   C.step(G.t);
-  if (G.state !== 'play') { P.step(STEP, { x: 0, z: 0, jumpPressed: false, jumpHeld: false }, C.solids); return; }
+  if (G.state !== 'play') { P.step(STEP, { x: 0, z: 0, jumpPressed: false, jumpHeld: false }, C.solids); for (const gd of C.guards) gd.step(STEP, P.pos, false); return; }
   if (!G.running && (Math.abs(inp.x) + Math.abs(inp.z) > 0.05 || inp.jumpPressed)) startClock();
   if (G.running) G.runTime += STEP;
   P.step(STEP, inp, C.solids);
@@ -310,7 +324,16 @@ function simStep(inp) {
   }
   // exit: the door opens as you get close; walk through to finish
   const E = C.exit;
-  if (!E.opening && Math.hypot(P.pos.x - E.x, P.pos.z - E.z) < 8 && P.pos.y > E.y - 0.5) { E.opening = true; audio.play('door', { vol: 0.7, rate: 0.8 }); }
+  for (const b of C.buttons) {
+    if (b.pressed || !P.grounded || Math.abs(P.pos.y - b.pos.y) > 0.4 || Math.hypot(P.pos.x - b.pos.x, P.pos.z - b.pos.z) > 0.8) continue;
+    C.press(b); audio.play('door', { vol: 0.8, rate: 0.8 }); audio.play('checkpoint', { vol: 0.6, rate: 1.5 }); vibrate(20);
+    puff(b.pos.clone().add(new THREE.Vector3(0, 0.3, 0)), 14, '#3dff7a', { speed: 2.6, add: true, alpha: 0.9, life: 0.6, size: 0.3, up: 1.6 });
+  }
+  for (const gd of C.guards) {
+    const got = gd.step(STEP, P.pos, true);
+    if (gd.alerted) { gd.alerted = false; audio.play('spike', { vol: 0.35, rate: 1.7 }); vibrate(20); }
+    if (got) { die('caught'); return; }
+  }
   if (P.pos.z < E.z - 0.35 && Math.abs(P.pos.x - E.x) < E.DW / 2) finish();
 }
 
@@ -401,7 +424,7 @@ scrollTo(0, 120);
 // ---------- test hooks (read-only state for the QA robot) ----------
 window.__game = {
   get state() { return G.state; }, get t() { return G.t; }, get runTime() { return G.runTime; }, get cp() { return G.cp; },
-  get deaths() { return G.deaths; }, get falls() { return G.falls; }, get spikes() { return G.spikes; }, get finished() { return G.finished; },
+  get deaths() { return G.deaths; }, get falls() { return G.falls; }, get spikes() { return G.spikes; }, get caught() { return G.caught; }, guards: () => C.guards.map((g) => ({ x: g.pos.x, z: g.pos.z, vx: g.vx, vz: g.vz, mode: g.mode })), buttons: () => C.buttons.map((b) => b.pressed), get finished() { return G.finished; },
   get pos() { return P ? { x: P.pos.x, y: P.pos.y, z: P.pos.z } : null; }, get grounded() { return !!(P && P.grounded); },
   get anim() { return P && P.anim; }, get camYaw() { return camYaw; }, get exitPos() { return { x: C.exit.x, y: C.exit.y + 1.7, z: C.exit.z }; }, get cpPos() { return C.checkpoints.map((c) => ({ x: c.pos.x, y: c.pos.y, z: c.pos.z })); }, get hero() { return P && P.rigName; }, get doorOpen() { return C.exit.open; }, get pixelRatio() { return pixelRatio; },
   movers: () => C.movers.map((m) => ({ x: m.pos.x, y: m.pos.y, z: m.pos.z, W: m.W, D: m.D })),
