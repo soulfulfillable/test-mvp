@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-15T01:20:11.489Z",
+  "startedAt": "2026-11-15T01:37:19.730Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -132,12 +132,12 @@
     {
       "name": "touch: joystick up moves the hero forward (out of the cell)",
       "ok": true,
-      "detail": "x -5.60 → -0.50, anim run"
+      "detail": "x -5.60 → 0.47, anim run"
     },
     {
       "name": "touch: jump button lifts the hero",
       "ok": true,
-      "detail": "peak y 1.79"
+      "detail": "peak y 1.80"
     },
     {
       "name": "touch: run + jump with two thumbs",
@@ -147,12 +147,12 @@
     {
       "name": "desktop: W moves forward",
       "ok": true,
-      "detail": "x -5.60 → -3.60"
+      "detail": "x -5.60 → -4.00"
     },
     {
       "name": "desktop: Space jumps",
       "ok": true,
-      "detail": "peak y 1.81"
+      "detail": "peak y 1.80"
     },
     {
       "name": "hazard: stepping in the live puddle counts a hit",
@@ -187,7 +187,7 @@
     {
       "name": "phone-390x844: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 32.9 s, retries 0, wall 216 s"
+      "detail": "game time 32.9 s, retries 0, wall 215 s"
     },
     {
       "name": "phone-390x844: all 4 checkpoints lit on the way",
@@ -217,7 +217,7 @@
     {
       "name": "phone-360x640: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 32.9 s, retries 0, wall 169 s"
+      "detail": "game time 32.9 s, retries 0, wall 174 s"
     },
     {
       "name": "phone-360x640: all 4 checkpoints lit on the way",
@@ -272,7 +272,7 @@
     {
       "name": "picker: the new hero runs",
       "ok": true,
-      "detail": "x -5.60 → -4.25"
+      "detail": "x -5.60 → -4.15"
     },
     {
       "name": "picker: choice survives reload",
@@ -287,7 +287,7 @@
     {
       "name": "frame: measured (headless software renderer)",
       "ok": true,
-      "detail": "avg 23.2 ms/frame (43 fps in SwiftShader), last frame CPU+submit 0.9 ms, draw calls 37, triangles 13996"
+      "detail": "avg 22.2 ms/frame (45 fps in SwiftShader), last frame CPU+submit 8.6 ms, draw calls 37, triangles 14074"
     },
     {
       "name": "frame: draw calls ≤ 150",
@@ -337,38 +337,38 @@
   "numbers": {
     "totalKB": 628,
     "phone-390x844-run": {
-      "time": 32.91,
+      "time": 32.89,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          32.90833333333211
+          32.891666666665444
         ]
       ]
     },
     "phone-360x640-run": {
-      "time": 32.87,
+      "time": 32.89,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          32.87499999999878
+          32.891666666665444
         ]
       ]
     },
     "frame": {
-      "avgMs": 23.203921568627457,
+      "avgMs": 22.217777777777783,
       "calls": 37,
-      "tris": 13996,
-      "cpu": 0.9000000001396984,
+      "tris": 14074,
+      "cpu": 8.599999999627471,
       "pr": 1
     }
   },
-  "finishedAt": "2026-11-15T01:35:11.406Z",
+  "finishedAt": "2026-11-15T01:52:21.972Z",
   "pass": 61,
   "fail": 0
 }
