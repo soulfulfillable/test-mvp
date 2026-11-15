@@ -91,7 +91,7 @@ export function buildCourse(scene) {
       mesh.position.copy(mid); mesh.castShadow = opts.cast !== false; mesh.receiveShadow = true; scene.add(mesh);
     }
     if (opts.collide !== false) {
-      const box = { min, max, mesh, top: max.y, seeThrough: !!opts.seeThrough, noStep: !!opts.noStep };
+      const box = { min, max, mesh, top: max.y, seeThrough: !!opts.seeThrough, camBlock: !!opts.camBlock, noStep: !!opts.noStep };
       C.solids.push(box);
       if (opts.wall !== false && !opts.seeThrough) C.walls.push(box);
       return box;
@@ -129,7 +129,7 @@ export function buildCourse(scene) {
       const b = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, y1 - y0, 6), M.bars); b.position.set(x, (y0 + y1) / 2, z); b.castShadow = true; scene.add(b);
     }
     for (const y of [y0 + 0.05, (y0 + y1) / 2, y1 - 0.05]) deco(Math.min(x0, x1) - (alongX ? 0 : 0.04), Math.max(x0, x1) + (alongX ? 0 : 0.04), y - 0.04, y + 0.04, Math.max(z0, z1) + (alongX ? 0.04 : 0), Math.min(z0, z1) - (alongX ? 0.04 : 0), M.bars);
-    if (collide) solid(x0, x1, y0, y1, z0, z1, null, { seeThrough: true, noStep: true });
+    if (collide) solid(x0, x1, y0, y1, z0, z1, null, { seeThrough: true, camBlock: true, noStep: true }); // the camera stays on the hero's side of bars
   }
   function railing(x0, x1, z0, z1, y) { // yellow pipe railing, 1 m (a collider you can hop over)
     const alongX = Math.abs(x1 - x0) > Math.abs(z1 - z0);

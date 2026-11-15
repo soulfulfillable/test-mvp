@@ -5,7 +5,7 @@ credited anyway). No company names, no personal names.
 
 ## Characters — made by us in code (since 2026-11-10, block "obby" style)
 
-Pup (the default, after the developer's own dog), Kitty (after their orange cat) and Runner are built from rounded
+Inmate (the default), Pup (after the developer's own dog), Kitty (after their orange cat) and the guards are built from rounded
 boxes in `src/blocky.js` and animated in code (rigid limb swings). No model files are shipped.
 Earlier trial builds used Kenney Mini Characters and Quaternius cartoon animals (both CC0); those files remain in
 `assets/` for reference only and are not deployed.

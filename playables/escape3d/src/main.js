@@ -167,7 +167,7 @@ function desiredCamera(outPos, outLook) {
 function rayBoxes(o, d, far, pad) {
   let best = far;
   for (const b of C.solids) {
-    if (b.seeThrough || b.mover) continue;
+    if ((b.seeThrough && !b.camBlock) || b.mover) continue;
     let t0 = 0, t1 = best;
     for (const ax of ['x', 'y', 'z']) {
       const mn = b.min[ax] - pad, mx = b.max[ax] + pad;
