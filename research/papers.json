@@ -4742,5 +4742,25 @@
       "chain of thought reasoning traditional chinese medicine"
     ],
     "first_seen": "2026-11-13"
+  },
+  {
+    "id": "arxiv:2611.22652",
+    "title": "OmniTongue: A Comprehensive MLLM Benchmark for Automated Tongue Diagnosis in Traditional Chinese Medicine",
+    "authors": [
+      "Liuyi Xu",
+      "Yun Guo",
+      "Shusheng Li",
+      "Xuewen Zhang",
+      "Yining Qian",
+      "An-Yang Lu"
+    ],
+    "year": "2026",
+    "source": "arXiv",
+    "url": "https://arxiv.org/abs/2611.22652v1",
+    "abstract": "Multimodal Large Language Models (MLLMs) have excelled in Western medical imaging, yet their potential in Traditional Chinese Medicine (TCM) tongue diagnosis remains systematically unevaluated. Tongue diagnosis requires sophisticated global and local perception, serving as a rigorous touchstone for assessing the visual understanding depth of MLLMs. However, existing datasets are limited by single dimensions, coarse granularity, and ambiguous labels, hindering the evaluation of authentic clinical capabilities. To bridge this gap, we introduce OmniTongue, the first comprehensive, fine-grained Visual Question Answering benchmark for TCM tongue diagnosis. This benchmark integrates 1,351 expert-validated images and 21,616 instruction pairs. Its core design features 16 clinical dimensions for multidimensional evaluation, region-specific annotations for pathological localization, and 66 fine-grained labels for precise diagnostic representation. Extensive evaluations of existing MLLMs reveal significant performance gaps, demonstrating that medical-specific models lack domain advantages, while universally poor Macro-F1 scores expose a reliance on statistical shortcuts rather than genuine understanding of tongue pathology. These findings not only highlight the current limitations of MLLMs in interpreting regional medical features but also underscore OmniTongue's significance for developing robust automated tongue diagnosis models. The code and dataset will be made publicly available in a future release.",
+    "matched_queries": [
+      "traditional chinese medicine dynamic questioning diagnosis"
+    ],
+    "first_seen": "2026-11-18"
   }
 ]
