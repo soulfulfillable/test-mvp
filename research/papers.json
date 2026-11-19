@@ -4762,5 +4762,48 @@
       "traditional chinese medicine dynamic questioning diagnosis"
     ],
     "first_seen": "2026-11-18"
+  },
+  {
+    "id": "doi:10.1016/j.jpha.2026.101572",
+    "title": "Revolutionizing traditional Chinese medicine research: Advancements in traditional machine learning and deep learning for AI-driven applications.",
+    "authors": [
+      "Ren J",
+      "Shi X",
+      "Liang R",
+      "Qin Y",
+      "Gao X",
+      "Zhang Q",
+      "Zhao L",
+      "Guan X."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.jpha.2026.101572",
+    "abstract": "Due to the numerous limitations of traditional methods in the research of traditional Chinese medicine (TCM), since entering the information age, artificial intelligence (AI) has not only played an increasingly important role in people's lives, but its components-traditional machine learning (ML) and deep learning (DL)-have also developed rapidly and demonstrated significant advantages and potential in TCM research. Therefore, they have been widely applied in areas such as TCM toxicity prediction, TCM efficacy assessment, targeted TCM development, identification and classification of TCM decoction pieces, authenticity and quality verification, quality control, and exploration of prescription composition rules. This article reviews and summarizes the specific applications of AI based on traditional ML and DL in the abovementioned research aspects in recent years, and identifies the challenges faced in the research. The aims are to summarize the current research status of AI in the field of TCM, clarify the technical methods employed, gain insights into the technical challenges encountered during the application process and ponder over them, and provide references and bases for future research in related aspects. At the same time, it explores the future applications trends of AI in TCM research, expounds on the importance of interdisciplinary cooperation in promoting the development of this field, looks ahead to its broad application prospects, and contributes to achieving more innovations and breakthroughs in TCM research.",
+    "matched_queries": [
+      "traditional chinese medicine syndrome differentiation decision tree"
+    ],
+    "first_seen": "2026-11-19"
+  },
+  {
+    "id": "doi:10.1186/s13020-026-01485-y",
+    "title": "MAGR-TCM: a knowledge graph-powered multi-agent model for intelligent home health consultation and triage in TCM gynecology.",
+    "authors": [
+      "Lv M",
+      "Pan X",
+      "Li Y",
+      "Hu Y",
+      "Xu W",
+      "Jin L",
+      "Fang F."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1186/s13020-026-01485-y",
+    "abstract": "<h4>Background</h4>Traditional Chinese Medicine (TCM) demonstrates distinct efficacy in managing gynecological disorders. However, accessing this specialized care in a home setting remains challenging due to the high cost of frequent hospital visits, privacy concerns, and a lack of immediate professional guidance. While general-purpose artificial intelligence offers a convenient alternative, the semantic gap between a patient's colloquial symptom descriptions and formal TCM diagnostic logic-compounded by the inherent 'hallucination' risks of large language models-prevents these tools from providing safe, actionable advice. To bridge this gap, this study proposes MAGR-TCM, an intelligent home health consultation and triage model.<h4>Methods</h4>Under expert supervision, a domain-specific knowledge graph was constructed, encompassing 10,231 entities and 32,051 relationships extracted from 741 high-quality clinical case records. Based on this foundation, we developed a Multi-Agent Retrieval-Augmented Generation (RAG) framework comprising four specialized agents designed to reconstruct the complete TCM 'Disease-Pattern-Therapeutic Principle-Formula-Medicinal' reasoning chain from informal user inquiries. This collaborative architecture simulates the expert diagnostic process to generate logical, evidence-based health guidance.<h4>Results</h4>Experimental results demonstrate that MAGR-TCM significantly outperforms all baseline models on both RAGAS automatic evaluation and expert human evaluation. The model achieved 100% sensitivity and specificity on the safety test set, further validating its practical utility in home health settings and its ability to distinguish self-treatable conditions from those requiring urgent hospital care.<h4>Conclusions</h4>By transitioning from black-box predictions to transparent, safe, and explainable reasoning logic, MAGR-TCM offers a technological paradigm for patient-centered home health management. It effectively mitigates generative hallucinations, making professional TCM expertise safely accessible for women's daily self-care and preliminary triage.",
+    "matched_queries": [
+      "traditional chinese medicine knowledge graph syndrome differentiation"
+    ],
+    "first_seen": "2026-11-19"
   }
 ]
