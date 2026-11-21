@@ -4805,5 +4805,43 @@
       "traditional chinese medicine knowledge graph syndrome differentiation"
     ],
     "first_seen": "2026-11-19"
+  },
+  {
+    "id": "doi:10.3389/fpubh.2026.1980675",
+    "title": "Development and validation of a risk stratification model for mild cognitive impairment among older adults with possible sarcopenia integrating traditional Chinese medicine constitution: a multicenter cross-sectional study.",
+    "authors": [
+      "Wang R",
+      "Mao N",
+      "He Y",
+      "Wang Y",
+      "Wu W."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.3389/fpubh.2026.1980675",
+    "abstract": "<h4>Background</h4>Possible sarcopenia is associated with cognitive impairment among older adults, while mild cognitive impairment (MCI) represents an important window for early identification. Existing MCI assessment approaches may depend on neuroimaging, genetic testing, or biochemical biomarkers, limiting their use in large-scale screening. Traditional Chinese medicine (TCM) constitution may provide accessible information on individual physiological and functional characteristics, but it has rarely been incorporated into MCI risk stratification.<h4>Objective</h4>To develop and validate a machine learning-based risk stratification model integrating TCM constitution and conventional health-related indicators for MCI among older adults with possible sarcopenia.<h4>Methods</h4>This multicenter cross-sectional study included 3,310 older adults with possible sarcopenia from ten tertiary hospitals in China and an independent single-institution external validation sample of 314 participants. The concurrent outcome was screening-defined probable MCI based on a prespecified Montreal Cognitive Assessment (MoCA) criterion. After a stratified 7:3 training-internal-validation split, data-dependent preprocessing parameters and least absolute shrinkage and selection operator (LASSO) feature selection were estimated using the training data only. Multilayer perceptron (MLP), gradient boosting decision tree (GBDT), support vector machine, K-nearest neighbors, logistic regression, and AdaBoost models were fitted using prespecified settings and evaluated using discrimination, classification, calibration, and decision-curve measures. SHapley Additive exPlanations (SHAP) were used only to describe contributions to model output.<h4>Results</h4>Seven features were retained: educational attainment, sex, smartphone usage, Pittsburgh Sleep Quality Index score, Patient Health Questionnaire-9 score, qi-deficiency constitution, and damp-heat constitution. The MLP showed the highest internal discrimination, with an AUC of 0.853 (95% CI: 0.827-0.878); its AUC was 0.799 (95% CI: 0.773-0.823) in the external sample. The internal and external Brier scores were 0.168 and 0.151, calibration intercepts were -0.07 and 0.18, and calibration slopes were 0.80 and 1.07, respectively. SHAP analysis ranked feature contributions to model output and was not interpreted causally.<h4>Conclusion</h4>This cross-sectional screening framework integrated TCM constitution with conventional indicators to stratify the probability of current screening-defined probable MCI among older adults with possible sarcopenia. The single-institution external evaluation supports only limited transportability; prospective multicenter evaluation and, where needed, recalibration are required before clinical implementation.",
+    "matched_queries": [
+      "TCM body constitution classification machine learning"
+    ],
+    "first_seen": "2026-11-21"
+  },
+  {
+    "id": "doi:10.1186/s13643-026-03314-7",
+    "title": "Different acupuncture and moxibustion therapies for atopic dermatitis: a systematic review and network meta-analysis.",
+    "authors": [
+      "Liu Q",
+      "Wu Z",
+      "Wang X",
+      "Li T",
+      "Chen Y."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1186/s13643-026-03314-7",
+    "abstract": "<h4>Objective</h4>To investigate the effectiveness of different acupuncture and moxibustion therapies in improving symptoms in patients with atopic dermatitis (AD) to determine the optimal approach. This study aims to provide insights into clinical decision-making in the complementary and alternative management of AD.<h4>Study design</h4>Systematic review and Network meta-analysis.<h4>Materials and methods</h4>Randomized controlled trial (RCT) studies were retrieved from various databases, including PubMed, Embase, the Cochrane Library, Web of Science, CNKI, WANFANG Data, and VIP. The RoB 2.0 assessment tool was used to assess the risk of bias in the included studies. The meta-analysis was conducted via Stata 17 software.<h4>Results</h4>A total of 23 RCTs involving 1,658 participants were included. Compared with controls, traditional pairwise meta-analyses revealed that acupuncture and moxibustion therapies significantly improved the overall response rate (OR: 2.83, 95% CI: 2.05-3.89; I<sup>2</sup> = 43.7%, P = 0.025) and reduced the SCORAD score (SMD: -0.24, 95% CI: -0.37-0.11; I<sup>2</sup> = 0.0%, P = 0.784). Network meta-analysis further indicated that moxibustion, embedding needling, and fire needling showed a higher probability of clinical efficacy according to SUCRA rankings. However, considering the small sample sizes of certain trials and the reliance on indirect evidence, these results should be interpreted as preliminary evidence rather than definitive clinical superiority.<h4>Conclusions</h4>Acupuncture and moxibustion therapies appear to be effective in improving clinical outcomes in patients with atopic dermatitis, with moxibustion showing the greatest potential benefit. These findings support the therapeutic value of acupuncture-based interventions as adjunctive treatments for AD. However, further high-quality, large-scale randomized controlled trials are needed to confirm these results and to optimize clinical application strategies.<h4>Systematic review registration</h4>PROSPERO CRD42025632518.",
+    "matched_queries": [
+      "traditional chinese medicine knowledge graph syndrome differentiation"
+    ],
+    "first_seen": "2026-11-21"
   }
 ]
