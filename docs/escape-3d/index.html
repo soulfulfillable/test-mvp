@@ -21,6 +21,9 @@ body.ready #loading{display:none}
 /* top bar: time + progress (3 checkpoints → exit) */
 #bar{position:absolute;left:var(--side);top:var(--top);height:36px;display:flex;align-items:center;gap:10px;padding:0 14px 0 12px;border-radius:18px;background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 #time{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;min-width:52px}
+#pals{display:flex;align-items:center;gap:3px;font-size:14px;font-variant-numeric:tabular-nums;color:rgba(255,255,255,.75);margin-left:2px}
+#pals svg{width:15px;height:15px;fill:#fff}
+#pals b{font-weight:600;color:#fff}
 #dots{display:flex;align-items:center;gap:5px}
 #dots i{display:block;width:7px;height:7px;border-radius:2px;transform:rotate(45deg);background:rgba(255,255,255,.35)}
 #dots i.exit{width:10px;height:12px;border-radius:2px 2px 0 0;transform:none;margin-left:3px}
@@ -64,7 +67,7 @@ body.touch #keys,body.moved #keys{opacity:0}
 #flash.win{background:radial-gradient(ellipse at 50% 40%,rgba(255,244,220,.95),rgba(255,214,140,.5) 70%);animation:win 1.6s ease-out forwards}
 @keyframes fl{0%{opacity:1}100%{opacity:0}}
 @keyframes fall{0%{opacity:0}45%{opacity:.85}100%{opacity:0}}
-@keyframes win{0%{opacity:0}18%{opacity:.9}100%{opacity:.18}}
+@keyframes win{0%{opacity:0}18%{opacity:.45}100%{opacity:0}}
 
 /* finish */
 #panel{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;pointer-events:auto;padding:24px 24px calc(var(--bottom) + 24px)}
@@ -86,14 +89,14 @@ body.done #stick-zone,body.done #jump{display:none}
     <div id="loading">Loading…</div>
     <div id="look"></div>
     <div id="flash"></div>
-    <div id="bar"><span id="time">0:00.0</span><span id="dots"><i></i><i></i><i></i><i class="exit"></i></span></div>
+    <div id="bar"><span id="time">0:00.0</span><span id="dots"><i></i><i></i><i></i><i class="exit"></i></span><span id="pals"><svg viewBox="0 0 20 20" aria-hidden="true"><ellipse cx="10" cy="13.2" rx="4.3" ry="3.4"/><circle cx="4.6" cy="8.6" r="1.9"/><circle cx="8.2" cy="5.2" r="1.9"/><circle cx="11.8" cy="5.2" r="1.9"/><circle cx="15.4" cy="8.6" r="1.9"/></svg><b id="pal-n">0</b>/2</span></div>
     <button id="btn-hero" aria-label="Choose character"><img alt=""></button>
     <button id="btn-sound" aria-label="Sound"><svg viewBox="0 0 20 20"><path d="M3.5 7.5h3l4-3.2v11.4l-4-3.2h-3z"/><g class="w"><path d="M13 7a4.2 4.2 0 0 1 0 6"/><path d="M15.2 4.8a7.3 7.3 0 0 1 0 10.4"/></g><g class="x"><path d="M13 7.5l5 5M18 7.5l-5 5"/></g></svg></button>
     <div id="stick-zone"><div id="stick" style="left:110px;top:calc(100% - 120px)"><div id="knob"></div></div></div>
     <div id="jump" aria-label="Jump"><svg viewBox="0 0 34 34"><path d="M8 21l9-9 9 9"/></svg></div>
     <div id="keys"><b>WASD</b> move · <b>Space</b> jump</div>
-    <div id="pick" class="hidden"><div class="sheet" onclick="event.stopPropagation()"><h3>Who's escaping?</h3><div id="pick-list"></div></div></div>
-    <div id="panel" class="hidden"><div class="card"><h2>You escaped</h2><div id="p-time">0:00.0</div><p id="p-sub"></p><button id="btn-again">Run again</button></div></div>
+    <div id="pick" class="hidden"><div class="sheet" onclick="event.stopPropagation()"><h3>Who's going home?</h3><div id="pick-list"></div></div></div>
+    <div id="panel" class="hidden"><div class="card"><h2>Home again</h2><div id="p-time">0:00.0</div><p id="p-sub"></p><button id="btn-again">Run again</button></div></div>
   </div>
 </div>
 <script type="module" src="game.js"></script>

@@ -211,7 +211,7 @@ export function makeOwner() {
   g2.fillStyle = '#f6dfba'; g2.fillRect(36, 64, 24, 18); g2.fillStyle = '#2b1d16'; g2.fillRect(34, 54, 6, 7); g2.fillRect(56, 54, 6, 7); g2.fillRect(44, 66, 8, 6);
   g2.fillStyle = '#bbb'; for (let i = 0; i < 3; i++) g2.fillRect(14, 96 + i * 9, 68, 4);
   const pt = new THREE.CanvasTexture(c); pt.colorSpace = THREE.SRGBColorSpace;
-  const poster = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.56), new THREE.MeshStandardMaterial({ map: pt, roughness: 0.9, side: THREE.DoubleSide })); poster.position.set(0, -0.62, 0.16); la.add(poster);
+  const poster = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.56), new THREE.MeshStandardMaterial({ map: pt, roughness: 0.9, side: THREE.DoubleSide })); poster.position.set(0, -0.72, 0.3); poster.rotation.x = 0.7; la.add(poster); // held up, upright, facing forward
   const legf = (x) => { const g = part(hip, 0.27, 0.8, 0.28, PA, x, 0.02, 0, true); part(g, 0.28, 0.1, 0.34, SHOE, 0, -0.76, 0.03); return g; };
   legf(-0.16); legf(0.16);
   const animate = (pose, dt) => {
@@ -219,7 +219,7 @@ export function makeOwner() {
     if (pose.mode === 'cheer') { // kneel a little, arms wide open
       hip.position.y = 0.86 - 0.22 + Math.abs(Math.sin(t * 6)) * 0.05; la.rotation.set(-1.1, 0, -0.9); ra.rotation.set(-1.1, 0, 0.9); head.rotation.x = 0.15; torso.rotation.x = 0.2; mouth.scale.set(1.3, 3, 1); poster.visible = false;
     } else { // waiting: looking around, poster held up, shoulders low
-      hip.position.y = 0.86; la.rotation.set(-1.25, 0, 0.1); ra.rotation.set(0, 0, 0.06); head.rotation.y = Math.sin(t * 0.8) * 0.5; head.rotation.x = 0.12; torso.rotation.x = 0; mouth.scale.set(1, 1, 1); poster.visible = true;
+      hip.position.y = 0.86; la.rotation.set(-0.7, 0, 0.25); ra.rotation.set(0, 0, 0.06); head.rotation.y = Math.sin(t * 0.8) * 0.5; head.rotation.x = 0.12; torso.rotation.x = 0; mouth.scale.set(1, 1, 1); poster.visible = true;
     }
   };
   return { root, animate, height: 1.9 };
