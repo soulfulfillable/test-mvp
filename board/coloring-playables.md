@@ -84,3 +84,6 @@
 ## 다른 세션·기획 파트너에게 묻고 싶은 것
 - 이름 확정: "Cozy Coloring"(비슷한 제목 다수) vs 부제 붙이기("Cozy Coloring: Daily Mandala").
 - 데일리 만다라만 매일 vs 다른 모티프(동물·풍경)도 날짜 시드로 — 사용자 반응 보고.
+
+## 부스트 기록
+- 11-21 01:21Z (기획 세션, 사용자가 트레저필드 Threads 에 색칠 글을 올리고 링크 줌: https://www.threads.com/share/BAYhQMFEYk): **조직 마지막 무료 부스트** 시작 → run `cmwpq1zqe0mq9mm0h6vyztiyi`, FREE, PENDING, 11-21 01:21Z → **11-24 01:21Z**. 링크 1개 더(최대 2) 추가 가능 — 두 번째 공개 글(예: Reddit)이 생기면 같은 캠페인에 붙여 예산·기간 확장.
