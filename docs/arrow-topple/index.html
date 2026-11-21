@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#BFE8F8">
+<title>Arrow Topple</title>
+<style>
+  html{background:#8FCB5B;overscroll-behavior:none}
+  /* 240px scroll cushion: an in-app browser sheet reads a downward drag as "close" unless the page can scroll */
+  body{margin:0;height:calc(100% + 240px);min-height:calc(100vh + 240px);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+  #app{position:fixed;inset:0;overflow:hidden;background:#BFE8F8}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  button{position:absolute;margin:0;padding:0;border:0;background:none;cursor:pointer;-webkit-appearance:none;appearance:none}
+  button svg{display:block;width:100%;height:100%}
+  #mute{top:calc(10px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));width:44px;height:44px}
+  #again{left:50%;bottom:calc(9% + env(safe-area-inset-bottom));width:84px;height:84px;margin-left:-42px;opacity:0;transform:scale(.6);pointer-events:none;transition:opacity .25s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+  #again.on{opacity:1;transform:scale(1);pointer-events:auto}
+  #again:active,#mute:active{transform:scale(.92)}
+  #mute .off{display:none} #mute.muted .off{display:block} #mute.muted .on{display:none}
+  @media (prefers-reduced-motion:reduce){#again{transition:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="c"></canvas>
+  <button id="mute" aria-label="Sound">
+    <svg viewBox="0 0 44 44" fill="none" stroke="#3A2A22" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <circle cx="22" cy="22" r="19" fill="#FFF8EA"/>
+      <path d="M12 18h5l7-6v20l-7-6h-5z" fill="#E2A85F"/>
+      <path class="on" d="M29 17c2.5 3 2.5 7 0 10"/>
+      <path class="off" d="M28 18l7 8M35 18l-7 8"/>
+    </svg>
+  </button>
+  <button id="again" aria-label="Play again">
+    <svg viewBox="0 0 84 84" fill="none" stroke="#3A2A22" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <circle cx="42" cy="42" r="38" fill="#FFF8EA"/>
+      <path d="M58 42a16 16 0 1 1-5.5-12" stroke-width="7" stroke="#3A2A22"/>
+      <path d="M58 42a16 16 0 1 1-5.5-12" stroke-width="2.4" stroke="#EC5A46" opacity="0"/>
+      <path d="M57 19v13H44z" fill="#EC5A46"/>
+    </svg>
+  </button>
+</div>
+<script src="planck.min.js"></script>
+<script src="sim.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

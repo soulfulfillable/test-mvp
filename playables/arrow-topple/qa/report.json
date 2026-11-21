@@ -1,0 +1,305 @@
+{
+ "when": "2026-11-21T04:19:34.680Z",
+ "pass": 38,
+ "total": 38,
+ "results": [
+  {
+   "name": "size 320x568: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.41,
+    "archerH": 0.19,
+    "wolfPx": 53
+   }
+  },
+  {
+   "name": "size 360x640: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.41,
+    "archerH": 0.19,
+    "wolfPx": 59
+   }
+  },
+  {
+   "name": "size 375x667: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.41,
+    "archerH": 0.19,
+    "wolfPx": 62
+   }
+  },
+  {
+   "name": "size 390x844: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.33,
+    "archerH": 0.16,
+    "wolfPx": 64
+   }
+  },
+  {
+   "name": "size 393x852: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.33,
+    "archerH": 0.15,
+    "wolfPx": 65
+   }
+  },
+  {
+   "name": "size 414x896: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.33,
+    "archerH": 0.16,
+    "wolfPx": 68
+   }
+  },
+  {
+   "name": "size 430x932: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.33,
+    "archerH": 0.15,
+    "wolfPx": 71
+   }
+  },
+  {
+   "name": "size 768x1024: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.54,
+    "archerH": 0.25,
+    "wolfPx": 126
+   }
+  },
+  {
+   "name": "size 820x1180: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.5,
+    "archerH": 0.23,
+    "wolfPx": 135
+   }
+  },
+  {
+   "name": "size 1024x768: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.66,
+    "archerH": 0.31,
+    "wolfPx": 115
+   }
+  },
+  {
+   "name": "size 844x390: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.66,
+    "archerH": 0.31,
+    "wolfPx": 59
+   }
+  },
+  {
+   "name": "size 667x375: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.66,
+    "archerH": 0.31,
+    "wolfPx": 56
+   }
+  },
+  {
+   "name": "size 1280x720: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.66,
+    "archerH": 0.31,
+    "wolfPx": 108
+   }
+  },
+  {
+   "name": "size 1920x1080: first frame",
+   "pass": true,
+   "detail": {
+    "towerH": 0.66,
+    "archerH": 0.31,
+    "wolfPx": 162
+   }
+  },
+  {
+   "name": "demo hand shows without touching (no text on screen)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "tiny drag (under 14px) does not shoot",
+   "pass": true,
+   "detail": {
+    "shots": 0
+   }
+  },
+  {
+   "name": "touching hides the demo hand",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "dragging back shows the dotted path",
+   "pass": true,
+   "detail": {
+    "dots": 15
+   }
+  },
+  {
+   "name": "one good arrow topples the tower → win",
+   "pass": true,
+   "detail": {
+    "state": "won",
+    "shots": 1,
+    "arrowsLeft": 2
+   }
+  },
+  {
+   "name": "slow-motion + zoom fired exactly once at the topple",
+   "pass": true,
+   "detail": {
+    "slowmo": 1,
+    "sawSlow": true,
+    "maxZoom": 1.158
+   }
+  },
+  {
+   "name": "arrow stuck where it hit",
+   "pass": true,
+   "detail": {
+    "sticks": 1
+   }
+  },
+  {
+   "name": "topple film strip written",
+   "pass": true,
+   "detail": {
+    "frames": 7,
+    "ms": 4077
+   }
+  },
+  {
+   "name": "wolves run off and the replay button appears",
+   "pass": true,
+   "detail": {
+    "again": true,
+    "fleeing": 2
+   }
+  },
+  {
+   "name": "replay button resets the round",
+   "pass": true,
+   "detail": {
+    "state": "play",
+    "arrowsLeft": 3
+   }
+  },
+  {
+   "name": "same pull twice ends the same way (settled positions identical)",
+   "pass": true,
+   "detail": {
+    "state": "won",
+    "same": true,
+    "len": 244
+   }
+  },
+  {
+   "name": "last flight path stays as a faint trail",
+   "pass": true,
+   "detail": {
+    "points": 10
+   }
+  },
+  {
+   "name": "arrow counter went 3 → 0",
+   "pass": true,
+   "detail": {
+    "arrowsLeft": 0
+   }
+  },
+  {
+   "name": "three misses → lose, wolves still up, replay offered",
+   "pass": true,
+   "detail": {
+    "state": "lost",
+    "wolvesUp": 2,
+    "again": true
+   }
+  },
+  {
+   "name": "after losing, one tap anywhere restarts",
+   "pass": true,
+   "detail": {
+    "state": "play"
+   }
+  },
+  {
+   "name": "miss then hit → win on the 2nd arrow",
+   "pass": true,
+   "detail": {
+    "state": "won",
+    "shots": 2
+   }
+  },
+  {
+   "name": "page never scrolled during drags (sheet guard)",
+   "pass": true,
+   "detail": {
+    "scrollY": 120
+   }
+  },
+  {
+   "name": "mute toggles and survives reload",
+   "pass": true,
+   "detail": {
+    "m1": true,
+    "m2": true
+   }
+  },
+  {
+   "name": "landscape 844x390 touch: win",
+   "pass": true,
+   "detail": {
+    "state": "won",
+    "fpSame": false
+   }
+  },
+  {
+   "name": "small phone 320x568 touch: win",
+   "pass": true,
+   "detail": {
+    "state": "won"
+   }
+  },
+  {
+   "name": "desktop mouse drag: win",
+   "pass": true,
+   "detail": {
+    "state": "won"
+   }
+  },
+  {
+   "name": "first screen at 1170x2532 saved",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "console errors 0 / page errors 0",
+   "pass": true,
+   "detail": []
+  },
+  {
+   "name": "external requests 0",
+   "pass": true,
+   "detail": []
+  }
+ ]
+}
