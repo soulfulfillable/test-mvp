@@ -50,9 +50,9 @@ function quadAnimate(Q) {
 }
 
 // the pup: apricot, cream face and paws, floppy ears, scruffy top tuft, orange harness (the developer's dog)
-export function makeDog() {
+export function makeDog(pal = {}) {
   const root = new THREE.Group();
-  const AP = '#e0a15e', APD = '#c98443', CR = '#f6dfba', DK = '#2b1d16', OR = '#ff7a1a', BK = '#1d1d1f';
+  const AP = pal.coat || '#e0a15e', APD = pal.ear || '#c98443', CR = pal.light || '#f6dfba', DK = '#2b1d16', OR = pal.harness || '#ff7a1a', BK = '#1d1d1f';
   const body = new THREE.Group(); const bodyY = 0.44; body.position.y = bodyY; root.add(body);
   part(body, 0.5, 0.42, 0.78, AP, 0, 0, -0.02);
   // harness
@@ -146,7 +146,7 @@ function bipedAnimate(B, rate = 1) {
 // the guard: twice your size, dark green uniform, cap, shades, baton
 export function makeGuard() {
   const root = new THREE.Group();
-  const UNI = '#35573f', UNID = '#27402e', SK = '#e3ad80', DK = '#1d1d1f', BADGE = '#f2c230';
+  const UNI = '#b59a5b', UNID = '#6b5a3a', SK = '#e3ad80', DK = '#1d1d1f', BADGE = '#e5352b';
   const hip = new THREE.Group(); hip.position.y = 1.0; root.add(hip);
   const torso = part(hip, 1.2, 1.0, 0.8, UNI, 0, 0.52, 0);
   part(hip, 1.24, 0.14, 0.84, DK, 0, 0.1, 0); part(hip, 0.2, 0.16, 0.06, BADGE, 0, 0.1, 0.42);     // belt + buckle
@@ -161,10 +161,68 @@ export function makeGuard() {
   flat(head, 0.3, 0.05, '#6b2f25', 0, -0.2, 0.302);                                                 // frown
   const arm = (x) => { const g = part(hip, 0.34, 0.6, 0.36, UNI, x, 1.0, 0, true); part(g, 0.3, 0.42, 0.32, SK, 0, -0.75, 0); return g; };
   const la = arm(-0.78), ra = arm(0.78);
-  part(ra, 0.1, 0.1, 0.8, DK, 0, -0.98, 0.32);                                                      // baton
+  // the net: a long pole with a hoop and a mesh bag
+  const pole = part(ra, 0.08, 0.08, 1.7, '#8a6a3c', 0, -0.98, 0.75);
+  const hoop = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.04, 6, 18), mat('#d9d9d9')); hoop.position.set(0, -0.98, 1.95); hoop.rotation.x = Math.PI / 2; ra.add(hoop);
+  const bag = new THREE.Mesh(new THREE.ConeGeometry(0.42, 0.7, 10, 3, true), new THREE.MeshStandardMaterial({ color: '#f4f4f4', wireframe: true })); bag.position.set(0, -1.33, 1.95); bag.rotation.x = Math.PI; ra.add(bag);
   const legf = (x) => { const g = part(hip, 0.46, 0.84, 0.5, UNID, x, 0.02, 0, true); part(g, 0.48, 0.16, 0.62, DK, 0, -0.92, 0.05); return g; };
   const ll = legf(-0.3), rl = legf(0.3);
   return { root, animate: bipedAnimate({ hip, hipY: 1.0, head, torso, la, ra, ll, rl, chaser: true }, 0.7), height: 2.75 };
 }
 
-export const MAKERS = { dog: makeDog, cat: makeCat, kid: makeKid };
+// a bunny friend: white, long ears, pink nose
+export function makeBunny() {
+  const root = new THREE.Group();
+  const W = '#f7f4ee', G = '#d9d3c8', PK = '#f2a3a3', DK = '#2b1d16';
+  const body = new THREE.Group(); const bodyY = 0.3; body.position.y = bodyY; root.add(body);
+  part(body, 0.36, 0.34, 0.5, W, 0, 0, 0);
+  const head = new THREE.Group(); head.position.set(0, 0.2, 0.28); body.add(head);
+  part(head, 0.36, 0.32, 0.32, W, 0, 0.04, 0.02);
+  part(head, 0.07, 0.05, 0.04, PK, 0, 0.0, 0.2);
+  flat(head, 0.06, 0.09, DK, -0.09, 0.08, 0.185); flat(head, 0.06, 0.09, DK, 0.09, 0.08, 0.185);
+  const ears = [];
+  for (const s of [-1, 1]) { const e = part(head, 0.09, 0.4, 0.07, W, s * 0.09, 0.6, -0.02, true); part(e, 0.05, 0.3, 0.02, PK, 0, -0.2, 0.04); e.rotation.x = Math.PI; ears.push([e, 0]); }
+  const leg = (x, z, h) => part(body, 0.12, h, 0.14, G, x, -0.1, z, true);
+  const fl = leg(-0.1, 0.16, 0.2), fr = leg(0.1, 0.16, 0.2), bl = leg(-0.12, -0.16, 0.2), br = leg(0.12, -0.16, 0.2);
+  const tailPivot = new THREE.Group(); tailPivot.position.set(0, 0.05, -0.27); body.add(tailPivot); part(tailPivot, 0.14, 0.14, 0.12, W, 0, 0, 0);
+  const q = quadAnimate({ body, bodyY, head, fl, fr, bl, br, tail: tailPivot });
+  let t = 0;
+  return { root, height: 0.8, animate: (pose, dt) => { q(pose, dt); t += dt; if (pose.mode === 'run' || pose.mode === 'walk') body.position.y = bodyY + Math.abs(Math.sin(t * 11)) * 0.16; for (const [e] of ears) e.rotation.z = Math.sin(t * 3) * 0.06; } };
+}
+
+// the owner waiting outside: green sweater, holding a red leash and a LOST DOG poster
+export function makeOwner() {
+  const root = new THREE.Group();
+  const SK = '#f0c9a0', SW = '#5c6b4a', PA = '#26262b', HA = '#1f1a17', DK = '#2b1d16', SHOE = '#3a3a40';
+  const hip = new THREE.Group(); hip.position.y = 0.86; root.add(hip);
+  const torso = part(hip, 0.62, 0.72, 0.34, SW, 0, 0.38, 0);
+  const head = new THREE.Group(); head.position.set(0, 1.0, 0); hip.add(head);
+  part(head, 0.42, 0.42, 0.4, SK, 0, 0, 0);
+  part(head, 0.46, 0.16, 0.44, HA, 0, 0.2, -0.01); part(head, 0.46, 0.3, 0.12, HA, 0, 0.06, -0.18);
+  flat(head, 0.06, 0.08, DK, -0.1, 0.02, 0.202); flat(head, 0.06, 0.08, DK, 0.1, 0.02, 0.202);
+  const mouth = flat(head, 0.14, 0.03, '#b0553f', 0, -0.1, 0.202);
+  const arm = (x) => { const g = part(hip, 0.2, 0.52, 0.24, SW, x, 0.72, 0, true); part(g, 0.18, 0.16, 0.2, SK, 0, -0.58, 0); return g; };
+  const la = arm(-0.43), ra = arm(0.43);
+  const leash = part(ra, 0.05, 0.6, 0.05, '#d92b2b', 0, -0.95, 0.02); leash.rotation.z = 0.15;
+  // poster in the left hand: a white sheet with a little dog face (drawn here; no text needed)
+  const c = document.createElement('canvas'); c.width = 96; c.height = 128; const g2 = c.getContext('2d');
+  g2.fillStyle = '#fffdf6'; g2.fillRect(0, 0, 96, 128); g2.fillStyle = '#d92b2b'; g2.fillRect(8, 8, 80, 18);
+  g2.fillStyle = '#e0a15e'; g2.fillRect(26, 44, 44, 40); g2.fillStyle = '#c98443'; g2.fillRect(18, 44, 10, 30); g2.fillRect(68, 44, 10, 30);
+  g2.fillStyle = '#f6dfba'; g2.fillRect(36, 64, 24, 18); g2.fillStyle = '#2b1d16'; g2.fillRect(34, 54, 6, 7); g2.fillRect(56, 54, 6, 7); g2.fillRect(44, 66, 8, 6);
+  g2.fillStyle = '#bbb'; for (let i = 0; i < 3; i++) g2.fillRect(14, 96 + i * 9, 68, 4);
+  const pt = new THREE.CanvasTexture(c); pt.colorSpace = THREE.SRGBColorSpace;
+  const poster = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.56), new THREE.MeshStandardMaterial({ map: pt, roughness: 0.9, side: THREE.DoubleSide })); poster.position.set(0, -0.62, 0.16); la.add(poster);
+  const legf = (x) => { const g = part(hip, 0.27, 0.8, 0.28, PA, x, 0.02, 0, true); part(g, 0.28, 0.1, 0.34, SHOE, 0, -0.76, 0.03); return g; };
+  legf(-0.16); legf(0.16);
+  const animate = (pose, dt) => {
+    const t = pose.t;
+    if (pose.mode === 'cheer') { // kneel a little, arms wide open
+      hip.position.y = 0.86 - 0.22 + Math.abs(Math.sin(t * 6)) * 0.05; la.rotation.set(-1.1, 0, -0.9); ra.rotation.set(-1.1, 0, 0.9); head.rotation.x = 0.15; torso.rotation.x = 0.2; mouth.scale.set(1.3, 3, 1); poster.visible = false;
+    } else { // waiting: looking around, poster held up, shoulders low
+      hip.position.y = 0.86; la.rotation.set(-1.25, 0, 0.1); ra.rotation.set(0, 0, 0.06); head.rotation.y = Math.sin(t * 0.8) * 0.5; head.rotation.x = 0.12; torso.rotation.x = 0; mouth.scale.set(1, 1, 1); poster.visible = true;
+    }
+  };
+  return { root, animate, height: 1.9 };
+}
+
+export const MAKERS = { dog: makeDog, cat: makeCat, kid: makeKid, bunny: makeBunny };

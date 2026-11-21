@@ -1,5 +1,5 @@
 // Escape 3D — sound (Web Audio). All clips are CC0 files (see CREDITS.md), ogg with an mp3 fallback for Safari.
-const NAMES = ['step', 'jump', 'land', 'checkpoint', 'spike', 'respawn', 'exit', 'door'];
+const NAMES = ['step', 'jump', 'land', 'checkpoint', 'spike', 'respawn', 'exit', 'door', 'alert', 'caught', 'friend'];
 
 export function createAudio(base = './audio/') {
   const A = { muted: false, ready: false, ctx: null, buffers: {}, last: {} };
