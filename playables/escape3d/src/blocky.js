@@ -225,4 +225,25 @@ export function makeOwner() {
   return { root, animate, height: 1.9 };
 }
 
+// a passer-by for the field: 5 meshes only (body + 2 arms + 2 legs, colours baked into the vertices)
+const VC = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.6, metalness: 0 });
+function bakedBoxes(list) { // [[w,h,d,color,x,y,z], …] → one geometry with a colour per box
+  let n = 0; const gs = list.map(([w, h, d, c, x, y, z]) => { const g = new THREE.BoxGeometry(w, h, d).toNonIndexed(); g.translate(x, y, z); const col = new THREE.Color(c); const k = g.attributes.position.count; const a = new Float32Array(k * 3); for (let i = 0; i < k; i++) { a[i * 3] = col.r; a[i * 3 + 1] = col.g; a[i * 3 + 2] = col.b; } g.setAttribute('color', new THREE.BufferAttribute(a, 3)); n += k; return g; });
+  const pos = new Float32Array(n * 3), nor = new Float32Array(n * 3), col = new Float32Array(n * 3); let o = 0;
+  for (const g of gs) { pos.set(g.attributes.position.array, o); nor.set(g.attributes.normal.array, o); col.set(g.attributes.color.array, o); o += g.attributes.position.count * 3; }
+  const out = new THREE.BufferGeometry(); out.setAttribute('position', new THREE.BufferAttribute(pos, 3)); out.setAttribute('normal', new THREE.BufferAttribute(nor, 3)); out.setAttribute('color', new THREE.BufferAttribute(col, 3)); return out;
+}
+export function makePerson(pal) {
+  const root = new THREE.Group(); const { shirt, pants, hair, skin = '#f0c9a0', hat } = pal; const DK = '#2b1d16';
+  const hip = new THREE.Group(); hip.position.y = 0.86; root.add(hip);
+  const bodyParts = [[0.6, 0.7, 0.32, shirt, 0, 0.37, 0], [0.4, 0.4, 0.38, skin, 0, 0.98, 0], [0.44, 0.14, 0.42, hair, 0, 1.19, -0.01], [0.44, 0.26, 0.1, hair, 0, 1.04, -0.17], [0.06, 0.08, 0.02, DK, -0.1, 1.0, 0.2], [0.06, 0.08, 0.02, DK, 0.1, 1.0, 0.2]];
+  if (hat) bodyParts.push([0.5, 0.1, 0.5, hat, 0, 1.28, 0.04]);
+  const torso = new THREE.Mesh(bakedBoxes(bodyParts), VC); torso.castShadow = true; hip.add(torso);
+  const limb = (x, y, list) => { const g = new THREE.Group(); g.position.set(x, y, 0); const m = new THREE.Mesh(bakedBoxes(list), VC); m.castShadow = true; g.add(m); hip.add(g); return g; };
+  const la = limb(-0.41, 0.7, [[0.2, 0.5, 0.22, shirt, 0, -0.25, 0], [0.18, 0.16, 0.2, skin, 0, -0.58, 0]]), ra = limb(0.41, 0.7, [[0.2, 0.5, 0.22, shirt, 0, -0.25, 0], [0.18, 0.16, 0.2, skin, 0, -0.58, 0]]);
+  const ll = limb(-0.16, 0.02, [[0.26, 0.78, 0.28, pants, 0, -0.39, 0], [0.27, 0.1, 0.34, '#3a3a40', 0, -0.8, 0.03]]), rl = limb(0.16, 0.02, [[0.26, 0.78, 0.28, pants, 0, -0.39, 0], [0.27, 0.1, 0.34, '#3a3a40', 0, -0.8, 0.03]]);
+  const head = new THREE.Group(); // (head is baked into the body; a dummy keeps the shared animator happy)
+  return { root, animate: bipedAnimate({ hip, hipY: 0.86, head, torso, la, ra, ll, rl }, 0.8), height: 1.9 };
+}
+
 export const MAKERS = { dog: makeDog, cat: makeCat, kid: makeKid, bunny: makeBunny };

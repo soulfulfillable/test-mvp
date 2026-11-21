@@ -38,8 +38,7 @@
   // legs: walk to `to`, or (jump legs) wait at `hold` until `ready`, then jump and steer at `aim` until landed near it
   const P = (i, dt = 0) => g.moverAt(i, g.t + dt);
   const L = [
-    // out of the cell when the hall guard is far up the hall, across to the foot of the stairs
-    { cp: 0, hold: () => [-5.0, 3.0], ready: () => GD()[0].z < -8 && GD()[0].mode === 'patrol', to: [2.9, 1.6] },
+    { cp: 0, to: [-3.6, 3.0] }, { to: [2.9, 1.6] },                 // out of the kennel, across the quiet hall to the stairs
     { to: [3.5, 1.0] },
     { to: [3.5, -6.5] },                                          // walk up the steps
     { to: [6.2, -6.5] },                                          // onto the catwalk
@@ -61,9 +60,11 @@
     { runjump: true, to: [0.6, -33.6], at: () => g.pos.x < 5.7, land: () => g.pos.x < 2.0 }, // run-up jump over the live puddle
     { to: [-11.2, -33.6] },                                       // the gate button
     { to: [-7.0, -34.4] },
-    // wait behind the wire until the yard guard walks away east, then dash for the gate
-    { hold: () => [-7.0, -35.5], ready: () => { const q = GD()[1]; return q.mode === 'patrol' && q.x > 8.5 && q.vx > 0.1; }, to: [-0.2, -38.2] },
-    { to: [0, -43.2] },
+    { to: [-6.5, -37.8] }, { to: [0, -38.2] }, { to: [0, -42.8] },
+    // the field: wait at the gate until the catcher is far on the east side walking away, then run down the west edge
+    { cp: 4, hold: () => [-1.0, -42.8], ready: () => { const q = GD()[0]; return q.mode === 'patrol' && q.x > 2.5 && q.vx > 0.1; }, to: [-10.8, -47] },
+    { to: [-10.8, -66.8] },
+    { to: [-1.5, -68.6] }, { to: [0, -69] },
   ];
   const cpStart = {}; L.forEach((l, i) => { if (l.cp !== undefined) cpStart[l.cp] = i; });
 

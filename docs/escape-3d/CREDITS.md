@@ -5,7 +5,7 @@ credited anyway). No company names, no personal names.
 
 ## Characters — made by us in code (since 2026-11-10, block "obby" style)
 
-Inmate (the default), Pup (after the developer's own dog), Kitty (after their orange cat) and the guards are built from rounded
+Pup (the default, after the developer's own dog), Kitty (after their orange cat), the bunny friend, the dog catchers and the owner are built from rounded
 boxes in `src/blocky.js` and animated in code (rigid limb swings). No model files are shipped.
 Earlier trial builds used Kenney Mini Characters and Quaternius cartoon animals (both CC0); those files remain in
 `assets/` for reference only and are not deployed.
@@ -25,6 +25,9 @@ archive's License.txt "Creative Commons Zero, CC0"). Re-encoded to mono OGG (q4)
 | `respawn` | `revive.ogg` | back at the checkpoint |
 | `door` | `confirm.ogg` | exit door starts opening |
 | `exit` | `level_up.ogg` | escaped |
+| `alert` | `boss.ogg` | the catcher notices you |
+| `caught` | `downed.ogg` | netted |
+| `friend` | `coin.ogg` | a friend is freed |
 
 ## Made by us (code)
 
