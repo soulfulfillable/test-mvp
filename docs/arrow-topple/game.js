@@ -67,7 +67,7 @@
   // ---------- scenery ----------
   function scenery() {
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.fillStyle = SKY; ctx.fillRect(0, 0, W, H);
-    var sx = Math.max(wx(0.3), 0) + S * 1.5, sy = Math.max(S * 1.9, GY - S * 7.0);
+    var sx = Math.max(wx(0.3), 0) + S * 1.5, sy = Math.max(S * 1.3, GY - S * 9.2);
     ctx.beginPath(); ctx.arc(sx, sy, S * 0.62, 0, 6.2832); ctx.fillStyle = CREAM; ctx.fill();   // sun = the light, top-left
     for (var i = 0; i < 4; i++) {
       var cxp = ((i * 0.31 + T * 0.004 * (1 + i * 0.3)) % 1.3 - 0.15) * W, cyp = GY - S * (5.3 + (i % 2) * 1.2 + (i > 1 ? Math.max(0, GY / S - 8) * 0.6 : 0)), r = S * (0.42 + (i % 3) * 0.1);
@@ -218,7 +218,7 @@
     else if (mood === 'stomp') { j = Math.abs(Math.sin(T * 5 + s.ph)) * 0.06; tilt = Math.sin(T * 5 + s.ph) * 0.04; }
     var x = sheepX(i);
     if (sheepRun && sheepRun.i === i) { var k = Math.min(1, (T - sheepRun.t0) / 0.9); k = k * k * (3 - 2 * k); x = x + (sheepRun.to - x) * k; if (k < 1) j = Math.abs(Math.sin(T * 16)) * 0.15; s.cx = x; }
-    ctx.save(); ctx.translate(x, -(0.2 + 0.55 * fgScale)); ctx.scale(fgScale, fgScale); ctx.translate(0, j); ctx.rotate(tilt);
+    ctx.save(); ctx.translate(x, -(0.36 + 0.55 * fgScale)); ctx.scale(fgScale, fgScale); ctx.translate(0, j); ctx.rotate(tilt);
     ctx.beginPath(); ctx.ellipse(0.05, -0.5 - j, 0.5, 0.08, 0, 0, 6.2832); ctx.fillStyle = GRASS_S; ctx.fill();
     var st = mood === 'stomp' ? Math.sin(T * 10 + s.ph) * 0.05 : 0;
     limb(-0.26, -0.2, -0.27, -0.46 + Math.max(0, st), 0.09, DARK); limb(-0.08, -0.2, -0.08, -0.46, 0.09, DARK); limb(0.14, -0.2, 0.14, -0.46 + Math.max(0, -st), 0.09, DARK); limb(0.3, -0.2, 0.31, -0.46, 0.09, DARK);
@@ -349,7 +349,7 @@
       else if (e.type === 'topple') { slowT = 0.42; counts.slowmo++; }
       else if (e.type === 'wolfdown') { sYelp(); buzz(30); puff(e.x, 0.1, 7, CREAM, 1.6); for (j = 0; j < sheep.length; j++) sheep[j].j = 0.01 + j * 0.0001; }
       else if (e.type === 'flee') { var wf = null; for (j = 0; j < sim.wolves.length; j++) if (sim.wolves[j].id === e.id) wf = sim.wolves[j]; fleeing.push({ x: e.x, t0: T, plunger: wf && wf.plunger > 0 }); }
-      else if (e.type === 'basketdown') { sheepRun = { i: 2, t0: T + 0.5, to: Math.max(4.4, Math.min(7.2, e.x - 0.3)) }; }
+      else if (e.type === 'basketdown') { sheepRun = { i: 2, t0: T + 0.5, to: Math.max(4.6, Math.min(7.6 - 0.75 * fgScale, e.x - 0.3)) }; }
       else if (e.type === 'win') { endT = 0; sWin(); confetti(); buzz(60); }
       else if (e.type === 'lose') { endT = 0; tone('triangle', 300, 150, 0.4, 0.12); }
     }
@@ -387,7 +387,7 @@
       var up = sim.wolves.filter(function (w) { return !w.down; }).length;
       var tb = { x0: 9, x1: 0, y1: 0 }; sim.items.forEach(function (it) { if (it.gone) return; var p = it.body.getPosition(); tb.x0 = Math.min(tb.x0, p.x - it.w / 2); tb.x1 = Math.max(tb.x1, p.x + it.w / 2); tb.y1 = Math.max(tb.y1, p.y + it.h / 2 + (it.kind === 'wolf' ? 0.2 : 0)); });
       return { state: sim.state, arrowsLeft: sim.arrowsLeft, shots: sim.shots, wolvesUp: up, canFire: sim.canFire(), aiming: !!aim, maxPull: maxPull(), W: W, H: H, S: S,
-        archer: box(AX - 0.75, 0, C.ORIGIN.x + 0.45, 2.45), tower: box(tb.x0, 0, tb.x1, tb.y1), hud: hudRect(), sheep: sheep.map(function (s) { var x = s.cx === undefined ? sheepX(sheep.indexOf(s)) : s.cx, b = -(0.2 + 0.55 * fgScale); return { x: wx(x - 0.62 * fgScale), y: wy(b + 0.5 * fgScale), w: 1.3 * fgScale * S, h: 1.0 * fgScale * S }; }),
+        archer: box(AX - 0.75, 0, C.ORIGIN.x + 0.45, 2.45), tower: box(tb.x0, 0, tb.x1, tb.y1), hud: hudRect(), sheep: sheep.map(function (s) { var x = s.cx === undefined ? sheepX(sheep.indexOf(s)) : s.cx, b = -(0.36 + 0.55 * fgScale); return { x: wx(x - 0.62 * fgScale), y: wy(b + 0.5 * fgScale), w: 1.3 * fgScale * S, h: 1.0 * fgScale * S }; }),
         demo: counts.demo, demoActive: demo.active, slowmo: counts.slowmo, slowNow: slowT > 0, zoom: zoom, sticks: counts.sticks, ghost: ghost ? ghost.length / 2 : 0, preview: aim ? sim.preview(aim.a, aim.p).length / 2 : 0,
         again: againBtn.classList.contains('on'), muted: muted, fleeing: fleeing.length, restarts: counts.restarts || 0, fp: sim.fingerprint(), fp5: counts.fp5 || '', scrollY: window.scrollY, time: sim.time };
     }

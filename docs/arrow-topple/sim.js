@@ -111,7 +111,7 @@
       ar.mode = 'hit'; ar.hitN = this.n;
       var tp = ar.body.getWorldPoint(Vec2(0.5, 0));
       if (pe.other.kind === 'ground') { ar.body.setType('static'); ar.mode = 'stuck'; }
-      else if (pe.tip && pe.other.body && !pe.other.gone) {
+      else if (pe.tip && pe.other.kind !== 'arrow' && pe.other.body && !pe.other.gone) {
         w.createJoint(planck.WeldJoint({ frequencyHz: 0, dampingRatio: 0 }, ar.body, pe.other.body, Vec2(tp.x, tp.y)));
         ar.mode = 'stuck'; ar.stuckTo = pe.other; pe.other.plunger++;
       }
