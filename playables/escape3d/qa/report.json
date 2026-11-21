@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-15T01:37:19.730Z",
+  "startedAt": "2026-11-21T01:40:40.509Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -7,12 +7,12 @@
     {
       "name": "total download < 5 MB",
       "ok": true,
-      "detail": "628 KB"
+      "detail": "687 KB"
     },
     {
-      "name": "phone-390x844: exit on screen at first frame",
+      "name": "phone-390x844: the owner (the goal) is on screen in the first frame",
       "ok": true,
-      "detail": "195,428"
+      "detail": "180,413"
     },
     {
       "name": "phone-390x844: HUD inside viewport, no overlap",
@@ -25,9 +25,9 @@
       "detail": ""
     },
     {
-      "name": "phone-360x640: exit on screen at first frame",
+      "name": "phone-360x640: the owner (the goal) is on screen in the first frame",
       "ok": true,
-      "detail": "180,325"
+      "detail": "169,313"
     },
     {
       "name": "phone-360x640: HUD inside viewport, no overlap",
@@ -40,9 +40,9 @@
       "detail": ""
     },
     {
-      "name": "phone-430x932: exit on screen at first frame",
+      "name": "phone-430x932: the owner (the goal) is on screen in the first frame",
       "ok": true,
-      "detail": "215,473"
+      "detail": "198,456"
     },
     {
       "name": "phone-430x932: HUD inside viewport, no overlap",
@@ -55,9 +55,9 @@
       "detail": ""
     },
     {
-      "name": "land-844x390: exit on screen at first frame",
+      "name": "land-844x390: the owner (the goal) is on screen in the first frame",
       "ok": true,
-      "detail": "422,199"
+      "detail": "413,190"
     },
     {
       "name": "land-844x390: HUD inside viewport, no overlap",
@@ -70,9 +70,9 @@
       "detail": ""
     },
     {
-      "name": "tablet-768x1024: exit on screen at first frame",
+      "name": "tablet-768x1024: the owner (the goal) is on screen in the first frame",
       "ok": true,
-      "detail": "384,521"
+      "detail": "362,499"
     },
     {
       "name": "tablet-768x1024: HUD inside viewport, no overlap",
@@ -85,9 +85,9 @@
       "detail": ""
     },
     {
-      "name": "desk-1280x720: exit on screen at first frame",
+      "name": "desk-1280x720: the owner (the goal) is on screen in the first frame",
       "ok": true,
-      "detail": "640,367"
+      "detail": "624,350"
     },
     {
       "name": "desk-1280x720: HUD inside viewport, no overlap",
@@ -100,9 +100,9 @@
       "detail": ""
     },
     {
-      "name": "desk-1920x1080: exit on screen at first frame",
+      "name": "desk-1920x1080: the owner (the goal) is on screen in the first frame",
       "ok": true,
-      "detail": "960,550"
+      "detail": "936,526"
     },
     {
       "name": "desk-1920x1080: HUD inside viewport, no overlap",
@@ -115,9 +115,9 @@
       "detail": ""
     },
     {
-      "name": "iframe-800x450: exit on screen at first frame",
+      "name": "iframe-800x450: the owner (the goal) is on screen in the first frame",
       "ok": true,
-      "detail": "400,229"
+      "detail": "390,219"
     },
     {
       "name": "iframe-800x450: HUD inside viewport, no overlap",
@@ -132,12 +132,12 @@
     {
       "name": "touch: joystick up moves the hero forward (out of the cell)",
       "ok": true,
-      "detail": "x -5.60 → 0.47, anim run"
+      "detail": "x -5.60 → 0.56, anim run"
     },
     {
       "name": "touch: jump button lifts the hero",
       "ok": true,
-      "detail": "peak y 1.80"
+      "detail": "peak y 1.79"
     },
     {
       "name": "touch: run + jump with two thumbs",
@@ -147,12 +147,12 @@
     {
       "name": "desktop: W moves forward",
       "ok": true,
-      "detail": "x -5.60 → -4.00"
+      "detail": "x -5.60 → -3.80"
     },
     {
       "name": "desktop: Space jumps",
       "ok": true,
-      "detail": "peak y 1.80"
+      "detail": "peak y 1.81"
     },
     {
       "name": "hazard: stepping in the live puddle counts a hit",
@@ -163,6 +163,11 @@
       "name": "hazard: hero is back on checkpoint 0 right away",
       "ok": true,
       "detail": "{\"x\":-5.6,\"y\":0,\"z\":3}"
+    },
+    {
+      "name": "guard: the net drops over the hero when caught",
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "guard: notices the hero in the hall and chases",
@@ -187,7 +192,7 @@
     {
       "name": "phone-390x844: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 32.9 s, retries 0, wall 215 s"
+      "detail": "game time 33.3 s, retries 0, wall 267 s"
     },
     {
       "name": "phone-390x844: all 4 checkpoints lit on the way",
@@ -198,6 +203,11 @@
       "name": "phone-390x844: both buttons pressed (laundry door, gate)",
       "ok": true,
       "detail": ""
+    },
+    {
+      "name": "phone-390x844: both friends freed and followed to the end",
+      "ok": true,
+      "detail": "[[\"bunny\",true,1.9],[\"cat\",true,3]]"
     },
     {
       "name": "phone-390x844: finish panel shows the time",
@@ -217,7 +227,7 @@
     {
       "name": "phone-360x640: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 32.9 s, retries 0, wall 174 s"
+      "detail": "game time 33.3 s, retries 0, wall 204 s"
     },
     {
       "name": "phone-360x640: all 4 checkpoints lit on the way",
@@ -228,6 +238,11 @@
       "name": "phone-360x640: both buttons pressed (laundry door, gate)",
       "ok": true,
       "detail": ""
+    },
+    {
+      "name": "phone-360x640: both friends freed and followed to the end",
+      "ok": true,
+      "detail": "[[\"bunny\",true,1.9],[\"cat\",true,3.1]]"
     },
     {
       "name": "phone-360x640: finish panel shows the time",
@@ -255,14 +270,19 @@
       "detail": "{\"x\":19.6,\"y\":0,\"z\":-21.6}"
     },
     {
-      "name": "picker: default hero is the inmate",
+      "name": "picker: default hero is the pup",
       "ok": true,
       "detail": ""
     },
     {
-      "name": "picker: 3 portraits, all on screen",
+      "name": "picker: 2 portraits, all on screen",
       "ok": true,
-      "detail": "[{\"h\":\"kid\",\"inside\":true,\"img\":true},{\"h\":\"dog\",\"inside\":true,\"img\":true},{\"h\":\"cat\",\"inside\":true,\"img\":true}]"
+      "detail": "[{\"h\":\"dog\",\"inside\":true,\"img\":true},{\"h\":\"cat\",\"inside\":true,\"img\":true}]"
+    },
+    {
+      "name": "picker: with Kitty as hero the second friend becomes a dog",
+      "ok": true,
+      "detail": ""
     },
     {
       "name": "picker: tapping Kitty swaps the hero and closes the sheet",
@@ -272,7 +292,7 @@
     {
       "name": "picker: the new hero runs",
       "ok": true,
-      "detail": "x -5.60 → -4.15"
+      "detail": "x -5.60 → -4.10"
     },
     {
       "name": "picker: choice survives reload",
@@ -287,12 +307,12 @@
     {
       "name": "frame: measured (headless software renderer)",
       "ok": true,
-      "detail": "avg 22.2 ms/frame (45 fps in SwiftShader), last frame CPU+submit 8.6 ms, draw calls 37, triangles 14074"
+      "detail": "avg 29.5 ms/frame (34 fps in SwiftShader), last frame CPU+submit 1.1 ms, draw calls 49, triangles 19318"
     },
     {
       "name": "frame: draw calls ≤ 150",
       "ok": true,
-      "detail": "37"
+      "detail": "49"
     },
     {
       "name": "console errors = 0",
@@ -324,6 +344,7 @@
     "touch-joystick-held.png",
     "hazard-spike-hit.png",
     "guard-chasing.png",
+    "guard-caught-net.png",
     "run-1-catwalk.png",
     "run-2-pallets.png",
     "run-3-yard.png",
@@ -335,40 +356,40 @@
     "picker-open.png"
   ],
   "numbers": {
-    "totalKB": 628,
+    "totalKB": 687,
     "phone-390x844-run": {
-      "time": 32.89,
+      "time": 33.26,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          32.891666666665444
+          33.25833333333209
         ]
       ]
     },
     "phone-360x640-run": {
-      "time": 32.89,
+      "time": 33.26,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          32.891666666665444
+          33.25833333333209
         ]
       ]
     },
     "frame": {
-      "avgMs": 22.217777777777783,
-      "calls": 37,
-      "tris": 14074,
-      "cpu": 8.599999999627471,
+      "avgMs": 29.488461538461536,
+      "calls": 49,
+      "tris": 19318,
+      "cpu": 1.1000000000931323,
       "pr": 1
     }
   },
-  "finishedAt": "2026-11-15T01:52:21.972Z",
-  "pass": 61,
+  "finishedAt": "2026-11-21T01:59:00.698Z",
+  "pass": 65,
   "fail": 0
 }

@@ -69,13 +69,13 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
   for (const [name, w, h, t] of SIZES) {
     const { context, page } = await newPage(browser, w, h, base, t);
     await sleep(150);
-    const ex0 = await page.evaluate(() => (() => { const e = __game.exitPos; return __game.project(e.x, e.y, e.z); })());
+    const ex0 = await page.evaluate(() => (() => { const e = __game.ownerPos; return __game.project(e.x, e.y, e.z); })());
     if (name === 'phone-390x844' || name === 'desk-1280x720') await shot(page, name + '-0-intro');
     await until(page, () => __game.state === 'play', null, 20000);
     await sleep(400);
     const ex1 = await page.evaluate(() => (() => { const e = __game.exitPos; return __game.project(e.x, e.y, e.z); })());
     const inView = (e) => e.inFront && e.x > 0 && e.x < w && e.y > 0 && e.y < h;
-    check(`${name}: exit on screen at first frame`, inView(ex0), `${ex0.x.toFixed(0)},${ex0.y.toFixed(0)}`);
+    check(`${name}: the owner (the goal) is on screen in the first frame`, inView(ex0), `${ex0.x.toFixed(0)},${ex0.y.toFixed(0)}`);
     const boxes = await page.evaluate(() => Object.fromEntries(['bar', 'btn-hero', 'btn-sound', 'stick', 'jump', 'keys'].map((id) => {
       const el = document.getElementById(id); const r = el.getBoundingClientRect(); const cs = getComputedStyle(el);
       const vis = cs.display !== 'none' && cs.visibility !== 'hidden' && r.width > 0 && el.offsetParent !== null && !(id === 'keys' && document.body.classList.contains('touch'));
@@ -154,6 +154,8 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const chased = await until(page, () => __game.guards()[0].mode === 'chase', null, 60000);
     if (chased) { await sleep(250); await shot(page, 'guard-chasing'); }
     const caught = await until(page, () => __game.caught >= 1, null, 60000);
+    const netted = await page.evaluate(() => __game.netOn); await sleep(150); await shot(page, 'guard-caught-net');
+    check('guard: the net drops over the hero when caught', netted);
     await page.evaluate(() => __auto.pathStop());
     await until(page, () => __game.state === 'play', null, 10000);
     const s2 = await st(page); const g2 = await page.evaluate(() => __game.guards()[0]);
@@ -190,6 +192,8 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     report.numbers[name + '-run'] = { time: +last.runTime.toFixed(2), deaths: last.deaths, falls: last.falls, spikes: last.spikes, log };
     check(`${name}: all 4 checkpoints lit on the way`, last.cp === 3, `cp=${last.cp}`);
     check(`${name}: both buttons pressed (laundry door, gate)`, (await page.evaluate(() => __game.buttons())).every(Boolean));
+    const fr = await page.evaluate(() => ({ f: __game.friends(), p: __game.pos, n: document.getElementById('pal-n').textContent }));
+    check(`${name}: both friends freed and followed to the end`, fr.f.every((q) => q.free && Math.hypot(q.x - fr.p.x, q.z - fr.p.z) < 4) && fr.n === '2', JSON.stringify(fr.f.map((q) => [q.kind, q.free, +(Math.hypot(q.x - fr.p.x, q.z - fr.p.z)).toFixed(1)])));
     if (ok) {
       await sleep(500); if (name === 'phone-390x844') await shot(page, 'run-5-escaped');
       const panel = await until(page, () => !document.getElementById('panel').classList.contains('hidden'), null, 20000);
@@ -200,7 +204,7 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
       check(`${name}: "Run again" button fully on screen`, btn.inside);
       await page.touchscreen.tap(btn.x, btn.y); await sleep(500);
       const r = await st(page);
-      check(`${name}: "Run again" restarts at the start`, r.state === 'play' && Math.abs(r.pos.z - 3.0) < 0.1 && Math.abs(r.pos.x + 5.6) < 0.1 && !r.finished && r.cp === 0 && !(await page.evaluate(() => __game.buttons())).some(Boolean), JSON.stringify({ s: r.state, z: r.pos.z, cp: r.cp }));
+      check(`${name}: "Run again" restarts at the start`, r.state === 'play' && Math.abs(r.pos.z - 3.0) < 0.1 && Math.abs(r.pos.x + 5.6) < 0.1 && !r.finished && r.cp === 0 && !(await page.evaluate(() => __game.buttons())).some(Boolean) && !(await page.evaluate(() => __game.friends())).some((q) => q.free), JSON.stringify({ s: r.state, z: r.pos.z, cp: r.cp }));
     }
     await context.close();
   }
@@ -228,12 +232,13 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
   // 6b) character picker: default is the pup; choose the kitty by tapping; it moves; the choice survives reload
   {
     const { context, page } = await newPage(browser, 390, 844, base + '?nointro', true);
-    check('picker: default hero is the inmate', (await page.evaluate(() => __game.hero)) === 'kid');
+    check('picker: default hero is the pup', (await page.evaluate(() => __game.hero)) === 'dog');
     await page.tap('#btn-hero'); await sleep(300);
     const tiles = await page.evaluate(() => [...document.querySelectorAll('.pick')].map((b) => { const r = b.getBoundingClientRect(); const img = b.querySelector('img'); return { h: b.dataset.hero, inside: r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight, img: img.complete && img.naturalWidth > 0 }; }));
     await shot(page, 'picker-open');
-    check('picker: 3 portraits, all on screen', tiles.length === 3 && tiles.every((t) => t.inside && t.img), JSON.stringify(tiles));
+    check('picker: 2 portraits, all on screen', tiles.length === 2 && tiles.every((t) => t.inside && t.img), JSON.stringify(tiles));
     await page.tap('.pick[data-hero="cat"]'); await sleep(300);
+    check('picker: with Kitty as hero the second friend becomes a dog', (await page.evaluate(() => __game.friends()[1].kind)) === 'dog');
     check('picker: tapping Kitty swaps the hero and closes the sheet', (await page.evaluate(() => __game.hero)) === 'cat' && (await page.evaluate(() => document.getElementById('pick').classList.contains('hidden'))));
     const z0 = (await st(page)).pos.x; await page.keyboard.down('KeyW');
     const ran = await until(page, (x) => __game.pos.x > x + 1, z0, 5000); await page.keyboard.up('KeyW');

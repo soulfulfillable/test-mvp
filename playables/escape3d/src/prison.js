@@ -7,6 +7,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { createGuard } from './guard.js';
+import { MAKERS, makeDog, makeOwner } from './blocky.js';
 import { floorTexture, wallTexture, grateTexture, glowTexture, shaftTexture, worldBox } from './textures.js';
 
 export const GOLD = new THREE.Color('#ffc93c');
@@ -51,7 +52,7 @@ function asphaltTex() {
 }
 
 export function buildCourse(scene) {
-  const C = { solids: [], hazards: [], movers: [], traps: [], checkpoints: [], walls: [], buttons: [], doors: [], guards: [], exit: null, killY: -1.0 };
+  const C = { solids: [], hazards: [], movers: [], traps: [], checkpoints: [], walls: [], buttons: [], doors: [], guards: [], friends: [], exit: null, killY: -1.0 };
   const STD = (o) => new THREE.MeshStandardMaterial({ roughness: 0.9, metalness: 0, ...o });
   const M = {
     floor: STD({ map: floorTexture(), color: '#c9c6c0', roughness: 0.55 }),          // polished concrete
@@ -77,6 +78,9 @@ export function buildCourse(scene) {
     goldDim: new THREE.MeshStandardMaterial({ color: '#8d8a84', emissive: GOLD, emissiveIntensity: 0.08, roughness: 0.6 }),
     stripe: STD({ color: '#f2c230', roughness: 0.6 }),
     steam: new THREE.MeshBasicMaterial({ map: glowTexture(), color: '#fff4ea', transparent: true, opacity: 0, depthWrite: false }),
+    live: new THREE.MeshStandardMaterial({ color: '#ffe14a', emissive: '#ffd21f', emissiveIntensity: 1.4, roughness: 0.4 }),
+    grass: STD({ color: '#7fb069' }), path: STD({ color: '#d8c9a3' }), leaf: STD({ color: '#4f8f4a' }), leaf2: STD({ color: '#6aa85a' }), trunk: STD({ color: '#6d5132' }),
+    house: STD({ color: '#f3e6c8' }), roof: STD({ color: '#c0503c' }), houseB: STD({ color: '#cfe0ea' }), roofB: STD({ color: '#4d6a86' }),
     spark: new THREE.MeshBasicMaterial({ map: glowTexture(), color: '#bfe3ff', transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }),
   };
 
@@ -166,16 +170,33 @@ export function buildCourse(scene) {
     const hz = { kind: 'puddle', min: new THREE.Vector3(cx - w / 2 * 0.9, y, cz - d / 2 * 0.9), max: new THREE.Vector3(cx + w / 2 * 0.9, y + 0.3, cz + d / 2 * 0.9), active: true, group: g, sparks, light };
     C.hazards.push(hz); return hz;
   }
-  function razorWire(x0, x1, z0, z1, y = 0) { // a coil of razor wire on the ground (jump over it or go round)
+  function razorWire(x0, x1, z0, z1, y = 0) { // a low electric fence (two live wires): jump it or go round the end
     const alongX = Math.abs(x1 - x0) > Math.abs(z1 - z0); const len = alongX ? Math.abs(x1 - x0) : Math.abs(z1 - z0);
-    const n = Math.round(len / 0.32);
-    for (let i = 0; i < n; i++) {
-      const t = (i + 0.5) / n; const x = alongX ? x0 + (x1 - x0) * t : (x0 + x1) / 2, z = alongX ? (z0 + z1) / 2 : z0 + (z1 - z0) * t;
-      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.018, 4, 14), M.wire); ring.position.set(x, y + 0.36, z);
-      ring.rotation.y = alongX ? Math.PI / 2 : 0; ring.rotation.x = (i % 2 ? 0.25 : -0.25); scene.add(ring);
+    const cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
+    const g = new THREE.Group(); g.position.set(cx, y, cz); scene.add(g);
+    const n = Math.max(2, Math.round(len / 2.2));
+    for (let i = 0; i <= n; i++) {
+      const o = -len / 2 + len * i / n; const post = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.7, 0.12), i % 2 ? M.stripe : M.steel);
+      post.position.set(alongX ? o : 0, 0.35, alongX ? 0 : o); post.castShadow = true; g.add(post);
     }
-    const hz = { kind: 'wire', min: new THREE.Vector3(Math.min(x0, x1), y, Math.min(z0, z1)), max: new THREE.Vector3(Math.max(x0, x1), y + 0.62, Math.max(z0, z1)), active: true };
+    for (const h of [0.28, 0.56]) { const w = new THREE.Mesh(new THREE.BoxGeometry(alongX ? len : 0.035, 0.035, alongX ? 0.035 : len), M.live); w.position.y = h; g.add(w); }
+    const sparks = []; for (let i = 0; i < Math.min(10, Math.round(len / 2.5)); i++) { const sp = new THREE.Sprite(M.spark.clone()); const o = (Math.random() - 0.5) * len; sp.userData = { x: alongX ? o : 0, z: alongX ? 0 : o, o: Math.random() }; g.add(sp); sparks.push(sp); }
+    const hz = { kind: 'wire', min: new THREE.Vector3(Math.min(x0, x1), y, Math.min(z0, z1)), max: new THREE.Vector3(Math.max(x0, x1), y + 0.62, Math.max(z0, z1)), active: true, group: g, sparks };
     C.hazards.push(hz); return hz;
+  }
+  // a small cage holding a friend; the bars sink into the floor when its button is pressed
+  function friendCage(x, z, kind) {
+    const S = 1.15, Hh = 1.15; const g = new THREE.Group(); g.position.set(x, 0, z); scene.add(g);
+    const geos = [];
+    const add = (geo, px, py, pz) => { geo.translate(px, py, pz); geos.push(geo.index ? geo.toNonIndexed() : geo); };
+    for (let i = 0; i <= 6; i++) { const o = -S / 2 + S * i / 6; for (const [bx, bz] of [[o, -S / 2], [o, S / 2], [-S / 2, o], [S / 2, o]]) add(new THREE.CylinderGeometry(0.022, 0.022, Hh, 5), bx, Hh / 2, bz); }
+    for (const yy of [0.03, Hh]) for (const [w, d, bx, bz] of [[S, 0.06, 0, -S / 2], [S, 0.06, 0, S / 2], [0.06, S, -S / 2, 0], [0.06, S, S / 2, 0]]) add(new THREE.BoxGeometry(w + 0.06, 0.06, d + 0.06), bx, yy, bz);
+    const cage = new THREE.Mesh(mergeGeometries(geos.map((q) => { for (const k of Object.keys(q.attributes)) if (!['position', 'normal', 'uv'].includes(k)) q.deleteAttribute(k); return q; }), false), M.bars); cage.castShadow = true; g.add(cage);
+    const box = { min: new THREE.Vector3(x - S / 2, 0, z - S / 2), max: new THREE.Vector3(x + S / 2, Hh, z + S / 2), top: Hh, seeThrough: true, noStep: true }; C.solids.push(box);
+    const holder = new THREE.Group(); holder.position.set(x, 0, z); scene.add(holder);
+    const f = { kind, home: new THREE.Vector3(x, 0, z), holder, body: null, cage, cageG: g, box, open: 0, free: false, order: -1, pos: new THREE.Vector3(x, 0, z), facing: Math.PI, pose: { mode: 'idle', speed: 0, t: Math.random() * 5 }, hop: 0 };
+    f.setKind = (k) => { if (f.body) holder.remove(f.body.root); f.kind = k; f.body = MAKERS[k](k === 'dog' ? { coat: '#7a5638', ear: '#553a25', light: '#ead9c2', harness: '#3a7bd5' } : undefined); holder.add(f.body.root); };
+    f.setKind(kind); C.friends.push(f); return f;
   }
 
   // checkpoints / movers / exit --------------------------------------------
@@ -212,10 +233,6 @@ export function buildCourse(scene) {
     const leaves = [-1, 1].map((s) => { const m = new THREE.Mesh(worldBox(DW / 2, DH, 0.2, 1.4, 1.7), leafMat); m.position.set(cx + s * DW / 4, y + DH / 2, z); m.castShadow = true; g.add(m); return m; });
     const doorBox = { min: new THREE.Vector3(cx - DW / 2, y, z - 0.2), max: new THREE.Vector3(cx + DW / 2, y + DH, z + 0.2), top: y + DH, noStep: true };
     C.solids.push(doorBox);
-    const lightMat = new THREE.MeshBasicMaterial({ color: '#fff3dc', fog: false });
-    const back = new THREE.Mesh(new THREE.PlaneGeometry(DW + 0.4, DH + 0.4), lightMat); back.position.set(cx, y + DH / 2, z - 1.8); g.add(back);
-    for (const s of [-1, 1]) { const side = new THREE.Mesh(new THREE.PlaneGeometry(1.8, DH + 0.4), lightMat); side.rotation.y = s * Math.PI / 2; side.position.set(cx - s * (DW / 2 + 0.1), y + DH / 2, z - 0.9); g.add(side); }
-    const floorGlow = new THREE.Mesh(new THREE.PlaneGeometry(DW + 0.2, 2), lightMat); floorGlow.rotation.x = -Math.PI / 2; floorGlow.position.set(cx, y + 0.01, z - 0.9); g.add(floorGlow);
     const seam = new THREE.Mesh(new THREE.PlaneGeometry(0.07, DH), new THREE.MeshBasicMaterial({ color: '#fff0cc', fog: false })); seam.position.set(cx, y + DH / 2, z + 0.11); g.add(seam);
     const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTexture(), color: '#ffd896', transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
     glow.scale.set(12, 12, 1); glow.position.set(cx, y + DH * 0.55, z - 1.4); g.add(glow);
@@ -283,7 +300,12 @@ export function buildCourse(scene) {
     solid(-7.95, -7.0, 0, 0.6, z0 - 0.4, z0 - 2.4, null);
     deco(-7.9, -7.4, 0, 0.5, z1 + 0.9, z1 + 0.4, M.steelWhite); solid(-7.9, -7.4, 0, 0.5, z1 + 0.9, z1 + 0.4, null); // toilet
     if (k === 1) { bars(-4.5, -4.5, z0 - 1.85, z1 + 0.15, 0, 3.2); bars(-4.62, -4.62, z0 - 1.9, z1 + 0.5, 0, 3.2, false); } // your cell: the door is slid open
-    else bars(-4.5, -4.5, z0 - 0.15, z1 + 0.15, 0, 3.2);
+    else {
+      bars(-4.5, -4.5, z0 - 0.15, z1 + 0.15, 0, 3.2);
+      const pals = [{ coat: '#7a5638', ear: '#553a25', light: '#ead9c2', harness: '#3a7bd5' }, null, { coat: '#f1efe9', ear: '#cfc9bd', light: '#ffffff', harness: '#d92b2b' }, 'bunny', { coat: '#3a3532', ear: '#262220', light: '#b9aea0', harness: '#f2c230' }, 'cat', null];
+      const pk = pals[k]; const a = pk === 'bunny' ? MAKERS.bunny() : pk === 'cat' || pk === null ? MAKERS.cat() : makeDog(pk);
+      a.animate({ mode: 'idle', speed: 0, t: k * 1.7 }, 0); a.root.position.set(-5.4 - (k % 2) * 0.5, 0, z0 - 1.6 - (k % 3) * 0.4); a.root.rotation.y = Math.PI / 2 + (k % 2 ? 0.4 : -0.3); scene.add(a.root);
+    }
   }
   // upper tier above the cells: barred windows high on the west wall (daylight in)
   for (let k = 0; k < 7; k++) { const z = 6 - k * 4; deco(-8.0, -7.95, 5.0, 7.4, z + 0.8, z - 0.8, new THREE.MeshBasicMaterial({ color: '#e9f1f5' }), { cast: false }); bars(-7.94, -7.94, z + 0.8, z - 0.8, 5.0, 7.4, false); }
@@ -332,7 +354,8 @@ export function buildCourse(scene) {
   pallet(new THREE.Vector3(14.3, -0.6, -16), new THREE.Vector3(0, 0, 1), 3.5, 5.0, 0);
   pallet(new THREE.Vector3(16.7, -0.6, -16), new THREE.Vector3(0, 0, 1), 3.5, 6.4, 0.3);
   const laundryDoor = barDoor(17.6, 20.6, -24.3, 3.2);                          // the way out to the yard is barred…
-  button(20.2, 0, -9.8, () => { laundryDoor.opening = true; });                 // …until you step on the green button
+  const pal1 = friendCage(18.9, -8.85, 'bunny');
+  button(20.2, 0, -9.8, () => { laundryDoor.opening = true; C.free(pal1); });                 // …until you step on the green button
   checkpoint(2, 19.6, 0, -21.6);
 
   // =====================================================================================
@@ -345,8 +368,6 @@ export function buildCourse(scene) {
   wallZ(-24.0, -40.6, 22.0, 22.6, 0, YW, M.concrete);                           // east
   wallX(-14.6, -8.6, -20.0, -20.6, 0, YW, M.concrete);                          // the bit south-west of the hall
   C.exit = exitDoor(0, -40.3, 0, -14.6, 22.6, YW);                              // north wall with the gate
-  // razor wire along the top of the perimeter
-  for (const [x0, x1, z] of [[-14.3, 22.3, -40.3]]) { const n = Math.round((x1 - x0) / 0.45); for (let i = 0; i < n; i++) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.015, 4, 12), M.wire); r.position.set(x0 + (i + 0.5) * (x1 - x0) / n, YW + 0.3, z); r.rotation.y = Math.PI / 2; scene.add(r); } }
   // chain-link fence across the yard (see-through), open only at the east end
   const fence = (x0, x1, z0, z1) => {
     const alongX = Math.abs(x1 - x0) > Math.abs(z1 - z0); const len = alongX ? Math.abs(x1 - x0) : Math.abs(z1 - z0);
@@ -360,7 +381,8 @@ export function buildCourse(scene) {
   razorWire(-14.0, 12.0, -31.2, -32.0);   // pass it at the east end…
   razorWire(-4.0, 22.0, -35.2, -36.0);    // …and this one at the west end
   livePuddle(2.2, 4.8, -32.6, -34.6);     // jump over the live puddle in the middle lane
-  button(-11.2, 0, -33.6, () => { C.exit.opening = true; });                    // the gate button, at the far west end of the yard
+  const pal2 = friendCage(-12.6, -34.6, 'cat');
+  button(-11.2, 0, -33.6, () => { C.exit.opening = true; C.free(pal2); });                    // the gate button, at the far west end of the yard
   // guards: one walks the cell hall floor, one walks the lane in front of the gate
   C.guards.push(createGuard(scene, { zone: { x0: -4.0, x1: 2.2, z0: -19.2, z1: 4.6 }, a: [-1, -18], b: [-1, 3.6] }));
   C.guards.push(createGuard(scene, { zone: { x0: -9.5, x1: 21, z0: -39.4, z1: -36.8 }, a: [15, -38.1], b: [4, -38.1] }));
@@ -372,6 +394,29 @@ export function buildCourse(scene) {
   for (const [x, z] of [[-13.5, -22], [21.5, -27], [-13.5, -33]]) { deco(x - 0.1, x + 0.1, 0, 7.5, z + 0.1, z - 0.1, M.steel); deco(x - 0.5, x + 0.5, 7.3, 7.6, z + 0.25, z - 0.25, M.lamp); }
   deco(-9.2, -9.0, 0, 3.0, -23.0, -23.2, M.steel); deco(-9.6, -8.6, 3.0, 3.7, -23.2, -23.25, STD({ color: '#ffffff' }));
   checkpoint(3, 19.2, 0, -26.3);
+
+  // =====================================================================================
+  // OUTSIDE (north of the gate): grass, a path, trees, home — and your person, waiting with a LOST DOG poster
+  // =====================================================================================
+  solid(-60, 60, -0.4, 0, -40.6, -90, M.grass, { cast: false, wall: false, tileU: 4, tileV: 4 });
+  deco(-1.6, 1.6, 0.0, 0.02, -40.7, -70, M.path, { cast: false });
+  const tree = (x, z, sc = 1) => { deco(x - 0.2 * sc, x + 0.2 * sc, 0, 1.6 * sc, z + 0.2 * sc, z - 0.2 * sc, M.trunk); deco(x - 1.2 * sc, x + 1.2 * sc, 1.4 * sc, 3.4 * sc, z + 1.2 * sc, z - 1.2 * sc, (x + z) % 2 ? M.leaf : M.leaf2); deco(x - 0.8 * sc, x + 0.8 * sc, 3.3 * sc, 4.4 * sc, z + 0.8 * sc, z - 0.8 * sc, M.leaf2); };
+  for (const [x, z, sc] of [[-6, -46, 1.1], [5.5, -48, 1.3], [-11, -52, 1.5], [10, -55, 1.2], [-4.5, -60, 1.4], [15, -45, 1], [-17, -46, 1.2], [20, -52, 1.5], [3, -66, 1.6], [-22, -58, 1.4]]) tree(x, z, sc);
+  const house = (x, z, wm, rm) => {
+    deco(x - 3, x + 3, 0, 3, z + 2.5, z - 2.5, wm);
+    const r = new THREE.Mesh(new THREE.ConeGeometry(4.9, 2.4, 4), rm); r.rotation.y = Math.PI / 4; r.position.set(x, 4.2, z); r.castShadow = true; scene.add(r);
+    deco(x - 0.5, x + 0.5, 0, 1.9, z + 2.56, z + 2.5, M.woodD); deco(x + 1.2, x + 2.2, 1.2, 2.1, z + 2.56, z + 2.5, STD({ color: '#bfe3ff' }));
+  };
+  house(0, -76, M.house, M.roof); house(-14, -70, M.houseB, M.roofB); house(13, -72, M.houseB, M.roofB);
+  { // the sign over the gate, outside face
+    const c = document.createElement('canvas'); c.width = 512; c.height = 128; const g2 = c.getContext('2d');
+    g2.fillStyle = '#2d3a44'; g2.fillRect(0, 0, 512, 128); g2.strokeStyle = '#f2c230'; g2.lineWidth = 8; g2.strokeRect(6, 6, 500, 116);
+    g2.fillStyle = '#ffffff'; g2.font = '700 64px -apple-system, Helvetica, Arial, sans-serif'; g2.textAlign = 'center'; g2.textBaseline = 'middle'; g2.fillText('DOG POUND', 256, 68);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+    const sign = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 1.3), new THREE.MeshBasicMaterial({ map: t })); sign.rotation.y = Math.PI; sign.position.set(0, 4.6, -40.72); scene.add(sign);
+  }
+  const ownerBody = makeOwner(); ownerBody.root.position.set(0, 0, -44.2); scene.add(ownerBody.root);
+  C.owner = { body: ownerBody, pos: new THREE.Vector3(0, 0, -44.2), cheer: false, pose: { mode: 'idle', speed: 0, t: 0 } };
 
   // ---------- time update (deterministic: everything is a function of t) ----------
   C.trapHeight = (tr, t) => {
@@ -423,29 +468,62 @@ export function buildCourse(scene) {
       const col = d.opening ? '#30d158' : '#ff3b30'; d.lampMat.color.set(col); d.lampMat.emissive.set(col);
     }
     for (const gd of C.guards) gd.render(dt);
+    for (const hz of C.hazards) if (hz.kind === 'wire') for (const sp of hz.sparks) {
+      const u = sp.userData; const k = (t * 2.3 + u.o) % 1; const lit = k < 0.12;
+      sp.position.set(u.x, 0.3 + (u.o > 0.5 ? 0.26 : 0), u.z); const sz = lit ? 0.3 + Math.random() * 0.25 : 0.01; sp.scale.set(sz, sz, 1); sp.material.opacity = lit ? 0.95 : 0;
+    }
+    M.live.emissiveIntensity = 1.2 + 0.5 * Math.sin(t * 9);
+    for (const f of C.friends) {
+      if (f.free) f.open = Math.min(1, f.open + dt / 0.5);
+      f.cageG.position.y = -f.open * 1.25; f.box.max.y = f.open > 0.5 ? f.box.min.y : 1.15;
+      f.hop = Math.max(0, f.hop - dt);
+      f.holder.position.set(f.pos.x, f.pos.y + (f.hop > 0 ? Math.abs(Math.sin(f.hop * 9)) * 0.35 : 0), f.pos.z); f.holder.rotation.y = f.facing;
+      f.pose.t += dt; f.body.animate(f.pose, dt);
+    }
+    const O = C.owner; O.pose.t += dt; O.pose.mode = O.cheer ? 'cheer' : 'idle'; O.body.animate(O.pose, dt);
     const E = C.exit;
     if (E.opening) E.open = Math.min(1, E.open + dt / 0.9);
     const o = E.open * E.open * (3 - 2 * E.open);
     E.leaves[0].position.x = E.x - E.DW / 4 - o * (E.DW / 2); E.leaves[1].position.x = E.x + E.DW / 4 + o * (E.DW / 2);
     E.doorBox.max.y = o > 0.6 ? E.doorBox.min.y : E.y + 3.4;
     const pulse = 0.5 + 0.5 * Math.sin(t * 2.2);
-    E.glow.material.opacity = 0.7 + 0.2 * pulse; E.glow.scale.setScalar(11 + pulse * 1.2 + o * 6);
+    E.glow.material.opacity = (0.7 + 0.2 * pulse) * (1 - o * 0.9); E.glow.scale.setScalar(11 + pulse * 1.2);
     E.shaftMat.opacity = 0.10 + 0.06 * pulse + o * 0.35; E.lamp.intensity = 25 + 10 * pulse + o * 15;
     E.beacon.material.opacity = 0.22 + 0.08 * pulse; E.seam.visible = o < 0.05;
   };
   C.unlight = (cp) => { cp.lit = false; cp.ring.material = M.goldDim.clone(); cp.flash = 0; };
   C.light = (cp) => { cp.lit = true; cp.ring.material = M.gold; cp.flash = 1.2; };
   C.press = (b) => { b.pressed = true; b.onPress(); };
+  // friends: once freed they follow the hero's footsteps (a trail of past positions), one behind the other
+  const trail = []; const GAP = 0.15;
+  C.free = (f) => { if (f.free) return; f.free = true; f.order = C.friends.filter((q) => q.free).length - 1; f.hop = 1.0; C.lastFreed = f; };
+  C.trailReset = (p) => { trail.length = 0; trail.push(p.clone()); let i = 0; for (const f of C.friends) if (f.free) { f.pos.set(p.x - 0.7 - 0.6 * (i++), p.y, p.z + 0.5); } };
+  C.followStep = (dt, hero, cheer) => {
+    const last = trail[trail.length - 1];
+    if (!last || last.distanceToSquared(hero) > GAP * GAP) { trail.push(hero.clone()); if (trail.length > 400) trail.shift(); }
+    for (const f of C.friends) {
+      if (!f.free) { f.pose.mode = 'idle'; continue; }
+      const idx = trail.length - 1 - Math.round((1.0 + f.order * 0.9) / GAP);
+      const target = trail[Math.max(0, idx)];
+      const dx = target.x - f.pos.x, dz = target.z - f.pos.z, d = Math.hypot(dx, dz);
+      const sp = Math.min(7.5, d * 6); if (d > 0.02) { f.pos.x += dx / d * sp * dt; f.pos.z += dz / d * sp * dt; f.facing = Math.atan2(dx, dz); }
+      f.pos.y += (target.y - f.pos.y) * Math.min(1, dt * 14);
+      f.pose.speed = sp; f.pose.mode = cheer ? 'cheer' : sp > 3 ? 'run' : sp > 0.4 ? 'walk' : 'idle';
+      if (cheer && f.hop <= 0) f.hop = 0.7;
+    }
+  };
   C.resetProgress = () => {
     for (const b of C.buttons) b.pressed = false;
     for (const d of C.doors) { d.open = 0; d.opening = false; }
     C.exit.open = 0; C.exit.opening = false;
     for (const gd of C.guards) gd.reset();
+    for (const f of C.friends) { f.free = false; f.open = 0; f.order = -1; f.pos.copy(f.home); f.facing = Math.PI; f.pose.mode = 'idle'; }
+    trail.length = 0; C.owner.cheer = false;
   };
   C.start = { pos: C.checkpoints[0].pos.clone(), yaw: -Math.PI / 2 }; // camera west of the hero, looking east out of the cell
 
   // ---------- merge static meshes per material (draw calls) ----------
-  const dyn = new Set([...C.movers.map((m) => m.g), C.exit.g, ...C.checkpoints.map((c) => c.group), ...C.hazards.filter((h) => h.group).map((h) => h.group), ...C.buttons.map((b) => b.g), ...C.doors.flatMap((d) => [d.g, d.lamp]), ...C.guards.map((g) => g.root)]);
+  const dyn = new Set([...C.movers.map((m) => m.g), C.exit.g, ...C.checkpoints.map((c) => c.group), ...C.hazards.filter((h) => h.group).map((h) => h.group), ...C.buttons.map((b) => b.g), ...C.doors.flatMap((d) => [d.g, d.lamp]), ...C.guards.map((g) => g.root), ...C.friends.flatMap((f) => [f.cageG, f.holder]), C.owner.body.root]);
   scene.updateMatrixWorld(true);
   const buckets = new Map(), victims = [];
   scene.traverse((o) => {

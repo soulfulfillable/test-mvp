@@ -63,7 +63,7 @@
     { to: [-7.0, -34.4] },
     // wait behind the wire until the yard guard walks away east, then dash for the gate
     { hold: () => [-7.0, -35.5], ready: () => { const q = GD()[1]; return q.mode === 'patrol' && q.x > 8.5 && q.vx > 0.1; }, to: [-0.2, -38.2] },
-    { to: [0, -42] },
+    { to: [0, -43.2] },
   ];
   const cpStart = {}; L.forEach((l, i) => { if (l.cp !== undefined) cpStart[l.cp] = i; });
 
