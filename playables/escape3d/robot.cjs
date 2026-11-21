@@ -183,6 +183,7 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     report.numbers[name + '-run'] = { time: +last.runTime.toFixed(2), deaths: last.deaths, falls: last.falls, spikes: last.spikes, log };
     check(`${name}: all 5 checkpoints lit on the way`, last.cp === 4, `cp=${last.cp}`);
     check(`${name}: both buttons pressed (laundry door, gate)`, (await page.evaluate(() => __game.buttons())).every(Boolean));
+    { const tf = (await st(page)).t; await until(page, (t) => __game.t > t + 2.5, tf, 60000); } // let the reunion run-in finish before measuring
     const fr = await page.evaluate(() => ({ f: __game.friends(), p: __game.pos, n: document.getElementById('pal-n').textContent }));
     check(`${name}: both friends freed and followed to the end`, fr.f.every((q) => q.free && Math.hypot(q.x - fr.p.x, q.z - fr.p.z) < 4) && fr.n === '2', JSON.stringify(fr.f.map((q) => [q.kind, q.free, +(Math.hypot(q.x - fr.p.x, q.z - fr.p.z)).toFixed(1)])));
     if (ok) {

@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-21T01:40:40.509Z",
+  "startedAt": "2026-11-21T02:31:38.560Z",
   "consoleErrors": [],
   "pageErrors": [],
   "externalRequests": [],
@@ -7,12 +7,12 @@
     {
       "name": "total download < 5 MB",
       "ok": true,
-      "detail": "687 KB"
+      "detail": "691 KB"
     },
     {
-      "name": "phone-390x844: the owner (the goal) is on screen in the first frame",
+      "name": "phone-390x844: the pup behind the kennel door is on screen in the first frame",
       "ok": true,
-      "detail": "180,413"
+      "detail": "132,457"
     },
     {
       "name": "phone-390x844: HUD inside viewport, no overlap",
@@ -25,9 +25,14 @@
       "detail": ""
     },
     {
-      "name": "phone-360x640: the owner (the goal) is on screen in the first frame",
+      "name": "opening: the kennel door slides open and the pup walks out",
       "ok": true,
-      "detail": "169,313"
+      "detail": "{\"d\":1,\"x\":-3.5047900132194436}"
+    },
+    {
+      "name": "phone-360x640: the pup behind the kennel door is on screen in the first frame",
+      "ok": true,
+      "detail": "132,346"
     },
     {
       "name": "phone-360x640: HUD inside viewport, no overlap",
@@ -40,9 +45,9 @@
       "detail": ""
     },
     {
-      "name": "phone-430x932: the owner (the goal) is on screen in the first frame",
+      "name": "phone-430x932: the pup behind the kennel door is on screen in the first frame",
       "ok": true,
-      "detail": "198,456"
+      "detail": "145,504"
     },
     {
       "name": "phone-430x932: HUD inside viewport, no overlap",
@@ -55,9 +60,9 @@
       "detail": ""
     },
     {
-      "name": "land-844x390: the owner (the goal) is on screen in the first frame",
+      "name": "land-844x390: the pup behind the kennel door is on screen in the first frame",
       "ok": true,
-      "detail": "413,190"
+      "detail": "386,215"
     },
     {
       "name": "land-844x390: HUD inside viewport, no overlap",
@@ -70,9 +75,9 @@
       "detail": ""
     },
     {
-      "name": "tablet-768x1024: the owner (the goal) is on screen in the first frame",
+      "name": "tablet-768x1024: the pup behind the kennel door is on screen in the first frame",
       "ok": true,
-      "detail": "362,499"
+      "detail": "290,564"
     },
     {
       "name": "tablet-768x1024: HUD inside viewport, no overlap",
@@ -85,9 +90,9 @@
       "detail": ""
     },
     {
-      "name": "desk-1280x720: the owner (the goal) is on screen in the first frame",
+      "name": "desk-1280x720: the pup behind the kennel door is on screen in the first frame",
       "ok": true,
-      "detail": "624,350"
+      "detail": "574,397"
     },
     {
       "name": "desk-1280x720: HUD inside viewport, no overlap",
@@ -100,9 +105,9 @@
       "detail": ""
     },
     {
-      "name": "desk-1920x1080: the owner (the goal) is on screen in the first frame",
+      "name": "desk-1920x1080: the pup behind the kennel door is on screen in the first frame",
       "ok": true,
-      "detail": "936,526"
+      "detail": "861,595"
     },
     {
       "name": "desk-1920x1080: HUD inside viewport, no overlap",
@@ -115,9 +120,9 @@
       "detail": ""
     },
     {
-      "name": "iframe-800x450: the owner (the goal) is on screen in the first frame",
+      "name": "iframe-800x450: the pup behind the kennel door is on screen in the first frame",
       "ok": true,
-      "detail": "390,219"
+      "detail": "359,248"
     },
     {
       "name": "iframe-800x450: HUD inside viewport, no overlap",
@@ -132,12 +137,12 @@
     {
       "name": "touch: joystick up moves the hero forward (out of the cell)",
       "ok": true,
-      "detail": "x -5.60 → 0.56, anim run"
+      "detail": "x -5.60 → -0.23, anim run"
     },
     {
       "name": "touch: jump button lifts the hero",
       "ok": true,
-      "detail": "peak y 1.79"
+      "detail": "peak y 1.81"
     },
     {
       "name": "touch: run + jump with two thumbs",
@@ -147,12 +152,12 @@
     {
       "name": "desktop: W moves forward",
       "ok": true,
-      "detail": "x -5.60 → -3.80"
+      "detail": "x -5.60 → -4.00"
     },
     {
       "name": "desktop: Space jumps",
       "ok": true,
-      "detail": "peak y 1.81"
+      "detail": "peak y 1.80"
     },
     {
       "name": "hazard: stepping in the live puddle counts a hit",
@@ -165,39 +170,19 @@
       "detail": "{\"x\":-5.6,\"y\":0,\"z\":3}"
     },
     {
-      "name": "guard: the net drops over the hero when caught",
+      "name": "quiet start: 20 s in the hall, nobody chases (the only catcher is out in the field)",
       "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "guard: notices the hero in the hall and chases",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "guard: catching sends the hero back to the cell",
-      "ok": true,
-      "detail": "{\"x\":-5.6,\"y\":0,\"z\":3}"
-    },
-    {
-      "name": "guard: goes back to his post after a catch",
-      "ok": true,
-      "detail": "{\"x\":-1,\"z\":-18,\"vx\":0,\"vz\":0,\"mode\":\"patrol\"}"
-    },
-    {
-      "name": "guard: the cell is safe (20 s standing there)",
-      "ok": true,
-      "detail": ""
+      "detail": "{\"caught\":0,\"modes\":[\"patrol\"],\"z\":[-59]}"
     },
     {
       "name": "phone-390x844: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 33.3 s, retries 0, wall 267 s"
+      "detail": "game time 48.6 s, retries 0, wall 373 s"
     },
     {
-      "name": "phone-390x844: all 4 checkpoints lit on the way",
+      "name": "phone-390x844: all 5 checkpoints lit on the way",
       "ok": true,
-      "detail": "cp=3"
+      "detail": "cp=4"
     },
     {
       "name": "phone-390x844: both buttons pressed (laundry door, gate)",
@@ -206,8 +191,8 @@
     },
     {
       "name": "phone-390x844: both friends freed and followed to the end",
-      "ok": true,
-      "detail": "[[\"bunny\",true,1.9],[\"cat\",true,3]]"
+      "ok": false,
+      "detail": "[[\"bunny\",true,3.2],[\"cat\",true,4.4]]"
     },
     {
       "name": "phone-390x844: finish panel shows the time",
@@ -227,12 +212,12 @@
     {
       "name": "phone-360x640: autopilot reaches the exit (touch controls only)",
       "ok": true,
-      "detail": "game time 33.3 s, retries 0, wall 204 s"
+      "detail": "game time 48.6 s, retries 0, wall 290 s"
     },
     {
-      "name": "phone-360x640: all 4 checkpoints lit on the way",
+      "name": "phone-360x640: all 5 checkpoints lit on the way",
       "ok": true,
-      "detail": "cp=3"
+      "detail": "cp=4"
     },
     {
       "name": "phone-360x640: both buttons pressed (laundry door, gate)",
@@ -241,8 +226,8 @@
     },
     {
       "name": "phone-360x640: both friends freed and followed to the end",
-      "ok": true,
-      "detail": "[[\"bunny\",true,1.9],[\"cat\",true,3.1]]"
+      "ok": false,
+      "detail": "[[\"bunny\",true,3.2],[\"cat\",true,4.4]]"
     },
     {
       "name": "phone-360x640: finish panel shows the time",
@@ -268,6 +253,31 @@
       "name": "drain: hero is back on checkpoint 2",
       "ok": true,
       "detail": "{\"x\":19.6,\"y\":0,\"z\":-21.6}"
+    },
+    {
+      "name": "field: 6 people walking back and forth",
+      "ok": true,
+      "detail": "6.3 -7.3 5.7 -2.9 6.6 9.2"
+    },
+    {
+      "name": "catcher: notices the hero in the field and chases",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "catcher: the net drops over the hero when caught",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "catcher: catching sends the hero back to the gate checkpoint",
+      "ok": true,
+      "detail": "{\"x\":0,\"y\":0,\"z\":-42.8}"
+    },
+    {
+      "name": "catcher: goes back to his post after a catch",
+      "ok": true,
+      "detail": "{\"x\":8,\"z\":-59,\"vx\":0,\"vz\":0,\"mode\":\"patrol\"}"
     },
     {
       "name": "picker: default hero is the pup",
@@ -307,12 +317,12 @@
     {
       "name": "frame: measured (headless software renderer)",
       "ok": true,
-      "detail": "avg 29.5 ms/frame (34 fps in SwiftShader), last frame CPU+submit 1.1 ms, draw calls 49, triangles 19318"
+      "detail": "avg 28.0 ms/frame (36 fps in SwiftShader), last frame CPU+submit 1.1 ms, draw calls 64, triangles 19320"
     },
     {
       "name": "frame: draw calls ≤ 150",
       "ok": true,
-      "detail": "49"
+      "detail": "64"
     },
     {
       "name": "console errors = 0",
@@ -343,8 +353,7 @@
     "iframe-800x450-1-start.png",
     "touch-joystick-held.png",
     "hazard-spike-hit.png",
-    "guard-chasing.png",
-    "guard-caught-net.png",
+    "quiet-hall.png",
     "run-1-catwalk.png",
     "run-2-pallets.png",
     "run-3-yard.png",
@@ -353,43 +362,46 @@
     "phone-390x844-finish.png",
     "phone-360x640-finish.png",
     "hazard-fall.png",
+    "field-people.png",
+    "guard-chasing.png",
+    "guard-caught-net.png",
     "picker-open.png"
   ],
   "numbers": {
-    "totalKB": 687,
+    "totalKB": 691,
     "phone-390x844-run": {
-      "time": 33.26,
+      "time": 48.62,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          33.25833333333209
+          48.62499999999788
         ]
       ]
     },
     "phone-360x640-run": {
-      "time": 33.26,
+      "time": 48.62,
       "deaths": 0,
       "falls": 0,
       "spikes": 0,
       "log": [
         [
           "finished",
-          33.25833333333209
+          48.62499999999788
         ]
       ]
     },
     "frame": {
-      "avgMs": 29.488461538461536,
-      "calls": 49,
-      "tris": 19318,
+      "avgMs": 27.95806451612904,
+      "calls": 64,
+      "tris": 19320,
       "cpu": 1.1000000000931323,
       "pr": 1
     }
   },
-  "finishedAt": "2026-11-21T01:59:00.698Z",
+  "finishedAt": "2026-11-21T02:57:42.266Z",
   "pass": 65,
-  "fail": 0
+  "fail": 2
 }
