@@ -69,13 +69,13 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
   for (const [name, w, h, t] of SIZES) {
     const { context, page } = await newPage(browser, w, h, base, t);
     await sleep(150);
-    const ex0 = await page.evaluate(() => (() => { const e = __game.pos; return __game.project(e.x, e.y + 0.5, e.z); })());
+    const ex0 = await page.evaluate(() => (() => { const e = __game.ownerPos; return __game.project(e.x, e.y, e.z); })());
     if (name === 'phone-390x844' || name === 'desk-1280x720') await shot(page, name + '-0-intro');
     await until(page, () => __game.state === 'play', null, 20000);
     await sleep(400);
     const ex1 = await page.evaluate(() => (() => { const e = __game.exitPos; return __game.project(e.x, e.y, e.z); })());
     const inView = (e) => e.inFront && e.x > 0 && e.x < w && e.y > 0 && e.y < h;
-    check(`${name}: the pup behind the kennel door is on screen in the first frame`, inView(ex0), `${ex0.x.toFixed(0)},${ex0.y.toFixed(0)}`);
+    check(`${name}: the owner (the goal) is on screen in the first frame`, inView(ex0), `${ex0.x.toFixed(0)},${ex0.y.toFixed(0)}`);
     const boxes = await page.evaluate(() => Object.fromEntries(['bar', 'btn-hero', 'btn-sound', 'stick', 'jump', 'keys'].map((id) => {
       const el = document.getElementById(id); const r = el.getBoundingClientRect(); const cs = getComputedStyle(el);
       const vis = cs.display !== 'none' && cs.visibility !== 'hidden' && r.width > 0 && el.offsetParent !== null && !(id === 'keys' && document.body.classList.contains('touch'));
@@ -91,7 +91,6 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     check(`${name}: HUD inside viewport, no overlap`, !outside.length && !over.length, `shown=${shown.map(([k]) => k).join(',')} out=[${outside}] overlap=[${over}]`);
     if (t) check(`${name}: joystick + jump shown on touch`, boxes.stick.vis && boxes.jump.vis);
     else check(`${name}: key hint shown on desktop`, boxes.keys.vis && !boxes.jump.vis);
-    if (name === 'phone-390x844') { const o = await page.evaluate(() => ({ d: __game.doorOpen0, x: __game.pos.x })); check('opening: the kennel door slides open and the pup walks out', o.d > 0.9 && o.x > -4.4, JSON.stringify(o)); }
     await shot(page, name + '-1-start');
     await context.close();
   }
@@ -150,13 +149,23 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const s1 = await st(page);
     check('hazard: stepping in the live puddle counts a hit', hit, `spikes=${s1.spikes}`);
     check('hazard: hero is back on checkpoint 0 right away', back && Math.abs(s1.pos.z - 3.0) < 0.05 && Math.abs(s1.pos.x + 5.6) < 0.05, JSON.stringify(s1.pos));
-    // a quiet start: stand in the middle of the hall for 20 game seconds — nobody comes for you
+    // the guard: walk into the middle of the hall and stand there — he notices, chases, catches
     await page.evaluate(() => __auto.path([[-3.4, 3.0], [-1.0, 0.5]]));
-    const tq = (await st(page)).t; await until(page, (t) => __game.t > t + 20, tq, 120000);
+    const chased = await until(page, () => __game.guards()[0].mode === 'chase', null, 60000);
+    if (chased) { await sleep(250); await shot(page, 'guard-chasing'); }
+    const caught = await until(page, () => __game.caught >= 1, null, 60000);
+    const netted = await page.evaluate(() => __game.netOn); await sleep(150); await shot(page, 'guard-caught-net');
+    check('guard: the net drops over the hero when caught', netted);
     await page.evaluate(() => __auto.pathStop());
-    const quiet = await page.evaluate(() => ({ caught: __game.caught, modes: __game.guards().map((g) => g.mode), z: __game.guards().map((g) => g.z) }));
-    await shot(page, 'quiet-hall');
-    check('quiet start: 20 s in the hall, nobody chases (the only catcher is out in the field)', quiet.caught === 0 && quiet.modes.every((m) => m === 'patrol') && quiet.z.every((z) => z < -50), JSON.stringify(quiet));
+    await until(page, () => __game.state === 'play', null, 10000);
+    const s2 = await st(page); const g2 = await page.evaluate(() => __game.guards()[0]);
+    check('guard: notices the hero in the hall and chases', chased);
+    check('guard: catching sends the hero back to the cell', caught && Math.abs(s2.pos.x + 5.6) < 0.05 && Math.abs(s2.pos.z - 3.0) < 0.05, JSON.stringify(s2.pos));
+    check('guard: goes back to his post after a catch', g2.mode === 'patrol' && g2.z < -10, JSON.stringify(g2));
+    // safe in the cell: standing in the cell never gets you caught (20 game seconds)
+    const c0 = await page.evaluate(() => __game.caught); const t0 = (await st(page)).t;
+    await until(page, (t) => __game.t > t + 20, t0, 120000);
+    check('guard: the cell is safe (20 s standing there)', (await page.evaluate(() => __game.caught)) === c0);
     await context.close();
   }
 
@@ -181,9 +190,8 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const log = await page.evaluate(() => __auto.log);
     check(`${name}: autopilot reaches the exit (touch controls only)`, ok, `game time ${last.runTime.toFixed(1)} s, retries ${last.deaths}, wall ${(Date.now() - t0) / 1000 | 0} s`);
     report.numbers[name + '-run'] = { time: +last.runTime.toFixed(2), deaths: last.deaths, falls: last.falls, spikes: last.spikes, log };
-    check(`${name}: all 5 checkpoints lit on the way`, last.cp === 4, `cp=${last.cp}`);
+    check(`${name}: all 4 checkpoints lit on the way`, last.cp === 3, `cp=${last.cp}`);
     check(`${name}: both buttons pressed (laundry door, gate)`, (await page.evaluate(() => __game.buttons())).every(Boolean));
-    { const tf = (await st(page)).t; await until(page, (t) => __game.t > t + 2.5, tf, 60000); } // let the reunion run-in finish before measuring
     const fr = await page.evaluate(() => ({ f: __game.friends(), p: __game.pos, n: document.getElementById('pal-n').textContent }));
     check(`${name}: both friends freed and followed to the end`, fr.f.every((q) => q.free && Math.hypot(q.x - fr.p.x, q.z - fr.p.z) < 4) && fr.n === '2', JSON.stringify(fr.f.map((q) => [q.kind, q.free, +(Math.hypot(q.x - fr.p.x, q.z - fr.p.z)).toFixed(1)])));
     if (ok) {
@@ -218,32 +226,6 @@ async function touch(s, type, pts) { await s.send('Input.dispatchTouchEvent', { 
     const s = await st(page);
     check('drain: falling in the water counts a fall', fell, `falls=${s.falls}`);
     check('drain: hero is back on checkpoint 2', fell && Math.abs(s.pos.z + 21.6) < 0.3 && Math.abs(s.pos.x - 19.6) < 0.3 && s.cp === 2, JSON.stringify(s.pos));
-    await context.close();
-  }
-
-  // 6a) the field at the end: people walking, the catcher notices, chases, nets you; back to the gate checkpoint
-  {
-    const { context, page } = await newPage(browser, 390, 844, base + '?nointro&dt=60', true);
-    await page.addScriptTag({ content: AUTOPILOT });
-    await page.evaluate(() => __auto.start());
-    await until(page, () => __game.cp >= 4, null, 400000);
-    await page.evaluate(() => __auto.stop());
-    const w0 = await page.evaluate(() => __game.walkers()); await sleep(1500); const w1 = await page.evaluate(() => __game.walkers());
-    check('field: 6 people walking back and forth', w0.length === 6 && w0.every((w, i) => Math.abs(w.x - w1[i].x) > 0.02), w0.map((w) => w.x.toFixed(1)).join(' '));
-    await page.evaluate(() => __auto.path([[0, -46.5]])); await until(page, () => __game.pos.z < -46, null, 60000); await sleep(600);
-    await shot(page, 'field-people');
-    await page.evaluate(() => __auto.path([[0, -52], [0, -59]]));
-    const chased = await until(page, () => __game.guards()[0].mode === 'chase', null, 120000);
-    if (chased) { await sleep(250); await shot(page, 'guard-chasing'); }
-    const caught = await until(page, () => __game.caught >= 1, null, 120000);
-    const netted = await page.evaluate(() => __game.netOn); await sleep(150); await shot(page, 'guard-caught-net');
-    await page.evaluate(() => __auto.pathStop());
-    await until(page, () => __game.state === 'play', null, 10000);
-    const s2 = await st(page); const g2 = await page.evaluate(() => __game.guards()[0]);
-    check('catcher: notices the hero in the field and chases', chased);
-    check('catcher: the net drops over the hero when caught', netted);
-    check('catcher: catching sends the hero back to the gate checkpoint', caught && Math.abs(s2.pos.x) < 0.05 && Math.abs(s2.pos.z + 42.8) < 0.05, JSON.stringify(s2.pos));
-    check('catcher: goes back to his post after a catch', g2.mode === 'patrol' && Math.abs(g2.x - 8) < 1.5, JSON.stringify(g2));
     await context.close();
   }
 

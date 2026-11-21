@@ -99,7 +99,7 @@ queueMicrotask(() => { // after the whole module has run (camera state etc. are 
   P = createPlayer(scene);
   P.setRig(heroName);
   P.reset(C.checkpoints[0].pos); P.facing = Math.PI + C.start.yaw;
-  G.state = params.has('nointro') ? 'play' : 'intro'; if (G.state === 'play') C.startDoor.opening = true;
+  G.state = params.has('nointro') ? 'play' : 'intro';
   if (G.state === 'play') G.introDone = true;
   resize(); scene.updateMatrixWorld(true); placeCamera(1, true);
   buildPicker(); syncFriends(); C.trailReset(P.pos);
@@ -233,16 +233,17 @@ addEventListener('mouseup', () => { if (lk.id === 'm') lk.id = null; });
 addEventListener('keydown', (e) => { if (e.code === 'KeyQ') keysYaw = 1; if (e.code === 'KeyE') keysYaw = -1; });
 addEventListener('keyup', (e) => { if (e.code === 'KeyQ' || e.code === 'KeyE') keysYaw = 0; });
 // intro: start high over the prison looking at the glowing gate, then glide down behind the hero (any input skips)
-const INTRO_LEN = 3.4;
+const INTRO_LEN = 4.6;
 const sm = (k) => { k = Math.min(1, Math.max(0, k)); return k * k * (3 - 2 * k); };
 function introCamera(t) {
   const tp = new THREE.Vector3(), tl = new THREE.Vector3(); desiredCamera(tp, tl);
-  const a0 = new THREE.Vector3(-0.2, 1.5, 5.9), a1 = new THREE.Vector3(-0.9, 1.35, 5.2), al = new THREE.Vector3(-4.6, 0.9, 3.0);
-  if (t >= 1.0 && !C.startDoor.opening) { C.startDoor.opening = true; audio.play('door', { vol: 1, rate: 1.5 }); G.shake = 0.12; vibrate(30); } // the door slams open
-  if (t > 1.3 && t < 2.5) { P.pos.x = -5.6 + sm((t - 1.3) / 1.2) * 2.1; P.vel.set(2, 0, 0); P.facing = Math.PI / 2; } else P.vel.set(0, 0, 0); // …and the pup trots out
-  if (t < 2.4) { camera.position.lerpVectors(a0, a1, sm(t / 2.4)); camLook.copy(al).setX(-4.6 + Math.max(0, P.pos.x + 5.6) * 0.6); }
-  else { const e = sm((t - 2.4) / (INTRO_LEN - 2.4)); camera.position.lerpVectors(a1, tp, e); camLook.lerpVectors(new THREE.Vector3(-3.3, 0.9, 3.0), tl, e); }
-  if (G.shake > 0) camera.position.y += (Math.random() - 0.5) * G.shake;
+  const O = C.owner.pos;
+  const a0 = new THREE.Vector3(O.x - 2.3, 1.55, O.z + 2.9), a1 = new THREE.Vector3(O.x - 1.9, 1.6, O.z + 2.5), al = new THREE.Vector3(O.x + 0.1, 1.35, O.z);
+  const hp = new THREE.Vector3(4, 16, -34), hl = new THREE.Vector3(-3, 0, -6);
+  if (t < 1.9) { camera.position.lerpVectors(a0, a1, t / 1.9); camLook.copy(al); }
+  else if (t < 3.2) { const e = sm((t - 1.9) / 1.3); camera.position.lerpVectors(a1, hp, e); camLook.lerpVectors(al, hl, e); }
+  else { const e = sm((t - 3.2) / (INTRO_LEN - 3.2)); camera.position.lerpVectors(hp, tp, e); camLook.lerpVectors(hl, tl, e); }
+  const E = C.exit; E.glow.visible = E.beacon.visible = t > 2.3; for (const q of E.shafts) q.visible = t > 2.3; // no light effects in the close-up
   camera.lookAt(camLook); camPos.copy(camera.position);
 }
 // the catcher's net dropped over the hero when caught
@@ -310,7 +311,7 @@ function flash(kind) { const f = $('flash'); f.className = ''; void f.offsetWidt
 function fmt(t) { const m = Math.floor(t / 60), s = t - m * 60; return m + ':' + (s < 10 ? '0' : '') + s.toFixed(1); }
 function updateDots() {
   const dots = $('dots').children;
-  for (let i = 0; i < dots.length; i++) dots[i].classList.toggle('on', i < 4 ? G.cp >= i + 1 : G.finished);
+  for (let i = 0; i < dots.length; i++) dots[i].classList.toggle('on', i < 3 ? G.cp >= i + 1 : G.finished);
 }
 
 // ---------- per-step simulation ----------
@@ -322,11 +323,6 @@ function simStep(inp) {
   if (!G.running && (Math.abs(inp.x) + Math.abs(inp.z) > 0.05 || inp.jumpPressed)) startClock();
   if (G.running) G.runTime += STEP;
   P.step(STEP, inp, C.solids);
-  for (const w of C.walkers) { // people are soft obstacles: you bump and slide round them, no penalty
-    const dx = P.pos.x - w.pos.x, dz = P.pos.z - w.pos.z, d = Math.hypot(dx, dz), R = 0.72;
-    if (d < R && P.pos.y < 1.7) { const k = (R - d) / Math.max(d, 0.01); P.pos.x += dx * k; P.pos.z += dz * k; if (!G.bumpT || G.t - G.bumpT > 0.6) { G.bumpT = G.t; audio.play('step', { vol: 0.4, rate: 0.6 }); P.squash = 0.12; } }
-  }
-  C.owner.wave = P.pos.z < C.owner.pos.z + 16;
   if (P.jumped) { audio.play('jump', { vol: 0.35, rate: 1.1 }); puff(P.pos, 4, '#d9d2c7', { speed: 1.2, alpha: 0.4, life: 0.35 }); }
   if (P.landed) {
     const v = P.lastFallSpeed; if (v > 3) { audio.play('land', { vol: Math.min(0.8, 0.25 + v * 0.04) }); puff(P.pos, v > 9 ? 9 : 5, '#d9d2c7', { speed: 1.4 + v * 0.08, alpha: 0.5, life: 0.45 }); }
@@ -364,7 +360,7 @@ function simStep(inp) {
     if (gs > 0.3 && gdist < 13) { gd.stepT = (gd.stepT || 0) - STEP * gs; if (gd.stepT <= 0) { gd.stepT = 1.5; audio.play('land', { vol: 0.5 * (1 - gdist / 13), rate: 0.55, minGap: 0.1 }); } }
     if (got) { die('caught'); return; }
   }
-  if (P.pos.z < C.owner.pos.z + 2.6 && Math.abs(P.pos.x - C.owner.pos.x) < 4.5) finish(); // across the field to your person
+  if (P.pos.z < E.z - 2.0) finish(); // through the gate and out to your person
 }
 
 // ---------- frame ----------
@@ -380,7 +376,7 @@ function frame(now) {
   if (G.state === 'intro') {
     G.introT += dt;
     const inp = input.read();
-    if (G.introT >= INTRO_LEN || inp.jumpPressed || Math.abs(inp.x) + Math.abs(inp.z) > 0.1) { G.state = 'play'; G.introDone = true; C.startDoor.opening = true; P.vel.set(0, 0, 0); placeCamera(1, true); }
+    if (G.introT >= INTRO_LEN || inp.jumpPressed || Math.abs(inp.x) + Math.abs(inp.z) > 0.1) { G.state = 'play'; G.introDone = true; C.exit.glow.visible = C.exit.beacon.visible = true; for (const q of C.exit.shafts) q.visible = true; placeCamera(1, true); }
     else introCamera(G.introT);
   }
   if (G.state !== 'intro') {
@@ -458,7 +454,7 @@ scrollTo(0, 120);
 // ---------- test hooks (read-only state for the QA robot) ----------
 window.__game = {
   get state() { return G.state; }, get t() { return G.t; }, get runTime() { return G.runTime; }, get cp() { return G.cp; },
-  get deaths() { return G.deaths; }, get falls() { return G.falls; }, get spikes() { return G.spikes; }, get caught() { return G.caught; }, walkers: () => C.walkers.map((w) => ({ x: w.pos.x, z: w.pos.z, dir: w.dir })), get doorOpen0() { return C.startDoor.open; }, get ownerPos() { return { x: C.owner.pos.x, y: 1.4, z: C.owner.pos.z }; }, friends: () => C.friends.map((f) => ({ free: f.free, kind: f.kind, x: f.pos.x, y: f.pos.y, z: f.pos.z })), get netOn() { return net.visible; }, guards: () => C.guards.map((g) => ({ x: g.pos.x, z: g.pos.z, vx: g.vx, vz: g.vz, mode: g.mode })), buttons: () => C.buttons.map((b) => b.pressed), get finished() { return G.finished; },
+  get deaths() { return G.deaths; }, get falls() { return G.falls; }, get spikes() { return G.spikes; }, get caught() { return G.caught; }, get ownerPos() { return { x: C.owner.pos.x, y: 1.4, z: C.owner.pos.z }; }, friends: () => C.friends.map((f) => ({ free: f.free, kind: f.kind, x: f.pos.x, y: f.pos.y, z: f.pos.z })), get netOn() { return net.visible; }, guards: () => C.guards.map((g) => ({ x: g.pos.x, z: g.pos.z, vx: g.vx, vz: g.vz, mode: g.mode })), buttons: () => C.buttons.map((b) => b.pressed), get finished() { return G.finished; },
   get pos() { return P ? { x: P.pos.x, y: P.pos.y, z: P.pos.z } : null; }, get grounded() { return !!(P && P.grounded); },
   get anim() { return P && P.anim; }, get camYaw() { return camYaw; }, get exitPos() { return { x: C.exit.x, y: C.exit.y + 1.7, z: C.exit.z }; }, get cpPos() { return C.checkpoints.map((c) => ({ x: c.pos.x, y: c.pos.y, z: c.pos.z })); }, get hero() { return P && P.rigName; }, get doorOpen() { return C.exit.open; }, get pixelRatio() { return pixelRatio; },
   movers: () => C.movers.map((m) => ({ x: m.pos.x, y: m.pos.y, z: m.pos.z, W: m.W, D: m.D })),

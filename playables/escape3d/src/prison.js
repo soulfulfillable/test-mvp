@@ -7,7 +7,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { createGuard } from './guard.js';
-import { MAKERS, makeDog, makeOwner, makePerson } from './blocky.js';
+import { MAKERS, makeDog, makeOwner } from './blocky.js';
 import { floorTexture, wallTexture, grateTexture, glowTexture, shaftTexture, worldBox } from './textures.js';
 
 export const GOLD = new THREE.Color('#ffc93c');
@@ -52,7 +52,7 @@ function asphaltTex() {
 }
 
 export function buildCourse(scene) {
-  const C = { solids: [], hazards: [], movers: [], traps: [], checkpoints: [], walls: [], buttons: [], doors: [], guards: [], friends: [], walkers: [], exit: null, killY: -1.0 };
+  const C = { solids: [], hazards: [], movers: [], traps: [], checkpoints: [], walls: [], buttons: [], doors: [], guards: [], friends: [], exit: null, killY: -1.0 };
   const STD = (o) => new THREE.MeshStandardMaterial({ roughness: 0.9, metalness: 0, ...o });
   const M = {
     floor: STD({ map: floorTexture(), color: '#c9c6c0', roughness: 0.55 }),          // polished concrete
@@ -299,13 +299,7 @@ export function buildCourse(scene) {
     deco(-7.95, -7.0, 0, 0.45, z0 - 0.4, z0 - 2.4, M.bunk); deco(-7.95, -7.05, 0.45, 0.6, z0 - 0.45, z0 - 2.35, M.mattress); // bunk
     solid(-7.95, -7.0, 0, 0.6, z0 - 0.4, z0 - 2.4, null);
     deco(-7.9, -7.4, 0, 0.5, z1 + 0.9, z1 + 0.4, M.steelWhite); solid(-7.9, -7.4, 0, 0.5, z1 + 0.9, z1 + 0.4, null); // toilet
-    if (k === 1) { // your kennel: the door bangs open at the start
-      bars(-4.5, -4.5, z0 - 1.85, z1 + 0.15, 0, 3.2);
-      const dg = new THREE.Group(); scene.add(dg);
-      for (let i = 0; i <= 10; i++) { const b = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 3.2, 6), M.bars); b.position.set(-4.56, 1.6, z0 - 0.15 - 1.7 * i / 10); b.castShadow = true; dg.add(b); }
-      for (const yy of [0.06, 1.6, 3.14]) { const r = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 1.76), M.bars); r.position.set(-4.56, yy, z0 - 1.0); dg.add(r); }
-      C.startDoor = { g: dg, open: 0, opening: false };
-    }
+    if (k === 1) { bars(-4.5, -4.5, z0 - 1.85, z1 + 0.15, 0, 3.2); bars(-4.62, -4.62, z0 - 1.9, z1 + 0.5, 0, 3.2, false); } // your cell: the door is slid open
     else {
       bars(-4.5, -4.5, z0 - 0.15, z1 + 0.15, 0, 3.2);
       const pals = [{ coat: '#7a5638', ear: '#553a25', light: '#ead9c2', harness: '#3a7bd5' }, null, { coat: '#f1efe9', ear: '#cfc9bd', light: '#ffffff', harness: '#d92b2b' }, 'bunny', { coat: '#3a3532', ear: '#262220', light: '#b9aea0', harness: '#f2c230' }, 'cat', null];
@@ -390,7 +384,8 @@ export function buildCourse(scene) {
   const pal2 = friendCage(-12.6, -34.6, 'cat');
   button(-11.2, 0, -33.6, () => { C.exit.opening = true; C.free(pal2); });                    // the gate button, at the far west end of the yard
   // guards: one walks the cell hall floor, one walks the lane in front of the gate
-  C.guards.push(createGuard(scene, { zone: { x0: -10.5, x1: 10.5, z0: -66, z1: -52 }, a: [8, -59], b: [-8, -59] })); // the only catcher: out in the field, near the end
+  C.guards.push(createGuard(scene, { zone: { x0: -4.0, x1: 2.2, z0: -19.2, z1: 4.6 }, a: [-1, -18], b: [-1, 3.6] }));
+  C.guards.push(createGuard(scene, { zone: { x0: -9.5, x1: 21, z0: -39.4, z1: -36.8 }, a: [15, -38.1], b: [4, -38.1] }));
   // guard tower (north-west corner) with a searchlight, floodlight poles, a basketball hoop — it's a real yard
   solid(-13.8, -10.8, 0, 6.5, -37.2, -40.0, M.concrete, { noStep: true });
   deco(-14.0, -10.6, 6.5, 6.8, -37.0, -40.2, M.steel);
@@ -404,11 +399,9 @@ export function buildCourse(scene) {
   // OUTSIDE (north of the gate): grass, a path, trees, home — and your person, waiting with a LOST DOG poster
   // =====================================================================================
   solid(-60, 60, -0.4, 0, -40.6, -90, M.grass, { cast: false, wall: false, tileU: 4, tileV: 4 });
-  deco(-1.6, 1.6, 0.0, 0.02, -40.7, -73.4, M.path, { cast: false });
-  for (const sx of [-1, 1]) solid(sx * 12, sx * 13, 0, 1.5, -40.7, -73, M.leaf, { noStep: true }); // hedges keep you in the field
-  for (let z = -44; z > -72; z -= 7) for (const sx of [-1, 1]) deco(sx * 11.2 - 0.25, sx * 11.2 + 0.25, 0.02, 0.5, z + 0.25, z - 0.25, sx * z % 2 ? STD({ color: '#ff8fab' }) : STD({ color: '#ffd166' })); // flower tubs
+  deco(-1.6, 1.6, 0.0, 0.02, -40.7, -70, M.path, { cast: false });
   const tree = (x, z, sc = 1) => { deco(x - 0.2 * sc, x + 0.2 * sc, 0, 1.6 * sc, z + 0.2 * sc, z - 0.2 * sc, M.trunk); deco(x - 1.2 * sc, x + 1.2 * sc, 1.4 * sc, 3.4 * sc, z + 1.2 * sc, z - 1.2 * sc, (x + z) % 2 ? M.leaf : M.leaf2); deco(x - 0.8 * sc, x + 0.8 * sc, 3.3 * sc, 4.4 * sc, z + 0.8 * sc, z - 0.8 * sc, M.leaf2); };
-  for (const [x, z, sc] of [[-16, -46, 1.1], [15.5, -48, 1.3], [-18, -54, 1.5], [17, -57, 1.2], [-15.5, -63, 1.4], [21, -45, 1], [-23, -47, 1.2], [22, -64, 1.5], [15, -70, 1.3], [-22, -70, 1.4], [8, -80, 1.6], [-8, -81, 1.5]]) tree(x, z, sc);
+  for (const [x, z, sc] of [[-6, -46, 1.1], [5.5, -48, 1.3], [-11, -52, 1.5], [10, -55, 1.2], [-4.5, -60, 1.4], [15, -45, 1], [-17, -46, 1.2], [20, -52, 1.5], [3, -66, 1.6], [-22, -58, 1.4]]) tree(x, z, sc);
   const house = (x, z, wm, rm) => {
     deco(x - 3, x + 3, 0, 3, z + 2.5, z - 2.5, wm);
     const r = new THREE.Mesh(new THREE.ConeGeometry(4.9, 2.4, 4), rm); r.rotation.y = Math.PI / 4; r.position.set(x, 4.2, z); r.castShadow = true; scene.add(r);
@@ -422,19 +415,8 @@ export function buildCourse(scene) {
     const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
     const sign = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 1.3), new THREE.MeshBasicMaterial({ map: t })); sign.rotation.y = Math.PI; sign.position.set(0, 4.6, -40.72); scene.add(sign);
   }
-  // people out for a walk, crossing the field back and forth (positions are a pure function of time)
-  const folk = [['#e76f51', '#264653', '#3a2a22'], ['#2a9d8f', '#3d405b', '#d9a441', '#f4f1de'], ['#457b9d', '#1d3557', '#1f1a17'], ['#f4a261', '#6d597a', '#7a4b2a'], ['#8ecae6', '#52575d', '#c9c9c9', '#d62828'], ['#b5838d', '#2b2d42', '#3a2a22']];
-  let ws = 20261121; const wr = () => ((ws = (ws * 16807) % 2147483647) / 2147483647); // one seed decides the whole crowd
-  folk.forEach(([shirt, pants, hair, hat], i) => {
-    const body = makePerson({ shirt, pants, hair, hat }); scene.add(body.root);
-    const z = -45.5 - i * 3.6, span = 8 + wr() * 1.5, speed = 1.5 + wr() * 1.3, phase = wr();
-    const w = { body, z, span, speed, phase, pos: new THREE.Vector3(0, 0, z), dir: 1, pose: { mode: 'walk', speed, t: wr() * 5 } };
-    w.at = (t) => { const u = ((t * speed / (4 * span) + phase) % 1 + 1) % 1; const tri = u < 0.5 ? u * 4 - 1 : 3 - u * 4; return { x: tri * span, dir: u < 0.5 ? 1 : -1 }; };
-    C.walkers.push(w);
-  });
-  checkpoint(4, 0, 0, -42.8);
-  const ownerBody = makeOwner(); ownerBody.root.position.set(0, 0, -70); scene.add(ownerBody.root);
-  C.owner = { body: ownerBody, pos: new THREE.Vector3(0, 0, -70), cheer: false, pose: { mode: 'idle', speed: 0, t: 0 } };
+  const ownerBody = makeOwner(); ownerBody.root.position.set(0, 0, -44.2); scene.add(ownerBody.root);
+  C.owner = { body: ownerBody, pos: new THREE.Vector3(0, 0, -44.2), cheer: false, pose: { mode: 'idle', speed: 0, t: 0 } };
 
   // ---------- time update (deterministic: everything is a function of t) ----------
   C.trapHeight = (tr, t) => {
@@ -445,7 +427,7 @@ export function buildCourse(scene) {
     if (p < 2.3) return 1;
     return Math.max(0, 1 - (p - 2.3) / 0.3);
   };
-  C.step = (t) => { for (const mv of C.movers) setMover(mv, t, false); for (const w of C.walkers) { const q = w.at(t); w.pos.x = q.x; w.dir = q.dir; } };
+  C.step = (t) => { for (const mv of C.movers) setMover(mv, t, false); };
   C.visual = (t, dt) => {
     M.kill.emissiveIntensity = 1.7 + 0.5 * Math.sin(t * 7);
     for (const tr of C.traps) { const h = C.trapHeight(tr, t); tr.hz.active = h > 0.45; tr.h = h; }
@@ -498,9 +480,7 @@ export function buildCourse(scene) {
       f.holder.position.set(f.pos.x, f.pos.y + (f.hop > 0 ? Math.abs(Math.sin(f.hop * 9)) * 0.35 : 0), f.pos.z); f.holder.rotation.y = f.facing;
       f.pose.t += dt; f.body.animate(f.pose, dt);
     }
-    for (const w of C.walkers) { w.body.root.position.copy(w.pos); w.body.root.rotation.y = w.dir > 0 ? Math.PI / 2 : -Math.PI / 2; w.pose.t += dt; w.body.animate(w.pose, dt); }
-    if (C.startDoor) { const D = C.startDoor; if (D.opening) D.open = Math.min(1, D.open + dt / 0.16); D.g.position.z = -D.open * 1.72; }
-    const O = C.owner; O.pose.t += dt; O.pose.mode = O.cheer || O.wave ? 'cheer' : 'idle'; O.body.animate(O.pose, dt);
+    const O = C.owner; O.pose.t += dt; O.pose.mode = O.cheer ? 'cheer' : 'idle'; O.body.animate(O.pose, dt);
     const E = C.exit;
     if (E.opening) E.open = Math.min(1, E.open + dt / 0.9);
     const o = E.open * E.open * (3 - 2 * E.open);
@@ -538,12 +518,12 @@ export function buildCourse(scene) {
     C.exit.open = 0; C.exit.opening = false;
     for (const gd of C.guards) gd.reset();
     for (const f of C.friends) { f.free = false; f.open = 0; f.order = -1; f.pos.copy(f.home); f.facing = Math.PI; f.pose.mode = 'idle'; }
-    trail.length = 0; C.owner.cheer = false; C.owner.wave = false;
+    trail.length = 0; C.owner.cheer = false;
   };
   C.start = { pos: C.checkpoints[0].pos.clone(), yaw: -Math.PI / 2 }; // camera west of the hero, looking east out of the cell
 
   // ---------- merge static meshes per material (draw calls) ----------
-  const dyn = new Set([...C.movers.map((m) => m.g), C.exit.g, ...C.checkpoints.map((c) => c.group), ...C.hazards.filter((h) => h.group).map((h) => h.group), ...C.buttons.map((b) => b.g), ...C.doors.flatMap((d) => [d.g, d.lamp]), ...C.guards.map((g) => g.root), ...C.friends.flatMap((f) => [f.cageG, f.holder]), C.owner.body.root, ...C.walkers.map((w) => w.body.root), C.startDoor.g]);
+  const dyn = new Set([...C.movers.map((m) => m.g), C.exit.g, ...C.checkpoints.map((c) => c.group), ...C.hazards.filter((h) => h.group).map((h) => h.group), ...C.buttons.map((b) => b.g), ...C.doors.flatMap((d) => [d.g, d.lamp]), ...C.guards.map((g) => g.root), ...C.friends.flatMap((f) => [f.cageG, f.holder]), C.owner.body.root]);
   scene.updateMatrixWorld(true);
   const buckets = new Map(), victims = [];
   scene.traverse((o) => {
