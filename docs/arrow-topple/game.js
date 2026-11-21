@@ -14,7 +14,7 @@
   var aim = null, drag = null, ghost = null, parts = [], stringT = 9, recoil = 0;
   var demo = { t: -0.7, runs: 0, active: false, lastTouch: 0 }, endT = -1, cheer = 0, counts = { slowmo: 0, sticks: 0, demo: 0 };
   var sheep = [{ x: 0.75, j: 0, ph: 0 }, { x: 2.3, j: 0, ph: 1.7 }, { x: 3.75, j: 0, ph: 3.1 }], sheepRun = null;
-  var fleeing = [], muted = false, steps = 0, fireStep = -1, level = 0;
+  var fleeing = [], muted = false, steps = 0, fireStep = -1, level = 0, camX = 6;
   try { muted = localStorage.getItem('at_mute') === '1'; level = Math.max(0, Math.min(NLEV - 1, parseInt(localStorage.getItem('at_level') || '0', 10) || 0)); } catch (e) { }
 
   // ---------- sound: four tiny synth voices ----------
@@ -35,9 +35,9 @@
   function resize() {
     var app = document.getElementById('app'); W = app.clientWidth; H = app.clientHeight; DPR = Math.min(window.devicePixelRatio || 1, 2);
     cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
-    S = Math.min(W / 9.8, H / 9.6); OX = (W - 9.8 * S) / 2 - 0.3 * S;
+    S = Math.min(W / 14.2, H / 9.6); OX = (W - 14.2 * S) / 2 - 0.3 * S;
     var spare = H - 9.6 * S; GY = spare * 0.56 + 8.0 * S;      // ground line; tall phones get sky above and a meadow below
-    fgScale = 0.8;
+    fgScale = 1;
   }
   function wx(x) { return OX + x * S; } function wy(y) { return GY - y * S; }
   function maxPull() { return Math.max(96, Math.min(210, Math.min(W, H) * 0.36)); }
@@ -282,7 +282,7 @@
   }
 
   // ---------- demo: a hand pulls back once, shows the dotted path, lets go (no shot) ----------
-  var DEMO = { a: 0.84, p: 0.42 };
+  var DEMO = { a: 0.75, p: 0.6 };
   function demoStep(dt) {
     if (level !== 0 || sim.shots > 0 || aim || sim.state !== 'play') { demo.active = false; return; }
     demo.t += dt;
@@ -295,7 +295,7 @@
   }
   function demoDraw() {
     if (!demo.active) return;
-    var mp = maxPull(), sx0 = wx(3.55), sy0 = wy(1.3), k = demo.k, d = DEMO.p * k * mp;
+    var mp = maxPull(), sx0 = wx(6.4), sy0 = wy(2.0), k = demo.k, d = DEMO.p * k * mp;
     var hx = sx0 - Math.cos(DEMO.a) * d, hy = sy0 + Math.sin(DEMO.a) * d;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.globalAlpha = demo.alpha * 0.9; ctx.strokeStyle = CREAM; ctx.lineWidth = Math.max(3, S * 0.09); ctx.lineCap = 'round'; ctx.setLineDash([1, S * 0.22]);
     ctx.beginPath(); ctx.moveTo(sx0, sy0); ctx.lineTo(hx, hy); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
@@ -313,7 +313,9 @@
       while (acc >= C.DT && n < 12) { sim.step(); steps++; acc -= C.DT; n++; drain(); if (fireStep >= 0 && steps - fireStep === 600) counts.fp5 = sim.fingerprint(); if (hitstop > 0) break; }
       if (n === 12) acc = 0;
     }
-    var zt = slowT > 0 && !reduced ? 1.16 : 1; zoom += (zt - zoom) * Math.min(1, real * (zt > zoom ? 9 : 4));
+    var fly = sim.flying && sim.flying.mode === 'fly' && !sim.flying.gone, busy = sim.shots > 0 && !drag && (sim.flying || !sim.asleep()) && !(endT > 1.2);
+    var zt = busy && !reduced ? Math.max(1.12, Math.min(1.6, 40 / S)) * (slowT > 0 ? 1.1 : 1) : 1; zoom += (zt - zoom) * Math.min(1, real * (zt > zoom ? 3.5 : 3));
+    var cxT = fly ? Math.max(C.ORIGIN.x + 1, Math.min(sim.focus, sim.flying.body.getPosition().x + 1.2)) : (busy ? sim.focus : camX); camX += (cxT - camX) * Math.min(1, real * 6);
     stringT += real; recoil -= real * 4; shake *= Math.pow(0.001, real); if (shake < 0.2) shake = 0;
     for (var i = 0; i < sheep.length; i++) if (sheep[i].j > 0) { sheep[i].j += real * 2.2; if (sheep[i].j >= 1) sheep[i].j = 0; }
     demoStep(real);
@@ -323,7 +325,7 @@
   function draw(real) {
     scenery();
     var sx = shake ? Math.sin(T * 70) * shake : 0, sy = shake ? Math.cos(T * 83) * shake : 0;
-    world(zoom, sim.focus, 2.2, sx, sy);
+    world(zoom, camX, 0, sx, sy);
     var i, it;
     for (i = 0; i < sim.items.length; i++) { it = sim.items[i]; if (!it.gone) { var p = it.body.getPosition(); if (p.y < 1.2) shadow(p.x, Math.max(it.w, it.h) * 0.42); } }
     if (ghost && sim.state === 'play') dots(ghost, CREAM, 0.045, 0.045, 0.55);
@@ -354,7 +356,7 @@
       else if (e.type === 'topple') { slowT = 0.42; counts.slowmo++; }
       else if (e.type === 'wolfdown') { sYelp(); buzz(30); puff(e.x, 0.1, 7, CREAM, 1.6); for (j = 0; j < sheep.length; j++) sheep[j].j = 0.01 + j * 0.0001; }
       else if (e.type === 'flee') { var wf = null; for (j = 0; j < sim.wolves.length; j++) if (sim.wolves[j].id === e.id) wf = sim.wolves[j]; fleeing.push({ x: e.x, t0: T, plunger: wf && wf.plunger > 0 }); }
-      else if (e.type === 'basketdown') { sheepRun = { i: 2, t0: T + 0.5, to: Math.max(4.6, Math.min(9.3, e.x - 0.3)) }; }
+      else if (e.type === 'basketdown') { sheepRun = { i: 2, t0: T + 0.5, to: Math.max(4.6, Math.min(13.6, e.x - 0.3)) }; }
       else if (e.type === 'win') { endT = 0; sWin(); confetti(); buzz(60); }
       else if (e.type === 'lose') { endT = 0; tone('triangle', 300, 150, 0.4, 0.12); }
     }
@@ -371,7 +373,7 @@
   }
   function end() { if (drag && aim && sim.canFire()) sim.fire(aim.a, aim.p); drag = null; aim = null; demo.lastTouch = T; pin(); }
   function advance() { if (sim.state === 'won') { level = (level + 1) % NLEV; try { localStorage.setItem('at_level', String(level)); } catch (e) { } } restart(); }
-  function restart() { sim = new Sim(level); aim = drag = ghost = null; parts.length = 0; fleeing.length = 0; sheepRun = null; endT = -1; slowT = 0; acc = 0; zoom = 1; againBtn.classList.remove('on'); for (var i = 0; i < sheep.length; i++) { sheep[i].j = 0; sheep[i].cx = undefined; } counts.restarts = (counts.restarts || 0) + 1; fireStep = -1; }
+  function restart() { sim = new Sim(level); aim = drag = ghost = null; parts.length = 0; fleeing.length = 0; sheepRun = null; endT = -1; slowT = 0; acc = 0; zoom = 1; camX = C.ORIGIN.x + 1; againBtn.classList.remove('on'); for (var i = 0; i < sheep.length; i++) { sheep[i].j = 0; sheep[i].cx = undefined; } counts.restarts = (counts.restarts || 0) + 1; fireStep = -1; }
   function pin() { if (Math.abs(window.scrollY - 120) > 2) window.scrollTo(0, 120); }
   cv.addEventListener('touchstart', function (e) { e.preventDefault(); var t = e.changedTouches[0]; start(t.clientX, t.clientY); }, { passive: false });
   cv.addEventListener('touchmove', function (e) { e.preventDefault(); var t = e.changedTouches[0]; move(t.clientX, t.clientY); }, { passive: false });
