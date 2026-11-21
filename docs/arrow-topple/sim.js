@@ -9,29 +9,43 @@
     DT: 1 / 120, G: -10, VMIN: 4.5, VMAX: 13.5,
     AMIN: -0.15, AMAX: 1.45,          // aim angle limits (rad)
     ORIGIN: { x: 1.9, y: 1.6 },      // where the arrow leaves the bow
-    ARROWS: 3, VIEW: { x0: 0, x1: 8, y0: -1.6, y1: 6.4 }
+    ARROWS: 3, VIEW: { x0: 0.3, x1: 10.1, y0: -1.6, y1: 8.0 }
   };
-  // One level only (stage 1). Tower stands on a single stone that is narrower than the deck above it.
-  var TX = 6.0;
-  var LEVEL = [
-    { id: 'stone', kind: 'stone', x: TX, y: 0.3, w: 1.1, h: 0.6 },
-    { id: 'deck0', kind: 'plank', x: TX, y: 0.7, w: 2.5, h: 0.2 },
-    { id: 'logA', kind: 'log', x: TX - 0.95, y: 1.55, w: 0.3, h: 1.5 },
-    { id: 'logB', kind: 'log', x: TX + 0.95, y: 1.55, w: 0.3, h: 1.5 },
-    { id: 'deck1', kind: 'plank', x: TX, y: 2.4, w: 2.3, h: 0.2 },
-    { id: 'wolfA', kind: 'wolf', x: TX + 0.05, y: 3.0, w: 0.78, h: 1.0 },
-    { id: 'logC', kind: 'log', x: TX - 0.85, y: 3.15, w: 0.28, h: 1.3 },
-    { id: 'logD', kind: 'log', x: TX + 0.85, y: 3.15, w: 0.28, h: 1.3 },
-    { id: 'deck2', kind: 'plank', x: TX, y: 3.9, w: 2.1, h: 0.2 },
-    { id: 'wolfB', kind: 'wolf', x: TX - 0.3, y: 4.5, w: 0.78, h: 1.0 },
-    { id: 'basket', kind: 'basket', x: TX + 0.52, y: 4.26, w: 0.56, h: 0.52 }
+  // Levels are written as stacks from the ground up, so pieces always sit exactly on each other.
+  // Every tower stands on one stone that is narrower than the deck above it → it topples instead of sliding.
+  function stack(out, tag, x, parts) {
+    var y = 0, n = 0;
+    parts.forEach(function (p) {
+      var id = tag + (n++);
+      if (p.k === 'stone') { out.push({ id: id, kind: 'stone', x: x + (p.dx || 0), y: y + p.h / 2, w: p.w, h: p.h }); y += p.h; }
+      else if (p.k === 'deck') { out.push({ id: id, kind: 'plank', x: x + (p.dx || 0), y: y + 0.1, w: p.w, h: 0.2 }); y += 0.2; }
+      else if (p.k === 'logs') { p.xs.forEach(function (lx, j) { out.push({ id: id + '_' + j, kind: 'log', x: x + lx, y: y + p.h / 2, w: p.w || 0.3, h: p.h }); }); y += p.h; }
+      else if (p.k === 'wolf') out.push({ id: id, kind: 'wolf', x: x + (p.dx || 0), y: y + 0.5, w: 0.78, h: 1.0 });
+      else if (p.k === 'basket') out.push({ id: id, kind: 'basket', x: x + (p.dx || 0), y: y + 0.26, w: 0.56, h: 0.52 });
+    });
+    return out;
+  }
+  var S_ = function (w, h) { return { k: 'stone', w: w, h: h }; }, D = function (w) { return { k: 'deck', w: w }; },
+    L = function (h, xs, w) { return { k: 'logs', h: h, xs: xs, w: w }; }, Wf = function (dx) { return { k: 'wolf', dx: dx }; }, B = function (dx) { return { k: 'basket', dx: dx }; };
+  var LEVELS = [
+    // 1 — one creaky tower, two wolves
+    { focus: 6.0, items: stack([], 'a', 6.0, [S_(1.1, 0.6), D(2.5), L(1.5, [-0.95, 0.95]), D(2.3), Wf(0.05), L(1.3, [-0.85, 0.85], 0.28), D(2.1), Wf(-0.3), B(0.52)]) },
+    // 2 — a tall pole: three wolves balancing on single posts
+    { focus: 7.0, items: stack([], 'a', 7.0, [S_(1.0, 0.6), L(1.6, [0], 0.36), D(2.0), Wf(-0.55), Wf(0.55), L(1.3, [0], 0.32), D(1.6), Wf(-0.2), B(0.42)]) },
+    // 3 — a stone wall in the way: the arrow has to go over it
+    { focus: 6.4, items: stack(stack([], 'w', 4.7, [S_(0.8, 0.8), S_(0.74, 0.8), S_(0.7, 0.8)]), 'a', 7.7, [S_(1.1, 0.6), D(2.3), L(1.2, [-0.85, 0.85]), D(2.2), Wf(-0.45), Wf(0.45), B(0)]) },
+    // 4 — two towers, one low and near, one tall and far
+    { focus: 7.0, items: stack(stack([], 'a', 5.3, [S_(0.9, 0.5), D(1.7), L(1.1, [-0.6, 0.6]), D(1.7), Wf(0)]), 'b', 8.4, [S_(1.0, 0.6), D(1.9), L(1.4, [-0.7, 0.7]), D(1.9), L(1.2, [-0.62, 0.62], 0.28), D(1.7), Wf(-0.25), B(0.45)]) },
+    // 5 — the big one: wide base, three wolves on two floors
+    { focus: 7.2, items: stack([], 'a', 7.2, [S_(1.4, 0.6), D(3.3), L(1.3, [-1.35, 0, 1.35]), D(3.2), Wf(-0.68), Wf(0.68), L(1.2, [-0.75, 0.75], 0.28), D(2.0), Wf(-0.3), B(0.5)]) }
   ];
   var MAT = {
     stone: { d: 2.6, f: 0.8, r: 0.02 }, plank: { d: 0.7, f: 0.6, r: 0.05 }, log: { d: 0.7, f: 0.6, r: 0.05 },
     wolf: { d: 0.8, f: 0.6, r: 0.12 }, basket: { d: 0.5, f: 0.6, r: 0.1 }
   };
 
-  function Sim() {
+  function Sim(level) {
+    this.level = level = Math.max(0, Math.min(LEVELS.length - 1, level || 0)); var LEVEL = LEVELS[level].items; this.focus = LEVELS[level].focus;
     this.world = new planck.World({ gravity: Vec2(0, C.G) });
     this.time = 0; this.n = 0; this.events = []; this.items = []; this.wolves = []; this.arrows = [];
     this.arrowsLeft = C.ARROWS; this.state = 'play'; this.flying = null; this.slowmoDone = false;
@@ -61,6 +75,7 @@
     if (d.kind === 'basket') this.basket = it;
     return it;
   };
+  Sim.prototype.asleep = function () { for (var i = 0; i < this.items.length; i++) if (!this.items[i].gone && this.items[i].body.isAwake()) return false; return !this.flying; };
   Sim.prototype.canFire = function () { return this.state === 'play' && this.arrowsLeft > 0 && !this.flying; };
   Sim.prototype.velocity = function (angle, power) {
     var a = Math.max(C.AMIN, Math.min(C.AMAX, angle)), p = Math.max(0, Math.min(1, power));
@@ -188,5 +203,5 @@
     }
     return s;
   };
-  return { Sim: Sim, C: C, LEVEL: LEVEL };
+  return { Sim: Sim, C: C, LEVELS: LEVELS };
 });

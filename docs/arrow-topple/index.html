@@ -17,6 +17,7 @@
   #again{left:50%;bottom:calc(9% + env(safe-area-inset-bottom));width:84px;height:84px;margin-left:-42px;opacity:0;transform:scale(.6);pointer-events:none;transition:opacity .25s,transform .35s cubic-bezier(.3,1.6,.5,1)}
   #again.on{opacity:1;transform:scale(1);pointer-events:auto}
   #again:active,#mute:active{transform:scale(.92)}
+  #again .nextp{display:none} #again.next .nextp{display:block} #again.next .replay{display:none}
   #mute .off{display:none} #mute.muted .off{display:block} #mute.muted .on{display:none}
   @media (prefers-reduced-motion:reduce){#again{transition:none}}
 </style>
@@ -35,9 +36,8 @@
   <button id="again" aria-label="Play again">
     <svg viewBox="0 0 84 84" fill="none" stroke="#3A2A22" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
       <circle cx="42" cy="42" r="38" fill="#FFF8EA"/>
-      <path d="M58 42a16 16 0 1 1-5.5-12" stroke-width="7" stroke="#3A2A22"/>
-      <path d="M58 42a16 16 0 1 1-5.5-12" stroke-width="2.4" stroke="#EC5A46" opacity="0"/>
-      <path d="M57 19v13H44z" fill="#EC5A46"/>
+      <g class="replay"><path d="M58 42a16 16 0 1 1-5.5-12" stroke-width="7"/><path d="M57 19v13H44z" fill="#EC5A46"/></g>
+      <path class="nextp" d="M33 24l24 18-24 18z" fill="#EC5A46"/>
     </svg>
   </button>
 </div>

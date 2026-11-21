@@ -5,7 +5,8 @@ const { chromium } = require('playwright');
 const path = require('path'), fs = require('fs'), { execSync } = require('child_process');
 const QA = path.join(__dirname, 'qa'), URL = 'file://' + path.resolve(__dirname, '../../docs/arrow-topple/index.html');
 const SIZES = [[320, 568], [360, 640], [375, 667], [390, 844], [393, 852], [414, 896], [430, 932], [768, 1024], [820, 1180], [1024, 768], [844, 390], [667, 375], [1280, 720], [1920, 1080]];
-const WIN = [48 * Math.PI / 180, 0.35];      // from tools/solve.cjs: the most forgiving one-arrow aim
+const SOL = JSON.parse(fs.readFileSync(path.join(QA, 'solutions.json'), 'utf8'));   // from tools/solve.cjs: one known-good aim per level
+const WIN = SOL[0].shots[0];
 const DUD = [-0.15, 0.15];                   // into the grass, short of the tower
 const results = []; const errors = []; const external = [];
 const ok = (name, pass, detail) => { results.push({ name, pass: !!pass, detail: detail === undefined ? '' : detail }); console.log((pass ? 'PASS ' : 'FAIL ') + name + (detail !== undefined ? ' — ' + JSON.stringify(detail) : '')); };
@@ -19,6 +20,7 @@ async function open(browser, w, h, touch = true) {
   pg.on('pageerror', e => errors.push(`${w}x${h} PAGE ${e.message}`));
   pg.on('request', r => { if (!r.url().startsWith('file://')) external.push(r.url()); });
   await pg.goto(URL); await pg.waitForFunction(() => window.__AT);
+  await pg.evaluate(() => { try { localStorage.removeItem('at_level'); localStorage.removeItem('at_mute'); } catch (e) { } __AT.go(0); });
   const cdp = await ctx.newCDPSession(pg);
   return { ctx, pg, cdp, w, h };
 }
@@ -49,7 +51,7 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
     if (overlap(i.hud, mute)) probs.push('hud/mute overlap');
     if (overlap(i.hud, i.tower) || overlap(mute, i.tower)) probs.push('hud over tower');
     if (overlap(i.hud, i.archer)) probs.push('hud over archer');
-    if (i.wolvesUp !== 2 || i.arrowsLeft !== 3 || i.state !== 'play') probs.push('bad start state');
+    if (i.wolvesUp !== i.wolves || i.arrowsLeft !== 3 || i.state !== 'play') probs.push('bad start state');
     const towerH = i.tower.h / h, archerH = i.archer.h / h;
     await s.pg.screenshot({ path: path.join(QA, `first-${w}x${h}.png`) });
     const d = await until(s, x => x.demo >= 1, 2500);
@@ -84,18 +86,19 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
     ok('topple film strip written', true, { frames: pick.length, ms: Date.now() - t0 });
   } catch (e) { ok('topple film strip written', false, String(e.message).slice(0, 200)); }
   frames.forEach(f => fs.unlinkSync(f));
-  i = await until(s, x => x.again && x.fleeing === 2, 6000);
+  i = await until(s, x => x.again && x.fleeing === 2 && x.next, 6000);
   await s.pg.screenshot({ path: path.join(QA, 'win-390x844.png') });
-  ok('wolves run off and the replay button appears', i.again && i.fleeing === 2, { again: i.again, fleeing: i.fleeing });
+  ok('wolves run off and the next-level button appears', i.again && i.next && i.fleeing === 2, { again: i.again, next: i.next, fleeing: i.fleeing });
   const fpA = (await until(s, x => x.fp5, 9000)).fp5;
-  await s.pg.tap('#again'); await s.pg.waitForTimeout(200); i = await info(s);
-  ok('replay button resets the round', i.state === 'play' && i.arrowsLeft === 3 && i.wolvesUp === 2 && !i.again, { state: i.state, arrowsLeft: i.arrowsLeft });
+  await s.pg.evaluate(() => __AT.go(0)); await s.pg.waitForTimeout(100);
+  i = await info(s);
+  ok('restart resets the round', i.state === 'play' && i.arrowsLeft === 3 && i.wolvesUp === 2 && !i.again, { state: i.state, arrowsLeft: i.arrowsLeft });
 
   // same pull again → same ending
   await drag(s, WIN[0], WIN[1]); i = await until(s, x => x.state !== 'play'); await until(s, x => x.fleeing === 2, 5000);
   const fpB = (await until(s, x => x.fp5, 9000)).fp5;
   if (fpA !== fpB) console.log('A', fpA, '\nB', fpB);
-  ok('same pull twice ends the same way (settled positions identical)', i.state === 'won' && fpA && fpA === fpB, { state: i.state, same: fpA === fpB, len: fpA.length }); await s.pg.tap('#again'); await s.pg.waitForTimeout(200);
+  ok('same pull twice ends the same way (settled positions identical)', i.state === 'won' && fpA && fpA === fpB, { state: i.state, same: fpA === fpB, len: fpA.length }); await s.pg.evaluate(() => __AT.go(0)); await s.pg.waitForTimeout(100);
 
   // fail path: three arrows into the grass
   for (let k = 0; k < 3; k++) { await until(s, x => x.canFire, 5000); await drag(s, DUD[0], DUD[1]); i = await info(s); if (k === 0) { const g = await until(s, x => x.ghost > 0, 3000); ok('last flight path stays as a faint trail', g.ghost > 2, { points: g.ghost }); await s.pg.screenshot({ path: path.join(QA, 'ghost-trail-390x844.png') }); } }
@@ -105,12 +108,36 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
   ok('three misses → lose, wolves still up, replay offered', lost.state === 'lost' && lost.wolvesUp === 2 && lost.again, { state: lost.state, wolvesUp: lost.wolvesUp, again: lost.again });
   await s.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 200, y: 400 }] }); await s.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await s.pg.waitForTimeout(200); i = await info(s);
-  ok('after losing, one tap anywhere restarts', i.state === 'play' && i.arrowsLeft === 3, { state: i.state });
+  ok('after losing, one tap anywhere restarts the same level', i.state === 'play' && i.arrowsLeft === 3 && i.level === 0, { state: i.state, level: i.level });
 
   // win with the 2nd arrow after a miss
   await drag(s, DUD[0], DUD[1]); await until(s, x => x.canFire, 5000); await drag(s, WIN[0], WIN[1]); i = await until(s, x => x.state !== 'play');
   ok('miss then hit → win on the 2nd arrow', i.state === 'won' && i.shots === 2, { state: i.state, shots: i.shots });
   ok('page never scrolled during drags (sheet guard)', i.scrollY === 120 || i.scrollY === 0, { scrollY: i.scrollY });
+
+  // all levels in a row: solver's aim by touch, then the next button
+  await s.pg.evaluate(() => __AT.go(0)); await s.pg.waitForTimeout(150);
+  for (let L = 0; L < SOL.length; L++) {
+    let q = await info(s); const startOk = q.level === L && q.state === 'play' && q.arrowsLeft === 3 && q.wolvesUp === q.wolves;
+    const mute = await s.pg.evaluate(() => { const r = document.getElementById('mute').getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; });
+    const fits = inside(q.tower, 390, 844) && !overlap(q.hud, q.tower) && !overlap(mute, q.tower);
+    await s.pg.waitForTimeout(250); await s.pg.screenshot({ path: path.join(QA, `level${L + 1}-390x844.png`) });
+    for (const sh of SOL[L].shots) { await until(s, x => x.canFire && (x.shots === 0 || x.asleep), 9000); await drag(s, sh[0], sh[1]); }
+    q = await until(s, x => x.state !== 'play', 15000);
+    ok(`level ${L + 1}: fits the screen, solver aim wins by touch`, startOk && fits && q.state === 'won', { startOk, fits, state: q.state, shots: q.shots, wolves: q.wolves, slowmo: q.slowmo });
+    q = await until(s, x => x.again, 5000);
+    if (L === SOL.length - 1) await s.pg.screenshot({ path: path.join(QA, 'last-level-win-390x844.png') });
+    const wantNext = L < SOL.length - 1;
+    await s.pg.tap('#again'); await s.pg.waitForTimeout(200); const z = await info(s);
+    ok(wantNext ? `level ${L + 1} → next button opens level ${L + 2}` : 'last level → replay button goes back to level 1', q.next === wantNext && z.level === (L + 1) % SOL.length && z.state === 'play', { next: q.next, level: z.level });
+  }
+  await s.pg.evaluate(() => __AT.go(2)); await s.pg.waitForTimeout(100);
+  await drag(s, DUD[0], DUD[1]); await until(s, x => x.canFire, 5000); await s.pg.evaluate(() => 0);
+  { // progress survives a reload: finish level 3 → reload → level 4
+    await drag(s, SOL[2].shots[0][0], SOL[2].shots[0][1]); let q = await until(s, x => x.state !== 'play', 15000); await until(s, x => x.again, 5000); await s.pg.tap('#again'); await s.pg.waitForTimeout(150);
+    await s.pg.reload(); await s.pg.waitForFunction(() => window.__AT); const z = await info(s);
+    ok('progress is saved: reload comes back on the next level', q.state === 'won' && z.level === 3, { won: q.state, level: z.level, demo: z.demoActive });
+  }
 
   // mute persists
   await s.pg.tap('#mute'); const m1 = (await info(s)).muted; await s.pg.reload(); await s.pg.waitForFunction(() => window.__AT); const m2 = (await info(s)).muted;
@@ -118,12 +145,12 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
   await s.ctx.close();
 
   // 3. landscape phone, touch
-  s = await open(browser, 844, 390); await drag(s, WIN[0], WIN[1], { x0: 500, y0: 150 }); i = await until(s, x => x.state !== 'play');
+  s = await open(browser, 844, 390); await drag(s, WIN[0], WIN[1], { x0: 500, y0: 100 }); i = await until(s, x => x.state !== 'play');
   ok('landscape 844x390 touch: win', i.state === 'won', { state: i.state, fpSame: i.fp === fpWin });
   await s.pg.waitForTimeout(300); await s.pg.screenshot({ path: path.join(QA, 'win-844x390.png') }); await s.ctx.close();
 
   // 4. small phone, touch
-  s = await open(browser, 320, 568); await drag(s, WIN[0], WIN[1], { x0: 200, y0: 250 }); i = await until(s, x => x.state !== 'play');
+  s = await open(browser, 320, 568); await drag(s, WIN[0], WIN[1], { x0: 200, y0: 200 }); i = await until(s, x => x.state !== 'play');
   ok('small phone 320x568 touch: win', i.state === 'won', { state: i.state }); await s.ctx.close();
 
   // 5. desktop mouse
@@ -132,7 +159,7 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
   i = await until(s, x => x.state !== 'play'); ok('desktop mouse drag: win', i.state === 'won', { state: i.state }); await s.ctx.close();
 
   // 6. real phone pixel size 1170x2532 @3x
-  { const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, hasTouch: true, isMobile: true }); const pg = await ctx.newPage(); await pg.goto(URL); await pg.waitForTimeout(400); await pg.screenshot({ path: path.join(QA, 'first-1170x2532.png') }); await ctx.close(); ok('first screen at 1170x2532 saved', true); }
+  { const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, hasTouch: true, isMobile: true }); const pg = await ctx.newPage(); await pg.goto(URL); await pg.waitForFunction(() => window.__AT); await pg.evaluate(() => __AT.go(0)); await pg.waitForTimeout(400); await pg.screenshot({ path: path.join(QA, 'first-1170x2532.png') }); await ctx.close(); ok('first screen at 1170x2532 saved', true); }
 
   ok('console errors 0 / page errors 0', errors.length === 0, errors.slice(0, 5));
   ok('external requests 0', external.length === 0, external.slice(0, 5));

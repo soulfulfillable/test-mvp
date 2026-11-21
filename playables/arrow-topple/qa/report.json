@@ -1,132 +1,132 @@
 {
- "when": "2026-11-21T04:19:34.680Z",
- "pass": 38,
- "total": 38,
+ "when": "2026-11-21T04:33:32.938Z",
+ "pass": 49,
+ "total": 49,
  "results": [
   {
    "name": "size 320x568: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.41,
-    "archerH": 0.19,
-    "wolfPx": 53
+    "towerH": 0.3,
+    "archerH": 0.14,
+    "wolfPx": 39
    }
   },
   {
    "name": "size 360x640: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.41,
-    "archerH": 0.19,
-    "wolfPx": 59
+    "towerH": 0.3,
+    "archerH": 0.14,
+    "wolfPx": 44
    }
   },
   {
    "name": "size 375x667: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.41,
-    "archerH": 0.19,
-    "wolfPx": 62
+    "towerH": 0.3,
+    "archerH": 0.14,
+    "wolfPx": 46
    }
   },
   {
    "name": "size 390x844: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.33,
-    "archerH": 0.16,
-    "wolfPx": 64
+    "towerH": 0.25,
+    "archerH": 0.12,
+    "wolfPx": 48
    }
   },
   {
    "name": "size 393x852: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.33,
-    "archerH": 0.15,
-    "wolfPx": 65
+    "towerH": 0.25,
+    "archerH": 0.12,
+    "wolfPx": 48
    }
   },
   {
    "name": "size 414x896: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.33,
-    "archerH": 0.16,
-    "wolfPx": 68
+    "towerH": 0.25,
+    "archerH": 0.12,
+    "wolfPx": 51
    }
   },
   {
    "name": "size 430x932: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.33,
-    "archerH": 0.15,
-    "wolfPx": 71
+    "towerH": 0.25,
+    "archerH": 0.12,
+    "wolfPx": 53
    }
   },
   {
    "name": "size 768x1024: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.54,
-    "archerH": 0.25,
-    "wolfPx": 126
+    "towerH": 0.4,
+    "archerH": 0.19,
+    "wolfPx": 94
    }
   },
   {
    "name": "size 820x1180: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.5,
-    "archerH": 0.23,
-    "wolfPx": 135
+    "towerH": 0.37,
+    "archerH": 0.17,
+    "wolfPx": 100
    }
   },
   {
    "name": "size 1024x768: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.66,
-    "archerH": 0.31,
-    "wolfPx": 115
+    "towerH": 0.55,
+    "archerH": 0.26,
+    "wolfPx": 96
    }
   },
   {
    "name": "size 844x390: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.66,
-    "archerH": 0.31,
-    "wolfPx": 59
+    "towerH": 0.55,
+    "archerH": 0.26,
+    "wolfPx": 49
    }
   },
   {
    "name": "size 667x375: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.66,
-    "archerH": 0.31,
-    "wolfPx": 56
+    "towerH": 0.55,
+    "archerH": 0.26,
+    "wolfPx": 47
    }
   },
   {
    "name": "size 1280x720: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.66,
-    "archerH": 0.31,
-    "wolfPx": 108
+    "towerH": 0.55,
+    "archerH": 0.26,
+    "wolfPx": 90
    }
   },
   {
    "name": "size 1920x1080: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.66,
-    "archerH": 0.31,
-    "wolfPx": 162
+    "towerH": 0.55,
+    "archerH": 0.26,
+    "wolfPx": 135
    }
   },
   {
@@ -150,7 +150,7 @@
    "name": "dragging back shows the dotted path",
    "pass": true,
    "detail": {
-    "dots": 15
+    "dots": 8
    }
   },
   {
@@ -168,7 +168,7 @@
    "detail": {
     "slowmo": 1,
     "sawSlow": true,
-    "maxZoom": 1.158
+    "maxZoom": 1.157
    }
   },
   {
@@ -183,19 +183,20 @@
    "pass": true,
    "detail": {
     "frames": 7,
-    "ms": 4077
+    "ms": 3014
    }
   },
   {
-   "name": "wolves run off and the replay button appears",
+   "name": "wolves run off and the next-level button appears",
    "pass": true,
    "detail": {
     "again": true,
+    "next": true,
     "fleeing": 2
    }
   },
   {
-   "name": "replay button resets the round",
+   "name": "restart resets the round",
    "pass": true,
    "detail": {
     "state": "play",
@@ -208,7 +209,7 @@
    "detail": {
     "state": "won",
     "same": true,
-    "len": 244
+    "len": 222
    }
   },
   {
@@ -235,10 +236,11 @@
    }
   },
   {
-   "name": "after losing, one tap anywhere restarts",
+   "name": "after losing, one tap anywhere restarts the same level",
    "pass": true,
    "detail": {
-    "state": "play"
+    "state": "play",
+    "level": 0
    }
   },
   {
@@ -254,6 +256,115 @@
    "pass": true,
    "detail": {
     "scrollY": 120
+   }
+  },
+  {
+   "name": "level 1: fits the screen, solver aim wins by touch",
+   "pass": true,
+   "detail": {
+    "startOk": true,
+    "fits": true,
+    "state": "won",
+    "shots": 1,
+    "wolves": 2,
+    "slowmo": 4
+   }
+  },
+  {
+   "name": "level 1 → next button opens level 2",
+   "pass": true,
+   "detail": {
+    "next": true,
+    "level": 1
+   }
+  },
+  {
+   "name": "level 2: fits the screen, solver aim wins by touch",
+   "pass": true,
+   "detail": {
+    "startOk": true,
+    "fits": true,
+    "state": "won",
+    "shots": 1,
+    "wolves": 3,
+    "slowmo": 5
+   }
+  },
+  {
+   "name": "level 2 → next button opens level 3",
+   "pass": true,
+   "detail": {
+    "next": true,
+    "level": 2
+   }
+  },
+  {
+   "name": "level 3: fits the screen, solver aim wins by touch",
+   "pass": true,
+   "detail": {
+    "startOk": true,
+    "fits": true,
+    "state": "won",
+    "shots": 1,
+    "wolves": 2,
+    "slowmo": 6
+   }
+  },
+  {
+   "name": "level 3 → next button opens level 4",
+   "pass": true,
+   "detail": {
+    "next": true,
+    "level": 3
+   }
+  },
+  {
+   "name": "level 4: fits the screen, solver aim wins by touch",
+   "pass": true,
+   "detail": {
+    "startOk": true,
+    "fits": true,
+    "state": "won",
+    "shots": 1,
+    "wolves": 2,
+    "slowmo": 7
+   }
+  },
+  {
+   "name": "level 4 → next button opens level 5",
+   "pass": true,
+   "detail": {
+    "next": true,
+    "level": 4
+   }
+  },
+  {
+   "name": "level 5: fits the screen, solver aim wins by touch",
+   "pass": true,
+   "detail": {
+    "startOk": true,
+    "fits": true,
+    "state": "won",
+    "shots": 1,
+    "wolves": 3,
+    "slowmo": 8
+   }
+  },
+  {
+   "name": "last level → replay button goes back to level 1",
+   "pass": true,
+   "detail": {
+    "next": false,
+    "level": 0
+   }
+  },
+  {
+   "name": "progress is saved: reload comes back on the next level",
+   "pass": true,
+   "detail": {
+    "won": "won",
+    "level": 3,
+    "demo": false
    }
   },
   {
