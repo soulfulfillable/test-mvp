@@ -92,7 +92,7 @@ addEventListener('keydown', (e) => { if (G.state === 'finish' && G.finishT > 1.2
 
 // ---------- load heroes (pup = default, kitty, kid) ----------
 let P;
-let heroName = 'kid';
+let heroName = 'dog';
 try { const h = localStorage.getItem('escape3d.hero'); if (RIGS[h]) heroName = h; } catch (e) { /* */ }
 if (RIGS[params.get('hero')]) heroName = params.get('hero');
 queueMicrotask(() => { // after the whole module has run (camera state etc. are declared below)
