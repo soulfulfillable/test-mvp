@@ -35,8 +35,8 @@
   function resize() {
     var app = document.getElementById('app'); W = app.clientWidth; H = app.clientHeight; DPR = Math.min(window.devicePixelRatio || 1, 2);
     cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
-    S = Math.min(W / 14.2, H / 9.6); OX = (W - 14.2 * S) / 2 - 0.3 * S;
-    var spare = H - 9.6 * S; GY = spare * 0.56 + 8.0 * S;      // ground line; tall phones get sky above and a meadow below
+    S = Math.min(W / 19.0, H / 11.5); OX = (W - 19.0 * S) / 2 - 0.3 * S;
+    var spare = H - 11.5 * S; GY = spare * 0.56 + 9.9 * S;      // ground line; tall phones get sky above and a meadow below
     fgScale = 1;
   }
   function wx(x) { return OX + x * S; } function wy(y) { return GY - y * S; }
@@ -67,7 +67,7 @@
   // ---------- scenery ----------
   function scenery() {
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.fillStyle = SKY; ctx.fillRect(0, 0, W, H);
-    var sx = Math.max(wx(0.3), 0) + S * 1.5, sy = Math.max(S * 1.3, GY - S * 9.6);
+    var sx = Math.max(wx(0.3), 0) + S * 1.5, sy = Math.max(S * 1.3, GY - S * 9.4);
     ctx.beginPath(); ctx.arc(sx, sy, S * 0.62, 0, 6.2832); ctx.fillStyle = CREAM; ctx.fill();   // sun = the light, top-left
     for (var i = 0; i < 4; i++) {
       var cxp = ((i * 0.31 + T * 0.004 * (1 + i * 0.3)) % 1.3 - 0.15) * W, cyp = GY - S * (5.3 + (i % 2) * 1.2 + (i > 1 ? Math.max(0, GY / S - 8) * 0.6 : 0)), r = S * (0.42 + (i % 3) * 0.1);
@@ -282,7 +282,7 @@
   }
 
   // ---------- demo: a hand pulls back once, shows the dotted path, lets go (no shot) ----------
-  var DEMO = { a: 0.75, p: 0.6 };
+  var DEMO = { a: 0.42, p: 0.9 };
   function demoStep(dt) {
     if (level !== 0 || sim.shots > 0 || aim || sim.state !== 'play') { demo.active = false; return; }
     demo.t += dt;
@@ -295,7 +295,7 @@
   }
   function demoDraw() {
     if (!demo.active) return;
-    var mp = maxPull(), sx0 = wx(6.4), sy0 = wy(2.0), k = demo.k, d = DEMO.p * k * mp;
+    var mp = maxPull(), sx0 = wx(8.5), sy0 = wy(1.2), k = demo.k, d = DEMO.p * k * mp;
     var hx = sx0 - Math.cos(DEMO.a) * d, hy = sy0 + Math.sin(DEMO.a) * d;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.globalAlpha = demo.alpha * 0.9; ctx.strokeStyle = CREAM; ctx.lineWidth = Math.max(3, S * 0.09); ctx.lineCap = 'round'; ctx.setLineDash([1, S * 0.22]);
     ctx.beginPath(); ctx.moveTo(sx0, sy0); ctx.lineTo(hx, hy); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
@@ -308,13 +308,13 @@
     var real = Math.min(0.05, (now - (frame.last || now)) / 1000); frame.last = now; T += real;
     if (hitstop > 0) hitstop -= real;
     else {
-      if (slowT > 0) slowT -= real; timeScale = slowT > 0 ? 0.2 : 1;
+      if (slowT > 0) slowT -= real; timeScale = slowT > 0 ? 0.2 : (sim.flying && sim.flying.mode === 'fly' && !reduced ? 0.5 : 1);
       acc += real * timeScale; var n = 0;
       while (acc >= C.DT && n < 12) { sim.step(); steps++; acc -= C.DT; n++; drain(); if (fireStep >= 0 && steps - fireStep === 600) counts.fp5 = sim.fingerprint(); if (hitstop > 0) break; }
       if (n === 12) acc = 0;
     }
     var fly = sim.flying && sim.flying.mode === 'fly' && !sim.flying.gone, busy = sim.shots > 0 && !drag && (sim.flying || !sim.asleep()) && !(endT > 1.2);
-    var zt = busy && !reduced ? Math.max(1.12, Math.min(1.6, 40 / S)) * (slowT > 0 ? 1.1 : 1) : 1; zoom += (zt - zoom) * Math.min(1, real * (zt > zoom ? 3.5 : 3));
+    var zt = busy && !reduced ? Math.max(1.1, Math.min(1.3, 30 / S)) * (slowT > 0 ? 1.1 : 1) : 1; zoom += (zt - zoom) * Math.min(1, real * (zt > zoom ? 3.5 : 3));
     var cxT = fly ? Math.max(C.ORIGIN.x + 1, Math.min(sim.focus, sim.flying.body.getPosition().x + 1.2)) : (busy ? sim.focus : camX); camX += (cxT - camX) * Math.min(1, real * 6);
     stringT += real; recoil -= real * 4; shake *= Math.pow(0.001, real); if (shake < 0.2) shake = 0;
     for (var i = 0; i < sheep.length; i++) if (sheep[i].j > 0) { sheep[i].j += real * 2.2; if (sheep[i].j >= 1) sheep[i].j = 0; }
@@ -356,7 +356,7 @@
       else if (e.type === 'topple') { slowT = 0.42; counts.slowmo++; }
       else if (e.type === 'wolfdown') { sYelp(); buzz(30); puff(e.x, 0.1, 7, CREAM, 1.6); for (j = 0; j < sheep.length; j++) sheep[j].j = 0.01 + j * 0.0001; }
       else if (e.type === 'flee') { var wf = null; for (j = 0; j < sim.wolves.length; j++) if (sim.wolves[j].id === e.id) wf = sim.wolves[j]; fleeing.push({ x: e.x, t0: T, plunger: wf && wf.plunger > 0 }); }
-      else if (e.type === 'basketdown') { sheepRun = { i: 2, t0: T + 0.5, to: Math.max(4.6, Math.min(13.6, e.x - 0.3)) }; }
+      else if (e.type === 'basketdown') { sheepRun = { i: 2, t0: T + 0.5, to: Math.max(4.6, Math.min(18.4, e.x - 0.3)) }; }
       else if (e.type === 'win') { endT = 0; sWin(); confetti(); buzz(60); }
       else if (e.type === 'lose') { endT = 0; tone('triangle', 300, 150, 0.4, 0.12); }
     }

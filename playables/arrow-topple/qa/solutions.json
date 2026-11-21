@@ -1,33 +1,33 @@
 [
  {
   "level": 1,
-  "oneArrowPct": 17.3,
-  "anyWolfPct": 32.1,
-  "random3": "98/120",
+  "oneArrowPct": 9,
+  "anyWolfPct": 16.3,
+  "random3": "86/120",
   "shots": [
    [
-    0.2792526803190927,
-    0.9
+    0.41887902047863906,
+    0.85
    ]
   ]
  },
  {
   "level": 2,
-  "oneArrowPct": 23.5,
-  "anyWolfPct": 23.7,
-  "random3": "120/120",
+  "oneArrowPct": 12.7,
+  "anyWolfPct": 13.9,
+  "random3": "111/120",
   "shots": [
    [
-    0.3141592653589793,
+    0.4886921905584123,
     0.9
    ]
   ]
  },
  {
   "level": 3,
-  "oneArrowPct": 17.8,
-  "anyWolfPct": 21.7,
-  "random3": "73/120",
+  "oneArrowPct": 8.3,
+  "anyWolfPct": 10.5,
+  "random3": "72/120",
   "shots": [
    [
     0.4537856055185257,
@@ -37,25 +37,25 @@
  },
  {
   "level": 4,
-  "oneArrowPct": 7.1,
-  "anyWolfPct": 33.4,
-  "random3": "74/120",
+  "oneArrowPct": 1.7,
+  "anyWolfPct": 17.6,
+  "random3": "41/120",
   "shots": [
    [
     0.41887902047863906,
-    0.9
+    1
    ]
   ]
  },
  {
   "level": 5,
-  "oneArrowPct": 13.2,
-  "anyWolfPct": 23.6,
-  "random3": "90/120",
+  "oneArrowPct": 4,
+  "anyWolfPct": 10.3,
+  "random3": "61/120",
   "shots": [
    [
-    0.5934119456780721,
-    0.75
+    0.5235987755982988,
+    0.9
    ]
   ]
  }

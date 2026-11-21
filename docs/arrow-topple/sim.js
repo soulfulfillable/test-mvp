@@ -6,10 +6,10 @@
 })(typeof self !== 'undefined' ? self : this, function (planck) {
   var Vec2 = planck.Vec2;
   var C = {
-    DT: 1 / 120, G: -10, VMIN: 4.5, VMAX: 13.5,
+    DT: 1 / 120, G: -10, VMIN: 4.5, VMAX: 15.5,
     AMIN: -0.15, AMAX: 1.45,          // aim angle limits (rad)
     ORIGIN: { x: 1.9, y: 1.6 },      // where the arrow leaves the bow
-    ARROWS: 3, VIEW: { x0: 0.3, x1: 14.5, y0: -1.6, y1: 8.0 }
+    ARROWS: 3, VIEW: { x0: 0.3, x1: 19.3, y0: -1.6, y1: 8.0 }
   };
   // Levels are written as stacks from the ground up, so pieces always sit exactly on each other.
   // Every tower stands on one stone that is narrower than the deck above it → it topples instead of sliding.
@@ -29,15 +29,15 @@
     L = function (h, xs, w) { return { k: 'logs', h: h, xs: xs, w: w }; }, Wf = function (dx) { return { k: 'wolf', dx: dx }; }, B = function (dx) { return { k: 'basket', dx: dx }; };
   var LEVELS = [
     // 1 — one creaky tower, two wolves
-    { focus: 11.2, items: stack([], 'a', 11.2, [S_(1.1, 0.6), D(2.5), L(1.5, [-0.95, 0.95]), D(2.3), Wf(0.05), L(1.3, [-0.85, 0.85], 0.28), D(2.1), Wf(-0.3), B(0.52)]) },
+    { focus: 15.7, items: stack([], 'a', 15.7, [S_(1.7, 0.6), D(2.5), L(1.5, [-0.95, 0.95]), D(2.3), Wf(0.05), L(1.3, [-0.85, 0.85], 0.28), D(2.1), Wf(-0.3), B(0.52)]) },
     // 2 — a tall pole: three wolves balancing on single posts
-    { focus: 12.2, items: stack([], 'a', 12.2, [S_(1.0, 0.6), L(1.6, [0], 0.36), D(2.0), Wf(-0.55), Wf(0.55), L(1.3, [0], 0.32), D(1.6), Wf(-0.2), B(0.42)]) },
+    { focus: 16.7, items: stack([], 'a', 16.7, [S_(1.0, 0.6), L(1.6, [0], 0.5), D(2.0), Wf(-0.55), Wf(0.55), L(1.3, [0], 0.32), D(1.6), Wf(-0.2), B(0.42)]) },
     // 3 — a stone wall in the way: the arrow has to go over it
-    { focus: 11.6, items: stack(stack([], 'w', 8.0, [S_(0.8, 0.8), S_(0.74, 0.8), S_(0.7, 0.8)]), 'a', 12.9, [S_(1.1, 0.6), D(2.3), L(1.2, [-0.85, 0.85]), D(2.2), Wf(-0.45), Wf(0.45), B(0)]) },
+    { focus: 16.1, items: stack(stack([], 'w', 11.0, [S_(0.8, 0.8), S_(0.74, 0.8), S_(0.7, 0.8)]), 'a', 17.4, [S_(1.7, 0.6), D(2.3), L(1.2, [-0.85, 0.85]), D(2.2), Wf(-0.45), Wf(0.45), B(0)]) },
     // 4 — two towers, one low and near, one tall and far
-    { focus: 12.2, items: stack(stack([], 'a', 10.5, [S_(0.9, 0.5), D(1.7), L(1.1, [-0.6, 0.6]), D(1.7), Wf(0)]), 'b', 13.0, [S_(1.0, 0.6), D(1.9), L(1.4, [-0.7, 0.7]), D(1.9), L(1.2, [-0.62, 0.62], 0.28), D(1.7), Wf(-0.25), B(0.45)]) },
+    { focus: 16.7, items: stack(stack([], 'a', 15.0, [S_(1.3, 0.5), D(1.7), L(1.1, [-0.6, 0.6]), D(1.7), Wf(0)]), 'b', 17.5, [S_(1.5, 0.6), D(1.9), L(1.4, [-0.7, 0.7]), D(1.9), L(1.2, [-0.62, 0.62], 0.28), D(1.7), Wf(-0.25), B(0.45)]) },
     // 5 — the big one: wide base, three wolves on two floors
-    { focus: 12.4, items: stack([], 'a', 12.4, [S_(1.4, 0.6), D(3.3), L(1.3, [-1.35, 0, 1.35]), D(3.2), Wf(-0.68), Wf(0.68), L(1.2, [-0.75, 0.75], 0.28), D(2.0), Wf(-0.3), B(0.5)]) }
+    { focus: 16.9, items: stack([], 'a', 16.9, [S_(2.3, 0.6), D(3.3), L(1.3, [-1.35, 0, 1.35]), D(3.2), Wf(-0.68), Wf(0.68), L(1.2, [-0.75, 0.75], 0.28), D(2.0), Wf(-0.3), B(0.5)]) }
   ];
   var MAT = {
     stone: { d: 2.6, f: 0.8, r: 0.02 }, plank: { d: 0.7, f: 0.6, r: 0.05 }, log: { d: 0.7, f: 0.6, r: 0.05 },
@@ -86,8 +86,8 @@
     if (!this.canFire()) return false;
     var v = this.velocity(angle, power);
     var b = this.world.createBody({ type: 'dynamic', bullet: true, position: Vec2(C.ORIGIN.x, C.ORIGIN.y), angle: v.a, angularDamping: 0.6 });
-    b.createFixture(planck.Box(0.45, 0.045), { density: 9, friction: 0.5, restitution: 0.05 });
-    var tip = b.createFixture(planck.Circle(Vec2(0.5, 0), 0.13), { density: 9, friction: 0.9, restitution: 0.0 });
+    b.createFixture(planck.Box(0.45, 0.045), { density: 5, friction: 0.5, restitution: 0.05 });
+    var tip = b.createFixture(planck.Circle(Vec2(0.5, 0), 0.13), { density: 5, friction: 0.9, restitution: 0.0 });
     b.setLinearVelocity(Vec2(v.x, v.y));
     var ar = { id: 'arrow' + this.shots, kind: 'arrow', body: b, tip: tip, mode: 'fly', hitT: -1, path: [], stuckTo: null, gone: false };
     b.setUserData(ar); this.arrows.push(ar); this.flying = ar; this.arrowsLeft--; this.shots++;
@@ -136,7 +136,7 @@
     this._pending.length = 0;
     if (fl) {
       p = fl.body.getPosition();
-      var out = p.x > 26 || p.x < -8 || p.y < -3;
+      var out = p.x > 32 || p.x < -8 || p.y < -3;
       if (out && !fl.gone) { fl.gone = true; w.destroyBody(fl.body); this.events.push({ type: 'miss' }); }
       if (fl.gone || (fl.mode !== 'fly' && this.n - fl.hitN > 54)) this.flying = null;
     }
@@ -181,7 +181,7 @@
   // Dotted preview: pure ballistics from the bow, stops at the first block or the ground.
   Sim.prototype.preview = function (angle, power, maxT) {
     var v = this.velocity(angle, power), pts = [], t, x, y, i, it, p;
-    for (t = 0; t <= (maxT || 2.2); t += 0.05) {
+    for (t = 0; t <= (maxT || 3.2); t += 0.05) {
       x = C.ORIGIN.x + v.x * t; y = C.ORIGIN.y + v.y * t + 0.5 * C.G * t * t;
       if (y < 0.05) break;
       pts.push(x, y);

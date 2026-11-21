@@ -74,14 +74,14 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
   ok('dragging back shows the dotted path', mid.aiming && mid.preview >= 5, { dots: mid.preview });
   // collapse film: screenshots as fast as they come
   const frames = []; const t0 = Date.now(); let sawSlow = false, maxZoom = 1;
-  for (let k = 0; k < 26; k++) { const f = path.join(QA, `_f${String(k).padStart(2, '0')}.png`); await s.pg.screenshot({ path: f }); frames.push(f); const q = await info(s); sawSlow = sawSlow || q.slowNow; maxZoom = Math.max(maxZoom, q.zoom); if (q.state === 'won' && k > 14) break; }
+  for (let k = 0; k < 70; k++) { const f = path.join(QA, `_f${String(k).padStart(2, '0')}.png`); await s.pg.screenshot({ path: f }); frames.push(f); const q = await info(s); sawSlow = sawSlow || q.slowNow; maxZoom = Math.max(maxZoom, q.zoom); if (q.state === 'won') break; }
   i = await until(s, x => x.state !== 'play');
   ok('one good arrow topples the tower → win', i.state === 'won' && i.shots === 1, { state: i.state, shots: i.shots, arrowsLeft: i.arrowsLeft });
   ok('slow-motion + zoom fired exactly once at the topple', i.slowmo === 1 && sawSlow && maxZoom > 1.05, { slowmo: i.slowmo, sawSlow, maxZoom: +maxZoom.toFixed(3) });
   ok('arrow stuck where it hit', i.sticks >= 1, { sticks: i.sticks });
   const fpWin = i.fp;
   try {
-    const pick = frames.filter((_, k) => k % Math.ceil(frames.length / 8) === 0).slice(0, 8);
+    const pick = Array.from({ length: 8 }, (_, k) => frames[Math.round(k * (frames.length - 1) / 7)]);
     execSync(`ffmpeg -y -loglevel error ${pick.map(f => `-i ${f}`).join(' ')} -filter_complex "${pick.map((_, k) => `[${k}:v]scale=390:-1[v${k}]`).join(';')};${pick.map((_, k) => `[v${k}]`).join('')}hstack=inputs=${pick.length}" ${path.join(QA, 'topple-strip.png')}`);
     ok('topple film strip written', true, { frames: pick.length, ms: Date.now() - t0 });
   } catch (e) { ok('topple film strip written', false, String(e.message).slice(0, 200)); }

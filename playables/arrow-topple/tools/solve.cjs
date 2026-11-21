@@ -31,7 +31,13 @@ LEVELS.forEach((lv, li) => {
   console.log(`3 random tower-touching arrows win ${w3}/${N}`);
   const nb = (set, g) => set.filter(o => Math.abs(o.deg - g.deg) <= 4 && Math.abs(o.p - g.p) <= 0.1001).length;
   let sol = null;
-  if (win.length) { const b = win.map(g => ({ g, n: nb(win, g) })).sort((x, y) => y.n - x.n)[0]; sol = { shots: [[R(b.g.deg), +b.g.p.toFixed(2)]], neighbours: b.n }; }
+  if (win.length) {   // prefer an aim that still wins when the finger is slightly off (±0.5°, ±0.01 power)
+    const cand = win.map(g => ({ g, n: nb(win, g) })).sort((x, y) => y.n - x.n); let b = null, tried = 0;
+    for (const c of cand.slice(0, 40)) { tried++; let okAll = true;
+      for (const da of [-0.5, 0, 0.5]) for (const dp of [-0.01, 0, 0.01]) if (okAll && run(li, [[R(c.g.deg + da), Math.min(1, c.g.p + dp)]]).state !== 'won') okAll = false;
+      if (okAll) { b = c; break; } }
+    console.log(b ? `robust aim found after ${tried} candidate(s)` : 'NO jitter-proof aim — using the best neighbourhood'); if (!b) b = cand[0];
+    sol = { shots: [[R(b.g.deg), +b.g.p.toFixed(2)]], neighbours: b.n }; }
   else { const firsts = one.map(g => ({ g, n: nb(one, g) })).sort((x, y) => y.g.down - x.g.down || y.n - x.n).slice(0, 6);
     outer: for (const f of firsts) for (const g2 of tower) { const sh = [[R(f.g.deg), f.g.p], [R(g2.deg), g2.p]]; if (run(li, sh).state === 'won') { sol = { shots: sh.map(x => [x[0], +x[1].toFixed(2)]) }; break outer; } } }
   console.log('solution', sol && JSON.stringify(sol.shots.map(x => [Math.round(x[0] * 180 / Math.PI) + '°', x[1]])), sol && sol.neighbours ? 'neighbours ' + sol.neighbours : '');

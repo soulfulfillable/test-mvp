@@ -1,5 +1,5 @@
 {
- "when": "2026-11-21T12:10:40.929Z",
+ "when": "2026-11-21T13:54:47.576Z",
  "pass": 49,
  "total": 49,
  "results": [
@@ -7,126 +7,126 @@
    "name": "size 320x568: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.21,
-    "archerH": 0.1,
-    "wolfPx": 27
+    "towerH": 0.16,
+    "archerH": 0.07,
+    "wolfPx": 20
    }
   },
   {
    "name": "size 360x640: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.21,
-    "archerH": 0.1,
-    "wolfPx": 30
+    "towerH": 0.16,
+    "archerH": 0.07,
+    "wolfPx": 23
    }
   },
   {
    "name": "size 375x667: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.21,
-    "archerH": 0.1,
-    "wolfPx": 32
+    "towerH": 0.16,
+    "archerH": 0.07,
+    "wolfPx": 24
    }
   },
   {
    "name": "size 390x844: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.17,
-    "archerH": 0.08,
-    "wolfPx": 33
+    "towerH": 0.13,
+    "archerH": 0.06,
+    "wolfPx": 25
    }
   },
   {
    "name": "size 393x852: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.17,
-    "archerH": 0.08,
-    "wolfPx": 33
+    "towerH": 0.13,
+    "archerH": 0.06,
+    "wolfPx": 25
    }
   },
   {
    "name": "size 414x896: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.17,
-    "archerH": 0.08,
-    "wolfPx": 35
+    "towerH": 0.13,
+    "archerH": 0.06,
+    "wolfPx": 26
    }
   },
   {
    "name": "size 430x932: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.17,
-    "archerH": 0.08,
-    "wolfPx": 36
+    "towerH": 0.13,
+    "archerH": 0.06,
+    "wolfPx": 27
    }
   },
   {
    "name": "size 768x1024: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.28,
-    "archerH": 0.13,
-    "wolfPx": 65
+    "towerH": 0.21,
+    "archerH": 0.1,
+    "wolfPx": 49
    }
   },
   {
    "name": "size 820x1180: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.26,
-    "archerH": 0.12,
-    "wolfPx": 69
+    "towerH": 0.19,
+    "archerH": 0.09,
+    "wolfPx": 52
    }
   },
   {
    "name": "size 1024x768: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.5,
-    "archerH": 0.23,
-    "wolfPx": 87
+    "towerH": 0.37,
+    "archerH": 0.17,
+    "wolfPx": 65
    }
   },
   {
    "name": "size 844x390: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.55,
-    "archerH": 0.26,
-    "wolfPx": 49
+    "towerH": 0.46,
+    "archerH": 0.21,
+    "wolfPx": 41
    }
   },
   {
    "name": "size 667x375: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.55,
-    "archerH": 0.26,
-    "wolfPx": 47
+    "towerH": 0.46,
+    "archerH": 0.21,
+    "wolfPx": 39
    }
   },
   {
    "name": "size 1280x720: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.55,
-    "archerH": 0.26,
-    "wolfPx": 90
+    "towerH": 0.46,
+    "archerH": 0.21,
+    "wolfPx": 75
    }
   },
   {
    "name": "size 1920x1080: first frame",
    "pass": true,
    "detail": {
-    "towerH": 0.55,
-    "archerH": 0.26,
-    "wolfPx": 135
+    "towerH": 0.46,
+    "archerH": 0.21,
+    "wolfPx": 113
    }
   },
   {
@@ -150,7 +150,7 @@
    "name": "dragging back shows the dotted path",
    "pass": true,
    "detail": {
-    "dots": 15
+    "dots": 21
    }
   },
   {
@@ -168,7 +168,7 @@
    "detail": {
     "slowmo": 1,
     "sawSlow": true,
-    "maxZoom": 1.557
+    "maxZoom": 1.401
    }
   },
   {
@@ -182,8 +182,8 @@
    "name": "topple film strip written",
    "pass": true,
    "detail": {
-    "frames": 7,
-    "ms": 3313
+    "frames": 8,
+    "ms": 5022
    }
   },
   {
@@ -209,7 +209,7 @@
    "detail": {
     "state": "won",
     "same": true,
-    "len": 227
+    "len": 228
    }
   },
   {
@@ -380,7 +380,7 @@
    "pass": true,
    "detail": {
     "state": "won",
-    "fpSame": true
+    "fpSame": false
    }
   },
   {
