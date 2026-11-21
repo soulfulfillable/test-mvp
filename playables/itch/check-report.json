@@ -1,0 +1,66 @@
+{
+ "when": "2026-11-21T01:12:13.040Z",
+ "results": [
+  {
+   "n": "molemash: Bridge runs on its mock platform inside the iframe",
+   "ok": true,
+   "d": "mock"
+  },
+  {
+   "n": "molemash: no rewarded ads offered",
+   "ok": true
+  },
+  {
+   "n": "molemash: opens straight into level 1",
+   "ok": true
+  },
+  {
+   "n": "molemash: results panel without continue-ad, world board or sign-in",
+   "ok": true,
+   "d": "{\"panel\":true,\"cont\":false,\"world\":false,\"signin\":false,\"ls\":2}"
+  },
+  {
+   "n": "molemash: progress saved in localStorage through the Bridge",
+   "ok": true,
+   "d": "keys 2"
+  },
+  {
+   "n": "molemash: best score survives a reload",
+   "ok": true,
+   "d": "17"
+  },
+  {
+   "n": "molemash: zero console errors in the itch-style iframe",
+   "ok": true,
+   "d": ""
+  },
+  {
+   "n": "coloring: Bridge runs on its mock platform inside the iframe",
+   "ok": true,
+   "d": "mock"
+  },
+  {
+   "n": "coloring: no rewarded ads offered",
+   "ok": true
+  },
+  {
+   "n": "coloring: gallery shows, no \"Unlock now (ad)\" button",
+   "ok": true
+  },
+  {
+   "n": "coloring: painting works, no \"Fill this color (ad)\" button",
+   "ok": true,
+   "d": "{\"filled\":12,\"boost\":false,\"ls\":1,\"id\":\"ladybug\"}"
+  },
+  {
+   "n": "coloring: painted pieces survive a reload",
+   "ok": true,
+   "d": "12 → 12"
+  },
+  {
+   "n": "coloring: zero console errors in the itch-style iframe",
+   "ok": true,
+   "d": ""
+  }
+ ]
+}
