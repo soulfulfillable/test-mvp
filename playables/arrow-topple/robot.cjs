@@ -106,7 +106,7 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
   ok('arrow counter went 3 → 0', i.arrowsLeft === 0 && i.shots === 3, { arrowsLeft: i.arrowsLeft });
   i = await until(s, x => x.state !== 'play', 12000); await s.pg.waitForTimeout(700);
   const lost = await info(s); await s.pg.screenshot({ path: path.join(QA, 'lose-390x844.png') });
-  ok('three misses → lose, wolves still up, replay offered', lost.state === 'lost' && lost.wolvesUp === 2 && lost.again, { state: lost.state, wolvesUp: lost.wolvesUp, again: lost.again });
+  ok('three misses → lose, wolves still up, replay offered', lost.state === 'lost' && lost.wolvesUp === 2 && lost.again && lost.lostMarkers === 2, { state: lost.state, wolvesUp: lost.wolvesUp, again: lost.again });
   await s.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 200, y: 400 }] }); await s.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await s.pg.waitForTimeout(200); i = await info(s);
   ok('after losing, one tap anywhere restarts the same level', i.state === 'play' && i.arrowsLeft === 3 && i.level === 0, { state: i.state, level: i.level });
@@ -138,6 +138,22 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
     await drag(s, SOL[2].shots[0][0], SOL[2].shots[0][1]); let q = await until(s, x => x.state !== 'play', 15000); await until(s, x => x.again, 5000); await s.pg.tap('#again'); await s.pg.waitForTimeout(150);
     await s.pg.reload(); await s.pg.waitForFunction(() => window.__AT); const z = await info(s);
     ok('progress is saved: reload comes back on the next level', q.state === 'won' && z.level === 3, { won: q.state, level: z.level, demo: z.demoActive });
+  }
+
+  // the iPhone report (2026-11-22): wolves knocked over onto the rubble must count as down, never "lost while lying there"
+  for (const L of [3, 0]) { if (!SOL[L].rubble) { ok(`level ${L + 1}: rubble landing replay`, false, 'solver found no rubble shot'); continue; }
+    await s.pg.evaluate(n => __AT.go(n), L); await s.pg.waitForTimeout(150);
+    await drag(s, SOL[L].rubble[0], SOL[L].rubble[1]); let q = await until(s, x => x.downBy.includes('rubble') || x.state !== 'play', 15000);
+    await s.pg.waitForTimeout(500); if (L === 3) await s.pg.screenshot({ path: path.join(QA, 'rubble-counts-390x844.png') });
+    ok(`level ${L + 1}: a wolf lying on the rubble counts as knocked down`, q.downBy.includes('rubble'), { downBy: q.downBy, state: q.state });
+  }
+  { // whenever the round is lost, no wolf that still counts as "up" may look toppled, and each one left gets a marker
+    await s.pg.evaluate(() => __AT.go(3)); await s.pg.waitForTimeout(150); let bad = 0, lostSeen = 0, q;
+    const tries = [SOL[3].partial, DUD, DUD];   // topple one tower, waste the rest
+    for (const t of tries) { await until(s, x => x.canFire && (x.shots === 0 || x.asleep), 9000); q = await info(s); if (q.state !== 'play') break; await drag(s, t[0], t[1]); }
+    q = await until(s, x => x.state !== 'play', 15000); await s.pg.waitForTimeout(600); q = await info(s);
+    if (q.state === 'lost') { lostSeen = 1; if (q.toppledButUp > 0 || q.lostMarkers !== q.wolvesUp || q.wolvesUp < 1) bad = 1; await s.pg.screenshot({ path: path.join(QA, 'lost-shows-who-is-left-390x844.png') }); }
+    ok('lost after a partial collapse: nobody left looks toppled, each wolf left is marked', lostSeen === 1 && !bad, { state: q.state, wolvesUp: q.wolvesUp, markers: q.lostMarkers, toppledButUp: q.toppledButUp, lostSeen });
   }
 
   // mute persists

@@ -1,7 +1,7 @@
 {
- "when": "2026-11-22T01:59:07.776Z",
- "pass": 50,
- "total": 50,
+ "when": "2026-11-22T18:04:52.465Z",
+ "pass": 53,
+ "total": 53,
  "results": [
   {
    "name": "size 320x568: first frame",
@@ -151,7 +151,7 @@
    "pass": true,
    "detail": {
     "dots": 12,
-    "endsAtX": 8.9,
+    "endsAtX": 9.1,
     "towerX": 15.7
    }
   },
@@ -170,7 +170,7 @@
    "detail": {
     "slowmo": 1,
     "sawSlow": true,
-    "maxZoom": 1.399
+    "maxZoom": 1.401
    }
   },
   {
@@ -193,7 +193,7 @@
    "pass": true,
    "detail": {
     "frames": 8,
-    "ms": 4190
+    "ms": 4187
    }
   },
   {
@@ -219,7 +219,7 @@
    "detail": {
     "state": "won",
     "same": true,
-    "len": 228
+    "len": 229
    }
   },
   {
@@ -375,6 +375,39 @@
     "won": "won",
     "level": 3,
     "demo": false
+   }
+  },
+  {
+   "name": "level 4: a wolf lying on the rubble counts as knocked down",
+   "pass": true,
+   "detail": {
+    "downBy": [
+     "",
+     "rubble"
+    ],
+    "state": "play"
+   }
+  },
+  {
+   "name": "level 1: a wolf lying on the rubble counts as knocked down",
+   "pass": true,
+   "detail": {
+    "downBy": [
+     "ground",
+     "rubble"
+    ],
+    "state": "won"
+   }
+  },
+  {
+   "name": "lost after a partial collapse: nobody left looks toppled, each wolf left is marked",
+   "pass": true,
+   "detail": {
+    "state": "lost",
+    "wolvesUp": 1,
+    "markers": 1,
+    "toppledButUp": 0,
+    "lostSeen": 1
    }
   },
   {

@@ -11,7 +11,7 @@ function run(level, shots, maxT = 40) {       // next arrow only when everything
     else if (i >= shots.length && s.asleep()) break;
     s.step(); t += C.DT;
   }
-  return { state: s.state, down: s.wolves.filter(w => w.down).length, touched: !!s.touched, fp: s.fingerprint() };
+  return { state: s.state, down: s.wolves.filter(w => w.down).length, rubble: s.wolves.filter(w => w.downBy === 'rubble').length, stuckUp: s.wolves.filter(w => !w.down && w.dislodged).length, touched: !!s.touched, fp: s.fingerprint() };
 }
 const solutions = [];
 LEVELS.forEach((lv, li) => {
@@ -42,6 +42,11 @@ LEVELS.forEach((lv, li) => {
     outer: for (const f of firsts) for (const g2 of tower) { const sh = [[R(f.g.deg), f.g.p], [R(g2.deg), g2.p]]; if (run(li, sh).state === 'won') { sol = { shots: sh.map(x => [x[0], +x[1].toFixed(2)]) }; break outer; } } }
   console.log('solution', sol && JSON.stringify(sol.shots.map(x => [Math.round(x[0] * 180 / Math.PI) + '°', x[1]])), sol && sol.neighbours ? 'neighbours ' + sol.neighbours : '');
   if (sol) { const a = run(li, sol.shots), b = run(li, sol.shots); console.log('replay wins', a.state === 'won', '· deterministic', a.fp === b.fp); }
-  solutions.push({ level: li + 1, oneArrowPct: +(100 * win.length / grid.length).toFixed(1), anyWolfPct: +(100 * one.length / grid.length).toFixed(1), random3: `${w3}/${N}`, shots: sol ? sol.shots : null });
+  // a shot where a wolf ends up lying on the rubble (used to be judged "still up") — the robot replays it
+  const rub = grid.filter(g => g.rubble > 0).map(g => ({ g, n: nb(grid.filter(o => o.rubble > 0), g) })).sort((x, y) => y.n - x.n)[0];
+  const stuck = grid.filter(g => g.stuckUp > 0).length;
+  console.log(`rubble landings ${grid.filter(g => g.rubble > 0).length} · shots that leave a shaken wolf still standing (judged up) ${stuck}`);
+  const part = grid.filter(g => g.down === 1 && g.state !== 'won' && g.stuckUp === 0); const pb = part.map(g => ({ g, n: nb(part, g) })).sort((x, y) => y.n - x.n)[0];
+  solutions.push({ partial: pb ? [R(pb.g.deg), +pb.g.p.toFixed(2)] : null, rubble: rub ? [R(rub.g.deg), +rub.g.p.toFixed(2)] : null, level: li + 1, oneArrowPct: +(100 * win.length / grid.length).toFixed(1), anyWolfPct: +(100 * one.length / grid.length).toFixed(1), random3: `${w3}/${N}`, shots: sol ? sol.shots : null });
 });
 fs.writeFileSync(path.join(__dirname, '../qa/solutions.json'), JSON.stringify(solutions, null, 1));

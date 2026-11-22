@@ -149,15 +149,17 @@
     if (plunger) { ctx.save(); ctx.translate(0.02, 0.48); ctx.rotate(1.9); ctx.translate(1.12, 0); ctx.scale(-1, 1); drawArrowShape(1.12); ctx.restore(); }
     return { hx: hx, hy: hy };
   }
-  function wolfMood(it) { if (it.down) return 'dazed'; if (it.dislodged) return 'fall'; if (sim.state === 'lost') return 'taunt'; if (sim.flying && sim.flying.mode === 'fly') return 'scared'; return 'taunt'; }
+  function wolfMood(it) { if (it.down) return 'dazed'; if (sim.state === 'lost') return 'taunt'; if (it.dislodged) return 'fall'; if (sim.state === 'lost') return 'taunt'; if (sim.flying && sim.flying.mode === 'fly') return 'scared'; return 'taunt'; }
   function drawWolf(it, i) {
     var p = it.body.getPosition(), a = it.body.getAngle(), mood = wolfMood(it), ph = i * 2.1;
     var bob = mood === 'taunt' ? Math.abs(Math.sin(T * 7 + ph)) * 0.05 * (sim.state === 'lost' ? 2 : 1) : 0;
+    var lost = sim.state === 'lost' && !it.down; if (lost) { var up = Math.min(1, Math.max(0, endT) / 0.35); a = a * (1 - up); }   // the ones still up stand back up and jeer — that is why the round is lost
     ctx.save(); ctx.translate(p.x, p.y + bob); ctx.rotate(a);
     var hand = drawWolfBody(mood, T, ph, a, i === 0, 0);
     if (i === 0 && mood === 'taunt') { var up = Math.abs(Math.sin(T * 3.2)) * 0.5; ink(el(hand.hx + 0.02, hand.hy + 0.14 + up, 0.12, 0.12), RED, RED_S, a); line([hand.hx + 0.02, hand.hy + 0.25 + up, hand.hx + 0.06, hand.hy + 0.32 + up], LW); }
     if (i === 0 && mood === 'scared') ink(el(hand.hx + 0.02, hand.hy + 0.14, 0.12, 0.12), RED, RED_S, a);
     ctx.restore();
+    if (lost) { var by = p.y + 1.25 + Math.abs(Math.sin(T * 4.5)) * 0.25; ink(function () { ctx.moveTo(p.x - 0.3, by + 0.5); ctx.lineTo(p.x + 0.3, by + 0.5); ctx.lineTo(p.x, by); ctx.closePath(); }, RED, RED_S, 0); }
     if (mood === 'dazed') for (var k = 0; k < 3; k++) { var q = T * 5 + k * 2.094; star(p.x + Math.cos(q) * 0.42, p.y + 0.72 + Math.sin(q) * 0.1, 0.11, CREAM); }
   }
   function drawFleeing() {
@@ -405,7 +407,7 @@
       return { level: level, levels: NLEV, wolves: sim.wolves.length, asleep: sim.asleep(), next: againBtn.classList.contains('next'), state: sim.state, arrowsLeft: sim.arrowsLeft, shots: sim.shots, wolvesUp: up, canFire: sim.canFire(), aiming: !!aim, maxPull: maxPull(), W: W, H: H, S: S,
         archer: box(AX - 0.75, 0, C.ORIGIN.x + 0.45, 2.45), tower: box(tb.x0, 0, tb.x1, tb.y1), hud: hudRect(), sheep: sheep.map(function (s) { var x = s.cx === undefined ? sheepX(sheep.indexOf(s)) : s.cx, b = -(0.36 + 0.55 * fgScale); return { x: wx(x - 0.62 * fgScale), y: wy(b + 0.5 * fgScale), w: 1.3 * fgScale * S, h: 1.0 * fgScale * S }; }),
         demo: counts.demo, demoActive: demo.active, slowmo: counts.slowmo, slowNow: slowT > 0, timeScale: timeScale, preHit: counts.preHit || 0, zoom: zoom, sticks: counts.sticks, ghost: ghost ? ghost.length / 2 : 0, preview: aim ? Math.min(PREVIEW_DOTS, sim.preview(aim.a, aim.p).length / 2) : 0, previewEndX: aim ? (function () { var q = sim.preview(aim.a, aim.p); if (q.length > PREVIEW_DOTS * 2) q.length = PREVIEW_DOTS * 2; return q[q.length - 2]; })() : 0, focus: sim.focus,
-        again: againBtn.classList.contains('on'), muted: muted, fleeing: fleeing.length, restarts: counts.restarts || 0, fp: sim.fingerprint(), fp5: counts.fp5 || '', scrollY: window.scrollY, time: sim.time };
+        again: againBtn.classList.contains('on'), muted: muted, fleeing: fleeing.length, downBy: sim.wolves.map(function (w) { return w.downBy || ''; }), lostMarkers: sim.state === 'lost' ? up : 0, toppledButUp: sim.wolves.filter(function (w) { if (w.down || w.gone) return false; var d = w.body.getAngle() - w.a0; return Math.abs(Math.atan2(Math.sin(d), Math.cos(d))) > 0.8 || w.y0 - w.body.getPosition().y > 0.7; }).length, restarts: counts.restarts || 0, fp: sim.fingerprint(), fp5: counts.fp5 || '', scrollY: window.scrollY, time: sim.time };
     }
   };
 

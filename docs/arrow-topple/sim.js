@@ -150,8 +150,12 @@
         if (!it.dislodged && (dx * dx + dy * dy > 0.16 || da > 0.5)) { it.dislodged = true; this.events.push({ type: 'loose', id: it.id }); }
         var sp = Math.sqrt(v.x * v.x + v.y * v.y);
         it.lowT = (p.y < 1.6 && sp < 0.6) ? it.lowT + 1 : 0;
-        if (p.y < 0.95 || it.lowT > 36 || p.x > 20 || p.x < -6) {
-          it.down = true; it.downN = this.n; this.events.push({ type: 'wolfdown', id: it.id, x: p.x, y: p.y });
+        // knocked over but resting on the rubble: if it looks toppled (dropped a floor, or lying on its side) it counts
+        var d0 = it.body.getAngle() - it.a0, tilt = Math.abs(Math.atan2(Math.sin(d0), Math.cos(d0)));
+        it.restT = (it.dislodged && sp < 0.6 && (it.y0 - p.y > 0.7 || tilt > 0.8)) ? (it.restT || 0) + 1 : 0;
+        var why = p.y < 0.95 ? 'ground' : it.lowT > 36 ? 'low' : it.restT > 48 ? 'rubble' : (p.x > 24 || p.x < -6) ? 'away' : '';
+        if (why) {
+          it.down = true; it.downN = this.n; it.downBy = why; this.events.push({ type: 'wolfdown', id: it.id, x: p.x, y: p.y, by: why });
         } else { up++; if (it.dislodged) loose++; }
       } else if (this.n - it.downN > 132) {
         it.gone = true; it.fleeX = p.x; it.fleeT = this.time;
