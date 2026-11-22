@@ -308,7 +308,7 @@
     var real = Math.min(0.05, (now - (frame.last || now)) / 1000); frame.last = now; T += real;
     if (hitstop > 0) hitstop -= real;
     else {
-      if (slowT > 0) slowT -= real; timeScale = slowT > 0 ? 0.2 : (sim.flying && sim.flying.mode === 'fly' && !reduced ? 0.5 : 1);
+      if (slowT > 0) slowT -= real; var tsT = slowT > 0 ? 0.2 : (nearHit() ? 0.28 : 1); timeScale += (tsT - timeScale) * Math.min(1, real * (tsT < timeScale ? 14 : 7));   // normal speed, then a short slow beat right before the hit
       acc += real * timeScale; var n = 0;
       while (acc >= C.DT && n < 12) { sim.step(); steps++; acc -= C.DT; n++; drain(); if (fireStep >= 0 && steps - fireStep === 600) counts.fp5 = sim.fingerprint(); if (hitstop > 0) break; }
       if (n === 12) acc = 0;
@@ -321,6 +321,12 @@
     demoStep(real);
     if (endT >= 0) { endT += real; if (endT > (sim.state === 'won' ? 1.7 : 0.5)) { againBtn.classList.toggle('next', sim.state === 'won' && level < NLEV - 1); againBtn.classList.add('on'); } }
     draw(real);
+  }
+  function nearHit() {   // arrow still in the air, heading at a block or wolf less than ~1.8 m away
+    var fl = sim.flying; if (reduced || !fl || fl.mode !== 'fly' || fl.gone) return false;
+    var p = fl.body.getPosition(), v = fl.body.getLinearVelocity();
+    for (var i = 0; i < sim.items.length; i++) { var it = sim.items[i]; if (it.gone) continue; var q = it.body.getPosition(), dx = q.x - p.x, dy = q.y - p.y; if (dx * dx + dy * dy < 4.8 && dx * v.x + dy * v.y > 0) { if (fl.near !== true) { fl.near = true; counts.preHit = (counts.preHit || 0) + 1; } return true; } }
+    return false;
   }
   function draw(real) {
     scenery();
@@ -397,7 +403,7 @@
       var tb = { x0: 9, x1: 0, y1: 0 }; sim.items.forEach(function (it) { if (it.gone) return; var p = it.body.getPosition(); tb.x0 = Math.min(tb.x0, p.x - it.w / 2); tb.x1 = Math.max(tb.x1, p.x + it.w / 2); tb.y1 = Math.max(tb.y1, p.y + it.h / 2 + (it.kind === 'wolf' ? 0.2 : 0)); });
       return { level: level, levels: NLEV, wolves: sim.wolves.length, asleep: sim.asleep(), next: againBtn.classList.contains('next'), state: sim.state, arrowsLeft: sim.arrowsLeft, shots: sim.shots, wolvesUp: up, canFire: sim.canFire(), aiming: !!aim, maxPull: maxPull(), W: W, H: H, S: S,
         archer: box(AX - 0.75, 0, C.ORIGIN.x + 0.45, 2.45), tower: box(tb.x0, 0, tb.x1, tb.y1), hud: hudRect(), sheep: sheep.map(function (s) { var x = s.cx === undefined ? sheepX(sheep.indexOf(s)) : s.cx, b = -(0.36 + 0.55 * fgScale); return { x: wx(x - 0.62 * fgScale), y: wy(b + 0.5 * fgScale), w: 1.3 * fgScale * S, h: 1.0 * fgScale * S }; }),
-        demo: counts.demo, demoActive: demo.active, slowmo: counts.slowmo, slowNow: slowT > 0, zoom: zoom, sticks: counts.sticks, ghost: ghost ? ghost.length / 2 : 0, preview: aim ? sim.preview(aim.a, aim.p).length / 2 : 0,
+        demo: counts.demo, demoActive: demo.active, slowmo: counts.slowmo, slowNow: slowT > 0, timeScale: timeScale, preHit: counts.preHit || 0, zoom: zoom, sticks: counts.sticks, ghost: ghost ? ghost.length / 2 : 0, preview: aim ? sim.preview(aim.a, aim.p).length / 2 : 0,
         again: againBtn.classList.contains('on'), muted: muted, fleeing: fleeing.length, restarts: counts.restarts || 0, fp: sim.fingerprint(), fp5: counts.fp5 || '', scrollY: window.scrollY, time: sim.time };
     }
   };
