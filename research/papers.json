@@ -4843,5 +4843,81 @@
       "traditional chinese medicine knowledge graph syndrome differentiation"
     ],
     "first_seen": "2026-11-21"
+  },
+  {
+    "id": "doi:10.3389/fphar.2026.1916858",
+    "title": "A preliminary study of a machine-learning prediction model for lung cancer diagnosis based on routine blood indicators and traditional chinese medicine diagnostic parameters.",
+    "authors": [
+      "Lu Z",
+      "Zhang C",
+      "Liu Y",
+      "Qin J",
+      "Yang L",
+      "Yin Q",
+      "Rao Z",
+      "Ji J",
+      "Chen K",
+      "Su W",
+      "Zhan X",
+      "Jin J",
+      "Ben W",
+      "Huang X",
+      "Liu J",
+      "Wang G",
+      "Zhou Z",
+      "Wang Z."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.3389/fphar.2026.1916858",
+    "abstract": "<h4>Background</h4>Early identification of lung cancer remains challenging in clinical practice, especially in patients who cannot undergo advanced imaging or invasive examinations. Traditional Chinese Medicine (TCM) provides distinctive diagnostic insights, but the potential role of its objective features in tumor screening remains insufficiently investigated. The objective of this study was to establish a multimodal machine-learning model combining routine laboratory examinations with selected objectified TCM indicators to screen for lung cancer.<h4>Methods</h4>This real-world, retrospective cohort study included patients who visited the Departments of Oncology and General Surgery at Longhua Hospital, Shanghai University of Traditional Chinese Medicine, between January 2022 and December 2023. Following inclusion and exclusion screening, a total of 309 patients with pathologically confirmed lung cancer and 205 non-cancer patients were enrolled. All participants were randomly assigned using computer-generated randomisation in a 70:30 ratio to a training cohort (n = 358) and a validation cohort (n = 156). Five machine-learning algorithms and a logistic regression (LR) model were trained in the training cohort. Model performance in the validation cohort was assessed using area under the receiver operating characteristic curve (AUC), sensitivity, and specificity. SHAP analysis was applied to interpret feature contributions.<h4>Results</h4>LASSO identified 13 key variables, encompassing age, blood biochemical indicators, objective tongue features, and TCM constitution scores. The XGBoost model constructed based on these variables demonstrated good discriminative performance for lung cancer in the validation set (AUC = 0.8745, 95% CI: 0.8219-0.9271; F1 = 0.7711). SHAP analysis revealed that age, absolute lymphocyte count, Qi-Deficiency Constitution Score (QDC-Score), apolipoprotein C3 (ApoC3), and tongue color features, including tongue coating color L* (TC-L) and full tongue color b* (FT-B), were the key factors driving model predictions.<h4>Conclusion</h4>We developed a low-cost screening model that integrates TCM-related features with routine clinical parameters, demonstrating good accuracy for identifying high-risk individuals for lung cancer among non-tumor populations. This multimodal approach highlights the complementary value of integrating TCM indices with biomedical variables. Prospective multicenter validation is required to further optimize this model and facilitate its implementation in real-world clinical practice.",
+    "matched_queries": [
+      "TCM body constitution classification machine learning"
+    ],
+    "first_seen": "2026-11-22"
+  },
+  {
+    "id": "doi:10.1016/j.imr.2026.101346",
+    "title": "Current practices and methodological challenges in establishing objective performance criteria for single-arm trials in traditional Chinese medicine: A scoping review.",
+    "authors": [
+      "Liang SB",
+      "Li ZH",
+      "Chai QY",
+      "Han M",
+      "Wang YF",
+      "Wang HD",
+      "Ma QY",
+      "Shi YH",
+      "Robinson N",
+      "Fei YT",
+      "Liu JP."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.imr.2026.101346",
+    "abstract": "<h4>Background</h4>Objective performance criteria (OPCs) are critical for evaluating efficacy in single-arm trials. This study aimed to examine current practices and methodological challenges in establishing OPCs in single-arm trials of traditional Chinese medicine (TCM).<h4>Methods</h4>PubMed, Embase, the Cochrane Library, CNKI, Wanfang, and VIP were searched for TCM single-arm trials using OPCs published up to December 2025. Data on OPC sources, population comparability, uncertainty quantification, and primary outcome alignment were extracted and descriptively analysed.<h4>Results</h4>Twelve studies (13 publications; 1134 participants) conducted in China (2019-2025) evaluated Chinese herbal decoctions (n = 9), proprietary Chinese medicines (n = 2), or acupuncture plus rehabilitation (n = 1) across kidney, neurological, gynaecological and other conditions. OPCs were derived from prior clinical studies (n = 6), meta-analyses (n = 5), or a synthesis of clinical experience and literature (n = 1). Three studies reported 95% confidence intervals, and four justified population comparability. Ten studies exhibited limited comparability due to differences in disease duration, severity, or assessment timing. One study mentioned expert discussion but provided no details. Eleven studies reported a clear primary outcome, among which ten aligned their OPCs accordingly and one based its OPC on a secondary outcome. Only one study lacked an explicit primary outcome definition. Four studies based their OPCs on non-standardized composite outcomes such as remission rate.<h4>Conclusions</h4>Current TCM single-arm trials face challenges in establishing OPCs, including incomplete reporting, poor population comparability, inadequate uncertainty quantification, and non-standardized endpoints. Future studies should adopt transparent and contextually appropriate OPC specification guidelines, ensuring methodological rigour in source selection, population comparability, and outcome definition.",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-11-22"
+  },
+  {
+    "id": "doi:10.1016/j.nmni.2026.101843",
+    "title": "Integrating mathematical modelling and artificial intelligence to combat emerging viral syndemics: A systematic review.",
+    "authors": [
+      "Cabrera-Rodríguez R",
+      "Reyes-Castañeda I",
+      "Lorenzo-Sánchez I",
+      "Valenzuela-Fernández A",
+      "Trujillo-González R."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.1016/j.nmni.2026.101843",
+    "abstract": "<h4>Background</h4>Global health security is increasingly threatened by emerging viral syndemics, where infectious viruses interact synergistically with socio-economic-structural vulnerabilities. Traditional reactive surveillance is increasingly insufficient to address the complexity of these interconnected crises. This systematic review aims to synthesize evidence for the \"Silicon Shield,\" a proactive computational framework integrating mathematical modelling and artificial intelligence (AI) to bridge a unified computational framework, and critical literature gaps for pandemic preparedness and response.<h4>Methods</h4>Following updated PRISMA 2020 guidelines, we searched PubMed, Scopus, and Web of Science (January 1990-July 2026) using Medical Subject Headings (MeSH). We evaluated the convergence of mechanistic frameworks (SIR, SEIR, ABM) with deep learning architectures (CNNs, Transformers, pLMs). Analysis prioritized Uncertainty Quantification (UQ) via Bayesian updating and causal inference through Directed Acyclic Graphs (DAGs) to mitigate ecological biases when modelling biosocial determinants.<h4>Results</h4>Synthesizing 364 sources, we formalize the \"Silicon Shield\" three-layer architecture: Data Pipes, Model Pipelines, and Decision Interfaces. Integrating real-time genomic and mobility data enables anomaly detection via ViraMiner and TCINet. EVEscape forecasts immune escape, while Social Vulnerability Indices (SVI) optimize resource allocation. The framework yields predictive performance, improved AUROC and probabilistic metrics including Weighted Interval Score (WIS) and Continuous Ranked Probability Score (CRPS). Explainable AI (xHAIM) translates outputs into clinical decision support.<h4>Conclusions</h4>The convergence of AI and mathematical modelling facilitates a fundamental transformation into a proactive global health defence system. Implementing the \"Silicon Shield\" requires interdisciplinary collaboration, standardized clinical validation, and a focus on global health equity to effectively mitigate future emerging virus syndemic threats.",
+    "matched_queries": [
+      "multi-label symptom syndrome classification traditional chinese medicine"
+    ],
+    "first_seen": "2026-11-22"
   }
 ]
