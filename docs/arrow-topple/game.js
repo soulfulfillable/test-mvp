@@ -282,6 +282,7 @@
   }
 
   // ---------- demo: a hand pulls back once, shows the dotted path, lets go (no shot) ----------
+  var PREVIEW_DOTS = 12;   // ≈0.55 s of flight, roughly the first third of the way
   var DEMO = { a: 0.42, p: 0.9 };
   function demoStep(dt) {
     if (level !== 0 || sim.shots > 0 || aim || sim.state !== 'play') { demo.active = false; return; }
@@ -341,7 +342,7 @@
     drawFleeing();
     drawShepherd();
     var pv = aim ? sim.preview(aim.a, aim.p) : (demo.active && demo.aim && demo.aim.p > 0.03 ? sim.preview(demo.aim.a, demo.aim.p) : null);
-    if (pv) dots(pv, CREAM, 0.085, 0.04, demo.active && !aim ? demo.alpha : 1, 2);
+    if (pv) { if (pv.length > PREVIEW_DOTS * 2) pv.length = PREVIEW_DOTS * 2; dots(pv, CREAM, 0.11, 0.05, demo.active && !aim ? demo.alpha : 1, 2); }   // only the first stretch — the rest is yours to judge
     drawParts(real * timeScale);
     for (i = 0; i < sheep.length; i++) drawSheep(sheep[i], i);
     drawHud(); demoDraw();
@@ -403,7 +404,7 @@
       var tb = { x0: 9, x1: 0, y1: 0 }; sim.items.forEach(function (it) { if (it.gone) return; var p = it.body.getPosition(); tb.x0 = Math.min(tb.x0, p.x - it.w / 2); tb.x1 = Math.max(tb.x1, p.x + it.w / 2); tb.y1 = Math.max(tb.y1, p.y + it.h / 2 + (it.kind === 'wolf' ? 0.2 : 0)); });
       return { level: level, levels: NLEV, wolves: sim.wolves.length, asleep: sim.asleep(), next: againBtn.classList.contains('next'), state: sim.state, arrowsLeft: sim.arrowsLeft, shots: sim.shots, wolvesUp: up, canFire: sim.canFire(), aiming: !!aim, maxPull: maxPull(), W: W, H: H, S: S,
         archer: box(AX - 0.75, 0, C.ORIGIN.x + 0.45, 2.45), tower: box(tb.x0, 0, tb.x1, tb.y1), hud: hudRect(), sheep: sheep.map(function (s) { var x = s.cx === undefined ? sheepX(sheep.indexOf(s)) : s.cx, b = -(0.36 + 0.55 * fgScale); return { x: wx(x - 0.62 * fgScale), y: wy(b + 0.5 * fgScale), w: 1.3 * fgScale * S, h: 1.0 * fgScale * S }; }),
-        demo: counts.demo, demoActive: demo.active, slowmo: counts.slowmo, slowNow: slowT > 0, timeScale: timeScale, preHit: counts.preHit || 0, zoom: zoom, sticks: counts.sticks, ghost: ghost ? ghost.length / 2 : 0, preview: aim ? sim.preview(aim.a, aim.p).length / 2 : 0,
+        demo: counts.demo, demoActive: demo.active, slowmo: counts.slowmo, slowNow: slowT > 0, timeScale: timeScale, preHit: counts.preHit || 0, zoom: zoom, sticks: counts.sticks, ghost: ghost ? ghost.length / 2 : 0, preview: aim ? Math.min(PREVIEW_DOTS, sim.preview(aim.a, aim.p).length / 2) : 0, previewEndX: aim ? (function () { var q = sim.preview(aim.a, aim.p); if (q.length > PREVIEW_DOTS * 2) q.length = PREVIEW_DOTS * 2; return q[q.length - 2]; })() : 0, focus: sim.focus,
         again: againBtn.classList.contains('on'), muted: muted, fleeing: fleeing.length, restarts: counts.restarts || 0, fp: sim.fingerprint(), fp5: counts.fp5 || '', scrollY: window.scrollY, time: sim.time };
     }
   };

@@ -1,5 +1,5 @@
 {
- "when": "2026-11-22T01:55:28.965Z",
+ "when": "2026-11-22T01:59:07.776Z",
  "pass": 50,
  "total": 50,
  "results": [
@@ -147,10 +147,12 @@
    "detail": ""
   },
   {
-   "name": "dragging back shows the dotted path",
+   "name": "dragging back shows the dotted path, but only the first part (stops well short of the tower)",
    "pass": true,
    "detail": {
-    "dots": 21
+    "dots": 12,
+    "endsAtX": 8.9,
+    "towerX": 15.7
    }
   },
   {
@@ -168,7 +170,7 @@
    "detail": {
     "slowmo": 1,
     "sawSlow": true,
-    "maxZoom": 1.401
+    "maxZoom": 1.399
    }
   },
   {
@@ -191,7 +193,7 @@
    "pass": true,
    "detail": {
     "frames": 8,
-    "ms": 4191
+    "ms": 4190
    }
   },
   {

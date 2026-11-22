@@ -71,7 +71,7 @@ async function until(s, fn, ms = 12000) { const t0 = Date.now(); for (;;) { cons
   ok('tiny drag (under 14px) does not shoot', i.shots === 0 && i.arrowsLeft === 3, { shots: i.shots });
   ok('touching hides the demo hand', !mid.demoActive && !i.demoActive);
   await drag(s, WIN[0], WIN[1], { hold: async () => { mid = await info(s); await s.pg.screenshot({ path: path.join(QA, 'aiming-390x844.png') }); } });
-  ok('dragging back shows the dotted path', mid.aiming && mid.preview >= 5, { dots: mid.preview });
+  ok('dragging back shows the dotted path, but only the first part (stops well short of the tower)', mid.aiming && mid.preview >= 5 && mid.preview <= 12 && mid.previewEndX < mid.focus - 4, { dots: mid.preview, endsAtX: +mid.previewEndX.toFixed(1), towerX: mid.focus });
   // collapse film: screenshots as fast as they come
   const frames = []; const t0 = Date.now(); let sawSlow = false, maxZoom = 1, flyFull = false, preHit = false;
   for (let k = 0; k < 70; k++) { const f = path.join(QA, `_f${String(k).padStart(2, '0')}.png`); await s.pg.screenshot({ path: f }); frames.push(f); const q = await info(s); sawSlow = sawSlow || q.slowNow; if (q.sticks === 0 && q.timeScale > 0.95) flyFull = true; if (q.preHit >= 1) preHit = true; maxZoom = Math.max(maxZoom, q.zoom); if (q.state === 'won') break; }
