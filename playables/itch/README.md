@@ -31,6 +31,7 @@ zip 은 Playgama 에 올린 것과 같은 빌드다. itch 에서는 Playgama 가
    - "Click to launch in fullscreen" 은 체크하지 않기
 9. **Details → Description**: 아래 "본문" 붙여넣기.
 10. **Genre**: 아래 표. **Tags**: 아래 10개를 하나씩 입력.
+   - **AI generation disclosure**(2026-11-23 실제 화면에서 확인된 칸, 처음 안내에 빠져 있었음): **Yes** 를 고르고 **Code · Graphics · Text** 를 체크, **Sound 는 체크하지 않는다**(코드·코드로 그린 그림·문구는 AI 로 만들었고, 소리·음악은 사람이 만든 CC0 음원). 사실대로 적는다 — 숨기면 itch 규정 위반으로 내려갈 수 있다.
 11. **Cover image**: `cover-630x500.png`. **Screenshots**: `screenshot-1~5.png` 다섯 장.
 12. 맨 아래 **Visibility & access**: 처음엔 **Draft** 로 저장 → 페이지 미리보기에서 게임이 뜨는지 확인 → **Public** 으로 바꾸고 다시 Save.
 13. 공개 주소(예: `https://treasurefieldstudio.itch.io/mole-mash`)를 게시판 `board/playables.md` 에 적어 주면 끝.
