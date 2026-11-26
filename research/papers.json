@@ -4919,5 +4919,64 @@
       "multi-label symptom syndrome classification traditional chinese medicine"
     ],
     "first_seen": "2026-11-22"
+  },
+  {
+    "id": "doi:10.3389/fmed.2026.1931256",
+    "title": "Artificial intelligence-based tongue image analysis for non-invasive screening of gastric cancer, precancerous lesions, and related gastrointestinal disorders: a systematic review.",
+    "authors": [
+      "Wang R",
+      "Li C",
+      "Zhang H",
+      "Shao P",
+      "Gao Z",
+      "Zhang C."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.3389/fmed.2026.1931256",
+    "abstract": "<h4>Background</h4>Gastric cancer remains a major cause of cancer-related mortality, largely because many cases are diagnosed at an advanced stage. Upper gastrointestinal endoscopy with histopathological confirmation is the diagnostic gold standard, but its invasiveness, cost, and limited accessibility restrict population-level use. Artificial intelligence (AI)-based tongue-image analysis may provide an objective, low-cost, and non-invasive adjunct for pre-endoscopic risk stratification.<h4>Methods</h4>This systematic review was conducted according to PRISMA 2020 principles and was informed by diagnostic test accuracy and prediction-model reporting frameworks. PubMed/MEDLINE, Scopus, Web of Science, and IEEE Xplore were searched from inception to 10 June 2026. Eligible studies were original investigations applying machine-learning or deep-learning methods to digital tongue images for gastric cancer, precancerous gastric lesions, or related gastrointestinal disorders and reporting at least one quantitative performance metric. Data were extracted on study design, sample size, target condition, reference standard, image-acquisition protocol, model architecture, validation strategy, diagnostic performance, calibration, interpretability, and risk of bias. A narrative synthesis was performed because of substantial heterogeneity.<h4>Results</h4>The search identified 139 records, of which 78 remained after duplicate removal. After title, abstract, and full-text screening, 9 studies published between 2018 and 2025 were included. The evidence covered gastric cancer, precancerous gastric lesions or high-risk gastric screening, and related gastrointestinal disorders. Models included logistic regression and XGBoost classifiers based on handcrafted features, convolutional neural networks, transformer-based architectures, segmentation-assisted pipelines, and multimodal models combining tongue images with clinical, questionnaire, biomarker, or microbiome data. Internally validated AUCs ranged from 0.61 to 0.99 across target conditions. External validation was reported in only three studies and generally showed performance degradation, particularly for precancerous gastric lesions. Calibration assessment was uncommon, and most studies did not report calibration curves, Brier scores, expected calibration error, or recalibration procedures.<h4>Conclusion</h4>AI-based tongue-image analysis is a promising but early-stage approach for non-invasive gastric disease screening. Current evidence supports its potential role as an adjunctive pre-endoscopic triage tool rather than a replacement for gastroscopy. Prospective external validation, standardized image acquisition, transparent model reporting, calibration assessment, and evaluation in diverse populations are required before clinical deployment.<h4>Systematic review registration</h4>https://www.crd.york.ac.uk/PROSPERO/view/CRD420261444857, PROSPERO CRD420261444857.",
+    "matched_queries": [
+      "TCM body constitution classification machine learning"
+    ],
+    "first_seen": "2026-11-26"
+  },
+  {
+    "id": "doi:10.3389/fmed.2026.1901533",
+    "title": "Cracks-YOLO: an improved YOLOv5 tongue crack detection method based on switchable atrous convolution and transformer.",
+    "authors": [
+      "Ding M",
+      "Wu M",
+      "Shen B",
+      "Lin H",
+      "Men S."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.3389/fmed.2026.1901533",
+    "abstract": "<h4>Introduction</h4>Tongue diagnosis is a vital component of Traditional Chinese Medicine (TCM), with cracked tongue serving as a key diagnostic indicator. Although deep learning techniques have advanced TCM tongue image recognition, existing methods for cracked tongue detection still face challenges of low accuracy and slow processing speed.<h4>Methods</h4>To address these issues, we propose an improved YOLOv5 framework integrating Switchable Atrous Convolution (SAC) and a Transformer encoder. First, given the varied morphology, size, and distribution of tongue cracks, SAC is introduced into the backbone network to adaptively adjust receptive fields via different atrous rates, enabling multi-scale feature extraction and better preservation of fine details. Second, a Transformer encoder module is incorporated to capture global information and long-range dependencies, thereby enhancing the network's overall feature representation capability. Experiments are conducted on a self-built tongue image dataset to evaluate the proposed modifications.<h4>Results</h4>The improved YOLOv5 demonstrates superior performance over the original YOLOv5 in tongue crack detection, achieving an increase of 2.2% in AP@50 and 8.43% in AP@50:95 metrics on the self-built dataset.<h4>Discussion</h4>These results confirm that the combination of SAC and Transformer effectively boosts detection accuracy and generalizability, addressing the limitations of prior approaches. The proposed method offers a more reliable and efficient solution for automated tongue crack analysis, with potential implications for clinical TCM diagnostic support.",
+    "matched_queries": [
+      "TCM body constitution classification machine learning"
+    ],
+    "first_seen": "2026-11-26"
+  },
+  {
+    "id": "doi:10.4103/nrr.nrr-d-25-00858",
+    "title": "Immune cells in cerebral small vessel disease: Emerging roles and potential targeting therapies.",
+    "authors": [
+      "Zhan Y",
+      "Wang Y",
+      "Bai M",
+      "Feng J",
+      "Wei J",
+      "Wang J."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.4103/nrr.nrr-d-25-00858",
+    "abstract": "Cerebral small vessel disease is an age-related condition that severely affects the quality of life of older adults; however, there are currently no definitive treatments or preventive measures. Cells from both the peripheral and central immune systems significantly impact the development of cerebral small vessel disease. By analyzing the effects of different immune cells on brain dysfunction associated with this disease, we aim to explore the various mechanisms through which autoimmune and acquired immune cells in peripheral circulation and the central nervous system contribute to disease development. Additionally, we seek to identify potential therapeutic modalities targeting these immune cells. In innate immunity, treatment targeting different monocyte loci includes four main modalities: cytokines (CSF1R, MIF, P2X7, CX3CR1, and CCL2), signaling pathways (DAP12/TREM, PI3K/AKT, and Wnt/β-catenin), tissue engineering (mitochondrial transplantation and exosomes), and traditional Chinese medicines. Treatment targeting different dendritic cell loci encompasses two modalities: signaling pathway (cGAS/STING/NF-κB) and tissue engineering (tolerogenic dendritic cells and engineered probiotics). For natural killer cells, treatment targeting different loci includes two modalities: tissue engineering (natural killer cell-based immunotherapies) and traditional Chinese medicines ( Tongxinluo capsule). In adaptive immunity, treatment targeting different T cell loci includes four modalities: cytokines (S1PR and RXR), signaling pathway (Nrf2/GPX4 and Notch-ITGB1), tissue engineering (elimination of senescent T cells, monoclonal antibodies targeting amyloid-beta protofibrils, nanovaccines, and nanomedicines), and traditional Chinese medicines (traditional herbal remedies and microneedle therapy). Treatment targeting different B cell loci includes three modalities: monoclonal antibodies (targeting CD49d and CD20), purine glycoside analogs (Cladribine), and plasma exchange. This review explores the relationship between nerve regeneration, immune cells, and cerebral small vessel disease. The disease is characterized by the crucial role played by signaling and interactions between immune cells and components of the neurovascular unit, which is a functional complex composed of neurons, glial cells, and microvessels that regulate inflammatory responses and tissue repair. The central nervous system lacks intrinsic regenerative capacity, and currently, there is no effective method to fully restore its function. The primary focus of current research is on utilizing tissue engineering and regenerative medicine to create environments that facilitate cell proliferation and tissue regeneration. Hydrogels, induced pluripotent stem cells, exosomes, regulatory T cell transplants, and gene modification are key areas of focus in neural regeneration research. In the future, immune rejuvenation and other emerging therapies may offer potential treatment strategies for cerebral small vessel disease. This review analyzes the functions of various immune cells in cerebral small vessel disease, explores the relationship between nerve regeneration and these immune cells, and discusses potential therapeutic avenues that target immune cells for future treatments and neural regeneration related to cerebral small vessel disease.",
+    "matched_queries": [
+      "traditional chinese medicine knowledge graph syndrome differentiation"
+    ],
+    "first_seen": "2026-11-26"
   }
 ]
