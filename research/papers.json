@@ -4978,5 +4978,24 @@
       "traditional chinese medicine knowledge graph syndrome differentiation"
     ],
     "first_seen": "2026-11-26"
+  },
+  {
+    "id": "epmc:PMC/PMC13807544",
+    "title": "Applications of Machine Learning in Traditional Chinese Medicine Quality Control: Methods, Progress, and Challenges",
+    "authors": [
+      "Wu J",
+      "Li P",
+      "Qi Z",
+      "Yang X",
+      "Yu P."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://europepmc.org/article/PMC/PMC13807544",
+    "abstract": "",
+    "matched_queries": [
+      "traditional chinese medicine syndrome differentiation decision tree"
+    ],
+    "first_seen": "2026-11-27"
   }
 ]
