@@ -13,8 +13,8 @@
   };
   // Levels are written as stacks from the ground up, so pieces always sit exactly on each other.
   // Every tower stands on one stone that is narrower than the deck above it → it topples instead of sliding.
-  function stack(out, tag, x, parts) {
-    var y = 0, n = 0;
+  function stack(out, tag, x, parts, y0) {
+    var y = y0 || 0, n = 0;
     parts.forEach(function (p) {
       var id = tag + (n++);
       if (p.k === 'stone') { out.push({ id: id, kind: 'stone', x: x + (p.dx || 0), y: y + p.h / 2, w: p.w, h: p.h }); y += p.h; }
@@ -27,17 +27,35 @@
   }
   var S_ = function (w, h) { return { k: 'stone', w: w, h: h }; }, D = function (w) { return { k: 'deck', w: w }; },
     L = function (h, xs, w) { return { k: 'logs', h: h, xs: xs, w: w }; }, Wf = function (dx) { return { k: 'wolf', dx: dx }; }, B = function (dx) { return { k: 'basket', dx: dx }; };
+  // Ground = a start height plus smooth ramps [x0, x1, rise]. Outside a ramp the ground is exactly flat,
+  // so every tower stands on a level shelf and loose pieces roll down the slopes next to it.
+  function heightAt(t, x) {
+    var h = t.h0 || 0, i, r, k;
+    for (i = 0; i < t.ramps.length; i++) { r = t.ramps[i]; k = Math.max(0, Math.min(1, (x - r[0]) / (r[1] - r[0]))); h += r[2] * k * k * (3 - 2 * k); }
+    return h;
+  }
+  function level(focus, terrain, towers) {
+    var items = [];
+    towers.forEach(function (t) { stack(items, t[0], t[1], t[2], heightAt(terrain, t[1])); });
+    return { focus: focus, terrain: terrain, items: items };
+  }
   var LEVELS = [
-    // 1 — one creaky tower, two wolves
-    { focus: 15.7, items: stack([], 'a', 15.7, [S_(1.7, 0.6), D(2.5), L(1.5, [-0.95, 0.95]), D(2.3), Wf(0.05), L(1.3, [-0.85, 0.85], 0.28), D(2.1), Wf(-0.3), B(0.52)]) },
-    // 2 — a tall pole: three wolves balancing on single posts
-    { focus: 16.7, items: stack([], 'a', 16.7, [S_(1.0, 0.6), L(1.6, [0], 0.5), D(2.0), Wf(-0.55), Wf(0.55), L(1.3, [0], 0.32), D(1.6), Wf(-0.2), B(0.42)]) },
-    // 3 — a stone wall in the way: the arrow has to go over it
-    { focus: 16.1, items: stack(stack([], 'w', 11.0, [S_(0.8, 0.8), S_(0.74, 0.8), S_(0.7, 0.8)]), 'a', 17.4, [S_(1.7, 0.6), D(2.3), L(1.2, [-0.85, 0.85]), D(2.2), Wf(-0.45), Wf(0.45), B(0)]) },
-    // 4 — two towers, one low and near, one tall and far
-    { focus: 16.7, items: stack(stack([], 'a', 15.0, [S_(1.3, 0.5), D(1.7), L(1.1, [-0.6, 0.6]), D(1.7), Wf(0)]), 'b', 17.5, [S_(1.5, 0.6), D(1.9), L(1.4, [-0.7, 0.7]), D(1.9), L(1.2, [-0.62, 0.62], 0.28), D(1.7), Wf(-0.25), B(0.45)]) },
-    // 5 — the big one: wide base, three wolves on two floors
-    { focus: 16.9, items: stack([], 'a', 16.9, [S_(2.3, 0.6), D(3.3), L(1.3, [-1.35, 0, 1.35]), D(3.2), Wf(-0.68), Wf(0.68), L(1.2, [-0.75, 0.75], 0.28), D(2.0), Wf(-0.3), B(0.5)]) }
+    // 1 — tower on a hilltop: shoot uphill
+    level(15.7, { h0: 0, ramps: [[8.5, 12.8, 1.9], [18.6, 23, -1.9]] },
+      [['a', 15.7, [S_(1.7, 0.6), D(2.5), L(1.5, [-0.95, 0.95]), D(2.3), Wf(0.05), L(1.3, [-0.85, 0.85], 0.28), D(2.1), Wf(-0.3), B(0.52)]]]),
+    // 2 — pole tower down in a hollow: drop the arrow in
+    level(16.7, { h0: 0, ramps: [[5.5, 10, -1.3], [19.2, 23.5, 1.6]] },
+      [['a', 16.7, [S_(1.0, 0.6), L(1.6, [0], 0.5), D(2.0), Wf(-0.55), Wf(0.55), L(1.3, [0], 0.32), D(1.6), Wf(-0.2), B(0.42)]]]),
+    // 3 — a hill stands in the way: lob over it
+    level(16.4, { h0: 0, ramps: [[7.2, 10.4, 2.7], [10.6, 13.8, -2.7]] },
+      [['a', 17.4, [S_(1.7, 0.6), D(2.3), L(1.2, [-0.85, 0.85]), D(2.2), Wf(-0.45), Wf(0.45), B(0)]]]),
+    // 4 — two towers on two terraces
+    level(15.6, { h0: 0, ramps: [[9.6, 11.4, 1.0], [14.8, 16.0, 1.2], [19.3, 23, -2.2]] },
+      [['a', 13.2, [S_(1.3, 0.5), D(1.7), L(1.1, [-0.6, 0.6]), D(1.7), Wf(0)]],
+       ['b', 17.6, [S_(1.5, 0.6), D(1.9), L(1.4, [-0.7, 0.7]), D(1.9), L(1.2, [-0.62, 0.62], 0.28), D(1.7), Wf(-0.25), B(0.45)]]]),
+    // 5 — the archer stands high, the big tower sits low
+    level(16.9, { h0: 2.3, ramps: [[4.2, 9, -2.3], [19.4, 23, 1.0]] },
+      [['a', 16.9, [S_(2.3, 0.6), D(3.3), L(1.3, [-1.35, 0, 1.35]), D(3.2), Wf(-0.68), Wf(0.68), L(1.2, [-0.75, 0.75], 0.28), D(2.0), Wf(-0.3), B(0.5)]]])
   ];
   var MAT = {
     stone: { d: 2.6, f: 0.8, r: 0.02 }, plank: { d: 0.7, f: 0.6, r: 0.05 }, log: { d: 0.7, f: 0.6, r: 0.05 },
@@ -45,13 +63,15 @@
   };
 
   function Sim(level) {
-    this.level = level = Math.max(0, Math.min(LEVELS.length - 1, level || 0)); var LEVEL = LEVELS[level].items; this.focus = LEVELS[level].focus;
+    this.level = level = Math.max(0, Math.min(LEVELS.length - 1, level || 0)); var LEVEL = LEVELS[level].items; this.focus = LEVELS[level].focus; this.terrain = LEVELS[level].terrain;
+    this.origin = { x: C.ORIGIN.x, y: this.groundY(1.25) + C.ORIGIN.y };
     this.world = new planck.World({ gravity: Vec2(0, C.G) });
     this.time = 0; this.n = 0; this.events = []; this.items = []; this.wolves = []; this.arrows = [];
     this.arrowsLeft = C.ARROWS; this.state = 'play'; this.flying = null; this.slowmoDone = false;
     this.quiet = 0; this.lastImpactT = -1; this._pending = []; this.shots = 0;
     var g = this.world.createBody({ type: 'static', position: Vec2(0, 0) });
-    g.createFixture(planck.Box(60, 1, Vec2(10, -1), 0), { friction: 0.85, restitution: 0.02 });
+    var pts = [], gx; for (gx = -14; gx <= 46; gx += 0.4) pts.push(Vec2(gx, this.groundY(gx)));
+    g.createFixture(planck.Chain(pts, false), { friction: 0.85, restitution: 0.02 });
     g.setUserData({ id: 'ground', kind: 'ground' }); this.ground = g;
     for (var i = 0; i < LEVEL.length; i++) this._add(LEVEL[i]);
     var self = this;
@@ -65,6 +85,7 @@
     }
     this.events.length = 0; this.time = 0; this.n = 0;
   }
+  Sim.prototype.groundY = function (x) { return heightAt(this.terrain, x); };
   Sim.prototype._add = function (d) {
     var m = MAT[d.kind];
     var b = this.world.createBody({ type: 'dynamic', position: Vec2(d.x, d.y), linearDamping: 0.02, angularDamping: 0.08 });
@@ -85,7 +106,7 @@
   Sim.prototype.fire = function (angle, power) {
     if (!this.canFire()) return false;
     var v = this.velocity(angle, power);
-    var b = this.world.createBody({ type: 'dynamic', bullet: true, position: Vec2(C.ORIGIN.x, C.ORIGIN.y), angle: v.a, angularDamping: 0.6 });
+    var b = this.world.createBody({ type: 'dynamic', bullet: true, position: Vec2(this.origin.x, this.origin.y), angle: v.a, angularDamping: 0.6 });
     b.createFixture(planck.Box(0.45, 0.045), { density: 5, friction: 0.5, restitution: 0.05 });
     var tip = b.createFixture(planck.Circle(Vec2(0.5, 0), 0.13), { density: 5, friction: 0.9, restitution: 0.0 });
     b.setLinearVelocity(Vec2(v.x, v.y));
@@ -136,7 +157,7 @@
     this._pending.length = 0;
     if (fl) {
       p = fl.body.getPosition();
-      var out = p.x > 32 || p.x < -8 || p.y < -3;
+      var out = p.x > 32 || p.x < -8 || p.y < -6;
       if (out && !fl.gone) { fl.gone = true; w.destroyBody(fl.body); this.events.push({ type: 'miss' }); }
       if (fl.gone || (fl.mode !== 'fly' && this.n - fl.hitN > 54)) this.flying = null;
     }
@@ -149,11 +170,12 @@
         var dx = p.x - it.x0, dy = p.y - it.y0, da = Math.abs(it.body.getAngle() - it.a0);
         if (!it.dislodged && (dx * dx + dy * dy > 0.16 || da > 0.5)) { it.dislodged = true; this.events.push({ type: 'loose', id: it.id }); }
         var sp = Math.sqrt(v.x * v.x + v.y * v.y);
-        it.lowT = (p.y < 1.6 && sp < 0.6) ? it.lowT + 1 : 0;
+        var hg = p.y - this.groundY(p.x);   // height above the ground right below
+        it.lowT = (hg < 1.6 && sp < 0.6) ? it.lowT + 1 : 0;
         // knocked over but resting on the rubble: if it looks toppled (dropped a floor, or lying on its side) it counts
         var d0 = it.body.getAngle() - it.a0, tilt = Math.abs(Math.atan2(Math.sin(d0), Math.cos(d0)));
         it.restT = (it.dislodged && sp < 0.6 && (it.y0 - p.y > 0.7 || tilt > 0.8)) ? (it.restT || 0) + 1 : 0;
-        var why = p.y < 0.95 ? 'ground' : it.lowT > 36 ? 'low' : it.restT > 48 ? 'rubble' : (p.x > 24 || p.x < -6) ? 'away' : '';
+        var why = hg < 0.95 ? 'ground' : it.lowT > 36 ? 'low' : it.restT > 48 ? 'rubble' : (p.x > 24 || p.x < -6) ? 'away' : '';
         if (why) {
           it.down = true; it.downN = this.n; it.downBy = why; this.events.push({ type: 'wolfdown', id: it.id, x: p.x, y: p.y, by: why });
         } else { up++; if (it.dislodged) loose++; }
@@ -166,7 +188,7 @@
     if (!this.slowmoDone && up > 0 && loose === up) { this.slowmoDone = true; this.events.push({ type: 'topple' }); }
     if (this.basket && !this.basket.down) {
       p = this.basket.body.getPosition();
-      if (p.y < 0.9) { this.basket.down = true; this.events.push({ type: 'basketdown', x: p.x }); }
+      if (p.y - this.groundY(p.x) < 0.9) { this.basket.down = true; this.events.push({ type: 'basketdown', x: p.x }); }
     }
     if (this.state === 'play') {
       if (up === 0) { this.state = 'won'; this.events.push({ type: 'win', shots: this.shots }); }
@@ -186,8 +208,8 @@
   Sim.prototype.preview = function (angle, power, maxT) {
     var v = this.velocity(angle, power), pts = [], t, x, y, i, it, p;
     for (t = 0; t <= (maxT || 3.2); t += 0.05) {
-      x = C.ORIGIN.x + v.x * t; y = C.ORIGIN.y + v.y * t + 0.5 * C.G * t * t;
-      if (y < 0.05) break;
+      x = this.origin.x + v.x * t; y = this.origin.y + v.y * t + 0.5 * C.G * t * t;
+      if (y < this.groundY(x) + 0.05) break;
       pts.push(x, y);
       var hit = false;
       for (i = 0; i < this.items.length && !hit; i++) {

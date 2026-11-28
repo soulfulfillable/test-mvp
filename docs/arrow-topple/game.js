@@ -61,7 +61,7 @@
   function limb(x0, y0, x1, y1, w, col) { ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.strokeStyle = OUT; ctx.lineWidth = w + LW * 2; ctx.stroke(); ctx.strokeStyle = col; ctx.lineWidth = w; ctx.stroke(); ctx.lineWidth = LW; }
   function dot(x, y, r, col) { ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fillStyle = col; ctx.fill(); }
   function line(pts, w, col) { ctx.beginPath(); ctx.moveTo(pts[0], pts[1]); for (var i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i + 1]); ctx.strokeStyle = col || OUT; ctx.lineWidth = w || LW; ctx.stroke(); ctx.lineWidth = LW; }
-  function shadow(x, w) { ctx.beginPath(); ctx.ellipse(x + 0.12, -0.03, w, 0.09, 0, 0, 6.2832); ctx.fillStyle = GRASS_S; ctx.fill(); }
+  function shadow(x, w) { ctx.beginPath(); ctx.ellipse(x + 0.12, G(x) - 0.03, w, 0.09, 0, 0, 6.2832); ctx.fillStyle = GRASS_S; ctx.fill(); }
   function star(x, y, r, col) { ctx.beginPath(); for (var i = 0; i < 10; i++) { var a = i * 0.6283 + 1.5708, q = i % 2 ? r * 0.45 : r; ctx.lineTo(x + Math.cos(a) * q, y + Math.sin(a) * q); } ctx.closePath(); ctx.fillStyle = col; ctx.fill(); ctx.strokeStyle = OUT; ctx.lineWidth = LW * 0.8; ctx.stroke(); ctx.lineWidth = LW; }
 
   // ---------- scenery ----------
@@ -77,13 +77,18 @@
     ctx.fillStyle = HILL;
     ctx.beginPath(); ctx.ellipse(W * 0.22, GY + S * 0.4, Math.max(W * 0.5, S * 5), S * 1.9, 0, 0, 6.2832); ctx.fill();
     ctx.beginPath(); ctx.ellipse(W * 0.86, GY + S * 0.4, Math.max(W * 0.42, S * 4), S * 1.3, 0, 0, 6.2832); ctx.fill();
-    ctx.fillStyle = GRASS; ctx.fillRect(0, GY, W, H - GY);
-    ctx.strokeStyle = OUT; ctx.lineWidth = LW * S; ctx.beginPath(); ctx.moveTo(0, GY); ctx.lineTo(W, GY); ctx.stroke();
-    ctx.strokeStyle = GRASS_S; ctx.lineWidth = LW * S; ctx.lineCap = 'round';
-    for (var k = 0; k < 26; k++) {   // grass ticks + a few flowers, fixed pattern
-      var gx = ((k * 0.381966) % 1) * W, gy = GY + S * 0.3 + ((k * 0.7548) % 1) * (H - GY - S * 0.4);
-      ctx.beginPath(); ctx.moveTo(gx, gy); ctx.lineTo(gx - S * 0.07, gy - S * 0.16); ctx.moveTo(gx + S * 0.1, gy); ctx.lineTo(gx + S * 0.14, gy - S * 0.2); ctx.stroke();
-      if (k % 5 === 0) { ctx.fillStyle = CREAM; ctx.beginPath(); ctx.arc(gx + S * 0.4, gy - S * 0.05, S * 0.07, 0, 6.2832); ctx.fill(); }
+  }
+
+  function G(x) { return sim.groundY(x); }
+  function drawGround() {   // rolling meadow: one outline on top, grass ticks and flowers follow the slope
+    var x0 = -30, x1 = 60, x;
+    ctx.beginPath(); ctx.moveTo(x0, -60); for (x = x0; x <= x1; x += 0.25) ctx.lineTo(x, G(x)); ctx.lineTo(x1, -60); ctx.closePath(); ctx.fillStyle = GRASS; ctx.fill();
+    ctx.beginPath(); for (x = x0; x <= x1; x += 0.25) ctx.lineTo(x, G(x)); ctx.strokeStyle = OUT; ctx.lineWidth = LW; ctx.stroke();
+    ctx.strokeStyle = GRASS_S; ctx.lineWidth = LW;
+    for (var k = 0; k < 70; k++) {
+      var gx = -8 + ((k * 0.381966) % 1) * 40, gy = G(gx) - 0.35 - ((k * 0.7548) % 1) * (4 + (k % 4) * 3);
+      ctx.beginPath(); ctx.moveTo(gx, gy); ctx.lineTo(gx - 0.07, gy + 0.16); ctx.moveTo(gx + 0.1, gy); ctx.lineTo(gx + 0.14, gy + 0.2); ctx.stroke();
+      if (k % 5 === 0) dot(gx + 0.4, gy + 0.05, 0.07, CREAM);
     }
   }
 
@@ -164,17 +169,17 @@
   }
   function drawFleeing() {
     for (var i = 0; i < fleeing.length; i++) {
-      var f = fleeing[i], dt = T - f.t0, x = f.x + dt * 5.2, y = 0.5 + Math.abs(Math.sin(dt * 14)) * 0.16;
+      var f = fleeing[i], dt = T - f.t0, x = f.x + dt * 5.2, y = G(f.x + dt * 5.2) + 0.5 + Math.abs(Math.sin(dt * 14)) * 0.16;
       if (wx(x) > W + 2 * S) continue;
       shadow(x, 0.34); ctx.save(); ctx.translate(x, y); ctx.scale(-1, 1); ctx.rotate(0.22); drawWolfBody('run', T, i, 0, false, f.plunger); ctx.restore();
-      if (Math.floor(dt * 14) !== Math.floor((dt - 0.016) * 14) && dt < 2) puff(x - 0.4, 0.08, 1, CREAM, 0.5);
+      if (Math.floor(dt * 14) !== Math.floor((dt - 0.016) * 14) && dt < 2) puff(x - 0.4, G(x - 0.4) + 0.08, 1, CREAM, 0.5);
     }
   }
 
   // ---------- shepherd ----------
   var AX = 1.25;
   function drawShepherd() {
-    var o = C.ORIGIN, ang, pull, br = Math.sin(T * 2.2) * 0.02;
+    var o = sim.origin, gA = G(AX), ang, pull, br = Math.sin(T * 2.2) * 0.02;
     if (aim) { ang = aim.a; pull = 0.12 + aim.p * 0.5; }
     else if (demo.active && demo.aim) { ang = demo.aim.a; pull = 0.12 + demo.aim.p * 0.5; }
     else { ang = 0.42 + Math.sin(T * 1.3) * 0.03; pull = 0.1; }
@@ -184,7 +189,7 @@
     var wob = stringT < 0.35 ? Math.sin(stringT * 90) * 0.05 * (1 - stringT / 0.35) : 0;
     var nx = gx - dx * (0.22 + pull - wob), ny = gy - dy * (0.22 + pull - wob);
     shadow(AX, 0.5);
-    ctx.save(); ctx.translate(AX - rc, hop);
+    ctx.save(); ctx.translate(AX - rc, hop + gA);
     limb(-0.15, 0.5, -0.17, 0.07, 0.17, WOOD_S); limb(0.13, 0.5, 0.17, 0.07, 0.17, WOOD_S);
     limb(-0.2, 0.05, -0.08, 0.05, 0.1, DARK); limb(0.14, 0.05, 0.27, 0.05, 0.1, DARK);
     ink(function () { ctx.moveTo(-0.38, 0.42); ctx.quadraticCurveTo(-0.36, 1.2, -0.24, 1.46 + br); ctx.lineTo(0.24, 1.46 + br); ctx.quadraticCurveTo(0.38, 1.2, 0.4, 0.42); ctx.quadraticCurveTo(0, 0.34, -0.38, 0.42); ctx.closePath(); }, CREAM, CREAM_S, 0);
@@ -200,14 +205,14 @@
     line([-0.29, 2.12 + br, 0, 2.08 + br, 0.29, 2.12 + br], LW * 1.6, RED);
     ctx.restore();
     // back arm → string hand, then bow, arrow, front arm
-    limb(AX - rc - 0.12, 1.36 + br + hop, nx, ny, 0.14, CREAM);
+    limb(AX - rc - 0.12, 1.36 + br + hop + gA, nx, ny, 0.14, CREAM);
     ctx.save(); ctx.translate(gx, gy); ctx.rotate(ang);
     ctx.beginPath(); ctx.moveTo(-0.22, 0.8); ctx.quadraticCurveTo(0.36, 0, -0.22, -0.8); ctx.strokeStyle = OUT; ctx.lineWidth = 0.1 + LW * 2; ctx.stroke(); ctx.strokeStyle = WOOD; ctx.lineWidth = 0.1; ctx.stroke();
     var sx = -(0.22 + pull - wob); line([-0.22, 0.8, sx, 0, -0.22, -0.8], LW * 0.6);
     if (sim.arrowsLeft > 0 && !won && (sim.canFire() || aim)) { ctx.translate(sx, 0); drawArrowShape(1.12); }
     ctx.restore();
     dot(nx, ny, 0.09, SKIN); ctx.beginPath(); ctx.arc(nx, ny, 0.09, 0, 6.2832); ctx.strokeStyle = OUT; ctx.lineWidth = LW; ctx.stroke();
-    limb(AX - rc + 0.14, 1.34 + br + hop, gx - dx * 0.02, gy - dy * 0.02, 0.14, CREAM);
+    limb(AX - rc + 0.14, 1.34 + br + hop + gA, gx - dx * 0.02, gy - dy * 0.02, 0.14, CREAM);
     dot(gx + dx * 0.05, gy + dy * 0.05, 0.1, SKIN); ctx.beginPath(); ctx.arc(gx + dx * 0.05, gy + dy * 0.05, 0.1, 0, 6.2832); ctx.strokeStyle = OUT; ctx.stroke();
   }
 
@@ -220,7 +225,7 @@
     else if (mood === 'stomp') { j = Math.abs(Math.sin(T * 5 + s.ph)) * 0.06; tilt = Math.sin(T * 5 + s.ph) * 0.04; }
     var x = sheepX(i);
     if (sheepRun && sheepRun.i === i) { var k = Math.min(1, (T - sheepRun.t0) / 0.9); k = k * k * (3 - 2 * k); x = x + (sheepRun.to - x) * k; if (k < 1) j = Math.abs(Math.sin(T * 16)) * 0.15; s.cx = x; }
-    ctx.save(); ctx.translate(x, -(0.36 + 0.55 * fgScale)); ctx.scale(fgScale, fgScale); ctx.translate(0, j); ctx.rotate(tilt);
+    ctx.save(); ctx.translate(x, G(x) - (0.36 + 0.55 * fgScale)); ctx.scale(fgScale, fgScale); ctx.translate(0, j); ctx.rotate(tilt);
     ctx.beginPath(); ctx.ellipse(0.05, -0.5 - j, 0.5, 0.08, 0, 0, 6.2832); ctx.fillStyle = GRASS_S; ctx.fill();
     var st = mood === 'stomp' ? Math.sin(T * 10 + s.ph) * 0.05 : 0;
     limb(-0.26, -0.2, -0.27, -0.46 + Math.max(0, st), 0.09, DARK); limb(-0.08, -0.2, -0.08, -0.46, 0.09, DARK); limb(0.14, -0.2, 0.14, -0.46 + Math.max(0, -st), 0.09, DARK); limb(0.3, -0.2, 0.31, -0.46, 0.09, DARK);
@@ -285,7 +290,7 @@
 
   // ---------- demo: a hand pulls back once, shows the dotted path, lets go (no shot) ----------
   var PREVIEW_DOTS = 12;   // ≈0.55 s of flight, roughly the first third of the way
-  var DEMO = { a: 0.42, p: 0.9 };
+  var DEMO = { a: 0.59, p: 0.9 };
   function demoStep(dt) {
     if (level !== 0 || sim.shots > 0 || aim || sim.state !== 'play') { demo.active = false; return; }
     demo.t += dt;
@@ -335,8 +340,9 @@
     scenery();
     var sx = shake ? Math.sin(T * 70) * shake : 0, sy = shake ? Math.cos(T * 83) * shake : 0;
     world(zoom, camX, 0, sx, sy);
+    drawGround();
     var i, it;
-    for (i = 0; i < sim.items.length; i++) { it = sim.items[i]; if (!it.gone) { var p = it.body.getPosition(); if (p.y < 1.2) shadow(p.x, Math.max(it.w, it.h) * 0.42); } }
+    for (i = 0; i < sim.items.length; i++) { it = sim.items[i]; if (!it.gone) { var p = it.body.getPosition(); if (p.y - G(p.x) < 1.2) shadow(p.x, Math.max(it.w, it.h) * 0.42); } }
     if (ghost && sim.state === 'play') dots(ghost, CREAM, 0.045, 0.045, 0.55);
     for (i = 0; i < sim.items.length; i++) { it = sim.items[i]; if (!it.gone && it.kind !== 'wolf') drawItem(it); }
     for (i = 0; i < sim.wolves.length; i++) if (!sim.wolves[i].gone) drawWolf(sim.wolves[i], i);
@@ -360,10 +366,10 @@
         var fl = sim.arrows[sim.arrows.length - 1]; if (fl) ghost = fl.path.slice();
       }
       else if (e.type === 'miss') { var f2 = sim.arrows[sim.arrows.length - 1]; if (f2) ghost = f2.path.slice(); }
-      else if (e.type === 'hit') { if (e.s > 1.4) { sKnock(e.s); if (e.s > 3 && (e.a === 'ground' || e.b === 'ground')) puff(e.x, 0.06, 3, CREAM, 0.8); } }
+      else if (e.type === 'hit') { if (e.s > 1.4) { sKnock(e.s); if (e.s > 3 && (e.a === 'ground' || e.b === 'ground')) puff(e.x, G(e.x) + 0.06, 3, CREAM, 0.8); } }
       else if (e.type === 'loose') { if (e.id === 'wolfA') { var w = sim.wolves[0].body.getPosition(); parts.push({ k: 'apple', x: w.x + 0.4, y: w.y + 0.5, vx: 1.6, vy: 4.5, t: 0, life: 1.6 }); } }
       else if (e.type === 'topple') { slowT = 0.42; counts.slowmo++; }
-      else if (e.type === 'wolfdown') { sYelp(); buzz(30); puff(e.x, 0.1, 7, CREAM, 1.6); for (j = 0; j < sheep.length; j++) sheep[j].j = 0.01 + j * 0.0001; }
+      else if (e.type === 'wolfdown') { sYelp(); buzz(30); puff(e.x, G(e.x) + 0.1, 7, CREAM, 1.6); for (j = 0; j < sheep.length; j++) sheep[j].j = 0.01 + j * 0.0001; }
       else if (e.type === 'flee') { var wf = null; for (j = 0; j < sim.wolves.length; j++) if (sim.wolves[j].id === e.id) wf = sim.wolves[j]; fleeing.push({ x: e.x, t0: T, plunger: wf && wf.plunger > 0 }); }
       else if (e.type === 'basketdown') { sheepRun = { i: 2, t0: T + 0.5, to: Math.max(4.6, Math.min(18.4, e.x - 0.3)) }; }
       else if (e.type === 'win') { endT = 0; sWin(); confetti(); buzz(60); }
@@ -403,9 +409,9 @@
     go: function (n) { level = n; restart(); },
     info: function () {
       var up = sim.wolves.filter(function (w) { return !w.down; }).length;
-      var tb = { x0: 9, x1: 0, y1: 0 }; sim.items.forEach(function (it) { if (it.gone) return; var p = it.body.getPosition(); tb.x0 = Math.min(tb.x0, p.x - it.w / 2); tb.x1 = Math.max(tb.x1, p.x + it.w / 2); tb.y1 = Math.max(tb.y1, p.y + it.h / 2 + (it.kind === 'wolf' ? 0.2 : 0)); });
+      var tb = { x0: 99, x1: 0, y1: -9, y0: 99 }; sim.items.forEach(function (it) { if (it.gone) return; var p = it.body.getPosition(); tb.x0 = Math.min(tb.x0, p.x - it.w / 2); tb.x1 = Math.max(tb.x1, p.x + it.w / 2); tb.y0 = Math.min(tb.y0, p.y - it.h / 2); tb.y1 = Math.max(tb.y1, p.y + it.h / 2 + (it.kind === 'wolf' ? 0.2 : 0)); });
       return { level: level, levels: NLEV, wolves: sim.wolves.length, asleep: sim.asleep(), next: againBtn.classList.contains('next'), state: sim.state, arrowsLeft: sim.arrowsLeft, shots: sim.shots, wolvesUp: up, canFire: sim.canFire(), aiming: !!aim, maxPull: maxPull(), W: W, H: H, S: S,
-        archer: box(AX - 0.75, 0, C.ORIGIN.x + 0.45, 2.45), tower: box(tb.x0, 0, tb.x1, tb.y1), hud: hudRect(), sheep: sheep.map(function (s) { var x = s.cx === undefined ? sheepX(sheep.indexOf(s)) : s.cx, b = -(0.36 + 0.55 * fgScale); return { x: wx(x - 0.62 * fgScale), y: wy(b + 0.5 * fgScale), w: 1.3 * fgScale * S, h: 1.0 * fgScale * S }; }),
+        archer: box(AX - 0.75, G(AX), C.ORIGIN.x + 0.45, G(AX) + 2.45), tower: box(tb.x0, tb.y0, tb.x1, tb.y1), hud: hudRect(), sheep: sheep.map(function (s) { var x = s.cx === undefined ? sheepX(sheep.indexOf(s)) : s.cx, b = G(x) - (0.36 + 0.55 * fgScale); return { x: wx(x - 0.62 * fgScale), y: wy(b + 0.5 * fgScale), w: 1.3 * fgScale * S, h: 1.0 * fgScale * S }; }),
         demo: counts.demo, demoActive: demo.active, slowmo: counts.slowmo, slowNow: slowT > 0, timeScale: timeScale, preHit: counts.preHit || 0, zoom: zoom, sticks: counts.sticks, ghost: ghost ? ghost.length / 2 : 0, preview: aim ? Math.min(PREVIEW_DOTS, sim.preview(aim.a, aim.p).length / 2) : 0, previewEndX: aim ? (function () { var q = sim.preview(aim.a, aim.p); if (q.length > PREVIEW_DOTS * 2) q.length = PREVIEW_DOTS * 2; return q[q.length - 2]; })() : 0, focus: sim.focus,
         again: againBtn.classList.contains('on'), muted: muted, fleeing: fleeing.length, downBy: sim.wolves.map(function (w) { return w.downBy || ''; }), lostMarkers: sim.state === 'lost' ? up : 0, toppledButUp: sim.wolves.filter(function (w) { if (w.down || w.gone) return false; var d = w.body.getAngle() - w.a0; return Math.abs(Math.atan2(Math.sin(d), Math.cos(d))) > 0.8 || w.y0 - w.body.getPosition().y > 0.7; }).length, restarts: counts.restarts || 0, fp: sim.fingerprint(), fp5: counts.fp5 || '', scrollY: window.scrollY, time: sim.time };
     }

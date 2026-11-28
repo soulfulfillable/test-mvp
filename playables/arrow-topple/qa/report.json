@@ -1,5 +1,5 @@
 {
- "when": "2026-11-22T18:04:52.465Z",
+ "when": "2026-11-28T02:01:15.841Z",
  "pass": 53,
  "total": 53,
  "results": [
@@ -151,7 +151,7 @@
    "pass": true,
    "detail": {
     "dots": 12,
-    "endsAtX": 9.1,
+    "endsAtX": 8.5,
     "towerX": 15.7
    }
   },
@@ -170,7 +170,7 @@
    "detail": {
     "slowmo": 1,
     "sawSlow": true,
-    "maxZoom": 1.401
+    "maxZoom": 1.399
    }
   },
   {
@@ -193,7 +193,7 @@
    "pass": true,
    "detail": {
     "frames": 8,
-    "ms": 4187
+    "ms": 4036
    }
   },
   {
@@ -219,7 +219,7 @@
    "detail": {
     "state": "won",
     "same": true,
-    "len": 229
+    "len": 226
    }
   },
   {
@@ -335,7 +335,7 @@
     "startOk": true,
     "fits": true,
     "state": "won",
-    "shots": 1,
+    "shots": 2,
     "wolves": 2,
     "slowmo": 7
    }
@@ -393,10 +393,10 @@
    "pass": true,
    "detail": {
     "downBy": [
-     "ground",
-     "rubble"
+     "rubble",
+     ""
     ],
-    "state": "won"
+    "state": "play"
    }
   },
   {

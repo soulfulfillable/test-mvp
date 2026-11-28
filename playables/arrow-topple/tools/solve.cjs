@@ -36,8 +36,16 @@ LEVELS.forEach((lv, li) => {
     for (const c of cand.slice(0, 40)) { tried++; let okAll = true;
       for (const da of [-0.5, 0, 0.5]) for (const dp of [-0.01, 0, 0.01]) if (okAll && run(li, [[R(c.g.deg + da), Math.min(1, c.g.p + dp)]]).state !== 'won') okAll = false;
       if (okAll) { b = c; break; } }
-    console.log(b ? `robust aim found after ${tried} candidate(s)` : 'NO jitter-proof aim — using the best neighbourhood'); if (!b) b = cand[0];
-    sol = { shots: [[R(b.g.deg), +b.g.p.toFixed(2)]], neighbours: b.n }; }
+    console.log(b ? `robust aim found after ${tried} candidate(s)` : 'no jitter-proof single arrow — looking for a two-arrow plan');
+    if (b) sol = { shots: [[R(b.g.deg), +b.g.p.toFixed(2)]], neighbours: b.n };
+    else {   // one arrow per tower: a steady first shot that drops one wolf, then any second shot that finishes — both must survive a shaky finger
+      const part1 = grid.filter(g => g.down >= 1 && g.state !== 'won'); const firsts = part1.map(g => ({ g, n: nb(part1, g) })).sort((x, y) => y.n - x.n).slice(0, 10);
+      const jit = [[0, 0, 0, 0], [0.5, 0.01, -0.5, -0.01], [-0.5, -0.01, 0.5, 0.01], [0.5, -0.01, 0.5, 0.01], [-0.5, 0.01, -0.5, -0.01]];
+      outer2: for (const f of firsts) for (const g2 of tower) {
+        if (run(li, [[R(f.g.deg), f.g.p], [R(g2.deg), g2.p]]).state !== 'won') continue;
+        if (jit.every(j => run(li, [[R(f.g.deg + j[0]), Math.min(1, f.g.p + j[1])], [R(g2.deg + j[2]), Math.min(1, g2.p + j[3])]]).state === 'won')) { sol = { shots: [[R(f.g.deg), +f.g.p.toFixed(2)], [R(g2.deg), +g2.p.toFixed(2)]] }; console.log('robust two-arrow plan found'); break outer2; } }
+      if (!sol) { sol = { shots: [[R(cand[0].g.deg), +cand[0].g.p.toFixed(2)]], neighbours: cand[0].n }; console.log('NO robust plan — falling back to the best single arrow'); }
+    } }
   else { const firsts = one.map(g => ({ g, n: nb(one, g) })).sort((x, y) => y.g.down - x.g.down || y.n - x.n).slice(0, 6);
     outer: for (const f of firsts) for (const g2 of tower) { const sh = [[R(f.g.deg), f.g.p], [R(g2.deg), g2.p]]; if (run(li, sh).state === 'won') { sol = { shots: sh.map(x => [x[0], +x[1].toFixed(2)]) }; break outer; } } }
   console.log('solution', sol && JSON.stringify(sol.shots.map(x => [Math.round(x[0] * 180 / Math.PI) + '°', x[1]])), sol && sol.neighbours ? 'neighbours ' + sol.neighbours : '');
