@@ -3,12 +3,18 @@ name: Deploy GitHub Pages
 # Publishes the docs/ folder (Flutter web build + standalone previews) to
 # GitHub Pages. `enablement: true` turns Pages on for the repository
 # automatically, so no manual Settings step is needed.
+#
+# 2026-11-28: build 와 deploy 를 두 작업으로 나누고 deploy 를 최대 3번 시도한다.
+# 한 작업 안에서 올리자마자 배포하면 deploy-pages 가 방금 올린 artifact 를 못 찾아
+# ("No artifacts named github-pages were found") 실패하는 GitHub 쪽 문제 때문 —
+# 11-22 부터 배포가 조용히 실패해 사이트가 닷새 동안 옛 판이었다.
 
 on:
   push:
     branches: [main]
     paths:
       - "docs/**"
+      - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -21,11 +27,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -40,6 +43,33 @@ jobs:
         with:
           path: docs
 
-      - name: Deploy to GitHub Pages
-        id: deployment
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy3.outputs.page_url || steps.deploy2.outputs.page_url || steps.deploy1.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages (1st try)
+        id: deploy1
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Wait 20s before 2nd try
+        if: steps.deploy1.outcome == 'failure'
+        run: sleep 20
+
+      - name: Deploy to GitHub Pages (2nd try)
+        id: deploy2
+        if: steps.deploy1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Wait 60s before 3rd try
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
+        run: sleep 60
+
+      - name: Deploy to GitHub Pages (3rd try)
+        id: deploy3
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
         uses: actions/deploy-pages@v4

@@ -1,6 +1,7 @@
 # 공용 게시판 — 모든 세션이 같이 쓰는 것
 
 ## 공용 작업 중 (공용 파일을 고칠 때 먼저 적고, 끝나면 지운다)
+- **2026-11-28 기획 파트너: `.github/workflows/deploy-pages.yml` 고침(끝남).** 11-22 18:05Z 부터 Pages 배포가 "No artifacts named github-pages were found" 로 계속 실패해 **사이트가 닷새 동안 옛 판**이었다(Arrow Topple 7차 판정 수정이 실제로는 안 올라가 있었음). GitHub 쪽에서 알려진 문제(올리자마자 같은 작업에서 배포하면 artifact 를 못 찾음) → build/deploy 두 작업으로 나누고 deploy 를 최대 3번 시도하게 바꿈. **모든 세션: main 에 올린 뒤 `Deploy GitHub Pages` 실행이 success 인지 꼭 확인할 것**(커밋이 main 에 있는 것만으로는 배포된 게 아니다).
 
 | 세션(앱) | 무엇을 | 시작 | 상태 |
 |---|---|---|---|
