@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#cdc8c0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Cozy Latte</title>
+<style>
+  :root{--table:#cdc8c0;--ink:#2b2a28;--accent:#1f7a6c}
+  @media (prefers-color-scheme:dark){:root{--table:#212427;--ink:#ecebe8;--accent:#3aa594}}
+  html{background:var(--table);overscroll-behavior:none}
+  /* 240px scroll cushion: an in-app browser sheet reads a downward drag as "close" unless the page can scroll */
+  body{margin:0;height:calc(100% + 240px);min-height:calc(100vh + 240px);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;font:15px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,sans-serif;color:var(--ink)}
+  #app{position:fixed;inset:0;overflow:hidden;background:var(--table);touch-action:pan-y}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  button{position:absolute;margin:0;padding:0;border:0;background:none;cursor:pointer;-webkit-appearance:none;appearance:none}
+
+  /* the only control: appears when the cup is finished */
+  #fresh{left:50%;bottom:calc(6.5% + env(safe-area-inset-bottom));width:64px;height:64px;margin-left:-32px;border-radius:50%;background:var(--accent);color:#fff;opacity:0;transform:scale(.7);pointer-events:none;transition:opacity .28s ease,transform .42s cubic-bezier(.3,1.5,.5,1)}
+  #fresh.on{opacity:1;transform:none;pointer-events:auto}
+  #fresh:active{transform:scale(.93);transition-duration:.08s}
+  #fresh svg{width:34px;height:34px;display:block;margin:15px}
+
+  /* first-run demonstration: a fingertip that presses and sways. No words. */
+  #finger{position:absolute;left:0;top:0;width:76px;height:118px;margin:-14px 0 0 -38px;opacity:0;pointer-events:none;transition:opacity .3s ease;will-change:transform}
+  #finger.on{opacity:.93}
+
+  #fps{position:absolute;left:calc(10px + env(safe-area-inset-left));top:calc(10px + env(safe-area-inset-top));padding:4px 8px;border-radius:7px;background:rgba(0,0,0,.55);color:#fff;font:12px/1.3 ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;pointer-events:none;display:none}
+
+  #nogl{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center}
+  #nogl svg{width:min(62vw,300px);height:auto}
+  #nogl p{margin:0;max-width:280px;font-size:15px;opacity:.72}
+  .nogl #nogl{display:flex}
+  .nogl canvas,.nogl #finger{display:none}
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="cup" aria-label="A cup of coffee seen from above. Touch to pour milk."></canvas>
+
+  <svg id="finger" viewBox="0 0 76 118" aria-hidden="true">
+    <circle cx="38" cy="14" r="12" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
+    <path d="M38 8c7.2 0 13 5.8 13 13v54c0 2 1.2 3.4 3 4.4 9 5 14 12 14 22v16H10v-14c0-6 2-11 6-15 5-5 9-8 9-14V21c0-7.200 5.800-13 13-13z" fill="#e9c3a2" stroke="#8a5c3f" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M30.500 22a7.500 7.500 0 0 1 15 0v9h-15z" fill="#f6e2d2" stroke="#8a5c3f" stroke-width="1.500" stroke-linejoin="round"/>
+  </svg>
+
+  <button id="fresh" type="button" aria-label="New cup">
+    <svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="15" cy="18" r="9.500"/>
+      <circle cx="15" cy="18" r="5.500" fill="currentColor" fill-opacity=".28" stroke="none"/>
+      <path d="M24.300 14.800h3.200a3.200 3.200 0 0 1 0 6.400h-3.200"/>
+      <path d="M11 4.500c-1.300 1.200 1.300 2.300 0 3.700M15.500 3.500c-1.300 1.200 1.300 2.300 0 3.700M20 4.500c-1.300 1.200 1.300 2.300 0 3.700" stroke-width="1.800"/>
+    </svg>
+  </button>
+
+  <div id="fps"></div>
+
+  <div id="nogl" role="img" aria-label="A finished latte">
+    <svg viewBox="0 0 300 300" aria-hidden="true">
+      <circle cx="150" cy="150" r="140" fill="#f1eee8"/>
+      <circle cx="150" cy="150" r="118" fill="none" stroke="#dcd7cf" stroke-width="3"/>
+      <rect x="228" y="196" width="62" height="24" rx="12" fill="#fbfaf7" stroke="#d8d3ca" stroke-width="2" transform="rotate(38 228 208)"/>
+      <circle cx="150" cy="150" r="100" fill="#fbfaf7" stroke="#d8d3ca" stroke-width="2"/>
+      <circle cx="150" cy="150" r="88" fill="#8a5a2f"/>
+      <path d="M150 92c30 0 52 22 52 46 0 30-30 46-52 70-22-24-52-40-52-70 0-24 22-46 52-46z" fill="#f6eee2"/>
+      <path d="M150 104v96M150 128c-14-8-28-8-38 0M150 128c14-8 28-8 38 0M150 152c-12-7-24-7-32 0M150 152c12-7 24-7 32 0M150 174c-8-5-16-5-22 0M150 174c8-5 16-5 22 0" fill="none" stroke="#8a5a2f" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <p>This browser can&rsquo;t pour milk yet. Open this page in Safari or Chrome.</p>
+  </div>
+</div>
+<script src="latte.js?v=1"></script>
+</body>
+</html>

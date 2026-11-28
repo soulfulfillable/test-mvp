@@ -1,0 +1,360 @@
+{
+ "when": "2026-11-28T01:48:45.586Z",
+ "base": "http://localhost:8765/cozy-latte/",
+ "pass": 39,
+ "total": 39,
+ "note": "Headless Chromium + software WebGL (~15 fps). Verifies behaviour only; hand feel on a real phone is NOT verified.",
+ "results": [
+  {
+   "name": "first screen 320x568",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.06
+   }
+  },
+  {
+   "name": "first screen 360x640",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.055
+   }
+  },
+  {
+   "name": "first screen 375x667",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.115
+   }
+  },
+  {
+   "name": "first screen 390x844",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.075
+   }
+  },
+  {
+   "name": "first screen 393x852",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.06
+   }
+  },
+  {
+   "name": "first screen 412x915",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.07
+   }
+  },
+  {
+   "name": "first screen 414x896",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.09
+   }
+  },
+  {
+   "name": "first screen 430x932",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.1
+   }
+  },
+  {
+   "name": "first screen 768x1024",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.115
+   }
+  },
+  {
+   "name": "first screen 820x1180",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.09
+   }
+  },
+  {
+   "name": "first screen 1024x768",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.165
+   }
+  },
+  {
+   "name": "first screen 844x390",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.08
+   }
+  },
+  {
+   "name": "first screen 1280x720",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.065
+   }
+  },
+  {
+   "name": "first screen 1170x2532",
+   "pass": true,
+   "detail": {
+    "cup": true,
+    "handle": true,
+    "buttonHiddenAndClear": true,
+    "canvas": true,
+    "centreIsCoffee": 0.105
+   }
+  },
+  {
+   "name": "touch puts milk at the touched point",
+   "pass": true,
+   "detail": {
+    "before": 0.12,
+    "after": 1.04
+   }
+  },
+  {
+   "name": "holding still makes the white pool grow",
+   "pass": true,
+   "detail": {
+    "probesWhiteAtStart": 9,
+    "after45Frames": 37
+   }
+  },
+  {
+   "name": "pouring beside a pattern pushes it away",
+   "pass": true,
+   "detail": {
+    "nearEdgePxFromCentreBefore": 53,
+    "after": 26,
+    "farEdgeBefore": 52,
+    "farEdgeAfter": 54
+   }
+  },
+  {
+   "name": "a fast stroke is one unbroken line (no dots)",
+   "pass": true,
+   "detail": {
+    "minWhitenessAlongLine": 0.66,
+    "samples": 19
+   }
+  },
+  {
+   "name": "a quick stroke through the pattern splits it",
+   "pass": true,
+   "detail": {
+    "whiteRunsAcrossBefore": 2,
+    "after": 4
+   }
+  },
+  {
+   "name": "two fingers: still running, pour released",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "scroll cushion: 240px of room, parked at 120, a downward drag does not move it",
+   "pass": true,
+   "detail": {
+    "room": 240,
+    "before": 120,
+    "afterDrag": 120
+   }
+  },
+  {
+   "name": "rotating the phone keeps the pattern",
+   "pass": true,
+   "detail": {
+    "probesBefore": 86,
+    "after": 89
+   }
+  },
+  {
+   "name": "milk runs out → cup is finished, \"new cup\" button appears",
+   "pass": true,
+   "detail": {
+    "fill": 1,
+    "done": true,
+    "buttonOpacity": 1,
+    "liquidRadius": 0.8974500000000001
+   }
+  },
+  {
+   "name": "finished cup takes no more milk",
+   "pass": true,
+   "detail": {
+    "probesBefore": 41,
+    "after": 40
+   }
+  },
+  {
+   "name": "\"new cup\" button is finger-sized (≥44px)",
+   "pass": true,
+   "detail": {
+    "size": 64
+   }
+  },
+  {
+   "name": "new cup: empty coffee again, button gone, can pour",
+   "pass": true,
+   "detail": {
+    "fill": 0,
+    "whiteProbes": 0
+   }
+  },
+  {
+   "name": "new cup pours again",
+   "pass": true,
+   "detail": {
+    "white": 1.03
+   }
+  },
+  {
+   "name": "no WebGL → a picture and one line instead of a blank page",
+   "pass": true,
+   "detail": {
+    "cls": true,
+    "disp": "flex",
+    "svgW": 241.796875,
+    "text": "This browser can’t pour milk yet. Open this page in Safari or Chrome.",
+    "canvas": "none"
+   }
+  },
+  {
+   "name": "first visit: a finger shows the pour once, uses none of your milk, hands back a clean cup",
+   "pass": true,
+   "detail": {
+    "sawFinger": true,
+    "milkProbesDuringDemo": 28,
+    "whiteAfter": 0,
+    "remembered": "1"
+   }
+  },
+  {
+   "name": "second visit: no demonstration",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "touching during the demonstration takes over immediately",
+   "pass": true,
+   "detail": {
+    "demo": false,
+    "white": 0.93,
+    "fill": 0.036523076923076915
+   }
+  },
+  {
+   "name": "?fps=1 shows the frame rate",
+   "pass": true,
+   "detail": "block|38 fps · grid 112 · milk 512 · L4"
+  },
+  {
+   "name": "no ?fps → no readout",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "idle cup stops drawing (battery) and wakes on touch",
+   "pass": true,
+   "detail": {
+    "asleep": true,
+    "awake": true,
+    "white": 1.045
+   }
+  },
+  {
+   "name": "slow device → steps the grid down by itself, picture survives",
+   "pass": true,
+   "detail": {
+    "startLevel": 1,
+    "startGrid": 192,
+    "endLevel": 5,
+    "endGrid": 96,
+    "endMilkRes": 384,
+    "centreStillWhite": 1.02
+   }
+  },
+  {
+   "name": "dark mode: dark table",
+   "pass": true,
+   "detail": {
+    "table": "#212427",
+    "cornerBrightness": 0.08
+   }
+  },
+  {
+   "name": "milk is in the very first frame drawn after the finger lands (virtual 60 fps clock)",
+   "pass": true,
+   "detail": {
+    "before": 0.145,
+    "after": 1.01,
+    "framesDrawn": 1
+   }
+  },
+  {
+   "name": "frame strips written (first touch ×6 frames, one cup in 5 stages)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "console errors / page errors / outside requests: none",
+   "pass": true,
+   "detail": []
+  }
+ ]
+}
