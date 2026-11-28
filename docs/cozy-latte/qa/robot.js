@@ -58,9 +58,16 @@ async function open(browser, o = {}) {
     const RL = g.Ro * 0.93;   // widest the liquid ever gets
     const okDials = dials.every(d => d.l >= 0 && d.r <= w && d.t >= 0 && d.b <= h && d.r - d.l >= 44 && d.b - d.t >= 100 &&
       Math.hypot(Math.max(d.l - g.cx, 0, g.cx - d.r), Math.max(d.t - g.cy, 0, g.cy - d.b)) > RL + 4 && (d.r < btn.l || d.l > btn.r));
+    const tl = await t.page.evaluate(() => ({ tools: ['style', 'tex'].map(id => { const r = document.querySelector('#' + id + ' i').getBoundingClientRect(), b = document.getElementById(id).getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: b.bottom, w: r.width, label: document.querySelector('#' + id + ' span').textContent }; }),
+      tags: [...document.querySelectorAll('.dial .tag')].map(e => { const r = e.getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom, text: e.textContent }; }),
+      help: (() => { const r = document.getElementById('help').getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; })() }));
+    const clr = d => Math.hypot(Math.max(d.l - g.cx, 0, g.cx - d.r), Math.max(d.t - g.cy, 0, g.cy - d.b)) > RL + 2;
+    const okTools = tl.tools.every(d => d.l >= 0 && d.r <= w && d.b <= h && d.w >= 44 && clr(d) && d.label.length > 2 && dials.every(q => d.r < q.l || d.l > q.r)) &&
+      tl.tags.length === 2 && tl.tags.every(d => d.l >= 0 && d.r <= w && d.t >= 0 && clr(d)) && tl.tags[0].text === 'Height' && tl.tags[1].text === 'Flow' &&
+      tl.help.r <= w && tl.help.t >= 0 && tl.help.r - tl.help.l >= 44 && clr(tl.help);
     const okCanvas = Math.abs(g.canvasW - w * (dpr || 1)) <= 1 && Math.abs(g.canvasH - h * (dpr || 1)) <= 1;
-    check(`first screen ${tag}`, s.ok && okCup && okHandle && okBtn && okDials && okCanvas && centre < 0.35 && s.fill === 0,
-      { cup: okCup, handle: okHandle, buttonHiddenAndClear: okBtn, dialsOnScreenClearOfCoffee: okDials, canvas: okCanvas, centreIsCoffee: centre });
+    check(`first screen ${tag}`, s.ok && okCup && okHandle && okBtn && okDials && okTools && okCanvas && centre < 0.35 && s.fill === 0,
+      { cup: okCup, handle: okHandle, buttonHiddenAndClear: okBtn, dialsOnScreenClearOfCoffee: okDials, toolsTagsHelpOnScreenClearOfCoffee: okTools, canvas: okCanvas, centreIsCoffee: centre });
     await t.shot('first-' + tag);
     // order chip + mode button on screen and clear of the coffee; then serve a tiny pour and see that the result card fits
     const top = await t.page.evaluate(() => ['order', 'mode'].map(id => { const r = document.getElementById(id).getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; }));
@@ -68,7 +75,7 @@ async function open(browser, o = {}) {
     const okTop = top.every(d => d.l >= 0 && d.r <= w && d.t >= 0 && clear(d)) && top[0].r <= top[1].l && top[1].b - top[1].t >= 44 && s.mode === 'orders' && s.guideOn && s.order === 'circle';
     if (dpr) { check(`orders screen ${tag}: order chip and mode button (pour not driven: software renderer stalls at this pixel count; same layout as 390x844)`, okTop); await t.ctx.close(); continue; }
     await t.touch('touchStart', g.cx, g.cy); await t.frames(3); await t.touch('touchEnd'); await t.frames(2);
-    const sv = await t.page.evaluate(() => { const r = document.getElementById('serve').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2, r.width, document.getElementById('serve').classList.contains('on')]; });
+    const sv = await t.page.evaluate(() => { const r = document.querySelector('#serve i').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2, r.width, document.getElementById('serve').classList.contains('on')]; });
     await t.page.touchscreen.tap(sv[0], sv[1]);
     await t.page.waitForFunction(() => __latte.state().card, null, { timeout: 15000 }).catch(() => { }); await t.page.waitForTimeout(450);
     const cd = await t.page.evaluate(() => { const r = document.getElementById('card').getBoundingClientRect(); const b = [...document.querySelectorAll('#card button')].map(x => x.getBoundingClientRect()); return { l: r.left, t: r.top, r: r.right, b: r.bottom, btnH: Math.min(...b.map(x => x.height)), btnIn: b.every(x => x.left >= r.left && x.right <= r.right && x.bottom <= r.bottom), dialOp: +getComputedStyle(document.getElementById('hgt')).opacity, pct: document.getElementById('pct').textContent }; });
@@ -263,7 +270,7 @@ async function open(browser, o = {}) {
     await t.page.touchscreen.tap(mb[0], mb[1]); await t.page.waitForTimeout(500);
     const f = await t.st(); const vis = await t.page.evaluate(() => getComputedStyle(document.getElementById('order')).visibility + '|' + document.getElementById('mode').textContent);
     await t.touch('touchStart', g.cx, g.cy); await t.frames(3); await t.touch('touchEnd'); await t.frames(2);
-    const sv = await t.page.evaluate(() => { const r = document.getElementById('serve').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
+    const sv = await t.page.evaluate(() => { const r = document.querySelector('#serve i').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
     await t.page.touchscreen.tap(sv[0], sv[1]); await t.page.waitForTimeout(1500);
     const fd = await t.st();
     check('"Free pour": no order, no score — serve just offers a new cup', f.mode === 'free' && !f.guideOn && vis === 'hidden|Orders' && fd.done && fd.button && !fd.card, { mode: f.mode, orderChip: vis, newCupButton: fd.button, card: fd.card });
@@ -271,6 +278,35 @@ async function open(browser, o = {}) {
     check('mode is remembered', (await t.st()).mode === 'free');
     await t.page.touchscreen.tap(mb[0], mb[1]); await t.page.waitForTimeout(500);
     check('back to "Orders"', (await t.st()).mode === 'orders' && (await t.st()).guideOn);
+    await t.ctx.close();
+  }
+
+
+  /* T. tools under the cup: pour style (auto-sway) and milk texture — each must make a visible difference */
+  {
+    const pour = async (si, ti, shot) => { const u = await open(browser, { tag: 'tool' + si + ti, dpr: shot ? 2 : 1, query: '?manual=1&level=3' });
+      const r = await u.page.evaluate(([si, ti]) => { __latte.setTools(si, ti); const g = __latte.state().geo; let t = 0; const R = () => __latte.state().geo.rho * g.Ro;
+        __latte.feed('down', g.cx, g.cy - R() * 0.45, 0); for (let f = 0; f < 60; f++) { t += 16.7; __latte.tick(16.7); }
+        const spotOn = __latte.state().spot;
+        for (let f = 0; f < 150; f++) { t += 16.7; __latte.feed('move', g.cx, g.cy - R() * 0.45 + R() * 0.9 * f / 150, t); __latte.tick(16.7); }
+        __latte.feed('up'); __latte.tick(16.7);
+        const m = __latte.mask(); let minX = 96, maxX = 0, n = 0, runs = 0; for (let i = 0; i < m.length; i++) if (m[i] === '1') { n++; const x = i % 96; if (x < minX) minX = x; if (x > maxX) maxX = x; }
+        let inW = false; for (let y = 0; y < 96; y++) { const c = m[y * 96 + 48] === '1'; if (c && !inW) runs++; inW = c; }
+        return { cells: n, width: maxX - minX + 1, bandsDownTheMiddle: runs, spotOn, spotAfter: __latte.state().spot, style: __latte.state().style, tex: __latte.state().tex }; }, [si, ti]);
+      if (shot) await u.shot(shot); await u.ctx.close(); return r; };
+    const straight = await pour(0, 1, 'tool-straight'), sway = await pour(1, 1, 'tool-sway'), wide = await pour(2, 1, 'tool-wide'), thin = await pour(0, 0, 'tool-thin'), thick = await pour(0, 2, 'tool-thick');
+    check('pour style: Sway and Wide swing the stream by themselves (wider, layered) while the finger goes straight', sway.width > straight.width * 0.9 && wide.width > sway.width + 6 && sway.bandsDownTheMiddle >= 3 && wide.bandsDownTheMiddle >= 3 && straight.bandsDownTheMiddle <= 2, { straight, sway, wide });
+    check('milk texture: Thin spreads further than Regular, Thick sits tighter', thin.cells > straight.cells * 1.12 && thick.cells < straight.cells * 0.9, { thin: thin.cells, regular: straight.cells, thick: thick.cells });
+    check('pour spot is shown while pouring and gone after', straight.spotOn && !straight.spotAfter);
+    // real taps cycle and remember
+    const t = await open(browser, { tag: 'tooltap', query: '?level=4' });
+    const c = id => t.page.evaluate(i => { const r = document.querySelector('#' + i + ' i').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }, id);
+    const s0 = await t.st(); const a = await c('style'), b = await c('tex');
+    await t.page.touchscreen.tap(a[0], a[1]); await t.page.touchscreen.tap(b[0], b[1]); await t.page.waitForTimeout(150);
+    const s1 = await t.st(); const lab = await t.page.evaluate(() => [document.querySelector('#style span').textContent, document.querySelector('#tex span').textContent]);
+    await t.page.reload(); await t.page.waitForTimeout(800); const s2 = await t.st();
+    check('tapping a tool changes it, the name tag follows, and it is remembered', s0.style === 'Straight' && s0.tex === 'Regular' && s1.style === 'Sway' && s1.tex === 'Thick' && lab[0] === 'Sway' && lab[1] === 'Thick' && s2.style === 'Sway' && s2.tex === 'Thick' && s1.fill === 0, { before: [s0.style, s0.tex], after: [s1.style, s1.tex], labels: lab, afterReload: [s2.style, s2.tex] });
+    await t.shot('tools-390x844');
     await t.ctx.close();
   }
 
@@ -314,6 +350,16 @@ async function open(browser, o = {}) {
   /* K. first-run demonstration */
   {
     const t = await open(browser, { tag: 'demo', firstRun: true, query: '?level=4', wait: 300 });
+    // the how-to sheet comes first; the cup does not take milk while it is open
+    const i0 = await t.st(); const g0 = i0.geo;
+    const steps = await t.page.evaluate(() => [...document.querySelectorAll('#intro .step p')].map(p => p.textContent.trim()));
+    const sheet = await t.page.evaluate(() => { const r = document.querySelector('#intro .sheet').getBoundingClientRect(), b = document.getElementById('start').getBoundingClientRect(); return { in: r.left >= 0 && r.top >= 0 && r.right <= innerWidth && r.bottom <= innerHeight, bx: b.left + b.width / 2, by: b.top + b.height / 2, bh: b.height, anim: getComputedStyle(document.querySelector('#intro .a')).animationName }; });
+    await t.touch('touchStart', g0.cx, g0.cy + g0.Ro * 0.95); await t.page.waitForTimeout(300); await t.touch('touchEnd');
+    const blocked = (await t.st()).fill === 0 && (await t.grid()) === 0;
+    await t.shot('intro-390x844');
+    check('first visit: a 3-step how-to sheet (moving pictures + one line each), cup locked behind it', i0.intro && steps.length === 3 && steps.every(x => x.length > 10 && x.length < 60) && sheet.in && sheet.bh >= 44 && sheet.anim !== 'none' && blocked, { steps, sheetOnScreen: sheet.in, animation: sheet.anim, cupLocked: blocked });
+    await t.page.touchscreen.tap(sheet.bx, sheet.by); await t.page.waitForTimeout(200);
+    check('"Start" closes the how-to sheet', !(await t.st()).intro);
     let sawFinger = false, sawMilk = 0, fillDuring = 0;
     const t0 = Date.now();
     while (Date.now() - t0 < 9000) {
@@ -329,10 +375,16 @@ async function open(browser, o = {}) {
     check('first visit: a finger shows the pour once, uses none of your milk, hands back a clean cup', sawFinger && sawMilk > 5 && fillDuring === 0 && n === 0 && s.fill === 0 && seen === '1', { sawFinger, milkProbesDuringDemo: sawMilk, whiteAfter: n, remembered: seen });
     await t.page.reload(); await t.page.waitForTimeout(2500);
     const again = await t.page.evaluate(() => document.getElementById('finger').classList.contains('on') || __latte.state().demo);
-    check('second visit: no demonstration', !again);
+    check('second visit: no how-to sheet, no demonstration', !again && !(await t.st()).intro);
+    const hb = await t.page.evaluate(() => { const r = document.getElementById('help').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
+    await t.page.touchscreen.tap(hb[0], hb[1]); await t.page.waitForTimeout(250);
+    const re = (await t.st()).intro;
+    await t.page.touchscreen.tap(sheet.bx, sheet.by); await t.page.waitForTimeout(250);
+    check('"?" brings the how-to sheet back any time; Start closes it without replaying the finger', re && !(await t.st()).intro && !(await t.st()).demo);
     await t.ctx.close();
     // touching during the demo takes over at once
     const u = await open(browser, { tag: 'demo-interrupt', firstRun: true, query: '?level=4', wait: 300 });
+    await u.page.evaluate(() => document.getElementById('start').click());
     const tt = Date.now(); while (!(await u.st()).down && Date.now() - tt < 6000) await u.page.waitForTimeout(40);
     const g = (await u.st()).geo;
     await u.touch('touchStart', g.cx + 40, g.cy + 40); await u.frames(2);

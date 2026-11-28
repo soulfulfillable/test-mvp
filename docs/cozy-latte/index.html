@@ -78,6 +78,47 @@
   @media (orientation:portrait) and (max-height:620px){#card{padding:10px}#over{width:78px;height:78px}#card .btns{margin-top:8px}#card .btns button{height:44px}#pct{font-size:30px}#stars{margin:3px 0 5px}}
   .nogl #top,.nogl #serve,.nogl #card{display:none}
 
+  /* name tags, the row of tools under the cup, the pour spot, the how-to sheet */
+  .dial .tag{position:absolute;left:50%;top:-15px;transform:translateX(-50%);font-size:13px;opacity:.66;white-space:nowrap;pointer-events:none}
+  #tools{position:absolute;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:flex-start;gap:clamp(8px,3.4vw,16px);transition:opacity .2s ease}
+  #tools .tool{position:static;display:flex;flex-direction:column;align-items:center;gap:4px;width:56px;font:inherit;font-size:13px;color:var(--ink)}
+  #tools .tool span{opacity:.66;white-space:nowrap}
+  #tools .tool i{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--knob);border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);box-sizing:border-box;color:var(--accent)}
+  #tools .tool:active i{transform:scale(.93)}
+  #tools .tool svg{width:28px;height:28px;display:block}
+  #tools #serve{position:static;margin:0;left:auto;bottom:auto;width:56px;height:auto;border:0;background:none;border-radius:0;transform:none;visibility:hidden;opacity:1;pointer-events:none}
+  #tools #serve.on{visibility:visible;pointer-events:auto}
+  #tools #serve svg{margin:0}
+  #tools #serve i{background:var(--accent);color:#fff;border-color:transparent}
+  .served #tools{opacity:0;pointer-events:none}
+  @media (max-width:340px){#tools .tool{width:50px}#tools .tool i{width:46px;height:46px}}
+  #spot{position:absolute;left:0;top:0;width:10px;height:10px;margin:0;border-radius:50%;border:2px solid rgba(255,255,255,.85);box-shadow:0 0 0 1px rgba(60,35,15,.35);box-sizing:border-box;opacity:0;pointer-events:none;transition:opacity .15s ease}
+  #spot.on{opacity:1}
+  #spot.sink{border-style:dashed}
+  #help{position:static;pointer-events:auto;width:44px;height:44px;font:inherit;font-size:17px;font-weight:600;color:var(--accent)}
+  #topR{display:flex;align-items:center;gap:2px;pointer-events:none}
+  #intro{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:color-mix(in srgb,var(--table) 78%,transparent);padding:16px;box-sizing:border-box}
+  #intro.on{display:flex}
+  #intro .sheet{width:min(340px,100%);max-height:100%;overflow:auto;box-sizing:border-box;padding:18px 16px 16px;border-radius:20px;background:var(--knob);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+  #intro .step{display:flex;align-items:center;gap:14px;padding:9px 0}
+  #intro .step+.step{border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
+  #intro .step svg{width:76px;height:76px;flex:none}
+  #intro .step p{margin:0;font-size:17px;line-height:1.3}
+  #intro .step p b{font-weight:600}
+  #start{position:static;width:100%;height:50px;margin-top:10px;border-radius:14px;background:var(--accent);color:#fff;font:inherit;font-size:17px;font-weight:600}
+  #start:active{opacity:.6}
+  @media (max-height:520px){#intro .sheet{width:min(640px,100%);display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 12px}#intro .step{flex-direction:column;text-align:center;gap:6px}#intro .step+.step{border-top:0}#start{grid-column:1/-1}}
+  @keyframes cl-grow{0%,12%{transform:scale(.18)}70%,100%{transform:scale(1)}}
+  @keyframes cl-tap{0%,8%{transform:translateY(-9px);opacity:.3}16%,88%{transform:none;opacity:1}100%{transform:translateY(-9px);opacity:.3}}
+  @keyframes cl-jug{0%,42%{transform:translateY(0)}54%,92%{transform:translateY(34px)}100%{transform:translateY(0)}}
+  @keyframes cl-low{0%,54%{transform:scale(.01)}92%,100%{transform:scale(1)}}
+  @keyframes cl-ring{0%{transform:scale(.3);opacity:.9}40%{transform:scale(1);opacity:0}100%{transform:scale(1);opacity:0}}
+  @keyframes cl-draw{0%,5%{stroke-dashoffset:210}62%,100%{stroke-dashoffset:0}}
+  @keyframes cl-cut{0%,66%{stroke-dashoffset:56}90%,100%{stroke-dashoffset:0}}
+  #intro .a{transform-box:fill-box;transform-origin:center;animation-duration:3.2s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+  @media (prefers-reduced-motion:reduce){#intro .a{animation:none}}
+  .nogl #tools,.nogl #intro,.nogl #spot{display:none}
+
   #fps{position:absolute;left:calc(10px + env(safe-area-inset-left));top:calc(10px + env(safe-area-inset-top));padding:4px 8px;border-radius:7px;background:rgba(0,0,0,.55);color:#fff;font:12px/1.3 ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;pointer-events:none;display:none}
 
   #nogl{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center}
@@ -109,22 +150,27 @@
   </button>
 
   <div class="dial" id="hgt" role="slider" tabindex="0" aria-label="Pour height" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100">
-    <div class="track"><i></i></div><div class="foot"></div>
+    <span class="tag">Height</span><div class="track"><i></i></div><div class="foot"></div>
     <div class="knob"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h11l-1.500 13.500a2 2 0 0 1-2 1.800h-4a2 2 0 0 1-2-1.800z" fill="currentColor" fill-opacity=".18"/><path d="M8 6l-4.500-1.500L7.300 10.500"/><path d="M18.600 9.500h1.900a2.500 2.500 0 0 1 0 5h-2.500"/></svg></div>
   </div>
   <div class="dial" id="amt" role="slider" tabindex="0" aria-label="Milk flow" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100">
-    <div class="track"><i></i></div>
+    <span class="tag">Flow</span><div class="track"><i></i></div>
     <div class="knob"><b></b></div>
   </div>
 
   <div id="top">
     <div id="order"><canvas id="thumb" width="92" height="92" aria-hidden="true"></canvas><div><span id="oname"></span><span id="osub"></span></div></div>
-    <button id="mode" type="button"></button>
+    <div id="topR"><button id="mode" type="button"></button><button id="help" type="button" aria-label="How to pour">?</button></div>
   </div>
 
-  <button id="serve" type="button" aria-label="Serve this cup">
-    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14.500l5.500 5.500L22 8.500"/></svg>
-  </button>
+  <div id="spot" aria-hidden="true"></div>
+
+  <div id="tools">
+    <button class="tool" id="style" type="button" aria-label="Pour style"><i><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="styleP" d="M14 5v18"/></svg></i><span></span></button>
+    <button class="tool" id="serve" type="button" aria-label="Serve this cup"><i><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14.500l5.500 5.500L22 8.500"/></svg></i><span>Serve</span></button>
+    <button class="tool" id="tex" type="button" aria-label="Milk texture"><i><svg viewBox="0 0 28 28" aria-hidden="true"><path id="texP" fill="currentColor" d="M14 4c4 5.500 7 9 7 12.500a7 7 0 0 1-14 0C7 13 10 9.500 14 4z"/></svg></i><span></span></button>
+  </div>
+
 
   <div id="card" role="dialog" aria-label="Result">
     <div class="row">
@@ -136,6 +182,24 @@
       </div>
     </div>
     <div class="btns"><button id="again" type="button">Again</button><button id="next" type="button">Next cup</button></div>
+  </div>
+
+  <div id="intro" role="dialog" aria-label="How to pour">
+    <div class="sheet">
+      <div class="step">
+        <svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="34" fill="#f3f1ec" stroke="#d6d1c8" stroke-width="2"/><circle cx="38" cy="38" r="27" fill="#8a5a30"/><circle class="a" style="animation-name:cl-grow" cx="38" cy="38" r="15" fill="#f6efe2"/><g class="a" style="animation-name:cl-tap"><rect x="44" y="34" width="15" height="42" rx="7.500" fill="#e6bd9b" transform="rotate(-24 44 34)"/></g></svg>
+        <p><b>Touch and hold</b> to pour milk.</p>
+      </div>
+      <div class="step">
+        <svg viewBox="0 0 76 76" aria-hidden="true"><path d="M10 12v52" stroke="#bdb8ae" stroke-width="3" stroke-linecap="round"/><g class="a" style="animation-name:cl-jug"><circle cx="10" cy="20" r="7" fill="var(--accent)"/></g><circle cx="46" cy="38" r="27" fill="#8a5a30"/><circle class="a" style="animation-name:cl-ring" cx="46" cy="38" r="18" fill="none" stroke="#c99a68" stroke-width="2.500"/><circle class="a" style="animation-name:cl-low" cx="46" cy="38" r="14" fill="#f6efe2"/></svg>
+        <p><b>Jug low</b> draws white. <b>Jug high</b> sinks and only pushes.</p>
+      </div>
+      <div class="step">
+        <svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="34" fill="#8a5a30"/><path class="a" style="animation-name:cl-draw;stroke-dasharray:210" d="M22 22h32l-32 8h32l-32 8h32l-32 8h32l-32 8h32" fill="none" stroke="#f6efe2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path class="a" style="animation-name:cl-cut;stroke-dasharray:56" d="M38 64V12" fill="none" stroke="#8a5a30" stroke-width="3.500" stroke-linecap="round"/></svg>
+        <p><b>Sway</b> side to side, then <b>cut through</b> to finish.</p>
+      </div>
+      <button id="start" type="button">Start</button>
+    </div>
   </div>
 
   <div id="fps"></div>
@@ -154,6 +218,6 @@
   </div>
 </div>
 <script src="orders.js?v=1"></script>
-<script src="latte.js?v=4"></script>
+<script src="latte.js?v=5"></script>
 </body>
 </html>

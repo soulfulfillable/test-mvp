@@ -403,7 +403,7 @@
   document.getElementById('next').addEventListener('click', function () { cupNo++; save('cozy-latte.cup', cupNo); newCup(); });
   document.getElementById('again').addEventListener('click', function () { newCup(); });
   modeBtn.addEventListener('click', function () { mode = mode === 'free' ? 'orders' : 'free'; save('cozy-latte.mode', mode); if (milkUsed > 0 || done) newCup(); else { hideResult(); showOrder(); wake(); } });
-  function onUI(el) { return !!(el && el.closest && el.closest('.dial,button,#card')); }
+  function onUI(el) { return !!(el && el.closest && el.closest('.dial,button,#card,#intro')); }
 
   /* ---------------------------------------------------------------- input */
   var down = false, queue = [], last = null, speed = 0, fvx = 0, fvy = 0, touchId = null, lastEventT = 0;
@@ -419,7 +419,7 @@
     return [0.5 + dx * RD, 0.5 + dy * RD];
   }
   function press(x, y, t) {
-    if (done || resetPending) return false;
+    if (done || resetPending || intro.classList.contains('on')) return false;
     var p = toSim(x, y, true); if (!p) return false;
     down = true; last = null; speed = 0; fvx = fvy = 0;
     queue.push({ x: p[0], y: p[1], t: t, first: true });
@@ -511,6 +511,58 @@
   function sstep(a, b, x) { x = Math.min(1, Math.max(0, (x - a) / (b - a))); return x * x * (3 - 2 * x); }
   function flowScale() { return 0.45 + 1.1 * amount + 0.5 * amount * amount; }     // 0.45× … 2.05×, 1.1× in the middle
 
+
+  /* ---------------------------------------------------------------- pour style, milk texture, how-to */
+  var STYLES = [{ name: 'Straight', amp: 0, d: 'M14 5v18' }, { name: 'Sway', amp: 0.15, d: 'M14 4c-5 2.500-5 5 0 7.500s5 5 0 7.500-5 2.500 0 5' }, { name: 'Wide', amp: 0.30, d: 'M14 4C3 6.500 3 9 14 11.500s11 5 0 7.500-11 2.500 0 5' }];
+  var TEXES = [{ name: 'Thin', decay: 1.0, push: 1.5, rw: 0.85, drag: 0.70, d: 'M14 5c2.500 5.500 4.500 9 4.500 12a4.500 4.500 0 0 1-9 0C9.500 14 11.500 10.500 14 5z' },
+    { name: 'Regular', decay: 1.9, push: 1.0, rw: 1.0, drag: 0.55, d: 'M14 4c4 5.500 7 9 7 12.500a7 7 0 0 1-14 0C7 13 10 9.500 14 4z' },
+    { name: 'Thick', decay: 3.8, push: 0.6, rw: 1.25, drag: 0.40, d: 'M14 4c5.500 4.500 9.500 8 9.500 12.500a9.500 8 0 0 1-19 0C4.500 12 8.500 8.500 14 4z' }];
+  var styleI = 0, texI = 1;
+  try { var si = parseInt(localStorage.getItem('cozy-latte.style'), 10), ti = parseInt(localStorage.getItem('cozy-latte.tex'), 10); if (si >= 0 && si < 3) styleI = si; if (ti >= 0 && ti < 3) texI = ti; } catch (e) { }
+  var styleBtn = document.getElementById('style'), texBtn = document.getElementById('tex'), spot = document.getElementById('spot');
+  function paintTools() {
+    styleBtn.querySelector('span').textContent = STYLES[styleI].name; document.getElementById('styleP').setAttribute('d', STYLES[styleI].d);
+    texBtn.querySelector('span').textContent = TEXES[texI].name; document.getElementById('texP').setAttribute('d', TEXES[texI].d);
+  }
+  styleBtn.addEventListener('click', function () { styleI = (styleI + 1) % 3; save('cozy-latte.style', styleI); paintTools(); });
+  texBtn.addEventListener('click', function () { texI = (texI + 1) % 3; save('cozy-latte.tex', texI); paintTools(); });
+  paintTools();
+  var intro = document.getElementById('intro'), afterIntro = null;
+  function openIntro(then) { afterIntro = then || null; intro.classList.add('on'); }
+  document.getElementById('start').addEventListener('click', function () { intro.classList.remove('on'); try { localStorage.setItem(DEMO_KEY, '1'); } catch (e) { } var f = afterIntro; afterIntro = null; if (f) f(); });
+  document.getElementById('help').addEventListener('click', function () { openIntro(null); });
+  // auto-sway: the stream swings across the direction the finger travels (side to side when the finger rests)
+  var base = null, baseT = 0, swDir = [0, 1], swPhase = 0, swAge = 0;
+  function swayQueue(dtReal) {
+    var amp = STYLES[styleI].amp * RD;
+    if (!down) { base = null; return; }
+    if (!amp) { base = null; return; }
+    var src = queue; queue = [];
+    if (!src.length) { if (!base) return; src = [{ x: base.x, y: base.y, t: baseT + dtReal * 1000 }]; }
+    for (var i = 0; i < src.length; i++) {
+      var p = src[i];
+      if (p.first || !base) { base = { x: p.x, y: p.y }; baseT = p.t; swPhase = 0; swAge = 0; swDir = [0, 1]; queue.push({ x: p.x, y: p.y, t: p.t, first: true }); continue; }
+      var dx = p.x - base.x, dy = p.y - base.y, dl = Math.sqrt(dx * dx + dy * dy), dtt = Math.max(1, p.t - baseT);
+      if (dl > 0.004) { var nx = swDir[0] + (dx / dl - swDir[0]) * 0.25, ny = swDir[1] + (dy / dl - swDir[1]) * 0.25, nl = Math.sqrt(nx * nx + ny * ny) || 1; swDir = [nx / nl, ny / nl]; }
+      var n = Math.max(1, Math.min(6, Math.round(dtt / 4)));
+      for (var k = 1; k <= n; k++) {
+        var f = k / n; swPhase += 2 * Math.PI * 3.2 * dtt / n / 1000; swAge += dtt / n / 1000;
+        var off = amp * Math.sin(swPhase) * Math.min(1, swAge / 0.25);
+        var x = base.x + dx * f - swDir[1] * off - 0.5, y = base.y + dy * f + swDir[0] * off - 0.5, r = Math.sqrt(x * x + y * y), lim = 0.93 * RD;
+        if (r > lim) { x *= lim / r; y *= lim / r; }
+        queue.push({ x: x + 0.5, y: y + 0.5, t: baseT + dtt * f });
+      }
+      base = { x: p.x, y: p.y }; baseT = p.t;
+    }
+  }
+  function placeSpot(rw) {
+    if (!down || !last || demo) { spot.classList.remove('on'); return; }
+    var R = rho() * geo.Ro, d = Math.max(10, 2 * rw / RD * R + 6);
+    spot.style.width = spot.style.height = d.toFixed(1) + 'px';
+    spot.style.transform = 'translate(' + (geo.cx + (last.x - 0.5) / RD * R - d / 2).toFixed(1) + 'px,' + (geo.cy - (last.y - 0.5) / RD * R - d / 2).toFixed(1) + 'px)';
+    spot.classList.toggle('sink', height > 0.5); spot.classList.add('on');
+  }
+
   // keep the page parked in the middle of its scroll cushion
   function pin() { if (Math.abs(window.scrollY - 120) > 2) window.scrollTo(0, 120); }
   window.addEventListener('scroll', function () { clearTimeout(pin.t); pin.t = setTimeout(pin, 80); }, { passive: true });
@@ -528,6 +580,8 @@
     var h = 1 / simN, u, i;
 
     // 1. gather this frame's finger path (every event since the last frame, in order)
+    var TX = TEXES[texI];
+    swayQueue(dtReal);
     var segs = [];
     if (queue.length) {
       var pts = queue; queue = [];
@@ -561,12 +615,12 @@
     u = use(prog.advect);
     bindTex(0, vel.a); bindTex(1, vel.a);
     gl.uniform1i(u.uVel, 0); gl.uniform1i(u.uSrc, 1); gl.uniform1f(u.uDt, dt); gl.uniform1f(u.uIsVel, 1);
-    gl.uniform1f(u.uDecay, Math.exp(-dt * 1.9)); gl.uniform1f(u.uSharp, 0);
+    gl.uniform1f(u.uDecay, Math.exp(-dt * TX.decay)); gl.uniform1f(u.uSharp, 0);
     draw(vel.b); vel.swap();
 
     // 3. the stream drags the surface the way the finger travels
     if (pouring && segs.length) {
-      var fl = Math.sqrt(fvx * fvx + fvy * fvy), fk = 0.55 * (fl > 1.6 ? 1.6 / fl : 1);
+      var fl = Math.sqrt(fvx * fvx + fvy * fvy), fk = TX.drag * (fl > 1.6 ? 1.6 / fl : 1);
       if (fl > 0.02) {
         gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.enable(gl.SCISSOR_TEST);
         u = use(prog.splat);
@@ -584,7 +638,7 @@
 
     // 4. pressure: keep the liquid incompressible, except where milk is arriving (a source that pushes everything outward)
     var amp = 0, sig = 0.055;
-    if (pouring) amp = 0.046 * flowScale() * (1 - 0.8 * sstep(0.30, 0.70, height)) / (Math.PI * sig * sig);
+    if (pouring) amp = 0.046 * TX.push * flowScale() * (1 - 0.8 * sstep(0.30, 0.70, height)) / (Math.PI * sig * sig);
     u = use(prog.div);
     bindTex(0, vel.a); gl.uniform1i(u.uVel, 0); gl.uniform1f(u.uH, h);
     gl.uniform3f(u.uSrc, last ? last.x : 0.5, last ? last.y : 0.5, amp); gl.uniform1f(u.uSig2, sig * sig);
@@ -605,7 +659,7 @@
 
     // 6. lay this frame's milk last, so it is on screen in the same frame the finger landed
     if (pouring && segs.length) {
-      var thick = (0.62 + 0.76 * amount) * (1 - 0.3 * height);
+      var thick = (0.62 + 0.76 * amount) * (1 - 0.3 * height) * TX.rw;
       var rw = (0.040 + (0.017 - 0.040) * sFast) * thick, rb = 0.016 - 0.006 * sFast;
       var floatW = 1 - sstep(0.30, 0.70, height);                 // low jug: foam floats and draws.  high jug: milk sinks, only pushes
       var cut = sstep(0.45, 0.85, height) * Math.min(1, speed / 0.4) * 0.92;
@@ -624,6 +678,8 @@
       gl.colorMask(true, true, true, true);
       gl.disable(gl.BLEND); gl.disable(gl.SCISSOR_TEST);
     }
+
+    placeSpot((0.040 + (0.017 - 0.040) * sFast) * (0.62 + 0.76 * amount) * (1 - 0.3 * height) * TX.rw);
 
     // 7. the jug runs dry
     if (pouring && !demo) {
@@ -655,9 +711,8 @@
   }
   function startDemo() {
     if (userTouched || demo || done) return;
-    demo = { t0: performance.now(), pressed: false, over: false, h: height, a: amount };
-    height = 0.15; amount = 0.5;
-    try { localStorage.setItem(DEMO_KEY, '1'); } catch (e) { }
+    demo = { t0: performance.now(), pressed: false, over: false, h: height, a: amount, s: styleI, x: texI };
+    height = 0.15; amount = 0.5; styleI = 0; texI = 1;
     fingerEl.classList.add('on'); wake();
   }
   function placeFinger(d, lifted) {
@@ -679,7 +734,7 @@
   function endDemo(byUser) {
     if (!demo) return;
     var pressed = demo.pressed && !demo.over;
-    height = demo.h; amount = demo.a;
+    height = demo.h; amount = demo.a; styleI = demo.s; texI = demo.x;
     demo = null; fingerEl.classList.remove('on');
     if (pressed) release();
     if (!byUser) { resetPending = true; fadeDir = 1; }      // hand back a clean cup
@@ -718,7 +773,7 @@
     if (shine > 0) { shine += dtReal / 1.1; if (shine >= 1) shine = 0; }
     if (done && !resetPending && now - doneAt > 650) {
       if (mode === 'orders') { if (!result) showResult(); }
-      else if (!freshBtn.classList.contains('on')) freshBtn.classList.add('on');
+      else if (!freshBtn.classList.contains('on')) { freshBtn.classList.add('on'); document.documentElement.classList.add('served'); }
     }
     if (!done && !demo && !resetPending && milkUsed > 0 && !serveBtn.classList.contains('on')) serveBtn.classList.add('on');
     if (done && guideA > 0) { guideA = Math.max(0, guideA - dtReal / 0.4); }
@@ -745,7 +800,7 @@
     if (SHOW_FPS) fpsEl.style.display = 'block';
     wake();
     var seen = false; try { seen = localStorage.getItem(DEMO_KEY) === '1'; } catch (e) { }
-    if (!seen && qs.get('demo') !== '0') setTimeout(startDemo, 700);
+    if (!seen && qs.get('demo') !== '0') openIntro(function () { setTimeout(startDemo, 500); });
   }
   var rz = 0;
   window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { layout(); pin(); wake(); }, 60); });
@@ -771,6 +826,7 @@
     // manual mode only: feed finger events (screen px) stamped on the virtual clock, then advance one frame
     feed: function (type, x, y, tMs) { if (type === 'down') return press(x, y, tMs); if (type === 'move') moveTo(x, y, tMs); else release(); return true; },
     serve: function () { finish(); },
+    setTools: function (si, ti) { styleI = si; texI = ti; paintTools(); },
     setDials: function (h, a) { dialH.put(h, false); dialA.put(a, false); },
     mask: function () { return Array.prototype.join.call(milkMask(), ''); },
     setGuide: function (str) { setGuide(str ? Uint8Array.from(str, function (c) { return +c; }) : null); },
@@ -780,7 +836,7 @@
     tick: function (dtMs) { if (!ok) return -1; vclock += dtMs; frame(vclock, dtMs / 1000); return frames; },
     state: function () {
       return { ok: ok, gl2: isGL2, frames: frames, fill: fill(), done: done, down: down, level: level, simN: simN, dyeN: dyeN, demo: !!demo, fade: fade, running: !!rafId,
-        button: freshBtn.classList.contains('on'), serve: serveBtn.classList.contains('on'), mode: mode, cupNo: cupNo, order: mode === 'orders' ? order().id : null, result: result, card: card.classList.contains('on'), guideOn: guideOn, height: height, amount: amount, geo: { W: geo.W, H: geo.H, cx: geo.cx, cy: geo.cy, Ro: geo.Ro, rho: rho(), canvasW: canvas.width, canvasH: canvas.height } };
+        button: freshBtn.classList.contains('on'), serve: serveBtn.classList.contains('on'), mode: mode, cupNo: cupNo, order: mode === 'orders' ? order().id : null, result: result, card: card.classList.contains('on'), guideOn: guideOn, style: STYLES[styleI].name, tex: TEXES[texI].name, intro: intro.classList.contains('on'), spot: spot.classList.contains('on'), height: height, amount: amount, geo: { W: geo.W, H: geo.H, cx: geo.cx, cy: geo.cy, Ro: geo.Ro, rho: rho(), canvasW: canvas.width, canvasH: canvas.height } };
     },
     // how white is the picture at these screen points right now? (0 coffee … 1 milk), read from the real frame
     white: function (points) {
