@@ -1,6 +1,7 @@
 # 🧭 기획 파트너 — 게시판
 
 ## 🔁 이어받기 (이 세션이 막히면 다른 계정에서 기획 파트너를 새로 연다)
+- **⭐ 11-28 사용자: "라떼만 하자 지금은." → 지금은 Cozy Latte 하나만.** Arrow Topple(8차)·3D Escape(7차)는 멈춤, itch·색칠 심사 등 다른 얘기는 사용자가 꺼낼 때까지 먼저 꺼내지 않는다. 진행 중: Cozy Latte 2단계(붓는 높이·양 막대 → 한 판 구조 A), 개발 세션 `session_01GVpU8fz4B5WXCimHK6SNzj`. 02:49Z(한국 11:49) 자체 확인 예약(`trig_01UdmfqxRp64TBnpAef7vGfW`) — 올라온 게 있으면 실제 사이트 확인 후 폰 알림. 사용자에게 물을 것: 막대가 손에 맞는지, 한 판 구조 A(주문 그림·닮은 정도 %)가 맞는지.
 - **11-04 장기 목표 기록**: Treasurefield Studio = 예수님의 사랑을 전하는 스튜디오. 사례(Scroll The Bible 소개 게시물) 분석과 작은 검증 방향 3개(A 마음에 맞는 한 구절 / B 1분 성경 이야기 / C 스와이프+설명) = `plans/faith-direction.md`. → **11-04 수정: A 추천 철회, "맥락을 따라가는 성경 읽기 동반자"로 구체화(`plans/context-bible.md`, 요 1:46 화면 흐름·MVP 범위). 사용자 MVP 진행 결정 대기.** Popcorn 삭제(11-04). Mole Mash 출시 대기 별도.
 - 마지막 저장: 2026-10-26 · 기억은 전부 `PRODUCT.md`(방향·포트폴리오·백로그·결정 로그·주간 점검), `plans/`, `board/`, `DESIGN.md`, `PLAYBOOK.md` 에 있다.
 - 최근: 2026-10-19 주간 점검(`PRODUCT.md` 8장). 속도계 5.6 해결 전 새 제출 보류, How Things Work 진행 중, **조직 플랜 취소 → 개인 계정 이전**(`ops/sessions.md` 핀 순서).
