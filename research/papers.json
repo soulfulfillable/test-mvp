@@ -4997,5 +4997,24 @@
       "traditional chinese medicine syndrome differentiation decision tree"
     ],
     "first_seen": "2026-11-27"
+  },
+  {
+    "id": "doi:10.3390/biomedicines14112559",
+    "title": "&lt;i&gt;Bupleuri radix&lt;/i&gt; and &lt;i&gt;Bupleurum&lt;/i&gt;-Containing Formulas for Depression: Ethnopharmacological Rationale, Active Material Basis, Gut-Liver-Brain Pharmacology, and Translational Perspectives.",
+    "authors": [
+      "Cheng Y",
+      "Zhang ZQ",
+      "Song JY",
+      "Lin TC",
+      "Yi LT."
+    ],
+    "year": "2026",
+    "source": "Europe PMC",
+    "url": "https://doi.org/10.3390/biomedicines14112559",
+    "abstract": "<i>Bupleuri radix</i> (Chaihu) is used in traditional Chinese medicine for emotional and digestive complaints, usually within multi-herb preparations. This structured narrative review aims to critically synthesize depression-related evidence across <i>Bupleurum</i>-containing formulas, herb pairs, extracts/fractions, and isolated constituents, distinguish preparation-specific findings from mechanistic and clinical inference, and identify priorities for future studies. The literature is synthesized by intervention identity, experimental context, mechanistic validation, exposure, and safety. Most mechanistic evidence comes from rodent stress models and cell systems. Reported effects involve neuroendocrine signaling, neuroinflammation, synaptic markers, microbial metabolites, and hepatic metabolism; causal perturbation supports selected pathways in specific preparations and models. These findings cannot establish a unified gut-liver-brain mechanism or identify the contribution of <i>Bupleuri radix</i> within every formula. Human studies concern heterogeneous populations, including major depressive disorder and depressive symptoms accompanying medical illness. Some trials report symptom improvement, but small samples, variable preparations, incomplete blinding, and limited adverse-event reporting constrain clinical conclusions. Pharmacokinetic studies further show that chemical abundance does not establish target-relevant exposure, while experimental and observational safety signals warrant preparation-specific evaluation. The gut-liver-brain framework is therefore presented as a testable working model. Progress requires authenticated preparations, exposure-matched mechanistic experiments, and adequately powered clinical trials with prespecified outcomes and systematic safety assessment.",
+    "matched_queries": [
+      "TCM clinical decision support syndrome differentiation"
+    ],
+    "first_seen": "2026-11-28"
   }
 ]
