@@ -22,6 +22,7 @@ Claude 세션이 그런 단계에 닿으면 사용자에게 캡처를 반복 요
 ```
 비밀키·토큰·쿠키는 어느 쪽도 채팅·리포에 적지 않는다. 배포/스토어 제출/새 권한 부여는 사용자가 이미 승인한 범위에서만.
 - **인스타그램 게시물은 클라우드 세션에서 못 읽는다(2026-11-22 확인)**: Default 환경 허용 목록에 `www.instagram.com` 을 추가했지만(사용자 승인) 로그인 안 한 요청은 로그인 화면으로 넘어간다. 봇인 척 다른 이름으로 요청하는 우회는 하지 않는다. → Codex 에게 맡기거나 사용자 캡처 1~2장.
+- **실제 사이트를 이제 세션에서 열 수 있다(2026-11-28)**: Default 환경 허용 목록에 `soulfulfillable.github.io` 추가(사용자 승인). 올린 뒤 `curl https://soulfulfillable.github.io/test-mvp/<경로>?t=<시각>` 로 받아 main 의 파일과 같은지 비교하거나, Playwright 로 실제 주소를 연다(브라우저는 `proxy: { server: HTTPS_PROXY 의 호스트, username, password }` 로 띄운다). "github.io 직접 열기는 확인 못 함"은 더 이상 쓰지 않는다.
 - **스레드(Threads) 공개 글은 글 내용까지 읽을 수 있다(2026-11-28 확인)**: Default 환경 허용 목록에 `www.threads.com` 추가(사용자 승인). 평범한 요청으로 공유 링크를 열면 글쓴이·본문이 페이지 제목/설명에 들어 있다. 사진·영상은 다른 주소(CDN)라 못 본다 → 영상 내용이 필요하면 사용자 캡처나 Codex.
 
 **지금 열려 있는 Codex 작업**: `board/playables.md`(구글 Playables 관심 신청서), `board/catdoku.md`(Play Console AAB 업로드·스토어 등록·인앱 상품). Playgama "Submit for review" 는 Mole Mash 샌드박스가 나온 뒤.
