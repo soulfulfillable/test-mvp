@@ -339,7 +339,7 @@
   }
   function finish() {            // the cup is served: by running out of milk, or by the serve button
     if (done) return;
-    done = true; down = false; touchId = null; mouseDown = false; doneAt = performance.now(); shine = 0.0001;
+    done = true; down = false; touchId = null; mouseDown = false; doneAt = lastT || performance.now(); shine = 0.0001;
     serveBtn.classList.remove('on');
     wake();
   }
@@ -353,7 +353,7 @@
     return { id: o.id, name: o.name, bits: bits };
   });
   var serveBtn = document.getElementById('serve'), card = document.getElementById('card'), modeBtn = document.getElementById('mode');
-  var mode = 'orders', cupNo = 0, best = {}, result = null;
+  var mode = 'orders', cupNo = 0, best = {}, result = null, resultMilk = null;
   try {
     if (localStorage.getItem('cozy-latte.mode') === 'free') mode = 'free';
     cupNo = Math.max(0, parseInt(localStorage.getItem('cozy-latte.cup'), 10) || 0);
@@ -388,7 +388,7 @@
   }
   function showResult() {
     var o = order(), milk = milkMask(), r = compare(milk, o.bits), ac = accent();
-    r.stars = starsFor(r.pct); r.order = o.id; result = r;
+    r.stars = starsFor(r.pct); r.order = o.id; result = r; resultMilk = milk;
     paintCells(document.getElementById('over'), function (i) { var m = milk[i], t = o.bits[i]; return m && t ? MILKC : m ? ac : t ? MISSC : null; });
     document.getElementById('pct').textContent = r.pct + '%';
     var st = '';
@@ -775,6 +775,7 @@
     mask: function () { return Array.prototype.join.call(milkMask(), ''); },
     setGuide: function (str) { setGuide(str ? Uint8Array.from(str, function (c) { return +c; }) : null); },
     score: function (str) { return compare(milkMask(), Uint8Array.from(str, function (c) { return +c; })); },
+    resultMask: function () { return resultMilk ? Array.prototype.join.call(resultMilk, '') : null; },
     orderBits: function () { return Array.prototype.join.call(order().bits, ''); },
     tick: function (dtMs) { if (!ok) return -1; vclock += dtMs; frame(vclock, dtMs / 1000); return frames; },
     state: function () {

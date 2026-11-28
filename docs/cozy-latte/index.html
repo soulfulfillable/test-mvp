@@ -75,6 +75,7 @@
   .served .dial{opacity:0;pointer-events:none}
   .dial{transition:opacity .2s ease}
   @media (orientation:landscape){#card{left:auto;right:calc(14px + env(safe-area-inset-right));bottom:auto;top:50%;width:236px;transform:translate(14px,-50%)}#card.on{transform:translate(0,-50%)}#card .row{flex-direction:column;align-items:flex-start;gap:8px}#over{width:84px;height:84px}}
+  @media (orientation:portrait) and (max-height:620px){#card{padding:10px}#over{width:78px;height:78px}#card .btns{margin-top:8px}#card .btns button{height:44px}#pct{font-size:30px}#stars{margin:3px 0 5px}}
   .nogl #top,.nogl #serve,.nogl #card{display:none}
 
   #fps{position:absolute;left:calc(10px + env(safe-area-inset-left));top:calc(10px + env(safe-area-inset-top));padding:4px 8px;border-radius:7px;background:rgba(0,0,0,.55);color:#fff;font:12px/1.3 ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;pointer-events:none;display:none}

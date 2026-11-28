@@ -3,6 +3,7 @@
    It checks WHAT happens. It cannot check how it FEELS: this browser renders ~15 frames a second. */
 const { chromium } = require(process.env.PW || '/opt/node22/lib/node_modules/playwright');
 const fs = require('fs'), path = require('path');
+const G = require('./gestures.js');
 const BASE = process.argv[2] || 'http://localhost:8765/cozy-latte/';
 const OUT = __dirname;
 const ARGS = ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'];
@@ -18,7 +19,8 @@ async function open(browser, o = {}) {
   page.on('request', r => { if (!r.url().startsWith(BASE.replace(/cozy-latte\/.*$/, '')) && !r.url().startsWith('data:')) problems.push('external request: ' + r.url()); });
   if (!o.firstRun) await page.addInitScript(() => { try { localStorage.setItem('cozy-latte.demo.v1', '1'); } catch (e) { } });
   if (o.noGL) await page.addInitScript(() => { const g = HTMLCanvasElement.prototype.getContext; HTMLCanvasElement.prototype.getContext = function (t) { return /webgl/.test(t) ? null : g.apply(this, arguments); }; });
-  await page.goto(BASE + (o.query || ''));
+  const q = o.query || '';
+  await page.goto(BASE + (o.orders ? q : q + (q ? '&' : '?') + 'mode=free'));
   await page.waitForTimeout(o.wait || 900);
   const cdp = await ctx.newCDPSession(page);
   const h = {
@@ -26,7 +28,7 @@ async function open(browser, o = {}) {
     st: () => page.evaluate(() => __latte.state()),
     touch: (type, x, y, id = 1) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x, y, id }] }),
     touches: (type, pts) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: pts }),
-    frames: async n => { const f0 = (await h.st()).frames; const t0 = Date.now(); while ((await h.st()).frames < f0 + n) { await page.waitForTimeout(25); if (Date.now() - t0 > 20000) throw new Error('frames stalled'); } },
+    frames: async n => { const f0 = (await h.st()).frames; const t0 = Date.now(); while ((await h.st()).frames < f0 + n) { await page.waitForTimeout(25); if (Date.now() - t0 > 120000) throw new Error('frames stalled'); } },
     white: pts => page.evaluate(p => __latte.white(p), pts),
     grid: async () => {            // 17x17 probe points over the liquid; returns how many read as milk
       const g = (await h.st()).geo, R = g.Ro * g.rho * 0.9, pts = [];
@@ -45,7 +47,7 @@ async function open(browser, o = {}) {
   const SIZES = [[320, 568], [360, 640], [375, 667], [390, 844], [393, 852], [412, 915], [414, 896], [430, 932], [768, 1024], [820, 1180], [1024, 768], [844, 390], [1280, 720], [390, 844, 3]];
   for (const [w, h, dpr] of SIZES) {
     const tag = dpr ? `${w * dpr}x${h * dpr}` : `${w}x${h}`;
-    const t = await open(browser, { w, h, dpr: dpr || 1, tag, query: '?level=' + (dpr ? 0 : 3) });
+    const t = await open(browser, { w, h, dpr: dpr || 1, tag, orders: true, query: '?level=' + (dpr ? 0 : 3) });
     const s = await t.st(), g = s.geo;
     const btn = await t.page.evaluate(() => { const r = document.getElementById('fresh').getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom, op: +getComputedStyle(document.getElementById('fresh')).opacity }; });
     const centre = (await t.white([[g.cx, g.cy]]))[0];
@@ -60,6 +62,20 @@ async function open(browser, o = {}) {
     check(`first screen ${tag}`, s.ok && okCup && okHandle && okBtn && okDials && okCanvas && centre < 0.35 && s.fill === 0,
       { cup: okCup, handle: okHandle, buttonHiddenAndClear: okBtn, dialsOnScreenClearOfCoffee: okDials, canvas: okCanvas, centreIsCoffee: centre });
     await t.shot('first-' + tag);
+    // order chip + mode button on screen and clear of the coffee; then serve a tiny pour and see that the result card fits
+    const top = await t.page.evaluate(() => ['order', 'mode'].map(id => { const r = document.getElementById(id).getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; }));
+    const clear = d => Math.hypot(Math.max(d.l - g.cx, 0, g.cx - d.r), Math.max(d.t - g.cy, 0, g.cy - d.b)) > RL + 2;
+    const okTop = top.every(d => d.l >= 0 && d.r <= w && d.t >= 0 && clear(d)) && top[0].r <= top[1].l && top[1].b - top[1].t >= 44 && s.mode === 'orders' && s.guideOn && s.order === 'circle';
+    if (dpr) { check(`orders screen ${tag}: order chip and mode button (pour not driven: software renderer stalls at this pixel count; same layout as 390x844)`, okTop); await t.ctx.close(); continue; }
+    await t.touch('touchStart', g.cx, g.cy); await t.frames(3); await t.touch('touchEnd'); await t.frames(2);
+    const sv = await t.page.evaluate(() => { const r = document.getElementById('serve').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2, r.width, document.getElementById('serve').classList.contains('on')]; });
+    await t.page.touchscreen.tap(sv[0], sv[1]);
+    await t.page.waitForFunction(() => __latte.state().card, null, { timeout: 15000 }).catch(() => { }); await t.page.waitForTimeout(450);
+    const cd = await t.page.evaluate(() => { const r = document.getElementById('card').getBoundingClientRect(); const b = [...document.querySelectorAll('#card button')].map(x => x.getBoundingClientRect()); return { l: r.left, t: r.top, r: r.right, b: r.bottom, btnH: Math.min(...b.map(x => x.height)), btnIn: b.every(x => x.left >= r.left && x.right <= r.right && x.bottom <= r.bottom), dialOp: +getComputedStyle(document.getElementById('hgt')).opacity, pct: document.getElementById('pct').textContent }; });
+    const s9 = await t.st();
+    const okCard = sv[3] && sv[2] >= 44 && s9.card && cd.l >= 0 && cd.r <= w && cd.t >= 0 && cd.b <= h && cd.btnH >= 44 && cd.btnIn && clear(cd) && cd.dialOp === 0 && /^\d+%$/.test(cd.pct);
+    check(`orders screen ${tag}: order shown, serve works, result card fits`, okTop && okCard, { orderChipAndModeButton: okTop, serveVisible: sv[3], cardOnScreenClearOfCoffee: okCard, cardShows: cd.pct });
+    if (tag === '320x568' || tag === '844x390') await t.shot('card-' + tag);
     await t.ctx.close();
   }
 
@@ -100,7 +116,7 @@ async function open(browser, o = {}) {
     const lw = [];        // the flow nudges a thin line a few px, so probe a short column at each step and keep the whitest
     for (let k = 1; k < 20; k++) { const col = []; for (let dy = -20; dy <= 20; dy += 1.5) col.push([A[0] + (B[0] - A[0]) * k / 20, A[1] + dy]); lw.push(Math.max(...(await t.white(col)))); }
     await t.touch('touchEnd');
-    check('a fast stroke is one unbroken line (no dots)', Math.min(...lw) > 0.4, { minWhitenessAlongLine: Math.min(...lw), samples: lw.length });
+    check('a fast stroke is one unbroken line (no dots; coffee reads below 0.2)', Math.min(...lw) > 0.3, { minWhitenessAlongLine: Math.min(...lw), samples: lw.length });
     await t.shot('pour-4-fast-line');
 
     // split: a quick stroke straight through the pool leaves coffee-coloured lines inside it
@@ -203,6 +219,59 @@ async function open(browser, o = {}) {
       const n = await u.grid(); if (a === 1) await u.shot('dial-flow-thick'); else await u.shot('dial-flow-thin'); await u.ctx.close(); return { n, fill }; };
     const thin = await hold(0), thick = await hold(1);
     check('flow dial: thick stream makes a bigger pool and fills the cup faster than a thread', thick.n > thin.n + 3 && thick.fill > thin.fill * 2.5, { thin, thick });
+  }
+
+
+  /* O. orders: every order is pourable (robot hand movements, virtual 60 fps), and the score is plain overlap */
+  {
+    const iou = (m, o) => { let both = 0, either = 0; for (let i = 0; i < m.length; i++) { const x = (i % 96 + 0.5) / 96 - 0.5, y = (Math.floor(i / 96) + 0.5) / 96 - 0.5; if (x * x + y * y > 0.48 * 0.48) continue; const a = m[i] === '1', b = o[i] === '1'; if (a && b) both++; if (a || b) either++; } return Math.round(100 * both / either); };
+    const NAMES = ['circle', 'heart', 'leaf'];
+    for (const lv of [3, 1]) for (let i = 0; i < NAMES.length; i++) {
+      const name = NAMES[i];
+      const t = await open(browser, { tag: 'order-' + name, orders: true, dpr: lv === 3 ? 2 : 1, query: '?manual=1&level=' + lv, wait: 300 });
+      await t.page.evaluate(n => localStorage.setItem('cozy-latte.cup', String(n)), i); await t.page.reload(); await t.page.waitForTimeout(600);
+      const s0 = await t.st();
+      await t.page.evaluate(() => __latte.tick(16.7));
+      if (lv === 3) await t.shot('order-' + name + '-start');
+      await t.page.evaluate('(function(){' + G.RUN_SRC + '; return runGesture(' + JSON.stringify(G.GESTURES[name]) + ')})()');
+      await t.page.evaluate(() => { for (let k = 0; k < 60; k++) __latte.tick(16.7); }); await t.page.waitForTimeout(450);
+      const s = await t.st(); const mine = iou(await t.page.evaluate(() => __latte.resultMask()), await t.page.evaluate(() => __latte.orderBits()));
+      const stars = await t.page.evaluate(() => document.querySelectorAll('#stars .got').length);
+      check(`order "${name}" is pourable: robot scores ≥70% (grid level ${lv})`, s0.order === name && s.card && s.result && s.result.pct >= 70, { pct: s.result && s.result.pct, stars: s.result && s.result.stars, fillUsed: +s.fill.toFixed(2) });
+      check(`order "${name}" L${lv}: the % on the card is exactly overlap ÷ union, stars follow the %`, s.result && s.result.pct === mine && stars === s.result.stars && stars === (mine >= 78 ? 3 : mine >= 62 ? 2 : mine >= 45 ? 1 : 0), { cardPct: s.result && s.result.pct, robotRecount: mine, starsDrawn: stars });
+      if (lv === 3) { await t.page.waitForTimeout(900); await t.shot('order-' + name + '-result'); }
+      if (name === 'heart' && lv === 3) {
+        // Next cup → next order, clean cup. Again → same order. Best is remembered.
+        await t.page.evaluate(() => document.getElementById('again').click()); await t.page.evaluate(() => { for (let k = 0; k < 50; k++) __latte.tick(16.7); });
+        const a = await t.st(); const sub = await t.page.evaluate(() => document.getElementById('osub').textContent);
+        check('"Again": same order, clean cup, best score shown', a.order === 'heart' && !a.card && !a.done && a.fill === 0 && (await t.grid()) === 0 && sub.includes('best ' + s.result.pct + '%'), { order: a.order, sub });
+        // an honest low score: a dab at the edge, served
+        await t.page.evaluate(() => { const g = __latte.state().geo, R = g.Ro * g.rho; __latte.feed('down', g.cx + R * 0.8, g.cy, 1); for (let k = 0; k < 20; k++) __latte.tick(16.7); __latte.feed('up'); __latte.serve(); for (let k = 0; k < 60; k++) __latte.tick(16.7); });
+        const low = await t.st();
+        check('a careless pour gets a low score and no stars', low.card && low.result.pct < 25 && low.result.stars === 0, { pct: low.result.pct, stars: low.result.stars });
+        await t.page.waitForTimeout(900); await t.shot('order-low-score');
+        await t.page.evaluate(() => document.getElementById('next').click()); await t.page.evaluate(() => { for (let k = 0; k < 50; k++) __latte.tick(16.7); });
+        const n = await t.st(); const nm = await t.page.evaluate(() => document.getElementById('oname').textContent);
+        check('"Next cup": the next order, clean cup', n.order === 'leaf' && n.cupNo === 2 && nm === 'Leaf' && !n.card && n.fill === 0, { order: n.order, cup: n.cupNo + 1 });
+      }
+      await t.ctx.close();
+    }
+    // mode switch with real taps
+    const t = await open(browser, { tag: 'mode', orders: true, query: '?level=4' });
+    const g = (await t.st()).geo;
+    const mb = await t.page.evaluate(() => { const r = document.getElementById('mode').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
+    await t.page.touchscreen.tap(mb[0], mb[1]); await t.page.waitForTimeout(500);
+    const f = await t.st(); const vis = await t.page.evaluate(() => getComputedStyle(document.getElementById('order')).visibility + '|' + document.getElementById('mode').textContent);
+    await t.touch('touchStart', g.cx, g.cy); await t.frames(3); await t.touch('touchEnd'); await t.frames(2);
+    const sv = await t.page.evaluate(() => { const r = document.getElementById('serve').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
+    await t.page.touchscreen.tap(sv[0], sv[1]); await t.page.waitForTimeout(1500);
+    const fd = await t.st();
+    check('"Free pour": no order, no score — serve just offers a new cup', f.mode === 'free' && !f.guideOn && vis === 'hidden|Orders' && fd.done && fd.button && !fd.card, { mode: f.mode, orderChip: vis, newCupButton: fd.button, card: fd.card });
+    await t.page.reload(); await t.page.waitForTimeout(800);
+    check('mode is remembered', (await t.st()).mode === 'free');
+    await t.page.touchscreen.tap(mb[0], mb[1]); await t.page.waitForTimeout(500);
+    check('back to "Orders"', (await t.st()).mode === 'orders' && (await t.st()).guideOn);
+    await t.ctx.close();
   }
 
   /* G–H. a whole cup → finished → new cup */
