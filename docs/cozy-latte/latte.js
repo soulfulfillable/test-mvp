@@ -81,13 +81,14 @@
   // one stroke segment a->b, drawn with blending into the current buffer (scissored to its box).
   // mode 0: drag the surface along with the stream. mode 1: milk core + a thin crema-coloured edge on both flanks.
   var FS_SPLAT = 'precision highp float;varying vec2 vUv;' +
-    'uniform vec2 uA;uniform vec2 uB;uniform float uR;uniform float uRb;uniform float uEdge;uniform float uAmt;uniform vec2 uVal;uniform float uMode;' +
+    'uniform vec2 uA;uniform vec2 uB;uniform float uR;uniform float uRb;uniform float uEdge;uniform float uAmt;uniform float uCut;uniform vec2 uVal;uniform float uMode;' +
     'void main(){vec2 pa=vUv-uA;vec2 ba=uB-uA;float L2=dot(ba,ba);float h=L2>1e-10?dot(pa,ba)/L2:0.5;float hc=clamp(h,0.,1.);float d=length(pa-ba*hc);' +
     'if(uMode<0.5){float w=exp(-d*d/(uR*uR))*uAmt;gl_FragColor=vec4(uVal*w,0.,w);}' +
     'else{float core=(1.-smoothstep(uR*0.55,uR,d))*uAmt;' +
     'float on=L2>1e-10?step(0.,h)*step(h,1.):0.;' +
     'float side=(smoothstep(uR*0.8,uR,d)-smoothstep(uR+uRb*0.4,uR+uRb,d))*on*uEdge;' +
-    'float keep=(1.-core)*(1.-side);gl_FragColor=vec4(core,0.,0.,1.-keep);}}';
+    'float thin=(1.-smoothstep(uR*0.30,uR*0.62,d))*on*uCut;' +     // held high, the stream dives and opens the surface
+    'float keep=(1.-core)*(1.-side)*(1.-thin);gl_FragColor=vec4(core*(1.-thin),0.,0.,1.-keep);}}';
 
   var NOISE = 'float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}' +
     'float vnoise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.-2.*f);' +
@@ -252,7 +253,7 @@
     var W = app.clientWidth || window.innerWidth, H = app.clientHeight || window.innerHeight;
     var s = Math.min(window.devicePixelRatio || 1, dprCap);
     var Ro = Math.min(W * 0.43, H * 0.30, 320);
-    geo = { W: W, H: H, s: s, cx: W / 2, cy: H * 0.47, Ro: Ro };
+    geo = { W: W, H: H, s: s, cx: W / 2, cy: H * (W > H ? 0.47 : 0.43), Ro: Ro };
     var cw = Math.max(2, Math.round(W * s)), ch = Math.max(2, Math.round(H * s));
     if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; }
     if (!ok) return;
@@ -322,6 +323,7 @@
   app.addEventListener('touchstart', function (e) {
     if (e.target === freshBtn || freshBtn.contains(e.target)) return;
     e.preventDefault();
+    if (onDial(e.target)) return;
     stopDemoForUser();
     if (touchId !== null) return;
     var t = e.changedTouches[0];
@@ -345,7 +347,7 @@
   function notTouch(e) { return e.pointerType !== 'touch'; }
   if (window.PointerEvent) {
     app.addEventListener('pointerdown', function (e) {
-      if (!notTouch(e) || e.button !== 0 || e.target === freshBtn || freshBtn.contains(e.target)) return;
+      if (!notTouch(e) || e.button !== 0 || e.target === freshBtn || freshBtn.contains(e.target) || onDial(e.target)) return;
       stopDemoForUser();
       if (press(e.clientX, e.clientY, e.timeStamp)) { mouseDown = true; try { app.setPointerCapture(e.pointerId); } catch (x) { } }
     });
@@ -362,6 +364,42 @@
     document.addEventListener(n, function (e) { e.preventDefault(); }, { passive: false });
   });
   freshBtn.addEventListener('click', function () { newCup(); });
+
+
+  /* ---------------------------------------------------------------- the two dials */
+  var height = 0.15, amount = 0.5;      // 0 = jug close to the cup … 1 = held high;  0 = a thread of milk … 1 = a thick stream
+  function onDial(el) { return !!(el && el.closest && el.closest('.dial')); }
+  function dial(id, key, get, set) {
+    var el = document.getElementById(id), knob = el.querySelector('.knob'), bar = el.querySelector('.track i'), dot = knob.querySelector('b');
+    var PAD = 20, tid = null;
+    try { var sv = parseFloat(localStorage.getItem(key)); if (sv >= 0 && sv <= 1) set(sv); } catch (e) { }
+    function paint() {
+      var v = get(), hpx = el.clientHeight - 2 * PAD;
+      knob.style.top = (PAD + (1 - v) * hpx).toFixed(1) + 'px';
+      bar.style.height = (v * 100).toFixed(1) + '%';
+      if (dot) { var d = 6 + v * 20; dot.style.width = dot.style.height = d.toFixed(1) + 'px'; }
+      el.setAttribute('aria-valuenow', Math.round(v * 100));
+    }
+    function put(v, save) { v = Math.min(1, Math.max(0, v)); set(v); paint(); if (save) { try { localStorage.setItem(key, v.toFixed(3)); } catch (e) { } } }
+    function at(y) { var r = el.getBoundingClientRect(); put(1 - (y - r.top - PAD) / (r.height - 2 * PAD), false); }
+    el.addEventListener('touchstart', function (e) { e.preventDefault(); if (tid !== null) return; var t = e.changedTouches[0]; tid = t.identifier; el.classList.add('held'); at(t.clientY); }, { passive: false });
+    el.addEventListener('touchmove', function (e) { e.preventDefault(); for (var i = 0; i < e.changedTouches.length; i++) if (e.changedTouches[i].identifier === tid) at(e.changedTouches[i].clientY); }, { passive: false });
+    var tEnd = function (e) { for (var i = 0; i < e.changedTouches.length; i++) if (e.changedTouches[i].identifier === tid) { tid = null; el.classList.remove('held'); put(get(), true); } };
+    el.addEventListener('touchend', tEnd); el.addEventListener('touchcancel', tEnd);
+    var md = false;
+    el.addEventListener('pointerdown', function (e) { if (e.pointerType === 'touch') return; md = true; el.classList.add('held'); try { el.setPointerCapture(e.pointerId); } catch (x) { } at(e.clientY); });
+    el.addEventListener('pointermove', function (e) { if (md && e.pointerType !== 'touch') at(e.clientY); });
+    var pEnd = function (e) { if (!md || e.pointerType === 'touch') return; md = false; el.classList.remove('held'); put(get(), true); };
+    el.addEventListener('pointerup', pEnd); el.addEventListener('pointercancel', pEnd);
+    el.addEventListener('keydown', function (e) { var d = e.key === 'ArrowUp' || e.key === 'ArrowRight' ? 0.05 : e.key === 'ArrowDown' || e.key === 'ArrowLeft' ? -0.05 : 0; if (d) { e.preventDefault(); put(get() + d, true); } });
+    window.addEventListener('resize', function () { setTimeout(paint, 80); });
+    paint();
+    return { paint: paint, put: put };
+  }
+  var dialH = dial('hgt', 'cozy-latte.height', function () { return height; }, function (v) { height = v; });
+  var dialA = dial('amt', 'cozy-latte.amount', function () { return amount; }, function (v) { amount = v; });
+  function sstep(a, b, x) { x = Math.min(1, Math.max(0, (x - a) / (b - a))); return x * x * (3 - 2 * x); }
+  function flowScale() { return 0.45 + 1.1 * amount + 0.5 * amount * amount; }     // 0.45× … 2.05×, 1.1× in the middle
 
   // keep the page parked in the middle of its scroll cushion
   function pin() { if (Math.abs(window.scrollY - 120) > 2) window.scrollTo(0, 120); }
@@ -436,7 +474,7 @@
 
     // 4. pressure: keep the liquid incompressible, except where milk is arriving (a source that pushes everything outward)
     var amp = 0, sig = 0.055;
-    if (pouring) amp = 0.050 / (Math.PI * sig * sig);
+    if (pouring) amp = 0.046 * flowScale() / (Math.PI * sig * sig);
     u = use(prog.div);
     bindTex(0, vel.a); gl.uniform1i(u.uVel, 0); gl.uniform1f(u.uH, h);
     gl.uniform3f(u.uSrc, last ? last.x : 0.5, last ? last.y : 0.5, amp); gl.uniform1f(u.uSig2, sig * sig);
@@ -457,12 +495,15 @@
 
     // 6. lay this frame's milk last, so it is on screen in the same frame the finger landed
     if (pouring && segs.length) {
-      var rw = 0.040 + (0.013 - 0.040) * sFast, rb = 0.016 - 0.006 * sFast;
-      var edge = Math.min(1, Math.max(0, (speed - 0.12) / 0.5)) * 0.95;
+      var thick = (0.62 + 0.76 * amount) * (1 - 0.3 * height);
+      var rw = (0.040 + (0.017 - 0.040) * sFast) * thick, rb = 0.016 - 0.006 * sFast;
+      var floatW = 1 - sstep(0.30, 0.70, height);                 // low jug: foam floats and draws.  high jug: milk sinks, only pushes
+      var cut = sstep(0.45, 0.85, height) * Math.min(1, speed / 0.4) * 0.92;
+      var edge = Math.min(1, Math.max(0, (speed - 0.12) / 0.5)) * 0.95 * floatW;
       gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.enable(gl.SCISSOR_TEST);
       gl.colorMask(true, false, false, false);
       u = use(prog.splat);
-      gl.uniform1f(u.uMode, 1); gl.uniform1f(u.uR, rw); gl.uniform1f(u.uRb, rb); gl.uniform1f(u.uEdge, edge); gl.uniform1f(u.uAmt, 1);
+      gl.uniform1f(u.uMode, 1); gl.uniform1f(u.uR, rw); gl.uniform1f(u.uRb, rb); gl.uniform1f(u.uEdge, edge); gl.uniform1f(u.uAmt, floatW); gl.uniform1f(u.uCut, cut);
       gl.bindFramebuffer(gl.FRAMEBUFFER, dye.a.fbo); gl.viewport(0, 0, dyeN, dyeN);
       for (i = 0; i < segs.length; i++) {
         var s2 = segs[i];
@@ -476,7 +517,7 @@
 
     // 7. the jug runs dry
     if (pouring && !demo) {
-      milkUsed += dt;
+      milkUsed += dt * flowScale() / 1.1;
       if (milkUsed >= MILK) { milkUsed = MILK; done = true; down = false; touchId = null; mouseDown = false; doneAt = performance.now(); shine = 0.0001; }
     }
   }
@@ -503,7 +544,8 @@
   }
   function startDemo() {
     if (userTouched || demo || done) return;
-    demo = { t0: performance.now(), pressed: false, over: false };
+    demo = { t0: performance.now(), pressed: false, over: false, h: height, a: amount };
+    height = 0.15; amount = 0.5;
     try { localStorage.setItem(DEMO_KEY, '1'); } catch (e) { }
     fingerEl.classList.add('on'); wake();
   }
@@ -526,6 +568,7 @@
   function endDemo(byUser) {
     if (!demo) return;
     var pressed = demo.pressed && !demo.over;
+    height = demo.h; amount = demo.a;
     demo = null; fingerEl.classList.remove('on');
     if (pressed) release();
     if (!byUser) { resetPending = true; fadeDir = 1; }      // hand back a clean cup
@@ -614,7 +657,7 @@
     tick: function (dtMs) { vclock += dtMs; frame(vclock, dtMs / 1000); return frames; },
     state: function () {
       return { ok: ok, gl2: isGL2, frames: frames, fill: fill(), done: done, down: down, level: level, simN: simN, dyeN: dyeN, demo: !!demo, fade: fade, running: !!rafId,
-        button: freshBtn.classList.contains('on'), geo: { W: geo.W, H: geo.H, cx: geo.cx, cy: geo.cy, Ro: geo.Ro, rho: rho(), canvasW: canvas.width, canvasH: canvas.height } };
+        button: freshBtn.classList.contains('on'), height: height, amount: amount, geo: { W: geo.W, H: geo.H, cx: geo.cx, cy: geo.cy, Ro: geo.Ro, rho: rho(), canvasW: canvas.width, canvasH: canvas.height } };
     },
     // how white is the picture at these screen points right now? (0 coffee … 1 milk), read from the real frame
     white: function (points) {

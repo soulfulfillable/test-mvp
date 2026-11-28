@@ -52,9 +52,13 @@ async function open(browser, o = {}) {
     const okCup = g.cx - g.Ro >= 0 && g.cx + g.Ro <= w && g.cy - g.Ro >= 0 && g.cy + g.Ro <= h;
     const okHandle = g.cx + 1.44 * 0.766 * g.Ro <= w + 0.5 && g.cy + 1.44 * 0.643 * g.Ro <= h;
     const okBtn = btn.l >= 0 && btn.r <= w && btn.b <= h && btn.t >= g.cy + g.Ro - 1 && btn.op === 0;
+    const dials = await t.page.evaluate(() => ['hgt', 'amt'].map(id => { const r = document.getElementById(id).getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; }));
+    const RL = g.Ro * 0.93;   // widest the liquid ever gets
+    const okDials = dials.every(d => d.l >= 0 && d.r <= w && d.t >= 0 && d.b <= h && d.r - d.l >= 44 && d.b - d.t >= 100 &&
+      Math.hypot(Math.max(d.l - g.cx, 0, g.cx - d.r), Math.max(d.t - g.cy, 0, g.cy - d.b)) > RL + 4 && (d.r < btn.l || d.l > btn.r));
     const okCanvas = Math.abs(g.canvasW - w * (dpr || 1)) <= 1 && Math.abs(g.canvasH - h * (dpr || 1)) <= 1;
-    check(`first screen ${tag}`, s.ok && okCup && okHandle && okBtn && okCanvas && centre < 0.35 && s.fill === 0,
-      { cup: okCup, handle: okHandle, buttonHiddenAndClear: okBtn, canvas: okCanvas, centreIsCoffee: centre });
+    check(`first screen ${tag}`, s.ok && okCup && okHandle && okBtn && okDials && okCanvas && centre < 0.35 && s.fill === 0,
+      { cup: okCup, handle: okHandle, buttonHiddenAndClear: okBtn, dialsOnScreenClearOfCoffee: okDials, canvas: okCanvas, centreIsCoffee: centre });
     await t.shot('first-' + tag);
     await t.ctx.close();
   }
@@ -92,9 +96,9 @@ async function open(browser, o = {}) {
     const A = [g.cx - 75, g.cy - R * 0.62], B = [g.cx + 75, g.cy - R * 0.62];
     await t.touch('touchStart', A[0], A[1]);
     await t.touch('touchMove', B[0], B[1]);
-    await t.frames(2);
+    await t.frames(1);
     const lw = [];        // the flow nudges a thin line a few px, so probe a short column at each step and keep the whitest
-    for (let k = 1; k < 20; k++) { const col = []; for (let dy = -9; dy <= 9; dy += 1.5) col.push([A[0] + (B[0] - A[0]) * k / 20, A[1] + dy]); lw.push(Math.max(...(await t.white(col)))); }
+    for (let k = 1; k < 20; k++) { const col = []; for (let dy = -20; dy <= 20; dy += 1.5) col.push([A[0] + (B[0] - A[0]) * k / 20, A[1] + dy]); lw.push(Math.max(...(await t.white(col)))); }
     await t.touch('touchEnd');
     check('a fast stroke is one unbroken line (no dots)', Math.min(...lw) > 0.4, { minWhitenessAlongLine: Math.min(...lw), samples: lw.length });
     await t.shot('pour-4-fast-line');
@@ -133,6 +137,72 @@ async function open(browser, o = {}) {
     check('rotating the phone keeps the pattern', na > nb * 0.7 && s2.geo.W === 844 && s2.geo.canvasW === 844, { probesBefore: nb, after: na });
     await t.shot('rotated-844x390');
     await t.ctx.close();
+  }
+
+
+  /* D. the two dials: pour height and milk flow */
+  {
+    const t = await open(browser, { tag: 'dials', query: '?level=3' });
+    const g = (await t.st()).geo, R = g.Ro * g.rho;
+    const rect = id => t.page.evaluate(i => { const r = document.getElementById(i).getBoundingClientRect(); return { x: r.left + r.width / 2, top: r.top, h: r.height }; }, id);
+    const yFor = (r, v) => r.top + 20 + (1 - v) * (r.h - 40);
+    const setDial = async (id, v, tid = 7) => { const r = await rect(id); await t.touches('touchStart', [{ x: r.x, y: yFor(r, 0.5), id: tid }]); await t.touches('touchMove', [{ x: r.x, y: yFor(r, v), id: tid }]); await t.touches('touchEnd', []); };
+    const s0 = await t.st();
+    check('dials start low jug / medium flow', Math.abs(s0.height - 0.15) < 0.01 && Math.abs(s0.amount - 0.5) < 0.01, { height: s0.height, amount: s0.amount });
+
+    // jug held high: milk sinks — it pushes the surface but leaves no white
+    await setDial('hgt', 1);
+    const sH = await t.st();
+    await t.touch('touchStart', g.cx, g.cy); await t.frames(25); await t.touch('touchEnd'); await t.frames(2);
+    const nHigh = await t.grid(), fHigh = (await t.st()).fill;
+    check('jug high: milk goes in (cup fills) but no white on top', sH.height > 0.97 && nHigh === 0 && fHigh > 0, { height: sH.height, whiteProbes: nHigh, fill: fHigh });
+    await t.shot('dial-high-no-white');
+    // jug low: white foam draws
+    await setDial('hgt', 0);
+    await t.touch('touchStart', g.cx, g.cy); await t.frames(25); await t.touch('touchEnd'); await t.frames(2);
+    const nLow = await t.grid();
+    check('jug low: white foam floats and draws', (await t.st()).height < 0.03 && nLow > 4, { whiteProbes: nLow });
+    // high + quick stroke opens the white (cut), adds no white
+    const scan = async () => { const pts = []; for (let x = -R * 0.8; x <= R * 0.8; x += 1) pts.push([g.cx + x, g.cy + 4]); const w = await t.white(pts); let runs = 0, inW = false; for (const v of w) { if (v > 0.6 && !inW) { runs++; inW = true; } else if (v < 0.45) inW = false; } return runs; };
+    const r1 = await scan();
+    await setDial('hgt', 1);
+    await t.touch('touchStart', g.cx + 5, g.cy - R * 0.5);
+    for (let k = 1; k <= 7; k++) await t.touch('touchMove', g.cx + 5, g.cy - R * 0.5 + k * R * 0.14);
+    await t.touch('touchEnd'); await t.frames(2);
+    const r2 = await scan();
+    check('jug high + quick stroke cuts the white open', r2 > r1, { whiteRunsBefore: r1, after: r2 });
+    await t.shot('dial-high-cut');
+
+    // other hand: move a dial while the first finger keeps pouring
+    await setDial('hgt', 0.1);
+    const ra = await rect('amt');
+    await t.touches('touchStart', [{ x: g.cx - 40, y: g.cy + 50, id: 1 }]); await t.frames(3);
+    await t.touches('touchStart', [{ x: g.cx - 40, y: g.cy + 50, id: 1 }, { x: ra.x, y: yFor(ra, 0.5), id: 2 }]);
+    await t.touches('touchMove', [{ x: g.cx - 36, y: g.cy + 50, id: 1 }, { x: ra.x, y: yFor(ra, 0.95), id: 2 }]);
+    await t.frames(2);
+    const sm = await t.st(); const held = await t.page.evaluate(() => document.getElementById('amt').classList.contains('held'));
+    await t.touches('touchMove', [{ x: g.cx - 30, y: g.cy + 50, id: 1 }, { x: ra.x, y: yFor(ra, 0.95), id: 2 }]);
+    await t.touches('touchEnd', [{ x: ra.x, y: yFor(ra, 0.95), id: 2 }]); await t.frames(3);   // CDP: the points listed in touchEnd are the ones lifted
+    const sm2 = await t.st();
+    await t.touches('touchEnd', []); await t.frames(2);
+    check('one finger pours while another moves a dial', sm.down && held && sm.amount > 0.9 && sm2.down && sm2.amount > 0.9 && !(await t.st()).down, { pouringWhileDialHeld: sm.down, amount: sm.amount, stillPouringAfterDialReleased: sm2.down });
+    await t.shot('dials-390x844');
+    // remembered
+    await t.page.reload(); await t.page.waitForTimeout(900);
+    const sr = await t.st();
+    check('dial positions are remembered next visit', sr.amount > 0.9 && Math.abs(sr.height - 0.1) < 0.03, { height: sr.height, amount: sr.amount });
+    const kn = await t.page.evaluate(() => { const k = document.querySelector('#amt .knob').getBoundingClientRect(), d = document.getElementById('amt').getBoundingClientRect(); return (k.top + k.height / 2 - d.top) / d.height; });
+    check('knob is drawn where the value is', kn < 0.25, { knobFromTop: +kn.toFixed(2) });
+    await t.ctx.close();
+
+    // flow: thread vs thick stream, same 1 second hold on a virtual 60 fps clock
+    const hold = async a => { const u = await open(browser, { tag: 'flow' + a, query: '?manual=1&level=3' });
+      await u.page.evaluate(v => { localStorage.setItem('cozy-latte.amount', v); localStorage.setItem('cozy-latte.height', '0.15'); }, String(a));
+      await u.page.reload(); await u.page.waitForTimeout(700);
+      const fill = await u.page.evaluate(() => { const g = __latte.state().geo; __latte.feed('down', g.cx, g.cy, 0); for (let f = 0; f < 60; f++) __latte.tick(1000 / 60); __latte.feed('up'); __latte.tick(1000 / 60); return __latte.state().fill; });
+      const n = await u.grid(); if (a === 1) await u.shot('dial-flow-thick'); else await u.shot('dial-flow-thin'); await u.ctx.close(); return { n, fill }; };
+    const thin = await hold(0), thick = await hold(1);
+    check('flow dial: thick stream makes a bigger pool and fills the cup faster than a thread', thick.n > thin.n + 3 && thick.fill > thin.fill * 2.5, { thin, thick });
   }
 
   /* G–H. a whole cup → finished → new cup */
@@ -228,8 +298,8 @@ async function open(browser, o = {}) {
     await t.touch('touchStart', g.cx, g.cy); await t.frames(6); await t.touch('touchEnd');
     const t0 = Date.now(); let s = await t.st();
     while (s.level < 5 && Date.now() - t0 < 60000) { await t.page.waitForTimeout(500); await t.touch('touchStart', g.cx + 30, g.cy); await t.touch('touchEnd'); s = await t.st(); }
-    const w = (await t.white([[g.cx, g.cy]]))[0];
-    check('slow device → steps the grid down by itself, picture survives', s0.level === 1 && s.level > s0.level && w > 0.6, { startLevel: s0.level, startGrid: s0.simN, endLevel: s.level, endGrid: s.simN, endMilkRes: s.dyeN, centreStillWhite: w });
+    const w = await t.grid();
+    check('slow device → steps the grid down by itself, picture survives', s0.level === 1 && s.level > s0.level && w > 3, { startLevel: s0.level, startGrid: s0.simN, endLevel: s.level, endGrid: s.simN, endMilkRes: s.dyeN, whiteProbesLeft: w });
     await t.ctx.close();
   }
 

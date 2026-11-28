@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Cozy Latte</title>
 <style>
-  :root{--table:#cdc8c0;--ink:#2b2a28;--accent:#1f7a6c}
-  @media (prefers-color-scheme:dark){:root{--table:#212427;--ink:#ecebe8;--accent:#3aa594}}
+  :root{--table:#cdc8c0;--ink:#2b2a28;--accent:#1f7a6c;--knob:#fbfaf8}
+  @media (prefers-color-scheme:dark){:root{--table:#212427;--ink:#ecebe8;--accent:#3aa594;--knob:#34383c}}
   html{background:var(--table);overscroll-behavior:none}
   /* 240px scroll cushion: an in-app browser sheet reads a downward drag as "close" unless the page can scroll */
   body{margin:0;height:calc(100% + 240px);min-height:calc(100vh + 240px);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;font:15px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,sans-serif;color:var(--ink)}
@@ -25,6 +25,22 @@
   /* first-run demonstration: a fingertip that presses and sways. No words. */
   #finger{position:absolute;left:0;top:0;width:130px;height:180px;margin:-6px 0 0 -24px;opacity:0;pointer-events:none;transition:opacity .3s ease;will-change:transform}
   #finger.on{opacity:.93}
+
+
+  /* two dials at the edges: how high the jug is held, and how much milk comes out. Usable with the other hand while pouring. */
+  .dial{position:absolute;width:60px;height:min(190px,26vh);bottom:calc(16px + env(safe-area-inset-bottom));touch-action:none;cursor:pointer;outline:none}
+  #hgt{left:calc(8px + env(safe-area-inset-left))}
+  #amt{right:calc(8px + env(safe-area-inset-right))}
+  @media (orientation:landscape){.dial{bottom:auto;top:50%;height:min(210px,62vh);transform:translateY(-50%)}#hgt{left:calc(22px + env(safe-area-inset-left))}#amt{right:calc(22px + env(safe-area-inset-right))}}
+  .dial .track{position:absolute;left:50%;top:20px;bottom:20px;width:4px;margin-left:-2px;border-radius:2px;background:color-mix(in srgb,var(--ink) 20%,transparent);overflow:hidden}
+  .dial .track i{position:absolute;left:0;right:0;bottom:0;background:var(--accent)}
+  #amt .track{width:18px;margin-left:-9px;border-radius:0;clip-path:polygon(42% 100%,58% 100%,100% 0,0 0)}
+  .dial .knob{position:absolute;left:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:var(--knob);border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);box-sizing:border-box;color:var(--accent);display:flex;align-items:center;justify-content:center}
+  .dial.held .knob{transform:scale(1.08)}
+  .dial .knob svg{width:26px;height:26px;display:block}
+  .dial .knob b{display:block;border-radius:50%;background:var(--accent)}
+  .dial .foot{position:absolute;left:50%;bottom:9px;width:26px;height:8px;margin-left:-13px;border:2px solid color-mix(in srgb,var(--ink) 38%,transparent);border-top:0;border-radius:0 0 13px 13px;box-sizing:border-box}
+  .nogl .dial{display:none}
 
   #fps{position:absolute;left:calc(10px + env(safe-area-inset-left));top:calc(10px + env(safe-area-inset-top));padding:4px 8px;border-radius:7px;background:rgba(0,0,0,.55);color:#fff;font:12px/1.3 ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;pointer-events:none;display:none}
 
@@ -56,6 +72,15 @@
     </svg>
   </button>
 
+  <div class="dial" id="hgt" role="slider" tabindex="0" aria-label="Pour height" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100">
+    <div class="track"><i></i></div><div class="foot"></div>
+    <div class="knob"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h11l-1.500 13.500a2 2 0 0 1-2 1.800h-4a2 2 0 0 1-2-1.800z" fill="currentColor" fill-opacity=".18"/><path d="M8 6l-4.500-1.500L7.300 10.500"/><path d="M18.600 9.500h1.900a2.500 2.500 0 0 1 0 5h-2.500"/></svg></div>
+  </div>
+  <div class="dial" id="amt" role="slider" tabindex="0" aria-label="Milk flow" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100">
+    <div class="track"><i></i></div>
+    <div class="knob"><b></b></div>
+  </div>
+
   <div id="fps"></div>
 
   <div id="nogl" role="img" aria-label="A finished latte">
@@ -71,6 +96,6 @@
     <p>This browser can&rsquo;t pour milk yet. Open this page in Safari or Chrome.</p>
   </div>
 </div>
-<script src="latte.js?v=2"></script>
+<script src="latte.js?v=3"></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 {
- "when": "2026-11-28T01:51:26.879Z",
+ "when": "2026-11-28T02:16:16.318Z",
  "base": "http://localhost:8765/cozy-latte/",
- "pass": 39,
- "total": 39,
+ "pass": 47,
+ "total": 47,
  "note": "Headless Chromium + software WebGL (~15 fps). Verifies behaviour only; hand feel on a real phone is NOT verified.",
  "results": [
   {
@@ -12,8 +12,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.115
+    "centreIsCoffee": 0.085
    }
   },
   {
@@ -23,8 +24,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.07
+    "centreIsCoffee": 0.115
    }
   },
   {
@@ -34,8 +36,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.14
+    "centreIsCoffee": 0.135
    }
   },
   {
@@ -45,8 +48,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.07
+    "centreIsCoffee": 0.11
    }
   },
   {
@@ -56,8 +60,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.12
+    "centreIsCoffee": 0.165
    }
   },
   {
@@ -67,8 +72,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.065
+    "centreIsCoffee": 0.12
    }
   },
   {
@@ -78,8 +84,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.07
+    "centreIsCoffee": 0.13
    }
   },
   {
@@ -89,8 +96,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.095
+    "centreIsCoffee": 0.085
    }
   },
   {
@@ -100,8 +108,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.125
+    "centreIsCoffee": 0.075
    }
   },
   {
@@ -111,8 +120,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.07
+    "centreIsCoffee": 0.055
    }
   },
   {
@@ -122,8 +132,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.115
+    "centreIsCoffee": 0.165
    }
   },
   {
@@ -133,8 +144,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.125
+    "centreIsCoffee": 0.12
    }
   },
   {
@@ -144,8 +156,9 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.11
+    "centreIsCoffee": 0.1
    }
   },
   {
@@ -155,16 +168,17 @@
     "cup": true,
     "handle": true,
     "buttonHiddenAndClear": true,
+    "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.055
+    "centreIsCoffee": 0.1
    }
   },
   {
    "name": "touch puts milk at the touched point",
    "pass": true,
    "detail": {
-    "before": 0.135,
-    "after": 1.045
+    "before": 0.02,
+    "after": 1.025
    }
   },
   {
@@ -172,16 +186,16 @@
    "pass": true,
    "detail": {
     "probesWhiteAtStart": 9,
-    "after45Frames": 33
+    "after45Frames": 37
    }
   },
   {
    "name": "pouring beside a pattern pushes it away",
    "pass": true,
    "detail": {
-    "nearEdgePxFromCentreBefore": 51,
+    "nearEdgePxFromCentreBefore": 52,
     "after": 24,
-    "farEdgeBefore": 50,
+    "farEdgeBefore": 51,
     "farEdgeAfter": 53
    }
   },
@@ -189,7 +203,7 @@
    "name": "a fast stroke is one unbroken line (no dots)",
    "pass": true,
    "detail": {
-    "minWhitenessAlongLine": 0.855,
+    "minWhitenessAlongLine": 0.615,
     "samples": 19
    }
   },
@@ -219,8 +233,78 @@
    "name": "rotating the phone keeps the pattern",
    "pass": true,
    "detail": {
-    "probesBefore": 84,
-    "after": 83
+    "probesBefore": 87,
+    "after": 87
+   }
+  },
+  {
+   "name": "dials start low jug / medium flow",
+   "pass": true,
+   "detail": {
+    "height": 0.15,
+    "amount": 0.5
+   }
+  },
+  {
+   "name": "jug high: milk goes in (cup fills) but no white on top",
+   "pass": true,
+   "detail": {
+    "height": 1,
+    "whiteProbes": 0,
+    "fill": 0.03929895104895109
+   }
+  },
+  {
+   "name": "jug low: white foam floats and draws",
+   "pass": true,
+   "detail": {
+    "whiteProbes": 16
+   }
+  },
+  {
+   "name": "jug high + quick stroke cuts the white open",
+   "pass": true,
+   "detail": {
+    "whiteRunsBefore": 1,
+    "after": 2
+   }
+  },
+  {
+   "name": "one finger pours while another moves a dial",
+   "pass": true,
+   "detail": {
+    "pouringWhileDialHeld": true,
+    "amount": 0.95,
+    "stillPouringAfterDialReleased": true
+   }
+  },
+  {
+   "name": "dial positions are remembered next visit",
+   "pass": true,
+   "detail": {
+    "height": 0.1,
+    "amount": 0.95
+   }
+  },
+  {
+   "name": "knob is drawn where the value is",
+   "pass": true,
+   "detail": {
+    "knobFromTop": 0.14
+   }
+  },
+  {
+   "name": "flow dial: thick stream makes a bigger pool and fills the cup faster than a thread",
+   "pass": true,
+   "detail": {
+    "thin": {
+     "n": 1,
+     "fill": 0.015734265734265743
+    },
+    "thick": {
+     "n": 29,
+     "fill": 0.0716783216783216
+    }
    }
   },
   {
@@ -260,7 +344,7 @@
    "name": "new cup pours again",
    "pass": true,
    "detail": {
-    "white": 1.04
+    "white": 1.045
    }
   },
   {
@@ -279,7 +363,7 @@
    "pass": true,
    "detail": {
     "sawFinger": true,
-    "milkProbesDuringDemo": 26,
+    "milkProbesDuringDemo": 28,
     "whiteAfter": 0,
     "remembered": "1"
    }
@@ -294,14 +378,14 @@
    "pass": true,
    "detail": {
     "demo": false,
-    "white": 0.93,
-    "fill": 0.03714743589743586
+    "white": 0.935,
+    "fill": 0.033423513986013974
    }
   },
   {
    "name": "?fps=1 shows the frame rate",
    "pass": true,
-   "detail": "block|37 fps · grid 112 · milk 512 · L4"
+   "detail": "block|41 fps · grid 112 · milk 512 · L4"
   },
   {
    "name": "no ?fps → no readout",
@@ -314,7 +398,7 @@
    "detail": {
     "asleep": true,
     "awake": true,
-    "white": 1.025
+    "white": 1.045
    }
   },
   {
@@ -326,7 +410,7 @@
     "endLevel": 5,
     "endGrid": 96,
     "endMilkRes": 384,
-    "centreStillWhite": 1.03
+    "whiteProbesLeft": 14
    }
   },
   {
@@ -341,8 +425,8 @@
    "name": "milk is in the very first frame drawn after the finger lands (virtual 60 fps clock)",
    "pass": true,
    "detail": {
-    "before": 0.01,
-    "after": 0.985,
+    "before": 0.09,
+    "after": 1,
     "framesDrawn": 1
    }
   },
