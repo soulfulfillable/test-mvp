@@ -131,7 +131,7 @@
     'gl_FragColor=vec4(col,1.);}';
 
   var FS_SHOW = 'precision highp float;varying vec2 vUv;uniform sampler2D uBg;uniform sampler2D uDye;uniform vec2 uRes;uniform vec2 uC;uniform float uRo;' +
-    'uniform float uRho;uniform float uFill;uniform float uFade;uniform float uShine;uniform float uTx;' +
+    'uniform float uRho;uniform float uFill;uniform float uFade;uniform float uShine;uniform float uTx;uniform sampler2D uGuide;uniform float uGuideA;' +
     'const float RD=0.48;const vec2 LD=vec2(-0.553,0.833);' +
     'void main(){vec3 bg=texture2D(uBg,vUv).rgb;vec2 p=(vUv*uRes-uC)/uRo;float r=length(p);float px=1.5/uRo;' +
     'if(r>uRho+px){gl_FragColor=vec4(bg,1.);return;}' +
@@ -143,6 +143,8 @@
     'vec3 crema=mix(vec3(0.335,0.185,0.085),vec3(0.640,0.415,0.205),g);' +
     'crema*=1.-0.22*smoothstep(0.72,1.0,rq);' +
     'm=mix(m,0.,uFade);' +
+    'float gd=texture2D(uGuide,uv).r;float gOut=smoothstep(0.30,0.50,gd)-smoothstep(0.50,0.70,gd);' +      // the order: a faint shape with a brighter outline
+    'crema=mix(crema,vec3(0.95,0.87,0.74),uGuideA*(0.10*smoothstep(0.42,0.58,gd)+0.42*gOut));' +
     'vec3 tan_=vec3(0.835,0.660,0.470);vec3 milk=vec3(0.972,0.945,0.898)*(0.975+0.025*g);' +
     'vec3 col=mix(crema,tan_,smoothstep(0.04,0.40,m));col=mix(col,milk,smoothstep(0.34,0.66,m));' +
     'float lit=dot(vec2(mx,my),-LD)*(1.-uFade);col+=clamp(lit,-1.,1.)*vec3(0.20,0.17,0.13);' +   // foam sits a hair above the crema
@@ -230,6 +232,46 @@
     return true;
   }
 
+  var MS = 96;                 // side of the score grid: the milk picture and the order are compared cell by cell
+  var guideTex = null, guideOn = false, guideA = 1, guideBits = null, maskT = null;
+  function setGuide(bits) {      // bits: Uint8Array(MS*MS) of 0/1, row 0 at the bottom, or null
+    guideBits = bits; guideOn = !!bits;
+    if (!ok) return;
+    if (!guideTex) {
+      guideTex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, guideTex);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    }
+    var px = new Uint8Array(MS * MS * 4), i, x, y;
+    if (bits) {
+      var a = new Float32Array(MS * MS), b = new Float32Array(MS * MS);
+      for (i = 0; i < a.length; i++) a[i] = bits[i];
+      for (var pass = 0; pass < 2; pass++) {              // soften the edge so the outline has a width
+        for (y = 0; y < MS; y++) for (x = 0; x < MS; x++) { var sum = 0, n = 0; for (var k = -1; k <= 1; k++) { var xx = x + k; if (xx >= 0 && xx < MS) { sum += a[y * MS + xx]; n++; } } b[y * MS + x] = sum / n; }
+        for (y = 0; y < MS; y++) for (x = 0; x < MS; x++) { var s2 = 0, n2 = 0; for (var k2 = -1; k2 <= 1; k2++) { var yy = y + k2; if (yy >= 0 && yy < MS) { s2 += b[yy * MS + x]; n2++; } } a[y * MS + x] = s2 / n2; }
+      }
+      for (i = 0; i < a.length; i++) { px[i * 4] = px[i * 4 + 1] = px[i * 4 + 2] = Math.round(a[i] * 255); px[i * 4 + 3] = 255; }
+    }
+    gl.bindTexture(gl.TEXTURE_2D, guideTex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, MS, MS, 0, gl.RGBA, gl.UNSIGNED_BYTE, px);
+    dirty = true;
+  }
+  function milkMask() {          // where is the milk right now? MS×MS of 0/1, same layout as the order
+    if (!maskT) maskT = target(MS, MS, false, true);
+    var u = use(prog.scale); bindTex(0, dye.a); gl.uniform1i(u.uT, 0); gl.uniform1f(u.uK, 1); draw(maskT);
+    var px = new Uint8Array(MS * MS * 4); gl.readPixels(0, 0, MS, MS, gl.RGBA, gl.UNSIGNED_BYTE, px);
+    var out = new Uint8Array(MS * MS);
+    for (var i = 0; i < out.length; i++) out[i] = px[i * 4] > 127 ? 1 : 0;
+    return out;
+  }
+  function inDisc(i) { var x = (i % MS + 0.5) / MS - 0.5, y = (Math.floor(i / MS) + 0.5) / MS - 0.5; return x * x + y * y <= RD * RD; }
+  // the score is nothing but overlap: cells that are both / cells that are either
+  function compare(milk, order) {
+    var both = 0, either = 0, spill = 0, miss = 0;
+    for (var i = 0; i < milk.length; i++) { if (!inDisc(i)) continue; var m = milk[i], o = order[i]; if (m && o) both++; if (m || o) either++; if (m && !o) spill++; if (!m && o) miss++; }
+    return { pct: either ? Math.round(100 * both / either) : 0, both: both, spill: spill, miss: miss };
+  }
+
   function freshDye() {
     var u = use(prog.init); gl.uniform1f(u.uSeed, Math.random() * 50);
     draw(dye.a);
@@ -258,6 +300,7 @@
     if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; }
     if (!ok) return;
     if (!bg || bg.w !== cw || bg.h !== ch) { kill(bg); bg = target(cw, ch, false, true); }
+    if (!guideTex) setGuide(guideBits);
     paintBg();
   }
   function tableColor() {
@@ -290,10 +333,77 @@
     freshDye();
     var u = use(prog.scale); gl.uniform1f(u.uK, 0);
     [vel.a, vel.b, prs.a, prs.b].forEach(function (t) { gl.bindFramebuffer(gl.FRAMEBUFFER, t.fbo); gl.viewport(0, 0, t.w, t.h); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); });
-    freshBtn.classList.remove('on');
+    freshBtn.classList.remove('on'); serveBtn.classList.remove('on');
+    hideResult(); showOrder();
     dirty = true;
   }
-  function newCup() { if (resetPending) return; resetPending = true; fadeDir = 1; freshBtn.classList.remove('on'); wake(); }
+  function finish() {            // the cup is served: by running out of milk, or by the serve button
+    if (done) return;
+    done = true; down = false; touchId = null; mouseDown = false; doneAt = performance.now(); shine = 0.0001;
+    serveBtn.classList.remove('on');
+    wake();
+  }
+  function newCup() { if (resetPending) return; resetPending = true; fadeDir = 1; freshBtn.classList.remove('on'); serveBtn.classList.remove('on'); card.classList.remove('on'); wake(); }
+
+
+  /* ---------------------------------------------------------------- orders: one cup at a time */
+  var ORDERS = (window.LATTE_ORDERS || []).map(function (o) {
+    var raw = atob(o.b64), bits = new Uint8Array(o.n * o.n);
+    for (var i = 0; i < bits.length; i++) bits[i] = (raw.charCodeAt(i >> 3) >> (7 - (i & 7))) & 1;
+    return { id: o.id, name: o.name, bits: bits };
+  });
+  var serveBtn = document.getElementById('serve'), card = document.getElementById('card'), modeBtn = document.getElementById('mode');
+  var mode = 'orders', cupNo = 0, best = {}, result = null;
+  try {
+    if (localStorage.getItem('cozy-latte.mode') === 'free') mode = 'free';
+    cupNo = Math.max(0, parseInt(localStorage.getItem('cozy-latte.cup'), 10) || 0);
+    best = JSON.parse(localStorage.getItem('cozy-latte.best') || '{}') || {};
+  } catch (e) { }
+  if (qs.get('mode') === 'free' || qs.get('mode') === 'orders') mode = qs.get('mode');
+  if (!ORDERS.length) mode = 'free';
+  function order() { return ORDERS[cupNo % ORDERS.length]; }
+  function save(k, v) { try { localStorage.setItem(k, v); } catch (e) { } }
+  function starsFor(p) { return p >= 78 ? 3 : p >= 62 ? 2 : p >= 45 ? 1 : 0; }
+  var COFFEE = '#8a5a30', MILKC = '#f6efe2', MISSC = '#b98a5b';
+
+  function paintCells(cv, fn) {          // draw the score grid into a round picture
+    var c = cv.getContext('2d'), W = cv.width, k = W / (MS * 2 * RD), o = (0.5 - RD) * MS;
+    c.clearRect(0, 0, W, W); c.save(); c.beginPath(); c.arc(W / 2, W / 2, W / 2, 0, 7); c.clip();
+    c.fillStyle = COFFEE; c.fillRect(0, 0, W, W);
+    for (var y = 0; y < MS; y++) for (var x = 0; x < MS; x++) {
+      var col = fn(y * MS + x); if (!col) continue;
+      c.fillStyle = col; c.fillRect((x - o) * k - 0.3, W - (y + 1 - o) * k - 0.3, k + 0.6, k + 0.6);
+    }
+    c.restore();
+  }
+  function accent() { return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#1f7a6c'; }
+  function showOrder() {
+    document.documentElement.classList.toggle('free', mode === 'free');
+    modeBtn.textContent = mode === 'free' ? 'Orders' : 'Free pour';
+    if (mode === 'free') { setGuide(null); return; }
+    var o = order(); setGuide(o.bits); guideA = 1;
+    paintCells(document.getElementById('thumb'), function (i) { return o.bits[i] ? MILKC : null; });
+    document.getElementById('oname').textContent = o.name;
+    document.getElementById('osub').textContent = 'Cup ' + (cupNo + 1) + (best[o.id] ? ' · best ' + best[o.id] + '%' : '');
+  }
+  function showResult() {
+    var o = order(), milk = milkMask(), r = compare(milk, o.bits), ac = accent();
+    r.stars = starsFor(r.pct); r.order = o.id; result = r;
+    paintCells(document.getElementById('over'), function (i) { var m = milk[i], t = o.bits[i]; return m && t ? MILKC : m ? ac : t ? MISSC : null; });
+    document.getElementById('pct').textContent = r.pct + '%';
+    var st = '';
+    for (var i = 0; i < 3; i++) st += '<svg viewBox="0 0 20 20"' + (i < r.stars ? ' class="got"' : '') + '><path fill="currentColor" d="M10 1.6l2.5 5.3 5.8.7-4.3 4 1.1 5.800L10 14.500l-5.100 2.900 1.100-5.800-4.300-4 5.800-.7z"/></svg>';
+    document.getElementById('stars').innerHTML = st;
+    if (!(best[o.id] >= r.pct)) { best[o.id] = r.pct; save('cozy-latte.best', JSON.stringify(best)); }
+    card.setAttribute('aria-label', 'Result: ' + r.pct + ' percent match, ' + r.stars + ' of 3 stars');
+    card.classList.add('on'); document.documentElement.classList.add('served');
+  }
+  function hideResult() { card.classList.remove('on'); document.documentElement.classList.remove('served'); result = null; }
+  serveBtn.addEventListener('click', function () { if (!done && milkUsed > 0) finish(); });
+  document.getElementById('next').addEventListener('click', function () { cupNo++; save('cozy-latte.cup', cupNo); newCup(); });
+  document.getElementById('again').addEventListener('click', function () { newCup(); });
+  modeBtn.addEventListener('click', function () { mode = mode === 'free' ? 'orders' : 'free'; save('cozy-latte.mode', mode); if (milkUsed > 0 || done) newCup(); else { hideResult(); showOrder(); wake(); } });
+  function onUI(el) { return !!(el && el.closest && el.closest('.dial,button,#card')); }
 
   /* ---------------------------------------------------------------- input */
   var down = false, queue = [], last = null, speed = 0, fvx = 0, fvy = 0, touchId = null, lastEventT = 0;
@@ -321,9 +431,9 @@
   function stopDemoForUser() { userTouched = true; if (demo) endDemo(true); }
 
   app.addEventListener('touchstart', function (e) {
-    if (e.target === freshBtn || freshBtn.contains(e.target)) return;
+    if (e.target.closest && e.target.closest('button')) return;
     e.preventDefault();
-    if (onDial(e.target)) return;
+    if (onUI(e.target)) return;
     stopDemoForUser();
     if (touchId !== null) return;
     var t = e.changedTouches[0];
@@ -347,7 +457,7 @@
   function notTouch(e) { return e.pointerType !== 'touch'; }
   if (window.PointerEvent) {
     app.addEventListener('pointerdown', function (e) {
-      if (!notTouch(e) || e.button !== 0 || e.target === freshBtn || freshBtn.contains(e.target) || onDial(e.target)) return;
+      if (!notTouch(e) || e.button !== 0 || onUI(e.target)) return;
       stopDemoForUser();
       if (press(e.clientX, e.clientY, e.timeStamp)) { mouseDown = true; try { app.setPointerCapture(e.pointerId); } catch (x) { } }
     });
@@ -474,7 +584,7 @@
 
     // 4. pressure: keep the liquid incompressible, except where milk is arriving (a source that pushes everything outward)
     var amp = 0, sig = 0.055;
-    if (pouring) amp = 0.046 * flowScale() / (Math.PI * sig * sig);
+    if (pouring) amp = 0.046 * flowScale() * (1 - 0.8 * sstep(0.30, 0.70, height)) / (Math.PI * sig * sig);
     u = use(prog.div);
     bindTex(0, vel.a); gl.uniform1i(u.uVel, 0); gl.uniform1f(u.uH, h);
     gl.uniform3f(u.uSrc, last ? last.x : 0.5, last ? last.y : 0.5, amp); gl.uniform1f(u.uSig2, sig * sig);
@@ -518,7 +628,7 @@
     // 7. the jug runs dry
     if (pouring && !demo) {
       milkUsed += dt * flowScale() / 1.1;
-      if (milkUsed >= MILK) { milkUsed = MILK; done = true; down = false; touchId = null; mouseDown = false; doneAt = performance.now(); shine = 0.0001; }
+      if (milkUsed >= MILK) { milkUsed = MILK; finish(); }
     }
   }
 
@@ -531,6 +641,7 @@
     gl.uniform1f(u.uRo, geo.Ro * geo.s);
     gl.uniform1f(u.uRho, rho()); gl.uniform1f(u.uFill, fill());
     gl.uniform1f(u.uFade, fade); gl.uniform1f(u.uShine, shine); gl.uniform1f(u.uTx, 1 / dyeN);
+    gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, guideTex); gl.uniform1i(u.uGuide, 2); gl.uniform1f(u.uGuideA, guideOn ? guideA : 0);
     draw(null);
   }
 
@@ -605,7 +716,12 @@
       else if (fade <= 0) { fade = 0; fadeDir = 0; }
     }
     if (shine > 0) { shine += dtReal / 1.1; if (shine >= 1) shine = 0; }
-    if (done && !freshBtn.classList.contains('on') && !resetPending && now - doneAt > 650) freshBtn.classList.add('on');
+    if (done && !resetPending && now - doneAt > 650) {
+      if (mode === 'orders') { if (!result) showResult(); }
+      else if (!freshBtn.classList.contains('on')) freshBtn.classList.add('on');
+    }
+    if (!done && !demo && !resetPending && milkUsed > 0 && !serveBtn.classList.contains('on')) serveBtn.classList.add('on');
+    if (done && guideA > 0) { guideA = Math.max(0, guideA - dtReal / 0.4); }
 
     step(dt, dtReal);
     render();
@@ -617,7 +733,7 @@
     }
 
     // nothing moving and nobody touching: stop drawing until the next touch (battery)
-    if (down || demo || fadeDir || shine > 0 || queue.length) idle = 0; else idle += dtReal;
+    if (down || demo || fadeDir || shine > 0 || queue.length || (done && (guideA > 0 || (mode === 'orders' && !result)))) idle = 0; else idle += dtReal;
     if (idle > 5 && !SHOW_FPS && !forcedDt) { cancelAnimationFrame(rafId); rafId = 0; }
   }
 
@@ -625,7 +741,7 @@
   function boot() {
     ok = initGL();
     if (!ok) { document.documentElement.classList.add('nogl'); return; }
-    buildSim(false); layout();
+    buildSim(false); layout(); showOrder();
     if (SHOW_FPS) fpsEl.style.display = 'block';
     wake();
     var seen = false; try { seen = localStorage.getItem(DEMO_KEY) === '1'; } catch (e) { }
@@ -642,8 +758,8 @@
   }
   canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); cancelAnimationFrame(rafId); rafId = 0; ok = false; });
   canvas.addEventListener('webglcontextrestored', function () {
-    vel = prs = div = dye = bg = null; simN = dyeN = 0; prog = {};
-    ok = initGL(); if (ok) { buildSim(false); layout(); milkUsed = 0; done = false; freshBtn.classList.remove('on'); wake(); }
+    vel = prs = div = dye = bg = null; guideTex = null; maskT = null; simN = dyeN = 0; prog = {};
+    ok = initGL(); if (ok) { buildSim(false); layout(); resetCup(); wake(); }
   });
 
   window.addEventListener('load', function () { window.scrollTo(0, 120); setTimeout(pin, 300); });
@@ -654,10 +770,16 @@
   window.__latte = {
     // manual mode only: feed finger events (screen px) stamped on the virtual clock, then advance one frame
     feed: function (type, x, y, tMs) { if (type === 'down') return press(x, y, tMs); if (type === 'move') moveTo(x, y, tMs); else release(); return true; },
-    tick: function (dtMs) { vclock += dtMs; frame(vclock, dtMs / 1000); return frames; },
+    serve: function () { finish(); },
+    setDials: function (h, a) { dialH.put(h, false); dialA.put(a, false); },
+    mask: function () { return Array.prototype.join.call(milkMask(), ''); },
+    setGuide: function (str) { setGuide(str ? Uint8Array.from(str, function (c) { return +c; }) : null); },
+    score: function (str) { return compare(milkMask(), Uint8Array.from(str, function (c) { return +c; })); },
+    orderBits: function () { return Array.prototype.join.call(order().bits, ''); },
+    tick: function (dtMs) { if (!ok) return -1; vclock += dtMs; frame(vclock, dtMs / 1000); return frames; },
     state: function () {
       return { ok: ok, gl2: isGL2, frames: frames, fill: fill(), done: done, down: down, level: level, simN: simN, dyeN: dyeN, demo: !!demo, fade: fade, running: !!rafId,
-        button: freshBtn.classList.contains('on'), height: height, amount: amount, geo: { W: geo.W, H: geo.H, cx: geo.cx, cy: geo.cy, Ro: geo.Ro, rho: rho(), canvasW: canvas.width, canvasH: canvas.height } };
+        button: freshBtn.classList.contains('on'), serve: serveBtn.classList.contains('on'), mode: mode, cupNo: cupNo, order: mode === 'orders' ? order().id : null, result: result, card: card.classList.contains('on'), guideOn: guideOn, height: height, amount: amount, geo: { W: geo.W, H: geo.H, cx: geo.cx, cy: geo.cy, Ro: geo.Ro, rho: rho(), canvasW: canvas.width, canvasH: canvas.height } };
     },
     // how white is the picture at these screen points right now? (0 coffee … 1 milk), read from the real frame
     white: function (points) {
