@@ -479,8 +479,8 @@
   /* ---------------------------------------------------------------- the two dials */
   var height = 0.15, amount = 0.5;      // 0 = jug close to the cup … 1 = held high;  0 = a thread of milk … 1 = a thick stream
   function onDial(el) { return !!(el && el.closest && el.closest('.dial')); }
-  function dial(id, key, get, set) {
-    var el = document.getElementById(id), knob = el.querySelector('.knob'), bar = el.querySelector('.track i'), dot = knob.querySelector('b');
+  function dial(id, key, get, set, title, words) {
+    var el = document.getElementById(id), tagEl = el.querySelector('.tag'), knob = el.querySelector('.knob'), bar = el.querySelector('.track i'), dot = knob.querySelector('b');
     var PAD = 20, tid = null;
     try { var sv = parseFloat(localStorage.getItem(key)); if (sv >= 0 && sv <= 1) set(sv); } catch (e) { }
     function paint() {
@@ -489,6 +489,7 @@
       bar.style.height = (v * 100).toFixed(1) + '%';
       if (dot) { var d = 6 + v * 20; dot.style.width = dot.style.height = d.toFixed(1) + 'px'; }
       el.setAttribute('aria-valuenow', Math.round(v * 100));
+      var word = words[v < 0.34 ? 0 : v < 0.67 ? 1 : 2]; tagEl.textContent = title + ' · ' + word; el.setAttribute('aria-valuetext', word);
     }
     function put(v, save) { v = Math.min(1, Math.max(0, v)); set(v); paint(); if (save) { try { localStorage.setItem(key, v.toFixed(3)); } catch (e) { } } }
     function at(y) { var r = el.getBoundingClientRect(); put(1 - (y - r.top - PAD) / (r.height - 2 * PAD), false); }
@@ -506,8 +507,8 @@
     paint();
     return { paint: paint, put: put };
   }
-  var dialH = dial('hgt', 'cozy-latte.height', function () { return height; }, function (v) { height = v; });
-  var dialA = dial('amt', 'cozy-latte.amount', function () { return amount; }, function (v) { amount = v; });
+  var dialH = dial('hgt', 'cozy-latte.height', function () { return height; }, function (v) { height = v; }, 'Height', ['Low', 'Mid', 'High']);
+  var dialA = dial('amt', 'cozy-latte.amount', function () { return amount; }, function (v) { amount = v; }, 'Flow', ['Light', 'Medium', 'Heavy']);
   function sstep(a, b, x) { x = Math.min(1, Math.max(0, (x - a) / (b - a))); return x * x * (3 - 2 * x); }
   function flowScale() { return 0.45 + 1.1 * amount + 0.5 * amount * amount; }     // 0.45× … 2.05×, 1.1× in the middle
 

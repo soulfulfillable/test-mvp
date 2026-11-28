@@ -1,8 +1,8 @@
 {
- "when": "2026-11-28T03:08:23.251Z",
+ "when": "2026-11-28T03:25:12.808Z",
  "base": "http://localhost:8765/cozy-latte/",
- "pass": 86,
- "total": 86,
+ "pass": 87,
+ "total": 87,
  "note": "Headless Chromium + software WebGL (~15 fps). Verifies behaviour only; hand feel on a real phone is NOT verified.",
  "results": [
   {
@@ -38,7 +38,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.195
+    "centreIsCoffee": 0.15
    }
   },
   {
@@ -61,7 +61,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.195
+    "centreIsCoffee": 0.18
    }
   },
   {
@@ -84,7 +84,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.235
+    "centreIsCoffee": 0.175
    }
   },
   {
@@ -107,7 +107,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.16
+    "centreIsCoffee": 0.125
    }
   },
   {
@@ -117,7 +117,7 @@
     "orderChipAndModeButton": true,
     "serveVisible": true,
     "cardOnScreenClearOfCoffee": true,
-    "cardShows": "3%"
+    "cardShows": "2%"
    }
   },
   {
@@ -130,7 +130,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.165
+    "centreIsCoffee": 0.205
    }
   },
   {
@@ -153,7 +153,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.235
+    "centreIsCoffee": 0.19
    }
   },
   {
@@ -176,7 +176,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.165
+    "centreIsCoffee": 0.195
    }
   },
   {
@@ -222,7 +222,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.15
+    "centreIsCoffee": 0.115
    }
   },
   {
@@ -268,7 +268,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.16
+    "centreIsCoffee": 0.165
    }
   },
   {
@@ -278,7 +278,7 @@
     "orderChipAndModeButton": true,
     "serveVisible": true,
     "cardOnScreenClearOfCoffee": true,
-    "cardShows": "2%"
+    "cardShows": "3%"
    }
   },
   {
@@ -291,7 +291,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.195
+    "centreIsCoffee": 0.16
    }
   },
   {
@@ -301,7 +301,7 @@
     "orderChipAndModeButton": true,
     "serveVisible": true,
     "cardOnScreenClearOfCoffee": true,
-    "cardShows": "3%"
+    "cardShows": "2%"
    }
   },
   {
@@ -314,7 +314,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.18
+    "centreIsCoffee": 0.14
    }
   },
   {
@@ -342,17 +342,17 @@
    "name": "pouring beside a pattern pushes it away",
    "pass": true,
    "detail": {
-    "nearEdgePxFromCentreBefore": 53,
+    "nearEdgePxFromCentreBefore": 52,
     "after": 25,
-    "farEdgeBefore": 52,
-    "farEdgeAfter": 54
+    "farEdgeBefore": 51,
+    "farEdgeAfter": 53
    }
   },
   {
    "name": "a fast stroke is one unbroken line (no dots; coffee reads below 0.2)",
    "pass": true,
    "detail": {
-    "minWhitenessAlongLine": 0.34,
+    "minWhitenessAlongLine": 0.615,
     "samples": 19
    }
   },
@@ -382,8 +382,8 @@
    "name": "rotating the phone keeps the pattern",
    "pass": true,
    "detail": {
-    "probesBefore": 88,
-    "after": 84
+    "probesBefore": 87,
+    "after": 87
    }
   },
   {
@@ -400,7 +400,7 @@
    "detail": {
     "height": 1,
     "whiteProbes": 0,
-    "fill": 0.039322552447552415
+    "fill": 0.03799956293706294
    }
   },
   {
@@ -426,6 +426,14 @@
     "amount": 0.95,
     "stillPouringAfterDialReleased": true
    }
+  },
+  {
+   "name": "dial name tags show the current value in words",
+   "pass": true,
+   "detail": [
+    "Height · Low",
+    "Flow · Heavy"
+   ]
   },
   {
    "name": "dial positions are remembered next visit",
@@ -691,8 +699,8 @@
    "name": "finished cup takes no more milk",
    "pass": true,
    "detail": {
-    "probesBefore": 43,
-    "after": 43
+    "probesBefore": 38,
+    "after": 38
    }
   },
   {
@@ -714,7 +722,7 @@
    "name": "new cup pours again",
    "pass": true,
    "detail": {
-    "white": 1.045
+    "white": 1.025
    }
   },
   {
@@ -729,13 +737,14 @@
    }
   },
   {
-   "name": "first visit: a 3-step how-to sheet (moving pictures + one line each), cup locked behind it",
+   "name": "first visit: a 4-step how-to sheet (pictures + one line each), cup locked behind it",
    "pass": true,
    "detail": {
     "steps": [
      "Touch and hold to pour milk.",
      "Jug low draws white. Jug high sinks and only pushes.",
-     "Sway side to side, then cut through to finish."
+     "Sway side to side, then cut through to finish.",
+     "Fill the faint shape, then tap Serve for your score."
     ],
     "sheetOnScreen": true,
     "animation": "cl-grow",
@@ -752,7 +761,7 @@
    "pass": true,
    "detail": {
     "sawFinger": true,
-    "milkProbesDuringDemo": 33,
+    "milkProbesDuringDemo": 27,
     "whiteAfter": 0,
     "remembered": "1"
    }
@@ -772,8 +781,8 @@
    "pass": true,
    "detail": {
     "demo": false,
-    "white": 0.91,
-    "fill": 0.03538243006993004
+    "white": 0.93,
+    "fill": 0.03276267482517485
    }
   },
   {
@@ -792,7 +801,7 @@
    "detail": {
     "asleep": true,
     "awake": true,
-    "white": 1.035
+    "white": 1.03
    }
   },
   {
@@ -819,8 +828,8 @@
    "name": "milk is in the very first frame drawn after the finger lands (virtual 60 fps clock)",
    "pass": true,
    "detail": {
-    "before": 0.085,
-    "after": 1,
+    "before": 0.06,
+    "after": 0.995,
     "framesDrawn": 1
    }
   },

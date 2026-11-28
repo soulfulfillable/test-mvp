@@ -63,7 +63,7 @@ async function open(browser, o = {}) {
       help: (() => { const r = document.getElementById('help').getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; })() }));
     const clr = d => Math.hypot(Math.max(d.l - g.cx, 0, g.cx - d.r), Math.max(d.t - g.cy, 0, g.cy - d.b)) > RL + 2;
     const okTools = tl.tools.every(d => d.l >= 0 && d.r <= w && d.b <= h && d.w >= 44 && clr(d) && d.label.length > 2 && dials.every(q => d.r < q.l || d.l > q.r)) &&
-      tl.tags.length === 2 && tl.tags.every(d => d.l >= 0 && d.r <= w && d.t >= 0 && clr(d)) && tl.tags[0].text === 'Height' && tl.tags[1].text === 'Flow' &&
+      tl.tags.length === 2 && tl.tags.every(d => d.l >= 0 && d.r <= w && d.t >= 0 && clr(d)) && tl.tags[0].text === 'Height · Low' && tl.tags[1].text === 'Flow · Medium' &&
       tl.help.r <= w && tl.help.t >= 0 && tl.help.r - tl.help.l >= 44 && clr(tl.help);
     const okCanvas = Math.abs(g.canvasW - w * (dpr || 1)) <= 1 && Math.abs(g.canvasH - h * (dpr || 1)) <= 1;
     check(`first screen ${tag}`, s.ok && okCup && okHandle && okBtn && okDials && okTools && okCanvas && centre < 0.35 && s.fill === 0,
@@ -213,6 +213,8 @@ async function open(browser, o = {}) {
     // remembered
     await t.page.reload(); await t.page.waitForTimeout(900);
     const sr = await t.st();
+    const tg = await t.page.evaluate(() => [...document.querySelectorAll('.dial .tag')].map(e => e.textContent));
+    check('dial name tags show the current value in words', tg[0] === 'Height · Low' && tg[1] === 'Flow · Heavy', tg);
     check('dial positions are remembered next visit', sr.amount > 0.9 && Math.abs(sr.height - 0.1) < 0.03, { height: sr.height, amount: sr.amount });
     const kn = await t.page.evaluate(() => { const k = document.querySelector('#amt .knob').getBoundingClientRect(), d = document.getElementById('amt').getBoundingClientRect(); return (k.top + k.height / 2 - d.top) / d.height; });
     check('knob is drawn where the value is', kn < 0.25, { knobFromTop: +kn.toFixed(2) });
@@ -357,7 +359,7 @@ async function open(browser, o = {}) {
     await t.touch('touchStart', g0.cx, g0.cy + g0.Ro * 0.95); await t.page.waitForTimeout(300); await t.touch('touchEnd');
     const blocked = (await t.st()).fill === 0 && (await t.grid()) === 0;
     await t.shot('intro-390x844');
-    check('first visit: a 3-step how-to sheet (moving pictures + one line each), cup locked behind it', i0.intro && steps.length === 3 && steps.every(x => x.length > 10 && x.length < 60) && sheet.in && sheet.bh >= 44 && sheet.anim !== 'none' && blocked, { steps, sheetOnScreen: sheet.in, animation: sheet.anim, cupLocked: blocked });
+    check('first visit: a 4-step how-to sheet (pictures + one line each), cup locked behind it', i0.intro && steps.length === 4 && steps.every(x => x.length > 10 && x.length < 60) && sheet.in && sheet.bh >= 44 && sheet.anim !== 'none' && blocked, { steps, sheetOnScreen: sheet.in, animation: sheet.anim, cupLocked: blocked });
     await t.page.touchscreen.tap(sheet.bx, sheet.by); await t.page.waitForTimeout(200);
     check('"Start" closes the how-to sheet', !(await t.st()).intro);
     let sawFinger = false, sawMilk = 0, fillDuring = 0;
