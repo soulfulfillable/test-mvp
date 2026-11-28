@@ -1,8 +1,8 @@
 {
- "when": "2026-11-28T02:16:16.318Z",
+ "when": "2026-11-28T02:55:02.966Z",
  "base": "http://localhost:8765/cozy-latte/",
- "pass": 47,
- "total": 47,
+ "pass": 79,
+ "total": 79,
  "note": "Headless Chromium + software WebGL (~15 fps). Verifies behaviour only; hand feel on a real phone is NOT verified.",
  "results": [
   {
@@ -14,7 +14,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.085
+    "centreIsCoffee": 0.14
+   }
+  },
+  {
+   "name": "orders screen 320x568: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -26,7 +36,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.115
+    "centreIsCoffee": 0.15
+   }
+  },
+  {
+   "name": "orders screen 360x640: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -38,7 +58,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.135
+    "centreIsCoffee": 0.17
+   }
+  },
+  {
+   "name": "orders screen 375x667: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -50,7 +80,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.11
+    "centreIsCoffee": 0.155
+   }
+  },
+  {
+   "name": "orders screen 390x844: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -62,7 +102,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.165
+    "centreIsCoffee": 0.135
+   }
+  },
+  {
+   "name": "orders screen 393x852: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -74,7 +124,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.12
+    "centreIsCoffee": 0.145
+   }
+  },
+  {
+   "name": "orders screen 412x915: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -86,7 +146,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.13
+    "centreIsCoffee": 0.16
+   }
+  },
+  {
+   "name": "orders screen 414x896: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -98,7 +168,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.085
+    "centreIsCoffee": 0.195
+   }
+  },
+  {
+   "name": "orders screen 430x932: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -110,7 +190,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.075
+    "centreIsCoffee": 0.095
+   }
+  },
+  {
+   "name": "orders screen 768x1024: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -122,7 +212,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.055
+    "centreIsCoffee": 0.15
+   }
+  },
+  {
+   "name": "orders screen 820x1180: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -134,7 +234,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.165
+    "centreIsCoffee": 0.125
+   }
+  },
+  {
+   "name": "orders screen 1024x768: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -146,7 +256,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.12
+    "centreIsCoffee": 0.18
+   }
+  },
+  {
+   "name": "orders screen 844x390: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -158,7 +278,17 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.1
+    "centreIsCoffee": 0.135
+   }
+  },
+  {
+   "name": "orders screen 1280x720: order shown, serve works, result card fits",
+   "pass": true,
+   "detail": {
+    "orderChipAndModeButton": true,
+    "serveVisible": true,
+    "cardOnScreenClearOfCoffee": true,
+    "cardShows": "3%"
    }
   },
   {
@@ -170,15 +300,20 @@
     "buttonHiddenAndClear": true,
     "dialsOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.1
+    "centreIsCoffee": 0.145
    }
+  },
+  {
+   "name": "orders screen 1170x2532: order chip and mode button (pour not driven: software renderer stalls at this pixel count; same layout as 390x844)",
+   "pass": true,
+   "detail": ""
   },
   {
    "name": "touch puts milk at the touched point",
    "pass": true,
    "detail": {
-    "before": 0.02,
-    "after": 1.025
+    "before": 0.095,
+    "after": 1.04
    }
   },
   {
@@ -193,17 +328,17 @@
    "name": "pouring beside a pattern pushes it away",
    "pass": true,
    "detail": {
-    "nearEdgePxFromCentreBefore": 52,
-    "after": 24,
-    "farEdgeBefore": 51,
-    "farEdgeAfter": 53
+    "nearEdgePxFromCentreBefore": 53,
+    "after": 26,
+    "farEdgeBefore": 52,
+    "farEdgeAfter": 54
    }
   },
   {
-   "name": "a fast stroke is one unbroken line (no dots)",
+   "name": "a fast stroke is one unbroken line (no dots; coffee reads below 0.2)",
    "pass": true,
    "detail": {
-    "minWhitenessAlongLine": 0.615,
+    "minWhitenessAlongLine": 0.34,
     "samples": 19
    }
   },
@@ -251,14 +386,14 @@
    "detail": {
     "height": 1,
     "whiteProbes": 0,
-    "fill": 0.03929895104895109
+    "fill": 0.03931206293706297
    }
   },
   {
    "name": "jug low: white foam floats and draws",
    "pass": true,
    "detail": {
-    "whiteProbes": 16
+    "whiteProbes": 21
    }
   },
   {
@@ -308,6 +443,158 @@
    }
   },
   {
+   "name": "order \"circle\" is pourable: robot scores ≥70% (grid level 3)",
+   "pass": true,
+   "detail": {
+    "pct": 94,
+    "stars": 3,
+    "fillUsed": 0.41
+   }
+  },
+  {
+   "name": "order \"circle\" L3: the % on the card is exactly overlap ÷ union, stars follow the %",
+   "pass": true,
+   "detail": {
+    "cardPct": 94,
+    "robotRecount": 94,
+    "starsDrawn": 3
+   }
+  },
+  {
+   "name": "order \"heart\" is pourable: robot scores ≥70% (grid level 3)",
+   "pass": true,
+   "detail": {
+    "pct": 98,
+    "stars": 3,
+    "fillUsed": 0.33
+   }
+  },
+  {
+   "name": "order \"heart\" L3: the % on the card is exactly overlap ÷ union, stars follow the %",
+   "pass": true,
+   "detail": {
+    "cardPct": 98,
+    "robotRecount": 98,
+    "starsDrawn": 3
+   }
+  },
+  {
+   "name": "\"Again\": same order, clean cup, best score shown",
+   "pass": true,
+   "detail": {
+    "order": "heart",
+    "sub": "Cup 2 · best 98%"
+   }
+  },
+  {
+   "name": "a careless pour gets a low score and no stars",
+   "pass": true,
+   "detail": {
+    "pct": 0,
+    "stars": 0
+   }
+  },
+  {
+   "name": "\"Next cup\": the next order, clean cup",
+   "pass": true,
+   "detail": {
+    "order": "leaf",
+    "cup": 3
+   }
+  },
+  {
+   "name": "order \"leaf\" is pourable: robot scores ≥70% (grid level 3)",
+   "pass": true,
+   "detail": {
+    "pct": 74,
+    "stars": 2,
+    "fillUsed": 0.21
+   }
+  },
+  {
+   "name": "order \"leaf\" L3: the % on the card is exactly overlap ÷ union, stars follow the %",
+   "pass": true,
+   "detail": {
+    "cardPct": 74,
+    "robotRecount": 74,
+    "starsDrawn": 2
+   }
+  },
+  {
+   "name": "order \"circle\" is pourable: robot scores ≥70% (grid level 1)",
+   "pass": true,
+   "detail": {
+    "pct": 95,
+    "stars": 3,
+    "fillUsed": 0.41
+   }
+  },
+  {
+   "name": "order \"circle\" L1: the % on the card is exactly overlap ÷ union, stars follow the %",
+   "pass": true,
+   "detail": {
+    "cardPct": 95,
+    "robotRecount": 95,
+    "starsDrawn": 3
+   }
+  },
+  {
+   "name": "order \"heart\" is pourable: robot scores ≥70% (grid level 1)",
+   "pass": true,
+   "detail": {
+    "pct": 98,
+    "stars": 3,
+    "fillUsed": 0.33
+   }
+  },
+  {
+   "name": "order \"heart\" L1: the % on the card is exactly overlap ÷ union, stars follow the %",
+   "pass": true,
+   "detail": {
+    "cardPct": 98,
+    "robotRecount": 98,
+    "starsDrawn": 3
+   }
+  },
+  {
+   "name": "order \"leaf\" is pourable: robot scores ≥70% (grid level 1)",
+   "pass": true,
+   "detail": {
+    "pct": 70,
+    "stars": 2,
+    "fillUsed": 0.21
+   }
+  },
+  {
+   "name": "order \"leaf\" L1: the % on the card is exactly overlap ÷ union, stars follow the %",
+   "pass": true,
+   "detail": {
+    "cardPct": 70,
+    "robotRecount": 70,
+    "starsDrawn": 2
+   }
+  },
+  {
+   "name": "\"Free pour\": no order, no score — serve just offers a new cup",
+   "pass": true,
+   "detail": {
+    "mode": "free",
+    "orderChip": "hidden|Orders",
+    "newCupButton": true,
+    "card": false
+   }
+  },
+  {
+   "name": "mode is remembered",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "back to \"Orders\"",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "milk runs out → cup is finished, \"new cup\" button appears",
    "pass": true,
    "detail": {
@@ -321,8 +608,8 @@
    "name": "finished cup takes no more milk",
    "pass": true,
    "detail": {
-    "probesBefore": 40,
-    "after": 40
+    "probesBefore": 43,
+    "after": 43
    }
   },
   {
@@ -344,7 +631,7 @@
    "name": "new cup pours again",
    "pass": true,
    "detail": {
-    "white": 1.045
+    "white": 1.03
    }
   },
   {
@@ -363,7 +650,7 @@
    "pass": true,
    "detail": {
     "sawFinger": true,
-    "milkProbesDuringDemo": 28,
+    "milkProbesDuringDemo": 27,
     "whiteAfter": 0,
     "remembered": "1"
    }
@@ -378,14 +665,14 @@
    "pass": true,
    "detail": {
     "demo": false,
-    "white": 0.935,
-    "fill": 0.033423513986013974
+    "white": 0.93,
+    "fill": 0.034726835664335653
    }
   },
   {
    "name": "?fps=1 shows the frame rate",
    "pass": true,
-   "detail": "block|41 fps · grid 112 · milk 512 · L4"
+   "detail": "block|37 fps · grid 112 · milk 512 · L4"
   },
   {
    "name": "no ?fps → no readout",
@@ -425,8 +712,8 @@
    "name": "milk is in the very first frame drawn after the finger lands (virtual 60 fps clock)",
    "pass": true,
    "detail": {
-    "before": 0.09,
-    "after": 1,
+    "before": 0.1,
+    "after": 1.005,
     "framesDrawn": 1
    }
   },

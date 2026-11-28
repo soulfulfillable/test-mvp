@@ -13,7 +13,8 @@
   /* 240px scroll cushion: an in-app browser sheet reads a downward drag as "close" unless the page can scroll */
   body{margin:0;height:calc(100% + 240px);min-height:calc(100vh + 240px);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;font:15px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,sans-serif;color:var(--ink)}
   #app{position:fixed;inset:0;overflow:hidden;background:var(--table);touch-action:pan-y}
-  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  #cup{position:absolute;inset:0;width:100%;height:100%;display:block}
+  canvas{display:block}
   button{position:absolute;margin:0;padding:0;border:0;background:none;cursor:pointer;-webkit-appearance:none;appearance:none}
 
   /* the only control: appears when the cup is finished */
@@ -42,13 +43,48 @@
   .dial .foot{position:absolute;left:50%;bottom:9px;width:26px;height:8px;margin-left:-13px;border:2px solid color-mix(in srgb,var(--ink) 38%,transparent);border-top:0;border-radius:0 0 13px 13px;box-sizing:border-box}
   .nogl .dial{display:none}
 
+  /* orders: what to pour (top), serve (bottom centre), and the result card */
+  #top{position:absolute;left:calc(12px + env(safe-area-inset-left));right:calc(12px + env(safe-area-inset-right));top:calc(10px + env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+  #order{display:flex;align-items:center;gap:10px;min-width:0}
+  #thumb{width:46px;height:46px;flex:none;border-radius:50%}
+  #order div{display:flex;flex-direction:column;min-width:0}
+  #oname{font-size:17px;font-weight:600;letter-spacing:-.01em}
+  #osub{font-size:13px;opacity:.62;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #mode{position:static;pointer-events:auto;font:inherit;font-size:17px;color:var(--accent);padding:10px 4px;min-height:44px}
+  #mode:active{opacity:.5}
+  .free #order{visibility:hidden}
+  #serve{left:50%;bottom:calc(6.5% + env(safe-area-inset-bottom));width:56px;height:56px;margin-left:-28px;border-radius:50%;background:var(--knob);border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);box-sizing:border-box;color:var(--accent);opacity:0;transform:scale(.7);pointer-events:none;transition:opacity .25s ease,transform .3s ease}
+  #serve.on{opacity:1;transform:none;pointer-events:auto}
+  #serve:active{transform:scale(.93)}
+  #serve svg{width:28px;height:28px;display:block;margin:13px}
+  #card{position:absolute;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));width:min(366px,calc(100% - 24px));transform:translate(-50%,14px);box-sizing:border-box;padding:14px;border-radius:18px;background:var(--knob);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);opacity:0;pointer-events:none;transition:opacity .28s ease,transform .34s ease}
+  #card.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+  #card .row{display:flex;align-items:center;gap:14px}
+  #over{width:104px;height:104px;flex:none;border-radius:50%}
+  #pct{font-size:34px;font-weight:700;line-height:1.05;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  #stars{display:flex;gap:3px;margin:5px 0 7px;color:color-mix(in srgb,var(--ink) 20%,transparent)}
+  #stars svg{width:20px;height:20px}
+  #stars .got{color:var(--accent)}
+  #legend{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:13px;opacity:.75}
+  #legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+  #card .btns{display:flex;gap:8px;margin-top:12px}
+  #card .btns button{position:static;flex:1;height:48px;border-radius:13px;font:inherit;font-size:17px}
+  #again{color:var(--accent);background:color-mix(in srgb,var(--ink) 7%,transparent)}
+  #next{color:#fff;background:var(--accent);font-weight:600}
+  #card .btns button:active{opacity:.6}
+  .served .dial{opacity:0;pointer-events:none}
+  .dial{transition:opacity .2s ease}
+  @media (orientation:landscape){#card{left:auto;right:calc(14px + env(safe-area-inset-right));bottom:auto;top:50%;width:236px;transform:translate(14px,-50%)}#card.on{transform:translate(0,-50%)}#card .row{flex-direction:column;align-items:flex-start;gap:8px}#over{width:84px;height:84px}}
+  @media (orientation:portrait) and (max-height:620px){#card{padding:10px}#over{width:78px;height:78px}#card .btns{margin-top:8px}#card .btns button{height:44px}#pct{font-size:30px}#stars{margin:3px 0 5px}}
+  .nogl #top,.nogl #serve,.nogl #card{display:none}
+
   #fps{position:absolute;left:calc(10px + env(safe-area-inset-left));top:calc(10px + env(safe-area-inset-top));padding:4px 8px;border-radius:7px;background:rgba(0,0,0,.55);color:#fff;font:12px/1.3 ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;pointer-events:none;display:none}
 
   #nogl{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center}
   #nogl svg{width:min(62vw,300px);height:auto}
   #nogl p{margin:0;max-width:280px;font-size:15px;opacity:.72}
   .nogl #nogl{display:flex}
-  .nogl canvas,.nogl #finger{display:none}
+  .nogl #cup,.nogl #finger{display:none}
 </style>
 </head>
 <body>
@@ -81,6 +117,27 @@
     <div class="knob"><b></b></div>
   </div>
 
+  <div id="top">
+    <div id="order"><canvas id="thumb" width="92" height="92" aria-hidden="true"></canvas><div><span id="oname"></span><span id="osub"></span></div></div>
+    <button id="mode" type="button"></button>
+  </div>
+
+  <button id="serve" type="button" aria-label="Serve this cup">
+    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14.500l5.500 5.500L22 8.500"/></svg>
+  </button>
+
+  <div id="card" role="dialog" aria-label="Result">
+    <div class="row">
+      <canvas id="over" width="208" height="208" aria-hidden="true"></canvas>
+      <div>
+        <div id="pct"></div>
+        <div id="stars" aria-hidden="true"></div>
+        <div id="legend"><span><i style="background:#f6efe2;border:1px solid rgba(0,0,0,.25);box-sizing:border-box"></i>Match</span><span><i style="background:var(--accent)"></i>Outside</span><span><i style="background:#b98a5b"></i>Missed</span></div>
+      </div>
+    </div>
+    <div class="btns"><button id="again" type="button">Again</button><button id="next" type="button">Next cup</button></div>
+  </div>
+
   <div id="fps"></div>
 
   <div id="nogl" role="img" aria-label="A finished latte">
@@ -96,6 +153,7 @@
     <p>This browser can&rsquo;t pour milk yet. Open this page in Safari or Chrome.</p>
   </div>
 </div>
-<script src="latte.js?v=3"></script>
+<script src="orders.js?v=1"></script>
+<script src="latte.js?v=4"></script>
 </body>
 </html>
