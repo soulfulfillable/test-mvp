@@ -13,7 +13,7 @@
   var SHOW_FPS = qs.get('fps') === '1';
   var PIN_LEVEL = qs.has('level') ? Math.max(0, Math.min(5, +qs.get('level') | 0)) : -1;
   var MILK = Math.max(1, +qs.get('milk') || 26);      // seconds of pouring in one cup
-  var DEMO_KEY = 'cozy-latte.demo.v1';
+  var DEMO_KEY = 'cozy-latte.demo.v2';
   var MANUAL = qs.get('manual') === '1';               // test robot steps frames itself on a virtual 60 fps clock
 
   var RD = 0.48;                 // radius of the liquid disc in simulation uv space
@@ -403,7 +403,7 @@
   document.getElementById('next').addEventListener('click', function () { cupNo++; save('cozy-latte.cup', cupNo); newCup(); });
   document.getElementById('again').addEventListener('click', function () { newCup(); });
   modeBtn.addEventListener('click', function () { mode = mode === 'free' ? 'orders' : 'free'; save('cozy-latte.mode', mode); if (milkUsed > 0 || done) newCup(); else { hideResult(); showOrder(); wake(); } });
-  function onUI(el) { return !!(el && el.closest && el.closest('.dial,button,#card,#intro')); }
+  function onUI(el) { return !!(el && el.closest && el.closest('.dial,button,#card')); }
 
   /* ---------------------------------------------------------------- input */
   var down = false, queue = [], last = null, speed = 0, fvx = 0, fvy = 0, touchId = null, lastEventT = 0;
@@ -419,7 +419,7 @@
     return [0.5 + dx * RD, 0.5 + dy * RD];
   }
   function press(x, y, t) {
-    if (done || resetPending || intro.classList.contains('on')) return false;
+    if (done || resetPending) return false;
     var p = toSim(x, y, true); if (!p) return false;
     down = true; last = null; speed = 0; fvx = fvy = 0;
     queue.push({ x: p[0], y: p[1], t: t, first: true });
@@ -528,10 +528,7 @@
   styleBtn.addEventListener('click', function () { styleI = (styleI + 1) % 3; save('cozy-latte.style', styleI); paintTools(); });
   texBtn.addEventListener('click', function () { texI = (texI + 1) % 3; save('cozy-latte.tex', texI); paintTools(); });
   paintTools();
-  var intro = document.getElementById('intro'), afterIntro = null;
-  function openIntro(then) { afterIntro = then || null; intro.classList.add('on'); }
-  document.getElementById('start').addEventListener('click', function () { intro.classList.remove('on'); try { localStorage.setItem(DEMO_KEY, '1'); } catch (e) { } var f = afterIntro; afterIntro = null; if (f) f(); });
-  document.getElementById('help').addEventListener('click', function () { openIntro(null); });
+  document.getElementById('help').addEventListener('click', function () { startDemo(true); });
   // auto-sway: the stream swings across the direction the finger travels (side to side when the finger rests)
   var base = null, baseT = 0, swDir = [0, 1], swPhase = 0, swAge = 0;
   function swayQueue(dtReal) {
@@ -702,44 +699,67 @@
     draw(null);
   }
 
-  /* ---------------------------------------------------------------- first-run demonstration */
-  var demo = null;
-  function demoPoint(t) {     // seconds -> position in disc units (y up): press, let it bloom, then sway while backing away
-    var hold = 0.55, sway = 1.7;
-    if (t < hold) return [0, -0.22];
-    var k = Math.min(1, (t - hold) / sway), e = k * k * (3 - 2 * k);
-    return [0.26 * Math.sin(k * Math.PI * 2 * 3) * (1 - 0.35 * k), -0.22 + 0.62 * e];
+  /* ---------------------------------------------------------------- the demonstration: a see-through hand pours one cup */
+  var demo = null, dimEl = document.getElementById('dim'), capEl = document.getElementById('cap');
+  var D_HOLD = [0, 0.3], D_CUT0 = [0, -0.62], D_CUT1 = [0, 0.78];
+  function dScr(d) { var R = rho() * geo.Ro; return [geo.cx + d[0] * R, geo.cy - d[1] * R]; }
+  function lerp2(a, b, k) { k = k < 0 ? 0 : k > 1 ? 1 : k; k = k * k * (3 - 2 * k); return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]; }
+  function swayAt(k) { return [0.30 * Math.sin(k * 3.0 * 2.2 * Math.PI * 2) * (1 - 0.2 * k), 0.3 - 0.75 * k]; }
+  // seconds into one run -> where the hand is (screen px), whether it touches, the word beside it, jug height and flow
+  function demoAt(t) {
+    var sv = serveBtn.querySelector('i').getBoundingClientRect(), ar = app.getBoundingClientRect(), serveXY = [sv.left - ar.left + sv.width / 2, sv.top - ar.top + sv.height / 2];
+    if (t < 0.7) return { p: dScr(D_HOLD), down: false, cap: 'Hold', h: 0.15, a: 0.5 };
+    if (t < 2.1) return { p: dScr(D_HOLD), down: true, cap: 'Hold', h: 0.15, a: 0.5 };
+    if (t < 5.1) return { p: dScr(swayAt((t - 2.1) / 3.0)), down: true, cap: 'Sway', h: 0.15, a: 0.5 };
+    if (t < 5.8) return { p: lerp2(dScr(swayAt(1)), dScr(D_CUT0), (t - 5.1) / 0.6), down: false, cap: 'Cut through', h: 0.6, a: 0.3 };
+    if (t < 6.6) return { p: lerp2(dScr(D_CUT0), dScr(D_CUT1), (t - 5.8) / 0.8), down: true, cap: 'Cut through', h: 0.6, a: 0.3 };
+    if (t < 7.5) return { p: lerp2(dScr(D_CUT1), serveXY, (t - 6.6) / 0.8), down: false, cap: 'Serve', h: 0.15, a: 0.5 };
+    if (t < 8.2) return { p: serveXY, down: false, tap: true, cap: 'Serve', h: 0.15, a: 0.5 };
+    return null;
   }
-  function startDemo() {
-    if (userTouched || demo || done) return;
-    demo = { t0: performance.now(), pressed: false, over: false, h: height, a: amount, s: styleI, x: texI };
-    height = 0.15; amount = 0.5; styleI = 0; texI = 1;
-    fingerEl.classList.add('on'); wake();
-  }
-  function placeFinger(d, lifted) {
-    var R = rho() * geo.Ro, x = geo.cx + d[0] * R, y = geo.cy - d[1] * R;
-    fingerEl.style.transform = 'translate(' + x.toFixed(1) + 'px,' + (y + (lifted ? -10 : 0)).toFixed(1) + 'px) scale(' + (lifted ? 1.06 : 1) + ')';
-    return [x, y];
+  function startDemo(asked) {
+    if (demo || (!asked && userTouched)) return;
+    if (milkUsed > 0 || done || resetPending) { resetPending = false; fadeDir = 0; fade = 0; resetCup(); }
+    demo = { t0: (lastT || performance.now()) + 250, pouring: false, loop: 1, h: height, a: amount, s: styleI, x: texI };
+    styleI = 0; texI = 1;
+    try { localStorage.setItem(DEMO_KEY, '1'); } catch (e) { }
+    dimEl.style.background = 'radial-gradient(circle at ' + geo.cx.toFixed(0) + 'px ' + geo.cy.toFixed(0) + 'px, rgba(20,17,14,0) ' + (geo.Ro * 1.04).toFixed(0) + 'px, rgba(20,17,14,.36) ' + (geo.Ro * 1.3).toFixed(0) + 'px)';
+    dimEl.classList.add('on'); wake();
   }
   function tickDemo(now) {
-    var t = (now - demo.t0) / 1000 - 0.55;        // a short approach before the press
-    if (t < 0) { placeFinger(demoPoint(0), true); return; }
-    if (t > 2.25) {
-      if (!demo.over) { demo.over = true; release(); placeFinger(demoPoint(2.25), true); fingerEl.classList.remove('on'); }
-      if (t > 3.1) endDemo(false);
+    var t = (now - demo.t0) / 1000;
+    if (t < 0) return;
+    var st = demoAt(t);
+    if (!st) {                                            // one run is over: once more, then hand back a clean cup
+      if (demo.pouring) { release(); demo.pouring = false; }
+      fingerEl.classList.remove('on'); capEl.classList.remove('on'); serveBtn.classList.remove('tap');
+      if (t > 8.9) { if (demo.loop < 2) { demo.loop++; demo.t0 = now + 900; resetPending = true; fadeDir = 1; } else endDemo(false); }
       return;
     }
-    var xy = placeFinger(demoPoint(t), false);
-    if (!demo.pressed) { demo.pressed = true; press(xy[0], xy[1], now); } else moveTo(xy[0], xy[1], now);
+    dialH.put(st.h, false); dialA.put(st.a, false);
+    serveBtn.classList.add('on'); serveBtn.classList.toggle('tap', !!st.tap);
+    fingerEl.classList.add('on');
+    var lift = st.down || st.tap ? 0 : -12;
+    fingerEl.style.transform = 'translate(' + st.p[0].toFixed(1) + 'px,' + (st.p[1] + lift).toFixed(1) + 'px) scale(' + (lift ? 1.05 : 1) + ')';
+    if (capEl.textContent !== st.cap) capEl.textContent = st.cap;
+    var cw = capEl.offsetWidth || 90, cx = Math.min(geo.W - cw - 8, Math.max(8, st.p[0] + 30)), cy = Math.max(8, st.p[1] - 62);
+    capEl.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px)'; capEl.classList.add('on');
+    if (st.down) { if (!demo.pouring) { demo.pouring = press(st.p[0], st.p[1], now); } else moveTo(st.p[0], st.p[1], now); }
+    else if (demo.pouring) { release(); demo.pouring = false; }
   }
   function endDemo(byUser) {
     if (!demo) return;
-    var pressed = demo.pressed && !demo.over;
-    height = demo.h; amount = demo.a; styleI = demo.s; texI = demo.x;
-    demo = null; fingerEl.classList.remove('on');
-    if (pressed) release();
-    if (!byUser) { resetPending = true; fadeDir = 1; }      // hand back a clean cup
+    if (demo.pouring) release();
+    styleI = demo.s; texI = demo.x; dialH.put(demo.h, false); dialA.put(demo.a, false);
+    demo = null;
+    fingerEl.classList.remove('on'); capEl.classList.remove('on'); dimEl.classList.remove('on'); serveBtn.classList.remove('tap'); serveBtn.classList.remove('on');
+    if (byUser) { resetPending = false; fadeDir = 0; fade = 0; resetCup(); }        // your turn: a clean cup, right now
+    else { resetPending = true; fadeDir = 1; }
   }
+  // any touch anywhere ends the demonstration
+  ['touchstart', 'pointerdown'].forEach(function (n) {
+    document.addEventListener(n, function (e) { if (demo && !(e.target.closest && e.target.closest('#help'))) { userTouched = true; endDemo(true); } }, { capture: true, passive: true });
+  });
 
   /* ---------------------------------------------------------------- frame loop + self-tuning */
   var rafId = 0, lastT = 0, idle = 0, acc = 0, accN = 0, settle = 30, fpsShown = 0, fpsAcc = 0, fpsN = 0, fpsAt = 0;
@@ -801,7 +821,7 @@
     if (SHOW_FPS) fpsEl.style.display = 'block';
     wake();
     var seen = false; try { seen = localStorage.getItem(DEMO_KEY) === '1'; } catch (e) { }
-    if (!seen && qs.get('demo') !== '0') openIntro(function () { setTimeout(startDemo, 500); });
+    if (!seen && qs.get('demo') !== '0') setTimeout(function () { startDemo(false); }, 600);
   }
   var rz = 0;
   window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { layout(); pin(); wake(); }, 60); });
@@ -837,7 +857,7 @@
     tick: function (dtMs) { if (!ok) return -1; vclock += dtMs; frame(vclock, dtMs / 1000); return frames; },
     state: function () {
       return { ok: ok, gl2: isGL2, frames: frames, fill: fill(), done: done, down: down, level: level, simN: simN, dyeN: dyeN, demo: !!demo, fade: fade, running: !!rafId,
-        button: freshBtn.classList.contains('on'), serve: serveBtn.classList.contains('on'), mode: mode, cupNo: cupNo, order: mode === 'orders' ? order().id : null, result: result, card: card.classList.contains('on'), guideOn: guideOn, style: STYLES[styleI].name, tex: TEXES[texI].name, intro: intro.classList.contains('on'), spot: spot.classList.contains('on'), height: height, amount: amount, geo: { W: geo.W, H: geo.H, cx: geo.cx, cy: geo.cy, Ro: geo.Ro, rho: rho(), canvasW: canvas.width, canvasH: canvas.height } };
+        button: freshBtn.classList.contains('on'), serve: serveBtn.classList.contains('on'), mode: mode, cupNo: cupNo, order: mode === 'orders' ? order().id : null, result: result, card: card.classList.contains('on'), guideOn: guideOn, style: STYLES[styleI].name, tex: TEXES[texI].name, cap: capEl.classList.contains('on') ? capEl.textContent : '', dim: dimEl.classList.contains('on'), spot: spot.classList.contains('on'), height: height, amount: amount, geo: { W: geo.W, H: geo.H, cx: geo.cx, cy: geo.cy, Ro: geo.Ro, rho: rho(), canvasW: canvas.width, canvasH: canvas.height } };
     },
     // how white is the picture at these screen points right now? (0 coffee … 1 milk), read from the real frame
     white: function (points) {

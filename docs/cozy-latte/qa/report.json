@@ -1,8 +1,8 @@
 {
- "when": "2026-11-28T03:25:12.808Z",
+ "when": "2026-11-28T04:06:30.753Z",
  "base": "http://localhost:8765/cozy-latte/",
- "pass": 87,
- "total": 87,
+ "pass": 101,
+ "total": 101,
  "note": "Headless Chromium + software WebGL (~15 fps). Verifies behaviour only; hand feel on a real phone is NOT verified.",
  "results": [
   {
@@ -15,7 +15,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.15
+    "centreIsCoffee": 0.21
    }
   },
   {
@@ -25,7 +25,7 @@
     "orderChipAndModeButton": true,
     "serveVisible": true,
     "cardOnScreenClearOfCoffee": true,
-    "cardShows": "3%"
+    "cardShows": "2%"
    }
   },
   {
@@ -38,7 +38,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.15
+    "centreIsCoffee": 0.175
    }
   },
   {
@@ -61,7 +61,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.18
+    "centreIsCoffee": 0.205
    }
   },
   {
@@ -84,7 +84,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.175
+    "centreIsCoffee": 0.195
    }
   },
   {
@@ -94,7 +94,7 @@
     "orderChipAndModeButton": true,
     "serveVisible": true,
     "cardOnScreenClearOfCoffee": true,
-    "cardShows": "3%"
+    "cardShows": "2%"
    }
   },
   {
@@ -107,7 +107,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.125
+    "centreIsCoffee": 0.15
    }
   },
   {
@@ -117,7 +117,7 @@
     "orderChipAndModeButton": true,
     "serveVisible": true,
     "cardOnScreenClearOfCoffee": true,
-    "cardShows": "2%"
+    "cardShows": "3%"
    }
   },
   {
@@ -130,7 +130,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.205
+    "centreIsCoffee": 0.23
    }
   },
   {
@@ -153,7 +153,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.19
+    "centreIsCoffee": 0.17
    }
   },
   {
@@ -176,7 +176,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.195
+    "centreIsCoffee": 0.225
    }
   },
   {
@@ -199,7 +199,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.15
+    "centreIsCoffee": 0.13
    }
   },
   {
@@ -222,7 +222,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.115
+    "centreIsCoffee": 0.195
    }
   },
   {
@@ -245,7 +245,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.195
+    "centreIsCoffee": 0.175
    }
   },
   {
@@ -268,7 +268,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.165
+    "centreIsCoffee": 0.125
    }
   },
   {
@@ -291,7 +291,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.16
+    "centreIsCoffee": 0.18
    }
   },
   {
@@ -301,7 +301,7 @@
     "orderChipAndModeButton": true,
     "serveVisible": true,
     "cardOnScreenClearOfCoffee": true,
-    "cardShows": "2%"
+    "cardShows": "3%"
    }
   },
   {
@@ -314,7 +314,7 @@
     "dialsOnScreenClearOfCoffee": true,
     "toolsTagsHelpOnScreenClearOfCoffee": true,
     "canvas": true,
-    "centreIsCoffee": 0.14
+    "centreIsCoffee": 0.195
    }
   },
   {
@@ -326,8 +326,8 @@
    "name": "touch puts milk at the touched point",
    "pass": true,
    "detail": {
-    "before": 0.1,
-    "after": 1.04
+    "before": 0.07,
+    "after": 1.035
    }
   },
   {
@@ -342,17 +342,17 @@
    "name": "pouring beside a pattern pushes it away",
    "pass": true,
    "detail": {
-    "nearEdgePxFromCentreBefore": 52,
-    "after": 25,
-    "farEdgeBefore": 51,
-    "farEdgeAfter": 53
+    "nearEdgePxFromCentreBefore": 54,
+    "after": 26,
+    "farEdgeBefore": 53,
+    "farEdgeAfter": 55
    }
   },
   {
    "name": "a fast stroke is one unbroken line (no dots; coffee reads below 0.2)",
    "pass": true,
    "detail": {
-    "minWhitenessAlongLine": 0.615,
+    "minWhitenessAlongLine": 0.355,
     "samples": 19
    }
   },
@@ -382,8 +382,8 @@
    "name": "rotating the phone keeps the pattern",
    "pass": true,
    "detail": {
-    "probesBefore": 87,
-    "after": 87
+    "probesBefore": 93,
+    "after": 92
    }
   },
   {
@@ -400,14 +400,14 @@
    "detail": {
     "height": 1,
     "whiteProbes": 0,
-    "fill": 0.03799956293706294
+    "fill": 0.040621940559440566
    }
   },
   {
    "name": "jug low: white foam floats and draws",
    "pass": true,
    "detail": {
-    "whiteProbes": 21
+    "whiteProbes": 18
    }
   },
   {
@@ -699,7 +699,7 @@
    "name": "finished cup takes no more milk",
    "pass": true,
    "detail": {
-    "probesBefore": 38,
+    "probesBefore": 39,
     "after": 38
    }
   },
@@ -722,7 +722,7 @@
    "name": "new cup pours again",
    "pass": true,
    "detail": {
-    "white": 1.025
+    "white": 1.04
    }
   },
   {
@@ -737,58 +737,227 @@
    }
   },
   {
-   "name": "first visit: a 4-step how-to sheet (pictures + one line each), cup locked behind it",
+   "name": "first visit: the demonstration starts by itself — hand visible, room dimmed, real milk is poured",
    "pass": true,
    "detail": {
-    "steps": [
-     "Touch and hold to pour milk.",
-     "Jug low draws white. Jug high sinks and only pushes.",
-     "Sway side to side, then cut through to finish.",
-     "Fill the faint shape, then tap Serve for your score."
-    ],
-    "sheetOnScreen": true,
-    "animation": "cl-grow",
-    "cupLocked": true
+    "handVisible": true,
+    "dimmed": true,
+    "whiteProbesAtPeak": 55
    }
   },
   {
-   "name": "\"Start\" closes the how-to sheet",
+   "name": "demonstration shows the moves in order with a word beside the hand: Hold → Sway → Cut through → Serve",
    "pass": true,
-   "detail": ""
+   "detail": [
+    "Hold",
+    "Sway",
+    "Cut through",
+    "Serve",
+    "Hold",
+    "Sway",
+    "Cut through",
+    "Serve"
+   ]
   },
   {
-   "name": "first visit: a finger shows the pour once, uses none of your milk, hands back a clean cup",
+   "name": "demonstration also moves the Height dial for the cut and taps Serve",
    "pass": true,
    "detail": {
-    "sawFinger": true,
-    "milkProbesDuringDemo": 27,
+    "heightDialMoved": true,
+    "serveTapped": true
+   }
+  },
+  {
+   "name": "demonstration runs twice, uses none of your milk, then hands back a clean cup with your settings",
+   "pass": true,
+   "detail": {
+    "runs": 2,
     "whiteAfter": 0,
+    "height": 0.15,
+    "amount": 0.5,
     "remembered": "1"
    }
   },
   {
-   "name": "second visit: no how-to sheet, no demonstration",
+   "name": "second visit: no demonstration",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "\"?\" brings the how-to sheet back any time; Start closes it without replaying the finger",
+   "name": "\"?\" replays the demonstration any time",
    "pass": true,
    "detail": ""
   },
   {
-   "name": "touching during the demonstration takes over immediately",
+   "name": "touching during the demonstration ends it at once: clean cup, and your finger pours",
    "pass": true,
    "detail": {
     "demo": false,
-    "white": 0.93,
-    "fill": 0.03276267482517485
+    "yourMilk": 0.92,
+    "demoMilkGone": 0.235,
+    "fill": 0.032760052447552375
+   }
+  },
+  {
+   "name": "demonstration 320x568: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 360x640: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 375x667: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 390x844: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 393x852: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 412x915: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 414x896: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 430x932: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 768x1024: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 820x1180: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 1024x768: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 844x390: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
+   }
+  },
+  {
+   "name": "demonstration 1280x720: hand tip and its word stay on screen through all four moves; a touch takes over",
+   "pass": true,
+   "detail": {
+    "moves": [
+     "Hold",
+     "Sway",
+     "Cut through",
+     "Serve"
+    ]
    }
   },
   {
    "name": "?fps=1 shows the frame rate",
    "pass": true,
-   "detail": "block|39 fps · grid 112 · milk 512 · L4"
+   "detail": "block|37 fps · grid 112 · milk 512 · L4"
   },
   {
    "name": "no ?fps → no readout",
@@ -801,7 +970,7 @@
    "detail": {
     "asleep": true,
     "awake": true,
-    "white": 1.03
+    "white": 1.04
    }
   },
   {
@@ -813,7 +982,7 @@
     "endLevel": 5,
     "endGrid": 96,
     "endMilkRes": 384,
-    "whiteProbesLeft": 15
+    "whiteProbesLeft": 14
    }
   },
   {
@@ -828,7 +997,7 @@
    "name": "milk is in the very first frame drawn after the finger lands (virtual 60 fps clock)",
    "pass": true,
    "detail": {
-    "before": 0.06,
+    "before": 0.045,
     "after": 0.995,
     "framesDrawn": 1
    }

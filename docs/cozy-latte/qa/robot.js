@@ -17,7 +17,7 @@ async function open(browser, o = {}) {
   page.on('console', m => { if ((m.type() === 'error' || m.type() === 'warning') && !IGNORE.test(m.text())) problems.push((o.tag || '') + ' console: ' + m.text()); });
   page.on('pageerror', e => problems.push((o.tag || '') + ' pageerror: ' + e.message));
   page.on('request', r => { if (!r.url().startsWith(BASE.replace(/cozy-latte\/.*$/, '')) && !r.url().startsWith('data:')) problems.push('external request: ' + r.url()); });
-  if (!o.firstRun) await page.addInitScript(() => { try { localStorage.setItem('cozy-latte.demo.v1', '1'); } catch (e) { } });
+  if (!o.firstRun) await page.addInitScript(() => { try { localStorage.setItem('cozy-latte.demo.v2', '1'); } catch (e) { } });
   if (o.noGL) await page.addInitScript(() => { const g = HTMLCanvasElement.prototype.getContext; HTMLCanvasElement.prototype.getContext = function (t) { return /webgl/.test(t) ? null : g.apply(this, arguments); }; });
   const q = o.query || '';
   await page.goto(BASE + (o.orders ? q : q + (q ? '&' : '?') + 'mode=free'));
@@ -349,52 +349,60 @@ async function open(browser, o = {}) {
     await t.ctx.close();
   }
 
-  /* K. first-run demonstration */
+  /* K. the demonstration: on a first visit a see-through hand pours a cup on the real cup */
   {
-    const t = await open(browser, { tag: 'demo', firstRun: true, query: '?level=4', wait: 300 });
-    // the how-to sheet comes first; the cup does not take milk while it is open
-    const i0 = await t.st(); const g0 = i0.geo;
-    const steps = await t.page.evaluate(() => [...document.querySelectorAll('#intro .step p')].map(p => p.textContent.trim()));
-    const sheet = await t.page.evaluate(() => { const r = document.querySelector('#intro .sheet').getBoundingClientRect(), b = document.getElementById('start').getBoundingClientRect(); return { in: r.left >= 0 && r.top >= 0 && r.right <= innerWidth && r.bottom <= innerHeight, bx: b.left + b.width / 2, by: b.top + b.height / 2, bh: b.height, anim: getComputedStyle(document.querySelector('#intro .a')).animationName }; });
-    await t.touch('touchStart', g0.cx, g0.cy + g0.Ro * 0.95); await t.page.waitForTimeout(300); await t.touch('touchEnd');
-    const blocked = (await t.st()).fill === 0 && (await t.grid()) === 0;
-    await t.shot('intro-390x844');
-    check('first visit: a 4-step how-to sheet (pictures + one line each), cup locked behind it', i0.intro && steps.length === 4 && steps.every(x => x.length > 10 && x.length < 60) && sheet.in && sheet.bh >= 44 && sheet.anim !== 'none' && blocked, { steps, sheetOnScreen: sheet.in, animation: sheet.anim, cupLocked: blocked });
-    await t.page.touchscreen.tap(sheet.bx, sheet.by); await t.page.waitForTimeout(200);
-    check('"Start" closes the how-to sheet', !(await t.st()).intro);
-    let sawFinger = false, sawMilk = 0, fillDuring = 0;
-    const t0 = Date.now();
-    while (Date.now() - t0 < 9000) {
-      const on = await t.page.evaluate(() => document.getElementById('finger').classList.contains('on'));
+    const t = await open(browser, { tag: 'demo', firstRun: true, orders: true, query: '?level=4', wait: 200 });
+    const caps = [], seen = { hand: false, dim: false, milk: 0, fill: 0, dialMoved: false, serveTap: false, loops: 0 };
+    let lastCap = '', t0 = Date.now(), shots = 0;
+    while (Date.now() - t0 < 60000) {
       const s = await t.st();
-      if (on) { sawFinger = true; if (s.down) { const n = await t.grid(); if (n > sawMilk) { sawMilk = n; if (n > 12 && !fs.existsSync(path.join(OUT, 'demo-390x844.png'))) await t.shot('demo-390x844'); } } fillDuring = Math.max(fillDuring, s.fill); }
-      if (sawFinger && !on && !s.demo && s.fade === 0) break;
-      await t.page.waitForTimeout(60);
+      const d = await t.page.evaluate(() => ({ hand: document.getElementById('finger').classList.contains('on'), op: +getComputedStyle(document.getElementById('finger')).opacity, tap: document.getElementById('serve').classList.contains('tap') }));
+      if (s.demo) { if (d.hand && d.op > 0.5) seen.hand = true; if (s.dim) seen.dim = true; if (s.height > 0.5) seen.dialMoved = true; if (d.tap) seen.serveTap = true; seen.fill = Math.max(seen.fill, s.fill);
+        if (s.cap && s.cap !== lastCap) { if (s.cap === 'Hold') seen.loops++; caps.push(s.cap); lastCap = s.cap; }
+        if (s.down) { const n = await t.grid(); seen.milk = Math.max(seen.milk, n); }
+        if (s.cap === 'Sway' && s.down && shots === 0 && seen.milk > 6) { shots++; await t.shot('demo-390x844'); }
+        if (s.cap === 'Cut through' && s.down && shots === 1) { shots++; await t.shot('demo-cut-390x844'); } }
+      else if (seen.hand && s.fade === 0) break;
+      await t.page.waitForTimeout(50);
     }
     await t.page.waitForTimeout(900);
     const s = await t.st(), n = await t.grid();
-    const seen = await t.page.evaluate(() => localStorage.getItem('cozy-latte.demo.v1'));
-    check('first visit: a finger shows the pour once, uses none of your milk, hands back a clean cup', sawFinger && sawMilk > 5 && fillDuring === 0 && n === 0 && s.fill === 0 && seen === '1', { sawFinger, milkProbesDuringDemo: sawMilk, whiteAfter: n, remembered: seen });
+    const key = await t.page.evaluate(() => localStorage.getItem('cozy-latte.demo.v2'));
+    const order = ['Hold', 'Sway', 'Cut through', 'Serve'];
+    check('first visit: the demonstration starts by itself — hand visible, room dimmed, real milk is poured', seen.hand && seen.dim && seen.milk > 8, { handVisible: seen.hand, dimmed: seen.dim, whiteProbesAtPeak: seen.milk });
+    check('demonstration shows the moves in order with a word beside the hand: Hold → Sway → Cut through → Serve', order.every((c, i) => caps[i] === c), caps);
+    check('demonstration also moves the Height dial for the cut and taps Serve', seen.dialMoved && seen.serveTap, { heightDialMoved: seen.dialMoved, serveTapped: seen.serveTap });
+    check('demonstration runs twice, uses none of your milk, then hands back a clean cup with your settings', seen.loops === 2 && seen.fill === 0 && !s.demo && !s.dim && s.cap === '' && n === 0 && s.fill === 0 && Math.abs(s.height - 0.15) < 0.01 && Math.abs(s.amount - 0.5) < 0.01 && !s.serve && key === '1', { runs: seen.loops, whiteAfter: n, height: s.height, amount: s.amount, remembered: key });
     await t.page.reload(); await t.page.waitForTimeout(2500);
-    const again = await t.page.evaluate(() => document.getElementById('finger').classList.contains('on') || __latte.state().demo);
-    check('second visit: no how-to sheet, no demonstration', !again && !(await t.st()).intro);
+    check('second visit: no demonstration', !(await t.st()).demo && !(await t.st()).dim);
+    // "?" replays it; a touch ends it at once
+    const g = (await t.st()).geo;
+    await t.touch('touchStart', g.cx, g.cy); await t.frames(4); await t.touch('touchEnd'); await t.frames(2);       // some of the user's own milk first
     const hb = await t.page.evaluate(() => { const r = document.getElementById('help').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
-    await t.page.touchscreen.tap(hb[0], hb[1]); await t.page.waitForTimeout(250);
-    const re = (await t.st()).intro;
-    await t.page.touchscreen.tap(sheet.bx, sheet.by); await t.page.waitForTimeout(250);
-    check('"?" brings the how-to sheet back any time; Start closes it without replaying the finger', re && !(await t.st()).intro && !(await t.st()).demo);
+    await t.page.touchscreen.tap(hb[0], hb[1]);
+    await t.page.waitForFunction(() => __latte.state().demo && __latte.state().down, null, { timeout: 15000 }).catch(() => { });
+    const r1 = await t.st();
+    await t.touch('touchStart', g.cx + 40, g.cy + 40); await t.frames(2);
+    const r2 = await t.st(); const w = (await t.white([[g.cx + 40, g.cy + 40]]))[0]; const hold = (await t.white([[g.cx, g.cy - g.Ro * g.rho * 0.3]]))[0];
+    await t.frames(15); const r3 = await t.st(); await t.touch('touchEnd');
+    check('"?" replays the demonstration any time', r1.demo && r1.dim);
+    check('touching during the demonstration ends it at once: clean cup, and your finger pours', !r2.demo && !r2.dim && r2.cap === '' && r2.down && w > 0.8 && hold < 0.4 && r3.fill > 0 && r3.fade === 0, { demo: r2.demo, yourMilk: w, demoMilkGone: hold, fill: r3.fill });
     await t.ctx.close();
-    // touching during the demo takes over at once
-    const u = await open(browser, { tag: 'demo-interrupt', firstRun: true, query: '?level=4', wait: 300 });
-    await u.page.evaluate(() => document.getElementById('start').click());
-    const tt = Date.now(); while (!(await u.st()).down && Date.now() - tt < 6000) await u.page.waitForTimeout(40);
-    const g = (await u.st()).geo;
-    await u.touch('touchStart', g.cx + 40, g.cy + 40); await u.frames(2);
-    const su = await u.st(); const fOn = await u.page.evaluate(() => document.getElementById('finger').classList.contains('on'));
-    const w = (await u.white([[g.cx + 40, g.cy + 40]]))[0];
-    await u.frames(20); const su2 = await u.st(); await u.touch('touchEnd');
-    check('touching during the demonstration takes over immediately', !su.demo && !fOn && su.down && w > 0.8 && su2.fill > 0 && su2.fade === 0, { demo: su.demo, white: w, fill: su2.fill });
-    await u.ctx.close();
+    // hand, word and dimming fit on every screen size
+    for (const [w2, h2] of [[320, 568], [360, 640], [375, 667], [390, 844], [393, 852], [412, 915], [414, 896], [430, 932], [768, 1024], [820, 1180], [1024, 768], [844, 390], [1280, 720]]) {
+      const u = await open(browser, { tag: 'demo' + w2, w: w2, h: h2, firstRun: true, orders: true, query: '?level=5', wait: 200 });
+      let okFit = true, sawCaps = new Set(), det = null; const tt = Date.now();
+      while (Date.now() - tt < 30000 && sawCaps.size < 4) {
+        const f = await u.page.evaluate(() => { const s = __latte.state(); if (!s.demo || !s.cap) return null; const c = document.getElementById('cap').getBoundingClientRect(), fg = document.getElementById('finger'), m = new DOMMatrix(getComputedStyle(fg).transform);
+          return { cap: s.cap, c: [c.left, c.top, c.right, c.bottom], tip: [m.e, m.f], W: innerWidth, H: innerHeight }; });
+        if (f) { sawCaps.add(f.cap); const good = f.c[0] >= 0 && f.c[1] >= 0 && f.c[2] <= f.W && f.c[3] <= f.H && f.tip[0] >= 0 && f.tip[0] <= f.W && f.tip[1] >= -14 && f.tip[1] <= f.H; if (!good) { okFit = false; det = f; } }
+        await u.page.waitForTimeout(70);
+      }
+      const g2 = (await u.st()).geo;
+      await u.touch('touchStart', g2.cx, g2.cy); await u.frames(2); const ww = (await u.white([[g2.cx, g2.cy]]))[0]; const e = await u.st(); await u.touch('touchEnd');
+      check(`demonstration ${w2}x${h2}: hand tip and its word stay on screen through all four moves; a touch takes over`, okFit && sawCaps.size === 4 && !e.demo && ww > 0.8, det || { moves: [...sawCaps] });
+      await u.ctx.close();
+    }
   }
 
   /* L. fps readout */

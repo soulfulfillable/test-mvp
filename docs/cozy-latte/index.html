@@ -24,8 +24,8 @@
   #fresh svg{width:34px;height:34px;display:block;margin:15px}
 
   /* first-run demonstration: a fingertip that presses and sways. No words. */
-  #finger{position:absolute;left:0;top:0;width:130px;height:180px;margin:-6px 0 0 -24px;opacity:0;pointer-events:none;transition:opacity .3s ease;will-change:transform}
-  #finger.on{opacity:.93}
+  #finger{position:absolute;left:0;top:0;width:190px;height:270px;margin:-10px 0 0 -62px;opacity:0;pointer-events:none;transition:opacity .3s ease;will-change:transform;transform-origin:62px 10px}
+  #finger.on{opacity:.8}
 
 
   /* two dials at the edges: how high the jug is held, and how much milk comes out. Usable with the other hand while pouring. */
@@ -99,27 +99,13 @@
   #spot.sink{border-style:dashed}
   #help{position:static;pointer-events:auto;width:44px;height:44px;font:inherit;font-size:17px;font-weight:600;color:var(--accent)}
   #topR{display:flex;align-items:center;gap:2px;pointer-events:none}
-  #intro{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:color-mix(in srgb,var(--table) 78%,transparent);padding:16px;box-sizing:border-box}
-  #intro.on{display:flex}
-  #intro .sheet{width:min(340px,100%);max-height:100%;overflow:auto;box-sizing:border-box;padding:18px 16px 16px;border-radius:20px;background:var(--knob);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
-  #intro .step{display:flex;align-items:center;gap:14px;padding:7px 0}
-  #intro .step+.step{border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
-  #intro .step svg{width:68px;height:68px;flex:none}
-  #intro .step p{margin:0;font-size:17px;line-height:1.3}
-  #intro .step p b{font-weight:600}
-  #start{position:static;width:100%;height:50px;margin-top:10px;border-radius:14px;background:var(--accent);color:#fff;font:inherit;font-size:17px;font-weight:600}
-  #start:active{opacity:.6}
-  @media (max-height:520px){#intro .sheet{width:min(640px,100%);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0 10px}#intro .step p{font-size:15px}#intro .step{flex-direction:column;text-align:center;gap:6px}#intro .step+.step{border-top:0}#start{grid-column:1/-1}}
-  @keyframes cl-grow{0%,12%{transform:scale(.18)}70%,100%{transform:scale(1)}}
-  @keyframes cl-tap{0%,8%{transform:translateY(-9px);opacity:.3}16%,88%{transform:none;opacity:1}100%{transform:translateY(-9px);opacity:.3}}
-  @keyframes cl-jug{0%,42%{transform:translateY(0)}54%,92%{transform:translateY(34px)}100%{transform:translateY(0)}}
-  @keyframes cl-low{0%,54%{transform:scale(.01)}92%,100%{transform:scale(1)}}
-  @keyframes cl-ring{0%{transform:scale(.3);opacity:.9}40%{transform:scale(1);opacity:0}100%{transform:scale(1);opacity:0}}
-  @keyframes cl-draw{0%,5%{stroke-dashoffset:210}62%,100%{stroke-dashoffset:0}}
-  @keyframes cl-cut{0%,66%{stroke-dashoffset:56}90%,100%{stroke-dashoffset:0}}
-  #intro .a{transform-box:fill-box;transform-origin:center;animation-duration:3.2s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
-  @media (prefers-reduced-motion:reduce){#intro .a{animation:none}}
-  .nogl #tools,.nogl #intro,.nogl #spot{display:none}
+  /* the demonstration: the room dims a little, a see-through hand pours a cup in front of you, a word beside it names each move */
+  #dim{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .35s ease}
+  #dim.on{opacity:1}
+  #cap{position:absolute;left:0;top:0;padding:6px 11px;border-radius:10px;background:rgba(28,24,20,.82);color:#fff;font-size:17px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s ease}
+  #cap.on{opacity:1}
+  #serve.tap i{transform:scale(.86);transition:transform .12s ease}
+  .nogl #tools,.nogl #dim,.nogl #cap,.nogl #spot{display:none}
 
   #fps{position:absolute;left:calc(10px + env(safe-area-inset-left));top:calc(10px + env(safe-area-inset-top));padding:4px 8px;border-radius:7px;background:rgba(0,0,0,.55);color:#fff;font:12px/1.3 ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;pointer-events:none;display:none}
 
@@ -134,13 +120,16 @@
 <div id="app">
   <canvas id="cup" aria-label="A cup of coffee seen from above. Touch to pour milk."></canvas>
 
-  <svg id="finger" viewBox="0 0 130 180" aria-hidden="true">
-    <defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#e6bd9b" stop-opacity=".94"/><stop offset="1" stop-color="#e6bd9b" stop-opacity="0"/></linearGradient></defs>
-    <g transform="rotate(-26 28 10)">
-      <rect x="8" y="10" width="40" height="190" rx="20" fill="url(#fg)"/>
-      <rect x="15.500" y="15" width="25" height="23" rx="10.500" fill="#f4dfcf" fill-opacity=".9"/>
+  <div id="dim" aria-hidden="true"></div>
+  <svg id="finger" viewBox="0 0 190 270" aria-hidden="true">
+    <defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset=".62" stop-color="#e8c2a2"/><stop offset="1" stop-color="#e8c2a2" stop-opacity="0"/></linearGradient></defs>
+    <g transform="rotate(-22 62 10)" fill="url(#fg)" stroke="#6b4630" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round">
+      <path d="M62 8c11 0 20 9 20 20v72c14-6 30-4 40 4 12-4 26 2 30 14 12 0 20 10 20 22v130H20V150c-14-10-22-26-18-40 3-10 14-14 22-8l18 14V28c0-11 9-20 20-20z"/>
+      <rect x="49" y="15" width="26" height="24" rx="11" fill="#f6e3d4" stroke="none"/>
+      <path d="M82 100v38M122 104v34M152 118v24" fill="none"/>
     </g>
   </svg>
+  <div id="cap" aria-hidden="true"></div>
 
   <button id="fresh" type="button" aria-label="New cup">
     <svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -186,28 +175,6 @@
     <div class="btns"><button id="again" type="button">Again</button><button id="next" type="button">Next cup</button></div>
   </div>
 
-  <div id="intro" role="dialog" aria-label="How to pour">
-    <div class="sheet">
-      <div class="step">
-        <svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="34" fill="#f3f1ec" stroke="#d6d1c8" stroke-width="2"/><circle cx="38" cy="38" r="27" fill="#8a5a30"/><circle class="a" style="animation-name:cl-grow" cx="38" cy="38" r="15" fill="#f6efe2"/><g class="a" style="animation-name:cl-tap"><rect x="44" y="34" width="15" height="42" rx="7.500" fill="#e6bd9b" transform="rotate(-24 44 34)"/></g></svg>
-        <p><b>Touch and hold</b> to pour milk.</p>
-      </div>
-      <div class="step">
-        <svg viewBox="0 0 76 76" aria-hidden="true"><path d="M10 12v52" stroke="#bdb8ae" stroke-width="3" stroke-linecap="round"/><g class="a" style="animation-name:cl-jug"><circle cx="10" cy="20" r="7" fill="var(--accent)"/></g><circle cx="46" cy="38" r="27" fill="#8a5a30"/><circle class="a" style="animation-name:cl-ring" cx="46" cy="38" r="18" fill="none" stroke="#c99a68" stroke-width="2.500"/><circle class="a" style="animation-name:cl-low" cx="46" cy="38" r="14" fill="#f6efe2"/></svg>
-        <p><b>Jug low</b> draws white. <b>Jug high</b> sinks and only pushes.</p>
-      </div>
-      <div class="step">
-        <svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="34" fill="#8a5a30"/><path class="a" style="animation-name:cl-draw;stroke-dasharray:210" d="M22 22h32l-32 8h32l-32 8h32l-32 8h32l-32 8h32" fill="none" stroke="#f6efe2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path class="a" style="animation-name:cl-cut;stroke-dasharray:56" d="M38 64V12" fill="none" stroke="#8a5a30" stroke-width="3.500" stroke-linecap="round"/></svg>
-        <p><b>Sway</b> side to side, then <b>cut through</b> to finish.</p>
-      </div>
-      <div class="step">
-        <svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="34" fill="#8a5a30"/><path d="M38 60C22 48 16 40 16 31a11 11 0 0 1 22-3 11 11 0 0 1 22 3c0 9-6 17-22 29z" fill="#f6efe2" fill-opacity=".22" stroke="#f6efe2" stroke-opacity=".8" stroke-width="2" stroke-dasharray="4 4"/><circle cx="58" cy="58" r="13" fill="var(--accent)"/><path d="M52 58.500l4.500 4.500 8-9" fill="none" stroke="#fff" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <p><b>Fill the faint shape</b>, then tap <b>Serve</b> for your score.</p>
-      </div>
-      <button id="start" type="button">Start</button>
-    </div>
-  </div>
-
   <div id="fps"></div>
 
   <div id="nogl" role="img" aria-label="A finished latte">
@@ -224,6 +191,6 @@
   </div>
 </div>
 <script src="orders.js?v=1"></script>
-<script src="latte.js?v=6"></script>
+<script src="latte.js?v=7"></script>
 </body>
 </html>
