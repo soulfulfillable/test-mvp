@@ -23,7 +23,7 @@
   #fresh svg{width:34px;height:34px;display:block;margin:15px}
 
   /* first-run demonstration: a fingertip that presses and sways. No words. */
-  #finger{position:absolute;left:0;top:0;width:76px;height:118px;margin:-14px 0 0 -38px;opacity:0;pointer-events:none;transition:opacity .3s ease;will-change:transform}
+  #finger{position:absolute;left:0;top:0;width:130px;height:180px;margin:-6px 0 0 -24px;opacity:0;pointer-events:none;transition:opacity .3s ease;will-change:transform}
   #finger.on{opacity:.93}
 
   #fps{position:absolute;left:calc(10px + env(safe-area-inset-left));top:calc(10px + env(safe-area-inset-top));padding:4px 8px;border-radius:7px;background:rgba(0,0,0,.55);color:#fff;font:12px/1.3 ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;pointer-events:none;display:none}
@@ -39,10 +39,12 @@
 <div id="app">
   <canvas id="cup" aria-label="A cup of coffee seen from above. Touch to pour milk."></canvas>
 
-  <svg id="finger" viewBox="0 0 76 118" aria-hidden="true">
-    <circle cx="38" cy="14" r="12" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
-    <path d="M38 8c7.2 0 13 5.8 13 13v54c0 2 1.2 3.4 3 4.4 9 5 14 12 14 22v16H10v-14c0-6 2-11 6-15 5-5 9-8 9-14V21c0-7.200 5.800-13 13-13z" fill="#e9c3a2" stroke="#8a5c3f" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M30.500 22a7.500 7.500 0 0 1 15 0v9h-15z" fill="#f6e2d2" stroke="#8a5c3f" stroke-width="1.500" stroke-linejoin="round"/>
+  <svg id="finger" viewBox="0 0 130 180" aria-hidden="true">
+    <defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#e6bd9b" stop-opacity=".94"/><stop offset="1" stop-color="#e6bd9b" stop-opacity="0"/></linearGradient></defs>
+    <g transform="rotate(-26 28 10)">
+      <rect x="8" y="10" width="40" height="190" rx="20" fill="url(#fg)"/>
+      <rect x="15.500" y="15" width="25" height="23" rx="10.500" fill="#f4dfcf" fill-opacity=".9"/>
+    </g>
   </svg>
 
   <button id="fresh" type="button" aria-label="New cup">
@@ -69,6 +71,6 @@
     <p>This browser can&rsquo;t pour milk yet. Open this page in Safari or Chrome.</p>
   </div>
 </div>
-<script src="latte.js?v=1"></script>
+<script src="latte.js?v=2"></script>
 </body>
 </html>
