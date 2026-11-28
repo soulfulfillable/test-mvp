@@ -442,7 +442,7 @@
     gl.uniform3f(u.uSrc, last ? last.x : 0.5, last ? last.y : 0.5, amp); gl.uniform1f(u.uSig2, sig * sig);
     gl.uniform1f(u.uSink, amp * sig * sig / (RD * RD));
     draw(div);
-    u = use(prog.scale); bindTex(0, prs.a); gl.uniform1i(u.uT, 0); gl.uniform1f(u.uK, 0.8); draw(prs.b); prs.swap();
+    u = use(prog.scale); bindTex(0, prs.a); gl.uniform1i(u.uT, 0); gl.uniform1f(u.uK, 0.97); draw(prs.b); prs.swap();
     u = use(prog.jacobi); gl.uniform1i(u.uP, 0); gl.uniform1i(u.uDiv, 1); gl.uniform1f(u.uH, h); bindTex(1, div);
     for (i = 0; i < iters; i++) { bindTex(0, prs.a); draw(prs.b); prs.swap(); }
     u = use(prog.grad); bindTex(0, prs.a); bindTex(1, vel.a); gl.uniform1i(u.uP, 0); gl.uniform1i(u.uVel, 1); gl.uniform1f(u.uH, h);

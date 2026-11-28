@@ -1,0 +1,288 @@
+/* Cozy Latte test robot.  node docs/cozy-latte/qa/robot.js [baseUrl]
+   Drives the real page in headless Chromium (software WebGL) with real touch events (CDP Input.dispatchTouchEvent).
+   It checks WHAT happens. It cannot check how it FEELS: this browser renders ~15 frames a second. */
+const { chromium } = require(process.env.PW || '/opt/node22/lib/node_modules/playwright');
+const fs = require('fs'), path = require('path');
+const BASE = process.argv[2] || 'http://localhost:8765/cozy-latte/';
+const OUT = __dirname;
+const ARGS = ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'];
+const results = [], problems = [];
+const check = (name, pass, detail) => { results.push({ name, pass: !!pass, detail: detail === undefined ? '' : detail }); console.log((pass ? 'PASS ' : 'FAIL ') + name + (detail !== undefined ? '  — ' + (typeof detail === 'string' ? detail : JSON.stringify(detail)) : '')); };
+const IGNORE = /GPU stall due to ReadPixels/;   // caused by the robot's own pixel probe, not by the page
+
+async function open(browser, o = {}) {
+  const ctx = await browser.newContext({ viewport: { width: o.w || 390, height: o.h || 844 }, deviceScaleFactor: o.dpr || 1, hasTouch: true, isMobile: o.mobile !== false, colorScheme: o.dark ? 'dark' : 'light' });
+  const page = await ctx.newPage();
+  page.on('console', m => { if ((m.type() === 'error' || m.type() === 'warning') && !IGNORE.test(m.text())) problems.push((o.tag || '') + ' console: ' + m.text()); });
+  page.on('pageerror', e => problems.push((o.tag || '') + ' pageerror: ' + e.message));
+  page.on('request', r => { if (!r.url().startsWith(BASE.replace(/cozy-latte\/.*$/, '')) && !r.url().startsWith('data:')) problems.push('external request: ' + r.url()); });
+  if (!o.firstRun) await page.addInitScript(() => { try { localStorage.setItem('cozy-latte.demo.v1', '1'); } catch (e) { } });
+  if (o.noGL) await page.addInitScript(() => { const g = HTMLCanvasElement.prototype.getContext; HTMLCanvasElement.prototype.getContext = function (t) { return /webgl/.test(t) ? null : g.apply(this, arguments); }; });
+  await page.goto(BASE + (o.query || ''));
+  await page.waitForTimeout(o.wait || 900);
+  const cdp = await ctx.newCDPSession(page);
+  const h = {
+    ctx, page,
+    st: () => page.evaluate(() => __latte.state()),
+    touch: (type, x, y, id = 1) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x, y, id }] }),
+    touches: (type, pts) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: pts }),
+    frames: async n => { const f0 = (await h.st()).frames; const t0 = Date.now(); while ((await h.st()).frames < f0 + n) { await page.waitForTimeout(25); if (Date.now() - t0 > 20000) throw new Error('frames stalled'); } },
+    white: pts => page.evaluate(p => __latte.white(p), pts),
+    grid: async () => {            // 17x17 probe points over the liquid; returns how many read as milk
+      const g = (await h.st()).geo, R = g.Ro * g.rho * 0.9, pts = [];
+      for (let i = -8; i <= 8; i++) for (let j = -8; j <= 8; j++) if (i * i + j * j <= 64) pts.push([g.cx + i / 8 * R, g.cy + j / 8 * R]);
+      const w = await h.white(pts); return w.filter(v => v > 0.6).length;
+    },
+    shot: (name, clip) => page.screenshot({ path: path.join(OUT, name + '.png'), clip }),
+  };
+  return h;
+}
+
+(async () => {
+  const browser = await chromium.launch({ args: ARGS });
+
+  /* A. first screen at 14 sizes */
+  const SIZES = [[320, 568], [360, 640], [375, 667], [390, 844], [393, 852], [412, 915], [414, 896], [430, 932], [768, 1024], [820, 1180], [1024, 768], [844, 390], [1280, 720], [390, 844, 3]];
+  for (const [w, h, dpr] of SIZES) {
+    const tag = dpr ? `${w * dpr}x${h * dpr}` : `${w}x${h}`;
+    const t = await open(browser, { w, h, dpr: dpr || 1, tag, query: '?level=' + (dpr ? 0 : 3) });
+    const s = await t.st(), g = s.geo;
+    const btn = await t.page.evaluate(() => { const r = document.getElementById('fresh').getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom, op: +getComputedStyle(document.getElementById('fresh')).opacity }; });
+    const centre = (await t.white([[g.cx, g.cy]]))[0];
+    const okCup = g.cx - g.Ro >= 0 && g.cx + g.Ro <= w && g.cy - g.Ro >= 0 && g.cy + g.Ro <= h;
+    const okHandle = g.cx + 1.44 * 0.766 * g.Ro <= w + 0.5 && g.cy + 1.44 * 0.643 * g.Ro <= h;
+    const okBtn = btn.l >= 0 && btn.r <= w && btn.b <= h && btn.t >= g.cy + g.Ro - 1 && btn.op === 0;
+    const okCanvas = Math.abs(g.canvasW - w * (dpr || 1)) <= 1 && Math.abs(g.canvasH - h * (dpr || 1)) <= 1;
+    check(`first screen ${tag}`, s.ok && okCup && okHandle && okBtn && okCanvas && centre < 0.35 && s.fill === 0,
+      { cup: okCup, handle: okHandle, buttonHiddenAndClear: okBtn, canvas: okCanvas, centreIsCoffee: centre });
+    await t.shot('first-' + tag);
+    await t.ctx.close();
+  }
+
+  /* B–F. pour, grow, unbroken line, push, split — iPhone size, real touches */
+  {
+    const t = await open(browser, { tag: 'pour', query: '?level=3' });
+    const g = (await t.st()).geo, R = g.Ro * g.rho;
+    const P = [g.cx, g.cy];
+    const before = (await t.white([P]))[0];
+    await t.touch('touchStart', P[0], P[1]);
+    let fr = 0, w1 = 0;
+    for (; fr < 6; fr++) { await t.frames(1); w1 = (await t.white([P]))[0]; if (w1 > 0.8) break; }
+    check('touch puts milk at the touched point', before < 0.35 && w1 > 0.8, { before, after: w1 });
+    await t.shot('pour-1-first-touch');
+    const n1 = await t.grid();
+    await t.frames(45);
+    const n2 = await t.grid();
+    check('holding still makes the white pool grow', n2 > n1 + 3, { probesWhiteAtStart: n1, after45Frames: n2 });
+    await t.shot('pour-2-hold');
+    await t.touch('touchEnd');
+    await t.frames(3);
+
+    // push: pour right next to the pool; the side of the pool facing the new milk must give way
+    const edgeTo = async sign => { const pts = []; for (let x = 0; x <= R * 0.9; x += 1) pts.push([g.cx + sign * x, g.cy]); const w = await t.white(pts); let e = 0; while (e < w.length && w[e] > 0.5) e++; return e; };
+    const left = await edgeTo(-1), e1 = await edgeTo(1);
+    await t.touch('touchStart', g.cx - left - 16, g.cy);
+    await t.frames(40);
+    await t.touch('touchEnd'); await t.frames(2);
+    const left2 = await edgeTo(-1), e2 = await edgeTo(1);
+    check('pouring beside a pattern pushes it away', left2 <= left - 4 && e2 >= e1, { nearEdgePxFromCentreBefore: left, after: left2, farEdgeBefore: e1, farEdgeAfter: e2 });
+    await t.shot('pour-3-push');
+
+    // unbroken line from two far-apart events (a very fast finger): one touchStart, one touchMove 150px away
+    const A = [g.cx - 75, g.cy - R * 0.62], B = [g.cx + 75, g.cy - R * 0.62];
+    await t.touch('touchStart', A[0], A[1]);
+    await t.touch('touchMove', B[0], B[1]);
+    await t.frames(2);
+    const lw = [];        // the flow nudges a thin line a few px, so probe a short column at each step and keep the whitest
+    for (let k = 1; k < 20; k++) { const col = []; for (let dy = -9; dy <= 9; dy += 1.5) col.push([A[0] + (B[0] - A[0]) * k / 20, A[1] + dy]); lw.push(Math.max(...(await t.white(col)))); }
+    await t.touch('touchEnd');
+    check('a fast stroke is one unbroken line (no dots)', Math.min(...lw) > 0.4, { minWhitenessAlongLine: Math.min(...lw), samples: lw.length });
+    await t.shot('pour-4-fast-line');
+
+    // split: a quick stroke straight through the pool leaves coffee-coloured lines inside it
+    const scan = async () => { const pts = []; for (let x = -e2; x <= e2; x += 1) pts.push([g.cx + x, g.cy + 6]); const w = await t.white(pts); let runs = 0, inW = false; for (const v of w) { if (v > 0.6 && !inW) { runs++; inW = true; } else if (v < 0.45) inW = false; } return runs; };
+    const r1 = await scan();
+    const X = g.cx + (e2 - left) / 2;
+    await t.touch('touchStart', X, g.cy - R * 0.45);
+    for (let k = 1; k <= 7; k++) await t.touch('touchMove', X, g.cy - R * 0.45 + k * R * 0.13);
+    await t.touch('touchEnd'); await t.frames(2);
+    const r2 = await scan();
+    check('a quick stroke through the pattern splits it', r2 > r1, { whiteRunsAcrossBefore: r1, after: r2 });
+    await t.shot('pour-5-split');
+
+    // second finger is ignored, nothing breaks
+    await t.touches('touchStart', [{ x: g.cx, y: g.cy + R * 0.5, id: 1 }]);
+    await t.touches('touchMove', [{ x: g.cx, y: g.cy + R * 0.5, id: 1 }, { x: g.cx + 60, y: g.cy + R * 0.6, id: 2 }]);
+    await t.frames(3);
+    await t.touches('touchEnd', []);
+    await t.frames(2);
+    check('two fingers: still running, pour released', (await t.st()).down === false && (await t.st()).ok);
+
+    // cushion: a long downward drag must not scroll the page away
+    const sc0 = await t.page.evaluate(() => ({ y: scrollY, room: document.documentElement.scrollHeight - innerHeight }));
+    await t.touch('touchStart', g.cx + R * 0.5, g.cy - R * 0.2);
+    for (let k = 1; k <= 8; k++) await t.touch('touchMove', g.cx + R * 0.5, g.cy - R * 0.2 + k * 45);
+    await t.touch('touchEnd'); await t.page.waitForTimeout(400);
+    const sc1 = await t.page.evaluate(() => scrollY);
+    check('scroll cushion: 240px of room, parked at 120, a downward drag does not move it', sc0.room >= 240 && sc0.y === 120 && sc1 === 120, { room: sc0.room, before: sc0.y, afterDrag: sc1 });
+
+    // resize / rotate keeps the cup
+    const nb = await t.grid();
+    await t.page.setViewportSize({ width: 844, height: 390 }); await t.page.waitForTimeout(600); await t.frames(2);
+    const s2 = await t.st(); const na = await t.grid();
+    check('rotating the phone keeps the pattern', na > nb * 0.7 && s2.geo.W === 844 && s2.geo.canvasW === 844, { probesBefore: nb, after: na });
+    await t.shot('rotated-844x390');
+    await t.ctx.close();
+  }
+
+  /* G–H. a whole cup → finished → new cup */
+  {
+    const t = await open(browser, { tag: 'full', query: '?level=4&milk=3' });
+    const g = (await t.st()).geo;
+    await t.touch('touchStart', g.cx, g.cy + 20);
+    const t0 = Date.now(); let s = await t.st(), k = 0;
+    while (!s.done && Date.now() - t0 < 40000) { await t.touch('touchMove', g.cx + 50 * Math.sin(k++ / 2), g.cy + 20 - k * 0.6); s = await t.st(); }
+    await t.page.waitForTimeout(1400); s = await t.st();
+    const op = await t.page.evaluate(() => +getComputedStyle(document.getElementById('fresh')).opacity);
+    check('milk runs out → cup is finished, "new cup" button appears', s.done && s.fill === 1 && s.button && op > 0.9 && s.down === false, { fill: s.fill, done: s.done, buttonOpacity: op, liquidRadius: s.geo.rho });
+    await t.shot('done-390x844');
+    const n1 = await t.grid();
+    await t.touch('touchEnd'); await t.touch('touchStart', g.cx - 60, g.cy + 70); await t.frames(4); await t.touch('touchEnd'); await t.frames(2);
+    const n2 = await t.grid();
+    check('finished cup takes no more milk', n2 <= n1 + 1 && (await t.st()).fill === 1, { probesBefore: n1, after: n2 });
+    const r = await t.page.evaluate(() => { const b = document.getElementById('fresh').getBoundingClientRect(); return [b.left + b.width / 2, b.top + b.height / 2, b.width]; });
+    check('"new cup" button is finger-sized (≥44px)', r[2] >= 44, { size: r[2] });
+    await t.page.touchscreen.tap(r[0], r[1]);
+    await t.page.waitForTimeout(1500); await t.frames(2);
+    s = await t.st(); const n3 = await t.grid();
+    check('new cup: empty coffee again, button gone, can pour', s.fill === 0 && !s.done && !s.button && n3 === 0, { fill: s.fill, whiteProbes: n3 });
+    await t.touch('touchStart', g.cx, g.cy); await t.frames(2);
+    const w = (await t.white([[g.cx, g.cy]]))[0]; await t.touch('touchEnd');
+    check('new cup pours again', w > 0.8, { white: w });
+    await t.shot('new-cup-390x844');
+    await t.ctx.close();
+  }
+
+  /* I. no WebGL */
+  {
+    const t = await open(browser, { tag: 'nogl', noGL: true });
+    const v = await t.page.evaluate(() => { const n = document.getElementById('nogl'); const r = n.querySelector('svg').getBoundingClientRect(); return { cls: document.documentElement.classList.contains('nogl'), disp: getComputedStyle(n).display, svgW: r.width, text: n.querySelector('p').textContent.trim(), canvas: getComputedStyle(document.getElementById('cup')).display }; });
+    check('no WebGL → a picture and one line instead of a blank page', v.cls && v.disp === 'flex' && v.svgW > 150 && v.text.length > 10 && v.canvas === 'none', v);
+    await t.shot('no-webgl-390x844');
+    await t.ctx.close();
+  }
+
+  /* K. first-run demonstration */
+  {
+    const t = await open(browser, { tag: 'demo', firstRun: true, query: '?level=4', wait: 300 });
+    let sawFinger = false, sawMilk = 0, fillDuring = 0;
+    const t0 = Date.now();
+    while (Date.now() - t0 < 9000) {
+      const on = await t.page.evaluate(() => document.getElementById('finger').classList.contains('on'));
+      const s = await t.st();
+      if (on) { sawFinger = true; if (s.down) { const n = await t.grid(); if (n > sawMilk) { sawMilk = n; if (n > 12 && !fs.existsSync(path.join(OUT, 'demo-390x844.png'))) await t.shot('demo-390x844'); } } fillDuring = Math.max(fillDuring, s.fill); }
+      if (sawFinger && !on && !s.demo && s.fade === 0) break;
+      await t.page.waitForTimeout(60);
+    }
+    await t.page.waitForTimeout(900);
+    const s = await t.st(), n = await t.grid();
+    const seen = await t.page.evaluate(() => localStorage.getItem('cozy-latte.demo.v1'));
+    check('first visit: a finger shows the pour once, uses none of your milk, hands back a clean cup', sawFinger && sawMilk > 5 && fillDuring === 0 && n === 0 && s.fill === 0 && seen === '1', { sawFinger, milkProbesDuringDemo: sawMilk, whiteAfter: n, remembered: seen });
+    await t.page.reload(); await t.page.waitForTimeout(2500);
+    const again = await t.page.evaluate(() => document.getElementById('finger').classList.contains('on') || __latte.state().demo);
+    check('second visit: no demonstration', !again);
+    await t.ctx.close();
+    // touching during the demo takes over at once
+    const u = await open(browser, { tag: 'demo-interrupt', firstRun: true, query: '?level=4', wait: 300 });
+    const tt = Date.now(); while (!(await u.st()).down && Date.now() - tt < 6000) await u.page.waitForTimeout(40);
+    const g = (await u.st()).geo;
+    await u.touch('touchStart', g.cx + 40, g.cy + 40); await u.frames(2);
+    const su = await u.st(); const fOn = await u.page.evaluate(() => document.getElementById('finger').classList.contains('on'));
+    const w = (await u.white([[g.cx + 40, g.cy + 40]]))[0];
+    await u.frames(20); const su2 = await u.st(); await u.touch('touchEnd');
+    check('touching during the demonstration takes over immediately', !su.demo && !fOn && su.down && w > 0.8 && su2.fill > 0 && su2.fade === 0, { demo: su.demo, white: w, fill: su2.fill });
+    await u.ctx.close();
+  }
+
+  /* L. fps readout */
+  {
+    const t = await open(browser, { tag: 'fps', query: '?fps=1&level=4', wait: 1600 });
+    const txt = await t.page.evaluate(() => { const e = document.getElementById('fps'); return getComputedStyle(e).display + '|' + e.textContent; });
+    check('?fps=1 shows the frame rate', /^block\|\d+ fps · grid \d+/.test(txt), txt);
+    await t.ctx.close();
+    const u = await open(browser, { tag: 'nofps', query: '?level=4' });
+    check('no ?fps → no readout', (await u.page.evaluate(() => getComputedStyle(document.getElementById('fps')).display)) === 'none');
+    // idle: stops drawing, wakes on touch
+    await u.page.waitForTimeout(6500);
+    const asleep = !(await u.st()).running; const g = (await u.st()).geo;
+    await u.touch('touchStart', g.cx, g.cy); await u.page.waitForTimeout(400);
+    const w = (await u.white([[g.cx, g.cy]]))[0]; const awake = (await u.st()).running; await u.touch('touchEnd');
+    check('idle cup stops drawing (battery) and wakes on touch', asleep && awake && w > 0.8, { asleep, awake, white: w });
+    await u.ctx.close();
+  }
+
+  /* N. self-tuning: unpinned, this slow machine must step the grid down by itself and keep the picture */
+  {
+    const t = await open(browser, { tag: 'tune', query: '', wait: 400 });
+    const s0 = await t.st(), g = s0.geo;
+    await t.touch('touchStart', g.cx, g.cy); await t.frames(6); await t.touch('touchEnd');
+    const t0 = Date.now(); let s = await t.st();
+    while (s.level < 5 && Date.now() - t0 < 60000) { await t.page.waitForTimeout(500); await t.touch('touchStart', g.cx + 30, g.cy); await t.touch('touchEnd'); s = await t.st(); }
+    const w = (await t.white([[g.cx, g.cy]]))[0];
+    check('slow device → steps the grid down by itself, picture survives', s0.level === 1 && s.level > s0.level && w > 0.6, { startLevel: s0.level, startGrid: s0.simN, endLevel: s.level, endGrid: s.simN, endMilkRes: s.dyeN, centreStillWhite: w });
+    await t.ctx.close();
+  }
+
+  /* Q. dark mode */
+  {
+    const t = await open(browser, { tag: 'dark', dark: true, query: '?level=3' });
+    const c = await t.page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--table').trim());
+    const corner = (await t.white([[6, 6]]))[0];
+    check('dark mode: dark table', c === '#212427' && corner < 0.2, { table: c, cornerBrightness: corner });
+    await t.shot('dark-390x844');
+    await t.ctx.close();
+  }
+
+  /* S. what a 60 fps phone would draw: virtual clock, 6 consecutive frames from the first touch, then the stages of one cup */
+  {
+    const t = await open(browser, { tag: 'strip', dpr: 2, query: '?manual=1&level=1' });
+    const g = (await t.st()).geo, clip = { x: g.cx - g.Ro * 1.08, y: g.cy - g.Ro * 1.08, width: g.Ro * 2.16, height: g.Ro * 2.16 };
+    const run = (fnSrc, T) => t.page.evaluate(({ fnSrc, T, g }) => { const fn = eval(fnSrc); let tt = 0, on = false;
+      for (let f = 0; f < Math.round(T * 60); f++) { for (let k = 0; k < 2; k++) { tt += 1 / 120; const p = fn(tt); const R = __latte.state().geo.rho * g.Ro;
+        if (!p) { if (on) { __latte.feed('up'); on = false; } continue; } const x = g.cx + p[0] * R, y = g.cy - p[1] * R;
+        if (!on) { __latte.feed('down', x, y, tt * 1000); on = true; } else __latte.feed('move', x, y, tt * 1000); } __latte.tick(1000 / 60); } if (on) __latte.feed('up'); return __latte.state().fill; }, { fnSrc, T, g });
+    // first touch, frame by frame (finger lands, then slides right at ~400 px/s)
+    await t.page.evaluate(() => __latte.tick(1000 / 60)); await t.shot('f0', clip);
+    const same = await t.page.evaluate(g => { const R = __latte.state().geo.rho * g.Ro, x = g.cx + R * 0.4, y = g.cy - R * 0.4; const a = __latte.white([[x, y]])[0]; const f0 = __latte.state().frames; __latte.feed('down', x, y, 1); __latte.tick(1000 / 60); const b = __latte.white([[x, y]])[0]; __latte.feed('up'); return { before: a, after: b, framesDrawn: __latte.state().frames - f0 }; }, g);
+    check('milk is in the very first frame drawn after the finger lands (virtual 60 fps clock)', same.before < 0.35 && same.after > 0.8 && same.framesDrawn === 1, same);
+    for (let f = 1; f <= 5; f++) {
+      await t.page.evaluate(({ f, g }) => { const R = __latte.state().geo.rho * g.Ro, x = g.cx - R * 0.3 + (f - 1) * 6.7, y = g.cy + R * 0.3; __latte.feed(f === 1 ? 'down' : 'move', x, y, f * 16.7); __latte.tick(1000 / 60); }, { f, g });
+      await t.shot('f' + f, clip);
+    }
+    await t.page.evaluate(() => { __latte.feed('up'); });
+    t.firstFrames = [0, 1, 2, 3, 4, 5].map(i => path.join(OUT, `f${i}.png`));
+    const strip = async (name, files, hgt) => { const p = await t.ctx.newPage(); const tags = files.map(f => `<img src="data:image/png;base64,${fs.readFileSync(f).toString('base64')}" style="height:${hgt}px;display:block">`).join('');
+      await p.setContent(`<body style="margin:0;background:#777"><div id=s style="display:inline-flex;gap:3px">${tags}</div>`); await p.waitForTimeout(300); await (await p.$('#s')).screenshot({ path: path.join(OUT, name + '.png') }); await p.close(); files.forEach(f => fs.unlinkSync(f)); };
+    await strip('strip-first-touch-6-frames', t.firstFrames, 330);
+    // one cup in stages
+    const u = await open(browser, { tag: 'stages', dpr: 2, query: '?manual=1&level=1' });
+    t.page = u.page; t.shot = u.shot;
+    await t.page.evaluate(() => __latte.tick(1000 / 60));
+    await run('(t=>[0,-0.3])', 1.2); await u.shot('s1', clip);
+    await run('(t=>{const k=t/2.4;return[0.3*Math.sin(t*Math.PI*2*3.2)*(1-0.3*k),-0.3+0.75*k]})', 1.2); await u.shot('s2', clip);
+    await run('(t=>{const u=t+1.2,k=u/2.4;return[0.3*Math.sin(u*Math.PI*2*3.2)*(1-0.3*k),-0.3+0.75*k]})', 1.2); await u.shot('s3', clip);
+    await run('(t=>t<0.15?null:[0,0.6-1.3*(t-0.15)/0.45])', 0.6); await u.shot('s4', clip);
+    await run('(t=>null)', 1.0); await u.shot('s5', clip);
+    await strip('strip-one-cup', [1, 2, 3, 4, 5].map(i => path.join(OUT, `s${i}.png`)), 330);
+    await u.shot('pattern-390x844');
+    check('frame strips written (first touch ×6 frames, one cup in 5 stages)', fs.existsSync(path.join(OUT, 'strip-first-touch-6-frames.png')) && fs.existsSync(path.join(OUT, 'strip-one-cup.png')));
+    await u.ctx.close(); await t.ctx.close();
+  }
+
+  check('console errors / page errors / outside requests: none', problems.length === 0, problems.slice(0, 8));
+  await browser.close();
+  const pass = results.filter(r => r.pass).length;
+  fs.writeFileSync(path.join(OUT, 'report.json'), JSON.stringify({ when: new Date().toISOString(), base: BASE, pass, total: results.length, note: 'Headless Chromium + software WebGL (~15 fps). Verifies behaviour only; hand feel on a real phone is NOT verified.', results }, null, 1));
+  console.log(`\n${pass}/${results.length} passed`);
+  process.exit(pass === results.length ? 0 : 1);
+})().catch(e => { console.error(e); process.exit(2); });
